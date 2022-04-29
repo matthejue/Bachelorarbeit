@@ -5,6 +5,7 @@
 \usepackage[parfill]{parskip}
 \usepackage{setspace}
 \usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
 
 \begin{document}
   \begin{titlepage}
@@ -14,7 +15,8 @@
     \textsc{\Large Technische Fakultät}\\[2.0cm]
 
     \rule{\linewidth}{0.5mm}\\[0.4cm]
-      {\huge \bfseries PicoC-Compiler\\\LARGE-\\\setstretch{1.1} Übersetzung eines Subsets von C in den Assembler der RETI-CPU\par}\\[0.4cm]
+      {\huge \bfseries PicoC-Compiler\\\LARGE - \\\setstretch{1.1} Übersetzung eines Subsets von C in den Assembler der RETI-CPU\par}
+      \vspace{0.5cm}
       \textsc{\large Bachelorarbeit}\\
       \rule{\linewidth}{0.5mm}\\[0.5cm]
 
@@ -48,9 +50,45 @@
   \newgeometry{margin=1.5cm}
   \tableofcontents
   \chapter{Motivation}
-  \section{}
+  \section{PicoC und RETI}
+  \section{Problemstellung}
+  \section{Compiler und Interpreter}
   \chapter{Einführung}
+  \section{Grammatiken}
+  \subsection{Konkrete Syntax}
+  \subsection{Chromsky Hierarchie}
+  \subsection{Reguläre Sprachen}
+  \subsection{Kontextfreie Sprachen}
+  \subsection{Linksrekursiv und Rechtrekursiv}
+  \subsection{Ableitungsbaum}
+  \section{Lexikalische Analyse}
+  \subsection{Lexer}
+  \section{Syntax Analyse}
+  \subsection{Derivation Tree}
+  \subsection{Abtrakte Syntax}
+  \subsection{Parser}
+  \subsection{Descent Parsing}
+  \subsection{First and Follow Set}
+  \subsection{Lookahead}
+  \subsection{Aktionen}
+  \section{Code Generation}
+  \subsection{Passes}
+  \subsection{T-Diagramme}
   \chapter{Implementierung}
+  \section{Grammatiken}
+  \subsection{PicoC}
+  \subsection{RETI}
+  \section{Lexikalische Analyse}
+  \subsection{LL(1) Lexer}
+  \section{Syntax Analyse}
+  \subsection{LL(k) Parser}
+  \subsection{Backtracking Parser}
+  \subsection{Visitor und Transformer}
+  \subsection{Lark}
+  \section{Code Generation}
+  \subsection{PicoC-zu-PicoC-Blocks Pass}
+  \subsection{PicoC-Blocks-zu-RETI-Blocks Pass}
+  \subsection{RETI-Blocks-zu-RETI Pass}
   \chapter{Ergebnisse und Ausblick}
   \lipsum
 
