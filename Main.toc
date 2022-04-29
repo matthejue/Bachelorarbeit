@@ -1,0 +1,6 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {chapter}{\numberline {1}Motivation}{3}{}%
+\contentsline {chapter}{\numberline {2}Einführung}{4}{}%
+\contentsline {chapter}{\numberline {3}Implementierung}{5}{}%
+\contentsline {chapter}{\numberline {4}Ergebnisse und Ausblick}{6}{}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
