@@ -1,106 +1,44 @@
-\documentclass{scrreprt}
+\documentclass{scrbook}
 \usepackage[margin=1.5cm]{geometry}
 \usepackage[ngerman]{babel}
 \usepackage{lipsum}
 \usepackage[parfill]{parskip}
 \usepackage{setspace}
 \usepackage{graphicx}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref} %hidelinks
+\usepackage{csquotes}
+\usepackage[style=authortitle]{biblatex}
+\addbibresource{Library.bib}
+
+\includeonly{
+  Motivation,
+  Einführung,
+  Implementierung,
+  Ergebnisse_und_Ausblick,
+  Appendix
+}
 
 \begin{document}
-  \begin{titlepage}
-    \vspace{1cm}
-    \center
-    \textsc{\LARGE Albert Ludwigs Universität Freiburg}\\[0.5cm]
-    \textsc{\Large Technische Fakultät}\\[2.0cm]
+\input{Titlepage}                 % ./Titlepage.tex
+\newgeometry{margin=2.5cm}
 
-    \rule{\linewidth}{0.5mm}\\[0.4cm]
-      {\huge \bfseries PicoC-Compiler\\\LARGE - \\\setstretch{1.1} Übersetzung eines Subsets von C in den Assembler der RETI-CPU\par}
-      \vspace{0.5cm}
-      \textsc{\large Bachelorarbeit}\\
-      \rule{\linewidth}{0.5mm}\\[0.5cm]
+\frontmatter
+\tableofcontents
 
-    {\large \emph{Due Date:} 28\textsuperscript{th} April 2022}\\[2.5cm]
+\mainmatter
+\include{Motivation}              % ./Motivation.tex
+\include{Einführung}              % ./Einführung.tex
+\include{Implementierung}         % ./Implementierung.tex
+\include{Ergebnisse_und_Ausblick} % ./Ergebnisse_und_Ausblick.tex
 
-    \begin{minipage}{0.45\textwidth}
-      \begin{flushleft} \large
-        \emph{Author:}\\
-        Jürgen Mattheis\\
-        \hspace{1cm}\\
-        \hspace{1cm}\\
-        \hspace{1cm}\\
-        \hspace{1cm}
-      \end{flushleft}
-    \end{minipage}
-    ~
-    \begin{minipage}{0.45\textwidth}
-      \begin{flushright} \large
-        \emph{Gutachter:}\\
-        Prof. Dr. Scholl\\
-        Prof. Dr. XY\\[0.64cm]
-        \emph{Betreung:}\\
-        M.Sc. Seufert\\
-      \end{flushright}
-    \end{minipage}
+\appendix
+\include{Appendix}
 
-    \vspace{9.5cm}
-    \large{Eine Bachelorarbeit am Lehrstuhl für}\\
-    \large{Betriebssysteme}
-  \end{titlepage}
-  \newgeometry{margin=1.5cm}
-  \tableofcontents
-  \chapter{Motivation}
-  \section{PicoC und RETI}
-  \section{Problemstellung}
-  \section{Compiler und Interpreter}
-  \chapter{Einführung}
-  \section{Grammatiken}
-  \subsection{Konkrete Syntax}
-  \subsection{Chromsky Hierarchie}
-  \subsection{Reguläre Sprachen}
-  \subsection{Kontextfreie Sprachen}
-  \subsection{Präzidenz und Assoziativität}
-  \subsection{Mehrdeutige Grammatiken}
-  \subsection{Ableitungsbaum}
-  \subsection{Linksrekursiv und Rechtrekursiv}
-  \section{Lexikalische Analyse}
-  \subsection{Lexer}
-  \section{Syntax Analyse}
-  \subsection{Derivation Tree}
-  \subsection{Abtrakte Syntax}
-  \subsection{Parser}
-  \subsection{Descent Parsing}
-  \subsection{First and Follow Set}
-  \subsection{Lookahead}
-  \subsection{Aktionen}
-  \section{Code Generation}
-  \subsection{Passes}
-  \subsection{T-Diagramme}
-  \chapter{Implementierung}
-  \section{Grammatiken}
-  \subsection{PicoC}
-  \subsection{RETI}
-  \subsection{Präzidenz und Assoziativität}
-  \subsection{Linksrekursivität}
-  \section{Lexikalische Analyse}
-  \subsection{LL(1) Recursive-Descent Lexer}
-  \section{Syntax Analyse}
-  \subsection{Normalized Heterogeneous ASTNode}
-  \subsection{LL(k) Recursive-Descent Parser}
-  \subsection{Mehrdeutigkeit}
-  \subsection{Backtracking Parser}
-  \subsection{Lark}
-  \subsection{Visitor und Transformer}
-  \section{Code Generation}
-  \subsection{Symbol Table for Nested Scopes}
-  \subsection{PicoC-zu-PicoC-Blocks Pass}
-  \subsection{PicoC-Blocks-zu-RETI-Blocks Pass}
-  \subsection{RETI-Blocks-zu-RETI Pass}
-  \chapter{Ergebnisse und Ausblick}
-  \section{Vergleich eigener Parser und Lark}
-  \section{Beispielhafte Auführung}
-  \section{Qualitätskontrolle}
-  \section{Erweiterungsideen}
-  \lipsum
-
+\backmatter
+\printbibheading
+\printbibliography[type=book,heading=subbibliography,title={Bücher}]
+\printbibliography[type=article,heading=subbibliography,title={Artikel}]
+\printbibliography[type=online,heading=subbibliography,title={Online}]
+\printbibliography[nottype=book, nottype=article, nottype=online,heading=subbibliography,title={Sonstige Quellen}]
+% ./Library.bib
 \end{document}
