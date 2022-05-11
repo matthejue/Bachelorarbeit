@@ -9,30 +9,45 @@
 \usepackage{csquotes}
 \usepackage[style=authortitle]{biblatex}
 \addbibresource{Library.bib}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}					% custom headers and footers
+	%	footers
+	\fancyfoot{}						% clear footers
+	\rfoot[]{\thepage}					% right align page numbers
+
+	%	headers
+	\fancyheadoffset{1cm}
+	\lhead{\nouppercase{\leftmark}} 	%	adding section on left side of the header
+	\rhead{\nouppercase{\rightmark}} 	%	adding subsection on right side of the header
+
 
 \includeonly{
-  Motivation,
-  Einführung,
-  Implementierung,
-  Ergebnisse_und_Ausblick,
-  Appendix
+  ./content/Motivation,
+  ./content/Einführung,
+  ./content/Implementierung,
+  ./content/Ergebnisse_und_Ausblick,
+  ./content/Appendix
 }
 
 \begin{document}
-\input{Titlepage}                 % ./Titlepage.tex
+\input{./content/Titlepage}                 % ./content/Titlepage.tex
 \newgeometry{margin=2.5cm}
+\setlength{\footskip}{30pt}               % move pagenumber up and down
+\includepdf[pages=-]{./ErklrungfrdieAbschlussarbeit_unterschrieben.pdf}
 
 \frontmatter
 \tableofcontents
 
 \mainmatter
-\include{Motivation}              % ./Motivation.tex
-\include{Einführung}              % ./Einführung.tex
-\include{Implementierung}         % ./Implementierung.tex
-\include{Ergebnisse_und_Ausblick} % ./Ergebnisse_und_Ausblick.tex
+\include{./content/Motivation}              % ./content/Motivation.tex
+\include{./content/Einführung}              % ./content/Einführung.tex
+\include{./content/Implementierung}         % ./content/Implementierung.tex
+\include{./content/Ergebnisse_und_Ausblick} % ./content/Ergebnisse_und_Ausblick.tex
 
 \appendix
-\include{Appendix}
+\include{./content/Appendix}                % ./content/Appendix.tex
 
 \backmatter
 \printbibheading
