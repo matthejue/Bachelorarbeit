@@ -1,0 +1,1084 @@
+<!DOCTYPE html> <html itemscope itemtype=https://schema.org/QAPage class=html__responsive lang=en style><!--
+ Page saved with SingleFile 
+ url: https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings 
+ saved date: Tue May 10 2022 23:28:06 GMT+0200 (Central European Summer Time)
+--><meta charset=utf-8>
+<title>visual c++ - Where can I get a list of all errors &amp; warnings? - Stack Overflow</title>
+<link rel=image_src href="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a">
+<link rel=search type=application/opensearchdescription+xml title="Stack Overflow" href=https://stackoverflow.com/opensearch.xml>
+<link rel=canonical href=https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings>
+<meta name=viewport content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+<meta property=og:type content=website>
+<meta property=og:url content=https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings>
+<meta property=og:site_name content="Stack Overflow">
+<meta property=og:image itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=73d79a89bded">
+<meta name=twitter:card content=summary>
+<meta name=twitter:domain content=stackoverflow.com>
+<meta name=twitter:title property=og:title itemprop=name content="Where can I get a list of all errors &amp; warnings?">
+<meta name=twitter:description property=og:description itemprop=description content="Is there some place where I can get a list of all Visual C++ compiler/linker errors/warnings? I am looking for both the error/warning number and the error/warning text that is displayed by the comp...">
+<style>html,body,div,span,h1,h2,h3,h4,h5,p,a,code,img,strong,ol,ul,li,form,label,aside,footer,header,nav,time{margin:0;padding:0;border:0;font:inherit;font-size:100%;vertical-align:baseline}footer,nav{display:block}body{line-height:1}ol,ul{list-style:none}button{margin:0}.svg-icon{vertical-align:bottom}.svg-icon:not(.native) *,.svg-spot:not(.native) *{fill:currentColor}@supports ((-webkit-clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)) or (clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%))){.s-expandable:not(.is-expanded) .s-expandable--content{opacity:1;-webkit-transform:none;transform:none}}.s-input{-webkit-appearance:none;width:100%;margin:0;padding:.6em .7em;border:1px solid var(--bc-darker);border-radius:var(--br-sm);background-color:var(--white);color:var(--fc-dark);font-size:var(--fs-body1);font-family:inherit}@supports (-webkit-overflow-scrolling:touch){.s-input,.s-textarea{font-size:16px;padding:.36em .55em}.s-input::-webkit-input-placeholder,.s-textarea::-webkit-input-placeholder{line-height:normal!important}}.s-input::-webkit-input-placeholder,.s-textarea::-webkit-input-placeholder{color:var(--black-200)}.s-input::placeholder,.s-textarea::placeholder{color:var(--black-200);opacity:1}.s-input::-webkit-scrollbar,.s-textarea::-webkit-scrollbar{width:calc(var(--su-static12) - var(--su-static2));height:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.s-input::-webkit-scrollbar-track,.s-textarea::-webkit-scrollbar-track{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.s-input::-webkit-scrollbar-thumb,.s-textarea::-webkit-scrollbar-thumb{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:var(--scrollbar)}.s-input::-webkit-scrollbar-corner,.s-textarea::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.s-input::-webkit-contacts-auto-fill-button,.s-textarea::-webkit-contacts-auto-fill-button{background-color:var(--black)}.s-input:-webkit-autofill,.s-textarea:-webkit-autofill{border-color:var(--blue-300);-webkit-text-fill-color:var(--black);-webkit-box-shadow:0 0 0 1000px var(--theme-secondary-050) inset;transition:background-color 0s 50000s}.s-input:-webkit-autofill:focus,.s-textarea:-webkit-autofill:focus{border-color:var(--blue-300);-webkit-box-shadow:0 0 0 1000px var(--blue-050) inset,0 0 0 var(--su-static4) var(--focus-ring)}.s-input.s-input__search{padding-left:var(--su-static32)}.s-label{padding:0 var(--su2);color:var(--fc-dark);font-family:inherit;font-size:var(--fs-body2);font-weight:600}.s-label[for]{cursor:pointer}.s-description{padding:0 var(--su2);color:var(--fc-medium);font-size:var(--fs-caption)}.s-label .s-description{padding:0;margin-top:4px;margin-bottom:0;font-weight:normal}.s-select{position:relative;color:var(--fc-dark)}.s-select:before,.s-select:after{content:"";position:absolute;z-index:var(--zi-selected);right:13px;border-color:currentColor transparent;border-style:solid;border-width:4px;pointer-events:none}.s-select:before{top:calc(50% - 5px);border-top-width:0;border-bottom-width:4px}.s-select:after{top:calc(50% + 1px);border-top-width:4px;border-bottom-width:0}.s-select>select{-webkit-appearance:none;-moz-appearance:none;appearance:none;position:relative;width:100%;height:100%;padding:.6em .7em;padding-right:var(--su32);border:1px solid var(--bc-darker);border-radius:var(--br-sm);background-color:var(--white);outline:0;font-size:var(--fs-body1);font-family:inherit;color:var(--black);line-height:var(--lh-sm)}@supports (-webkit-overflow-scrolling:touch){.s-select>select{font-size:16px;padding:.4em .55em}}.s-select>select::-webkit-contacts-auto-fill-button{background-color:var(--black)}.s-select>select:-webkit-autofill{border-color:var(--blue-300);-webkit-text-fill-color:var(--black);-webkit-box-shadow:0 0 0 1000px var(--theme-secondary-050) inset;transition:background-color 0s 50000s}.s-select>select:-webkit-autofill:focus{border-color:var(--blue-300);-webkit-box-shadow:0 0 0 1000px var(--blue-050) inset,0 0 0 var(--su-static4) var(--focus-ring)}@supports ((-webkit-appearance:none) or (-moz-appearance:none) or (appearance:none)){.s-checkbox,.s-radio{-webkit-appearance:none;-moz-appearance:none;appearance:none;margin:0;width:1em;height:1em;border:1px solid var(--bc-darker);background-color:var(--white);outline:0;font-size:inherit;vertical-align:middle;cursor:pointer}.s-checkbox::-ms-check,.s-radio::-ms-check{display:none}}@supports ((-webkit-appearance:none) or (-moz-appearance:none) or (appearance:none)){.s-checkbox{border-radius:var(--br-sm);background-position:center center;background-repeat:no-repeat;background-size:contain}.s-checkbox:checked{border-color:var(--theme-secondary-400)!important;background-color:var(--theme-secondary-400);background-image:url("data:image/svg+xml,%3Csvg width='11' height='11' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.41L8.59 2 4 6.59 2.41 5 1 6.41l3 3z' fill='%23fff'/%3E%3C/svg%3E")}@media (prefers-color-scheme:dark){body.theme-highcontrast.theme-system .s-checkbox:checked{border-color:var(--blue-700)!important;background-color:var(--blue-300)}}body.theme-highcontrast.theme-dark .s-checkbox:checked{border-color:var(--blue-700)!important;background-color:var(--blue-300)}.s-checkbox:checked:focus{border-color:var(--theme-secondary-400)}.s-checkbox:focus{border-color:var(--theme-secondary-300);box-shadow:0 0 0 var(--su-static4) var(--focus-ring)}}@supports ((-webkit-appearance:none) or (-moz-appearance:none) or (appearance:none)){.s-radio{border-radius:var(--br-circle)}.s-radio:checked{border-color:var(--theme-secondary-400);border-width:.30769231em;background-color:hsl(0,0%,100%)}@media (prefers-color-scheme:dark){body.theme-highcontrast.theme-system .s-radio:checked{border-color:var(--blue-300);outline:1px solid var(--black)}}body.theme-highcontrast.theme-dark .s-radio:checked{border-color:var(--blue-300);outline:1px solid var(--black)}.s-radio:focus{box-shadow:0 0 0 var(--su-static4) var(--focus-ring)}}.s-input:focus,.s-input.has-focus,.s-textarea:focus,.s-select>select:focus{border-color:var(--theme-secondary-300);box-shadow:0 0 0 var(--su-static4) var(--focus-ring);color:var(--black);outline:0}.s-input:focus-within{border-color:var(--theme-secondary-300);box-shadow:0 0 0 var(--su-static4) var(--focus-ring);color:var(--black);outline:0}.s-input-icon{position:absolute;top:50%;right:.7em;margin-top:-9px;pointer-events:none}.s-input-icon.s-input-icon__search{right:auto;left:.7em}@supports (-webkit-overflow-scrolling:touch){.s-input__md,.s-textarea__md{font-size:17px;padding-top:.4em;padding-bottom:.4em}}.s-modal{display:flex;visibility:hidden;position:fixed;z-index:var(--zi-hide);top:0;right:0;bottom:0;left:0;align-items:center;justify-content:center;background-color:hsla(210,8%,5%,0.5);opacity:0;backface-visibility:hidden;transition:opacity 100ms var(--te-smooth) 0s,z-index 0s 100ms,visibility 0s 100ms;will-change:visibility,z-index,opacity}.s-modal--dialog{overflow-y:auto;visibility:hidden;z-index:var(--zi-hide);max-height:100%;padding:var(--su24);border-radius:var(--br-lg);background-color:var(--white);box-shadow:var(--bs-lg);opacity:0;backface-visibility:hidden;transform:translate3d(0,30%,0) scale3d(.6,.6,.6);transition:opacity 200ms var(--te-smooth) 0s,z-index 0s 100ms,visibility 0s 100ms,transform 100ms var(--te-smooth) 0s,transform 100ms var(--te-smooth) 0s;will-change:visibility,z-index,opacity,transform}.s-modal--dialog::-webkit-scrollbar{width:calc(var(--su-static12) - var(--su-static2));height:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.s-modal--dialog::-webkit-scrollbar-track{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.s-modal--dialog::-webkit-scrollbar-thumb{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:var(--scrollbar)}.s-modal--dialog::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.s-modal--close{position:absolute!important;top:var(--su8);right:var(--su8);padding:var(--su12)!important}.s-modal--close .svg-icon{margin:0!important}.s-modal--header{margin-bottom:var(--su16);color:var(--fc-dark);font-size:var(--fs-headline1);line-height:var(--lh-sm)}.s-navigation{display:flex;margin:calc(var(--su2) * -1);padding:var(--su2) 0;flex-wrap:wrap;list-style:none}.s-navigation .s-navigation--item{display:flex;align-items:center;padding:var(--su6) var(--su12);position:relative;border:none;font:unset;background:none;box-shadow:none;cursor:pointer;user-select:auto;border-radius:1000px;margin:var(--su2);white-space:nowrap;color:var(--black-600)}.s-navigation .s-navigation--item:hover,.s-navigation .s-navigation--item:active{background:var(--black-075);color:var(--black-600)}.s-navigation .s-navigation--item:focus:not(:focus-visible){outline:none;box-shadow:none}.s-navigation .s-navigation--item:focus-visible{outline:none;box-shadow:0 0 0 var(--su-static4) var(--focus-ring-muted)}.s-prose{--s-prose-line-height:1.5;--s-prose-spacing:1.1em;--s-prose-spacing-condensed:calc(var(--s-prose-spacing) / 2);font-size:15px;line-height:var(--s-prose-line-height);word-wrap:break-word}.s-prose p{margin-bottom:var(--s-prose-spacing)}.s-prose code{font-size:var(--fs-body1);font-family:var(--ff-mono)}.s-prose p:last-child,.s-prose dl:last-child,.s-prose blockquote:last-child,.s-prose table:last-child,.s-prose .s-table-container:last-child,.s-prose .s-link-preview:last-child,.s-prose hr:last-child,.s-prose ol:last-child,.s-prose ul:last-child,.s-prose img:last-child,.s-prose pre:last-child,.s-prose h1:last-child,.s-prose h2:last-child,.s-prose h3:last-child,.s-prose h4:last-child,.s-prose h5:last-child,.s-prose h6:last-child,.s-prose p:only-child,.s-prose dl:only-child,.s-prose blockquote:only-child,.s-prose table:only-child,.s-prose .s-table-container:only-child,.s-prose .s-link-preview:only-child,.s-prose hr:only-child,.s-prose ol:only-child,.s-prose ul:only-child,.s-prose img:only-child,.s-prose pre:only-child,.s-prose h1:only-child,.s-prose h2:only-child,.s-prose h3:only-child,.s-prose h4:only-child,.s-prose h5:only-child,.s-prose h6:only-child{margin-bottom:0}.s-prose *:not(.s-code-block)>code{padding:var(--su2) var(--su4);color:var(--black-800);background-color:var(--black-075);border-radius:var(--br-sm)}@media not all and (min-resolution:.001dpcm){@supports (-webkit-appearance:none) and (stroke-color:transparent){.s-spinner,.s-spinner:before,.s-spinner:after{box-shadow:0 0 0 2px transparent}}}@keyframes s-spinner-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.s-topbar{min-width:auto;box-shadow:var(--bs-sm);width:100%;z-index:var(--zi-navigation-fixed);background-color:var(--theme-topbar-background-color);height:var(--theme-topbar-height);display:flex;border-top:var(--theme-topbar-accent-border);align-items:center}.s-topbar .s-topbar--container{width:var(--s-full);max-width:100%;height:100%;display:flex;margin:0 auto;align-items:center}.s-topbar .s-topbar--logo{padding:0 var(--su8);height:100%;display:flex;align-items:center;background-color:transparent}.s-topbar a.s-topbar--logo:hover{background-color:var(--theme-topbar-item-background-hover)}.s-topbar .s-navigation .s-navigation--item:not(.is-selected){color:var(--theme-topbar-item-color)}.s-topbar .s-navigation .s-navigation--item:not(.is-selected):hover{color:var(--theme-topbar-item-color-hover);background-color:var(--theme-topbar-item-background-hover)}.s-topbar .s-topbar--content{display:flex;height:100%;list-style:none;margin:0;padding:0;overflow-x:auto;margin-left:auto}.s-topbar .s-topbar--content>li{display:inline-flex}.s-topbar .s-topbar--content::-webkit-scrollbar{width:calc(var(--su-static12) - var(--su-static2));height:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.s-topbar .s-topbar--content::-webkit-scrollbar-track{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.s-topbar .s-topbar--content::-webkit-scrollbar-thumb{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:var(--scrollbar)}.s-topbar .s-topbar--content::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset){color:var(--theme-topbar-item-color);display:inline-flex;align-items:center;padding:0 calc(var(--su12) - var(--su2));text-decoration:none;white-space:nowrap;position:relative}.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset):hover,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset):focus,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset).is-selected,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset).is-selected:hover,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset).is-selected:focus{color:var(--theme-topbar-item-color-hover);background-color:var(--theme-topbar-item-background-hover);text-decoration:none;outline:none}.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset) .svg-icon{vertical-align:text-top}.s-topbar .s-topbar--content .s-topbar--item__unset{align-self:center;padding-top:var(--su8);padding-bottom:var(--su8)}.s-topbar .s-topbar--searchbar{padding:0 var(--su8);display:flex;align-items:center;flex-shrink:10000;flex-grow:1}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group{position:relative;flex-grow:1}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input{border-color:var(--theme-topbar-search-border);background-color:var(--theme-topbar-search-background);box-shadow:var(--theme-topbar-search-shadow);color:var(--theme-topbar-search-color);display:block;line-height:var(--lh-sm)}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input:focus{border-color:var(--theme-topbar-search-border-focus);box-shadow:var(--theme-topbar-search-shadow-focus)}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input::placeholder{color:var(--theme-topbar-search-placeholder);font-style:normal}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input-icon{color:var(--theme-topbar-search-placeholder)}@media (max-width:640px){html.html__responsive:not(.html__unpinned-leftnav) .s-topbar .s-topbar--searchbar{display:none;position:absolute;left:0;right:0;top:100%;max-width:100%;padding:var(--su8) var(--su12);background:var(--theme-topbar-item-background-hover)}}.s-sidebarwidget{--s-sidebarwidget-content-padding:calc(var(--su16) - var(--su1));--s-sidebarwidget-content-inner-spacing:var(--su12);--s-sidebarwidget-content-outer-spacing:var(--su16);--s-sidebarwidget-outer-border-color:var(--bc-medium);--s-sidebarwidget-content-separator-color:var(--bc-light);--s-sidebarwidget-header-background-color:var(--black-025);position:relative;border:1px solid var(--s-sidebarwidget-outer-border-color);border-radius:var(--br-sm);box-shadow:var(--bs-sm);font-size:var(--fs-body1)}.s-sidebarwidget:not(.s-anchors) a:not(.button):not(.s-btn):not(.post-tag):not(.s-sidebarwidget--action):not(.s-user-card--link),.s-sidebarwidget:not(.s-anchors) a:not(.button):not(.s-btn):not(.post-tag):not(.s-sidebarwidget--action):not(.s-user-card--link):visited{color:var(--black-500)}.s-sidebarwidget:before{content:'';display:block;margin-top:-1px}.s-sidebarwidget:after{content:'';position:absolute;top:-1px;right:-1px;left:-1px;height:calc(2px + var(--br-sm));border-top:1px solid var(--s-sidebarwidget-outer-border-color);border-radius:var(--br-sm);pointer-events:none}@supports ((-webkit-clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)) or (clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%))) or (-webkit-clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)){.s-sidebarwidget:after{-webkit-clip-path:polygon(0% 0%,100% 0%,100% 50%,0% 50%);clip-path:polygon(0% 0%,100% 0%,100% 50%,0% 50%);border:1px solid var(--s-sidebarwidget-outer-border-color)}}.s-sidebarwidget--header{border-top:1px solid var(--s-sidebarwidget-content-separator-color)}.s-sidebarwidget--header:active,.s-sidebarwidget--content:active{outline:none}.s-sidebarwidget--header{padding:var(--s-sidebarwidget-content-inner-spacing) var(--s-sidebarwidget-content-padding);background:var(--s-sidebarwidget-header-background-color)}.s-sidebarwidget--header:first-child{border-top-left-radius:var(--br-sm);border-top-right-radius:var(--br-sm)}.s-sidebarwidget--header.s-sidebarwidget__small-bold-text{font-size:var(--fs-caption);font-weight:bold}.s-sidebarwidget--item{margin:var(--s-sidebarwidget-content-inner-spacing) 0}.s-sidebarwidget__yellow{border-color:var(--yellow-200);background-color:var(--yellow-050)}.s-sidebarwidget__yellow .s-sidebarwidget--header{background-color:var(--yellow-100);color:var(--fc-medium)}.s-sidebarwidget__yellow .s-sidebarwidget--header{border-color:var(--yellow-200)}.s-sidebarwidget__yellow:after{border-color:var(--yellow-200)}html,body{--ff-sans:-apple-system,BlinkMacSystemFont,"Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;--ff-serif:Georgia,Cambria,"Times New Roman",Times,serif;--ff-mono:ui-monospace,"Cascadia Mono","Segoe UI Mono","Liberation Mono",Menlo,Monaco,Consolas,monospace;--theme-body-font-family:var(--ff-sans);--fs-fine:11px;--fs-caption:12px;--fs-body1:13px;--fs-body2:1.15384615rem;--fs-body3:1.30769231rem;--fs-subheading:1.46153846rem;--fs-title:1.61538462rem;--fs-headline1:2.07692308rem;--fs-headline2:2.61538461rem;--fs-display1:3.30769231rem;--fs-display2:4.23076923rem;--fs-display3:5.30769231rem;--fs-display4:7.61538461rem;--fs-body2-relative:1.15384615em;--fs-body3-relative:1.30769231em;--fs-subheading-relative:1.46153846em;--fs-title-relative:1.61538462em;--fs-headline1-relative:2.07692308em;--fs-headline2-relative:2.61538461em;--fs-display1-relative:3.30769231em;--fs-display2-relative:4.23076923em;--fs-display3-relative:5.30769231em;--fs-display4-relative:7.61538461em;--fs-base:13px;--stacks-internals-lh-unit:13;--lh-xs:1;--lh-sm:calc((var(--stacks-internals-lh-unit) + 2) / var(--stacks-internals-lh-unit));--lh-md:calc((var(--stacks-internals-lh-unit) + 4) / var(--stacks-internals-lh-unit));--lh-lg:calc((var(--stacks-internals-lh-unit) + 8) / var(--stacks-internals-lh-unit));--lh-xl:calc((var(--stacks-internals-lh-unit) + 12) / var(--stacks-internals-lh-unit));--lh-xxl:2;--lh-base:var(--lh-md);--lh-6:((var(--stacks-internals-lh-unit) + 6) / var(--stacks-internals-lh-unit))}body{--zi-hide:-1;--zi-base:0;--zi-selected:25;--zi-active:30;--zi-dropdown:1000;--zi-popovers:2000;--zi-tooltips:3000;--zi-banners:4000;--zi-navigation:5000;--zi-navigation-fixed:5050;--zi-modals-background:8050;--zi-modals:9000;--br-sm:3px;--br-md:5px;--br-lg:7px;--br-circle:50%;--te-smooth-slow:cubic-bezier(.25,.46,.45,.94);--te-smooth:cubic-bezier(.165,.84,.44,1);--te-smooth-quick:cubic-bezier(.19,1,.22,1);--te-back-out:cubic-bezier(.175,.885,.32,1.275);--te-back-in-out:cubic-bezier(.68,-0.55,.265,1.55);--te-ease-in:cubic-bezier(.47,0,.745,.715);--te-ease-in-out:cubic-bezier(.445,.05,.55,.95);--te-ease-out:cubic-bezier(.39,.575,.565,1);--default-transition-duration:.1s;--transition-time:var(--default-transition-duration);--s-full:97.2307692rem;--s-step:calc(var(--s-full) / 12)}.component-colors,body:not(.theme-dark),body.theme-dark .theme-light__forced,body.theme-system .theme-light__forced,body:not(.theme-dark) .themed,body.theme-dark .theme-light__forced .themed,body.theme-system .theme-light__forced .themed,body.theme-dark,body:not(.theme-dark) .theme-dark__forced,body.theme-dark .themed,body:not(.theme-dark) .theme-dark__forced .themed{--theme-body-font-color:var(--black-800);--theme-background-color:var(--white);--theme-link-color:var(--theme-secondary-400);--theme-link-color-hover:var(--theme-secondary-350);--theme-link-color-visited:var(--theme-secondary-500);--theme-button-color:var(--theme-secondary-400);--theme-button-background-color:transparent;--theme-button-hover-color:var(--theme-secondary-500);--theme-button-hover-background-color:var(--theme-secondary-050);--theme-button-active-background-color:var(--theme-secondary-100);--theme-button-selected-color:var(--theme-secondary-900);--theme-button-selected-background-color:var(--theme-secondary-150);--theme-button-primary-color:var(--white);--theme-button-primary-background-color:var(--theme-secondary-400);--theme-button-primary-hover-color:var(--white);--theme-button-primary-hover-background-color:var(--theme-secondary-500);--theme-button-primary-active-background-color:var(--theme-secondary-700);--theme-button-primary-selected-color:var(--white);--theme-button-primary-selected-background-color:var(--theme-secondary-700);--theme-button-primary-number-color:var(--theme-secondary-900);--theme-button-filled-color:var(--theme-secondary-700);--theme-button-filled-background-color:var(--theme-secondary-050);--theme-button-filled-border-color:var(--theme-secondary-350);--theme-button-filled-hover-color:var(--theme-secondary-800);--theme-button-filled-hover-background-color:var(--theme-secondary-100);--theme-button-filled-active-background-color:var(--theme-secondary-150);--theme-button-filled-active-border-color:var(--theme-secondary-350);--theme-button-filled-selected-color:var(--theme-secondary-900);--theme-button-filled-selected-background-color:var(--theme-secondary-300);--theme-button-filled-selected-border-color:var(--theme-secondary-500);--theme-button-outlined-border-color:var(--theme-secondary-300);--theme-button-outlined-selected-border-color:var(--theme-secondary-400);--theme-tag-color:var(--theme-secondary-800);--theme-tag-background-color:var(--theme-secondary-075);--theme-tag-border-color:transparent;--theme-tag-hover-color:var(--theme-secondary-900);--theme-tag-hover-background-color:var(--theme-secondary-100);--theme-tag-hover-border-color:transparent;--theme-topbar-height:var(--su-static48);--theme-topbar-background-color:var(--black-025);--theme-topbar-search-color:var(--black-700);--theme-topbar-search-background:var(--white);--theme-topbar-search-placeholder:var(--black-200);--theme-topbar-search-border:var(--black-200);--theme-topbar-search-border-focus:var(--blue-300);--theme-topbar-search-shadow-focus:0 0 0 var(--su-static4) var(--focus-ring);--theme-topbar-select-color:var(--black-700);--theme-topbar-select-background:var(--black-075);--theme-topbar-item-color:var(--black-600);--theme-topbar-item-color-hover:var(--black-800);--theme-topbar-item-background-hover:var(--black-075);--theme-topbar-item-color-current:var(--black);--theme-topbar-item-border-current:var(--theme-primary-color);--theme-topbar-accent-border:3px solid var(--theme-primary-color);--theme-post-title-color:var(--theme-link-color);--theme-post-title-color-hover:var(--theme-link-color-hover);--theme-post-title-color-visited:var(--theme-link-color-visited);--theme-post-title-font-family:var(--theme-body-font-family);--theme-post-body-font-family:var(--theme-body-font-family)}:root{--theme-base-primary-color-h:27;--theme-base-primary-color-s:90%;--theme-base-primary-color-l:55%;--theme-base-primary-color-r:243.525;--theme-base-primary-color-g:129.9225;--theme-base-primary-color-b:36.975;--theme-base-secondary-color-h:206;--theme-base-secondary-color-s:100%;--theme-base-secondary-color-l:40%;--theme-base-secondary-color-r:0;--theme-base-secondary-color-g:115.6;--theme-base-secondary-color-b:204}body:not(.theme-dark),body.theme-dark .theme-light__forced,body.theme-system .theme-light__forced{--white:hsl(0,0%,100%);--black:hsl(210,8%,5%);--orange:hsl(27,90%,55%);--yellow:hsl(47,83%,91%);--green:hsl(140,40%,55%);--blue:hsl(206,100%,40%);--powder:hsl(205,46%,92%);--red:hsl(358,62%,52%);--black-025:hsl(210,8%,97.5%);--black-050:hsl(210,8%,95%);--black-075:hsl(210,8%,90%);--black-100:hsl(210,8%,85%);--black-150:hsl(210,8%,80%);--black-200:hsl(210,8%,75%);--black-300:hsl(210,8%,65%);--black-350:hsl(210,8%,60%);--black-400:hsl(210,8%,55%);--black-500:hsl(210,8%,45%);--black-600:hsl(210,8%,35%);--black-700:hsl(210,8%,25%);--black-750:hsl(210,8%,20%);--black-800:hsl(210,8%,15%);--black-900:hsl(210,8%,5%);--orange-050:hsl(27,100%,97%);--orange-100:hsl(27,95%,90%);--orange-200:hsl(27,90%,83%);--orange-300:hsl(27,90%,70%);--orange-400:hsl(27,90%,55%);--orange-500:hsl(27,90%,50%);--orange-600:hsl(27,90%,45%);--orange-700:hsl(27,90%,39%);--orange-800:hsl(27,87%,35%);--orange-900:hsl(27,80%,30%);--blue-050:hsl(206,100%,97%);--blue-100:hsl(206,96%,90%);--blue-200:hsl(206,93%,83.5%);--blue-300:hsl(206,90%,69.5%);--blue-400:hsl(206,85%,57.5%);--blue-500:hsl(206,100%,52%);--blue-600:hsl(206,100%,40%);--blue-700:hsl(209,100%,37.5%);--blue-800:hsl(209,100%,32%);--blue-900:hsl(209,100%,26%);--powder-050:hsl(205,47%,97%);--powder-100:hsl(205,46%,92%);--powder-200:hsl(205,53%,88%);--powder-300:hsl(205,57%,81%);--powder-400:hsl(205,56%,76%);--powder-500:hsl(205,41%,63%);--powder-600:hsl(205,36%,53%);--powder-700:hsl(205,47%,42%);--powder-800:hsl(205,46%,32%);--powder-900:hsl(205,46%,22%);--green-025:hsl(140,42%,95%);--green-050:hsl(140,40%,90%);--green-100:hsl(140,40%,85%);--green-200:hsl(140,40%,75%);--green-300:hsl(140,40%,65%);--green-400:hsl(140,40%,55%);--green-500:hsl(140,40%,47%);--green-600:hsl(140,40%,40%);--green-700:hsl(140,41%,31%);--green-800:hsl(140,40%,27%);--green-900:hsl(140,40%,20%);--yellow-050:hsl(47,87%,94%);--yellow-100:hsl(47,83%,91%);--yellow-200:hsl(47,65%,84%);--yellow-300:hsl(47,69%,69%);--yellow-400:hsl(47,79%,58%);--yellow-500:hsl(47,73%,50%);--yellow-600:hsl(47,76%,46%);--yellow-700:hsl(47,79%,40%);--yellow-800:hsl(47,82%,34%);--yellow-900:hsl(47,84%,28%);--red-050:hsl(358,75%,97%);--red-100:hsl(358,76%,90%);--red-200:hsl(358,74%,83%);--red-300:hsl(358,70%,70%);--red-400:hsl(358,68%,59%);--red-500:hsl(358,62%,52%);--red-600:hsl(358,62%,47%);--red-700:hsl(358,64%,41%);--red-800:hsl(358,64%,35%);--red-900:hsl(358,67%,29%);--gold:hsl(48,100%,50%);--gold-lighter:hsl(48,100%,91%);--gold-darker:hsl(45,100%,47%);--silver:hsl(210,6%,72%);--silver-lighter:hsl(0,0%,91%);--silver-darker:hsl(210,3%,61%);--bronze:hsl(28,38%,67%);--bronze-lighter:hsl(28,40%,92%);--bronze-darker:hsl(28,31%,52%);--bc-lightest:var(--black-025);--bc-lighter:var(--black-050);--bc-light:var(--black-075);--bc-medium:var(--black-100);--bc-dark:var(--black-150);--bc-darker:var(--black-200);--fc-dark:hsl(210,8%,5%);--fc-medium:hsl(210,8%,25%);--fc-light:hsl(210,8%,45%);--focus-ring-success:hsla(140,40%,75%,0.4);--focus-ring-warning:hsla(47,79%,58%,0.4);--focus-ring-error:hsla(358,62%,47%,0.15);--focus-ring-muted:hsla(210,8%,15%,0.1);--bs-sm:0 1px 2px hsla(0,0%,0%,0.05),0 1px 4px hsla(0,0%,0%,0.05),0 2px 8px hsla(0,0%,0%,0.05);--bs-md:0 1px 3px hsla(0,0%,0%,0.06),0 2px 6px hsla(0,0%,0%,0.06),0 3px 8px hsla(0,0%,0%,0.09);--bs-lg:0 1px 4px hsla(0,0%,0%,0.09),0 3px 8px hsla(0,0%,0%,0.09),0 4px 13px hsla(0,0%,0%,0.13);--bs-xl:0 10px 24px hsla(0,0%,0%,0.05),0 20px 48px hsla(0,0%,0%,0.05),0 1px 4px hsla(0,0%,0%,0.1);--scrollbar:hsla(0,0%,0%,0.2);--highlight-bg:hsl(0,0%,96.5%);--highlight-color:var(--black-750);--highlight-comment:hsl(210,8%,43.5%);--highlight-punctuation:var(--black-600);--highlight-namespace:hsl(27,99%,36%);--highlight-attribute:hsl(206,98.5%,29%);--highlight-literal:hsl(27,99%,36%);--highlight-symbol:hsl(306,43%,35%);--highlight-keyword:hsl(206,98.5%,29%);--highlight-variable:hsl(80,80.5%,26.5%);--highlight-addition:var(--green-700);--highlight-deletion:var(--red-600)}body:not(.theme-dark),body.theme-dark .theme-light__forced,body.theme-system .theme-light__forced,body:not(.theme-dark) .themed,body.theme-dark .theme-light__forced .themed,body.theme-system .theme-light__forced .themed{color:var(--theme-body-font-color);--theme-primary-color-h:var(--theme-light-primary-color-h, var(--theme-base-primary-color-h));--theme-primary-color-s:var(--theme-light-primary-color-s, var(--theme-base-primary-color-s));--theme-primary-color-l:var(--theme-light-primary-color-l, var(--theme-base-primary-color-l));--theme-primary-color-r:var(--theme-light-primary-color-r, var(--theme-base-primary-color-r));--theme-primary-color-g:var(--theme-light-primary-color-g, var(--theme-base-primary-color-g));--theme-primary-color-b:var(--theme-light-primary-color-b, var(--theme-base-primary-color-b));--theme-secondary-color-h:var(--theme-light-secondary-color-h, var(--theme-base-secondary-color-h));--theme-secondary-color-s:var(--theme-light-secondary-color-s, var(--theme-base-secondary-color-s));--theme-secondary-color-l:var(--theme-light-secondary-color-l, var(--theme-base-secondary-color-l));--theme-secondary-color-r:var(--theme-light-secondary-color-r, var(--theme-base-secondary-color-r));--theme-secondary-color-g:var(--theme-light-secondary-color-g, var(--theme-base-secondary-color-g));--theme-secondary-color-b:var(--theme-light-secondary-color-b, var(--theme-base-secondary-color-b));--theme-primary-color:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),var(--theme-primary-color-l));--theme-primary-900:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 26%));--theme-primary-800:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 21%));--theme-primary-700:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 16%));--theme-primary-600:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 10%));--theme-primary-500:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 5%));--theme-primary-400:var(--theme-primary-color);--theme-primary-350:rgb(calc(51 + var(--theme-primary-color-r) * .8),calc(51 + var(--theme-primary-color-g) * .8),calc(51 + var(--theme-primary-color-b) * .8));--theme-primary-300:rgb(calc(89.25 + var(--theme-primary-color-r) * .65),calc(89.25 + var(--theme-primary-color-g) * .65),calc(89.25 + var(--theme-primary-color-b) * .65));--theme-primary-200:rgb(calc(122.4 + var(--theme-primary-color-r) * .52),calc(122.4 + var(--theme-primary-color-g) * .52),calc(122.4 + var(--theme-primary-color-b) * .52));--theme-primary-150:rgb(calc(165.75 + var(--theme-primary-color-r) * .35),calc(165.75 + var(--theme-primary-color-g) * .35),calc(165.75 + var(--theme-primary-color-b) * .35));--theme-primary-100:rgb(calc(198.9 + var(--theme-primary-color-r) * .22),calc(198.9 + var(--theme-primary-color-g) * .22),calc(198.9 + var(--theme-primary-color-b) * .22));--theme-primary-075:rgb(calc(216.75 + var(--theme-primary-color-r) * .15),calc(216.75 + var(--theme-primary-color-g) * .15),calc(216.75 + var(--theme-primary-color-b) * .15));--theme-primary-050:rgb(calc(234.6 + var(--theme-primary-color-r) * .08),calc(234.6 + var(--theme-primary-color-g) * .08),calc(234.6 + var(--theme-primary-color-b) * .08));--theme-primary-025:rgb(calc(244.8 + var(--theme-primary-color-r) * .04),calc(244.8 + var(--theme-primary-color-g) * .04),calc(244.8 + var(--theme-primary-color-b) * .04));--theme-secondary-color:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),var(--theme-secondary-color-l));--theme-secondary-900:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 26%));--theme-secondary-800:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 21%));--theme-secondary-700:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 16%));--theme-secondary-600:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 10%));--theme-secondary-500:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 5%));--theme-secondary-400:var(--theme-secondary-color);--theme-secondary-350:rgb(calc(51 + var(--theme-secondary-color-r) * .8),calc(51 + var(--theme-secondary-color-g) * .8),calc(51 + var(--theme-secondary-color-b) * .8));--theme-secondary-300:rgb(calc(89.25 + var(--theme-secondary-color-r) * .65),calc(89.25 + var(--theme-secondary-color-g) * .65),calc(89.25 + var(--theme-secondary-color-b) * .65));--theme-secondary-200:rgb(calc(122.4 + var(--theme-secondary-color-r) * .52),calc(122.4 + var(--theme-secondary-color-g) * .52),calc(122.4 + var(--theme-secondary-color-b) * .52));--theme-secondary-150:rgb(calc(165.75 + var(--theme-secondary-color-r) * .35),calc(165.75 + var(--theme-secondary-color-g) * .35),calc(165.75 + var(--theme-secondary-color-b) * .35));--theme-secondary-100:rgb(calc(198.9 + var(--theme-secondary-color-r) * .22),calc(198.9 + var(--theme-secondary-color-g) * .22),calc(198.9 + var(--theme-secondary-color-b) * .22));--theme-secondary-075:rgb(calc(216.75 + var(--theme-secondary-color-r) * .15),calc(216.75 + var(--theme-secondary-color-g) * .15),calc(216.75 + var(--theme-secondary-color-b) * .15));--theme-secondary-050:rgb(calc(234.6 + var(--theme-secondary-color-r) * .08),calc(234.6 + var(--theme-secondary-color-g) * .08),calc(234.6 + var(--theme-secondary-color-b) * .08));--theme-secondary-025:rgb(calc(244.8 + var(--theme-secondary-color-r) * .04),calc(244.8 + var(--theme-secondary-color-g) * .04),calc(244.8 + var(--theme-secondary-color-b) * .04));--focus-ring:hsla(var(--theme-secondary-color-h),var(--theme-secondary-color-s),var(--theme-secondary-color-l),.15)}.ba{border-style:solid!important;border-width:var(--su-static1)!important}.bt{border-top-style:solid!important;border-top-width:var(--su-static1)!important}.bb{border-bottom-style:solid!important;border-bottom-width:var(--su-static1)!important}.bl{border-left-style:solid!important;border-left-width:var(--su-static1)!important}.bbw1{border-bottom-width:var(--su-static1)!important}.bar-sm{border-radius:var(--br-sm)!important}.btr-sm{border-top-left-radius:var(--br-sm)!important;border-top-right-radius:var(--br-sm)!important}.blr-sm{border-top-left-radius:var(--br-sm)!important;border-bottom-left-radius:var(--br-sm)!important}.bar0{border-radius:0!important}.bc-black-075{border-color:var(--black-075)!important}.bc-black-100{border-color:var(--black-100)!important}.fc-black-800{color:var(--black-800)!important}.fc-black-700{color:var(--black-700)!important}.fc-black-600{color:var(--black-600)!important}.fc-black-500{color:var(--black-500)!important}.fc-black-400{color:var(--black-400)!important}.fc-black-200{color:var(--black-200)!important}.fc-orange-400{color:var(--orange-400)!important}.bg-orange-400{background-color:var(--orange-400)!important}.fc-success{color:var(--green-600)!important}.fc-error{color:var(--red-500)!important}.fc-black-750{color:var(--black-750)!important}.bg-black-025{background-color:var(--black-025)!important}.flex--item1{flex-basis:8.33333333%}.gs2{margin:calc(var(--su2) / 2 * -1)}.gs2>.flex--item{margin:calc(var(--su2) / 2)}.gs4{margin:calc(var(--su4) / 2 * -1)}.gs4>.d-flex,.gs4>.flex--item{margin:calc(var(--su4) / 2)}.gs8{margin:calc(var(--su8) / 2 * -1)}.gs8>.flex--item{margin:calc(var(--su8) / 2)}.gs16{margin:calc(var(--su16) / 2 * -1)}.gs16>.d-flex{margin:calc(var(--su16) / 2)}.gsx,.gsx>.d-flex,.gsx>[class*="flex--item"]{margin-top:0;margin-bottom:0}.gsy,.gsy>.d-flex,.gsy>[class*="flex--item"]{margin-right:0;margin-left:0}.fd-column{flex-direction:column!important}.fw-wrap{flex-wrap:wrap!important}.jc-center{justify-content:center!important}.jc-end{justify-content:flex-end!important}.jc-space-between{justify-content:space-between!important}.ai-center{align-items:center!important}.ai-end{align-items:flex-end!important}.ai-start{align-items:flex-start!important}.ai-stretch{align-items:stretch!important}.as-center{align-self:center!important}.fl-shrink0{flex-shrink:0!important}.fl-none{flex:none!important}.fl0{flex:0 auto!important}.fl1{flex:1 auto!important}.g4{gap:var(--su4)}body{--su-base:1;--su-static1:1px;--su-static2:2px;--su-static4:4px;--su-static6:6px;--su-static8:8px;--su-static12:12px;--su-static16:16px;--su-static24:24px;--su-static32:32px;--su-static48:48px;--su-static64:64px;--su-static96:96px;--su-static128:128px;--su1:clamp(var(--su-static1),calc(var(--su-static1) * var(--su-base)),calc(var(--su-static1) * var(--su-base)));--su2:calc(var(--su-static2) * var(--su-base));--su4:calc(var(--su-static4) * var(--su-base));--su6:calc(var(--su-static6) * var(--su-base));--su8:calc(var(--su-static8) * var(--su-base));--su12:calc(var(--su-static12) * var(--su-base));--su16:calc(var(--su-static16) * var(--su-base));--su24:calc(var(--su-static24) * var(--su-base));--su32:calc(var(--su-static32) * var(--su-base));--su48:calc(var(--su-static48) * var(--su-base));--su64:calc(var(--su-static64) * var(--su-base));--su96:calc(var(--su-static96) * var(--su-base));--su128:calc(var(--su-static128) * var(--su-base))}.m0{margin:0!important}.mr0{margin-right:0!important}.mb0{margin-bottom:0!important}.mt-auto{margin-top:auto!important}.mx-auto{margin-left:auto!important;margin-right:auto!important}.m0{margin:0!important}.mt2{margin-top:var(--su2)!important}.mt4{margin-top:var(--su4)!important}.mt12{margin-top:var(--su12)!important}.mt16{margin-top:var(--su16)!important}.mt24{margin-top:var(--su24)!important}.mr2{margin-right:var(--su2)!important}.mr8{margin-right:var(--su8)!important}.mr16{margin-right:var(--su16)!important}.mr0{margin-right:0!important}.mb4{margin-bottom:var(--su4)!important}.mb6{margin-bottom:var(--su6)!important}.mb8{margin-bottom:var(--su8)!important}.mb12{margin-bottom:var(--su12)!important}.mb16{margin-bottom:var(--su16)!important}.mb0{margin-bottom:0!important}.ml4{margin-left:var(--su4)!important}.ml8{margin-left:var(--su8)!important}.ml12{margin-left:var(--su12)!important}.ml32{margin-left:var(--su32)!important}.mln2{margin-left:calc(var(--su2) * -1)!important}.my8{margin-top:var(--su8)!important;margin-bottom:var(--su8)!important}.my16{margin-top:var(--su16)!important;margin-bottom:var(--su16)!important}.p0{padding:0!important}.p12{padding:var(--su12)!important}.p0{padding:0!important}.pt2{padding-top:var(--su2)!important}.pt4{padding-top:var(--su4)!important}.pb6{padding-bottom:var(--su6)!important}.pb8{padding-bottom:var(--su8)!important}.pl8{padding-left:var(--su8)!important}.px8{padding-left:var(--su8)!important;padding-right:var(--su8)!important}.px16{padding-left:var(--su16)!important;padding-right:var(--su16)!important}.py4{padding-top:var(--su4)!important;padding-bottom:var(--su4)!important}.py6{padding-top:var(--su6)!important;padding-bottom:var(--su6)!important}.py12{padding-top:var(--su12)!important;padding-bottom:var(--su12)!important}.t0{top:0!important}.r0{right:0!important}.b0{bottom:0!important}.l0{left:0!important}h1,h2,h3,h4,h5,p{margin-top:0}.fs-headline1{font-size:var(--fs-headline1)!important}.fs-title{font-size:var(--fs-title)!important}.fs-subheading{font-size:var(--fs-subheading)!important}.fs-body2{font-size:var(--fs-body2)!important}.fs-caption{font-size:var(--fs-caption)!important}.fs-fine{font-size:var(--fs-fine)!important}@media (max-width:640px){html.html__responsive:not(.html__unpinned-leftnav) .fs-headline1{font-size:2rem!important}html.html__responsive:not(.html__unpinned-leftnav) .fs-title{font-size:1.8rem!important}html.html__responsive:not(.html__unpinned-leftnav) .fs-subheading{font-size:1.6rem!important}html.html__responsive:not(.html__unpinned-leftnav) .fs-body2{font-size:1.3rem!important}}.fc-light{color:var(--fc-light)!important}.fw-bold{font-weight:600!important}.ta-center{text-align:center!important}.tt-uppercase{text-transform:uppercase!important}.truncate{overflow:hidden;max-width:100%;text-overflow:ellipsis!important;white-space:nowrap}.ws-nowrap{white-space:nowrap!important}.ow-break-word{overflow-wrap:break-word!important;word-wrap:break-word!important}ul,ol{padding:0;margin-left:2.8em}ol ol{margin-bottom:0}ul{list-style-type:disc}ol{list-style-type:decimal}.d-block{display:block!important}.d-flex{display:flex!important}.d-inline-flex{display:inline-flex!important}.c-default{cursor:default!important}.c-pointer{cursor:pointer!important}.c-move{cursor:move!important}.v-visible-sr{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal}.float-right{float:right!important}.clearfix:before,.clearfix:after{content:"";display:table}.clearfix:after{clear:both}.va-text-top{vertical-align:text-top!important}.ps-fixed{position:fixed!important}.ps-relative{position:relative!important}.overflow-hidden{overflow:hidden!important}.overflow-hidden::-webkit-scrollbar{width:calc(var(--su-static12) - var(--su-static2));height:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.overflow-hidden::-webkit-scrollbar-track{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:transparent}.overflow-hidden::-webkit-scrollbar-thumb{border-radius:calc(var(--su-static12) - var(--su-static2));background-color:var(--scrollbar)}.overflow-hidden::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.z-selected{z-index:var(--zi-selected)!important}.z-nav{z-index:var(--zi-navigation)!important}.fill-current{fill:currentColor!important}.bs-sm{box-shadow:var(--bs-sm)!important}.w50{width:50%!important}.w100{width:100%!important}.w16{width:var(--su-static16)!important}.w24{width:var(--su-static24)!important}.w96{width:var(--su-static96)!important}.wmx4{max-width:calc(var(--s-step) * 4)!important}.wmx12{max-width:var(--s-full)!important}.wmx100{max-width:100%!important}.wmn0{min-width:0!important}.h-auto{height:auto!important}.h16{height:var(--su-static16)!important}.h24{height:var(--su-static24)!important}@media (max-width:1264px){html.html__responsive:not(.html__unpinned-leftnav) .lg\:pr24{padding-right:var(--su24)!important}html.html__responsive:not(.html__unpinned-leftnav) .lg\:pl24{padding-left:var(--su24)!important}}@media (max-width:980px){html.html__responsive:not(.html__unpinned-leftnav) .md\:fd-column{flex-direction:column!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mt24{margin-top:var(--su24)!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mt0{margin-top:0!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mr0{margin-right:0!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mb8{margin-bottom:var(--su8)!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mb12{margin-bottom:var(--su12)!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mb0{margin-bottom:0!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:d-none{display:none!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:w-auto{width:auto!important}}@media (max-width:640px){html.html__responsive:not(.html__unpinned-leftnav) .sm\:fd-row{flex-direction:row!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:fd-column{flex-direction:column!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:jc-space-between{justify-content:space-between!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:ai-center{align-items:center!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:ai-start{align-items:flex-start!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:as-end{align-self:flex-end!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:order-first{order:-1!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:mr16{margin-right:var(--su16)!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:mb12{margin-bottom:var(--su12)!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:mb0{margin-bottom:0!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:ml0{margin-left:0!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:d-none{display:none!important}}</style>
+<link rel=alternate type=application/atom+xml title="Feed for question 'Where can I get a list of all errors &amp; warnings?'" href=https://stackoverflow.com/feeds/question/1392855>
+<meta name=twitter:app:country content=US>
+<meta name=twitter:app:name:iphone content="Stack Exchange iOS">
+<meta name=twitter:app:id:iphone content=871299723>
+<meta name=twitter:app:url:iphone content=se-zaphod://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings>
+<meta name=twitter:app:name:ipad content="Stack Exchange iOS">
+<meta name=twitter:app:id:ipad content=871299723>
+<meta name=twitter:app:url:ipad content=se-zaphod://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings>
+<meta name=twitter:app:name:googleplay content="Stack Exchange Android">
+<meta name=twitter:app:url:googleplay content=https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings>
+<meta name=twitter:app:id:googleplay content=com.stackexchange.marvin>
+<style>@keyframes researchshow{0%{transform:translate3d(0,300px,0);opacity:0}25%{transform:translate3d(0,-12px,0);opacity:1}40%{transform:translate3d(0,-2px,0)}100%{transform:translate3d(0,0,0);opacity:1}}@keyframes researchhide{0%,50%{transform:translate3d(0,0,0);opacity:1}75%{transform:translate3d(0,-12px,0);opacity:1}100%{transform:translate3d(0,300px,0);opacity:0}}</style>
+<noscript id=noscript-css><style>body,.s-topbar{margin-top:1.9em}</style></noscript>
+<meta http-equiv=origin-trial content="AxujKG9INjsZ8/gUq8+dTruNvk7RjZQ1oFhhgQbcTJKDnZfbzSTE81wvC2Hzaf3TW4avA76LTZEMdiedF1vIbA4AAABueyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv=origin-trial content=Azuce85ORtSnWe1MZDTv68qpaW3iHyfL9YbLRy0cwcCZwVnePnOmkUJlG8HGikmOwhZU22dElCcfrfX2HhrBPAkAAAB7eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9><meta http-equiv=origin-trial content=A16nvcdeoOAqrJcmjLRpl1I6f3McDD8EfofAYTt/P/H4/AWwB99nxiPp6kA0fXoiZav908Z8etuL16laFPUdfQsAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9><meta http-equiv=origin-trial content=AxBHdr0J44vFBQtZUqX9sjiqf5yWZ/OcHRcRMN3H9TH+t90V/j3ENW6C8+igBZFXMJ7G3Pr8Dd13632aLng42wgAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9><meta http-equiv=origin-trial content="A88BWHFjcawUfKU3lIejLoryXoyjooBXLgWmGh+hNcqMK44cugvsI5YZbNarYvi3roc1fYbHA1AVbhAtuHZflgEAAAB2eyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IlRydXN0VG9rZW5zIiwiZXhwaXJ5IjoxNjUyNzc0NDAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv=origin-trial content="AzoawhTRDevLR66Y6MROu167EDncFPBvcKOaQispTo9ouEt5LvcBjnRFqiAByRT+2cDHG1Yj4dXwpLeIhc98/gIAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv=origin-trial content="A6+nc62kbJgC46ypOwRsNW6RkDn2x7tgRh0wp7jb3DtFF7oEhu1hhm4rdZHZ6zXvnKZLlYcBlQUImC4d3kKihAcAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv=origin-trial content="A/9La288e7MDEU2ifusFnMg1C2Ij6uoa/Z/ylwJIXSsWfK37oESIPbxbt4IU86OGqDEPnNVruUiMjfKo65H/CQwAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><style>.sf-hidden{display:none!important}</style><meta http-equiv=content-security-policy content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:;"></head>
+ <body class="question-page unified-theme">
+ <div id=notify-container></div>
+ <div id=custom-header class=sf-hidden></div>
+ 
+<header class="s-topbar ps-fixed t0 l0 js-top-bar">
+ <div class=s-topbar--container>
+ <a href=# class="s-topbar--menu-btn js-left-sidebar-toggle sf-hidden" role=menuitem aria-haspopup=true aria-controls=left-sidebar aria-expanded=false></a>
+ <div class="topbar-dialog leftnav-dialog js-leftnav-dialog dno sf-hidden">
+ 
+ </div>
+ <a href=https://stackoverflow.com/ class="s-topbar--logo js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+ <span class="-img _glyph">Stack Overflow</span>
+ </a>
+ <ol class=s-navigation role=presentation>
+ <li class=md:d-none>
+ <a href=https://stackoverflow.co/ class="s-navigation--item js-gps-track" data-gps-track="top_nav.products.click({location:2, destination:7})" data-ga='["top navigation","about menu click",null,null,null]'>About</a>
+ </li>
+ <li>
+ <a href=# class="s-navigation--item js-gps-track js-products-menu" aria-controls=products-popover data-controller=s-popover data-action=s-popover#toggle data-s-popover-placement=bottom data-s-popover-toggle-class=is-selected data-gps-track="top_nav.products.click({location:2, destination:1})" data-ga='["top navigation","products menu click",null,null,null]'>
+ Products
+ </a>
+ </li>
+ <li class=md:d-none>
+ <a href=https://stackoverflow.com/teams class="s-navigation--item js-gps-track" data-gps-track="top_nav.products.click({location:2, destination:7})" data-ga='["top navigation","learn more - teams",null,null,null]'>For Teams</a>
+ </li>
+ </ol>
+ <div class="s-popover ws2 mtn2 p0 sf-hidden" id=products-popover role=menu aria-hidden=true>
+ 
+ 
+ </div>
+ <form id=search role=search action=/search class="s-topbar--searchbar js-searchbar" autocomplete=off>
+ <div class=s-topbar--searchbar--input-group>
+ <input name=q type=text placeholder=Search… value autocomplete=off maxlength=240 class="s-input s-input__search js-search-field" aria-label=Search aria-controls=top-search data-controller=s-popover data-action="focus->s-popover#show" data-s-popover-placement=bottom-start>
+ <svg aria-hidden=true class="s-input-icon s-input-icon__search svg-icon iconSearch" width=18 height=18 viewBox="0 0 18 18"><path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path></svg>
+ <div class="s-popover p0 wmx100 wmn4 sm:wmn-initial js-top-search-popover sf-hidden" id=top-search role=menu>
+ 
+ 
+ 
+ 
+ 
+</div>
+ </div>
+ </form>
+ 
+<ol class=s-topbar--content role=presentation>
+ <li class=js-topbar-dialog-corral role=presentation>
+ 
+ <div class="topbar-dialog siteSwitcher-dialog dno sf-hidden" role=menu>
+ 
+ 
+ 
+ 
+ 
+ 
+ </div>
+ </li>
+ <li><a href=# class="s-topbar--item s-btn s-btn__icon s-btn__muted d-none sm:d-inline-flex js-searchbar-trigger sf-hidden" role=button aria-label=Search aria-haspopup=true aria-controls=search title="Click to show search"><svg aria-hidden=true class="svg-icon iconSearch" width=18 height=18 viewBox="0 0 18 18"><path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path></svg></a></li>
+ <li><a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1392855%2fwhere-can-i-get-a-list-of-all-errors-warnings" class="s-topbar--item s-topbar--item__unset s-btn s-btn__filled ws-nowrap js-gps-track" rel=nofollow data-gps-track=login.click data-ga='["top navigation","login button click",null,null,null]'>Log in</a></li>
+ <li><a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1392855%2fwhere-can-i-get-a-list-of-all-errors-warnings" class="s-topbar--item s-topbar--item__unset ml4 s-btn s-btn__primary ws-nowrap" rel=nofollow data-ga='["sign up","Sign Up Navigation","Header",null,null]'>Sign up</a></li>
+</ol>
+ </div>
+</header>
+ 
+ 
+ 
+ 
+<div class="bg-black-025 bs-sm bt bc-black-100 ps-fixed l0 r0 b0 z-nav js-dismissable-hero" data-campaign-name=stk>
+ <div class="d-flex wmx12 mx-auto px8 py12 jc-space-between ai-center lg:pl24 lg:pr24 md:fd-column sm:fd-row sm:ai-center">
+ <div class="flex--item fs-body2 fl1 mr16 md:mr0 md:mb12 sm:mb0 sm:mr16">
+ <p class=mb0><strong>Join Stack Overflow</strong> to find the best answer to your technical question, help others answer theirs.</p>
+ </div>
+ <div id=openid-buttons class="d-flex gs8 gsx ai-center sm:jc-space-between">
+ <a class="flex--item s-btn s-btn__filled ws-nowrap" href="https://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1392855%2fwhere-can-i-get-a-list-of-all-errors-warnings" rel=nofollow data-ga='["sign up","Sign Up Navigation","Question Hero",null,null]'>
+ <span class=sm:d-none>Sign up with email</span>
+ <span class="d-none sm:d-inline sf-hidden">Sign up</span>
+ 
+ </a>
+ <button class="flex--item ws-nowrap s-btn s-btn__icon s-btn__google ta-center js-major-provider sm:d-none" data-provider=google data-oauthserver=https://accounts.google.com/o/oauth2/auth data-oauthversion=2.0 data-ga='["sign up","Sign Up Started - Google","Question Hero",null,null]'>
+ <svg aria-hidden=true class="native svg-icon iconGoogle" width=18 height=18 viewBox="0 0 18 18"><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18Z" fill=#4285F4></path><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17Z" fill=#34A853></path><path d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07Z" fill=#FBBC05></path><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3Z" fill=#EA4335></path></svg>
+ Sign up with Google
+ </button>
+ <button class="flex--item ws-nowrap s-btn s-btn__icon s-btn__github ta-center js-major-provider sm:d-none" data-provider=github data-oauthserver=https://github.com/login/oauth/authorize data-oauthversion=2.0 data-ga='["sign up","Sign Up Started - GitHub","Question Hero",null,null]'>
+ <svg aria-hidden=true class="svg-icon iconGitHub" width=18 height=18 viewBox="0 0 18 18"><path d="M9 1a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 9 1Z" fill=#010101></path></svg>
+ Sign up with GitHub
+ </button>
+ <button class="flex--item ws-nowrap s-btn s-btn__icon s-btn__facebook ta-center js-major-provider sm:d-none" data-provider=facebook data-oauthserver=https://www.facebook.com/v2.0/dialog/oauth data-oauthversion=2.0 data-ga='["sign up","Sign Up Started - Facebook","Question Hero",null,null]'>
+ <svg aria-hidden=true class="svg-icon iconFacebook" width=18 height=18 viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm6.55 16v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h-2.5Z" fill=#4167B2></path></svg>
+ Sign up with Facebook
+ </button>
+ <button class="flex--item s-btn s-btn__muted s-btn__icon px8 js-dismiss" title=Dismiss><svg aria-hidden=true class="svg-icon iconClear" width=18 height=18 viewBox="0 0 18 18"><path d="M15 4.41 13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9 15 4.41Z"></path></svg></button>
+ </div>
+ <form id=login-form action="/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1392855%2fwhere-can-i-get-a-list-of-all-errors-warnings" method=POST>
+ 
+ 
+ 
+ 
+ <div id=se-login-fields>
+ 
+ </div>
+ </form>
+ 
+ </div>
+</div>
+ <div class=container>
+ 
+<div id=left-sidebar data-is-here-when="md lg" class="left-sidebar js-pinned-left-sidebar ps-relative">
+ <div class="left-sidebar--sticky-container js-sticky-leftnav">
+ <nav role=navigation>
+ <ol class=nav-links>
+ 
+<li class=ps-relative>
+ <a href=https://stackoverflow.com/ class="pl8 js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Home
+ </div>
+ </div>
+ </a>
+</li>
+ <li>
+ <ol class=nav-links>
+ <li class="fs-fine tt-uppercase ml8 mt16 mb4 fc-light">Public</li>
+ 
+<li class="ps-relative youarehere">
+ <a id=nav-questions href=https://stackoverflow.com/questions class="pl8 js-gps-track nav-links--link -link__with-icon" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+<svg aria-hidden=true class="svg-icon iconGlobe" width=18 height=18 viewBox="0 0 18 18"><path d="M9 1C4.64 1 1 4.64 1 9c0 4.36 3.64 8 8 8 4.36 0 8-3.64 8-8 0-4.36-3.64-8-8-8ZM8 15.32a6.46 6.46 0 0 1-4.3-2.74 6.46 6.46 0 0 1-.93-5.01L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52Zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.45 6.45 0 0 1 3.83 4.51 6.45 6.45 0 0 1-1.51 5.73v.01Z"></path></svg> <span class=-link--channel-name>Questions</span>
+ </a>
+</li>
+ 
+<li class=ps-relative>
+ <a id=nav-tags href=https://stackoverflow.com/tags class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Tags
+ </div>
+ </div>
+ </a>
+</li>
+ 
+<li class=ps-relative>
+ <a id=nav-users href=https://stackoverflow.com/users class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Users
+ </div>
+ </div>
+ </a>
+</li>
+ 
+<li class=ps-relative>
+ <a id=nav-companies href="https://stackoverflow.com/jobs/companies?so_medium=stackoverflow&amp;so_source=SiteNav" class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:12})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Companies
+ </div>
+ </div>
+ </a>
+</li>
+ <li class="d-flex ml8 mt16 jc-space-between">
+ <div class="flex--item tt-uppercase fs-fine fc-light">Collectives</div>
+ <div class="flex--item fs-fine fc-light">
+ <a href=https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings class="s-link s-link__inherit mr8 js-gps-track js-collectives-navcta-toggle" role=button aria-controls=popover-discover-collectives data-controller=s-popover data-action=s-popover#toggle data-s-popover-placement=top data-s-popover-toggle-class=is-selected data-gps-track="top_nav.click({is_current:false, location:2, destination:17})">
+ <svg aria-hidden=true class="svg-icon iconInfoSm" width=14 height=14 viewBox="0 0 14 14"><path d="M7 1a6 6 0 1 1 0 12A6 6 0 0 1 7 1Zm1 10V6H6v5h2Zm0-6V3H6v2h2Z"></path></svg>
+ </a>
+ </div>
+ </li>
+ 
+<li class=ps-relative>
+ <a id=nav-collective-discover href=https://stackoverflow.com/collectives class="pl8 ai-center js-collectives-navcta-toggle js-gps-track nav-links--link -link__with-icon" data-gps-track="top_nav.click({is_current:false, location:2, destination:18})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+<svg aria-hidden=true class="mt-auto fc-orange-400 svg-icon iconStarVerified" width=18 height=18 viewBox="0 0 18 18"><path d="M9.86.89a1.14 1.14 0 0 0-1.72 0l-.5.58c-.3.35-.79.48-1.23.33l-.72-.25a1.14 1.14 0 0 0-1.49.85l-.14.76c-.1.45-.45.8-.9.9l-.76.14c-.67.14-1.08.83-.85 1.49l.25.72c.15.44.02.92-.33 1.23l-.58.5a1.14 1.14 0 0 0 0 1.72l.58.5c.35.3.48.79.33 1.23l-.25.72c-.23.66.18 1.35.85 1.49l.76.14c.45.1.8.45.9.9l.14.76c.14.67.83 1.08 1.49.85l.72-.25c.44-.15.92-.02 1.23.33l.5.58c.46.52 1.26.52 1.72 0l.5-.58c.3-.35.79-.48 1.23-.33l.72.25c.66.23 1.35-.18 1.49-.85l.14-.76c.1-.45.45-.8.9-.9l.76-.14c.67-.14 1.08-.83.85-1.49l-.25-.72c-.15-.44-.02-.92.33-1.23l.58-.5c.52-.46.52-1.26 0-1.72l-.58-.5c-.35-.3-.48-.79-.33-1.23l.25-.72a1.14 1.14 0 0 0-.85-1.49l-.76-.14c-.45-.1-.8-.45-.9-.9l-.14-.76a1.14 1.14 0 0 0-1.49-.85l-.72.25c-.44.15-.92.02-1.23-.33l-.5-.58Zm-.49 2.67L10.6 6.6c.05.15.19.24.34.25l3.26.22c.36.03.5.48.23.71l-2.5 2.1a.4.4 0 0 0-.14.4l.8 3.16a.4.4 0 0 1-.6.44L9.2 12.13a.4.4 0 0 0-.42 0l-2.77 1.74a.4.4 0 0 1-.6-.44l.8-3.16a.4.4 0 0 0-.13-.4l-2.5-2.1a.4.4 0 0 1 .22-.7l3.26-.23a.4.4 0 0 0 .34-.25l1.22-3.03a.4.4 0 0 1 .74 0Z"></path></svg> <span class=-link--channel-name>Explore Collectives</span>
+ </a>
+</li>
+ </ol>
+ </li>
+ 
+<li>
+ <ol class=nav-links>
+ 
+<div class="js-freemium-cta ps-relative">
+ <div class="fs-fine tt-uppercase ml8 mt16 mb8 fc-light">Teams</div>
+ <div class="bt bl bb bc-black-075 p12 pb6 fc-black-600 blr-sm overflow-hidden">
+ <strong class="fc-black-750 mb6">Stack Overflow for Teams</strong>
+ – Start collaborating and sharing organizational knowledge.
+ 
+ <img class="wmx100 mx-auto my8 h-auto d-block" width=139 height=114 src=data:null;base64, alt>
+ <a href="https://try.stackoverflow.co/why-teams/?utm_source=so-owned&amp;utm_medium=side-bar&amp;utm_campaign=campaign-38&amp;utm_content=cta" class="w100 s-btn s-btn__primary s-btn__xs bg-orange-400 js-gps-track" data-gps-track="teams.create.left-sidenav.click({ Action: 6 })" data-ga='["teams left navigation - anonymous","left nav free cta","stackoverflow.com/teams/create/free",null,null]'>Create a free Team</a>
+ <a href=https://stackoverflow.co/teams class="w100 s-btn s-btn__muted s-btn__xs js-gps-track" data-gps-track="teams.create.left-sidenav.click({ Action: 5 })" data-ga='["teams left navigation - anonymous","left nav free cta","stackoverflow.com/teams",null,null]'>Why Teams?</a>
+ </div>
+</div>
+ <li class="d-flex ai-center jc-space-between ml8 mt24 mb4 js-create-team-cta d-none sf-hidden">
+ 
+ 
+ </li>
+ <li class="ps-relative js-create-team-cta d-none sf-hidden">
+ 
+ </li>
+ </ol>
+</li> 
+ </ol>
+ </nav>
+ </div>
+ <div class="s-popover ws2 sf-hidden" id=popover-discover-collectives role=menu aria-hidden=true>
+ 
+ 
+ </div>
+ <div class="s-popover sf-hidden" id=popover-teams-create-cta role=menu aria-hidden=true>
+ 
+ 
+ 
+ </div>
+</div>
+ <div id=content class=snippet-hidden>
+ 
+<div itemprop=mainEntity itemscope itemtype=https://schema.org/Question>
+ <link itemprop=image href="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a" class=sf-hidden>
+ <div class="inner-content clearfix">
+ 
+ <div id=question-header class="d-flex sm:fd-column">
+ <h1 itemprop=name class="fs-headline1 ow-break-word mb8 flex--item fl1"><a href=https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings class=question-hyperlink>Where can I get a list of all errors &amp; warnings?</a></h1>
+ <div class="ml12 aside-cta flex--item print:d-none sm:ml0 sm:mb12 sm:order-first sm:as-end">
+ <a href=https://stackoverflow.com/questions/ask class="ws-nowrap s-btn s-btn__primary">
+ Ask Question
+ </a>
+ </div>
+ </div>
+ <div class="d-flex fw-wrap pb8 mb16 bb bc-black-075">
+ <div class="flex--item ws-nowrap mr16 mb8" title="2009-09-08 09:06:27Z">
+ <span class="fc-light mr2">Asked</span>
+ <time itemprop=dateCreated datetime=2009-09-08T09:06:27>12 years, 8 months ago</time>
+ </div>
+ <div class="flex--item ws-nowrap mr16 mb8">
+ <span class="fc-light mr2">Modified</span>
+ <a href=https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings?lastactivity class="s-link s-link__inherit" title="2018-10-21 09:41:54Z">3 years, 6 months ago</a>
+ </div>
+ <div class="flex--item ws-nowrap mb8" title="Viewed 2,615 times">
+ <span class="fc-light mr2">Viewed</span>
+ 3k times
+ </div>
+ </div>
+ <div id=mainbar role=main aria-label="question and answers">
+ 
+<div class=question data-questionid=1392855 data-position-on-page=0 data-score=15 id=question>
+ 
+<div class="js-zone-container zone-container-main mb8" style=min-height:auto;height:auto>
+ <div id=dfp-tlb class="everyonelovesstackoverflow everyoneloves__top-leaderboard everyoneloves__leaderboard" data-dfp-zone=true style=min-height:auto;height:auto data-google-query-id=CIG91P3v1fcCFZRs4Aod01UIoA data-clc-prefilled=true data-clc-ready=true><div id=google_ads_iframe_/248424177/stackoverflow.com/lb/question-pages_0__container__ style="border:0pt none;display:inline-block;width:728px;height:90px"></div></div>
+ <div class=js-report-ad-button-container style=width:728px;height:24px><button class="js-report-ad s-btn s-btn__link fs-fine mt2 float-right">Report this ad</button></div>
+</div>
+ <div class=post-layout>
+ <div class="votecell post-layout--left">
+ <div class="js-voting-container d-flex jc-center fd-column ai-stretch gs4 fc-black-200" data-post-id=1392855>
+ <button class="js-vote-up-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Up vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-ke5pyy6j>
+ <svg aria-hidden=true class="svg-icon iconArrowUpLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-ke5pyy6j class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This question shows research effort; it is useful and clear</div>
+ <div class="js-vote-count flex--item d-flex fd-column ai-center fc-black-500 fs-title" itemprop=upvoteCount data-value=15>
+ 15
+ </div>
+ <button class="js-vote-down-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Down vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-3spdzq2u>
+ <svg aria-hidden=true class="svg-icon iconArrowDownLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-3spdzq2u class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This question does not show any research effort; it is unclear or not useful</div>
+ <button class="js-bookmark-btn s-btn s-btn__unset c-pointer py4 js-gps-track" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Bookmark (3)" data-selected-classes=fc-yellow-600 data-gps-track="post.click({ item: 1, priv: 0, post_type: 1 })" aria-describedby=--stacks-s-tooltip-w8elhfwk>
+ <svg aria-hidden=true class="svg-icon iconBookmark" width=18 height=18 viewBox="0 0 18 18"><path d="M6 1a2 2 0 0 0-2 2v14l5-4 5 4V3a2 2 0 0 0-2-2H6Zm3.9 3.83h2.9l-2.35 1.7.9 2.77L9 7.59l-2.35 1.7.9-2.76-2.35-1.7h2.9L9 2.06l.9 2.77Z"></path></svg>
+ <div class="js-bookmark-count mt4" data-value=3>3</div>
+ </button><div id=--stacks-s-tooltip-w8elhfwk class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Bookmark this question.</div>
+ 
+ 
+ <a class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href=https://stackoverflow.com/posts/1392855/timeline data-shortcut=T data-ks-title=timeline data-controller=s-tooltip data-s-tooltip-placement=right aria-label=Timeline aria-describedby=--stacks-s-tooltip-k19963x2><svg aria-hidden=true class="mln2 mr0 svg-icon iconHistory" width=19 height=18 viewBox="0 0 19 18"><path d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"></path></svg></a><div id=--stacks-s-tooltip-k19963x2 class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Show activity on this post.</div>
+</div>
+ </div>
+ 
+<div class="postcell post-layout--right">
+ 
+ <div class="s-prose js-post-body" itemprop=text>
+ 
+<p>Is there some place where I can get a <strong>list</strong> of all Visual C++ <strong>compiler/linker errors/warnings</strong>? I am looking for both the error/warning number and the error/warning text that is displayed by the compiler. MSDN has them all, but they are linked to on individual pages.</p>
+ </div>
+ <div class="mt24 mb12">
+ <div class="post-taglist d-flex gs4 gsy fd-column">
+ <div class="d-flex ps-relative fw-wrap">
+ <a href=https://stackoverflow.com/questions/tagged/visual-c%2b%2b class="post-tag js-gps-track" title="show questions tagged 'visual-c++'" rel=tag>visual-c++</a> <a href=https://stackoverflow.com/questions/tagged/compiler-errors class="post-tag js-gps-track" title="show questions tagged 'compiler-errors'" rel=tag>compiler-errors</a> <a href=https://stackoverflow.com/questions/tagged/warnings class="post-tag js-gps-track" title="show questions tagged 'warnings'" rel=tag>warnings</a> 
+ </div>
+ </div>
+ </div>
+ <div class=mb0>
+ <div class="mt16 d-flex gs8 gsy fw-wrap jc-end ai-start pt4 mb16">
+ <div class="flex--item mr16 fl1 w96">
+ 
+<div class="js-post-menu pt2" data-post-id=1392855>
+ <div class="d-flex gs8 s-anchors s-anchors__muted fw-wrap">
+ <div class=flex--item>
+ <a href=https://stackoverflow.com/q/1392855 rel=nofollow itemprop=url class="js-share-link js-gps-track" title="Short permalink to this question" data-gps-track="post.click({ item: 2, priv: 0, post_type: 1 })" data-controller="se-share-sheet s-popover" data-se-share-sheet-title="Share a link to this question" data-se-share-sheet-subtitle data-se-share-sheet-post-type=question data-se-share-sheet-social="facebook twitter " data-se-share-sheet-location=1 data-se-share-sheet-license-url=https%3a%2f%2fcreativecommons.org%2flicenses%2fby-sa%2f3.0%2f data-se-share-sheet-license-name="CC BY-SA 3.0" data-s-popover-placement=bottom-start aria-controls=se-share-sheet-0 data-action=" s-popover#toggle se-share-sheet#preventNavigation s-popover:show->se-share-sheet#willShow s-popover:shown->se-share-sheet#didShow">Share</a><div class="s-popover z-dropdown s-anchors s-anchors__default sf-hidden" style=width:unset;max-width:28em id=se-share-sheet-0></div>
+ </div>
+ <div class=flex--item>
+ <button type=button id=btnFollowPost-1392855 class="s-btn s-btn__link js-follow-post js-follow-question js-gps-track" data-gps-track="post.click({ item: 14, priv: 0, post_type: 1 })" data-controller="s-tooltip " data-s-tooltip-placement=bottom data-s-popover-placement=bottom aria-controls aria-describedby=--stacks-s-tooltip-vr8umfon>
+ Follow
+ </button><div id=--stacks-s-tooltip-vr8umfon class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Follow this question to receive notifications</div>
+ </div>
+ </div>
+ <div class=js-menu-popup-container></div>
+</div>
+ </div>
+ <div class="post-signature flex--item">
+<div class=user-info>
+ <div class="user-action-time truncate">
+ <a href=https://stackoverflow.com/posts/1392855/revisions title="show all edits to this post" class=js-gps-track data-gps-track="post.click({ item: 4, priv: 0, post_type: 1 })">edited <span title="2012-08-10 20:59:49Z" class=relativetime>Aug 10, 2012 at 20:59</span></a>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://stackoverflow.com/users/193653/claws><div class=gravatar-wrapper-32><img src=data:image/png;base64,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 alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details>
+ <a href=https://stackoverflow.com/users/193653/claws>claws</a>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score 49,468" dir=ltr>49.5k</span><span title="55 gold badges" aria-hidden=true><span class=badge1></span><span class=badgecount>55</span></span><span class=v-visible-sr>55 gold badges</span><span title="141 silver badges" aria-hidden=true><span class=badge2></span><span class=badgecount>141</span></span><span class=v-visible-sr>141 silver badges</span><span title="191 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>191</span></span><span class=v-visible-sr>191 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ <div class="post-signature owner flex--item">
+ <div class="user-info user-hover">
+ <div class="user-action-time truncate">
+ asked <span title="2009-09-08 09:06:27Z" class=relativetime>Sep 8, 2009 at 9:06</span>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://stackoverflow.com/users/1630/ashwin-nanjappa><div class=gravatar-wrapper-32><img src=data:null;base64, alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details itemprop=author itemscope itemtype=http://schema.org/Person>
+ <a href=https://stackoverflow.com/users/1630/ashwin-nanjappa>Ashwin Nanjappa</a><span class="d-none sf-hidden" itemprop=name>Ashwin Nanjappa</span>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score 72,322" dir=ltr>72.3k</span><span title="76 gold badges" aria-hidden=true><span class=badge1></span><span class=badgecount>76</span></span><span class=v-visible-sr>76 gold badges</span><span title="202 silver badges" aria-hidden=true><span class=badge2></span><span class=badgecount>202</span></span><span class=v-visible-sr>202 silver badges</span><span title="288 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>288</span></span><span class=v-visible-sr>288 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ </div>
+ </div>
+ 
+</div>
+ <span class="d-none sf-hidden" itemprop=commentCount>1</span> 
+ <div class="post-layout--right js-post-comments-component">
+ <div id=comments-1392855 class="comments js-comments-container bt bc-black-075 mt12" data-post-id=1392855 data-min-length=15>
+ <ul class="comments-list js-comments-list" data-remaining-comments-count=0 data-canpost=false data-cansee=true data-comments-unavailable=false data-addlink-disabled=true>
+ <li id=comment-7309183 class="comment js-comment" data-comment-id=7309183 data-comment-owner-id=560648 data-comment-score=0>
+ <div class="js-comment-actions comment-actions">
+ <div class="comment-score js-comment-edit-hide">
+ </div>
+ </div>
+ <div class="comment-text js-comment-text-and-form">
+ <div class="comment-body js-comment-edit-hide">
+ 
+ <span class=comment-copy>Good question. I'd like to know, too. MSDN doesn't bother presenting them in any sort of convenient format.</span>
+ 
+ <div class="d-inline-flex ai-center">
+–&nbsp;<a href=https://stackoverflow.com/users/560648/lightness-races-in-orbit title="368,366 reputation" class=comment-user>Lightness Races in Orbit</a>
+ </div>
+ <span class=comment-date dir=ltr><a class=comment-link href=#comment7309183_1392855><span title="2011-06-07 12:05:59Z, License: CC BY-SA 3.0" class=relativetime-clean>Jun 7, 2011 at 12:05</span></a></span>
+ </div>
+ </div>
+ </li>
+ </ul>
+ </div>
+ <div id=comments-link-1392855 data-rep=50 data-anon=true>
+ <a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." href=# role=button>Add a comment</a>
+ <span class="js-link-separator dno sf-hidden">&nbsp;|&nbsp;</span>
+ <a class="js-show-link comments-link dno sf-hidden" title="Expand to show all comments on this post" href=# role=button></a>
+ </div> 
+ </div>
+ </div>
+</div>
+<div class="js-zone-container zone-container-responsive sf-hidden">
+ 
+ 
+</div>
+ <div id=answers>
+ <a name=tab-top></a>
+ <div id=answers-header>
+ <div class="answers-subheader d-flex ai-center mb8">
+ <div class="flex--item fl1">
+ <h2 class=mb0 data-answercount=2>
+ 2 Answers
+ <span style=display:none itemprop=answerCount>2</span>
+ </h2>
+ </div>
+ <div class=flex--item>
+ 
+<div class="d-flex g4 gsx ai-center sm:fd-column sm:ai-start">
+ <div class="d-flex fd-column ai-end sm:ai-start">
+ <label class="flex--item fs-caption" for=answer-sort-dropdown-select-menu>
+ Sorted by:
+ </label>
+ <a class="js-sort-preference-change s-link flex--item fs-fine d-none sf-hidden" data-value=ScoreDesc href="https://stackoverflow.com/questions/1392855/where-can-i-get-a-list-of-all-errors-warnings?answertab=scoredesc#tab-top">
+ Reset to default
+ </a>
+ </div>
+ <div class="flex--item s-select">
+ <select id=answer-sort-dropdown-select-menu>
+                    <option value=scoredesc selected>
+ Highest score (default)
+ </option>
+                    <option value=modifieddesc>
+ Date modified (newest first)
+ </option>
+                    <option value=createdasc>
+ Date created (oldest first)
+ </option>
+        </select>
+ </div>
+</div>
+ </div>
+ </div>
+ 
+ </div>
+ 
+<a name=6265193></a>
+<div id=answer-6265193 class="answer js-answer" data-answerid=6265193 data-parentid=1392855 data-score=8 data-position-on-page=1 data-highest-scored=1 data-question-has-accepted-highest-score=0 itemprop=acceptedAnswer itemscope itemtype=https://schema.org/Answer>
+ <div class=post-layout>
+ <div class="votecell post-layout--left">
+ <div class="js-voting-container d-flex jc-center fd-column ai-stretch gs4 fc-black-200" data-post-id=6265193>
+ <button class="js-vote-up-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Up vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-uiddv4eu>
+ <svg aria-hidden=true class="svg-icon iconArrowUpLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-uiddv4eu class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is useful</div>
+ <div class="js-vote-count flex--item d-flex fd-column ai-center fc-black-500 fs-title" itemprop=upvoteCount data-value=8>
+ 8
+ </div>
+ <button class="js-vote-down-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Down vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-wm8c6jm1>
+ <svg aria-hidden=true class="svg-icon iconArrowDownLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-wm8c6jm1 class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is not useful</div>
+ 
+ <div class="js-accepted-answer-indicator flex--item fc-green-500 py6 mtn8 d-none sf-hidden" data-s-tooltip-placement=right title="Loading when this answer was accepted…" tabindex=0 role=note aria-label=Accepted>
+ 
+ </div>
+ 
+ <a class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href=https://stackoverflow.com/posts/6265193/timeline data-shortcut=T data-ks-title=timeline data-controller=s-tooltip data-s-tooltip-placement=right aria-label=Timeline aria-describedby=--stacks-s-tooltip-9ppivhxn><svg aria-hidden=true class="mln2 mr0 svg-icon iconHistory" width=19 height=18 viewBox="0 0 19 18"><path d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"></path></svg></a><div id=--stacks-s-tooltip-9ppivhxn class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Show activity on this post.</div>
+</div>
+ </div>
+ 
+<div class="answercell post-layout--right">
+ 
+ <div class="s-prose js-post-body" itemprop=text>
+<p>Apparently, none exists: googling for a single page containing all the terms <code>lnk1000 lnk1003 c4100</code> yields no results.</p>
+<p>I think you'll have to compile a reference yourself by painstaking navigation through <a href=http://msdn.microsoft.com/en-us/library/8x5x43k7.aspx rel=noreferrer>this MSDN section</a>.</p>
+ </div>
+ <div class=mt24>
+ <div class="d-flex fw-wrap ai-start jc-end gs8 gsy">
+ <time itemprop=dateCreated datetime=2011-06-07T12:33:36></time>
+ <div class="flex--item mr16" style="flex:1 1 100px">
+ 
+<div class="js-post-menu pt2" data-post-id=6265193>
+ <div class="d-flex gs8 s-anchors s-anchors__muted fw-wrap">
+ <div class=flex--item>
+ <a href=https://stackoverflow.com/a/6265193 rel=nofollow itemprop=url class="js-share-link js-gps-track" title="Short permalink to this answer" data-gps-track="post.click({ item: 2, priv: 0, post_type: 2 })" data-controller="se-share-sheet s-popover" data-se-share-sheet-title="Share a link to this answer" data-se-share-sheet-subtitle data-se-share-sheet-post-type=answer data-se-share-sheet-social="facebook twitter " data-se-share-sheet-location=2 data-se-share-sheet-license-url=https%3a%2f%2fcreativecommons.org%2flicenses%2fby-sa%2f3.0%2f data-se-share-sheet-license-name="CC BY-SA 3.0" data-s-popover-placement=bottom-start aria-controls=se-share-sheet-1 data-action=" s-popover#toggle se-share-sheet#preventNavigation s-popover:show->se-share-sheet#willShow s-popover:shown->se-share-sheet#didShow">Share</a><div class="s-popover z-dropdown s-anchors s-anchors__default sf-hidden" style=width:unset;max-width:28em id=se-share-sheet-1></div>
+ </div>
+ <div class=flex--item>
+ <button type=button id=btnFollowPost-6265193 class="s-btn s-btn__link js-follow-post js-follow-answer js-gps-track" data-gps-track="post.click({ item: 14, priv: 0, post_type: 2 })" data-controller="s-tooltip " data-s-tooltip-placement=bottom data-s-popover-placement=bottom aria-controls aria-describedby=--stacks-s-tooltip-hld06djd>
+ Follow
+ </button><div id=--stacks-s-tooltip-hld06djd class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Follow this answer to receive notifications</div>
+ </div>
+ </div>
+ <div class=js-menu-popup-container></div>
+</div>
+ </div>
+ <div class="post-signature flex--item fl0">
+ <div class="user-info user-hover">
+ <div class="user-action-time truncate">
+ answered <span title="2011-06-07 12:33:36Z" class=relativetime>Jun 7, 2011 at 12:33</span>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://stackoverflow.com/users/560648/lightness-races-in-orbit><div class=gravatar-wrapper-32><img src=data:null;base64, alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details itemprop=author itemscope itemtype=http://schema.org/Person>
+ <a href=https://stackoverflow.com/users/560648/lightness-races-in-orbit>Lightness Races in Orbit</a><span class="d-none sf-hidden" itemprop=name>Lightness Races in Orbit</span>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score 368,366" dir=ltr>368k</span><span title="73 gold badges" aria-hidden=true><span class=badge1></span><span class=badgecount>73</span></span><span class=v-visible-sr>73 gold badges</span><span title="619 silver badges" aria-hidden=true><span class=badge2></span><span class=badgecount>619</span></span><span class=v-visible-sr>619 silver badges</span><span title="1021 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>1021</span></span><span class=v-visible-sr>1021 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ </div>
+ 
+ 
+ </div>
+ 
+</div>
+ <span class="d-none sf-hidden" itemprop=commentCount></span> 
+ <div class="post-layout--right js-post-comments-component">
+ <div id=comments-6265193 class="comments js-comments-container bt bc-black-075 mt12 dno sf-hidden" data-post-id=6265193 data-min-length=15>
+ 
+ </div>
+ <div id=comments-link-6265193 data-rep=50 data-anon=true>
+ <a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href=# role=button>Add a comment</a>
+ <span class="js-link-separator dno sf-hidden">&nbsp;|&nbsp;</span>
+ <a class="js-show-link comments-link dno sf-hidden" title="Expand to show all comments on this post" href=# role=button></a>
+ </div> 
+ </div>
+ </div>
+</div>
+<div class="js-zone-container zone-container-main my8" style=min-height:auto;height:auto>
+ <div id=dfp-mlb class="everyonelovesstackoverflow everyoneloves__mid-leaderboard everyoneloves__leaderboard" data-clc-prefilled=true style=min-height:auto;height:auto data-google-query-id=CIym2_3v1fcCFQ9O4Aod6hkCGg data-clc-ready=true><div id=google_ads_iframe_/248424177/stackoverflow.com/mlb/question-pages_0__container__ style="border:0pt none;display:inline-block;width:728px;height:90px"></div></div>
+ <div class=js-report-ad-button-container style=width:728px;height:24px><button class="js-report-ad s-btn s-btn__link fs-fine mt2 float-right">Report this ad</button></div>
+</div>
+ 
+<a name=52913941></a>
+<div id=answer-52913941 class="answer js-answer" data-answerid=52913941 data-parentid=1392855 data-score=1 data-position-on-page=2 data-highest-scored=0 data-question-has-accepted-highest-score=0 itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer>
+ <div class=post-layout>
+ <div class="votecell post-layout--left">
+ <div class="js-voting-container d-flex jc-center fd-column ai-stretch gs4 fc-black-200" data-post-id=52913941>
+ <button class="js-vote-up-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Up vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-11lzmjpv>
+ <svg aria-hidden=true class="svg-icon iconArrowUpLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-11lzmjpv class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is useful</div>
+ <div class="js-vote-count flex--item d-flex fd-column ai-center fc-black-500 fs-title" itemprop=upvoteCount data-value=1>
+ 1
+ </div>
+ <button class="js-vote-down-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Down vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-9wnte0fy>
+ <svg aria-hidden=true class="svg-icon iconArrowDownLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-9wnte0fy class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is not useful</div>
+ 
+ <div class="js-accepted-answer-indicator flex--item fc-green-500 py6 mtn8 d-none sf-hidden" data-s-tooltip-placement=right title="Loading when this answer was accepted…" tabindex=0 role=note aria-label=Accepted>
+ 
+ </div>
+ 
+ <a class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href=https://stackoverflow.com/posts/52913941/timeline data-shortcut=T data-ks-title=timeline data-controller=s-tooltip data-s-tooltip-placement=right aria-label=Timeline aria-describedby=--stacks-s-tooltip-tgxa3guu><svg aria-hidden=true class="mln2 mr0 svg-icon iconHistory" width=19 height=18 viewBox="0 0 19 18"><path d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"></path></svg></a><div id=--stacks-s-tooltip-tgxa3guu class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Show activity on this post.</div>
+</div>
+ </div>
+ 
+<div class="answercell post-layout--right">
+ 
+ <div class="s-prose js-post-body" itemprop=text>
+<p>Al list of all warnings for VS2015 and VS2017 can be found at sections such as
+<a href=https://docs.microsoft.com/en-us/visualstudio/code-quality/code-analysis-for-cpp-corecheck rel="nofollow noreferrer">C++ Core Guidelines Checker Reference</a>,
+<a href=https://docs.microsoft.com/en-us/visualstudio/code-quality/code-analysis-for-c-cpp-warnings rel="nofollow noreferrer">Code Analysis for C/C++ Warnings</a>,
+and other related sections linked from the References header in the left menu.</p>
+<p>For example, here is a document describing <a href=https://docs.microsoft.com/en-us/visualstudio/code-quality/c6001 rel="nofollow noreferrer">C6001: using uninitialized memory [variable]</a>.</p>
+<p>I am not sure if there is a single page covering all warning codes, but lacking one, you can clone the documentation sources and search through it yourself: <a href=https://github.com/MicrosoftDocs/visualstudio-docs/tree/master/docs/code-quality rel="nofollow noreferrer">https://github.com/MicrosoftDocs/visualstudio-docs/tree/master/docs/code-quality</a></p>
+ </div>
+ <div class=mt24>
+ <div class="d-flex fw-wrap ai-start jc-end gs8 gsy">
+ <time itemprop=dateCreated datetime=2018-10-21T09:41:54></time>
+ <div class="flex--item mr16" style="flex:1 1 100px">
+ 
+<div class="js-post-menu pt2" data-post-id=52913941>
+ <div class="d-flex gs8 s-anchors s-anchors__muted fw-wrap">
+ <div class=flex--item>
+ <a href=https://stackoverflow.com/a/52913941 rel=nofollow itemprop=url class="js-share-link js-gps-track" title="Short permalink to this answer" data-gps-track="post.click({ item: 2, priv: 0, post_type: 2 })" data-controller="se-share-sheet s-popover" data-se-share-sheet-title="Share a link to this answer" data-se-share-sheet-subtitle data-se-share-sheet-post-type=answer data-se-share-sheet-social="facebook twitter " data-se-share-sheet-location=2 data-se-share-sheet-license-url=https%3a%2f%2fcreativecommons.org%2flicenses%2fby-sa%2f4.0%2f data-se-share-sheet-license-name="CC BY-SA 4.0" data-s-popover-placement=bottom-start aria-controls=se-share-sheet-2 data-action=" s-popover#toggle se-share-sheet#preventNavigation s-popover:show->se-share-sheet#willShow s-popover:shown->se-share-sheet#didShow">Share</a><div class="s-popover z-dropdown s-anchors s-anchors__default sf-hidden" style=width:unset;max-width:28em id=se-share-sheet-2></div>
+ </div>
+ <div class=flex--item>
+ <button type=button id=btnFollowPost-52913941 class="s-btn s-btn__link js-follow-post js-follow-answer js-gps-track" data-gps-track="post.click({ item: 14, priv: 0, post_type: 2 })" data-controller="s-tooltip " data-s-tooltip-placement=bottom data-s-popover-placement=bottom aria-controls aria-describedby=--stacks-s-tooltip-ax3ernnp>
+ Follow
+ </button><div id=--stacks-s-tooltip-ax3ernnp class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Follow this answer to receive notifications</div>
+ </div>
+ </div>
+ <div class=js-menu-popup-container></div>
+</div>
+ </div>
+ <div class="post-signature flex--item fl0">
+ <div class="user-info user-hover">
+ <div class="user-action-time truncate">
+ answered <span title="2018-10-21 09:41:54Z" class=relativetime>Oct 21, 2018 at 9:41</span>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://stackoverflow.com/users/427545/lekensteyn><div class=gravatar-wrapper-32><img src="data:image/png;base64,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" alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details itemprop=author itemscope itemtype=http://schema.org/Person>
+ <a href=https://stackoverflow.com/users/427545/lekensteyn>Lekensteyn</a><span class="d-none sf-hidden" itemprop=name>Lekensteyn</span>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score 61,396" dir=ltr>61.4k</span><span title="21 gold badges" aria-hidden=true><span class=badge1></span><span class=badgecount>21</span></span><span class=v-visible-sr>21 gold badges</span><span title="151 silver badges" aria-hidden=true><span class=badge2></span><span class=badgecount>151</span></span><span class=v-visible-sr>151 silver badges</span><span title="187 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>187</span></span><span class=v-visible-sr>187 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ </div>
+ 
+ 
+ </div>
+ 
+</div>
+ <span class="d-none sf-hidden" itemprop=commentCount></span> 
+ <div class="post-layout--right js-post-comments-component">
+ <div id=comments-52913941 class="comments js-comments-container bt bc-black-075 mt12 dno sf-hidden" data-post-id=52913941 data-min-length=15>
+ 
+ </div>
+ <div id=comments-link-52913941 data-rep=50 data-anon=true>
+ <a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href=# role=button>Add a comment</a>
+ <span class="js-link-separator dno sf-hidden">&nbsp;|&nbsp;</span>
+ <a class="js-show-link comments-link dno sf-hidden" title="Expand to show all comments on this post" href=# role=button></a>
+ </div> 
+ </div>
+ </div>
+</div>
+ <a name=new-answer></a>
+ <form id=post-form action=/questions/1392855/answer/submit method=post class="js-add-answer-component post-form">
+ 
+ 
+ 
+ <h2 class=space>
+ Your Answer
+ </h2>
+ 
+ 
+<div id=post-editor class="post-editor js-post-editor">
+ <div class=ps-relative>
+ <div class="wmd-container mb8">
+ <div id=wmd-button-bar class="wmd-button-bar btr-sm"><ul id=wmd-button-row class=wmd-button-row><li id=wmd-bold-button class=wmd-button style=left:0px><span style="background-position:0px -20px"></span><li id=wmd-italic-button class=wmd-button style=left:25px><span style="background-position:-20px -20px"></span><li id=wmd-spacer1 class=wmd-spacer style=left:50px><span style="background-position:-40px -20px"></span><li id=wmd-link-button class=wmd-button style=left:75px><span style="background-position:-40px -20px"></span><li id=wmd-quote-button class=wmd-button style=left:100px><span style="background-position:-60px -20px"></span><li id=wmd-code-button class=wmd-button style=left:125px><span style="background-position:-80px -20px"></span><li id=wmd-image-button class=wmd-button style=left:150px><span style="background-position:-100px -20px"></span><li id=wmd-spacer2 class=wmd-spacer style=left:175px><span style="background-position:-120px -20px"></span><li id=wmd-olist-button class=wmd-button style=left:200px><span style="background-position:-120px -20px"></span><li id=wmd-ulist-button class=wmd-button style=left:225px><span style="background-position:-140px -20px"></span><li id=wmd-heading-button class=wmd-button style=left:250px><span style="background-position:-160px -20px"></span><li id=wmd-hr-button class=wmd-button style=left:275px><span style="background-position:-180px -20px"></span><li id=wmd-spacer3 class=wmd-spacer style=left:300px><span style="background-position:-200px -20px"></span><li id=wmd-undo-button class=wmd-button style=left:325px><span style="background-position:-200px -20px"></span><li id=wmd-redo-button class=wmd-button style=left:350px><span style="background-position:-220px -20px"></span><li class="wmd-spacer wmd-spacer-max"></ul></div>
+ <div class=js-stacks-validation>
+ <div class=ps-relative>
+ <textarea id=wmd-input name=post-text class="wmd-input s-input bar0 js-post-body-field" data-post-type-id=2 cols=92 rows=15 tabindex=101 data-min-length></textarea>
+ </div>
+ <div class="s-input-message mt4 d-none js-stacks-validation-message sf-hidden"></div>
+ </div>
+ </div>
+ </div>
+ <aside class="d-flex ai-start jc-space-between js-answer-help s-notice s-notice__warning pb0 pr4 pt4 mb8 d-none sf-hidden" role=status aria-hidden=true>
+ 
+ 
+</aside>
+ <div>
+ <div id=draft-saved class="fc-success h24" style=display:none>Draft saved</div>
+ <div id=draft-discarded class="fc-error h24" style=display:none>Draft discarded</div>
+ </div>
+ <div id=wmd-preview class="s-prose mb16 wmd-preview js-wmd-preview"></div>
+ <div></div>
+ <div class="edit-block sf-hidden">
+ 
+ 
+ </div>
+</div>
+ <div class=ps-relative>
+ <div class="form-item new-post-login p0 my16">
+ <div class="d-flex gs16 md:fd-column new-login-form">
+ <div class="d-flex fd-column w50 md:w-auto gsy gs8 jc-space-between new-login-left">
+ <h3 class="flex--item fs-title">Sign up or <a id=login-link href="https://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1392855%2fwhere-can-i-get-a-list-of-all-errors-warnings%23new-answer">log in</a></h3>
+ 
+ <div class="flex--item s-btn s-btn__muted s-btn__outlined s-btn__icon google-login" data-ga='["sign up","Sign Up Started - Google","New Post",null,null]'>
+ <svg aria-hidden=true class="native svg-icon iconGoogle" width=18 height=18 viewBox="0 0 18 18"><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18Z" fill=#4285F4></path><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17Z" fill=#34A853></path><path d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07Z" fill=#FBBC05></path><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3Z" fill=#EA4335></path></svg> Sign up using Google
+ </div>
+ <div class="flex--item s-btn s-btn__muted s-btn__icon facebook-login" data-ga='["sign up","Sign Up Started - Facebook","New Post",null,null]'>
+ <svg aria-hidden=true class="svg-icon iconFacebook" width=18 height=18 viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm6.55 16v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h-2.5Z" fill=#4167B2></path></svg> Sign up using Facebook
+ </div>
+ <div class="flex--item s-btn s-btn__muted s-btn__outlined s-btn__icon stackexchange-login" data-ga='["sign up","Sign Up Navigation","New Post",null,null]'>
+ <svg aria-hidden=true class="native svg-icon iconLogoGlyphXSm" width=18 height=18 viewBox="0 0 18 18"><path d="M14 16v-5h2v7H2v-7h2v5h10Z" fill=#BCBBBB></path><path d="m12.09.72-1.21.9 4.5 6.07 1.22-.9L12.09.71ZM5 15h8v-2H5v2Zm9.15-5.87L8.35 4.3l.96-1.16 5.8 4.83-.96 1.16Zm-7.7-1.47 6.85 3.19.63-1.37-6.85-3.2-.63 1.38Zm6.53 5L5.4 11.39l.38-1.67 7.42 1.48-.22 1.46Z" fill=#F48024></path></svg> Sign up using Email and Password
+ </div>
+ </div>
+ 
+ 
+ <button type=button class="d-none js-submit-openid sf-hidden">Submit</button>
+ <div class="d-flex gsy gs8 fd-column w50 md:w-auto new-login-right form-item p0">
+ <h3 class="flex--item fs-title">Post as a guest</h3>
+ <div class=flex--item>
+ <div class="d-flex gs4 gsy fd-column">
+ <label class=s-label for=display-name>Name</label>
+ <div class="d-flex ps-relative">
+ <input class=s-input id=display-name name=display-name maxlength=30 type=text value tabindex=105 placeholder>
+ </div>
+ </div>
+ </div>
+ <div class=flex--item>
+ <div class="d-flex gs4 gsy fd-column">
+ <div class=flex--item>
+ <div class="d-flex gs2 gsy fd-column">
+ <label class="flex--item s-label" for=m-address>Email</label>
+ <p class="flex--item s-description">Required, but never shown</p>
+ </div>
+ </div>
+ <div class="d-flex ps-relative">
+ <input class="s-input js-post-email-field" id=m-address name=m-address type=text value size=40 tabindex=106 placeholder>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <noscript>
+                        <h3 class="flex--item fs-title">Post as a guest</h3>
+            <div class="flex--item">
+                <div class="d-flex gs4 gsy fd-column">
+                    <label class="s-label" for="display-name">Name</label>
+                    <div class="d-flex ps-relative">
+                        <input class="s-input" id="display-name" name="display-name" maxlength="30" type="text" value="" tabindex="105" placeholder="" />
+                    </div>
+                </div>
+            </div>
+            <div class="flex--item">
+                <div class="d-flex gs4 gsy fd-column">
+                    <div class="flex--item">
+                        <div class="d-flex gs2 gsy fd-column">
+                            <label class="flex--item s-label" for="m-address">Email</label>
+                            <p class="flex--item s-description">Required, but never shown</p>
+                        </div>
+                    </div>
+                    <div class="d-flex ps-relative">
+                        <input class="s-input js-post-email-field" id="m-address" name="m-address" type="text" value="" size="40" tabindex="106" placeholder="" />
+                    </div>
+                </div>
+            </div>
+
+            </noscript>
+ </div>
+ <div class="form-submit cbt d-flex gsx gs4">
+ <button id=submit-button class="flex--item s-btn s-btn__primary s-btn__icon" type=submit tabindex=120 autocomplete=off>
+Post Your Answer </button>
+ <button class="flex--item s-btn s-btn__danger discard-answer dno sf-hidden">
+ Discard
+ </button>
+ <p class=privacy-policy-agreement>
+ By clicking “Post Your Answer”, you agree to our <a href=https://stackoverflow.com/legal/terms-of-service/public name=tos target=_blank class=-link>terms of service</a>, <a href=https://stackoverflow.com/legal/privacy-policy name=privacy target=_blank class=-link>privacy policy</a> and <a href=https://stackoverflow.com/legal/cookie-policy name=cookie target=_blank class=-link>cookie policy</a>
+ </p>
+ </div>
+ <div class="js-general-error general-error cbt d-none sf-hidden"></div>
+ </form>
+ <h2 class=bottom-notice data-loc=1>
+Not the answer you're looking for? Browse other questions tagged <a href=https://stackoverflow.com/questions/tagged/visual-c%2b%2b class=post-tag title="show questions tagged 'visual-c++'" rel=tag>visual-c++</a> <a href=https://stackoverflow.com/questions/tagged/compiler-errors class=post-tag title="show questions tagged 'compiler-errors'" rel=tag>compiler-errors</a> <a href=https://stackoverflow.com/questions/tagged/warnings class=post-tag title="show questions tagged 'warnings'" rel=tag>warnings</a> or <a href=https://stackoverflow.com/questions/ask>ask your own question</a>. </h2>
+ </div>
+ </div>
+ <div id=sidebar class=show-votes role=complementary aria-label=sidebar>
+ 
+ 
+<div class="s-sidebarwidget s-sidebarwidget__yellow s-anchors s-anchors__grayscale mb16" data-tracker="cb=1">
+ <ul class="d-block p0 m0">
+ <div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text fc-light d:fc-black-900 bb bbw1">
+ The Overflow Blog
+ </div>
+ <li class="s-sidebarwidget--item d-flex px16">
+ <div class="flex--item1 fl-shrink0">
+<svg aria-hidden=true class="va-text-top svg-icon iconPencilSm" width=14 height=14 viewBox="0 0 14 14"><path d="m11.1 1.71 1.13 1.12c.2.2.2.51 0 .71L11.1 4.7 9.21 2.86l1.17-1.15c.2-.2.51-.2.71 0ZM2 10.12l6.37-6.43 1.88 1.88L3.88 12H2v-1.88Z"></path></svg> </div>
+ <div class="flex--item wmn0 ow-break-word">
+ <a href="https://stackoverflow.blog/2022/05/10/feeling-burned-out-youre-not-the-only-one-ep-440/?cb=1" class=js-gps-track data-ga='["community bulletin board","The Overflow Blog","https://stackoverflow.blog/2022/05/10/feeling-burned-out-youre-not-the-only-one-ep-440/",null,null]' data-gps-track="communitybulletin.click({ priority: 1, position: 0 })">Feeling burned out? You’re not the only one (Ep. 440)</a>
+ </div>
+ </li>
+ <div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text fc-light d:fc-black-900 bb bbw1">
+ Featured on Meta
+ </div>
+ <li class="s-sidebarwidget--item d-flex px16">
+ <div class="flex--item1 fl-shrink0">
+<div class="favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div> </div>
+ <div class="flex--item wmn0 ow-break-word">
+ <a href="https://meta.stackoverflow.com/questions/417932/staging-ground-reviewer-motivation-scaling-and-open-questions?cb=1" class=js-gps-track data-ga='["community bulletin board","Featured on Meta","https://meta.stackoverflow.com/questions/417932/staging-ground-reviewer-motivation-scaling-and-open-questions",null,null]' data-gps-track="communitybulletin.click({ priority: 6, position: 1 })">Staging Ground: Reviewer Motivation, Scaling, and Open Questions</a>
+ </div>
+ </li>
+ <li class="s-sidebarwidget--item d-flex px16">
+ <div class="flex--item1 fl-shrink0">
+<div class="favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div> </div>
+ <div class="flex--item wmn0 ow-break-word">
+ <a href="https://meta.stackoverflow.com/questions/417008/overhauling-our-communitys-closure-reasons-and-guidance?cb=1" class=js-gps-track data-ga='["community bulletin board","Featured on Meta","https://meta.stackoverflow.com/questions/417008/overhauling-our-communitys-closure-reasons-and-guidance",null,null]' data-gps-track="communitybulletin.click({ priority: 6, position: 2 })">Overhauling our community's closure reasons and guidance</a>
+ </div>
+ </li>
+ </ul>
+</div>
+<div class="js-zone-container zone-container-sidebar" style=min-height:auto;height:auto>
+ <div id=dfp-tsb class="everyonelovesstackoverflow everyoneloves__top-sidebar" data-dfp-zone=true style=min-height:auto;height:auto data-google-query-id=CLKb2P3v1fcCFVCZewodGOEN2A data-clc-prefilled=true data-clc-ready=true><div id=google_ads_iframe_/248424177/stackoverflow.com/sb/question-pages_0__container__ style="border:0pt none;display:inline-block;width:300px;height:600px"></div></div>
+ <div class=js-report-ad-button-container style=width:300px;height:24px><button class="js-report-ad s-btn s-btn__link fs-fine mt2 float-right">Report this ad</button></div>
+</div>
+<div class="js-zone-container zone-container-sidebar">
+ <div id=dfp-msb class="everyonelovesstackoverflow everyoneloves__mid-sidebar" data-dfp-zone=true style=min-height:auto;height:auto;display:none data-google-query-id=CNjG2P3v1fcCFVfNEQgdgNgLoA data-clc-ready=true></div>
+ <div class=js-report-ad-button-container style=width:300px></div>
+</div>
+<div id=hireme class="tex2jax_ignore clc-cp-container"> <div class="clc-cp-sb--short _benefits"> <div class="-wrapper clc-g-column"> <div class="clc-g-col clc-g-column -header"> <div class="clc-g-col clc-g-center fl-none -logo"> <img src=data:null;base64, alt="ImFusion GmbH"> </div> <div class="clc-g-col clc-g-column -company-info"> <h2 class="clc-g-col fl-none -company">ImFusion GmbH</h2> <span class="clc-g-col fl-none -meta-info _muted">Computer Vision</span> </div> </div> <div class="d-flex flex--item fd-column mb16"> <a href="https://stackoverflow.com/jobs/companies/imfusion-gmbh?so_medium=Ad&amp;so_source=CompanyPageAd&amp;so_campaign=StandardCompanyPageAd" data-clc-click="https://clc.stackoverflow.com/click?an=ATMAzP8KxUAY9csy2kgFwz5FRAICENeBVQsD8Isg-fgp1OsyABIAjLAXt1E5AJ3IFx6lI8MTESg&amp;cr=832980&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fimfusion-gmbh%3Fso_medium%3DAd%26so_source%3DCompanyPageAd%26so_campaign%3DStandardCompanyPageAd%26med%3Dclc%26clc-var%3D18&amp;sig=iS5CpuxpwnEyxA" class=clc-cp-link target=_blank></a> <h2 class="fc-black-800 fs-subheading flex--item mb8 ta-center z-selected">We have great benefits!</h2> <div class="d-flex flex--item fd-column gs8 gsy"> <div class="d-flex flex--item"> <div class=flex--item> <div class="ba bc-black-100 w24 h24 ta-center pt2 mr8 bar-sm fc-black-400" alt="flexible working hours"> <svg class="w16 h16 fill-current" aria-hidden=true viewBox="0 0 18 18"><path d="M9 17A8 8 0 1 1 9 1a8 8 0 0 1 0 16zm0-2A6 6 0 1 0 9 3a6 6 0 0 0 0 12zM8 5h1.01L9 9.36l3.22 2.1-.6.93L8 10V5z"></path></svg> </div> </div> <div class="flex--item fs-caption fc-black-700 as-center">flexible working hours</div> </div> <div class="d-flex flex--item"> <div class=flex--item> <div class="ba bc-black-100 w24 h24 ta-center pt2 mr8 bar-sm fc-black-400" alt="exciting mix of industrial &amp; academic work"> <svg class="w16 h16 fill-current" aria-hidden=true viewBox="0 0 18 18"><path d="M10 8h2.87c.66 0 1.17-.47 1.13-1.04l-.31-5.05c-.08-.5-.55-.91-1.17-.91H5.45c-.59 0-1.1.4-1.14.9l-.3 5.06C3.95 7.53 4.46 8 5.12 8H8v1H4.56C3.71 9 3 9.46 3 10s.71 1 1.56 1H8v2.1c-.96.2-1.88.67-2.65 1.41a1 1 0 1 0 1.03.52 4.67 4.67 0 0 1 5.23 0 1 1 0 1 0 1.05-.52A5.26 5.26 0 0 0 10 13.1V11h3.44c.85 0 1.56-.43 1.56-1 0-.54-.71-1-1.56-1H10V8z"></path></svg> </div> </div> <div class="flex--item fs-caption fc-black-700 as-center">exciting mix of industrial &amp; academic work</div> </div> <div class="d-flex flex--item"> <div class=flex--item> <div class="ba bc-black-100 w24 h24 ta-center pt2 mr8 bar-sm fc-black-400" alt="coffee, soft drinks, fruit basket"> <svg class="w16 h16 fill-current" aria-hidden=true viewBox="0 0 18 18"><path d="M7 7h1V1h2v6c0 1.7-1.33 2.9-3 3v7H5v-7c-1.67-.1-3-1.3-3-3V1h2v6h1V1h2v6zm5 3V4.2C12 2.8 13.8 1 16 1v16h-2v-7h-2z"></path></svg> </div> </div> <div class="flex--item fs-caption fc-black-700 as-center">coffee, soft drinks, fruit basket</div> </div> <div class="d-flex flex--item"> <div class=flex--item> <div class="ba bc-black-100 w24 h24 ta-center pt2 mr8 bar-sm fc-black-400" alt="family friendly"> <svg class="w16 h16 fill-current" aria-hidden=true viewBox="0 0 18 18"><path d="M10 1c-.7 0-1.37.12-2 .34V6h7.92A6 6 0 0 0 10 1z"></path><path d="M16 7H6L5 5H1v2h3c0 1.12.3 2.17.84 3.06A3.5 3.5 0 1 0 9 13.5a3.5 3.5 0 1 0 5.68-2.74A5.97 5.97 0 0 0 16 7zm-7 6.5c0-.2-.02-.4-.05-.6l.1.02c-.03.2-.05.38-.05.58zm-2 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm7 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg> </div> </div> <div class="flex--item fs-caption fc-black-700 as-center">family friendly</div> </div> <li class="d-flex flex--item fc-black-700 fs-caption ml32">+ 5 more benefits</li> </div> </div> <div class="clc-g-col g-row -footer"> <a href="https://stackoverflow.com/jobs/companies/imfusion-gmbh?so_medium=Ad&amp;so_source=CompanyPageAd&amp;so_campaign=StandardCompanyPageAd" data-clc-click="https://clc.stackoverflow.com/click?an=ATMAzP8KxUAY9csy2kgFwz5FRAICENeBVQsD8Isg-fgp1OsyABIAjLAXt1E5AJ3IFx6lI8MTESg&amp;cr=832980&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fimfusion-gmbh%3Fso_medium%3DAd%26so_source%3DCompanyPageAd%26so_campaign%3DStandardCompanyPageAd%26med%3Dclc%26clc-var%3D18&amp;sig=iS5CpuxpwnEyxA" class="clc-g-center s-btn s-btn__filled w100" target=_blank>Learn more</a> </div> </div> </div> <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class=impression style=display:none> </div> 
+ <div class="module sidebar-related">
+ <h4 id=h-related>Related</h4>
+ <div class="related js-gps-related-questions" data-tracker="rq=1">
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/183788?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted default">66</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/183788/c-c-compiler-warnings-do-you-clean-up-all-your-code-to-remove-them-or-leave?rq=1" class=question-hyperlink>C / C++ compiler warnings: do you clean up all your code to remove them or leave them in?</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/3007312?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes large">265</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/3007312/resolving-lnk4098-defaultlib-msvcrt-conflicts-with?rq=1" class=question-hyperlink>Resolving LNK4098: defaultlib 'MSVCRT' conflicts with</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/5508110?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted large">467</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers?rq=1" class=question-hyperlink>Why is this program erroneously rejected by three C++ compilers?</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/8047756?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted default">4</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/8047756/why-exactly-not-treat-all-warnings-as-errors-when-therere-no-warnings-in-third?rq=1" class=question-hyperlink>Why exactly not treat all warnings as errors when there're no warnings in third party code?</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/9031783?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted large">443</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/9031783/hide-all-warnings-in-ipython?rq=1" class=question-hyperlink>Hide all warnings in ipython</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/9566923?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">9</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/9566923/can-i-exclude-some-specific-warnings-from-treat-warnings-as-errors-without-dis?rq=1" class=question-hyperlink>Can I exclude some specific warnings from "treat warnings as errors" without disabling them?</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/12769982?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes extra-large">1237</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/12769982/reference-what-does-this-error-mean-in-php?rq=1" class=question-hyperlink>Reference - What does this error mean in PHP?</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/14902181?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes large">101</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/14902181/can-pycharm-list-all-of-python-errors-in-a-project?rq=1" class=question-hyperlink>Can PyCharm list all of Python errors in a project?</a>
+ </div>
+ <div class="spacer js-gps-track">
+ <a href="https://stackoverflow.com/q/42868740?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted default">7</div>
+ </a>
+ <a href="https://stackoverflow.com/questions/42868740/treat-all-warnings-as-errors-except-some?rq=1" class=question-hyperlink>Treat all warnings as errors, except some</a>
+ </div>
+ </div>
+ </div>
+ <div id=hot-network-questions class="module tex2jax_ignore">
+ <h4>
+ <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track s-link s-link__inherit" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+ Hot Network Questions
+ </a>
+ </h4>
+ <ul>
+ <li>
+ <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href=https://scifi.stackexchange.com/questions/263097/novel-about-a-teenage-female-protagonist-on-a-ftl-spaceflight-in-a-deterministic class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Novel about a teenage female protagonist on a FTL spaceflight in a deterministic universe
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-cs" title="Computer Science Stack Exchange"></div><a href=https://cs.stackexchange.com/questions/151393/determining-if-an-nfa-accepts-an-infinite-language-in-polynomial-time class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:419 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Determining if an NFA accepts an infinite language in polynomial time
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-hermeneutics" title="Biblical Hermeneutics Stack Exchange"></div><a href=https://hermeneutics.stackexchange.com/questions/76217/will-the-righteous-be-judged-2-cor-510-or-will-they-not-john-524 class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:320 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Will the righteous be judged 2 Cor 5:10 or will they not John 5:24?
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-stats" title="Cross Validated"></div><a href=https://stats.stackexchange.com/questions/574444/if-p-values-are-random-why-not-decide-using-the-test-statistic-instead class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+ If p-values are random, why not decide using the test statistic instead?
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href=https://electronics.stackexchange.com/questions/619091/are-microphones-with-flatter-frequency-response-charts-better-at-picking-up-freq class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Are microphones with flatter frequency response charts better at picking up frequencies?
+ </a>
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ <li class="js-hidden dno sf-hidden">
+ 
+ </li>
+ </ul>
+ <a href=# class="show-more js-show-more js-gps-track" data-gps-track="posts_hot_network.click({ item_type:3, location:11 })">
+ more hot questions
+ </a>
+</div>
+ <div id=feed-link class=js-feed-link>
+ <a href=https://stackoverflow.com/feeds/question/1392855 title="Feed of this question and its answers">
+ <svg aria-hidden=true class="fc-orange-400 svg-icon iconRss" width=18 height=18 viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm0 1.5c6.9 0 12.5 5.6 12.5 12.5H13C13 9.55 8.45 5 3 5V2.5Zm0 5c4.08 0 7.5 3.41 7.5 7.5H8c0-2.72-2.28-5-5-5V7.5Zm0 5c1.36 0 2.5 1.14 2.5 2.5H3v-2.5Z"></path></svg>
+ Question feed
+ </a>
+ </div>
+ <aside class="s-modal js-feed-link-modal" tabindex=-1 role=dialog aria-labelledby=feed-modal-title aria-describedby=feed-modal-description aria-hidden=true>
+ <div class="s-modal--dialog js-modal-dialog wmx4" role=document data-controller=se-draggable>
+ <h1 class="s-modal--header fw-bold js-first-tabbable c-move" id=feed-modal-title data-se-draggable-target=handle tabindex=0>
+ Subscribe to RSS
+ </h1>
+ <div class="d-flex gs4 gsy fd-column">
+ <div class=flex--item>
+ <label class="d-block s-label c-default" for=feed-url>
+ Question feed
+ <p class="s-description mt2" id=feed-modal-description>To subscribe to this RSS feed, copy and paste this URL into your RSS reader.</p>
+ </label>
+ </div>
+ <div class="d-flex ps-relative">
+ <input class=s-input type=text name=feed-url id=feed-url readonly value=https://stackoverflow.com/feeds/question/1392855>
+ <svg aria-hidden=true class="s-input-icon fc-orange-400 svg-icon iconRss" width=18 height=18 viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm0 1.5c6.9 0 12.5 5.6 12.5 12.5H13C13 9.55 8.45 5 3 5V2.5Zm0 5c4.08 0 7.5 3.41 7.5 7.5H8c0-2.72-2.28-5-5-5V7.5Zm0 5c1.36 0 2.5 1.14 2.5 2.5H3v-2.5Z"></path></svg>
+ </div>
+ </div>
+ <a class="s-modal--close s-btn s-btn__muted js-modal-close js-last-tabbable" href=# aria-label=Close>
+ <svg aria-hidden=true class="svg-icon iconClearSm" width=14 height=14 viewBox="0 0 14 14"><path d="M12 3.41 10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7 12 3.41Z"></path></svg>
+ </a>
+ </div>
+ </aside>
+ </div>
+ </div>
+<noscript><div><img src="/posts/1392855/ivc/48f7" class="dno" alt="" width="0" height="0"></div></noscript><div style=display:none id=js-codeblock-lang>lang-cpp</div></div>
+ </div>
+ </div>
+ 
+ <footer id=footer class="site-footer js-footer" role=contentinfo>
+ <div class=site-footer--container>
+ <div class=site-footer--logo>
+ 
+ <a href=https://stackoverflow.com/><svg aria-hidden=true class="native svg-icon iconLogoGlyphMd" width=32 height=37 viewBox="0 0 32 37"><path d="M26 33v-9h4v13H0V24h4v9h22Z" fill=#BCBBBB></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5 0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14 10.79.68-2.95-16.1-3.35L7 23l16.1 2.99ZM23 30H7v-3h16v3Z" fill=#F48024></path></svg></a>
+ </div>
+ <nav class=site-footer--nav>
+ <div class=site-footer--col>
+ <h5 class=-title><a href=https://stackoverflow.com/ class=js-gps-track data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></h5>
+ <ul class="-list js-primary-footer-links">
+ <li><a href=https://stackoverflow.com/questions class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 16})">Questions</a></li>
+ <li><a href=https://stackoverflow.com/help class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Help</a></li>
+ </ul>
+ </div>
+ <div class=site-footer--col>
+ <h5 class=-title><a href=https://stackoverflow.com/?products class=js-gps-track data-gps-track="footer.click({ location: 2, link: 19 })">Products</a></h5>
+ <ul class=-list>
+ <li><a href=https://stackoverflow.co/teams class="js-gps-track -link" data-ga='["teams traffic","footer - site nav","stackoverflow.com/teams",null,{"dimension4":"teams"}]' data-gps-track="footer.click({ location: 2, link: 29 })">Teams</a></li>
+ <li><a href=https://stackoverflow.co/advertising class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 21 })">Advertising</a></li>
+ <li><a href=https://stackoverflow.co/collectives class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 40 })">Collectives</a></li>
+ <li><a href=https://stackoverflow.co/talent class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 20 })">Talent</a></li>
+ </ul>
+ </div>
+ <div class=site-footer--col>
+ <h5 class=-title><a class=js-gps-track data-gps-track="footer.click({ location: 2, link: 1 })" href=https://stackoverflow.co/>Company</a></h5>
+ <ul class=-list>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href=https://stackoverflow.co/>About</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href=https://stackoverflow.co/company/press>Press</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 9 })" href=https://stackoverflow.co/company/work-here>Work Here</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href=https://stackoverflow.com/legal>Legal</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href=https://stackoverflow.com/legal/privacy-policy>Privacy Policy</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 37 })" href=https://stackoverflow.com/legal/terms-of-service>Terms of Service</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href=https://stackoverflow.co/company/contact>Contact Us</a></li>
+ <li id=consent-footer-link><a class="js-gps-track -link js-cookie-settings" data-gps-track="footer.click({ location: 2, link: 38 })" href=# data-consent-popup-loader=footer>Cookie Settings</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 39 })" href=https://stackoverflow.com/legal/cookie-policy>Cookie Policy</a></li>
+ </ul>
+ </div>
+ <div class="site-footer--col site-footer--categories-nav">
+ <div>
+ <h5 class=-title><a href=https://stackexchange.com/ data-gps-track="footer.click({ location: 2, link: 30 })">Stack Exchange Network</a></h5>
+ <ul class=-list>
+ <li>
+ <a href=https://stackexchange.com/sites#technology class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Technology
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#culturerecreation class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Culture &amp; recreation
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#lifearts class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Life &amp; arts
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#science class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Science
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#professional class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Professional
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#business class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Business
+ </a>
+ </li>
+ <li class="mt16 md:mt0">
+ <a href=https://api.stackexchange.com/ class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ API
+ </a>
+ </li>
+ <li>
+ <a href=https://data.stackexchange.com/ class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Data
+ </a>
+ </li>
+ </ul>
+ </div>
+ </div>
+ </nav>
+ <div class="site-footer--copyright fs-fine md:mt24">
+ <ul class="-list -social md:mb8">
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">Blog</a></li>
+ <li><a href=https://www.facebook.com/officialstackoverflow/ class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 31 })">Facebook</a></li>
+ <li><a href=https://twitter.com/stackoverflow class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 32 })">Twitter</a></li>
+ <li><a href=https://linkedin.com/company/stack-overflow class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 33 })">LinkedIn</a></li>
+ <li><a href=https://www.instagram.com/thestackoverflow class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 36 })">Instagram</a></li>
+ </ul>
+ <p class=md:mb0>
+Site design / logo © 2022 Stack Exchange Inc; user contributions licensed under <a href=https://stackoverflow.com/help/licensing>cc by-sa</a>. <span id=svnrev>rev&nbsp;2022.5.10.42085</span>
+ </p>
+ </div>
+ </div>
+ </footer>
+ 
+ 
+ <div id=onetrust-consent-sdk class="d-none sf-hidden"></div>
+ <div id=onetrust-banner-sdk data-controller=s-modal></div>
+ <div id=ot-pc-content class="d-none sf-hidden"></div>
+ <div id=onetrust-style class="d-none sf-hidden">&nbsp;</div>
+ <div class="d-none js-consent-banner-version sf-hidden" data-consent-banner-version=baseline></div>
+ 
+ 
+ 
+<div class=adsbox id=clc-abd style=position:absolute;pointer-events:none>&nbsp;</div>

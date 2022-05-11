@@ -1,0 +1,1336 @@
+<!DOCTYPE html> <html itemscope itemtype=https://schema.org/QAPage class=html__responsive lang=en style><!--
+ Page saved with SingleFile 
+ url: https://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value 
+ saved date: Wed Apr 13 2022 05:14:51 GMT+0200 (Central European Summer Time)
+--><meta charset=utf-8>
+<title>assembly - What is an immediate value? - Reverse Engineering Stack Exchange</title>
+<link rel=image_src href="https://cdn.sstatic.net/Sites/reverseengineering/Img/apple-touch-icon.png?v=304d2581a262">
+<link rel=search type=application/opensearchdescription+xml title="Reverse Engineering Stack Exchange" href=https://reverseengineering.stackexchange.com/opensearch.xml>
+<link rel=canonical href=https://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value>
+<meta name=viewport content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+<meta property=og:type content=website>
+<meta property=og:url content=https://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value>
+<meta property=og:site_name content="Reverse Engineering Stack Exchange">
+<meta property=og:image itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/reverseengineering/Img/apple-touch-icon@2.png?v=5a6ef1bcd2c8">
+<meta name=twitter:card content=summary>
+<meta name=twitter:domain content=reverseengineering.stackexchange.com>
+<meta name=twitter:site content=@StackReverseEng>
+<meta name=twitter:creator content=@StackReverseEng>
+<meta name=twitter:title property=og:title itemprop=name content="What is an immediate value?">
+<meta name=twitter:description property=og:description itemprop=description content='I just read this post.
+
+What does mean an "immediate value" ? Is there any string/ascii there?
+
+How can I find this value on the binary file?
+
+I have the same code and when I search on 0x28 address I '>
+<style>html,body,div,span,h1,h2,h3,h4,h5,p,pre,a,code,em,img,strong,b,ol,ul,li,form,label,aside,footer,header,nav,time{margin:0;padding:0;border:0;font:inherit;font-size:100%;vertical-align:baseline}footer,header,nav{display:block}body{line-height:1}ol,ul{list-style:none}button{margin:0}.svg-icon,.svg-spot{vertical-align:bottom}.svg-icon:not(.native) *,.svg-spot:not(.native) *{fill:currentColor}@supports ((-webkit-clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)) or (clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%))){.s-expandable:not(.is-expanded) .s-expandable--content{opacity:1;-webkit-transform:none;transform:none}}.s-input{-webkit-appearance:none;width:100%;margin:0;padding:.6em .7em;border:1px solid var(--bc-darker);border-radius:3px;background-color:var(--white);color:var(--fc-dark);font-size:13px;font-family:inherit}@supports (-webkit-overflow-scrolling:touch){.s-input,.s-textarea{font-size:16px;padding:.36em .55em}.s-input::-webkit-input-placeholder,.s-textarea::-webkit-input-placeholder{line-height:normal!important}}.s-input::-webkit-input-placeholder,.s-textarea::-webkit-input-placeholder{color:var(--black-200)}.s-input::placeholder,.s-textarea::placeholder{color:var(--black-200);opacity:1}.s-input::-webkit-scrollbar,.s-textarea::-webkit-scrollbar{width:10px;height:10px;background-color:transparent}.s-input::-webkit-scrollbar-track,.s-textarea::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.s-input::-webkit-scrollbar-thumb,.s-textarea::-webkit-scrollbar-thumb{border-radius:10px;background-color:var(--scrollbar)}.s-input::-webkit-scrollbar-corner,.s-textarea::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.s-input::-webkit-contacts-auto-fill-button,.s-textarea::-webkit-contacts-auto-fill-button{background-color:var(--black)}.s-input:-webkit-autofill,.s-textarea:-webkit-autofill{border-color:var(--blue-300);-webkit-text-fill-color:var(--black);-webkit-box-shadow:0 0 0 1000px var(--theme-secondary-050) inset;transition:background-color 0s 50000s}.s-input:-webkit-autofill:focus,.s-textarea:-webkit-autofill:focus{border-color:var(--blue-300);-webkit-box-shadow:0 0 0 1000px var(--blue-050) inset,0 0 0 4px var(--focus-ring)}.s-input.s-input__search{padding-left:32px}.s-label{padding:0 2px;color:var(--fc-dark);font-family:inherit;font-size:1.15384615rem;font-weight:600}.s-label[for]{cursor:pointer}.s-description{padding:0 2px;color:var(--fc-medium);font-size:12px}.s-label .s-description{padding:0;margin-top:4px;margin-bottom:0;font-weight:normal}.s-select{position:relative;color:var(--fc-dark)}.s-select:before,.s-select:after{content:"";position:absolute;z-index:25;right:13px;border-color:currentColor transparent;border-style:solid;border-width:4px;pointer-events:none}.s-select:before{top:calc(50% - 5px);border-top-width:0;border-bottom-width:4px}.s-select:after{top:calc(50% + 1px);border-top-width:4px;border-bottom-width:0}.s-select>select{-webkit-appearance:none;-moz-appearance:none;appearance:none;position:relative;width:100%;height:100%;padding:.6em .7em;padding-right:32px;border:1px solid var(--bc-darker);border-radius:3px;background-color:var(--white);outline:0;font-size:13px;font-family:inherit;color:var(--black);line-height:1.15384615}@supports (-webkit-overflow-scrolling:touch){.s-select>select{font-size:16px;padding:.4em .55em}}.s-select>select::-webkit-contacts-auto-fill-button{background-color:var(--black)}.s-select>select:-webkit-autofill{border-color:var(--blue-300);-webkit-text-fill-color:var(--black);-webkit-box-shadow:0 0 0 1000px var(--theme-secondary-050) inset;transition:background-color 0s 50000s}.s-select>select:-webkit-autofill:focus{border-color:var(--blue-300);-webkit-box-shadow:0 0 0 1000px var(--blue-050) inset,0 0 0 4px var(--focus-ring)}@supports ((-webkit-appearance:none) or (-moz-appearance:none) or (appearance:none)){.s-checkbox,.s-radio{-webkit-appearance:none;-moz-appearance:none;appearance:none;margin:0;width:1em;height:1em;border:1px solid var(--bc-darker);background-color:var(--white);outline:0;font-size:inherit;vertical-align:middle;cursor:pointer}.s-checkbox::-ms-check,.s-radio::-ms-check{display:none}}@supports ((-webkit-appearance:none) or (-moz-appearance:none) or (appearance:none)){.s-checkbox{border-radius:3px;background-position:center center;background-repeat:no-repeat;background-size:contain}.s-checkbox:checked{border-color:var(--theme-secondary-400)!important;background-color:var(--theme-secondary-400);background-image:url("data:image/svg+xml,%3Csvg width='11' height='11' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.41L8.59 2 4 6.59 2.41 5 1 6.41l3 3z' fill='%23fff'/%3E%3C/svg%3E")}@media (prefers-color-scheme:dark){body.theme-highcontrast.theme-system .s-checkbox:checked{border-color:var(--blue-700)!important;background-color:var(--blue-300)}}body.theme-highcontrast.theme-dark .s-checkbox:checked{border-color:var(--blue-700)!important;background-color:var(--blue-300)}.s-checkbox:checked:focus{border-color:var(--theme-secondary-400)}.s-checkbox:focus{border-color:var(--theme-secondary-300);box-shadow:0 0 0 4px var(--focus-ring)}}@supports ((-webkit-appearance:none) or (-moz-appearance:none) or (appearance:none)){.s-radio{border-radius:50%}.s-radio:checked{border-color:var(--theme-secondary-400);border-width:.30769231em;background-color:hsl(0,0%,100%)}@media (prefers-color-scheme:dark){body.theme-highcontrast.theme-system .s-radio:checked{border-color:var(--blue-300);outline:1px solid var(--black)}}body.theme-highcontrast.theme-dark .s-radio:checked{border-color:var(--blue-300);outline:1px solid var(--black)}.s-radio:focus{box-shadow:0 0 0 4px var(--focus-ring)}}.s-input:focus,.s-input.has-focus,.s-textarea:focus,.s-select>select:focus{border-color:var(--theme-secondary-300);box-shadow:0 0 0 4px var(--focus-ring);color:var(--black);outline:0}.s-input:focus-within{border-color:var(--theme-secondary-300);box-shadow:0 0 0 4px var(--focus-ring);color:var(--black);outline:0}.s-input-icon{position:absolute;top:50%;right:.7em;margin-top:-9px;pointer-events:none}.s-input-icon.s-input-icon__search{right:auto;left:.7em}@supports (-webkit-overflow-scrolling:touch){.s-input__md,.s-textarea__md{font-size:17px;padding-top:.4em;padding-bottom:.4em}}.s-modal{display:flex;visibility:hidden;position:fixed;z-index:-1;top:0;right:0;bottom:0;left:0;align-items:center;justify-content:center;background-color:hsla(210,8%,5%,0.5);opacity:0;backface-visibility:hidden;transition:opacity 100ms cubic-bezier(.165,.84,.44,1) 0s,z-index 0s 100ms,visibility 0s 100ms;will-change:visibility,z-index,opacity}.s-modal--dialog{overflow-y:auto;visibility:hidden;z-index:-1;max-height:100%;padding:24px;border-radius:7px;background-color:var(--white);box-shadow:var(--bs-lg);opacity:0;backface-visibility:hidden;transform:translate3d(0,30%,0) scale3d(.6,.6,.6);transition:opacity 200ms cubic-bezier(.165,.84,.44,1) 0s,z-index 0s 100ms,visibility 0s 100ms,transform 100ms cubic-bezier(.165,.84,.44,1) 0s,transform 100ms cubic-bezier(.165,.84,.44,1) 0s;will-change:visibility,z-index,opacity,transform}.s-modal--dialog::-webkit-scrollbar{width:10px;height:10px;background-color:transparent}.s-modal--dialog::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.s-modal--dialog::-webkit-scrollbar-thumb{border-radius:10px;background-color:var(--scrollbar)}.s-modal--dialog::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.s-modal--close{position:absolute!important;top:8px;right:8px;padding:12px!important}.s-modal--close .svg-icon{margin:0!important}.s-modal--header{margin-bottom:16px;color:var(--fc-dark);font-size:2.07692308rem;line-height:1.15384615}.s-prose{--s-prose-line-height:1.5;--s-prose-spacing:1.1em;--s-prose-spacing-condensed:calc(var(--s-prose-spacing) / 2);font-size:15px;line-height:var(--s-prose-line-height);word-wrap:break-word}.s-prose p{margin-bottom:var(--s-prose-spacing)}.s-prose pre{word-wrap:normal}.s-prose code{font-size:13px;font-family:var(--ff-mono)}.s-prose li{word-wrap:break-word}.s-prose p:last-child,.s-prose dl:last-child,.s-prose blockquote:last-child,.s-prose table:last-child,.s-prose .s-table-container:last-child,.s-prose .s-link-preview:last-child,.s-prose hr:last-child,.s-prose ol:last-child,.s-prose ul:last-child,.s-prose img:last-child,.s-prose pre:last-child,.s-prose h1:last-child,.s-prose h2:last-child,.s-prose h3:last-child,.s-prose h4:last-child,.s-prose h5:last-child,.s-prose h6:last-child,.s-prose p:only-child,.s-prose dl:only-child,.s-prose blockquote:only-child,.s-prose table:only-child,.s-prose .s-table-container:only-child,.s-prose .s-link-preview:only-child,.s-prose hr:only-child,.s-prose ol:only-child,.s-prose ul:only-child,.s-prose img:only-child,.s-prose pre:only-child,.s-prose h1:only-child,.s-prose h2:only-child,.s-prose h3:only-child,.s-prose h4:only-child,.s-prose h5:only-child,.s-prose h6:only-child{margin-bottom:0}.s-prose ol{margin-top:0;margin-bottom:var(--s-prose-spacing)}.s-prose ol li{margin-bottom:var(--s-prose-spacing-condensed)}.s-prose ol li:last-child,.s-prose ul li:last-child{margin-bottom:0}.s-prose *:not(.s-code-block)>code{padding:2px 4px;color:var(--black-800);background-color:var(--black-075);border-radius:3px}.s-prose pre{margin-top:0;margin-bottom:calc(var(--s-prose-spacing) + .4em)}.s-prose pre:not(.s-code-block){padding:12px;color:var(--highlight-color);width:auto;max-height:600px;overflow:auto;font-size:13px;line-height:1.30769231;background-color:var(--highlight-bg);border-radius:5px;scrollbar-color:var(--scrollbar) transparent}.s-prose pre:not(.s-code-block) code{background-color:transparent;padding:0;border-radius:0}.s-prose pre:not(.s-code-block)::-webkit-scrollbar{width:10px;height:10px;background-color:transparent}.s-prose pre:not(.s-code-block)::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.s-prose pre:not(.s-code-block)::-webkit-scrollbar-thumb{border-radius:10px;background-color:var(--scrollbar)}.s-prose pre:not(.s-code-block)::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}@media not all and (min-resolution:.001dpcm){@supports (-webkit-appearance:none) and (stroke-color:transparent){.s-spinner,.s-spinner:before,.s-spinner:after{box-shadow:0 0 0 2px transparent}}}@keyframes s-spinner-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.s-topbar{min-width:auto;box-shadow:var(--bs-sm);width:100%;z-index:5050;background-color:var(--theme-topbar-background-color);height:var(--theme-topbar-height);display:flex;border-top:var(--theme-topbar-accent-border);align-items:center}.s-topbar .s-topbar--container{width:97.2307692rem;max-width:100%;height:100%;display:flex;margin:0 auto;align-items:center}.s-topbar .s-topbar--logo{padding:0 8px;height:100%;display:flex;align-items:center;background-color:transparent}.s-topbar a.s-topbar--logo:hover{background-color:var(--theme-topbar-item-background-hover)}.s-topbar .s-topbar--content{display:flex;height:100%;list-style:none;margin:0;padding:0;overflow-x:auto;margin-left:auto}.s-topbar .s-topbar--content>li{display:inline-flex}.s-topbar .s-topbar--content::-webkit-scrollbar{width:10px;height:10px;background-color:transparent}.s-topbar .s-topbar--content::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.s-topbar .s-topbar--content::-webkit-scrollbar-thumb{border-radius:10px;background-color:var(--scrollbar)}.s-topbar .s-topbar--content::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset){color:var(--theme-topbar-item-color);display:inline-flex;align-items:center;padding:0 10px;text-decoration:none;white-space:nowrap;position:relative}.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset):hover,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset):focus,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset).is-selected,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset).is-selected:hover,.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset).is-selected:focus{color:var(--theme-topbar-item-color-hover);background-color:var(--theme-topbar-item-background-hover);text-decoration:none;outline:none}.s-topbar .s-topbar--content .s-topbar--item:not(.s-topbar--item__unset) .svg-icon{vertical-align:text-top}.s-topbar .s-topbar--content .s-topbar--item__unset{align-self:center;padding-top:8px;padding-bottom:8px}.s-topbar .s-topbar--searchbar{padding:0 8px;display:flex;align-items:center;flex-shrink:10000;flex-grow:1}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group{position:relative;flex-grow:1}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input{border-color:var(--theme-topbar-search-border);background-color:var(--theme-topbar-search-background);box-shadow:var(--theme-topbar-search-shadow);color:var(--theme-topbar-search-color);display:block;line-height:1.15384615}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input:focus{border-color:var(--theme-topbar-search-border-focus);box-shadow:var(--theme-topbar-search-shadow-focus)}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input::placeholder{color:var(--theme-topbar-search-placeholder);font-style:normal}.s-topbar .s-topbar--searchbar .s-topbar--searchbar--input-group .s-input-icon{color:var(--theme-topbar-search-placeholder)}@media (max-width:640px){html.html__responsive:not(.html__unpinned-leftnav) .s-topbar .s-topbar--searchbar{display:none;position:absolute;left:0;right:0;top:100%;max-width:100%;padding:8px 12px;background:var(--theme-topbar-item-background-hover)}}.s-sidebarwidget{position:relative;border:1px solid var(--bc-medium);border-radius:3px;box-shadow:var(--bs-sm);font-size:13px}.s-sidebarwidget:not(.s-anchors) a:not(.button):not(.s-btn):not(.post-tag):not(.s-sidebarwidget--action):not(.s-user-card--link),.s-sidebarwidget:not(.s-anchors) a:not(.button):not(.s-btn):not(.post-tag):not(.s-sidebarwidget--action):not(.s-user-card--link):visited{color:var(--black-500)}.s-sidebarwidget:before{content:'';display:block;margin-top:-1px}.s-sidebarwidget:after{content:'';position:absolute;top:-1px;right:-1px;left:-1px;height:5px;border-top:1px solid var(--bc-medium);border-radius:3px;pointer-events:none}@supports ((-webkit-clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)) or (clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%))) or (-webkit-clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)){.s-sidebarwidget:after{-webkit-clip-path:polygon(0% 0%,100% 0%,100% 50%,0% 50%);clip-path:polygon(0% 0%,100% 0%,100% 50%,0% 50%);border:1px solid var(--bc-medium)}}.s-sidebarwidget--header{border-top:1px solid var(--bc-light)}.s-sidebarwidget--header:active,.s-sidebarwidget--content:active{outline:none}.s-sidebarwidget--header{padding:12px 15px;background:var(--black-025)}.s-sidebarwidget--header:first-child{border-top-left-radius:3px;border-top-right-radius:3px}.s-sidebarwidget--header.s-sidebarwidget__small-bold-text{font-size:12px;font-weight:bold}.s-sidebarwidget--item{margin:12px 0}.s-sidebarwidget__yellow{border-color:var(--yellow-200);background-color:var(--yellow-050)}.s-sidebarwidget__yellow .s-sidebarwidget--header{background-color:var(--yellow-100);color:var(--fc-medium)}.s-sidebarwidget__yellow .s-sidebarwidget--header{border-color:var(--yellow-200)}.s-sidebarwidget__yellow:after{border-color:var(--yellow-200)}@font-face{font-family:"Segoe UI Adjusted";src:local(Segoe UI);ascent-override:95%}@font-face{font-family:"Segoe UI Adjusted";src:local(Segoe UI Italic);ascent-override:95%;font-style:italic}@font-face{font-family:"Segoe UI Adjusted";src:local(Segoe UI Semibold);ascent-override:95%;font-weight:600}@font-face{font-family:"Segoe UI Adjusted";src:local(Segoe UI Bold);ascent-override:90%;font-weight:700}body{--ff-sans:-apple-system,BlinkMacSystemFont,"Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;--ff-serif:Georgia,Cambria,"Times New Roman",Times,serif;--ff-mono:ui-monospace,"Cascadia Mono","Segoe UI Mono","Liberation Mono",Menlo,Monaco,Consolas,monospace;--theme-body-font-family:var(--ff-sans)}body{--theme-body-font-color:var(--black-800);--theme-background-color:var(--white);--theme-link-color:var(--theme-secondary-400);--theme-link-color-hover:var(--theme-secondary-350);--theme-link-color-visited:var(--theme-secondary-500);--theme-button-color:var(--theme-secondary-400);--theme-button-background-color:transparent;--theme-button-hover-color:var(--theme-secondary-500);--theme-button-hover-background-color:var(--theme-secondary-050);--theme-button-active-background-color:var(--theme-secondary-100);--theme-button-selected-color:var(--theme-secondary-900);--theme-button-selected-background-color:var(--theme-secondary-150);--theme-button-primary-color:var(--white);--theme-button-primary-background-color:var(--theme-secondary-400);--theme-button-primary-hover-color:var(--white);--theme-button-primary-hover-background-color:var(--theme-secondary-500);--theme-button-primary-active-background-color:var(--theme-secondary-700);--theme-button-primary-selected-color:var(--white);--theme-button-primary-selected-background-color:var(--theme-secondary-700);--theme-button-primary-number-color:var(--theme-secondary-900);--theme-button-filled-color:var(--theme-secondary-700);--theme-button-filled-background-color:var(--theme-secondary-050);--theme-button-filled-border-color:var(--theme-secondary-350);--theme-button-filled-hover-color:var(--theme-secondary-800);--theme-button-filled-hover-background-color:var(--theme-secondary-100);--theme-button-filled-active-background-color:var(--theme-secondary-150);--theme-button-filled-active-border-color:var(--theme-secondary-350);--theme-button-filled-selected-color:var(--theme-secondary-900);--theme-button-filled-selected-background-color:var(--theme-secondary-300);--theme-button-filled-selected-border-color:var(--theme-secondary-500);--theme-button-outlined-border-color:var(--theme-secondary-300);--theme-button-outlined-selected-border-color:var(--theme-secondary-400);--theme-tag-color:var(--theme-secondary-800);--theme-tag-background-color:var(--theme-secondary-075);--theme-tag-border-color:transparent;--theme-tag-hover-color:var(--theme-secondary-900);--theme-tag-hover-background-color:var(--theme-secondary-100);--theme-tag-hover-border-color:transparent;--theme-topbar-height:48px;--theme-topbar-background-color:var(--black-025);--theme-topbar-search-color:var(--black-700);--theme-topbar-search-background:var(--white);--theme-topbar-search-placeholder:var(--black-200);--theme-topbar-search-border:var(--black-200);--theme-topbar-search-border-focus:var(--blue-300);--theme-topbar-search-shadow-focus:0 0 0 4px var(--focus-ring);--theme-topbar-select-color:var(--black-700);--theme-topbar-select-background:var(--black-075);--theme-topbar-item-color:var(--black-600);--theme-topbar-item-color-hover:var(--black-800);--theme-topbar-item-background-hover:var(--black-075);--theme-topbar-item-color-current:var(--black);--theme-topbar-item-border-current:var(--theme-primary-color);--theme-topbar-accent-border:3px solid var(--theme-primary-color);--theme-post-title-color:var(--theme-link-color);--theme-post-title-color-hover:var(--theme-link-color-hover);--theme-post-title-color-visited:var(--theme-link-color-visited);--theme-post-title-font-family:var(--theme-body-font-family);--theme-post-body-font-family:var(--theme-body-font-family)}:root{--theme-base-primary-color-h:27;--theme-base-primary-color-s:90%;--theme-base-primary-color-l:55%;--theme-base-primary-color-r:243.525;--theme-base-primary-color-g:129.9225;--theme-base-primary-color-b:36.975;--theme-base-secondary-color-h:206;--theme-base-secondary-color-s:100%;--theme-base-secondary-color-l:40%;--theme-base-secondary-color-r:0;--theme-base-secondary-color-g:115.6;--theme-base-secondary-color-b:204}body:not(.theme-dark),body.theme-dark .theme-light__forced,body.theme-system .theme-light__forced{--white:hsl(0,0%,100%);--black:hsl(210,8%,5%);--orange:hsl(27,90%,55%);--yellow:hsl(47,83%,91%);--green:hsl(140,40%,55%);--blue:hsl(206,100%,40%);--powder:hsl(205,46%,92%);--red:hsl(358,62%,52%);--black-025:hsl(210,8%,97.5%);--black-050:hsl(210,8%,95%);--black-075:hsl(210,8%,90%);--black-100:hsl(210,8%,85%);--black-150:hsl(210,8%,80%);--black-200:hsl(210,8%,75%);--black-300:hsl(210,8%,65%);--black-350:hsl(210,8%,60%);--black-400:hsl(210,8%,55%);--black-500:hsl(210,8%,45%);--black-600:hsl(210,8%,35%);--black-700:hsl(210,8%,25%);--black-750:hsl(210,8%,20%);--black-800:hsl(210,8%,15%);--black-900:hsl(210,8%,5%);--orange-050:hsl(27,100%,97%);--orange-100:hsl(27,95%,90%);--orange-200:hsl(27,90%,83%);--orange-300:hsl(27,90%,70%);--orange-400:hsl(27,90%,55%);--orange-500:hsl(27,90%,50%);--orange-600:hsl(27,90%,45%);--orange-700:hsl(27,90%,39%);--orange-800:hsl(27,87%,35%);--orange-900:hsl(27,80%,30%);--blue-050:hsl(206,100%,97%);--blue-100:hsl(206,96%,90%);--blue-200:hsl(206,93%,83.5%);--blue-300:hsl(206,90%,69.5%);--blue-400:hsl(206,85%,57.5%);--blue-500:hsl(206,100%,52%);--blue-600:hsl(206,100%,40%);--blue-700:hsl(209,100%,37.5%);--blue-800:hsl(209,100%,32%);--blue-900:hsl(209,100%,26%);--powder-050:hsl(205,47%,97%);--powder-100:hsl(205,46%,92%);--powder-200:hsl(205,53%,88%);--powder-300:hsl(205,57%,81%);--powder-400:hsl(205,56%,76%);--powder-500:hsl(205,41%,63%);--powder-600:hsl(205,36%,53%);--powder-700:hsl(205,47%,42%);--powder-800:hsl(205,46%,32%);--powder-900:hsl(205,46%,22%);--green-025:hsl(140,42%,95%);--green-050:hsl(140,40%,90%);--green-100:hsl(140,40%,85%);--green-200:hsl(140,40%,75%);--green-300:hsl(140,40%,65%);--green-400:hsl(140,40%,55%);--green-500:hsl(140,40%,47%);--green-600:hsl(140,40%,40%);--green-700:hsl(140,41%,31%);--green-800:hsl(140,40%,27%);--green-900:hsl(140,40%,20%);--yellow-050:hsl(47,87%,94%);--yellow-100:hsl(47,83%,91%);--yellow-200:hsl(47,65%,84%);--yellow-300:hsl(47,69%,69%);--yellow-400:hsl(47,79%,58%);--yellow-500:hsl(47,73%,50%);--yellow-600:hsl(47,76%,46%);--yellow-700:hsl(47,79%,40%);--yellow-800:hsl(47,82%,34%);--yellow-900:hsl(47,84%,28%);--red-050:hsl(358,75%,97%);--red-100:hsl(358,76%,90%);--red-200:hsl(358,74%,83%);--red-300:hsl(358,70%,70%);--red-400:hsl(358,68%,59%);--red-500:hsl(358,62%,52%);--red-600:hsl(358,62%,47%);--red-700:hsl(358,64%,41%);--red-800:hsl(358,64%,35%);--red-900:hsl(358,67%,29%);--gold:hsl(48,100%,50%);--gold-lighter:hsl(48,100%,91%);--gold-darker:hsl(45,100%,47%);--silver:hsl(210,6%,72%);--silver-lighter:hsl(0,0%,91%);--silver-darker:hsl(210,3%,61%);--bronze:hsl(28,38%,67%);--bronze-lighter:hsl(28,40%,92%);--bronze-darker:hsl(28,31%,52%);--bc-lightest:var(--black-025);--bc-lighter:var(--black-050);--bc-light:var(--black-075);--bc-medium:var(--black-100);--bc-dark:var(--black-150);--bc-darker:var(--black-200);--fc-dark:hsl(210,8%,5%);--fc-medium:hsl(210,8%,25%);--fc-light:hsl(210,8%,45%);--focus-ring-success:hsla(140,40%,75%,0.4);--focus-ring-warning:hsla(47,79%,58%,0.4);--focus-ring-error:hsla(358,62%,47%,0.15);--focus-ring-muted:hsla(210,8%,15%,0.1);--bs-sm:0 1px 2px hsla(0,0%,0%,0.05),0 1px 4px hsla(0,0%,0%,0.05),0 2px 8px hsla(0,0%,0%,0.05);--bs-md:0 1px 3px hsla(0,0%,0%,0.06),0 2px 6px hsla(0,0%,0%,0.06),0 3px 8px hsla(0,0%,0%,0.09);--bs-lg:0 1px 4px hsla(0,0%,0%,0.09),0 3px 8px hsla(0,0%,0%,0.09),0 4px 13px hsla(0,0%,0%,0.13);--bs-xl:0 10px 24px hsla(0,0%,0%,0.05),0 20px 48px hsla(0,0%,0%,0.05),0 1px 4px hsla(0,0%,0%,0.1);--scrollbar:hsla(0,0%,0%,0.2);--highlight-bg:hsl(0,0%,96.5%);--highlight-color:var(--black-750);--highlight-comment:hsl(210,8%,43.5%);--highlight-punctuation:var(--black-600);--highlight-namespace:hsl(27,99%,36%);--highlight-attribute:hsl(206,98.5%,29%);--highlight-literal:hsl(27,99%,36%);--highlight-symbol:hsl(306,43%,35%);--highlight-keyword:hsl(206,98.5%,29%);--highlight-variable:hsl(80,80.5%,26.5%);--highlight-addition:var(--green-700);--highlight-deletion:var(--red-600)}body:not(.theme-dark),body.theme-dark .theme-light__forced,body.theme-system .theme-light__forced,body:not(.theme-dark) .themed,body.theme-dark .theme-light__forced .themed,body.theme-system .theme-light__forced .themed{--theme-primary-color-h:var(--theme-light-primary-color-h, var(--theme-base-primary-color-h));--theme-primary-color-s:var(--theme-light-primary-color-s, var(--theme-base-primary-color-s));--theme-primary-color-l:var(--theme-light-primary-color-l, var(--theme-base-primary-color-l));--theme-primary-color-r:var(--theme-light-primary-color-r, var(--theme-base-primary-color-r));--theme-primary-color-g:var(--theme-light-primary-color-g, var(--theme-base-primary-color-g));--theme-primary-color-b:var(--theme-light-primary-color-b, var(--theme-base-primary-color-b));--theme-secondary-color-h:var(--theme-light-secondary-color-h, var(--theme-base-secondary-color-h));--theme-secondary-color-s:var(--theme-light-secondary-color-s, var(--theme-base-secondary-color-s));--theme-secondary-color-l:var(--theme-light-secondary-color-l, var(--theme-base-secondary-color-l));--theme-secondary-color-r:var(--theme-light-secondary-color-r, var(--theme-base-secondary-color-r));--theme-secondary-color-g:var(--theme-light-secondary-color-g, var(--theme-base-secondary-color-g));--theme-secondary-color-b:var(--theme-light-secondary-color-b, var(--theme-base-secondary-color-b));--theme-primary-color:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),var(--theme-primary-color-l));--theme-primary-900:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 26%));--theme-primary-800:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 21%));--theme-primary-700:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 16%));--theme-primary-600:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 10%));--theme-primary-500:hsl(var(--theme-primary-color-h),var(--theme-primary-color-s),calc(var(--theme-primary-color-l) - 5%));--theme-primary-400:var(--theme-primary-color);--theme-primary-350:rgb(calc(51 + var(--theme-primary-color-r) * .8),calc(51 + var(--theme-primary-color-g) * .8),calc(51 + var(--theme-primary-color-b) * .8));--theme-primary-300:rgb(calc(89.25 + var(--theme-primary-color-r) * .65),calc(89.25 + var(--theme-primary-color-g) * .65),calc(89.25 + var(--theme-primary-color-b) * .65));--theme-primary-200:rgb(calc(122.4 + var(--theme-primary-color-r) * .52),calc(122.4 + var(--theme-primary-color-g) * .52),calc(122.4 + var(--theme-primary-color-b) * .52));--theme-primary-150:rgb(calc(165.75 + var(--theme-primary-color-r) * .35),calc(165.75 + var(--theme-primary-color-g) * .35),calc(165.75 + var(--theme-primary-color-b) * .35));--theme-primary-100:rgb(calc(198.9 + var(--theme-primary-color-r) * .22),calc(198.9 + var(--theme-primary-color-g) * .22),calc(198.9 + var(--theme-primary-color-b) * .22));--theme-primary-075:rgb(calc(216.75 + var(--theme-primary-color-r) * .15),calc(216.75 + var(--theme-primary-color-g) * .15),calc(216.75 + var(--theme-primary-color-b) * .15));--theme-primary-050:rgb(calc(234.6 + var(--theme-primary-color-r) * .08),calc(234.6 + var(--theme-primary-color-g) * .08),calc(234.6 + var(--theme-primary-color-b) * .08));--theme-primary-025:rgb(calc(244.8 + var(--theme-primary-color-r) * .04),calc(244.8 + var(--theme-primary-color-g) * .04),calc(244.8 + var(--theme-primary-color-b) * .04));--theme-secondary-color:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),var(--theme-secondary-color-l));--theme-secondary-900:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 26%));--theme-secondary-800:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 21%));--theme-secondary-700:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 16%));--theme-secondary-600:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 10%));--theme-secondary-500:hsl(var(--theme-secondary-color-h),var(--theme-secondary-color-s),calc(var(--theme-secondary-color-l) - 5%));--theme-secondary-400:var(--theme-secondary-color);--theme-secondary-350:rgb(calc(51 + var(--theme-secondary-color-r) * .8),calc(51 + var(--theme-secondary-color-g) * .8),calc(51 + var(--theme-secondary-color-b) * .8));--theme-secondary-300:rgb(calc(89.25 + var(--theme-secondary-color-r) * .65),calc(89.25 + var(--theme-secondary-color-g) * .65),calc(89.25 + var(--theme-secondary-color-b) * .65));--theme-secondary-200:rgb(calc(122.4 + var(--theme-secondary-color-r) * .52),calc(122.4 + var(--theme-secondary-color-g) * .52),calc(122.4 + var(--theme-secondary-color-b) * .52));--theme-secondary-150:rgb(calc(165.75 + var(--theme-secondary-color-r) * .35),calc(165.75 + var(--theme-secondary-color-g) * .35),calc(165.75 + var(--theme-secondary-color-b) * .35));--theme-secondary-100:rgb(calc(198.9 + var(--theme-secondary-color-r) * .22),calc(198.9 + var(--theme-secondary-color-g) * .22),calc(198.9 + var(--theme-secondary-color-b) * .22));--theme-secondary-075:rgb(calc(216.75 + var(--theme-secondary-color-r) * .15),calc(216.75 + var(--theme-secondary-color-g) * .15),calc(216.75 + var(--theme-secondary-color-b) * .15));--theme-secondary-050:rgb(calc(234.6 + var(--theme-secondary-color-r) * .08),calc(234.6 + var(--theme-secondary-color-g) * .08),calc(234.6 + var(--theme-secondary-color-b) * .08));--theme-secondary-025:rgb(calc(244.8 + var(--theme-secondary-color-r) * .04),calc(244.8 + var(--theme-secondary-color-g) * .04),calc(244.8 + var(--theme-secondary-color-b) * .04));--focus-ring:hsla(var(--theme-secondary-color-h),var(--theme-secondary-color-s),var(--theme-secondary-color-l),.15);--theme-body-font-color:var(--black-800)}.bt{border-top-style:solid!important;border-top-width:1px!important}.bb{border-bottom-style:solid!important;border-bottom-width:1px!important}.bl{border-left-style:solid!important;border-left-width:1px!important}.bbw1{border-bottom-width:1px!important}.bar-sm{border-radius:3px!important}.bar-lg{border-radius:7px!important}.btr-sm{border-top-left-radius:3px!important;border-top-right-radius:3px!important}.blr-sm{border-top-left-radius:3px!important;border-bottom-left-radius:3px!important}.bar0{border-radius:0!important}.bc-black-075{border-color:var(--black-075)!important}.fc-black-600{color:var(--black-600)!important}.fc-black-500{color:var(--black-500)!important}.fc-black-200{color:var(--black-200)!important}.fc-orange-400{color:var(--orange-400)!important}.bg-orange-400{background-color:var(--orange-400)!important}.fc-success{color:var(--green-600)!important}.fc-error{color:var(--red-500)!important}.fc-white{color:var(--white)!important}.fc-black-750{color:var(--black-750)!important}.bg-black-750{background-color:var(--black-750)!important}.flex--item1{flex-basis:8.33333333%}.gs2{margin:-1px}.gs2>.flex--item{margin:1px}.gs4{margin:-2px}.gs4>.d-flex,.gs4>.flex--item{margin:2px}.gs8{margin:-4px}.gs8>.flex--item{margin:4px}.gs16{margin:-8px}.gs16>.d-flex{margin:8px}.gsx,.gsx>.d-flex,.gsx>[class*="flex--item"]{margin-top:0;margin-bottom:0}.gsy,.gsy>.d-flex,.gsy>[class*="flex--item"]{margin-right:0;margin-left:0}.fd-column{flex-direction:column!important}.fw-wrap{flex-wrap:wrap!important}.jc-center{justify-content:center!important}.jc-end{justify-content:flex-end!important}.jc-space-between{justify-content:space-between!important}.ai-center{align-items:center!important}.ai-end{align-items:flex-end!important}.ai-start{align-items:flex-start!important}.ai-stretch{align-items:stretch!important}.as-start{align-self:flex-start!important}.fl-shrink0{flex-shrink:0!important}.fl0{flex:0 auto!important}.fl1{flex:1 auto!important}.g4{gap:4px}.m0{margin:0!important}.mt2{margin-top:2px!important}.mt12{margin-top:12px!important}.mt16{margin-top:16px!important}.mt24{margin-top:24px!important}.mtn1{margin-top:-1px!important}.mtn2{margin-top:-2px!important}.mr0{margin-right:0!important}.mr2{margin-right:2px!important}.mr16{margin-right:16px!important}.mr64{margin-right:64px!important}.mb0{margin-bottom:0!important}.mb4{margin-bottom:4px!important}.mb6{margin-bottom:6px!important}.mb8{margin-bottom:8px!important}.mb12{margin-bottom:12px!important}.mb16{margin-bottom:16px!important}.mb24{margin-bottom:24px!important}.ml4{margin-left:4px!important}.ml8{margin-left:8px!important}.ml12{margin-left:12px!important}.mln2{margin-left:-2px!important}.mln4{margin-left:-4px!important}.mx-auto{margin-left:auto!important;margin-right:auto!important}.my8{margin-top:8px!important;margin-bottom:8px!important}.my16{margin-top:16px!important;margin-bottom:16px!important}.p0{padding:0!important}.p8{padding:8px!important}.p12{padding:12px!important}.p32{padding:32px!important}.pt2{padding-top:2px!important}.pt4{padding-top:4px!important}.pb6{padding-bottom:6px!important}.pb8{padding-bottom:8px!important}.pl8{padding-left:8px!important}.px12{padding-left:12px!important;padding-right:12px!important}.px16{padding-left:16px!important;padding-right:16px!important}.py4{padding-top:4px!important;padding-bottom:4px!important}.py6{padding-top:6px!important;padding-bottom:6px!important}.py24{padding-top:24px!important;padding-bottom:24px!important}.t0{top:0!important}.t8{top:8px!important}.r8{right:8px!important}.r16{right:16px!important}.b16{bottom:16px!important}.l0{left:0!important}.l16{left:16px!important}h1,h2,h3,h4,h5,p{margin-top:0}.fs-headline1{font-size:2.07692308rem!important}.fs-title{font-size:1.61538462rem!important}.fs-body2{font-size:1.15384615rem!important}.fs-caption{font-size:12px!important}.fs-fine{font-size:11px!important}@media (max-width:640px){html.html__responsive:not(.html__unpinned-leftnav) .fs-headline1{font-size:2rem!important}html.html__responsive:not(.html__unpinned-leftnav) .fs-title{font-size:1.8rem!important}html.html__responsive:not(.html__unpinned-leftnav) .fs-body2{font-size:1.3rem!important}}.fc-light{color:var(--fc-light)!important}.ff-sans{font-family:var(--ff-sans)!important}.fw-bold{font-weight:600!important}.tt-uppercase{text-transform:uppercase!important}.truncate{overflow:hidden;max-width:100%;text-overflow:ellipsis!important;white-space:nowrap}.ws-nowrap{white-space:nowrap!important}.ow-break-word{overflow-wrap:break-word!important;word-wrap:break-word!important}ul,ol{padding:0;margin-left:2.8em}ol ol{margin-bottom:0}ul{list-style-type:disc}ol{list-style-type:decimal}.d-block{display:block!important}.d-flex{display:flex!important}.d-inline-flex{display:inline-flex!important}.c-default{cursor:default!important}.c-pointer{cursor:pointer!important}.c-move{cursor:move!important}.v-visible-sr{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal}.clearfix:before,.clearfix:after{content:"";display:table}.clearfix:after{clear:both}.va-text-bottom{vertical-align:text-bottom!important}.va-text-top{vertical-align:text-top!important}.ps-fixed{position:fixed!important}.ps-relative{position:relative!important}.overflow-hidden{overflow:hidden!important}.overflow-hidden::-webkit-scrollbar{width:10px;height:10px;background-color:transparent}.overflow-hidden::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.overflow-hidden::-webkit-scrollbar-thumb{border-radius:10px;background-color:var(--scrollbar)}.overflow-hidden::-webkit-scrollbar-corner{background-color:transparent;border-color:transparent}.o50{opacity:.5!important}.z-nav-fixed{z-index:5050!important}.w50{width:50%!important}.w100{width:100%!important}.ws4{width:32.4102564rem!important}.w96{width:96px!important}.wmx2{max-width:16.2051282rem!important}.wmx3{max-width:24.3076923rem!important}.wmx4{max-width:32.4102564rem!important}.wmx12{max-width:97.2307692rem!important}.wmx100{max-width:100%!important}.wmn0{min-width:0!important}.wmn3{min-width:24.3076923rem!important}.h-auto{height:auto!important}.h24{height:24px!important}@media (max-width:980px){html.html__responsive:not(.html__unpinned-leftnav) .md\:fd-column{flex-direction:column!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mt0{margin-top:0!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mt24{margin-top:24px!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mr32{margin-right:32px!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mb0{margin-bottom:0!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:mb8{margin-bottom:8px!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:ps-absolute{position:absolute!important}html.html__responsive:not(.html__unpinned-leftnav) .md\:w-auto{width:auto!important}}@media (max-width:640px){html.html__responsive:not(.html__unpinned-leftnav) .sm\:fd-row{flex-direction:row!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:fd-column{flex-direction:column!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:ai-start{align-items:flex-start!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:as-end{align-self:flex-end!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:order-first{order:-1!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:mb12{margin-bottom:12px!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:ml0{margin-left:0!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:p16{padding:16px!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:d-none{display:none!important}html.html__responsive:not(.html__unpinned-leftnav) .sm\:w-auto{width:auto!important}}</style>
+<link rel=alternate type=application/atom+xml title="Feed for question 'What is an immediate value?'" href=https://reverseengineering.stackexchange.com/feeds/question/17671>
+<meta name=twitter:app:country content=US>
+<meta name=twitter:app:name:iphone content="Stack Exchange iOS">
+<meta name=twitter:app:id:iphone content=871299723>
+<meta name=twitter:app:url:iphone content=se-zaphod://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value>
+<meta name=twitter:app:name:ipad content="Stack Exchange iOS">
+<meta name=twitter:app:id:ipad content=871299723>
+<meta name=twitter:app:url:ipad content=se-zaphod://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value>
+<meta name=twitter:app:name:googleplay content="Stack Exchange Android">
+<meta name=twitter:app:url:googleplay content=https://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value>
+<meta name=twitter:app:id:googleplay content=com.stackexchange.marvin>
+<style>@keyframes researchshow{0%{transform:translate3d(0,300px,0);opacity:0}25%{transform:translate3d(0,-12px,0);opacity:1}40%{transform:translate3d(0,-2px,0)}100%{transform:translate3d(0,0,0);opacity:1}}@keyframes researchhide{0%,50%{transform:translate3d(0,0,0);opacity:1}75%{transform:translate3d(0,-12px,0);opacity:1}100%{transform:translate3d(0,300px,0);opacity:0}}</style>
+<noscript id=noscript-css><style>body,.s-topbar{margin-top:1.9em}</style></noscript>
+<style>.sf-hidden{display:none!important}</style><meta http-equiv=content-security-policy content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:;"></head>
+ <body class="question-page unified-theme">
+ <div id=notify-container></div>
+ <div id=custom-header class=sf-hidden></div>
+ 
+<header class="s-topbar ps-fixed t0 l0 js-top-bar">
+ <div class=s-topbar--container>
+ <a href=# class="s-topbar--menu-btn js-left-sidebar-toggle sf-hidden" role=menuitem aria-haspopup=true aria-controls=left-sidebar aria-expanded=false></a>
+ <div class="topbar-dialog leftnav-dialog js-leftnav-dialog dno sf-hidden">
+ 
+ </div>
+ <a href=# class="s-topbar--logo network-logo js-gps-track js-network-logo" data-gps-track=stack_exchange_popup.show role=menuitem aria-haspopup=true aria-controls=topbar-network-logo-dialog aria-expanded=false>
+ <svg aria-hidden=true class="native mtn1 svg-icon iconLogoSEAlternativeSm" width=107 height=15 viewBox="0 0 107 15"><path d="m48.41 11.93-1.96-3.2-1.04 1.16v2.04h-1.42V2.18h1.42v6.01L48.14 5h1.72l-2.44 2.7 2.74 4.22h-1.75Zm-7.06.08c-1.59 0-3.14-.96-3.14-3.56s1.55-3.54 3.14-3.54c.97 0 1.65.27 2.31.97l-.97.93c-.44-.48-.79-.66-1.34-.66s-1 .22-1.3.62c-.31.38-.42.87-.42 1.68 0 .81.1 1.32.41 1.7.3.4.76.62 1.3.62.56 0 .9-.18 1.35-.66l.97.92c-.66.7-1.34.98-2.31.98Zm-5.66-3.15h-1.65c-.83 0-1.26.37-1.26 1s.4.99 1.3.99c.53 0 .93-.04 1.3-.4.22-.2.31-.53.31-1.03v-.56Zm.03 3.07v-.63c-.51.5-1 .71-1.87.71-.87 0-1.46-.2-1.89-.63a2.1 2.1 0 0 1-.55-1.49c0-1.16.82-2 2.42-2h1.86v-.5c0-.87-.44-1.3-1.54-1.3-.77 0-1.15.18-1.54.68l-.92-.86c.66-.77 1.35-1 2.52-1 1.93 0 2.9.8 2.9 2.38v4.64h-1.39Zm-5.9 0c-1.32 0-1.93-.93-1.93-1.93V6.18h-.8V5.1h.8V3h1.41v2.1h1.36v1.07H29.3v3.75c0 .5.25.81.78.81h.58v1.2h-.85Zm-6.33.08c-1.48 0-2.55-.34-3.49-1.28l1-.98c.72.72 1.51.94 2.52.94 1.3 0 2.04-.55 2.04-1.5 0-.42-.13-.78-.39-1.01-.25-.23-.5-.33-1.08-.41l-1.16-.17a3.4 3.4 0 0 1-1.88-.78 2.41 2.41 0 0 1-.72-1.86c0-1.7 1.25-2.86 3.3-2.86 1.3 0 2.22.33 3.07 1.1l-.96.94a2.92 2.92 0 0 0-2.15-.75c-1.16 0-1.8.65-1.8 1.52 0 .35.1.67.37.9.25.22.65.38 1.11.45l1.13.17c.91.13 1.42.35 1.84.72.54.47.8 1.17.8 2 0 1.8-1.48 2.86-3.55 2.86Z" fill=#FEFEFE></path><path d="M104.16 7.09c-.2-.42-.6-.74-1.2-.74s-.99.32-1.18.74c-.1.25-.15.44-.16.75h2.7a2 2 0 0 0-.16-.75Zm-2.54 1.96c0 .9.56 1.57 1.55 1.57.78 0 1.16-.21 1.61-.66l1.08 1.04a3.4 3.4 0 0 1-2.7 1.11c-1.68 0-3.29-.76-3.29-3.62 0-2.3 1.26-3.6 3.1-3.6 1.97 0 3.1 1.44 3.1 3.37v.79h-4.45Zm-5.48-2.57C95.1 6.48 95 7.37 95 8.3c0 .94.1 1.85 1.15 1.85 1.05 0 1.18-.91 1.18-1.85 0-.93-.13-1.82-1.18-1.82Zm-.17 8.22c-1.1 0-1.84-.21-2.58-.92l1.1-1.11c.4.38.8.54 1.4.54 1.06 0 1.43-.74 1.43-1.46v-.72c-.47.51-1 .7-1.7.7-.69 0-1.29-.23-1.68-.62-.67-.66-.73-1.57-.73-2.8 0-1.24.06-2.13.73-2.8.4-.39 1-.62 1.7-.62.75 0 1.24.2 1.73.75v-.67h1.72v6.8c0 1.7-1.21 2.93-3.12 2.93Zm-5.76-2.67V7.76c0-.96-.61-1.28-1.17-1.28-.56 0-1.18.32-1.18 1.28v4.27h-1.78V4.97h1.73v.65a2.44 2.44 0 0 1 1.78-.73c.7 0 1.28.23 1.67.62.58.57.73 1.24.73 2v4.52H90.2Zm-7.1-2.98h-1.4c-.64 0-1 .3-1 .8 0 .49.33.81 1.02.81.5 0 .8-.04 1.12-.34.2-.17.26-.46.26-.89v-.38Zm.04 2.98v-.6c-.48.47-.93.67-1.74.67-.8 0-1.4-.2-1.82-.62-.38-.4-.58-.97-.58-1.59 0-1.12.77-2.05 2.42-2.05h1.68V7.5c0-.77-.38-1.11-1.32-1.11-.68 0-1 .16-1.37.58l-1.13-1.1c.7-.75 1.38-.97 2.57-.97 1.99 0 3.02.84 3.02 2.5v4.64h-1.73Zm-6.93 0v-4.3c0-.94-.6-1.25-1.15-1.25-.56 0-1.15.32-1.15 1.24v4.31h-1.77V2.38h1.77v3.24a2.35 2.35 0 0 1 1.7-.73c1.56 0 2.38 1.08 2.38 2.57v4.57h-1.78Zm-6.96.08c-1.42 0-3.18-.76-3.18-3.62 0-2.85 1.76-3.6 3.18-3.6.98 0 1.72.3 2.34.95l-1.2 1.2c-.36-.4-.68-.56-1.14-.56-.42 0-.75.14-1.01.46-.27.33-.4.8-.4 1.55s.13 1.24.4 1.58c.26.3.59.46 1 .46.47 0 .79-.16 1.15-.56l1.2 1.18c-.62.65-1.36.96-2.34.96Zm-5.53-.08-1.3-2.11-1.3 2.11H59l2.45-3.6-2.35-3.46h2.12L62.42 7l1.21-2.02h2.13L63.4 8.43l2.46 3.6h-2.13Zm-11.75 0V2.06h6.6V3.8h-4.65v2.33h3.96v1.74h-3.96v2.42h4.65v1.74h-6.6Z" fill=#2F96E8></path><path d="M0 3c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2H0Z" fill=#8FD8F7></path><path d="M12 10H0c0 1.1.9 2 2 2h5v3l3-3a2 2 0 0 0 2-2Z" fill=#155397></path><path fill=#46A2D9 d="M0 4h12v2H0z"></path><path fill=#2D6DB5 d="M0 7h12v2H0z"></path></svg>
+ </a>
+ <div class="topbar-dialog network-logo-dialog js-network-logo-dialog dno sf-hidden" id=topbar-network-logo-dialog role=dialog aria-labelledby=topbar-network-logo-dialog-title aria-describedby=topbar-network-logo-dialog-body>
+ 
+ </div>
+ <form id=search role=search action=/search class="s-topbar--searchbar js-searchbar" autocomplete=off>
+ <div class=s-topbar--searchbar--input-group>
+ <input name=q type=text placeholder="Search on Reverse Engineering…" value autocomplete=off maxlength=240 class="s-input s-input__search js-search-field" aria-label=Search aria-controls=top-search data-controller=s-popover data-action="focus->s-popover#show" data-s-popover-placement=bottom-start>
+ <svg aria-hidden=true class="s-input-icon s-input-icon__search svg-icon iconSearch" width=18 height=18 viewBox="0 0 18 18"><path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path></svg>
+ <div class="s-popover p0 wmx100 wmn4 sm:wmn-initial js-top-search-popover sf-hidden" id=top-search role=menu>
+ 
+ 
+ 
+ 
+ 
+</div>
+ </div>
+ </form>
+ 
+<ol class=s-topbar--content role=presentation>
+ <li>
+ <a href=# class="s-topbar--item js-inbox-button" aria-label=Inbox title="Recent inbox messages" role=menuitem aria-haspopup=true aria-expanded=false data-unread-count=0>
+ <svg aria-hidden=true class="svg-icon iconInbox" width=20 height=18 viewBox="0 0 20 18"><path d="M4.63 1h10.56a2 2 0 0 1 1.94 1.35L20 10.79V15a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-4.21l2.78-8.44c.25-.8 1-1.36 1.85-1.35Zm8.28 12 2-2h2.95l-2.44-7.32a1 1 0 0 0-.95-.68H5.35a1 1 0 0 0-.95.68L1.96 11h2.95l2 2h6Z"></path></svg>
+ <span class="s-activity-indicator s-activity-indicator__danger js-unread-count d-none sf-hidden">0</span>
+ </a>
+ </li>
+ <li>
+ <a href=# class="s-topbar--item js-achievements-button" data-unread-class=fc-success aria-label=Achievements title="Recent achievements: reputation, badges, and privileges earned" role=menuitem aria-haspopup=true aria-expanded=false data-unread-count=0 data-lit-up=false>
+ <svg aria-hidden=true class="svg-icon iconAchievements" width=18 height=18 viewBox="0 0 18 18"><path d="M15 2V1H3v1H0v4c0 1.6 1.4 3 3 3v1c.4 1.5 3 2.6 5 3v2H5s-1 1.5-1 2h10c0-.4-1-2-1-2h-3v-2c2-.4 4.6-1.5 5-3V9c1.6-.2 3-1.4 3-3V2h-3ZM3 7c-.5 0-1-.5-1-1V4h1v3Zm8.4 2.5L9 8 6.6 9.4l1-2.7L5 5h3l1-2.7L10 5h2.8l-2.3 1.8 1 2.7h-.1ZM16 6c0 .5-.5 1-1 1V4h1v2Z"></path></svg>
+ <span class="s-activity-indicator s-activity-indicator__success js-unread-count d-none sf-hidden">+0</span>
+ </a>
+ </li>
+ <li>
+ <a href=# class="s-topbar--item js-help-button" title="Help Center and other resources" role=menuitem aria-haspopup=true aria-controls=topbar-help-dialog data-ga='["top navigation","help menu click",null,null,null]' aria-expanded=false><svg aria-hidden=true class="svg-icon iconHelp" width=18 height=18 viewBox="0 0 18 18"><path d="M9 1C4.64 1 1 4.64 1 9c0 4.36 3.64 8 8 8 4.36 0 8-3.64 8-8 0-4.36-3.64-8-8-8Zm.81 12.13c-.02.71-.55 1.15-1.24 1.13-.66-.02-1.17-.49-1.15-1.2.02-.72.56-1.18 1.22-1.16.7.03 1.2.51 1.17 1.23ZM11.77 8c-.59.66-1.78 1.09-2.05 1.97a4 4 0 0 0-.09.75c0 .05-.03.16-.18.16H7.88c-.16 0-.18-.1-.18-.15.06-1.35.66-2.2 1.83-2.88.39-.29.7-.75.7-1.24.01-1.24-1.64-1.82-2.35-.72-.21.33-.18.73-.18 1.1H5.75c0-1.97 1.03-3.26 3.03-3.26 1.75 0 3.47.87 3.47 2.83 0 .57-.2 1.05-.48 1.44Z"></path></svg></a>
+ </li>
+ <div class="topbar-dialog help-dialog js-help-dialog dno sf-hidden" id=topbar-help-dialog role=menu>
+ 
+ </div>
+ <li>
+ <a href=https://stackexchange.com/ class="s-topbar--item js-site-switcher-button js-gps-track" data-gps-track=site_switcher.show aria-label="Site switcher" title="A list of all 179 Stack Exchange sites" role=menuitem aria-haspopup=true aria-expanded=false data-ga='["top navigation","stack exchange click",null,null,null]'>
+ <svg aria-hidden=true class="svg-icon iconStackExchange" width=18 height=18 viewBox="0 0 18 18"><path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path></svg>
+ </a>
+ </li>
+ <li class=js-topbar-dialog-corral role=presentation>
+ 
+ <div class="topbar-dialog siteSwitcher-dialog dno sf-hidden" role=menu>
+ 
+ 
+ 
+ 
+ 
+ 
+ </div>
+ </li>
+ <li><a href=# class="s-topbar--item s-btn s-btn__icon s-btn__muted d-none sm:d-inline-flex js-searchbar-trigger sf-hidden" role=button aria-label=Search aria-haspopup=true aria-controls=search title="Click to show search"><svg aria-hidden=true class="svg-icon iconSearch" width=18 height=18 viewBox="0 0 18 18"><path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path></svg></a></li>
+ <li><a href="https://reverseengineering.stackexchange.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2freverseengineering.stackexchange.com%2fquestions%2f17671%2fwhat-is-an-immediate-value" class="s-topbar--item s-topbar--item__unset s-btn s-btn__filled ws-nowrap js-gps-track" rel=nofollow data-gps-track=login.click data-ga='["top navigation","login button click",null,null,null]'>Log in</a></li>
+ <li><a href="https://reverseengineering.stackexchange.com/users/signup?ssrc=head&amp;returnurl=https%3a%2f%2freverseengineering.stackexchange.com%2fquestions%2f17671%2fwhat-is-an-immediate-value" class="s-topbar--item s-topbar--item__unset ml4 s-btn s-btn__primary ws-nowrap" rel=nofollow data-ga='["sign up","Sign Up Navigation","Header",null,null]'>Sign up</a></li>
+</ol>
+ </div>
+</header>
+ 
+ 
+ 
+ 
+<div class="sm:d-none py24 bg-black-750 fc-black-200 ps-relative js-dismissable-hero">
+ <div class="px12 d-flex ai-center jc-center mx-auto wmx12">
+ <div class="flex--item wmx3 fs-body2 mr64 md:mr32">
+ <p>Reverse Engineering Stack Exchange is a question and answer site for researchers and developers who explore the principles of a system through analysis of its structure, function, and operation. It only takes a minute to sign up.</p>
+ <a href="https://reverseengineering.stackexchange.com/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2freverseengineering.stackexchange.com%2fquestions%2f17671%2fwhat-is-an-immediate-value" class="s-btn s-btn__primary">Sign up to join this community</a>
+ </div>
+ <div class="d-flex fd-column ai-center wmn3 hero-background">
+ <div class="d-flex ai-center mb24">
+ <div class="flex--item mr16">
+ <img width=31 src=data:null;base64,>
+ </div>
+ <div class=flex--item>
+ Anybody can ask a question
+ </div>
+ </div>
+ <div class="d-flex ai-center mb24">
+ <div class="flex--item mr16">
+ <img width=35 src=data:null;base64,>
+ </div>
+ <div class=flex--item>
+ Anybody can answer
+ </div>
+ </div>
+ <div class="d-flex ai-center">
+ <div class="flex--item mr16">
+ <img width=24 src=data:null;base64,>
+ </div>
+ <div class="flex--item wmx2">
+ The best answers are voted up and rise to the top
+ </div>
+ </div>
+ </div>
+ <div class="flex--item as-start md:ps-absolute t8 r8">
+ <button class="s-btn s-btn__muted p8 js-dismiss">
+ <svg aria-hidden=true class="svg-icon iconClear" width=18 height=18 viewBox="0 0 18 18"><path d="M15 4.41 13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9 15 4.41Z"></path></svg>
+ </button>
+ </div>
+ </div>
+</div>
+ <header class=site-header>
+ <div class=site-header--container>
+ <a class="site-header--link fs-headline1 fw-bold" href=https://reverseengineering.stackexchange.com/>
+Reverse Engineering </a>
+ </div>
+ </header>
+ <div class=container>
+ 
+<div data-is-here-when="md lg" class="left-sidebar js-pinned-left-sidebar ps-relative" id=left-sidebar>
+ <div class="left-sidebar--sticky-container js-sticky-leftnav">
+ <nav role=navigation>
+ <ol class=nav-links>
+ 
+<li class=ps-relative>
+ <a href=https://reverseengineering.stackexchange.com/ class="pl8 js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Home
+ </div>
+ </div>
+ </a>
+</li>
+ <li>
+ <ol class=nav-links>
+ <li class="fs-fine tt-uppercase ml8 mt16 mb4 fc-light">Public</li>
+ 
+<li class="ps-relative youarehere">
+ <a id=nav-questions href=https://reverseengineering.stackexchange.com/questions class="pl8 js-gps-track nav-links--link -link__with-icon" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+<svg aria-hidden=true class="svg-icon iconGlobe" width=18 height=18 viewBox="0 0 18 18"><path d="M9 1C4.64 1 1 4.64 1 9c0 4.36 3.64 8 8 8 4.36 0 8-3.64 8-8 0-4.36-3.64-8-8-8ZM8 15.32a6.46 6.46 0 0 1-4.3-2.74 6.46 6.46 0 0 1-.93-5.01L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52Zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.45 6.45 0 0 1 3.83 4.51 6.45 6.45 0 0 1-1.51 5.73v.01Z"></path></svg> <span class=-link--channel-name>Questions</span>
+ </a>
+</li>
+ 
+<li class=ps-relative>
+ <a id=nav-tags href=https://reverseengineering.stackexchange.com/tags class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Tags
+ </div>
+ </div>
+ </a>
+</li>
+ 
+<li class=ps-relative>
+ <a id=nav-users href=https://reverseengineering.stackexchange.com/users class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Users
+ </div>
+ </div>
+ </a>
+</li>
+ 
+<li class=ps-relative>
+ <a id=nav-unanswered href=https://reverseengineering.stackexchange.com/unanswered class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:5})" aria-controls data-controller data-s-popover-placement=right data-s-popover-auto-show=true data-s-popover-hide-on-outside-click=never>
+ <div class="d-flex ai-center">
+ <div class="flex--item truncate">
+ Unanswered
+ </div>
+ </div>
+ </a>
+</li>
+ </ol>
+ </li>
+ 
+<li>
+ <ol class=nav-links>
+ 
+<div class="js-freemium-cta ps-relative">
+ <div class="fs-fine tt-uppercase ml8 mt16 mb8 fc-light">Teams</div>
+ <div class="bt bl bb bc-black-075 p12 pb6 fc-black-600 blr-sm overflow-hidden">
+ <strong class="fc-black-750 mb6">Stack Overflow for Teams</strong>
+ – Start collaborating and sharing organizational knowledge.
+ 
+ <img class="wmx100 mx-auto my8 h-auto d-block" width=139 height=114 src=data:null;base64, alt>
+ <a href="https://try.stackoverflow.co/why-teams/?utm_source=so-owned&amp;utm_medium=side-bar&amp;utm_campaign=campaign-38&amp;utm_content=cta" class="w100 s-btn s-btn__primary s-btn__xs bg-orange-400 js-gps-track" data-gps-track="teams.create.left-sidenav.click({ Action: 6 })" data-ga='["teams left navigation - anonymous","left nav free cta","stackoverflow.com/teams/create/free",null,null]'>Create a free Team</a>
+ <a href=https://stackoverflow.co/teams class="w100 s-btn s-btn__muted s-btn__xs js-gps-track" data-gps-track="teams.create.left-sidenav.click({ Action: 5 })" data-ga='["teams left navigation - anonymous","left nav free cta","stackoverflow.com/teams",null,null]'>Why Teams?</a>
+ </div>
+</div>
+ <li class="d-flex ai-center jc-space-between ml8 mt24 mb4 js-create-team-cta d-none sf-hidden">
+ 
+ 
+ </li>
+ <li class="ps-relative js-create-team-cta d-none sf-hidden">
+ 
+ </li>
+ </ol>
+</li> 
+ </ol>
+ </nav>
+ </div>
+ <div class="s-popover sf-hidden" id=popover-teams-create-cta role=menu aria-hidden=true>
+ 
+ 
+ 
+ </div>
+</div>
+ <div id=content>
+ 
+<div itemprop=mainEntity itemscope itemtype=https://schema.org/Question>
+ <link itemprop=image href="https://cdn.sstatic.net/Sites/reverseengineering/Img/apple-touch-icon.png?v=304d2581a262" class=sf-hidden>
+ <div class="inner-content clearfix">
+ 
+ <div id=question-header class="d-flex sm:fd-column">
+ <h1 itemprop=name class="fs-headline1 ow-break-word mb8 flex--item fl1"><a href=https://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value class=question-hyperlink>What is an immediate value?</a></h1>
+ <div class="ml12 aside-cta flex--item print:d-none sm:ml0 sm:mb12 sm:order-first sm:as-end">
+ <a href=https://reverseengineering.stackexchange.com/questions/ask class="ws-nowrap s-btn s-btn__primary">
+ Ask Question
+ </a>
+ </div>
+ </div>
+ <div class="d-flex fw-wrap pb8 mb16 bb bc-black-075">
+ <div class="flex--item ws-nowrap mr16 mb8" title="2018-03-12 21:21:59Z">
+ <span class="fc-light mr2">Asked</span>
+ <time itemprop=dateCreated datetime=2018-03-12T21:21:59>4 years, 1 month ago</time>
+ </div>
+ <div class="flex--item ws-nowrap mr16 mb8">
+ <span class="fc-light mr2">Modified</span>
+ <a href=https://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value?lastactivity class="s-link s-link__inherit" title="2018-04-04 11:42:03Z">4 years ago</a>
+ </div>
+ <div class="flex--item ws-nowrap mb8" title="Viewed 12,700 times">
+ <span class="fc-light mr2">Viewed</span>
+ 13k times
+ </div>
+ </div>
+ <div id=mainbar role=main aria-label="question and answers">
+ 
+<div class=question data-questionid=17671 data-position-on-page=0 data-score=2 id=question>
+ <div class=post-layout>
+ <div class="votecell post-layout--left">
+ <div class="js-voting-container d-flex jc-center fd-column ai-stretch gs4 fc-black-200" data-post-id=17671>
+ <button class="js-vote-up-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Up vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-uk0r2f9k>
+ <svg aria-hidden=true class="svg-icon iconArrowUpLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-uk0r2f9k class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This question shows research effort; it is useful and clear</div>
+ <div class="js-vote-count flex--item d-flex fd-column ai-center fc-black-500 fs-title" itemprop=upvoteCount data-value=2>
+ 2
+ </div>
+ <button class="js-vote-down-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Down vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-mzpw9ehc>
+ <svg aria-hidden=true class="svg-icon iconArrowDownLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-mzpw9ehc class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This question does not show any research effort; it is unclear or not useful</div>
+ <button class="js-bookmark-btn s-btn s-btn__unset c-pointer py4 js-gps-track" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label=Bookmark data-selected-classes=fc-yellow-600 data-gps-track="post.click({ item: 1, priv: 0, post_type: 1 })" aria-describedby=--stacks-s-tooltip-fsb3x5ni>
+ <svg aria-hidden=true class="svg-icon iconBookmark" width=18 height=18 viewBox="0 0 18 18"><path d="M6 1a2 2 0 0 0-2 2v14l5-4 5 4V3a2 2 0 0 0-2-2H6Zm3.9 3.83h2.9l-2.35 1.7.9 2.77L9 7.59l-2.35 1.7.9-2.76-2.35-1.7h2.9L9 2.06l.9 2.77Z"></path></svg>
+ <div class="js-bookmark-count mt4 d-none sf-hidden" data-value></div>
+ </button><div id=--stacks-s-tooltip-fsb3x5ni class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Bookmark this question.</div>
+ 
+ 
+ <a class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href=https://reverseengineering.stackexchange.com/posts/17671/timeline data-shortcut=T data-ks-title=timeline data-controller=s-tooltip data-s-tooltip-placement=right aria-label=Timeline aria-describedby=--stacks-s-tooltip-g8k4siyu><svg aria-hidden=true class="mln2 mr0 svg-icon iconHistory" width=19 height=18 viewBox="0 0 19 18"><path d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"></path></svg></a><div id=--stacks-s-tooltip-g8k4siyu class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Show activity on this post.</div>
+</div>
+ </div>
+ 
+<div class="postcell post-layout--right">
+ 
+ <div class="s-prose js-post-body" itemprop=text>
+ 
+<p>I just read <a href=https://reverseengineering.stackexchange.com/questions/17666/how-does-the-ldr-instruction-work-on-arm>this post</a>.</p>
+<p>What does mean an "<em>immediate value</em>" ? Is there any string/ascii there?</p>
+<p>How can I find this value on the binary file?</p>
+<p>I have the same code and when I search on 0x28 address I dont see any value.</p>
+ </div>
+ <div class="mt24 mb12">
+ <div class="post-taglist d-flex gs4 gsy fd-column">
+ <div class="d-flex ps-relative fw-wrap">
+ <a href=https://reverseengineering.stackexchange.com/questions/tagged/assembly class=post-tag title="show questions tagged 'assembly'" rel=tag>assembly</a> <a href=https://reverseengineering.stackexchange.com/questions/tagged/arm class=post-tag title="show questions tagged 'arm'" rel=tag>arm</a> 
+ </div>
+ </div>
+ </div>
+ <div class=mb0>
+ <div class="mt16 d-flex gs8 gsy fw-wrap jc-end ai-start pt4 mb16">
+ <div class="flex--item mr16 fl1 w96">
+ 
+<div class="js-post-menu pt2" data-post-id=17671>
+ <div class="d-flex gs8 s-anchors s-anchors__muted fw-wrap">
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/q/17671 rel=nofollow itemprop=url class="js-share-link js-gps-track" title="Short permalink to this question" data-gps-track="post.click({ item: 2, priv: 0, post_type: 1 })" data-controller="se-share-sheet s-popover" data-se-share-sheet-title="Share a link to this question" data-se-share-sheet-subtitle data-se-share-sheet-post-type=question data-se-share-sheet-social="facebook twitter " data-se-share-sheet-location=1 data-se-share-sheet-license-url=https%3a%2f%2fcreativecommons.org%2flicenses%2fby-sa%2f3.0%2f data-se-share-sheet-license-name="CC BY-SA 3.0" data-s-popover-placement=bottom-start aria-controls=se-share-sheet-0 data-action=" s-popover#toggle se-share-sheet#preventNavigation s-popover:show->se-share-sheet#willShow s-popover:shown->se-share-sheet#didShow">Share</a><div class="s-popover z-dropdown s-anchors s-anchors__default sf-hidden" style=width:unset;max-width:28em id=se-share-sheet-0></div>
+ </div>
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/posts/17671/edit class="js-suggest-edit-post js-gps-track" data-gps-track="post.click({ item: 6, priv: 0, post_type: 1 })" title>Improve this question</a>
+ </div>
+ <div class=flex--item>
+ <button type=button id=btnFollowPost-17671 class="s-btn s-btn__link js-follow-post js-follow-question js-gps-track" data-gps-track="post.click({ item: 14, priv: 0, post_type: 1 })" data-controller="s-tooltip " data-s-tooltip-placement=bottom data-s-popover-placement=bottom aria-controls aria-describedby=--stacks-s-tooltip-iifq1ssb>
+ Follow
+ </button><div id=--stacks-s-tooltip-iifq1ssb class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Follow this question to receive notifications</div>
+ </div>
+ </div>
+ <div class=js-menu-popup-container></div>
+</div>
+ </div>
+ <div class="post-signature flex--item">
+<div class=user-info>
+ <div class=user-action-time>
+ <a href=https://reverseengineering.stackexchange.com/posts/17671/revisions title="show all edits to this post" class=js-gps-track data-gps-track="post.click({ item: 4, priv: 0, post_type: 1 })">edited <span title="2018-04-04 11:42:03Z" class=relativetime>Apr 4, 2018 at 11:42</span></a>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://reverseengineering.stackexchange.com/users/23440/chris><div class=gravatar-wrapper-32><img src="data:image/png;base64,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" alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details>
+ <a href=https://reverseengineering.stackexchange.com/users/23440/chris>Chris</a>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score " dir=ltr>103</span><span title="4 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>4</span></span><span class=v-visible-sr>4 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ <div class="post-signature owner flex--item">
+ <div class=user-info>
+ <div class=user-action-time>
+ asked <span title="2018-03-12 21:21:59Z" class=relativetime>Mar 12, 2018 at 21:21</span>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://reverseengineering.stackexchange.com/users/23594/ljohhuh><div class=gravatar-wrapper-32><img src=data:image/png;base64,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 alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details itemprop=author itemscope itemtype=http://schema.org/Person>
+ <a href=https://reverseengineering.stackexchange.com/users/23594/ljohhuh>Ljohhuh</a><span class="d-none sf-hidden" itemprop=name>Ljohhuh</span>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score " dir=ltr>41</span><span title="1 gold badge" aria-hidden=true><span class=badge1></span><span class=badgecount>1</span></span><span class=v-visible-sr>1 gold badge</span><span title="1 silver badge" aria-hidden=true><span class=badge2></span><span class=badgecount>1</span></span><span class=v-visible-sr>1 silver badge</span><span title="4 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>4</span></span><span class=v-visible-sr>4 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ </div>
+ </div>
+ 
+</div>
+ <span class="d-none sf-hidden" itemprop=commentCount></span> 
+ <div class="post-layout--right js-post-comments-component">
+ <div id=comments-17671 class="comments js-comments-container bt bc-black-075 mt12 dno sf-hidden" data-post-id=17671 data-min-length=15>
+ 
+ </div>
+ <div id=comments-link-17671 data-rep=50 data-anon=true>
+ <a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." href=# role=button>Add a comment</a>
+ <span class="js-link-separator dno sf-hidden">&nbsp;|&nbsp;</span>
+ <a class="js-show-link comments-link dno sf-hidden" title="Expand to show all comments on this post" href=# role=button></a>
+ </div> 
+ </div>
+ </div>
+</div>
+ <div id=answers>
+ <a name=tab-top></a>
+ <div id=answers-header>
+ <div class="answers-subheader d-flex ai-center mb8">
+ <div class="flex--item fl1">
+ <h2 class=mb0 data-answercount=3>
+ 3 Answers
+ <span style=display:none itemprop=answerCount>3</span>
+ </h2>
+ </div>
+ <div class=flex--item>
+ 
+<div class="d-flex g4 gsx ai-center sm:fd-column sm:ai-start">
+ <div class="d-flex fd-column ai-end sm:ai-start">
+ <label class="flex--item fs-caption" for=answer-sort-dropdown-select-menu>
+ Sorted by:
+ </label>
+ <a class="js-sort-preference-change s-link flex--item fs-fine d-none sf-hidden" data-value=ScoreDesc href="https://reverseengineering.stackexchange.com/questions/17671/what-is-an-immediate-value?answertab=scoredesc#tab-top">
+ Reset to default
+ </a>
+ </div>
+ <div class="flex--item s-select">
+ <select id=answer-sort-dropdown-select-menu>
+                    <option value=scoredesc selected>
+ Highest score (default)
+ </option>
+                    <option value=modifieddesc>
+ Date modified (newest first)
+ </option>
+                    <option value=createdasc>
+ Date created (oldest first)
+ </option>
+        </select>
+ </div>
+</div>
+ </div>
+ </div>
+ </div>
+ 
+<a name=17678></a>
+<div id=answer-17678 class="answer js-answer" data-answerid=17678 data-parentid=17671 data-score=5 data-position-on-page=1 data-highest-scored=1 data-question-has-accepted-highest-score=0 itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer>
+ <div class=post-layout>
+ <div class="votecell post-layout--left">
+ <div class="js-voting-container d-flex jc-center fd-column ai-stretch gs4 fc-black-200" data-post-id=17678>
+ <button class="js-vote-up-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Up vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-d7jd1j3a>
+ <svg aria-hidden=true class="svg-icon iconArrowUpLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-d7jd1j3a class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is useful</div>
+ <div class="js-vote-count flex--item d-flex fd-column ai-center fc-black-500 fs-title" itemprop=upvoteCount data-value=5>
+ 5
+ </div>
+ <button class="js-vote-down-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Down vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-7lkr9xvd>
+ <svg aria-hidden=true class="svg-icon iconArrowDownLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-7lkr9xvd class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is not useful</div>
+ 
+ <div class="js-accepted-answer-indicator flex--item fc-green-500 py6 mtn8 d-none sf-hidden" data-s-tooltip-placement=right title="Loading when this answer was accepted…" tabindex=0 role=note aria-label=Accepted>
+ 
+ </div>
+ 
+ <a class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href=https://reverseengineering.stackexchange.com/posts/17678/timeline data-shortcut=T data-ks-title=timeline data-controller=s-tooltip data-s-tooltip-placement=right aria-label=Timeline aria-describedby=--stacks-s-tooltip-ljzfo1js><svg aria-hidden=true class="mln2 mr0 svg-icon iconHistory" width=19 height=18 viewBox="0 0 19 18"><path d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"></path></svg></a><div id=--stacks-s-tooltip-ljzfo1js class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Show activity on this post.</div>
+</div>
+ </div>
+ 
+<div class="answercell post-layout--right">
+ 
+ <div class="s-prose js-post-body" itemprop=text>
+<p>In the area of machine code/instruction sets, an <em>immediate value</em> is a constant number embedded into the instruction itself , as opposed to one loaded from another place. For example, on x86:</p>
+<pre><code>6A 03  push    3
+</code></pre>
+<p>Here, 3 is an <em>immediate</em> because it's included directly as part of the opcode (in the second byte).</p>
+<p>On ARM:</p>
+<pre><code> 00 00 50 E3                 CMP             R0, #0
+</code></pre>
+<p>here, 0 is again an <em>immediate</em> because it's encoded in bits of the opcode. In ARM assembly, immediates are usually marked with <code>#</code> symbol, although it is optional in later revisions when unambiguous.</p>
+<p>Another example:</p>
+<pre><code> C8 30 1F E5                 LDR             R3, =0xC0B8
+</code></pre>
+<p>Here, despite appearances, <code>0xC0B8</code> is <em>not</em> an immediate. If we turn on [x] Disable pointer dereferencing in IDA, it is shown as:</p>
+<pre><code>LDR             R3, dword_BDE0
+</code></pre>
+<p>and</p>
+<pre><code>B8 C0 00 00   dword_BDE0      DCD 0xC0B8 
+</code></pre>
+<p>I.e. this value is not embedded into the instruction but is loaded from the <em>literal pool</em> (an area reserved for storage of values not representable as immediates), but by default IDA simplifies such instructions to show directly the loaded value (this syntax is supported by most ARM assemblers).</p>
+ </div>
+ <div class=mt24>
+ <div class="d-flex fw-wrap ai-start jc-end gs8 gsy">
+ <time itemprop=dateCreated datetime=2018-03-13T08:54:52></time>
+ <div class="flex--item mr16" style="flex:1 1 100px">
+ 
+<div class="js-post-menu pt2" data-post-id=17678>
+ <div class="d-flex gs8 s-anchors s-anchors__muted fw-wrap">
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/a/17678 rel=nofollow itemprop=url class="js-share-link js-gps-track" title="Short permalink to this answer" data-gps-track="post.click({ item: 2, priv: 0, post_type: 2 })" data-controller="se-share-sheet s-popover" data-se-share-sheet-title="Share a link to this answer" data-se-share-sheet-subtitle data-se-share-sheet-post-type=answer data-se-share-sheet-social="facebook twitter " data-se-share-sheet-location=2 data-se-share-sheet-license-url=https%3a%2f%2fcreativecommons.org%2flicenses%2fby-sa%2f3.0%2f data-se-share-sheet-license-name="CC BY-SA 3.0" data-s-popover-placement=bottom-start aria-controls=se-share-sheet-1 data-action=" s-popover#toggle se-share-sheet#preventNavigation s-popover:show->se-share-sheet#willShow s-popover:shown->se-share-sheet#didShow">Share</a><div class="s-popover z-dropdown s-anchors s-anchors__default sf-hidden" style=width:unset;max-width:28em id=se-share-sheet-1></div>
+ </div>
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/posts/17678/edit class="js-suggest-edit-post js-gps-track" data-gps-track="post.click({ item: 6, priv: 0, post_type: 2 })" title>Improve this answer</a>
+ </div>
+ <div class=flex--item>
+ <button type=button id=btnFollowPost-17678 class="s-btn s-btn__link js-follow-post js-follow-answer js-gps-track" data-gps-track="post.click({ item: 14, priv: 0, post_type: 2 })" data-controller="s-tooltip " data-s-tooltip-placement=bottom data-s-popover-placement=bottom aria-controls aria-describedby=--stacks-s-tooltip-l13wj6ib>
+ Follow
+ </button><div id=--stacks-s-tooltip-l13wj6ib class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Follow this answer to receive notifications</div>
+ </div>
+ </div>
+ <div class=js-menu-popup-container></div>
+</div>
+ </div>
+ <div class="post-signature flex--item fl0">
+ <div class="user-info user-hover">
+ <div class=user-action-time>
+ answered <span title="2018-03-13 08:54:52Z" class=relativetime>Mar 13, 2018 at 8:54</span>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://reverseengineering.stackexchange.com/users/60/igor-skochinsky><div class=gravatar-wrapper-32><img src="data:image/png;base64,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" alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details itemprop=author itemscope itemtype=http://schema.org/Person>
+ <a href=https://reverseengineering.stackexchange.com/users/60/igor-skochinsky>Igor Skochinsky</a><span class="mod-flair mtn2" title=Moderator>♦</span><span class="d-none sf-hidden" itemprop=name>Igor Skochinsky</span>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score 34,493" dir=ltr>34.5k</span><span title="6 gold badges" aria-hidden=true><span class=badge1></span><span class=badgecount>6</span></span><span class=v-visible-sr>6 gold badges</span><span title="60 silver badges" aria-hidden=true><span class=badge2></span><span class=badgecount>60</span></span><span class=v-visible-sr>60 silver badges</span><span title="112 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>112</span></span><span class=v-visible-sr>112 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ </div>
+ 
+ 
+ </div>
+ 
+</div>
+ <span class="d-none sf-hidden" itemprop=commentCount></span> 
+ <div class="post-layout--right js-post-comments-component">
+ <div id=comments-17678 class="comments js-comments-container bt bc-black-075 mt12 dno sf-hidden" data-post-id=17678 data-min-length=15>
+ 
+ </div>
+ <div id=comments-link-17678 data-rep=50 data-anon=true>
+ <a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href=# role=button>Add a comment</a>
+ <span class="js-link-separator dno sf-hidden">&nbsp;|&nbsp;</span>
+ <a class="js-show-link comments-link dno sf-hidden" title="Expand to show all comments on this post" href=# role=button></a>
+ </div> 
+ </div>
+ </div>
+</div>
+ 
+<a name=17728></a>
+<div id=answer-17728 class="answer js-answer" data-answerid=17728 data-parentid=17671 data-score=2 data-position-on-page=2 data-highest-scored=0 data-question-has-accepted-highest-score=0 itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer>
+ <div class=post-layout>
+ <div class="votecell post-layout--left">
+ <div class="js-voting-container d-flex jc-center fd-column ai-stretch gs4 fc-black-200" data-post-id=17728>
+ <button class="js-vote-up-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Up vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-gr4sba4x>
+ <svg aria-hidden=true class="svg-icon iconArrowUpLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-gr4sba4x class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is useful</div>
+ <div class="js-vote-count flex--item d-flex fd-column ai-center fc-black-500 fs-title" itemprop=upvoteCount data-value=2>
+ 2
+ </div>
+ <button class="js-vote-down-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Down vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-si98jfhf>
+ <svg aria-hidden=true class="svg-icon iconArrowDownLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-si98jfhf class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is not useful</div>
+ 
+ <div class="js-accepted-answer-indicator flex--item fc-green-500 py6 mtn8 d-none sf-hidden" data-s-tooltip-placement=right title="Loading when this answer was accepted…" tabindex=0 role=note aria-label=Accepted>
+ 
+ </div>
+ 
+ <a class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href=https://reverseengineering.stackexchange.com/posts/17728/timeline data-shortcut=T data-ks-title=timeline data-controller=s-tooltip data-s-tooltip-placement=right aria-label=Timeline aria-describedby=--stacks-s-tooltip-f8zgmpt4><svg aria-hidden=true class="mln2 mr0 svg-icon iconHistory" width=19 height=18 viewBox="0 0 19 18"><path d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"></path></svg></a><div id=--stacks-s-tooltip-f8zgmpt4 class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Show activity on this post.</div>
+</div>
+ </div>
+ 
+<div class="answercell post-layout--right">
+ 
+ <div class="s-prose js-post-body" itemprop=text>
+<p>An immediate value is a value that is stored in the instruction.</p>
+<p>For example (in PIC16 because that's what I'm familiar with):</p>
+<pre><code>MOVlw 0x01
+MOVwf 0x07h
+MOVlw 0x01
+ADDwf 0x07h,0
+</code></pre>
+<p>What this program does is as follows:</p>
+<ol>
+<li>Move a literal value of hex 01 into the accumulator</li>
+<li>Move the accumulator to memory address 0x07h</li>
+<li>Move a literal value of hex 01 into the accumulator</li>
+<li>Add the address 0x07h to the accumulator and store in the accumulator.</li>
+</ol>
+<p>This is a program to show us the difference between a literal (immediate) value and direct addressing.</p>
+<p>On the first instruction, <code>MOVlw 0x01</code> we move a <strong>literal</strong> value into the accumulator. This means that the <strong>value is taken directly from the instruction</strong>, as opposed to being taken from a register which the instruction points to. When the processor reads this instruction, it takes the operand (which in this case is an immediate value), and places it directly into the accumulator. It does not need to make a register or memory access other than that necessary to get the instruction.</p>
+<p>On the fourth instruction, <code>ADDwf 0x07h,0</code>, we do the opposite of the above. Instead of taking the value directly from the instruction, the <strong>instruction contains the address that the value is stored in</strong>, in memory. So, when the processor reads this instruction, it requests from memory the value located in address <code>0x07h</code> and does the operation with the value that the memory returns.</p>
+<p>As a further example, let's look at how those two instructions might look at the byte level (be aware that this may not be the correct machine code for an actual PIC16 microcontroller):</p>
+<p>Let's assume that our instructions have 8 bit opcodes and 8 bit operands.</p>
+<p>Our two instructions: <code>MOVlw 0x01</code> and <code>ADDwf 0x07h,0</code> might become something like: <code>01 01</code> and <code>02 7h 00</code>. This makes it much easier to see what's really going on.</p>
+<p>In <code>01 01</code> (<code>MOVlw 0x01</code>), the value <code>01</code> comes directly from the operand field of the instruction. However, in <code>02 7h 00</code> (<code>ADDwf 0x07h,0</code>), the operand <code>7h</code> is an address where the actual operand (in this case another <code>01</code>) of the instruction is stored.</p>
+ </div>
+ <div class=mt24>
+ <div class="d-flex fw-wrap ai-start jc-end gs8 gsy">
+ <time itemprop=dateCreated datetime=2018-03-19T08:11:31></time>
+ <div class="flex--item mr16" style="flex:1 1 100px">
+ 
+<div class="js-post-menu pt2" data-post-id=17728>
+ <div class="d-flex gs8 s-anchors s-anchors__muted fw-wrap">
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/a/17728 rel=nofollow itemprop=url class="js-share-link js-gps-track" title="Short permalink to this answer" data-gps-track="post.click({ item: 2, priv: 0, post_type: 2 })" data-controller="se-share-sheet s-popover" data-se-share-sheet-title="Share a link to this answer" data-se-share-sheet-subtitle data-se-share-sheet-post-type=answer data-se-share-sheet-social="facebook twitter " data-se-share-sheet-location=2 data-se-share-sheet-license-url=https%3a%2f%2fcreativecommons.org%2flicenses%2fby-sa%2f3.0%2f data-se-share-sheet-license-name="CC BY-SA 3.0" data-s-popover-placement=bottom-start aria-controls=se-share-sheet-2 data-action=" s-popover#toggle se-share-sheet#preventNavigation s-popover:show->se-share-sheet#willShow s-popover:shown->se-share-sheet#didShow">Share</a><div class="s-popover z-dropdown s-anchors s-anchors__default sf-hidden" style=width:unset;max-width:28em id=se-share-sheet-2></div>
+ </div>
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/posts/17728/edit class="js-suggest-edit-post js-gps-track" data-gps-track="post.click({ item: 6, priv: 0, post_type: 2 })" title>Improve this answer</a>
+ </div>
+ <div class=flex--item>
+ <button type=button id=btnFollowPost-17728 class="s-btn s-btn__link js-follow-post js-follow-answer js-gps-track" data-gps-track="post.click({ item: 14, priv: 0, post_type: 2 })" data-controller="s-tooltip " data-s-tooltip-placement=bottom data-s-popover-placement=bottom aria-controls aria-describedby=--stacks-s-tooltip-yywfg0hr>
+ Follow
+ </button><div id=--stacks-s-tooltip-yywfg0hr class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Follow this answer to receive notifications</div>
+ </div>
+ </div>
+ <div class=js-menu-popup-container></div>
+</div>
+ </div>
+ <div class="post-signature flex--item fl0">
+ <div class="user-info user-hover">
+ <div class=user-action-time>
+ answered <span title="2018-03-19 08:11:31Z" class=relativetime>Mar 19, 2018 at 8:11</span>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://reverseengineering.stackexchange.com/users/23663/superstewie><div class=gravatar-wrapper-32><img src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAACi0lEQVR4nO2bP28aQRDF3xoKlBZCOtyRyo0LN65xgetEIg1O6VT+Gu4iWUrKmMZI6XEBn8CFq1Smw50Vp3cR+1LEe5I53+4Os8ucxPw6/rzj7dzssjOw5ujDNIOD07N9tN+9cb2l0nz+OHO+vrUmH5VFAyBtQJqkAZhOFrg4v0GWOZeZZPoQ6qkuPJ0sMB7N88efjt6vVR9KkgAsm59d3gIABsMujDHJ9RSiT4Fl85bZ5e2rz8fWU6mfnu0739BsNkgXvP/9UPran/sHPP59Qq1eHneufhnf+EwWeYXJsgzj0TxPW8vuXhvHJzuoe8xz9VSiB8BycX6TD2J3r40vJzukO8fVh5LsW2Aw7AL4n7bHK5jn6kNJlgEW6pyNrfeRPABVR7fC0gakYS+Cvno7NT9+9lj6jc8ADYC0AWmcAeDW471+J9/QSOhD/Jcugtx63Jq35Su1kuPqQ/2/GgBuPd7rd1584MHhNoDwQXD1FP+FKcCtx8vS9uBwOyiduXqq/0IAQupxF623jdIsabYa2Kq5M4irp/ovBGAw7KLX7xTEth73FSbj0RzTyaLw/PXVHb5//YWnR/eCytVT/RfWAGNMPv9Wrcdtqtm5e311h28B5mPoqf5LvwW49bgdRLPVCLpzsfWh/r3lsK8e9/72VjNk8xS9rxbw+ffeVm4zgjP4GHqff90KSxuQRgMgbUAaDYC0AWm0H+ASaz/gGe0HQPsBALQfoP0A7QcQ0H7AM9oP0H5Atdn4AOhfZKQNSKMBkDYgjZ4XSHVhPS+g5wVeUtnzAr69PPXcYNXOC6z93CC3n8DVU4m+BnD7CTH6ERQ2/rxAsgDYO7nq//25+lCS7wS55lMOHtCtsAbgH+omsMnf6eSBAAAAAElFTkSuQmCC alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details itemprop=author itemscope itemtype=http://schema.org/Person>
+ <a href=https://reverseengineering.stackexchange.com/users/23663/superstewie>superstewie</a><span class="d-none sf-hidden" itemprop=name>superstewie</span>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score " dir=ltr>21</span><span title="2 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>2</span></span><span class=v-visible-sr>2 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ </div>
+ 
+ 
+ </div>
+ 
+</div>
+ <span class="d-none sf-hidden" itemprop=commentCount></span> 
+ <div class="post-layout--right js-post-comments-component">
+ <div id=comments-17728 class="comments js-comments-container bt bc-black-075 mt12 dno sf-hidden" data-post-id=17728 data-min-length=15>
+ 
+ </div>
+ <div id=comments-link-17728 data-rep=50 data-anon=true>
+ <a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href=# role=button>Add a comment</a>
+ <span class="js-link-separator dno sf-hidden">&nbsp;|&nbsp;</span>
+ <a class="js-show-link comments-link dno sf-hidden" title="Expand to show all comments on this post" href=# role=button></a>
+ </div> 
+ </div>
+ </div>
+</div>
+ 
+<a name=17674></a>
+<div id=answer-17674 class="answer js-answer" data-answerid=17674 data-parentid=17671 data-score=1 data-position-on-page=3 data-highest-scored=0 data-question-has-accepted-highest-score=0 itemprop=suggestedAnswer itemscope itemtype=https://schema.org/Answer>
+ <div class=post-layout>
+ <div class="votecell post-layout--left">
+ <div class="js-voting-container d-flex jc-center fd-column ai-stretch gs4 fc-black-200" data-post-id=17674>
+ <button class="js-vote-up-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Up vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-tdqc63tv>
+ <svg aria-hidden=true class="svg-icon iconArrowUpLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-tdqc63tv class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is useful</div>
+ <div class="js-vote-count flex--item d-flex fd-column ai-center fc-black-500 fs-title" itemprop=upvoteCount data-value=1>
+ 1
+ </div>
+ <button class="js-vote-down-btn flex--item s-btn s-btn__unset c-pointer" data-controller=s-tooltip data-s-tooltip-placement=right aria-pressed=false aria-label="Down vote" data-selected-classes=fc-theme-primary data-unselected-classes aria-describedby=--stacks-s-tooltip-ts8txelt>
+ <svg aria-hidden=true class="svg-icon iconArrowDownLg" width=36 height=36 viewBox="0 0 36 36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+ </button><div id=--stacks-s-tooltip-ts8txelt class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>This answer is not useful</div>
+ 
+ <div class="js-accepted-answer-indicator flex--item fc-green-500 py6 mtn8 d-none sf-hidden" data-s-tooltip-placement=right title="Loading when this answer was accepted…" tabindex=0 role=note aria-label=Accepted>
+ 
+ </div>
+ 
+ <a class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href=https://reverseengineering.stackexchange.com/posts/17674/timeline data-shortcut=T data-ks-title=timeline data-controller=s-tooltip data-s-tooltip-placement=right aria-label=Timeline aria-describedby=--stacks-s-tooltip-6q650te4><svg aria-hidden=true class="mln2 mr0 svg-icon iconHistory" width=19 height=18 viewBox="0 0 19 18"><path d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"></path></svg></a><div id=--stacks-s-tooltip-6q650te4 class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Show activity on this post.</div>
+</div>
+ </div>
+ 
+<div class="answercell post-layout--right">
+ 
+ <div class="s-prose js-post-body" itemprop=text>
+<p>An "<em>immediate value</em>" is an hardcoded value included in the program. It is all the static values that are present in a program. For example (if translated to C):</p>
+<pre><code>x = 10;
+</code></pre>
+<p><code>x</code> is a variable and <code>10</code> is an immediate value.</p>
+<p>Concerning, "<em>where to find the value</em>", it is <strong>in the register <code>r0</code></strong>. I cannot tell more than that. If you do not know what a register is, you may just ask <a href=https://en.wikipedia.org/wiki/Processor_register rel="nofollow noreferrer">Wikipedia about that</a>.</p>
+ </div>
+ <div class=mt24>
+ <div class="d-flex fw-wrap ai-start jc-end gs8 gsy">
+ <time itemprop=dateCreated datetime=2018-03-12T23:35:13></time>
+ <div class="flex--item mr16" style="flex:1 1 100px">
+ 
+<div class="js-post-menu pt2" data-post-id=17674>
+ <div class="d-flex gs8 s-anchors s-anchors__muted fw-wrap">
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/a/17674 rel=nofollow itemprop=url class="js-share-link js-gps-track" title="Short permalink to this answer" data-gps-track="post.click({ item: 2, priv: 0, post_type: 2 })" data-controller="se-share-sheet s-popover" data-se-share-sheet-title="Share a link to this answer" data-se-share-sheet-subtitle data-se-share-sheet-post-type=answer data-se-share-sheet-social="facebook twitter " data-se-share-sheet-location=2 data-se-share-sheet-license-url=https%3a%2f%2fcreativecommons.org%2flicenses%2fby-sa%2f3.0%2f data-se-share-sheet-license-name="CC BY-SA 3.0" data-s-popover-placement=bottom-start aria-controls=se-share-sheet-3 data-action=" s-popover#toggle se-share-sheet#preventNavigation s-popover:show->se-share-sheet#willShow s-popover:shown->se-share-sheet#didShow">Share</a><div class="s-popover z-dropdown s-anchors s-anchors__default sf-hidden" style=width:unset;max-width:28em id=se-share-sheet-3></div>
+ </div>
+ <div class=flex--item>
+ <a href=https://reverseengineering.stackexchange.com/posts/17674/edit class="js-suggest-edit-post js-gps-track" data-gps-track="post.click({ item: 6, priv: 0, post_type: 2 })" title>Improve this answer</a>
+ </div>
+ <div class=flex--item>
+ <button type=button id=btnFollowPost-17674 class="s-btn s-btn__link js-follow-post js-follow-answer js-gps-track" data-gps-track="post.click({ item: 14, priv: 0, post_type: 2 })" data-controller="s-tooltip " data-s-tooltip-placement=bottom data-s-popover-placement=bottom aria-controls aria-describedby=--stacks-s-tooltip-g7nt9leg>
+ Follow
+ </button><div id=--stacks-s-tooltip-g7nt9leg class="s-popover s-popover__tooltip pe-none sf-hidden" aria-hidden=true role=tooltip>Follow this answer to receive notifications</div>
+ </div>
+ </div>
+ <div class=js-menu-popup-container></div>
+</div>
+ </div>
+ <div class="post-signature flex--item fl0">
+ <div class="user-info user-hover">
+ <div class=user-action-time>
+ answered <span title="2018-03-12 23:35:13Z" class=relativetime>Mar 12, 2018 at 23:35</span>
+ </div>
+ <div class=user-gravatar32>
+ <a href=https://reverseengineering.stackexchange.com/users/53/perror><div class=gravatar-wrapper-32><img src="data:image/jpeg;base64,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" alt="user avatar" width=32 height=32 class=bar-sm></div></a>
+ </div>
+ <div class=user-details itemprop=author itemscope itemtype=http://schema.org/Person>
+ <a href=https://reverseengineering.stackexchange.com/users/53/perror>perror</a><span class="d-none sf-hidden" itemprop=name>perror</span>
+ <div class=-flair>
+ <span class=reputation-score title="reputation score 17,943" dir=ltr>17.9k</span><span title="28 gold badges" aria-hidden=true><span class=badge1></span><span class=badgecount>28</span></span><span class=v-visible-sr>28 gold badges</span><span title="82 silver badges" aria-hidden=true><span class=badge2></span><span class=badgecount>82</span></span><span class=v-visible-sr>82 silver badges</span><span title="145 bronze badges" aria-hidden=true><span class=badge3></span><span class=badgecount>145</span></span><span class=v-visible-sr>145 bronze badges</span>
+ </div>
+ </div>
+</div>
+ </div>
+ </div>
+ 
+ 
+ </div>
+ 
+</div>
+ <span class="d-none sf-hidden" itemprop=commentCount>5</span> 
+ <div class="post-layout--right js-post-comments-component">
+ <div id=comments-17674 class="comments js-comments-container bt bc-black-075 mt12" data-post-id=17674 data-min-length=15>
+ <ul class="comments-list js-comments-list" data-remaining-comments-count=0 data-canpost=false data-cansee=true data-comments-unavailable=false data-addlink-disabled=true>
+ <li id=comment-27832 class="comment js-comment" data-comment-id=27832 data-comment-owner-id=23594 data-comment-score=0>
+ <div class="js-comment-actions comment-actions">
+ <div class="comment-score js-comment-edit-hide">
+ </div>
+ </div>
+ <div class="comment-text js-comment-text-and-form">
+ <div class="comment-body js-comment-edit-hide">
+ 
+ <span class=comment-copy>I not sure I get you , (I know what is register) if I see <code>ldr r0 #0x28</code> so in r0 will be the string that in 0x28 address?</span>
+ 
+ <div class="d-inline-flex ai-center">
+–&nbsp;<a href=https://reverseengineering.stackexchange.com/users/23594/ljohhuh title="41 reputation" class="comment-user owner">Ljohhuh</a>
+ </div>
+ <span class=comment-date dir=ltr><a class=comment-link href=#comment27832_17674><span title="2018-03-13 16:42:59Z, License: CC BY-SA 3.0" class=relativetime-clean>Mar 13, 2018 at 16:42</span></a></span>
+ <span title="this comment was edited 1 time">
+ <svg aria-hidden=true class="va-text-bottom o50 svg-icon iconPencilSm" width=14 height=14 viewBox="0 0 14 14"><path d="m11.1 1.71 1.13 1.12c.2.2.2.51 0 .71L11.1 4.7 9.21 2.86l1.17-1.15c.2-.2.51-.2.71 0ZM2 10.12l6.37-6.43 1.88 1.88L3.88 12H2v-1.88Z"></path></svg>
+ </span>
+ </div>
+ </div>
+ </li>
+ <li id=comment-27833 class="comment js-comment" data-comment-id=27833 data-comment-owner-id=53 data-comment-score=0>
+ <div class="js-comment-actions comment-actions">
+ <div class="comment-score js-comment-edit-hide">
+ </div>
+ </div>
+ <div class="comment-text js-comment-text-and-form">
+ <div class="comment-body js-comment-edit-hide">
+ 
+ <span class=comment-copy>No, the value 0x28. An immediate value is a <b>value</b>.</span>
+ 
+ <div class="d-inline-flex ai-center">
+–&nbsp;<a href=https://reverseengineering.stackexchange.com/users/53/perror title="17,943 reputation" class=comment-user>perror</a>
+ </div>
+ <span class=comment-date dir=ltr><a class=comment-link href=#comment27833_17674><span title="2018-03-13 16:44:44Z, License: CC BY-SA 3.0" class=relativetime-clean>Mar 13, 2018 at 16:44</span></a></span>
+ </div>
+ </div>
+ </li>
+ <li id=comment-27837 class="comment js-comment" data-comment-id=27837 data-comment-owner-id=23594 data-comment-score=0>
+ <div class="js-comment-actions comment-actions">
+ <div class="comment-score js-comment-edit-hide">
+ </div>
+ </div>
+ <div class="comment-text js-comment-text-and-form">
+ <div class="comment-body js-comment-edit-hide">
+ 
+ <span class=comment-copy>so r0=0x28 (Value?) that strange becuase I saw it on loop that <code>ldr r0 #0x28</code> and <code>ldr r1 #0x32</code> and that happend every loop and after that check r0 and r1 are equal so get out from loop . so if it assign of 0x28 and 0x32 they aways be not equal</span>
+ 
+ <div class="d-inline-flex ai-center">
+–&nbsp;<a href=https://reverseengineering.stackexchange.com/users/23594/ljohhuh title="41 reputation" class="comment-user owner">Ljohhuh</a>
+ </div>
+ <span class=comment-date dir=ltr><a class=comment-link href=#comment27837_17674><span title="2018-03-13 18:00:35Z, License: CC BY-SA 3.0" class=relativetime-clean>Mar 13, 2018 at 18:00</span></a></span>
+ <span title="this comment was edited 1 time">
+ <svg aria-hidden=true class="va-text-bottom o50 svg-icon iconPencilSm" width=14 height=14 viewBox="0 0 14 14"><path d="m11.1 1.71 1.13 1.12c.2.2.2.51 0 .71L11.1 4.7 9.21 2.86l1.17-1.15c.2-.2.51-.2.71 0ZM2 10.12l6.37-6.43 1.88 1.88L3.88 12H2v-1.88Z"></path></svg>
+ </span>
+ </div>
+ </div>
+ </li>
+ <li id=comment-27838 class="comment js-comment" data-comment-id=27838 data-comment-owner-id=53 data-comment-score=0>
+ <div class="js-comment-actions comment-actions">
+ <div class="comment-score js-comment-edit-hide">
+ </div>
+ </div>
+ <div class="comment-text js-comment-text-and-form">
+ <div class="comment-body js-comment-edit-hide">
+ 
+ <span class=comment-copy>I cannot comment if I cannot see the code...</span>
+ 
+ <div class="d-inline-flex ai-center">
+–&nbsp;<a href=https://reverseengineering.stackexchange.com/users/53/perror title="17,943 reputation" class=comment-user>perror</a>
+ </div>
+ <span class=comment-date dir=ltr><a class=comment-link href=#comment27838_17674><span title="2018-03-13 18:03:01Z, License: CC BY-SA 3.0" class=relativetime-clean>Mar 13, 2018 at 18:03</span></a></span>
+ </div>
+ </div>
+ </li>
+ <li id=comment-27839 class="comment js-comment" data-comment-id=27839 data-comment-owner-id=23594 data-comment-score=0>
+ <div class="js-comment-actions comment-actions">
+ <div class="comment-score js-comment-edit-hide">
+ </div>
+ </div>
+ <div class="comment-text js-comment-text-and-form">
+ <div class="comment-body js-comment-edit-hide">
+ 
+ <span class=comment-copy>ok so you tell that <code>ldr ro #0x28</code> so r0=0x28(value ) can you please tell me what does it mean <code>ldr r0 =0x1234</code>? that mean that r0 get the value that store on 0x1234?</span>
+ 
+ <div class="d-inline-flex ai-center">
+–&nbsp;<a href=https://reverseengineering.stackexchange.com/users/23594/ljohhuh title="41 reputation" class="comment-user owner">Ljohhuh</a>
+ </div>
+ <span class=comment-date dir=ltr><a class=comment-link href=#comment27839_17674><span title="2018-03-13 18:10:42Z, License: CC BY-SA 3.0" class=relativetime-clean>Mar 13, 2018 at 18:10</span></a></span>
+ </div>
+ </div>
+ </li>
+ </ul>
+ </div>
+ <div id=comments-link-17674 data-rep=50 data-anon=true>
+ <a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href=# role=button>Add a comment</a>
+ <span class="js-link-separator dno sf-hidden">&nbsp;|&nbsp;</span>
+ <a class="js-show-link comments-link dno sf-hidden" title="Expand to show all comments on this post" href=# role=button></a>
+ </div> 
+ </div>
+ </div>
+</div>
+ <a name=new-answer></a>
+ <form id=post-form action=/questions/17671/answer/submit method=post class="js-add-answer-component post-form">
+ 
+ 
+ 
+ <h2 class=space>
+ Your Answer
+ </h2>
+ 
+<div id=post-editor class="post-editor js-post-editor">
+ <div class=ps-relative>
+ <div class="wmd-container mb8">
+ <div id=wmd-button-bar class="wmd-button-bar btr-sm"><ul id=wmd-button-row class=wmd-button-row><li id=wmd-bold-button class=wmd-button style=left:0px><span style="background-position:0px -20px"></span><li id=wmd-italic-button class=wmd-button style=left:25px><span style="background-position:-20px -20px"></span><li id=wmd-spacer1 class=wmd-spacer style=left:50px><span style="background-position:-40px -20px"></span><li id=wmd-link-button class=wmd-button style=left:75px><span style="background-position:-40px -20px"></span><li id=wmd-quote-button class=wmd-button style=left:100px><span style="background-position:-60px -20px"></span><li id=wmd-code-button class=wmd-button style=left:125px><span style="background-position:-80px -20px"></span><li id=wmd-image-button class=wmd-button style=left:150px><span style="background-position:-100px -20px"></span><li id=wmd-spacer2 class=wmd-spacer style=left:175px><span style="background-position:-120px -20px"></span><li id=wmd-olist-button class=wmd-button style=left:200px><span style="background-position:-120px -20px"></span><li id=wmd-ulist-button class=wmd-button style=left:225px><span style="background-position:-140px -20px"></span><li id=wmd-heading-button class=wmd-button style=left:250px><span style="background-position:-160px -20px"></span><li id=wmd-hr-button class=wmd-button style=left:275px><span style="background-position:-180px -20px"></span><li id=wmd-spacer3 class=wmd-spacer style=left:300px><span style="background-position:-200px -20px"></span><li id=wmd-undo-button class=wmd-button style=left:325px><span style="background-position:-200px -20px"></span><li id=wmd-redo-button class=wmd-button style=left:350px><span style="background-position:-220px -20px"></span><li class="wmd-spacer wmd-spacer-max"></ul></div>
+ <div class=js-stacks-validation>
+ <div class=ps-relative>
+ <textarea id=wmd-input name=post-text class="wmd-input s-input bar0 js-post-body-field" data-post-type-id=2 cols=92 rows=15 tabindex=101 data-min-length></textarea>
+ </div>
+ <div class="s-input-message mt4 d-none js-stacks-validation-message sf-hidden"></div>
+ </div>
+ </div>
+ </div>
+ <aside class="d-flex ai-start jc-space-between js-answer-help s-notice s-notice__warning pb0 pr4 pt4 mb8 d-none sf-hidden" role=status aria-hidden=true>
+ 
+ 
+</aside>
+ <div>
+ <div id=draft-saved class="fc-success h24" style=display:none>Draft saved</div>
+ <div id=draft-discarded class="fc-error h24" style=display:none>Draft discarded</div>
+ </div>
+ <div id=wmd-preview class="s-prose mb16 wmd-preview js-wmd-preview"></div>
+ <div></div>
+ <div class="edit-block sf-hidden">
+ 
+ 
+ </div>
+</div>
+ <div class=ps-relative>
+ <div class="form-item new-post-login p0 my16">
+ <div class="d-flex gs16 md:fd-column new-login-form">
+ <div class="d-flex fd-column w50 md:w-auto gsy gs8 jc-space-between new-login-left">
+ <h3 class="flex--item fs-title">Sign up or <a id=login-link href="https://reverseengineering.stackexchange.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2freverseengineering.stackexchange.com%2fquestions%2f17671%2fwhat-is-an-immediate-value%23new-answer">log in</a></h3>
+ 
+ <div class="flex--item s-btn s-btn__muted s-btn__outlined s-btn__icon google-login" data-ga='["sign up","Sign Up Started - Google","New Post",null,null]'>
+ <svg aria-hidden=true class="native svg-icon iconGoogle" width=18 height=18 viewBox="0 0 18 18"><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18Z" fill=#4285F4></path><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17Z" fill=#34A853></path><path d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07Z" fill=#FBBC05></path><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3Z" fill=#EA4335></path></svg> Sign up using Google
+ </div>
+ <div class="flex--item s-btn s-btn__muted s-btn__icon facebook-login" data-ga='["sign up","Sign Up Started - Facebook","New Post",null,null]'>
+ <svg aria-hidden=true class="svg-icon iconFacebook" width=18 height=18 viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm6.55 16v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h-2.5Z" fill=#4167B2></path></svg> Sign up using Facebook
+ </div>
+ <div class="flex--item s-btn s-btn__muted s-btn__outlined s-btn__icon stackexchange-login" data-ga='["sign up","Sign Up Navigation","New Post",null,null]'>
+ <svg aria-hidden=true class="native svg-icon iconLogoGlyphXSm" width=18 height=18 viewBox="0 0 18 18"><path d="M14 16v-5h2v7H2v-7h2v5h10Z" fill=#BCBBBB></path><path d="m12.09.72-1.21.9 4.5 6.07 1.22-.9L12.09.71ZM5 15h8v-2H5v2Zm9.15-5.87L8.35 4.3l.96-1.16 5.8 4.83-.96 1.16Zm-7.7-1.47 6.85 3.19.63-1.37-6.85-3.2-.63 1.38Zm6.53 5L5.4 11.39l.38-1.67 7.42 1.48-.22 1.46Z" fill=#F48024></path></svg> Sign up using Email and Password
+ </div>
+ </div>
+ 
+ 
+ <button type=button class="d-none js-submit-openid sf-hidden">Submit</button>
+ <div class="d-flex gsy gs8 fd-column w50 md:w-auto new-login-right form-item p0">
+ <h3 class="flex--item fs-title">Post as a guest</h3>
+ <div class=flex--item>
+ <div class="d-flex gs4 gsy fd-column">
+ <label class=s-label for=display-name>Name</label>
+ <div class="d-flex ps-relative">
+ <input class=s-input id=display-name name=display-name maxlength=30 type=text value tabindex=105 placeholder>
+ </div>
+ </div>
+ </div>
+ <div class=flex--item>
+ <div class="d-flex gs4 gsy fd-column">
+ <div class=flex--item>
+ <div class="d-flex gs2 gsy fd-column">
+ <label class="flex--item s-label" for=m-address>Email</label>
+ <p class="flex--item s-description">Required, but never shown</p>
+ </div>
+ </div>
+ <div class="d-flex ps-relative">
+ <input class="s-input js-post-email-field" id=m-address name=m-address type=text value size=40 tabindex=106 placeholder>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <noscript>
+                        <h3 class="flex--item fs-title">Post as a guest</h3>
+            <div class="flex--item">
+                <div class="d-flex gs4 gsy fd-column">
+                    <label class="s-label" for="display-name">Name</label>
+                    <div class="d-flex ps-relative">
+                        <input class="s-input" id="display-name" name="display-name" maxlength="30" type="text" value="" tabindex="105" placeholder="" />
+                    </div>
+                </div>
+            </div>
+            <div class="flex--item">
+                <div class="d-flex gs4 gsy fd-column">
+                    <div class="flex--item">
+                        <div class="d-flex gs2 gsy fd-column">
+                            <label class="flex--item s-label" for="m-address">Email</label>
+                            <p class="flex--item s-description">Required, but never shown</p>
+                        </div>
+                    </div>
+                    <div class="d-flex ps-relative">
+                        <input class="s-input js-post-email-field" id="m-address" name="m-address" type="text" value="" size="40" tabindex="106" placeholder="" />
+                    </div>
+                </div>
+            </div>
+
+            </noscript>
+ </div>
+ <div class="form-submit cbt d-flex gsx gs4">
+ <button id=submit-button class="flex--item s-btn s-btn__primary s-btn__icon" type=submit tabindex=120 autocomplete=off>
+Post Your Answer </button>
+ <button class="flex--item s-btn s-btn__danger discard-answer dno sf-hidden">
+ Discard
+ </button>
+ <p class=privacy-policy-agreement>
+ By clicking “Post Your Answer”, you agree to our <a href=https://stackoverflow.com/legal/terms-of-service/public name=tos target=_blank class=-link>terms of service</a>, <a href=https://stackoverflow.com/legal/privacy-policy name=privacy target=_blank class=-link>privacy policy</a> and <a href=https://stackoverflow.com/legal/cookie-policy name=cookie target=_blank class=-link>cookie policy</a>
+ </p>
+ </div>
+ <div class="js-general-error general-error cbt d-none sf-hidden"></div>
+ </form>
+ <h2 class=bottom-notice data-loc=1>
+Not the answer you're looking for? Browse other questions tagged <a href=https://reverseengineering.stackexchange.com/questions/tagged/assembly class=post-tag title="show questions tagged 'assembly'" rel=tag>assembly</a> <a href=https://reverseengineering.stackexchange.com/questions/tagged/arm class=post-tag title="show questions tagged 'arm'" rel=tag>arm</a> or <a href=https://reverseengineering.stackexchange.com/questions/ask>ask your own question</a>. </h2>
+ </div>
+ </div>
+ <div id=sidebar class=show-votes role=complementary aria-label=sidebar>
+ 
+ 
+<div class="s-sidebarwidget s-sidebarwidget__yellow s-anchors s-anchors__grayscale mb16" data-tracker="cb=1">
+ <ul class="d-block p0 m0">
+ <div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text fc-light d:fc-black-900 bb bbw1">
+ The Overflow Blog
+ </div>
+ <li class="s-sidebarwidget--item d-flex px16">
+ <div class="flex--item1 fl-shrink0">
+<svg aria-hidden=true class="va-text-top svg-icon iconPencilSm" width=14 height=14 viewBox="0 0 14 14"><path d="m11.1 1.71 1.13 1.12c.2.2.2.51 0 .71L11.1 4.7 9.21 2.86l1.17-1.15c.2-.2.51-.2.71 0ZM2 10.12l6.37-6.43 1.88 1.88L3.88 12H2v-1.88Z"></path></svg> </div>
+ <div class="flex--item wmn0 ow-break-word">
+ <a href="https://stackoverflow.blog/2022/04/11/the-complete-guide-to-protecting-your-apis-with-oauth2/?cb=1" class=js-gps-track data-ga='["community bulletin board","The Overflow Blog","https://stackoverflow.blog/2022/04/11/the-complete-guide-to-protecting-your-apis-with-oauth2/",null,null]' data-gps-track="communitybulletin.click({ priority: 1, position: 0 })">The complete guide to protecting your APIs with OAuth2</a>
+ </div>
+ </li>
+ <div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text fc-light d:fc-black-900 bb bbw1">
+ Featured on Meta
+ </div>
+ <li class="s-sidebarwidget--item d-flex px16">
+ <div class="flex--item1 fl-shrink0">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div> </div>
+ <div class="flex--item wmn0 ow-break-word">
+ <a href="https://meta.stackexchange.com/questions/377768/how-might-the-staging-ground-the-new-ask-wizard-work-on-the-stack-exchange-net?cb=1" class=js-gps-track title="How might the Staging Ground &amp; the new Ask Wizard work on the Stack Exchange network?" data-ga='["community bulletin board","Featured on Meta","https://meta.stackexchange.com/questions/377768/how-might-the-staging-ground-the-new-ask-wizard-work-on-the-stack-exchange-net",null,null]' data-gps-track="communitybulletin.click({ priority: 3, position: 1 })">How might the Staging Ground &amp; the new Ask Wizard work on the Stack Exchange...</a>
+ </div>
+ </li>
+ </ul>
+</div>
+ <div class="module sidebar-linked">
+ <h4 id=h-linked>Linked</h4>
+ <div class=linked data-tracker="lq=1">
+ <div class="spacer js-gps-track" data-gps-track="linkedquestion.click({ source_post_id: 17671, target_question_id: 17666, position: 0 })">
+ <a href="https://reverseengineering.stackexchange.com/q/17666?lq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">4</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/17666/how-does-the-ldr-instruction-work-on-arm?noredirect=1&amp;lq=1" class=question-hyperlink>How does the ldr instruction work on ARM?</a>
+ </div>
+ <div class="spacer js-gps-track" data-gps-track="linkedquestion.click({ source_post_id: 17671, target_question_id: 20188, position: 1 })">
+ <a href="https://reverseengineering.stackexchange.com/q/20188?lq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">1</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/20188/explenation-about-opcode-and-operand?noredirect=1&amp;lq=1" class=question-hyperlink>Explenation about opcode and operand</a>
+ </div>
+ </div>
+</div>
+ <div class="module sidebar-related">
+ <h4 id=h-related>Related</h4>
+ <div class="related js-gps-related-questions" data-tracker="rq=1">
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/10728?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">2</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/10728/what-does-lea-rdx-qword-ptr-ssrbp50-mean?rq=1" class=question-hyperlink>What does lea rdx,qword ptr ss:[rbp+50] mean?</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/13587?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted default">3</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/13587/getting-access-violation-when-patching-a-program?rq=1" class=question-hyperlink>Getting Access Violation when patching a program</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/14717?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted default">1</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/14717/reverse-engineering-arm-pic?rq=1" class=question-hyperlink>Reverse engineering ARM PIC</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/17666?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">4</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/17666/how-does-the-ldr-instruction-work-on-arm?rq=1" class=question-hyperlink>How does the ldr instruction work on ARM?</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/18074?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted default">5</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/18074/what-does-xref-mean?rq=1" class=question-hyperlink>What does XREF mean?</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/21368?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes answered-accepted default">0</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/21368/what-does-ds-mean?rq=1" class=question-hyperlink>What does ds mean?</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/21487?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">0</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/21487/understand-what-ioctl-do?rq=1" class=question-hyperlink>Understand what Ioctl do</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/30025?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">0</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/30025/what-is-the-meaning-of-jmp-dword-ptr-off-xxxxxxxx-8-in-ida?rq=1" class=question-hyperlink>What is the meaning of jmp dword ptr off_XXXXXXXX + 8 in IDA?</a>
+ </div>
+ <div class=spacer>
+ <a href="https://reverseengineering.stackexchange.com/q/30087?rq=1" title="Question score (upvotes - downvotes)">
+ <div class="answer-votes default">1</div>
+ </a>
+ <a href="https://reverseengineering.stackexchange.com/questions/30087/how-to-interpret-memory-dumps?rq=1" class=question-hyperlink>How to interpret memory dumps?</a>
+ </div>
+ </div>
+ </div>
+ <div id=hot-network-questions class="module tex2jax_ignore">
+ <h4>
+ <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track s-link s-link__inherit" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+ Hot Network Questions
+ </a>
+ </h4>
+ <ul>
+ <li>
+ <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href=https://ell.stackexchange.com/questions/313263/using-adverbs-of-frequency-in-present-continuous-tense class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Using Adverbs of Frequency in Present Continuous Tense
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href=https://politics.stackexchange.com/questions/72554/is-boris-johnson-the-first-serving-british-prime-minister-to-be-found-to-have-br class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Is Boris Johnson the first serving British prime minister to be found to have broken the law?
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-law" title="Law Stack Exchange"></div><a href=https://law.stackexchange.com/questions/79298/can-an-fbi-domain-seizure-april-fools-joke-land-you-in-jail class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:617 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Can an "FBI domain seizure" April Fools joke land you in jail?
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href=https://politics.stackexchange.com/questions/72529/has-russia-actually-defaulted-on-its-foreign-debt-as-of-april-11-2022 class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Has Russia actually defaulted on its foreign debt as of April 11, 2022?
+ </a>
+ </li>
+ <li>
+ <div class="favicon favicon-mathoverflow" title=MathOverflow></div><a href=https://mathoverflow.net/questions/420158/swimming-against-the-tide-in-the-past-century-remarkable-achievements-that-aros class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Swimming against the tide in the past century: remarkable achievements that arose in contrast to the general view of mathematicians
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href=https://mathematica.stackexchange.com/questions/266602/how-can-i-output-all-zero-point-data-by-graphing class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+ How can I output all zero-point data by graphing?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href=https://rpg.stackexchange.com/questions/197611/how-can-i-implement-a-passive-stealth-that-is-mathematically-equivalent-to-rol class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+ How can I implement a "passive stealth" that is mathematically equivalent to rolling stealth vs. passive perception?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-stats" title="Cross Validated"></div><a href=https://stats.stackexchange.com/questions/571278/can-non-parametric-data-have-mean-value-and-standard-deviation class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Can non-parametric data have mean value and standard deviation?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href=https://rpg.stackexchange.com/questions/197620/can-a-petrified-character-drown class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Can a petrified character drown?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-blender" title="Blender Stack Exchange"></div><a href=https://blender.stackexchange.com/questions/260379/how-can-i-delay-the-trim-curve-happen-in-different-times-for-each-curve class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:502 }); posts_hot_network.click({ item_type:2, location:11 })">
+ How can I delay the Trim Curve happen in different times for each curve?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href=https://english.stackexchange.com/questions/587515/what-does-careabouts-mean class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+ What does "careabouts" mean?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href=https://english.stackexchange.com/questions/587517/what-is-the-origin-of-the-word-latte-referring-to-a-caff%c3%a8-latte class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+ What is the origin of the word "latte" referring to a caffè latte?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href=https://physics.stackexchange.com/questions/703101/could-i-within-my-lifetime-reach-any-star-i-wanted-if-i-went-fast-enough class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Could I, within my lifetime, reach any star I wanted if I went fast enough?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a href=https://unix.stackexchange.com/questions/698876/how-can-i-use-a-private-key-in-an-ssh-client-for-only-one-host class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+ How can I use a private key in an ssh client for only one host?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href=https://stackoverflow.com/questions/71845818/msvc-vs-gcc-clang-bug-while-using-lambdas class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+ MSVC vs GCC &amp; Clang Bug while using lambdas
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href=https://academia.stackexchange.com/questions/184157/cant-get-back-exam-due-to-absence class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Can't get back exam due to absence
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href=https://academia.stackexchange.com/questions/184171/phd-advisor-switching-schools-wants-me-to-go-with-him class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+ PhD advisor switching schools wants me to go with him
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href=https://worldbuilding.stackexchange.com/questions/228191/how-can-plants-reliably-intentionally-poison-those-that-eat-their-fruit class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+ How can plants reliably intentionally poison those that eat their fruit?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href=https://worldbuilding.stackexchange.com/questions/228202/what-is-the-simplest-set-of-rules-a-masquerade-can-have-to-maintain-history-as-w class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+ What is the simplest set of rules a masquerade can have to maintain history as we know it?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-dba" title="Database Administrators Stack Exchange"></div><a href=https://dba.stackexchange.com/questions/310837/can-case-be-used-to-select-which-table-to-join class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:182 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Can CASE be used to select which table to JOIN?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-latin" title="Latin Language Stack Exchange"></div><a href=https://latin.stackexchange.com/questions/18059/potestas-est-in-veritate-quis-vero-robustior class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:644 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Potestas est in veritate. Quis vero, robustior
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href=https://mathematica.stackexchange.com/questions/266536/how-to-generate-a-list-of-combinations-of-string-joins class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+ How to generate a list of combinations of string joins?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href=https://worldbuilding.stackexchange.com/questions/228160/why-would-a-supermassive-sarlac-like-creature-let-captured-prey-wander-around-in class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+ Why would a supermassive sarlac-like creature let captured prey wander around inside itself?
+ </a>
+ </li>
+ <li class=js-hidden>
+ <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href=https://scifi.stackexchange.com/questions/262165/1960s-film-about-an-underground-civilization class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+ 1960s (?) film about an underground civilization
+ </a>
+ </li>
+ </ul>
+ 
+</div>
+ <div id=feed-link class=js-feed-link>
+ <a href=https://reverseengineering.stackexchange.com/feeds/question/17671 title="Feed of this question and its answers">
+ <svg aria-hidden=true class="fc-orange-400 svg-icon iconRss" width=18 height=18 viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm0 1.5c6.9 0 12.5 5.6 12.5 12.5H13C13 9.55 8.45 5 3 5V2.5Zm0 5c4.08 0 7.5 3.41 7.5 7.5H8c0-2.72-2.28-5-5-5V7.5Zm0 5c1.36 0 2.5 1.14 2.5 2.5H3v-2.5Z"></path></svg>
+ Question feed
+ </a>
+ </div>
+ <aside class="s-modal js-feed-link-modal" tabindex=-1 role=dialog aria-labelledby=feed-modal-title aria-describedby=feed-modal-description aria-hidden=true>
+ <div class="s-modal--dialog js-modal-dialog wmx4" role=document data-controller=se-draggable>
+ <h1 class="s-modal--header fw-bold js-first-tabbable c-move" id=feed-modal-title data-se-draggable-target=handle tabindex=0>
+ Subscribe to RSS
+ </h1>
+ <div class="d-flex gs4 gsy fd-column">
+ <div class=flex--item>
+ <label class="d-block s-label c-default" for=feed-url>
+ Question feed
+ <p class="s-description mt2" id=feed-modal-description>To subscribe to this RSS feed, copy and paste this URL into your RSS reader.</p>
+ </label>
+ </div>
+ <div class="d-flex ps-relative">
+ <input class=s-input type=text name=feed-url id=feed-url readonly value=https://reverseengineering.stackexchange.com/feeds/question/17671>
+ <svg aria-hidden=true class="s-input-icon fc-orange-400 svg-icon iconRss" width=18 height=18 viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm0 1.5c6.9 0 12.5 5.6 12.5 12.5H13C13 9.55 8.45 5 3 5V2.5Zm0 5c4.08 0 7.5 3.41 7.5 7.5H8c0-2.72-2.28-5-5-5V7.5Zm0 5c1.36 0 2.5 1.14 2.5 2.5H3v-2.5Z"></path></svg>
+ </div>
+ </div>
+ <a class="s-modal--close s-btn s-btn__muted js-modal-close js-last-tabbable" href=# aria-label=Close>
+ <svg aria-hidden=true class="svg-icon iconClearSm" width=14 height=14 viewBox="0 0 14 14"><path d="M12 3.41 10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7 12 3.41Z"></path></svg>
+ </a>
+ </div>
+ </aside>
+ </div>
+ </div>
+<noscript><div><img src="/posts/17671/ivc/32b7" class="dno" alt="" width="0" height="0"></div></noscript></div>
+ </div>
+ </div>
+ <footer id=footer class="site-footer js-footer" role=contentinfo>
+ <div class=site-footer--container>
+ <nav class=site-footer--nav>
+ <div class=site-footer--col>
+ <h5 class=-title><a href=https://reverseengineering.stackexchange.com/>Reverse Engineering</a></h5>
+ <ul class="-list js-primary-footer-links">
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 2 })" href=https://reverseengineering.stackexchange.com/tour>Tour</a></li>
+ <li><a href=https://reverseengineering.stackexchange.com/help class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Help</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 5 })" href="https://chat.stackexchange.com/?tab=site&amp;host=reverseengineering.stackexchange.com">Chat</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href=https://reverseengineering.stackexchange.com/contact>Contact</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 14 })" href=https://reverseengineering.meta.stackexchange.com/>Feedback</a></li>
+ </ul>
+ </div>
+ <div class=site-footer--col>
+ <h5 class=-title><a class=js-gps-track data-gps-track="footer.click({ location: 2, link: 1 })" href=https://stackoverflow.co/>Company</a></h5>
+ <ul class=-list>
+ <li><a href=https://stackoverflow.com/ class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></li>
+ <li><a href=https://stackoverflow.co/teams class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 29 })">Teams</a></li>
+ <li><a href=https://stackoverflow.co/advertising class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 21 })">Advertising</a></li>
+ <li><a href=https://stackoverflow.co/collectives class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 40 })">Collectives</a></li>
+ <li><a href=https://stackoverflow.co/talent class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 20 })">Talent</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href=https://stackoverflow.co/>About</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href=https://stackoverflow.co/company/press>Press</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href=https://stackoverflow.com/legal>Legal</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href=https://stackoverflow.com/legal/privacy-policy>Privacy Policy</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 37 })" href=https://stackoverflow.com/legal/terms-of-service>Terms of Service</a></li>
+ <li id=consent-footer-link><a class="js-gps-track -link js-cookie-settings" data-gps-track="footer.click({ location: 2, link: 38 })" href=# data-consent-popup-loader=footer>Cookie Settings</a></li>
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 39 })" href=https://stackoverflow.com/legal/cookie-policy>Cookie Policy</a></li>
+ </ul>
+ </div>
+ <div class="site-footer--col site-footer--categories-nav">
+ <div>
+ <h5 class=-title><a href=https://stackexchange.com/ data-gps-track="footer.click({ location: 2, link: 30 })">Stack Exchange Network</a></h5>
+ <ul class=-list>
+ <li>
+ <a href=https://stackexchange.com/sites#technology class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Technology
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#culturerecreation class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Culture &amp; recreation
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#lifearts class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Life &amp; arts
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#science class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Science
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#professional class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Professional
+ </a>
+ </li>
+ <li>
+ <a href=https://stackexchange.com/sites#business class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Business
+ </a>
+ </li>
+ <li class="mt16 md:mt0">
+ <a href=https://api.stackexchange.com/ class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ API
+ </a>
+ </li>
+ <li>
+ <a href=https://data.stackexchange.com/ class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })">
+ Data
+ </a>
+ </li>
+ </ul>
+ </div>
+ </div>
+ </nav>
+ <div class="site-footer--copyright fs-fine md:mt24">
+ <ul class="-list -social md:mb8">
+ <li><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">Blog</a></li>
+ <li><a href=https://www.facebook.com/officialstackoverflow/ class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 31 })">Facebook</a></li>
+ <li><a href=https://twitter.com/stackoverflow class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 32 })">Twitter</a></li>
+ <li><a href=https://linkedin.com/company/stack-overflow class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 33 })">LinkedIn</a></li>
+ <li><a href=https://www.instagram.com/thestackoverflow class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 36 })">Instagram</a></li>
+ </ul>
+ <p class=md:mb0>
+Site design / logo © 2022 Stack Exchange Inc; user contributions licensed under <a href=https://stackoverflow.com/help/licensing>cc by-sa</a>. <span id=svnrev>rev&nbsp;2022.4.12.41952</span>
+ </p>
+ </div>
+ </div>
+ </footer>
+ <noscript>
+        <div id="noscript-warning">Reverse Engineering Stack Exchange works best with JavaScript enabled
+            <img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=17440561&amp;cv=3.6.0&amp;cj=1" alt="">
+        </div>
+    </noscript>
+ 
+ 
+ <div class="ff-sans ps-fixed z-nav-fixed ws4 sm:w-auto p32 sm:p16 bg-black-750 fc-white bar-lg b16 l16 r16 js-consent-banner">
+ <svg aria-hidden=true class="mln4 mb24 sm:d-none svg-spot spotCookieLg" style=color:var(--theme-button-filled-background-color) width=96 height=96 viewBox="0 0 96 96">
+ <path d="M35 45.5a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0zM63.5 63a7.5 7.5 0 100-15 7.5 7.5 0 000 15zm-19 19a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" opacity=.2></path>
+ <path d="M56.99 2.53a23.1 23.1 0 0114.66 6.15h.01l.01.02c.57.55.61 1.27.5 1.74v.07a10.95 10.95 0 01-3.07 4.77 9 9 0 01-6.9 2.5 10.34 10.34 0 01-9.72-10.44v-.08a10 10 0 011.03-3.74l.01-.03.02-.02c.28-.5.82-.92 1.52-.95.63-.02 1.27-.02 1.93.01zm12.04 7.83a20.1 20.1 0 00-12.2-4.83l-.92-.03c-.23.6-.38 1.25-.43 1.94a7.34 7.34 0 006.95 7.34 6 6 0 004.64-1.7c.94-.88 1.6-1.9 1.96-2.72zm15.3 8.76a6.84 6.84 0 00-5.09-.24 7.9 7.9 0 00-3.28 2.05 1.8 1.8 0 00-.3 1.95l.02.02v.02a15.16 15.16 0 008.74 7.47c.64.23 1.32.08 1.8-.33a6.63 6.63 0 001.63-1.97l.01-.03.01-.03c1.67-3.5-.12-7.32-3.54-8.91zm-5.5 3.28c.36-.25.82-.5 1.35-.67.92-.3 1.92-.35 2.89.1 2.14 1 2.92 3.14 2.11 4.88-.12.21-.26.41-.43.6l-.26-.1a12.29 12.29 0 01-5.66-4.81zM32 24a2 2 0 11-4 0 2 2 0 014 0zm12 21a2 2 0 11-4 0 2 2 0 014 0zm36 4a2 2 0 11-4 0 2 2 0 014 0zm-7 21a2 2 0 11-4 0 2 2 0 014 0zM59 81a2 2 0 11-4 0 2 2 0 014 0zM22 63a2 2 0 11-4 0 2 2 0 014 0zm27 7a9 9 0 11-18 0 9 9 0 0118 0zm-3 0a6 6 0 10-12 0 6 6 0 0012 0zM33 41a9 9 0 11-18 0 9 9 0 0118 0zm-15 0a6 6 0 1012 0 6 6 0 00-12 0zm50 11a9 9 0 11-18 0 9 9 0 0118 0zm-3 0a6 6 0 10-12 0 6 6 0 0012 0zM44.08 4.24c.31.48.33 1.09.05 1.58a17.46 17.46 0 00-2.36 8.8c0 9.55 7.58 17.24 16.85 17.24 2.97 0 5.75-.78 8.16-2.15a1.5 1.5 0 012.1.66 12.08 12.08 0 0011 6.74 12.4 12.4 0 007.85-2.75 1.5 1.5 0 012.38.74A45.76 45.76 0 0192 48.16c0 24.77-19.67 44.9-44 44.9S4 72.93 4 48.16C4 25.23 20.84 6.28 42.64 3.58a1.5 1.5 0 011.44.66zM40.22 7C21.32 10.71 7 27.7 7 48.16c0 23.17 18.39 41.9 41 41.9s41-18.73 41-41.9c0-3.52-.42-6.93-1.22-10.2a15.5 15.5 0 01-7.9 2.15c-5.5 0-10.36-2.83-12.97-7.1a19.46 19.46 0 01-8.28 1.85c-11 0-19.86-9.1-19.86-20.24 0-2.7.52-5.26 1.45-7.62zM92 91a2 2 0 100-4 2 2 0 000 4zM7 8.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM82.5 90a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm9.5-7.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM13.5 8a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM80 14.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM53.5 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+ </svg>
+ <p class="fs-body2 fw-bold mb4">
+ Your privacy
+ </p>
+ <p class="mb16 s-anchors s-anchors__inherit s-anchors__underlined">
+ By clicking “Accept all cookies”, you agree Stack Exchange can store cookies on your device and disclose information in accordance with our <a href=https://stackoverflow.com/legal/cookie-policy>Cookie Policy</a>.
+ </p>
+ <div class="d-flex gs8 ai-stretch fd-column sm:fd-row">
+ <button class="flex--item s-btn s-btn__primary js-accept-cookies js-consent-banner-hide">
+ Accept all cookies
+ </button>
+ <button class="flex--item s-btn s-btn__filled js-cookie-settings" data-consent-popup-loader=banner>
+ Customize settings
+ </button>
+ </div>
+ </div>
+ <div id=onetrust-consent-sdk class="d-none sf-hidden"></div>
+ <div id=onetrust-banner-sdk data-controller=s-modal></div>
+ <div id=ot-pc-content class="d-none sf-hidden"></div>
+ <div id=onetrust-style class="d-none sf-hidden">&nbsp;</div>
+ <div class="d-none js-consent-banner-version sf-hidden" data-consent-banner-version=baseline></div>
+ 
+ 
+ 

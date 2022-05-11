@@ -1,0 +1,402 @@
+Scaler Topics Logo
+Topics
+Explore
+Search for Courses, Topics
+Sign in
+c
+/
+Types of Errors in C
+Log In to get certified and check your progress
+
+    MODULE  1
+    Introduction to C
+    MODULE  2
+    Building Block of C Language
+    MODULE  3
+    Basic Input Output in C
+    MODULE  4
+    Operators and Expressions in C
+    MODULE  5
+    Flow Control in C
+    MODULE  6
+    Strings in C
+    MODULE  7
+    Debugging in C
+        Function Call Stack in C
+        Types of Errors in C
+            Introduction
+            How to Read an Error in C?
+            Types of Errors in C
+            Conclusion
+            Types of Errors in C Challenge link Challenge
+        Common Mistakes in C
+        Debugging a C Program
+    MODULE  8
+    User Defined Data Types in C
+    MODULE  9
+    Arrays in C
+    MODULE  10
+    Functions in C
+    MODULE  11
+    Pointers in C
+    MODULE  12
+    Dynamic Memory Allocation in C
+    MODULE  13
+    File Management in C
+
+Types of Errors in C
+Types of Errors in C
+
+Learn about Types of Errors in C.
+U
+Urvish Mahajan
+28 Jan 2022 - 11 mins read
+quiz
+Challenge Inside! : Find out where you stand! Try quiz, solve problems & win rewards!
+Go to Challenge
+Types of Errors in C
+Overview
+
+An error in the C language is an issue that arises in a program, making the program not work in the way it was supposed to work or may stop from compiling as well. If an error appears in a program, the program can do one of the following three things: the code will not compile, the program will stop working during execution, or the program will generate garbage values or an incorrect output. There are five different types of errors in C Programming like Syntax Error , Run Time Error , Logical Error , Semantic Error , and Linker Error .
+Scope
+
+    This article explains errors and their types in C Programming Language.
+    This article covers the explanation and examples for each type of error in C Programming Language (syntax error, run time error, logical error, sematic error, linker error).
+
+Introduction
+
+Let us say you want to create a program that prints today's date. But instead of writing printf in the code, you wrote print . Because of this, our program will generate an error as the compiler would not understand what the word print means. Hence, today's date will not print. This is what we call an error. An error is a fault or problem in a program that leads to an abnormal behavior of the program. In other words, an error is a situation in which the program does something which it was not supposed to do. This includes producing incorrect or unexpected output, stopping a program that was running, or hindering the code's compilation. Therefore it is important to remove all errors from our code, this is known as debugging.
+How to Read an Error in C?
+
+In order to resolve an error, we must figure out how and why did an error occur. Whenever we encounter an error in our code, the compiler stops the code compilation if it is a syntax error or it either stops the program's execution or generates a garbage value if it is a run time error.
+
+Syntax errors are easy to figure out because the compiler highlights the line of code that caused the error. Generally, we can find the error's root cause on the highlighted line or above the highlighted line.
+
+For example:
+
+ 
+
+ # include <stdio.h> int main () { int var = 10 return 0 ; }  
+
+ 
+
+Output:
+
+ 
+
+ error: expected ',' or ';' before 'return' 4 | return 0 ;  
+
+ 
+
+As we can see, the compiler shows an error on line 4 of the code. So, in order to figure out the problem, we will go through line 4 and a few lines above it. Once we do that, we can quickly determine that we are missing a semicolon (;) in line 4. The compiler also suggested the same thing.
+
+Other than the syntax errors, run time errors are often encountered while coding. These errors are the ones that occur while the code is being executed.
+
+Let us now see an example of a run time error:
+
+ 
+
+ # include <stdio.h> void main () { int var; var = 20 / 0 ; printf ( "%d" , var); }  
+
+ 
+
+Output:
+
+ 
+
+ warning: division by zero [-Wdiv-by-zero] 6 | var = 20 / 0 ;  
+
+ 
+
+As we can see, the compiler generated a warning at line 6 because we are dividing a number by zero.
+
+Sometimes, the compiler does not throw a run time error. Instead, it returns a garbage value. In situations like these, we have to figure out why did we get an incorrect output by comparing the output with the expected output. In other cases, the compiler does not display any error at all. The program execution just ends abruptly in cases like these.
+
+Let us take another example to understand this kind of run time error:
+
+ 
+
+ # include <stdio.h> # include <stdlib.h> int main () { int arr[ 1 ]; arr[ 0 ] = 10 ; int val = arr[ 10000 ]; printf ( "%d" , val); return 0 ; }  
+
+ 
+
+Output:
+
+ 
+
+ segmentation fault  
+
+ 
+
+In the above code we are trying to acess the 10000th element but the size of array is only 1 therefore there is no space allocated to the 10000th element, this is know as segmentation fault .
+Types of Errors in C
+
+There are five different types of errors in C.
+
+    Syntax Error
+    Run Time Error
+    Logical Error
+    Semantic Error
+    Linker Error
+
+1. Syntax Error
+
+Syntax errors occur when a programmer makes mistakes in typing the code's syntax correctly or makes typos. In other words, syntax errors occur when a programmer does not follow the set of rules defined for the syntax of C language.
+
+Syntax errors are sometimes also called compilation errors because they are always detected by the compiler. Generally, these errors can be easily identified and rectified by programmers.
+
+The most commonly occurring syntax errors in C language are:
+
+    Missing semi-colon ( ; )
+    Missing parenthesis ( {} )
+    Assigning value to a variable without declaring it
+
+Let us take an example to understand syntax errors:
+
+ 
+
+ # include <stdio.h> void main () { var = 5 ; // we did not declare the data type of variable printf ( "The variable is: %d" , var); }  
+
+ 
+
+Output:
+
+ 
+
+ error: 'var' undeclared (first use in this function)  
+
+ 
+
+If the user assigns any value to a variable without defining the data type of the variable, the compiler throws a syntax error.
+Let's see another example:
+
+ 
+
+ # include <stdio.h> void main () { for ( int i= 0 ;) { // incorrect syntax of the for loop printf ( "Scaler Academy" ); } }  
+
+ 
+
+Output:
+
+ 
+
+ error: expected expression before ')' token  
+
+ 
+
+A for loop needs 3 arguments to run. Since we entered only one argument, the compiler threw a syntax error.
+2. Run Time Error
+
+Errors that occur during the execution (or running) of a program are called Run Time Errors. These errors occur after the program has been compiled successfully. When a program is running, and it is not able to perform any particular operation, it means that we have encountered a run time error. For example, while a certain program is running, if it encounters the square root of -1 in the code, the program will not be able to generate an output because calculating the square root of -1 is not possible. Hence, the program will produce an error.
+
+Run time errors can be a little tricky to identify because the compiler can not detect these errors. They can only be identified once the program is running. Some of the most common run time errors are: number not divisible by zero, array index out of bounds, string index out of bounds, etc.
+
+Run time errors can occur because of various reasons. Some of the reasons are:
+
+    Mistakes in the Code : Let us say during the execution of a while loop, the programmer forgets to enter a break statement. This will lead the program to run infinite times, hence resulting in a run time error.
+    Memory Leaks : If a programmer creates an array in the heap but forgets to delete the array's data, the program might start leaking memory, resulting in a run time error.
+    Mathematically Incorrect Operations : Dividing a number by zero, or calculating the square root of -1 will also result in a run time error.
+    Undefined Variables : If a programmer forgets to define a variable in the code, the program will generate a run time error.
+
+Example 1 :
+
+ 
+
+ // A program that calculates the square root of integers # include <stdio.h> # include <math.h> int main () { for ( int i = 4 ; i >= -2 ; i--) { printf ( "%f" , sqrt (i)); printf ( "\n" ); } return 0 ; }  
+
+ 
+
+Output:
+
+ 
+
+ 2.000000 1.732051 1.414214 1.000000 0.000000 -1. #IND00 -1. #IND00  
+
+ 
+
+**In some compilers you may also see this output: **
+
+ 
+
+ 2.000000 1.732051 1.414214 1.000000 0.000000 -nan -nan  
+
+ 
+
+In the above example, we used a for loop to calculate the square root of six integers. But because we also tried to calculate the square root of two negative numbers, the program generated two errors (the IND written above stands for "Ideterminate"). These errors are the run time errors. -nan is similar to IND.
+Example 2 :
+
+ 
+
+ # include <stdio.h> void main () { int var = 2147483649 ; printf ( "%d" , var); }  
+
+ 
+
+Output:
+
+ 
+
+ -2147483647  
+
+ 
+
+This is an integer overflow error. The maximum value an integer can hold in C is 2147483647. Since in the above example, we assigned 2147483649 to the variable var , the variable overflows, and we get -2147483647 as the output (because of the circular property).
+3. Logical Error
+
+Sometimes, we do not get the output we expected after the compilation and execution of a program. Even though the code seems error free, the output generated is different from the expected one. These types of errors are called Logical Errors. Logical errors are those errors in which we think that our code is correct, the code compiles without any error and gives no error while it is running, but the output we get is different from the output we expected.
+
+In 1999, NASA lost a spacecraft due to a logical error. This happened because of some miscalculations between the English and the American Units. The software was coded to work for one system but was used with the other.
+For Example :
+
+ 
+
+ # include <stdio.h> void main () { float a = 10 ; float b = 5 ; if (b = 0 ) { // we wrote = instead of == printf ( "Division by zero is not possible" ); } else { printf ( "The output is: %f" , a/b); } }  
+
+ 
+
+Output:
+
+ 
+
+ The output is: inf  
+
+ 
+
+INF signifies a division by zero error. In the above example, at line 8, we wanted to check whether the variable b was equal to zero. But instead of using the equal to comparison operator (==), we use the assignment operator (=). Because of this, the if statement became false and the value of b became 0. Finally, the else clause got executed.
+4. Semantic Error
+
+Errors that occur because the compiler is unable to understand the written code are called Semantic Errors. A semantic error will be generated if the code makes no sense to the compiler, even though it is syntactically correct. It is like using the wrong word in the wrong place in the English language. For example, adding a string to an integer will generate a semantic error.
+
+Semantic errors are different from syntax errors, as syntax errors signify that the structure of a program is incorrect without considering its meaning. On the other hand, semantic errors signify the incorrect implementation of a program by considering the meaning of the program.
+
+The most commonly occurring semantic errors are: use of un-initialized variables, type compatibility, and array index out of bounds.
+Example 1 :
+
+ 
+
+ # include <stdio.h> void main () { int a, b, c; a * b = c; // This will generate a semantic error }  
+
+ 
+
+Output:
+
+ 
+
+ error: lvalue required as left operand of assignment  
+
+ 
+
+When we have an expression on the left hand side of an assignment operator ( = ), the program generates a semantic error. Even though the code is syntactically correct, the compiler does not understand the code.
+Example 2 :
+
+ 
+
+ # include <stdio.h> void main () { int arr[ 5 ] = { 5 , 10 , 15 , 20 , 25 }; int arraySize = sizeof (arr)/ sizeof (arr[ 0 ]); for ( int i = 0 ; i <= arraySize; i++) { printf ( "%d \n" , arr[i]); } }  
+
+ 
+
+Output:
+
+ 
+
+ 5 10 15 20 25 32764  
+
+ 
+
+In the above example, we printed six elements while the array arr only had five. Because we tried to access the sixth element of the array, we got a semantic error and hence, the program generated a garbage value.
+5. Linker Error
+
+Linker is a program that takes the object files generated by the compiler and combines them into a single executable file. Linker errors are the errors encountered when the executable file of the code can not be generated even though the code gets compiled successfully. This error is generated when a different object file is unable to link with the main object file. We can run into a linked error if we have imported an incorrect header file in the code, we have a wrong function declaration, etc.
+For Example :
+
+ 
+
+ # include <stdio.h> void Main () { int var = 10 ; printf ( "%d" , var); }  
+
+ 
+
+Output:
+
+ 
+
+ undefined reference to `main '  
+
+ 
+
+In the above code, as we wrote Main() instead of main() , the program generated a linker error. This happens because every file in the C language must have a main() function. As in the above program, we did not have a main() function, the program was unable to run the code, and we got an error. This is one of the most common type of linker error.
+Conclusion
+
+    There are 5 different types of errors in C programming language: Syntax error, Run Time error, Logical error, Semantic error, and Linker error.
+    Syntax errors, linker errors, and semantic errors can be identified by the compiler during compilation. Logical errors and run time errors are encountered after the program is compiled and executed.
+    Syntax errors, linker errors, and semantic errors are relatively easy to identify and rectify compared to the logical and run time errors. This is so because the compiler generates these 3 (syntax, linker, semantic) errors during compilation itself while the other 2 errors are generated during or after the execution.
+
+Challenge Time!
+quiz Time to test your skills and win rewards!
+Start Challenge
+Note: Rewards will be credited after the next product update.
+Author
+U
+Urvish Mahajan
+Contributors
+A
+See All
+Author & Contributors
+Author
+U
+Urvish Mahajan
+Co-Authors
+A
+Ankush Gupta
+C
+How would you rate this article?
+Very Bad
+
+Bad
+
+Average
+
+Good
+
+Loved It!
+
+Prev Next
+Log in to your account
+Not a Topics user?
+Email Password
+Remember Me Continue using mobile
+Continue Forgot Password Didn't receive confirmation instructions?
+Or
+Log In Using
+FB-connect
+Github-connect
+google-connect
+linkedIn-connect
+Not a Topics user? Sign up
+topics
+Got suggestions? We would love to hear your feedback.
+topics Your feedback is important to help us improve
+Close Submit
+Scaler Topics Footer Logo
+Explore
+
+    Hubs
+    Articles
+    Scaler.com 
+
+Resource
+
+    Blog
+    About Us
+    Contact Us
+    Careers
+    Review
+    Terms of Use
+    Privacy Policy 
+
+Follow us on
+
+    YouTube
+    LinkedIn
+    Facebook
+    Instagram
+    Twitter 
+

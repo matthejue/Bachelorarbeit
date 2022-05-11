@@ -8,7 +8,7 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref} %hidelinks
 \usepackage{csquotes}
 \usepackage[style=authortitle]{biblatex}
-\addbibresource{Library.bib}
+\addbibresource{./library/library.bib}
 \usepackage{pdfpages}
 \usepackage{fancyhdr}
 
@@ -22,6 +22,9 @@
 	\lhead{\nouppercase{\leftmark}} 	%	adding section on left side of the header
 	\rhead{\nouppercase{\rightmark}} 	%	adding subsection on right side of the header
 
+% spacing before and after chapter
+\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
+\renewcommand*{\chapterheadendvskip}{\vspace{0.5cm}}
 
 \includeonly{
   ./content/Motivation,
@@ -39,6 +42,8 @@
 
 \frontmatter
 \tableofcontents
+\listoffigures
+\listoftables
 
 \mainmatter
 \include{./content/Motivation}              % ./content/Motivation.tex
@@ -48,6 +53,7 @@
 
 \appendix
 \include{./content/Appendix}                % ./content/Appendix.tex
+\include{./content/Danksagungen}            % ./content/Danksagungen.tex
 
 \backmatter
 \printbibheading

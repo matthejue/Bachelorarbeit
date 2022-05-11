@@ -1,0 +1,213 @@
+
+Stack Overflow
+
+    About
+    Products
+    For Teams
+
+    Log in
+    Sign up
+
+Join Stack Overflow to find the best answer to your technical question, help others answer theirs.
+Sign up with email Sign up Sign up with Google Sign up with GitHub Sign up with Facebook
+
+    Home
+        Public
+        Questions
+        Tags
+        Users
+        Companies
+        Collectives
+        Explore Collectives
+        Teams
+        Stack Overflow for Teams – Start collaborating and sharing organizational knowledge. Create a free Team Why Teams?
+
+Where can I get a list of all errors & warnings?
+Ask Question
+Asked 12 years, 8 months ago
+Modified 3 years, 6 months ago
+Viewed 3k times
+Report this ad
+This question shows research effort; it is useful and clear
+15
+This question does not show any research effort; it is unclear or not useful
+3
+Bookmark this question.
+Show activity on this post.
+
+Is there some place where I can get a list of all Visual C++ compiler/linker errors/warnings ? I am looking for both the error/warning number and the error/warning text that is displayed by the compiler. MSDN has them all, but they are linked to on individual pages.
+visual-c++ compiler-errors warnings
+Share
+Follow
+Follow this question to receive notifications
+edited Aug 10, 2012 at 20:59
+user avatar
+claws
+49.5k 55 55 gold badges 141 141 silver badges 191 191 bronze badges
+asked Sep 8, 2009 at 9:06
+user avatar
+Ashwin Nanjappa Ashwin Nanjappa
+72.3k 76 76 gold badges 202 202 silver badges 288 288 bronze badges
+1
+
+    Good question. I'd like to know, too. MSDN doesn't bother presenting them in any sort of convenient format.
+    –  Lightness Races in Orbit
+    Jun 7, 2011 at 12:05
+
+Add a comment  | 
+2 Answers 2
+Sorted by: Reset to default
+This answer is useful
+8
+This answer is not useful
+Show activity on this post.
+
+Apparently, none exists: googling for a single page containing all the terms lnk1000 lnk1003 c4100 yields no results.
+
+I think you'll have to compile a reference yourself by painstaking navigation through this MSDN section .
+Share
+Follow
+Follow this answer to receive notifications
+answered Jun 7, 2011 at 12:33
+user avatar
+Lightness Races in Orbit Lightness Races in Orbit
+368k 73 73 gold badges 619 619 silver badges 1021 1021 bronze badges
+Add a comment  | 
+Report this ad
+This answer is useful
+1
+This answer is not useful
+Show activity on this post.
+
+Al list of all warnings for VS2015 and VS2017 can be found at sections such as C++ Core Guidelines Checker Reference , Code Analysis for C/C++ Warnings , and other related sections linked from the References header in the left menu.
+
+For example, here is a document describing C6001: using uninitialized memory [variable] .
+
+I am not sure if there is a single page covering all warning codes, but lacking one, you can clone the documentation sources and search through it yourself: https://github.com/MicrosoftDocs/visualstudio-docs/tree/master/docs/code-quality
+Share
+Follow
+Follow this answer to receive notifications
+answered Oct 21, 2018 at 9:41
+user avatar
+Lekensteyn Lekensteyn
+61.4k 21 21 gold badges 151 151 silver badges 187 187 bronze badges
+Add a comment  | 
+Your Answer
+
+Draft saved
+Draft discarded
+Sign up or log in
+Sign up using Google
+Sign up using Facebook
+Sign up using Email and Password
+Submit
+Post as a guest
+Name
+Email
+
+Required, but never shown
+Post as a guest
+Name
+Email
+
+Required, but never shown
+Post Your Answer Discard
+
+By clicking “Post Your Answer”, you agree to our terms of service , privacy policy and cookie policy
+Not the answer you're looking for? Browse other questions tagged visual-c++ compiler-errors warnings or ask your own question .
+
+    The Overflow Blog
+    Feeling burned out? You’re not the only one (Ep. 440)
+    Featured on Meta
+    Staging Ground: Reviewer Motivation, Scaling, and Open Questions
+    Overhauling our community's closure reasons and guidance
+
+Report this ad
+ImFusion GmbH
+ImFusion GmbH
+Computer Vision
+We have great benefits!
+flexible working hours
+exciting mix of industrial & academic work
+coffee, soft drinks, fruit basket
+family friendly
++ 5 more benefits
+Learn more
+Related
+66
+C / C++ compiler warnings: do you clean up all your code to remove them or leave them in?
+265
+Resolving LNK4098: defaultlib 'MSVCRT' conflicts with
+467
+Why is this program erroneously rejected by three C++ compilers?
+4
+Why exactly not treat all warnings as errors when there're no warnings in third party code?
+443
+Hide all warnings in ipython
+9
+Can I exclude some specific warnings from "treat warnings as errors" without disabling them?
+1237
+Reference - What does this error mean in PHP?
+101
+Can PyCharm list all of Python errors in a project?
+7
+Treat all warnings as errors, except some
+Hot Network Questions
+
+    Novel about a teenage female protagonist on a FTL spaceflight in a deterministic universe
+    Determining if an NFA accepts an infinite language in polynomial time
+    Will the righteous be judged 2 Cor 5:10 or will they not John 5:24?
+    If p-values are random, why not decide using the test statistic instead?
+    Are microphones with flatter frequency response charts better at picking up frequencies?
+
+more hot questions
+Question feed
+Subscribe to RSS
+Question feed
+
+To subscribe to this RSS feed, copy and paste this URL into your RSS reader.
+lang-cpp
+Stack Overflow
+
+    Questions
+    Help
+
+Products
+
+    Teams
+    Advertising
+    Collectives
+    Talent
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Terms of Service
+    Contact Us
+    Cookie Settings
+    Cookie Policy
+
+Stack Exchange Network
+
+    Technology
+    Culture & recreation
+    Life & arts
+    Science
+    Professional
+    Business
+    API
+    Data
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+    Instagram
+
+Site design / logo © 2022 Stack Exchange Inc; user contributions licensed under cc by-sa . rev 2022.5.10.42085
+ 
+ 
