@@ -18,7 +18,7 @@ jobs:
     - name: Push test file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        API_TOKEN_GITHUB: ${{ secrets.upload_to_repo }}
       with:
         source_file: 'ErklrungfrdieAbschlussarbeit_unterschrieben.pdf'
         destination_repo: 'matthejue/Bachelorarbeit_out'
