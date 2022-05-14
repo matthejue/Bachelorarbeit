@@ -22,7 +22,7 @@ jobs:
       with:
         source_file: 'ErklrungfrdieAbschlussarbeit_unterschrieben.pdf'
         destination_repo: 'matthejue/Bachelorarbeit_out'
-        destination_folder: 'out'
+        destination_folder: ''
         user_email: 'matthejue@gmail.com'
         user_name: 'matthejue'
         commit_message: 'updated pdf'
