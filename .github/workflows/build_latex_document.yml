@@ -13,4 +13,4 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: latex_artifact
-        path: my_doc.pdf
+        path: Main.pdf
