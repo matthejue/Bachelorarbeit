@@ -20,7 +20,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: 'ErklrungfrdieAbschlussarbeit.pdf'
+        source_file: 'ErklrungfrdieAbschlussarbeit_unterschrieben.pdf'
         destination_repo: 'matthejue/Bachelorarbeit_out'
         destination_folder: 'out'
         user_email: 'matthejue@gmail.com'
