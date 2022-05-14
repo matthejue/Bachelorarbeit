@@ -4,13 +4,25 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: xu-cheng/texlive-action/full@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+    # - uses: xu-cheng/texlive-action/full@v1
+    #   with:
+    #     run: |
+    #       apk add make
+    #       make
+    # - uses: actions/upload-artifact@v1
+    #   with:
+    #     name: latex_artifact
+    #     path: Main.pdf
+    - name: Push test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        run: |
-          apk add make
-          make
-    - uses: actions/upload-artifact@v1
-      with:
-        name: latex_artifact
-        path: Main.pdf
+        source_file: 'ErklrungfrdieAbschlussarbeit.pdf'
+        destination_repo: 'matthejue/Bachelorarbeit_out'
+        destination_folder: 'out'
+        user_email: 'matthejue@gmail.com'
+        user_name: 'matthejue'
+        commit_message: 'updated pdf'
