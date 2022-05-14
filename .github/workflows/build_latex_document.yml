@@ -6,11 +6,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    # - uses: xu-cheng/texlive-action/full@v1
-    #   with:
-    #     run: |
-    #       apk add make
-    #       make
+    - uses: xu-cheng/texlive-action/full@v1
+      with:
+        run: |
+          apk add make
+          make
     # - uses: actions/upload-artifact@v1
     #   with:
     #     name: latex_artifact
@@ -20,7 +20,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
       with:
-        source_file: 'ErklrungfrdieAbschlussarbeit_unterschrieben.pdf'
+        source_file: 'Main.pdf'
         destination_repo: 'matthejue/Bachelorarbeit_out'
         destination_folder: ''
         user_email: 'matthejue@gmail.com'
