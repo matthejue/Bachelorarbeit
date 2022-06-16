@@ -2,49 +2,50 @@
 \chapter{Implementierung}
 \section{Grammatiken}
 \subsection{PicoC}
-Die PicoC Subsprache von C, verfolgt dieselben Präzidenzregeln, wie die Sprache C \footcite{noauthor_c_nodate}, welche in Tabelle~\ref{tab:reference_table} dargestellt ist.
+Die PicoC Subsprache von C, verfolgt dieselben Präzidenzregeln, wie die Sprache C \footcite{noauthor_c_nodate}, welche in Tabelle~\ref{tab:reference_table} dargestellt sind.
 
-\begin{tabulary}{\linewidth}{LLLL}
+\begin{table}[h]
+\begin{tabulary}{\linewidth}{|L|L|L|L|}
   \toprule
   Precedence &	Operator & Description &	Associativity \\
   \midrule
   1	& \verb|a()|	& Function call & Left-to-right $\rightarrow$ \\
     & \verb|a[]|	& Subscript & \\
     & \verb|.| & 	Member access & \\
-  \addlinespace
+  \hline
   2	&	\verb|-a| & Unary minus & Right-to-left $\leftarrow$ \\
     & \verb|! ~|	& Logical NOT and bitwise NOT & \\
     & \verb|*a| & Indirection (dereference) & \\
     & \verb|&| & Address-of & \\
-  \addlinespace
-  3	& \verb|a*b a/b a\%b| &	Multiplication, division, and remainder & Left-to-right $\rightarrow$ \\
-  \addlinespace
-  6	& \verb|a+b a-b|	& Addition and subtraction & \\
-  \addlinespace
-  7	& \verb|<< >>|	& Bitwise left shift and right shift & \\
-  \addlinespace
-  9	& \verb|< <= > >=|	& For relational operators < and ≤ and > and ≥ respectively & \\
-  \addlinespace
-  10 &	\verb|==|   !=	& For equality operators = and ≠ respectively & \\
-  \addlinespace
-  11 &	\verb|a&b|	Bitwise AND & \\
-  \addlinespace
-  12 &	\verb|^	&| Bitwise XOR (exclusive or) & \\
-  \addlinespace
-  13 &	\midbar \verb|&| Bitwise OR (inclusive or) & \\
-  \addlinespace
-  14	& \verb|&&| &	Logical AND & \\
-  \addlinespace
-  15	& \mid\mid	& Logical OR & \\
-  \addlinespace
-  16 & \verb|=| & Direct Assignment & Right-to-left $\leftarrow$ \\
-  \addlinespace
-  17 &	\verb|,|	& Comma	& Left-to-right $\rightarrow$ \\
+  \hline
+  3	& \smalltt{a*b a/b a\%b} &	Multiplication, division, and remainder & Left-to-right $\rightarrow$ \\
+  \cline{1-3}
+  4	& \verb|a+b a-b|	& Addition and subtraction & \\
+  \cline{1-3}
+  5	& \verb|<< >>|	& Bitwise left shift and right shift & \\
+  \cline{1-3}
+  6	& \verb|< <= > >=|	& For relational operators $<$ and $\leq$ and $>$ and $\geq$ respectively & \\
+  \cline{1-3}
+  7 &	\verb|== !=|	& For equality operators $=$ and $\neq$ respectively & \\
+  \cline{1-3}
+  8 &	\verb|a&b| & Bitwise AND & \\
+  \cline{1-3}
+  9 &	\verb|^	&| & Bitwise XOR (exclusive or) & \\
+  \cline{1-3}
+  10 & \smalltt{a$\mid$b} & Bitwise OR (inclusive or) & \\
+  \cline{1-3}
+  11	& \verb|&&| &	Logical AND & \\
+  \cline{1-3}
+  12	& $\mid\mid$	& Logical OR & \\
+  \hline
+  13 & \verb|=| & Direct Assignment & Right-to-left $\leftarrow$ \\
+  \hline
+  14 &	\verb|,|& Comma	& Left-to-right $\rightarrow$ \\
   \bottomrule
-
-  \label{tab:reference_table}
-  \caption{Präzidenzregeln von PicoC}
 \end{tabulary}
+\label{tab:reference_table}
+\caption{Präzidenzregeln von PicoC}
+\end{table}
 
 \subsection{RETI}
 \subsection{Mehrdeutigkeit}
