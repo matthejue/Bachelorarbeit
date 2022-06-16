@@ -1,5 +1,5 @@
 \documentclass{scrbook}
-\usepackage[margin=1.5cm]{geometry}
+\usepackage[showframe, margin=1.5cm]{geometry}
 \usepackage[ngerman]{babel}
 \usepackage{lipsum}
 \usepackage[parfill]{parskip}
@@ -13,7 +13,9 @@
 \usepackage{fancyhdr}
 \usepackage{booktabs} % for table rules
 \usepackage{tabulary}
+% \usepackage{tabularx}
 \usepackage{array}
+\usepackage{multirow}
 
 \newcommand{\smalltt}[1]{{\small\texttt{#1}}}
 
@@ -23,9 +25,10 @@
 	\rfoot[]{\thepage}					% right align page numbers
 
 	%	headers
+
 	\fancyheadoffset{1cm}
 	\lhead{\nouppercase{\leftmark}} 	%	adding section on left side of the header
-	\rhead{\nouppercase{\rightmark}} 	%	adding subsection on right side of the header
+\rhead{\nouppercase{\rightmark}} 	%	adding subsection on right side of the header
 
 % spacing before and after chapter
 \renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}

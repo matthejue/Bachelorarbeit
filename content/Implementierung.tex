@@ -5,11 +5,12 @@
 Die PicoC Subsprache von C, verfolgt dieselben Präzidenzregeln, wie die Sprache C \footcite{noauthor_c_nodate}, welche in Tabelle~\ref{tab:reference_table} dargestellt sind.
 
 \begin{table}[h]
-\begin{tabulary}{\linewidth}{|L|L|L|L|}
+  \center
+  \begin{tabulary}{\linewidth}{|C|C|L|L|}
   \toprule
-  Precedence &	Operator & Description &	Associativity \\
+  Präzidenz &	Operator & Beschreibung &	Assoziativität \\
   \midrule
-  1	& \verb|a()|	& Function call & Left-to-right $\rightarrow$ \\
+  1	& \verb|a()|	& Function call & \multirow{2}{=}{Left-to-right $\rightarrow$} \\
     & \verb|a[]|	& Subscript & \\
     & \verb|.| & 	Member access & \\
   \hline
