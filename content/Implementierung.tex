@@ -2,23 +2,70 @@
 \chapter{Implementierung}
 \section{Grammatiken}
 \subsection{PicoC}
+Die PicoC Subsprache von C, verfolgt dieselben Präzidenzregeln, wie die Sprache C \footcite{noauthor_c_nodate}, welche in Tabelle~\ref{tab:reference_table} dargestellt ist.
+
+\begin{tabulary}{\linewidth}{LLLL}
+  \toprule
+  Precedence &	Operator & Description &	Associativity \\
+  \midrule
+  1	& \verb|a()|	& Function call & Left-to-right $\rightarrow$ \\
+    & \verb|a[]|	& Subscript & \\
+    & \verb|.| & 	Member access & \\
+  \addlinespace
+  2	&	\verb|-a| & Unary minus & Right-to-left $\leftarrow$ \\
+    & \verb|! ~|	& Logical NOT and bitwise NOT & \\
+    & \verb|*a| & Indirection (dereference) & \\
+    & \verb|&| & Address-of & \\
+  \addlinespace
+  3	& \verb|a*b a/b a\%b| &	Multiplication, division, and remainder & Left-to-right $\rightarrow$ \\
+  \addlinespace
+  6	& \verb|a+b a-b|	& Addition and subtraction & \\
+  \addlinespace
+  7	& \verb|<< >>|	& Bitwise left shift and right shift & \\
+  \addlinespace
+  9	& \verb|< <= > >=|	& For relational operators < and ≤ and > and ≥ respectively & \\
+  \addlinespace
+  10 &	\verb|==|   !=	& For equality operators = and ≠ respectively & \\
+  \addlinespace
+  11 &	\verb|a&b|	Bitwise AND & \\
+  \addlinespace
+  12 &	\verb|^	&| Bitwise XOR (exclusive or) & \\
+  \addlinespace
+  13 &	\midbar \verb|&| Bitwise OR (inclusive or) & \\
+  \addlinespace
+  14	& \verb|&&| &	Logical AND & \\
+  \addlinespace
+  15	& \mid\mid	& Logical OR & \\
+  \addlinespace
+  16 & \verb|=| & Direct Assignment & Right-to-left $\leftarrow$ \\
+  \addlinespace
+  17 &	\verb|,|	& Comma	& Left-to-right $\rightarrow$ \\
+  \bottomrule
+
+  \label{tab:reference_table}
+  \caption{Präzidenzregeln von PicoC}
+\end{tabulary}
+
 \subsection{RETI}
+\subsection{Mehrdeutigkeit}
 \subsection{Präzidenz und Assoziativität}
 \subsection{Linksrekursivität}
 \section{Lexikalische Analyse}
+\subsection{Lark}
 \subsection{LL(1) Recursive-Descent Lexer}
 \section{Syntax Analyse}
-\subsection{Normalized Heterogeneous ASTNode}
-\subsection{LL(k) Recursive-Descent Parser}
-Das LL(k) Recursive-Descent Parser \footcite{parr_language_2009} Pattern ist
-\subsection{Mehrdeutigkeit}
-\subsection{Backtracking Parser}
 \subsection{Lark}
+\subsection{Normalized Heterogeneous ASTNode}
+\subsection{Early Algorithmus}
+Das LL(k) Recursive-Descent Parser \footcite{parr_language_2009} Pattern ist
 \subsection{Visitor und Transformer}
 \section{Code Generation}
 \subsection{Symbol Table for Nested Scopes}
-\subsection{PicoC-zu-PicoC-Blocks Pass}
-\subsection{PicoC-Blocks-zu-RETI-Blocks Pass}
-\subsection{RETI-Blocks-zu-RETI Pass}
+\subsection{PicoC-Shrink Pass}
+\subsection{PicoC-Blocks Pass}
+\subsection{PicoC-Mon Pass}
+\subsection{RETI-Blocks Pass}
+\subsection{RETI-Patch Pass}
+\subsection{RETI Pass}
 \section{Fehlermeldungen}
 \subsection{Error Handler}
