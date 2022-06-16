@@ -2,7 +2,7 @@
 \chapter{Implementierung}
 \section{Grammatiken}
 \subsection{PicoC}
-Die PicoC Subsprache von C, verfolgt dieselben Präzidenzregeln, wie die Sprache C \footcite{noauthor_c_nodate}, welche in Tabelle~\ref{tab:reference_table} dargestellt sind.
+Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache C \footcite{noauthor_c_nodate}. Die Präzidenzregeln von PicoC sind in Tabelle~\ref{tab:reference_table} aufgelistet.
 
 \begin{table}[h]
   \center
@@ -10,38 +10,36 @@ Die PicoC Subsprache von C, verfolgt dieselben Präzidenzregeln, wie die Sprache
   \toprule
   Präzidenz &	Operator & Beschreibung &	Assoziativität \\
   \midrule
-  1	& \verb|a()|	& Function call & \multirow{2}{=}{Left-to-right $\rightarrow$} \\
-    & \verb|a[]|	& Subscript & \\
-    & \verb|.| & 	Member access & \\
+  1	& \verb|a()|	& Funktionsaufruf & \multirow{2}{=}{Links, dann rechts $\rightarrow$} \\
+    & \verb|a[]|	& Indexzugriff & \\
+    & \verb|a.b| & Attributzugriff & \\
   \hline
-  2	&	\verb|-a| & Unary minus & Right-to-left $\leftarrow$ \\
-    & \verb|! ~|	& Logical NOT and bitwise NOT & \\
-    & \verb|*a| & Indirection (dereference) & \\
-    & \verb|&| & Address-of & \\
+  2	&	\verb|-a| & Unäres Minus & \multirow{2}{=}{Rechts, dann links $\leftarrow$} \\
+    & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
+    & \verb|*a| & Dereferenz & \\
+    & \verb|&a| & Referenz, Adresse-von & \\
   \hline
-  3	& \smalltt{a*b a/b a\%b} &	Multiplication, division, and remainder & Left-to-right $\rightarrow$ \\
+  3	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & Links, dann rechts $\rightarrow$ \\
   \cline{1-3}
-  4	& \verb|a+b a-b|	& Addition and subtraction & \\
+  4	& \verb|a+b a-b|	& Addition und Subtraktion & \\
   \cline{1-3}
-  5	& \verb|<< >>|	& Bitwise left shift and right shift & \\
+  5	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
   \cline{1-3}
-  6	& \verb|< <= > >=|	& For relational operators $<$ and $\leq$ and $>$ and $\geq$ respectively & \\
+  6 &	\verb|a==b a!=b|	& Gleichheit und Ungleichheit & \\
   \cline{1-3}
-  7 &	\verb|== !=|	& For equality operators $=$ and $\neq$ respectively & \\
+  7 &	\verb|a&b| & Bitweise UND & \\
   \cline{1-3}
-  8 &	\verb|a&b| & Bitwise AND & \\
+  8 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
   \cline{1-3}
-  9 &	\verb|^	&| & Bitwise XOR (exclusive or) & \\
+  9 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
   \cline{1-3}
-  10 & \smalltt{a$\mid$b} & Bitwise OR (inclusive or) & \\
+  10	& \verb|a&&b| &	Logiches UND & \\
   \cline{1-3}
-  11	& \verb|&&| &	Logical AND & \\
-  \cline{1-3}
-  12	& $\mid\mid$	& Logical OR & \\
+  11	& $a{\mid\mid} b$	& Logisches ODER & \\
   \hline
-  13 & \verb|=| & Direct Assignment & Right-to-left $\leftarrow$ \\
+  12 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
   \hline
-  14 &	\verb|,|& Comma	& Left-to-right $\rightarrow$ \\
+  13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
   \bottomrule
 \end{tabulary}
 \label{tab:reference_table}

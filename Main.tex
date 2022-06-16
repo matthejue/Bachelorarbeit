@@ -1,48 +1,7 @@
-\documentclass{scrbook}
-\usepackage[showframe, margin=1.5cm]{geometry}
-\usepackage[ngerman]{babel}
-\usepackage{lipsum}
-\usepackage[parfill]{parskip}
-\usepackage{setspace}
-\usepackage{graphicx}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref} %hidelinks
-\usepackage{csquotes}
-\usepackage[style=authortitle]{biblatex}
-\addbibresource{./library/library.bib}
-\usepackage{pdfpages}
-\usepackage{fancyhdr}
-\usepackage{booktabs} % for table rules
-\usepackage{tabulary}
-% \usepackage{tabularx}
-\usepackage{array}
-\usepackage{multirow}
-
-\newcommand{\smalltt}[1]{{\small\texttt{#1}}}
-
-\pagestyle{fancy}					% custom headers and footers
-	%	footers
-	\fancyfoot{}						% clear footers
-	\rfoot[]{\thepage}					% right align page numbers
-
-	%	headers
-
-	\fancyheadoffset{1cm}
-	\lhead{\nouppercase{\leftmark}} 	%	adding section on left side of the header
-\rhead{\nouppercase{\rightmark}} 	%	adding subsection on right side of the header
-
-% spacing before and after chapter
-\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
-\renewcommand*{\chapterheadendvskip}{\vspace{0.5cm}}
-
-\includeonly{
-  ./content/Motivation,
-  ./content/Einführung,
-  ./content/Implementierung,
-  ./content/Ergebnisse_und_Ausblick,
-  ./content/Appendix
-}
+\input(./content/Packete_und_Deklarationen) % ./content/Packete_und_Deklarationen.tex
 
 \begin{document}
+\sloppy
 \input{./content/Titlepage}                 % ./content/Titlepage.tex
 \newgeometry{margin=2.5cm}
 \setlength{\footskip}{30pt}               % move pagenumber up and down
