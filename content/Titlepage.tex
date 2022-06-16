@@ -1,15 +1,26 @@
 % ../Main.tex
+% ./Packete_und_Deklarationen.tex
 \begin{titlepage}
   \vspace{1cm}
   \center
   \textsc{\LARGE Albert Ludwigs Universität Freiburg}\\[0.5cm]
   \textsc{\Large Technische Fakultät}\\[2.0cm]
 
-  \rule{\linewidth}{0.5mm}\\[0.5cm]
-    {\huge \bfseries PicoC-Compiler\\\LARGE - \\\setstretch{1.1} Übersetzung einer Untermenge von C in den Befehlssatz der RETI-CPU\par}
-    \vspace{0.5cm}
+  \tcbset{skin=enhanced,
+    title style={preaction={opacity=1, fill=gray}, pattern=fivepointed stars, pattern  color=white, opacity=0.1, rule=0mm},
+    interior style={preaction={opacity=0.2, fill=gray}, pattern=fivepointed stars, pattern  color=white, opacity=0.3, rule=0mm},
+    frame style={color=white},
+    segmentation style={black,solid,opacity=0.2,line width=1pt}
+  }
+
+  \begin{tcolorbox}[title={\center \huge \bfseries PicoC-Compiler}, arc=0mm,colback=white,boxrule=0mm]
+    \center
+    % \\
+    % \tcblower
+    {\bfseries \center \LARGE \\\setstretch{1.1} Übersetzung einer Untermenge von C in den Befehlssatz der RETI-CPU\par}
+  \end{tcolorbox}
     \textsc{\large Bachelorarbeit}\\
-    \rule{\linewidth}{0.5mm}\\[0.5cm]
+    \rule{\linewidth}{0.1mm}\\[0.5cm]
 
   {\large \emph{Abgabedatum:} 28\textsuperscript{th} April 2022}\\[2.5cm]
 
@@ -33,7 +44,8 @@
     \end{flushright}
   \end{minipage}
 
-  \vspace{9.5cm}
+  \vspace{11.cm}
+  \rule{11cm}{0.1mm}\\[0.25cm]
   \large{Eine Bachelorarbeit am Lehrstuhl für}\\
   \large{Betriebssysteme}
 \end{titlepage}
