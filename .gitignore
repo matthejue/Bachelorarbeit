@@ -12,3 +12,6 @@
 *.blg
 *.run.xml
 My Library/
+.dep/
+*.lot
+*.lof
