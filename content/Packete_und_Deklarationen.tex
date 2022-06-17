@@ -4,7 +4,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{lipsum}
 \usepackage[parfill, ]{parskip}
-\setlength{\parskip}{0.5cm} % space between paragraphs
+\setlength{\parskip}{0.4cm} % space between paragraphs
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref} %hidelinks
@@ -12,7 +12,6 @@
 \usepackage[style=authortitle]{biblatex}
 \addbibresource{./library/library.bib}
 \usepackage{pdfpages}
-\usepackage{fancyhdr}
 \usepackage{booktabs} % for table rules
 \usepackage{tabulary}
 % \usepackage{tabularx}
@@ -40,6 +39,8 @@
 % bold with color
 \newcommand\colorbold[1]{\textcolor{SecondaryColor}{\textbf{#1}}}
 
+% footer and header
+\usepackage{fancyhdr}
 \pagestyle{fancy}					% custom headers and footers
 	%	footers
 	\fancyfoot{}						% clear footers
