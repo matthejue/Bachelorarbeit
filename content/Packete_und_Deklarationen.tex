@@ -23,21 +23,24 @@
 \usepackage{tcolorbox}
 \usepackage{tikz}
 \tcbuselibrary{skins}
+\tcbuselibrary{breakable}
 \usetikzlibrary{patterns}
 \usetikzlibrary{shadings}
 \tcbuselibrary{theorems}
 \usepackage{cleveref}
 
 \usepackage{xcolor}
-\definecolor{PrimaryColor}{HTML}{2A1F59}
-\definecolor{SecondaryColor}{HTML}{4D2875}
-\definecolor{TertiaryColor}{HTML}{FED32F}
-\definecolor{gray75}{gray}{0.75}
+\definecolor{PrimaryColor}{HTML}{4D2875}
+\definecolor{SecondaryColor}{HTML}{DBD3E3}
+% \definecolor{TertiaryColor}{HTML}{FED32F}
+% \definecolor{gray75}{gray}{0.75}
+
+
 
 \newcommand{\smalltt}[1]{{\small\texttt{#1}}}
 
 % bold with color
-\newcommand\colorbold[1]{\textcolor{SecondaryColor}{\textbf{#1}}}
+\newcommand\colorbold[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
 
 % footer and header
 \usepackage{fancyhdr}
@@ -63,9 +66,10 @@
 
 \usepackage{fix-cm}
 \newcommand{\hsp}{\hspace{0pt}}
-\titleformat{\chapter}[hang]{\bfseries}{\fontsize{100}{0}\selectfont \textcolor{SecondaryColor}\thechapter\hsp}{0.5cm}{\Huge}[]
+\titleformat{\chapter}[hang]{\bfseries}{\fontsize{100}{0}\selectfont \textcolor{PrimaryColor}\thechapter\hsp}{0.5cm}{\Huge}[]
 
 \titlespacing*{\chapter}{0cm}{*0}{*4}
+
 
 \includeonly{
   ./content/Motivation,
