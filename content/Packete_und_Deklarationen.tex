@@ -53,13 +53,18 @@
 % spacing after section
 \usepackage{titlesec}
 
+% \titlespacing*{\section}
+% {0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+% \titlespacing*{\subsection}
+% {0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+\titlespacing*{\section}{0cm}{*3}{*3}
+\titlespacing*{\subsection}{0cm}{*3}{*2}
+
 \usepackage{fix-cm}
 \newcommand{\hsp}{\hspace{0pt}}
-\titleformat{\chapter}[hang]{\flushleft \fontseries{b}\fontsize{80}{100}\selectfont}{\fontseries{b}\fontsize{100}{130}\selectfont \textcolor{SecondaryColor}\thechapter\hsp}{0pt}{\\ \Huge\bfseries}[]
-\titlespacing*{\section}{0cm}{*0}{*3}
-\titlespacing*{\subsection}{0cm}{*0}{*2}
+\titleformat{\chapter}[hang]{\bfseries}{\fontsize{100}{0}\selectfont \textcolor{SecondaryColor}\thechapter\hsp}{0.5cm}{\Huge}[]
 
-\titlespacing*{\chapter}{0cm}{*0}{*2}
+\titlespacing*{\chapter}{0cm}{*0}{*4}
 
 \includeonly{
   ./content/Motivation,
