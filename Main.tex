@@ -2,17 +2,37 @@
 
 \begin{document}
 \sloppy
+%
+\newtcolorbox{titlebox}[1]{skin=enhanced,
+    title style={preaction={opacity=1, fill=PrimaryColor}, pattern=fivepointed stars, pattern color=TertiaryColor, opacity=0.1},
+    interior style={preaction={opacity=0.2, fill=SecondaryColor}, pattern=fivepointed stars, pattern  color=TertiaryColor, opacity=0.3},
+    frame style={color=white},
+    % segmentation style={black,solid,opacity=0.2,line width=1pt}
+    title={#1}, arc=0mm, boxrule=0mm
+  }
+
 \input{./content/Titlepage}                 % ./content/Titlepage.tex
 \newgeometry{margin=2.5cm}
 \setlength{\footskip}{30pt}                 % move pagenumber up and down
 \includepdf[pages=-]{./ErklrungfrdieAbschlussarbeit_unterschrieben.pdf}
 
-\frontmatter
+% \frontmatter
 \tableofcontents
 \listoffigures
 \listoftables
 
-\mainmatter
+% \mainmatter
+
+% theorem style=change apart
+\newtcbtheorem[number within=subsection,crefname={definition}{definitions}]{Definition}{Definition}%
+{enhanced,arc=0mm,outer arc=0mm,
+boxrule=0mm,toprule=0mm,bottomrule=1mm,left=1mm,right=1mm,
+titlerule=0mm,toptitle=0mm,bottomtitle=0mm,top=0mm,
+coltitle=white, colback=white, colframe=SecondaryColor,
+title style={top color=PrimaryColor,bottom color=PrimaryColor,
+middle color=SecondaryColor},
+fonttitle=\bfseries\sffamily\normalsize,fontupper=\normalsize\itshape}{def}
+
 \include{./content/Motivation}              % ./content/Motivation.tex
 \include{./content/Einführung}              % ./content/Einführung.tex
 \include{./content/Implementierung}         % ./content/Implementierung.tex
@@ -22,7 +42,7 @@
 \include{./content/Appendix}                % ./content/Appendix.tex
 \include{./content/Danksagungen}            % ./content/Danksagungen.tex
 
-\backmatter
+% \backmatter
 \printbibheading
 \printbibliography[type=book,heading=subbibliography,title={Bücher}]
 % \printbibliography[type=article,heading=subbibliography,title={Artikel}]

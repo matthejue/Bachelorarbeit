@@ -1,9 +1,10 @@
-% ../Main.tex
-\documentclass{scrbook}
+%!Tex Root = ../Main.tex
+\documentclass{report}
 \usepackage[showframe, margin=1.5cm]{geometry}
 \usepackage[ngerman]{babel}
 \usepackage{lipsum}
-\usepackage[parfill]{parskip}
+\usepackage[parfill, ]{parskip}
+\setlength{\parskip}{0.5cm} % space between paragraphs
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref} %hidelinks
@@ -18,18 +19,26 @@
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{amssymb}
+
+% colorbox stuff
 \usepackage{tcolorbox}
 \usepackage{tikz}
 \tcbuselibrary{skins}
 \usetikzlibrary{patterns}
 \usetikzlibrary{shadings}
+\tcbuselibrary{theorems}
+\usepackage{cleveref}
 
-% \usepackage{xcolor}
-% \definecolor{PrimaryColor}{HTML}{2A1F59}
-% \definecolor{SecondaryColor}{HTML}{4D2875}
-% \definecolor{TertiaryColor}{HTML}{FED32F}
+\usepackage{xcolor}
+\definecolor{PrimaryColor}{HTML}{2A1F59}
+\definecolor{SecondaryColor}{HTML}{4D2875}
+\definecolor{TertiaryColor}{HTML}{FED32F}
+\definecolor{gray75}{gray}{0.75}
 
 \newcommand{\smalltt}[1]{{\small\texttt{#1}}}
+
+% bold with color
+\newcommand\colorbold[1]{\textcolor{SecondaryColor}{\textbf{#1}}}
 
 \pagestyle{fancy}					% custom headers and footers
 	%	footers
@@ -41,9 +50,16 @@
 	\lhead{\nouppercase{\leftmark}} 	%	adding section on left side of the header
 \rhead{\nouppercase{\rightmark}} 	%	adding subsection on right side of the header
 
-% spacing before and after chapter
-\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
-\renewcommand*{\chapterheadendvskip}{\vspace{0.5cm}}
+% spacing after section
+\usepackage{titlesec}
+
+\usepackage{fix-cm}
+\newcommand{\hsp}{\hspace{0pt}}
+\titleformat{\chapter}[hang]{\flushleft \fontseries{b}\fontsize{80}{100}\selectfont}{\fontseries{b}\fontsize{100}{130}\selectfont \textcolor{SecondaryColor}\thechapter\hsp}{0pt}{\\ \Huge\bfseries}[]
+\titlespacing*{\section}{0cm}{*0}{*3}
+\titlespacing*{\subsection}{0cm}{*0}{*2}
+
+\titlespacing*{\chapter}{0cm}{*0}{*2}
 
 \includeonly{
   ./content/Motivation,
@@ -52,4 +68,3 @@
   ./content/Ergebnisse_und_Ausblick,
   ./content/Appendix
 }
-

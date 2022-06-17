@@ -1,4 +1,4 @@
-%!Tex Root=../Main.tex
+%!Tex Root = ../Main.tex
 % ./Packete_und_Deklarationen.tex
 \chapter{Implementierung}
 \section{Grammatiken}
@@ -17,8 +17,7 @@ Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache 
   \hline
   2	&	\verb|-a| & Unäres Minus & \multirow{2}{=}{Rechts, dann links $\leftarrow$} \\
     & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
-    & \verb|*a| & Dereferenz & \\
-    & \verb|&a| & Referenz, Adresse-von & \\
+    & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
   \hline
   3	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & Links, dann rechts $\rightarrow$ \\
   \cline{1-3}

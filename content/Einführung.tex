@@ -1,4 +1,4 @@
-%!Tex Root=../Main.tex
+%!Tex Root = ../Main.tex
 % ./Packete_und_Deklarationen.tex
 \chapter{Einführung}
 \section{Grammatiken}
@@ -11,7 +11,16 @@
 \subsection{Ableitungsbaum}
 \subsection{Linksrekursiv und Rechtrekursiv}
 \section{Lexikalische Analyse}
-\subsection{Lexer}
+Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist es in einfachen Worten ausgedrückt, in einem Inputstring, z.B. dem Inhalt einer Datei welche in \colorbold{UTF-8} codiert ist Folgen von Symbolen (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} matchen, die durch eine \colorbold{Grammatik} spezifiziert sind.
+
+Die Grammatik ist
+
+\begin{Definition}{Lexer (bzw. Scanner)}{lexer}%
+  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (T \times V)^{*}$, welche eine beliebige endliche \colorbold{Folge von Symbolen} aus $\sum$ auf ein Tupel aus einem \colorbold{Type} $T$ und einem \colorbold{Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der Grammatik der \colorbold{Sprache} $\mathtt{L}$ abbleiten lässt.
+\end{Definition}
+
+Es gilt:
+
 \section{Syntax Analyse}
 \subsection{Derivation Tree}
 \subsection{Abtrakte Syntax}
