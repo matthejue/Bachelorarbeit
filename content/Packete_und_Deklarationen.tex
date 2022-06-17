@@ -7,10 +7,10 @@
 \setlength{\parskip}{0.4cm} % space between paragraphs
 \usepackage{setspace}
 \usepackage{graphicx}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref} %hidelinks
+\usepackage[colorlinks=true, allcolors=PrimaryColor]{hyperref} %hidelinks
 \usepackage{csquotes}
 \usepackage[style=authortitle]{biblatex}
-\addbibresource{./library/library.bib}
+\addbibresource{./My Library/My Library.bib}
 \usepackage{pdfpages}
 \usepackage{booktabs} % for table rules
 \usepackage{tabulary}
@@ -34,19 +34,18 @@
 \definecolor{SecondaryColor}{HTML}{DBD3E3}
 
 
-
 \newcommand{\smalltt}[1]{{\small\texttt{#1}}}
 
 % bold with color
 \newcommand\colorbold[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
 
+% https://tex.stackexchange.com/questions/153167/how-to-set-page-number-at-right-footer
 % footer
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfootoffset{1cm}
 \rfoot[]{\thepage}
-
 
 \fancypagestyle{plain}{%
   % on first chapter pages no rule
@@ -60,15 +59,7 @@
 \lhead{\nouppercase{\leftmark}}
 \rhead{\nouppercase{\rightmark}}
 
-% %	footers
-% \fancyfoot{}						% clear footers
-% \rfoot[]{\thepage}					% right align page numbers
-%
-% %	headers
-% \fancyheadoffset{1cm}
-% \lhead{\nouppercase{\leftmark}} 	%	adding section on left side of the header
-% \rhead{\nouppercase{\rightmark}} 	%	adding subsection on right side of the header
-
+% https://tex.stackexchange.com/questions/108684/spacing-before-and-after-section-titles
 % spacing after section
 \usepackage{titlesec}
 
@@ -76,8 +67,16 @@
 \titlespacing*{\section}{0cm}{*3}{*3}
 \titlespacing*{\subsection}{0cm}{*3}{*2}
 
+% https://tex.stackexchange.com/questions/139366/chapter-header-with-super-huge-numbers
 \usepackage{fix-cm}
 \newcommand{\hsp}{\hspace{0pt}}
 \titleformat{\chapter}[hang]{\bfseries}{\fontsize{100}{0}\selectfont \textcolor{PrimaryColor}\thechapter\hsp}{0.5cm}{\Huge}[]
 
+% https://tex.stackexchange.com/a/40001
 \titlespacing*{\chapter}{0cm}{*0}{*4}
+
+% https://golatex.de/viewtopic.php?t=18830
+\defbibenvironment{bibliography}
+  {\itemize}
+  {\enditemize}
+  {\item}

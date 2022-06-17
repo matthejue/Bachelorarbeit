@@ -11,17 +11,27 @@
 \subsection{Ableitungsbaum}
 \subsection{Linksrekursiv und Rechtrekursiv}
 \section{Lexikalische Analyse}
-Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist es in einfachen Worten ausgedrückt, in einem Inputstring, z.B. dem Inhalt einer Datei welche in \colorbold{UTF-8} codiert ist, Folgen von Symbolen (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} matchen, die durch eine \colorbold{Grammatik} spezifiziert sind.
+Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist vereinfacht gesagt, in einem Inputstring, z.B. dem Inhalt einer Datei, welche in \colorbold{UTF-8} codiert ist, Folgen endlicher Symbole (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} (Definition \ref{def:pattern}) matchen, die durch eine \colorbold{Grammatik} spezifiziert sind.
 
-Die Grammatik ist
+\begin{Definition}{Pattern}{pattern}
+  \colorbold{Beschreibung} aller möglichen \colorbold{Lexeme} einer Menge $\mathbb{P}_\mathtt{T}$, die einem bestimmten \colorbold{Token} $\mathtt{T}$ zugeordnet werden.
+  Die Menge $\mathbb{P}_\mathtt{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich aus die sich aus den Regeln einer \colorbold{Grammatik} $\mathtt{G}$ einer \colorbold{Sprache} $\mathtt{L}$ ableiten lassen, die für die Spezifikation eines  \colorbold{Tokens} zuständig sind.\footcite{noauthor_what_nodate}
+\end{Definition}{Pattern}{pattern}
 
-\begin{Definition}{Lexer (bzw. Scanner)}{lexer}%
-  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (T \times V)^{*}$, welche eine beliebige endliche \colorbold{Folge von Symbolen} aus $\sum$ auf ein Tupel aus einem \colorbold{Type} $T$ und einem \colorbold{Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der Grammatik der \colorbold{Sprache} $\mathtt{L}$ abbleiten lässt.
+Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition \ref{def:lexeme}) genannt.
+
+\begin{Definition}{Lexeme}{lexeme}
+  Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} einer \colorbold{Sprache} $\mathtt{L}$ matched.
+\footcite{noauthor_what_nodate}
+\end{Definition}
+
+Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} (Definition \ref{def:lexer}) im Inputstring identifziert und \colorbold{Tokens} zugeordnet, welche
+
+\begin{Definition}{Lexer (bzw. Scanner)}{lexer}
+  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls Folge von Symbolen sich unter der Grammatik $\mathtt{G}$ der \colorbold{Sprache} $\mathtt{L}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
 \end{Definition}
 
 Es gilt:
-
-Alle gegenwertigen Theorien der Evolution und des Urknalls sind falsch, weil in einem 2000 tausend Jahre alten Bucn etwas anderes behauptet wird.
 
 \begin{special_paragraph}
   test
