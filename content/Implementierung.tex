@@ -1,8 +1,14 @@
 %!Tex Root = ../Main.tex
 % ./Packete_und_Deklarationen.tex
 \chapter{Implementierung}
+\section{PicoC und RETI}
+\subsubsection{ASTNode}
+% Tabelle aller PicoC Nodes
+% Tabelle aller RETI Nodes
+% RETI Interpreter erwähnen
 \section{Grammatiken}
-\subsection{PicoC}
+\subsection{Umstzung von Präzidenz}
+% erwähnen von Mehrdeutigkeit und Assoziativität
 Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache C \footcite{noauthor_c_nodate}. Die Präzidenzregeln von PicoC sind in Tabelle~\ref{tab:reference_table} aufgelistet.
 
 \begin{table}[h]
@@ -45,27 +51,27 @@ Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache 
 \label{tab:reference_table}
 \caption{Präzidenzregeln von PicoC}
 \end{table}
-
-\subsection{RETI}
-\subsection{Mehrdeutigkeit}
-\subsection{Präzidenz und Assoziativität}
-\subsection{Linksrekursivität}
+% Tabelle aller RETI Nodes
 \section{Lexikalische Analyse}
 \subsection{Lark}
-\subsection{LL(1) Recursive-Descent Lexer}
-\section{Syntax Analyse}
+\section{Syntaktische Analyse}
 \subsection{Lark}
-\subsection{Normalized Heterogeneous ASTNode}
+% \subsection{Visitor und Transformer}
 \subsection{Early Algorithmus}
-Das LL(k) Recursive-Descent Parser \footcite{parr_language_2009} Pattern ist
-\subsection{Visitor und Transformer}
 \section{Code Generation}
-\subsection{Symbol Table for Nested Scopes}
-\subsection{PicoC-Shrink Pass}
-\subsection{PicoC-Blocks Pass}
-\subsection{PicoC-Mon Pass}
-\subsection{RETI-Blocks Pass}
-\subsection{RETI-Patch Pass}
-\subsection{RETI Pass}
-\section{Fehlermeldungen}
+\subsection{Passes}
+\subsubsection{PicoC-Shrink Pass}
+\subsubsection{PicoC-Blocks Pass}
+\subsubsection{PicoC-Mon Pass}
+\begin{Definition}{Symboltabelle}{symboltabelle}
+\end{Definition}
+\subsubsection{RETI-Blocks Pass}
+\subsubsection{RETI-Patch Pass}
+\subsubsection{RETI Pass}
+\subsection{Umsetzung von Pointern und Arrays}
+\subsection{Umsetzung von Structs}
+\subsection{Umsetzung von Funktionen}
+\subsection{Umsetzung kleinerer Details}
+% langen Sprüngen, großen Konstanten, Division durch 0
+\subsection{Fehlermeldungen}
 \subsection{Error Handler}
