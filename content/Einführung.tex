@@ -55,15 +55,14 @@ Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring}
   Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} $T$ von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der \colorbold{regulären Grammatik} ${G}_{Lex}$ der \colorbold{regulären Sprache} ${L_{Lex}}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
 \end{Definition}
 
-Die %weitere Aufgabe \colorbold{Lekikalischen Analyse} werden jegliche für die Weiterverarbeitung unwichtige Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herausgefiltert, entweder vom Lexer oder schon bevor der Inputstring an den Lexer übergeben wird.
-% nur das f<r die Syntaktische Analyser wichtige
-
-Die vom \colorbold{Lexer} identifizierten \colorbold{Token} der \colorbold{Sprache}  werden
+Die vom \colorbold{Lexer} identifizierten \colorbold{Token} der \colorbold{Sprache} werden
 
 % Wozu überhaupt diese Einteilung Tokenname und value
 
+Eilne weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für die Weiterverarbeitung unwichtigen Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herauszufiltern, entweder vom Lexer oder schon bevor der Inputstring an den Lexer übergeben wird. Nur das, was für die \colorbold{Syntaktische Analyse} wichtig ist, soll weiterverarbeitet werden, alles andere wird herausgefiltert.
+
 \begin{special_paragraph}
-  Die \colorbold{reguläre Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $L_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein oder wenige Symbole} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$ oder $k$}, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind, der \colorbold{Kontext} in dem ein Symbol auftaucht ist also \colorbold{nicht wichtig}.
+  Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $L_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein oder wenige Symbole} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$ oder $k$}, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind, der \colorbold{Kontext} in dem ein Symbol auftaucht ist also \colorbold{nicht wichtig}.
 \end{special_paragraph}
 
 \section{Syntaktische Analyse}
