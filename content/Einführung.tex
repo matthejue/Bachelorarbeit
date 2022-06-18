@@ -49,15 +49,13 @@ Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition \ref{d
 \footcite{noauthor_what_nodate}
 \end{Definition}
 
-Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring} identifziert und \colorbold{Tokens} $T$ zugeordnet (Definition \ref{def:lexer}).
+Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring} identifziert und \colorbold{Tokens} $T$ zugeordnet (Definition \ref{def:lexer}). Die Tokens sind es, die letztendlich an die \colorbold{Syntaktische Analyse} weitergegeben werden.
 
 \begin{Definition}{Lexer (bzw. Scanner)}{lexer}
   Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} $T$ von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der \colorbold{regulären Grammatik} ${G}_{Lex}$ der \colorbold{regulären Sprache} ${L_{Lex}}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
 \end{Definition}
 
-Die vom \colorbold{Lexer} identifizierten \colorbold{Token} der \colorbold{Sprache} werden
-
-% Wozu überhaupt diese Einteilung Tokenname und value
+Der Grund warum nicht einfach nur \colorbold{Lexeme} an die \colorbold{Syntaktische Analyse} weitergegeben werden ist, weil z.B. ein `Identifer`.
 
 Eilne weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für die Weiterverarbeitung unwichtigen Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herauszufiltern, entweder vom Lexer oder schon bevor der Inputstring an den Lexer übergeben wird. Nur das, was für die \colorbold{Syntaktische Analyse} wichtig ist, soll weiterverarbeitet werden, alles andere wird herausgefiltert.
 
@@ -67,7 +65,8 @@ Eilne weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für
 
 \section{Syntaktische Analyse}
 
-Ein
+Die vom \colorbold{Lexer} identifizierten \colorbold{Token} der \colorbold{Sprache} werden
+% Wegweiser
 
 Der \colorbold{Parser} nutzt \colorbold{Token} $\mathtt{T}$ als Wegweiser, um herauszufinden,
 
@@ -101,5 +100,7 @@ Der \colorbold{Parser} nutzt \colorbold{Token} $\mathtt{T}$ als Wegweiser, um he
 \section{Code Generation}
 \begin{Definition}{Pass}{pass}
 \end{Definition}
-\section{Fehlemeldungen}
-% \subsection{Kategorien von Fehlermeldungen}
+\section{Fehlermeldungen}
+\begin{Definition}{Fehlermeldung}{fehlermeldung}
+\end{Definition}
+% Kategorien von Fehlermeldungen
