@@ -1,52 +1,80 @@
 %!Tex Root = ../Main.tex
 % ./Packete_und_Deklarationen.tex
 \chapter{Einführung}
+\section{Compiler und Interpreter}
+\subsection{T-Diagramme}
 \section{Grammatiken}
-\subsection{Konkrete Syntax}
 \subsection{Chromsky Hierarchie}
-\subsection{Reguläre Sprachen}
-\subsection{Kontextfreie Sprachen}
+% \subsection{Reguläre Sprachen}
+% \subsection{Kontextfreie Sprachen}
 \subsection{Präzidenz und Assoziativität}
 \subsection{Mehrdeutige Grammatiken}
 \subsection{Ableitungsbaum}
 \subsection{Linksrekursiv und Rechtrekursiv}
 \section{Lexikalische Analyse}
+\label{sec:lexikalische_analyse}
+
 Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist vereinfacht gesagt, in einem Inputstring, z.B. dem Inhalt einer Datei, welche in \colorbold{UTF-8} codiert ist, Folgen endlicher Symbole (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} (Definition \ref{def:pattern}) matchen, die durch eine \colorbold{reguläre Grammatik} spezifiziert sind.
 
 \begin{Definition}{Pattern}{pattern}
-  \colorbold{Beschreibung} aller möglichen \colorbold{Lexeme} einer Menge $\mathbb{P}_\mathtt{T}$, die einem bestimmten \colorbold{Token} $\mathtt{T}$ zugeordnet werden.
-  Die Menge $\mathbb{P}_\mathtt{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich mit den Regeln einer \colorbold{regulären Grammatik} $\mathtt{G}_{Lex}$ einer \colorbold{regulären Sprache} $\mathtt{L}_{Lex}$ beschreiben lassen \footnote{Als Beschreibungswerkzeug können aber auch z.B. reguläre Ausdrücke hergenommen werden.}, die für die Beschreibung eines \colorbold{Tokens} zuständig sind.\footcite{noauthor_what_nodate}
+  \colorbold{Beschreibung} aller möglichen \colorbold{Lexeme} einer Menge $\mathbb{P}_{T}$, die einem bestimmten \colorbold{Token} $T$ zugeordnet werden.
+  Die Menge $\mathbb{P}_{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich mit den Regeln einer \colorbold{regulären Grammatik} ${G}_{Lex}$ einer \colorbold{regulären Sprache} ${L}_{Lex}$ beschreiben lassen \footnote{Als Beschreibungswerkzeug können aber auch z.B. reguläre Ausdrücke hergenommen werden.}, die für die Beschreibung eines \colorbold{Tokens} $T$ zuständig sind.\footcite{noauthor_what_nodate}
 \end{Definition}
 
 Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition \ref{def:lexeme}) genannt.
 
 \begin{Definition}{Lexeme}{lexeme}
-  Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} einer \colorbold{Sprache} $\mathtt{L}_{Lex}$ matched.
+  Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} $T$ einer \colorbold{Sprache} ${L}_{Lex}$ matched.
 \footcite{noauthor_what_nodate}
 \end{Definition}
 
-Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im Inputstring identifziert und \colorbold{Tokens} zugeordnet (Definition \ref{def:lexer}).
+Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring} identifziert und \colorbold{Tokens} $T$ zugeordnet (Definition \ref{def:lexer}).
 
 \begin{Definition}{Lexer (bzw. Scanner)}{lexer}
-  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der \colorbold{regulären Grammatik} $\mathtt{G}_{Lex}$ der \colorbold{regulären Sprache} $\mathtt{L_{Lex}}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
+  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} $T$ von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der \colorbold{regulären Grammatik} ${G}_{Lex}$ der \colorbold{regulären Sprache} ${L_{Lex}}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
 \end{Definition}
 
-Ein Token ist
+Die \colorbold{Lekikalische Analyse} filtert jegliche für die Weiterverarbeitung unwichtige Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring heraus und
 
 \begin{special_paragraph}
-  Die \colorbold{reguläre Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $\mathh{L}_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein üblicher \colorbold{Lexer} immer nur \colorbold{ein Symbol} vorausschaut, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind, der \colorbold{Kontext} in dem ein Symbol auftaucht ist also \colorbold{nicht wichtig}.
+  Die \colorbold{reguläre Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $L_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein oder wenige Symbole} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$ oder $k$}, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind, der \colorbold{Kontext} in dem ein Symbol auftaucht ist also \colorbold{nicht wichtig}.
 \end{special_paragraph}
 
-\section{Syntax Analyse}
-\subsection{Derivation Tree}
-\subsection{Abtrakte Syntax}
-\subsection{Parser}
-\subsection{Descent Parsing}
-\subsection{First and Follow Set}
-\subsection{Lookahead}
-\subsection{Aktionen}
+\section{Syntaktische Analyse}
+Dadurch, dass der \colorbold{Lexer} in der \colorbold{Lekikalischen Analyse}, wie in \ref{sec:lexikalische_analyse} beschrieben alle \colorbold{Token} $\mathtt{T}$ der Sprache $\mathtt{L_{Lex}}$ im Inutstring identifziert hat, ist die Weiterverarbeitung durch die \colorbold{Syntaktische Analyse}, mittels eines \colorbold{Parsers} deutlich einfacher.
+
+Ein
+
+Der \colorbold{Parser} nutzt \colorbold{Token} $\mathtt{T}$ als Wegweiser, um herauszufinden,
+
+
+\begin{Definition}{Parser}{parser}
+\footcite{noauthor_what_nodate}
+\end{Definition}
+
+\begin{Definition}{Konkrette Syntax}{konkrette_syntax}
+\end{Definition}
+
+\begin{Definition}{Derivation Tree}{derivation tree}
+\end{Definition}
+
+\begin{Definition}{Abstrakte Syntax}{abstrakte_syntax}
+\end{Definition}
+
+\begin{Definition}{Abstrakte Syntax Tree}{abstrakte_syntax_tree}
+\end{Definition}
+
+\begin{Definition}{Transformer}{transformer}
+\end{Definition}
+
+\begin{Definition}{Visitor}{visitor}
+\end{Definition}
+
+% \subsection{Descent Parsing}
+% \subsection{First and Follow Set}
+% \subsection{Lookahead}
+% \subsection{Aktionen}
 \section{Code Generation}
 \subsection{Passes}
-\subsection{T-Diagramme}
 \section{Fehlemeldungen}
 \subsection{Kategorien von Fehlermeldungen}
