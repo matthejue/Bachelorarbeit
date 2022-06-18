@@ -1,6 +1,8 @@
 %!Tex Root = ../Main.tex
 % ./Packete_und_Deklarationen.tex
 \chapter{Einführung}
+\label{ch:einführung}
+
 \section{Compiler und Interpreter}
 \begin{Definition}{Compiler}{compiler}
 \end{Definition}
@@ -49,30 +51,65 @@ Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition \ref{d
 \footcite{noauthor_what_nodate}
 \end{Definition}
 
-Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring} identifziert und \colorbold{Tokens} $T$ zugeordnet (Definition \ref{def:lexer}). Die Tokens sind es, die letztendlich an die \colorbold{Syntaktische Analyse} weitergegeben werden.
+Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring} identifziert und \colorbold{Tokens} $T$ zugeordnet (Definition \ref{def:lexer}). Die \colorbold{Tokens} sind es, die letztendlich an die \colorbold{Syntaktische Analyse} weitergegeben werden.
 
 \begin{Definition}{Lexer (bzw. Scanner)}{lexer}
-  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} $T$ von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der \colorbold{regulären Grammatik} ${G}_{Lex}$ der \colorbold{regulären Sprache} ${L_{Lex}}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
+  Ein \colorbold{Lexer} ist eine \colorbold{partielle} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times W)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} $T$ mit einem \colorbold{Tokennamen} $N$ und einem \colorbold{Tokenwert} $W$ abbildet, falls diese Folge von Symbolen sich unter der \colorbold{regulären Grammatik} ${G}_{Lex}$, der \colorbold{regulären Sprache} ${L_{Lex}}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
 \end{Definition}
 
-Der Grund warum nicht einfach nur \colorbold{Lexeme} an die \colorbold{Syntaktische Analyse} weitergegeben werden ist, weil z.B. ein `Identifer`.
+Der Grund warum nicht einfach nur die \colorbold{Lexeme} an die \colorbold{Syntaktische Analyse} weitergegeben werden und der Grund für die Aufteilung des \colorbold{Tokens} in \colorbold{Tokenname} und \colorbold{Tokenwert} ist, weil z.B. die Bezeichner von Variablen, Konstanten und Funktionen beliebige Zeichenfolgen sein können, wie \smalltt{my\_fun}, \smalltt{my\_var} oder \smalltt{my\_const} und es auch viele verschiedenen Zahlen gibt, wie \smalltt{42}, \smalltt{314} oder \smalltt{12}. Die Überbegriffe bzw. Tokennamen für beliebige Bezeichner von Variablen, Konstanten und Funktionen und beliebige Zahlen sind aber trotz allem z.B. \smalltt{Zahl} und \smalltt{Bezeichner}.
+
+Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Tokenwert}, denn z.B. im Falle von PicoC kann z.B. der Wert $99$ durch zwei verschiedene Literale darstellt werden, einmal als ASCII-Zeichen \smalltt{'c'} und des Weiteren auch in Dezimalschreibweise als \smalltt{99}\footnote{Die Programmiersprache Python erlaubt es z.B. diesern Wert auch mit den Literalen \smalltt{0b1100011} und \smalltt{0x63} darzustellen}. Der \colorbold{Tokenwert} ist jedoch der letztendliche Wert an sich, unabhängig von der Darstellungsform.
+
+% weil es z.B. unter anderem oftmals viele verschiedene \colorbold{Literale} (Definition \ref{def:literal}) für einen Zahlenwert gibt und und
+
+% Definition Literal
+% VAlue und LExeme, wegen Literal nennt man es nicht so
+
+\begin{Special_Paragraph}
+  Um Verwirrung verzubäugen ist es wichtig folgende Unterscheidung hervorzuheben: Wenn von \colorbold{Symbolen} die Rede ist, so werden in der \colorbold{Lexikalischen Analyse}, der \colorbold{Syntaktische Analyse} und der \colorbold{Code Generierung}, auf diesen verschiedenen Ebenen unterschiedliche Konzepte als Symbole bezeichnet.
+
+  In der Lexikalischen Analyse sind einzelne \colorbold{Zeichen eines Zeichensatzes} die Symbole.
+
+  In der Syntaktischen Analyse sind die \colorbold{Tokennamen} die Symbole.
+
+  In der Code Generierung sind die \colorbold{Bezeichner von Variablen, Konstanten und Funktionnen} die Symbole\footnote{Das ist der Grund, warum die Tabelle, in der Informationen zu Identifiern gespeichert werden aus Kapitel \ref{ch:implementierung} Symboltabelle genannt wird.}.
+\end{Special_Paragraph}
+
+\begin{Definition}{Literal}{literal}
+  Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} für ein und denselben \colorbold{Wert}.
+\end{Definition}
 
 Eilne weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für die Weiterverarbeitung unwichtigen Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herauszufiltern, entweder vom Lexer oder schon bevor der Inputstring an den Lexer übergeben wird. Nur das, was für die \colorbold{Syntaktische Analyse} wichtig ist, soll weiterverarbeitet werden, alles andere wird herausgefiltert.
 
-\begin{special_paragraph}
+\begin{Special_Paragraph}
   Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $L_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein oder wenige Symbole} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$ oder $k$}, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind, der \colorbold{Kontext} in dem ein Symbol auftaucht ist also \colorbold{nicht wichtig}.
-\end{special_paragraph}
+\end{Special_Paragraph}
 
 \section{Syntaktische Analyse}
 
-Die vom \colorbold{Lexer} identifizierten \colorbold{Token} der \colorbold{Sprache} werden
+Die vom \colorbold{Lexer} identifizierten \colorbold{Token} der \colorbold{Sprache} $L_{Lex}$ werden nun im Folgenden
 % Wegweiser
 
 Der \colorbold{Parser} nutzt \colorbold{Token} $\mathtt{T}$ als Wegweiser, um herauszufinden,
 
-
 \begin{Definition}{Parser}{parser}
-\footcite{noauthor_what_nodate}
+  Ein Programm, dass eine \colorbold{Eingabe} in ein für die \colorbold{Weiterverbeitung} taugliche Form bringt.
+\end{Definition}
+
+\begin{Special_Paragraph}
+  An dieser Stelle könnte möglicherweise eine Begriffsverwirrung enstehen.
+\end{Special_Paragraph}
+
+
+In Bezug auf einen Compiler hat ein Parser meist die Aufgabe aus einem \colorbold{Inputstring} einen \colorbold{Derivation Tree} zu generieren.
+
+% Ein \colorbold{Parser} ist aber auch ein erweiterter \colorbold{Recognizer}, einmal hat der \colorbold{Parser} die Aufgabe eines \colorbold{Recognizers}, nämlich zu überprüfen, ob ein Inputstring sich den Regeln der Grammatik $$, ein \colorbold{Wort} der Sprache $L_{Parse}$.
+
+% Fehlermeldung bei Lexer, wenn z.B. ein ubekanntes Zeichen auftaucht. Meist sind aber alle möglichen Zeichenkombination allein dadruch schon möglich, dass es einen Identifier gibt, der alle möglichen Zeichenfolgen abfängt. Wodurch der Lexer wiederum doch eine linkstotale Funktion ist, die man im Allgemeinen einfach als Funktion bezeichnet.
+
+\begin{Definition}{Recognizer}{Recognizer}
+
 \end{Definition}
 
 \begin{Definition}{Konkrette Syntax}{konkrette_syntax}
@@ -93,11 +130,7 @@ Der \colorbold{Parser} nutzt \colorbold{Token} $\mathtt{T}$ als Wegweiser, um he
 \begin{Definition}{Visitor}{visitor}
 \end{Definition}
 
-% \subsection{Descent Parsing}
-% \subsection{First and Follow Set}
-% \subsection{Lookahead}
-% \subsection{Aktionen}
-\section{Code Generation}
+\section{Code Generierung}
 \begin{Definition}{Pass}{pass}
 \end{Definition}
 \section{Fehlermeldungen}

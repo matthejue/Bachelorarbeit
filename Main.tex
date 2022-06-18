@@ -34,12 +34,15 @@
 \newtcbtheorem[number within=chapter, list inside={theorem_list},crefname={definition}{definitions}]{Definition}{Definition}%
 {enhanced, arc=0mm,top=3mm,bottom=3mm, boxrule=0mm, borderline south={1mm}{0pt}{PrimaryColor}, title style={color=PrimaryColor},
 interior style={opacity=0.2, fill=PrimaryColor},
-frame style={color=white},fonttitle=\bfseries, fontupper=\itshape
+frame style={color=white}, fonttitle=\bfseries, fontupper=\itshape,
+before upper=\setlength{\parskip}{1em}
 }{def}
 
-\newtcolorbox{special_paragraph}{enhanced, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},
+\newtcolorbox{Special_Paragraph}{enhanced, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},
 interior style={fill=SecondaryColor},
 frame style={color=white},
+% https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
+before upper=\setlength{\parskip}{1em}
 }
 
 \include{./content/Motivation}              % ./content/Motivation.tex

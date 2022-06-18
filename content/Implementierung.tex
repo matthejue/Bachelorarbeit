@@ -1,6 +1,8 @@
 %!Tex Root = ../Main.tex
 % ./Packete_und_Deklarationen.tex
 \chapter{Implementierung}
+\label{ch:implementierung}
+
 \section{PicoC und RETI}
 \subsubsection{ASTNode}
 % Tabelle aller PicoC Nodes
@@ -53,12 +55,14 @@ Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache 
 \end{table}
 % Tabelle aller RETI Nodes
 \section{Lexikalische Analyse}
-\subsection{Lark}
+\subsection{Verwendung von Lark}
+\subsection{Basic Parser}
 \section{Syntaktische Analyse}
-\subsection{Lark}
-% \subsection{Visitor und Transformer}
-\subsection{Early Algorithmus}
-\section{Code Generation}
+\subsection{Verwendung von Lark}
+\subsection{Derivation Tree}
+\subsection{Derivation Tree Vereinfachung}
+\subsection{Early Parser}
+\section{Code Generierung}
 \subsection{Passes}
 \subsubsection{PicoC-Shrink Pass}
 \subsubsection{PicoC-Blocks Pass}
