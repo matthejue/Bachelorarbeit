@@ -11,30 +11,30 @@
 \subsection{Ableitungsbaum}
 \subsection{Linksrekursiv und Rechtrekursiv}
 \section{Lexikalische Analyse}
-Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist vereinfacht gesagt, in einem Inputstring, z.B. dem Inhalt einer Datei, welche in \colorbold{UTF-8} codiert ist, Folgen endlicher Symbole (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} (Definition \ref{def:pattern}) matchen, die durch eine \colorbold{Grammatik} spezifiziert sind.
+Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist vereinfacht gesagt, in einem Inputstring, z.B. dem Inhalt einer Datei, welche in \colorbold{UTF-8} codiert ist, Folgen endlicher Symbole (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} (Definition \ref{def:pattern}) matchen, die durch eine \colorbold{reguläre Grammatik} spezifiziert sind.
 
 \begin{Definition}{Pattern}{pattern}
   \colorbold{Beschreibung} aller möglichen \colorbold{Lexeme} einer Menge $\mathbb{P}_\mathtt{T}$, die einem bestimmten \colorbold{Token} $\mathtt{T}$ zugeordnet werden.
-  Die Menge $\mathbb{P}_\mathtt{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich aus die sich aus den Regeln einer \colorbold{Grammatik} $\mathtt{G}$ einer \colorbold{Sprache} $\mathtt{L}$ ableiten lassen, die für die Spezifikation eines  \colorbold{Tokens} zuständig sind.\footcite{noauthor_what_nodate}
+  Die Menge $\mathbb{P}_\mathtt{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich mit den Regeln einer \colorbold{regulären Grammatik} $\mathtt{G}_{Lex}$ einer \colorbold{regulären Sprache} $\mathtt{L}_{Lex}$ beschreiben lassen \footnote{Als Beschreibungswerkzeug können aber auch z.B. reguläre Ausdrücke hergenommen werden.}, die für die Beschreibung eines \colorbold{Tokens} zuständig sind.\footcite{noauthor_what_nodate}
 \end{Definition}
 
 Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition \ref{def:lexeme}) genannt.
 
 \begin{Definition}{Lexeme}{lexeme}
-  Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} einer \colorbold{Sprache} $\mathtt{L}$ matched.
+  Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} einer \colorbold{Sprache} $\mathtt{L}_{Lex}$ matched.
 \footcite{noauthor_what_nodate}
 \end{Definition}
 
 Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im Inputstring identifziert und \colorbold{Tokens} zugeordnet (Definition \ref{def:lexer}).
 
 \begin{Definition}{Lexer (bzw. Scanner)}{lexer}
-  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls Folge von Symbolen sich unter der Grammatik $\mathtt{G}$ der \colorbold{Sprache} $\mathtt{L}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
+  Ein \colorbold{Lexer} ist eine \colorbold{rechtseindeutige} Funktion \hspace{0.2cm}$lex: \sum^{*} \rightharpoonup (N \times V)^{*}$, welche ein \colorbold{Wort} aus $\sum^{*}$ auf ein \colorbold{Token} von einem \colorbold{Token Name} $N$ und einem \colorbold{Token Value}  $V$ abbildet, falls diese Folge von Symbolen sich unter der \colorbold{regulären Grammatik} $\mathtt{G}_{Lex}$ der \colorbold{regulären Sprache} $\mathtt{L_{Lex}}$ abbleiten lässt.\footcite{noauthor_lecture-notes-2021_2022}
 \end{Definition}
 
-Ein Token
+Ein Token ist
 
 \begin{special_paragraph}
-  test
+  Die \colorbold{reguläre Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $\mathh{L}_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein üblicher \colorbold{Lexer} immer nur \colorbold{ein Symbol} vorausschaut, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind, der \colorbold{Kontext} in dem ein Symbol auftaucht ist also \colorbold{nicht wichtig}.
 \end{special_paragraph}
 
 \section{Syntax Analyse}
