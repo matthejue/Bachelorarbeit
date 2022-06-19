@@ -63,11 +63,7 @@ Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring}
 Ein \colorbold{Lexer} ist im Allgemeinen eine \colorbold{partielle Funktion}, da es Zeichenfolgen geben kann, die kein \colorbold{Pattern} eines \colorbold{Tokens} der Sprache $L_{Lex}$ matchen. In Bezug auf eine Implementierung, wird, wenn der Lexer Teil der Implementierung eines Compilers ist, in diesem Fall eine \colorbold{Fehlermeldung} ausgegeben.
 
 Eine weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für die Weiterverarbeitung unwichtigen Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herauszufiltern. Das geschieht mittels des \colorbold{Lexers}, der allen für die \colorbold{Syntaktische Analyse} unwichtige Zeichen das leere Wort $\epsilon$ zuordnet. Das ist auch im Sinne der Definition, denn $\epsilon \in \Sigma^{*}$.
-
 Nur das, was für die \colorbold{Syntaktische Analyse} wichtig ist, soll weiterverarbeitet werden, alles andere wird herausgefiltert.
-
-
-% In den  $G_{Lex}$ Grammatiken einiger Programmiersprachen sind allerdinds alle möglichen Zeichenfolgen allein dadurch schon möglich, weil diese Programmiesprachen das Konzept eines \colorbold{Identifiers} o.ä. umsetzen, der alle möglichen Zeichenfolgen abfängt\footnote{Bei der Grammatik von C und auch PicoC ist das allerdings nicht der Fall, weil Identifier dort nicht mit einer Zahl anfangen dürfen.}. Wodurch der Lexer wiederum doch eine linkstotale partielle Funktion ist, die man im Allgemeinen einfach als \colorbold{Funktion} bezeichnet: $lex: \Sigma^{*} \rightarrow (N \times W)^{*}$.
 
 Der Grund warum nicht einfach nur die \colorbold{Lexeme} an die \colorbold{Syntaktische Analyse} weitergegeben werden und der Grund für die Aufteilung des \colorbold{Tokens} in \colorbold{Tokenname} und \colorbold{Tokenwert} ist, weil z.B. die Bezeichner von Variablen, Konstanten und Funktionen beliebige Zeichenfolgen sein können, wie \smalltt{my\_fun}, \smalltt{my\_var} oder \smalltt{my\_const} und es auch viele verschiedenen Zahlen gibt, wie \smalltt{42}, \smalltt{314} oder \smalltt{12}. Die Überbegriffe bzw. Tokennamen für beliebige Bezeichner von Variablen, Konstanten und Funktionen und beliebige Zahlen sind aber trotz allem z.B. \smalltt{Zahl} und \smalltt{Bezeichner}.
 
@@ -94,17 +90,19 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
 % TODO: zusammenfassendes Bild
 
 \section{Syntaktische Analyse}
-
 In der \colorbold{Syntaktischen Analyse} ist für einige Sprachen eine \colorbold{Kontextfreie Grammatik} $G_{Parse}$ notwendig, um die diese Sprache zu beschreiben, da viele Programmiersprachen z.B. für \colorbold{Funktionsaufrufe} \verb|fun(arg)| und \colorbold{Codeblöcke} \verb|if(1){}| syntaktische Mittel verwenden, die es notwendig machen sich zu merken wieviele öffnende Klammern \verb|'('| bzw. öffnende geschweifte Klammern \verb|'{'| es momentan gibt, die noch nicht durch eine enstsprechende schließende Klammer \verb|')'| bzw. schließende geschweifte Klammer \verb|'}'| geschlossen wurden.
 
 % TODO: später erwähnen, dass alle Regeln der Grammatik G_parse eine kontexfreie Form haben, was der Beweis ist
 
 Die vom \colorbold{Lexer} im Inputstring identifizierten \colorbold{Token} werden in der \colorbold{Syntaktischen Analyse} vom \colorbold{Parser} (Definition \ref{def:parser}) als \colorbold{Wegweiser} verwendet, da je nachdem, in welcher Reihenfolge die \colorbold{Token} auftauchen, dies einer anderen Ableitung nach der \colorbold{Grammatik} $G_{Parse}$ entspricht. Dabei wird in der Grammatik nach dem \colorbold{Tokennamen} unterschieden und nicht nach dem Tokenwert, da es nur von Interesse ist, ob an einer bestimmten Stelle z.B. eine \verb|Zahl| steht und nicht, welchen konkretten Wert diese \verb|Zahl| hat. Der \colorbold{Tokenwert} ist erst später in der \colorbold{Code Generierung} relevant.
 
-Die \colorbold{Syntax}, in welcher der Inputstring aufgeschrieben ist, wird auch als \colorbold{konkrette Syntax} (Definition \ref{def:konkrette_syntax}) bezeichnet.
+Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben ist, wird auch als \colorbold{konkrette Syntax} (Definition \ref{def:konkrette_syntax}) bezeichnet. Zum Schluss
 
 \begin{Definition}{Parser}{parser}
   Ein Programm, dass eine \colorbold{Eingabe} in eine für die \colorbold{Weiterverbeitung} taugliche Form bringt.
+
+  \phantomsection\label{par:parser}
+  In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \ref{par:parser} verendet}
 \end{Definition}
 
 In Bezug auf Compilerbau hat ein \colorbold{Parser} meist die Aufgabe aus einem \colorbold{Inputstring} einen \colorbold{Derivation Tree} (Definition \ref{def:derivation_tree}) zu generieren.
@@ -112,35 +110,44 @@ In Bezug auf Compilerbau hat ein \colorbold{Parser} meist die Aufgabe aus einem 
 \begin{Special_Paragraph}
   An dieser Stelle könnte möglicherweise eine Begriffsverwirrung enstehen, ob ein \colorbold{Lexer} nach der obigen Definition nicht auch ein \colorbold{Parser} ist.
 
-  In Bezug auf Compilerbau ist ein \colorbold{Lexer} ein Teil eines Parsers und der Parser vereinigt sowohl die \colorbold{Lexikalische Analyse}, als auch einen Teil der \colorbold{Syntaktischen Analyse} in sich, aber für sich isoliert betrachtet ist ein Lexer nach Definition \ref{def:parser} ebenfalls ein Parser. Aber im Compilerbau überwiegt seine Funktionalität, dass er den Inputstring lexikalisch weiterverarbeitet, um ihn als Lexer zu bezeichnen, der Teil eines Parsers ist.
+  In Bezug auf Compilerbau ist ein \colorbold{Lexer} ein Teil eines Parsers. Der Parser vereinigt sowohl die \colorbold{Lexikalische Analyse}, als auch einen Teil der \colorbold{Syntaktischen Analyse} in sich. Aber für sich isoliert, ohne Bezug zu Compilerbau betrachtet, ist ein Lexer nach Definition \ref{def:parser} ebenfalls ein Parser. Aber im Compilerbau hat \colorbold{Parser} eine spezifischere Definition und hier überwiegt beim \colorbold{Lexer} seine Funktionalität, dass er den Inputstring lexikalisch weiterverarbeitet, um ihn als Lexer zu bezeichnen, der Teil eines Parsers ist.
 \end{Special_Paragraph}
 
-Ein \colorbold{Parser} ist aber auch ein erweiterter \colorbold{Recognizer}, denn einmal hat der \colorbold{Parser} die Aufgabe eines \colorbold{Recognizers} (Definition \ref{def:recognizer}), nämlich zu überprüfen, ob ein Inputstring sich den Regeln der Grammatik $G_Parse$ ableiten lässt und ein \colorbold{Wort} der Sprache $L_{Parse}$ ist.
+Ein \colorbold{Parser} ist aber auch ein erweiterter \colorbold{Recognizer}, denn zum einen hat der \colorbold{Parser} die Aufgabe eines \colorbold{Recognizers} (Definition \ref{def:recognizer}), nämlich zu überprüfen, ob ein Inputstring sich den Regeln der \colorbold{Konkretten Syntax} ableiten lässt und des Weiteren wendet ein \colorbold{Parser} auch \colorbold{Aktions} an, um währendessen einen \colorbold{Derivation Tree} zu generieren.
 
 \begin{Definition}{Recognizer}{recognizer}
+
+\end{Definition}
+
+\begin{Definition}{Aktion}{aktion}
 
 \end{Definition}
 
 \begin{Definition}{Konkrette Syntax}{konkrette_syntax}
   \colorbold{Syntax} einer \colorbold{Sprache}, die durch die \colorbold{Grammatiken} $G_{Lex}$ und $G_{Parse}$ zusammengenommen beschrieben wird.
 
-  Ein \colorbold{Programm} in seiner \colorbold{Textrepräsentation}, wie es in einer Textdatei nach den Regeln der \colorbold{Grammatiken} $G_{Lex}$ und $G_{Parse}$ abgeleitet steht, bevor man es kompiliert, ist in \colorbold{konkretter Syntax} aufgeschrieben.
+  Ein \colorbold{Programm} in seiner \colorbold{Textrepräsentation}, wie es in einer Textdatei nach den Regeln der \colorbold{Grammatiken} $G_{Lex}$ und $G_{Parse}$ abgeleitet steht, bevor man es kompiliert, ist in \colorbold{konkretter Syntax} aufgeschrieben.\footcite{noauthor_course_2022}
 \end{Definition}
 
 \begin{Definition}{Derivation Tree (bzw. Parse Tree)}{derivation_tree}
-\end{Definition}
+Form in Compiler.
 
-\begin{Definition}{Abstrakte Syntax}{abstrakte_syntax}
-
-\end{Definition}
-
-\begin{Definition}{Abstrakte Syntax Tree}{abstrakte_syntax_tree}
+ Inside the compiler, we
+use abstract syntax trees (ASTs) to represent programs in a way that efficiently
+supports the operations that the compiler needs to perform
 \end{Definition}
 
 \begin{Definition}{Transformer}{transformer}
 \end{Definition}
 
 \begin{Definition}{Visitor}{visitor}
+\end{Definition}
+
+\begin{Definition}{Abstrakte Syntax}{abstrakte_syntax}
+Form in Compiler.
+\end{Definition}
+
+\begin{Definition}{Abstrakte Syntax Tree}{abstrakte_syntax_tree}
 \end{Definition}
 
 % TODO: zusammenfassendes Bild

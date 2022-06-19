@@ -16,12 +16,13 @@
 \contentsline {tcolorbox}{\numberline {2.16}Literal}{11}{tcb@cnt@Definition.2.16}%
 \contentsline {tcolorbox}{\numberline {2.17}Parser}{11}{tcb@cnt@Definition.2.17}%
 \contentsline {tcolorbox}{\numberline {2.18}Recognizer}{12}{tcb@cnt@Definition.2.18}%
-\contentsline {tcolorbox}{\numberline {2.19}Konkrette Syntax}{12}{tcb@cnt@Definition.2.19}%
-\contentsline {tcolorbox}{\numberline {2.20}Derivation Tree (bzw. Parse Tree)}{12}{tcb@cnt@Definition.2.20}%
-\contentsline {tcolorbox}{\numberline {2.21}Abstrakte Syntax}{12}{tcb@cnt@Definition.2.21}%
-\contentsline {tcolorbox}{\numberline {2.22}Abstrakte Syntax Tree}{12}{tcb@cnt@Definition.2.22}%
-\contentsline {tcolorbox}{\numberline {2.23}Transformer}{12}{tcb@cnt@Definition.2.23}%
-\contentsline {tcolorbox}{\numberline {2.24}Visitor}{12}{tcb@cnt@Definition.2.24}%
-\contentsline {tcolorbox}{\numberline {2.25}Pass}{13}{tcb@cnt@Definition.2.25}%
-\contentsline {tcolorbox}{\numberline {2.26}Fehlermeldung}{13}{tcb@cnt@Definition.2.26}%
+\contentsline {tcolorbox}{\numberline {2.19}Aktion}{12}{tcb@cnt@Definition.2.19}%
+\contentsline {tcolorbox}{\numberline {2.20}Konkrette Syntax}{12}{tcb@cnt@Definition.2.20}%
+\contentsline {tcolorbox}{\numberline {2.21}Derivation Tree (bzw. Parse Tree)}{12}{tcb@cnt@Definition.2.21}%
+\contentsline {tcolorbox}{\numberline {2.22}Transformer}{12}{tcb@cnt@Definition.2.22}%
+\contentsline {tcolorbox}{\numberline {2.23}Visitor}{12}{tcb@cnt@Definition.2.23}%
+\contentsline {tcolorbox}{\numberline {2.24}Abstrakte Syntax}{13}{tcb@cnt@Definition.2.24}%
+\contentsline {tcolorbox}{\numberline {2.25}Abstrakte Syntax Tree}{13}{tcb@cnt@Definition.2.25}%
+\contentsline {tcolorbox}{\numberline {2.26}Pass}{13}{tcb@cnt@Definition.2.26}%
+\contentsline {tcolorbox}{\numberline {2.27}Fehlermeldung}{13}{tcb@cnt@Definition.2.27}%
 \contentsline {tcolorbox}{\numberline {3.1}Symboltabelle}{15}{tcb@cnt@Definition.3.1}%
