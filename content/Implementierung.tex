@@ -3,14 +3,15 @@
 \chapter{Implementierung}
 \label{ch:implementierung}
 
-\section{PicoC und RETI}
-\subsubsection{ASTNode}
-% Tabelle aller PicoC Nodes
-% Tabelle aller RETI Nodes
-% RETI Interpreter erwähnen
-\section{Grammatiken}
-\subsection{Umstzung von Präzidenz}
-% erwähnen von Mehrdeutigkeit und Assoziativität
+\section{Lexikalische Analyse}
+\subsection{Verwendung von Lark}
+% erwähnen, dass in Lark die Grammatiken L_Lex und L_Parse gemischt sind
+% EBNF erwähnen
+% (erwähnen, dass finalle Grammatik im Appendix)
+\subsection{Basic Parser}
+\section{Syntaktische Analyse}
+\subsection{Verwendung von Lark}
+\subsection{Umsetzung von Präzidenz}
 Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache C \footcite{noauthor_c_nodate}. Die Präzidenzregeln von PicoC sind in Tabelle~\ref{tab:reference_table} aufgelistet.
 
 \begin{table}[h]
@@ -53,15 +54,20 @@ Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache 
 \label{tab:reference_table}
 \caption{Präzidenzregeln von PicoC}
 \end{table}
-% Tabelle aller RETI Nodes
-\section{Lexikalische Analyse}
-\subsection{Verwendung von Lark}
-\subsection{Basic Parser}
-\section{Syntaktische Analyse}
-\subsection{Verwendung von Lark}
-\subsection{Derivation Tree}
-\subsection{Derivation Tree Vereinfachung}
+% erwähnen von Mehrdeutigkeit und Assoziativität
+% finalle Grammatik im Appendix
+% Crafting Compilers Quelle benennen
+\subsection{Derivation Tree Generierung}
 \subsection{Early Parser}
+\subsection{Derivation Tree Vereinfachung}
+% Visitor erwähnen
+\subsection{Abstrakt Syntax Tree Generierung}
+\subsubsection{ASTNode}
+\subsubsection{PicoC Nodes}
+% Tabelle aller PicoC Nodes
+\subsubsection{RETI Nodes}
+% Tabelle aller RETI Nodes
+% Transformer erwähnen
 \section{Code Generierung}
 \subsection{Passes}
 \subsubsection{PicoC-Shrink Pass}
@@ -72,6 +78,7 @@ Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache 
 \subsubsection{RETI-Blocks Pass}
 \subsubsection{RETI-Patch Pass}
 \subsubsection{RETI Pass}
+% TODO: zusammenfassendes Bild
 \subsection{Umsetzung von Pointern und Arrays}
 \subsection{Umsetzung von Structs}
 \subsection{Umsetzung von Funktionen}
@@ -79,3 +86,5 @@ Die PicoC Sprache hat dieselben Präzidenzregeln implementiert, wie die Sprache 
 % langen Sprüngen, großen Konstanten, Division durch 0
 \section{Fehlermeldungen}
 \subsection{Error Handler}
+% Fehlermeldung ist, wenn der Lexer (partielle Funktion) oder Parser nicht matcht
+% Token und Nodes enthalten Position, im Transformer wird die Position von den Token auf die Nodes übertragen und auch die Symboltabelle speichert Position
