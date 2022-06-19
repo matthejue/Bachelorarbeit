@@ -1,28 +1,28 @@
-\contentsline {tcolorbox}{\numberline {2.1}Compiler}{8}{tcb@cnt@Definition.2.1}%
-\contentsline {tcolorbox}{\numberline {2.2}Interpreter}{8}{tcb@cnt@Definition.2.2}%
-\contentsline {tcolorbox}{\numberline {2.3}T-Diagram}{8}{tcb@cnt@Definition.2.3}%
-\contentsline {tcolorbox}{\numberline {2.4}Sprache}{8}{tcb@cnt@Definition.2.4}%
-\contentsline {tcolorbox}{\numberline {2.5}Chromsky Hierarchie}{8}{tcb@cnt@Definition.2.5}%
-\contentsline {tcolorbox}{\numberline {2.6}Grammatik}{8}{tcb@cnt@Definition.2.6}%
-\contentsline {tcolorbox}{\numberline {2.7}Reguläre Sprachen}{8}{tcb@cnt@Definition.2.7}%
-\contentsline {tcolorbox}{\numberline {2.8}Kontextfreie Sprachen}{9}{tcb@cnt@Definition.2.8}%
-\contentsline {tcolorbox}{\numberline {2.9}Ableitungsbaum}{9}{tcb@cnt@Definition.2.9}%
-\contentsline {tcolorbox}{\numberline {2.10}Mehrdeutige Grammatik}{9}{tcb@cnt@Definition.2.10}%
-\contentsline {tcolorbox}{\numberline {2.11}Assoziativität}{9}{tcb@cnt@Definition.2.11}%
-\contentsline {tcolorbox}{\numberline {2.12}Präzidenz}{9}{tcb@cnt@Definition.2.12}%
-\contentsline {tcolorbox}{\numberline {2.13}Pattern}{9}{tcb@cnt@Definition.2.13}%
-\contentsline {tcolorbox}{\numberline {2.14}Lexeme}{9}{tcb@cnt@Definition.2.14}%
-\contentsline {tcolorbox}{\numberline {2.15}Lexer (bzw. Scanner)}{10}{tcb@cnt@Definition.2.15}%
-\contentsline {tcolorbox}{\numberline {2.16}Literal}{11}{tcb@cnt@Definition.2.16}%
-\contentsline {tcolorbox}{\numberline {2.17}Parser}{11}{tcb@cnt@Definition.2.17}%
-\contentsline {tcolorbox}{\numberline {2.18}Recognizer}{12}{tcb@cnt@Definition.2.18}%
-\contentsline {tcolorbox}{\numberline {2.19}Aktion}{12}{tcb@cnt@Definition.2.19}%
-\contentsline {tcolorbox}{\numberline {2.20}Konkrette Syntax}{12}{tcb@cnt@Definition.2.20}%
-\contentsline {tcolorbox}{\numberline {2.21}Derivation Tree (bzw. Parse Tree)}{12}{tcb@cnt@Definition.2.21}%
-\contentsline {tcolorbox}{\numberline {2.22}Transformer}{12}{tcb@cnt@Definition.2.22}%
-\contentsline {tcolorbox}{\numberline {2.23}Visitor}{12}{tcb@cnt@Definition.2.23}%
-\contentsline {tcolorbox}{\numberline {2.24}Abstrakte Syntax}{13}{tcb@cnt@Definition.2.24}%
-\contentsline {tcolorbox}{\numberline {2.25}Abstrakte Syntax Tree}{13}{tcb@cnt@Definition.2.25}%
-\contentsline {tcolorbox}{\numberline {2.26}Pass}{13}{tcb@cnt@Definition.2.26}%
-\contentsline {tcolorbox}{\numberline {2.27}Fehlermeldung}{13}{tcb@cnt@Definition.2.27}%
-\contentsline {tcolorbox}{\numberline {3.1}Symboltabelle}{15}{tcb@cnt@Definition.3.1}%
+\contentsline {tcolorbox}{\numberline {1}Compiler}{8}{tcb@cnt@Definition.1}%
+\contentsline {tcolorbox}{\numberline {2}Interpreter}{8}{tcb@cnt@Definition.2}%
+\contentsline {tcolorbox}{\numberline {3}T-Diagram}{8}{tcb@cnt@Definition.3}%
+\contentsline {tcolorbox}{\numberline {4}Sprache}{8}{tcb@cnt@Definition.4}%
+\contentsline {tcolorbox}{\numberline {5}Chromsky Hierarchie}{8}{tcb@cnt@Definition.5}%
+\contentsline {tcolorbox}{\numberline {6}Grammatik}{8}{tcb@cnt@Definition.6}%
+\contentsline {tcolorbox}{\numberline {7}Reguläre Sprachen}{8}{tcb@cnt@Definition.7}%
+\contentsline {tcolorbox}{\numberline {8}Kontextfreie Sprachen}{9}{tcb@cnt@Definition.8}%
+\contentsline {tcolorbox}{\numberline {9}Ableitungsbaum}{9}{tcb@cnt@Definition.9}%
+\contentsline {tcolorbox}{\numberline {10}Mehrdeutige Grammatik}{9}{tcb@cnt@Definition.10}%
+\contentsline {tcolorbox}{\numberline {11}Assoziativität}{9}{tcb@cnt@Definition.11}%
+\contentsline {tcolorbox}{\numberline {12}Präzidenz}{9}{tcb@cnt@Definition.12}%
+\contentsline {tcolorbox}{\numberline {13}Pattern}{9}{tcb@cnt@Definition.13}%
+\contentsline {tcolorbox}{\numberline {14}Lexeme}{9}{tcb@cnt@Definition.14}%
+\contentsline {tcolorbox}{\numberline {15}Lexer (bzw. Scanner)}{10}{tcb@cnt@Definition.15}%
+\contentsline {tcolorbox}{\numberline {16}Literal}{11}{tcb@cnt@Definition.16}%
+\contentsline {tcolorbox}{\numberline {17}Parser}{11}{tcb@cnt@Definition.17}%
+\contentsline {tcolorbox}{\numberline {18}Recognizer}{12}{tcb@cnt@Definition.18}%
+\contentsline {tcolorbox}{\numberline {19}Aktion}{12}{tcb@cnt@Definition.19}%
+\contentsline {tcolorbox}{\numberline {20}Konkrette Syntax}{12}{tcb@cnt@Definition.20}%
+\contentsline {tcolorbox}{\numberline {21}Derivation Tree (bzw. Parse Tree)}{12}{tcb@cnt@Definition.21}%
+\contentsline {tcolorbox}{\numberline {22}Transformer}{12}{tcb@cnt@Definition.22}%
+\contentsline {tcolorbox}{\numberline {23}Visitor}{12}{tcb@cnt@Definition.23}%
+\contentsline {tcolorbox}{\numberline {24}Abstrakte Syntax}{13}{tcb@cnt@Definition.24}%
+\contentsline {tcolorbox}{\numberline {25}Abstrakte Syntax Tree}{13}{tcb@cnt@Definition.25}%
+\contentsline {tcolorbox}{\numberline {26}Pass}{13}{tcb@cnt@Definition.26}%
+\contentsline {tcolorbox}{\numberline {27}Fehlermeldung}{13}{tcb@cnt@Definition.27}%
+\contentsline {tcolorbox}{\numberline {28}Symboltabelle}{15}{tcb@cnt@Definition.28}%

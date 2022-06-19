@@ -101,8 +101,17 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
 \begin{Definition}{Parser}{parser}
   Ein Programm, dass eine \colorbold{Eingabe} in eine für die \colorbold{Weiterverbeitung} taugliche Form bringt.
 
-  \phantomsection\label{par:parser}
-  In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \ref{par:parser} verendet}
+  % https://www.overleaf.com/learn/latex/Counters
+  \newcounter{subdefcounter}
+  \counterwithin{subdefcounter}{\tcbcounter}
+  \setcounter{subdefcounter}{1}
+
+  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0pt}{}[:]
+
+  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+  \paragraph{\thesubdefcounter}\label{par:parser}
+  In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \nameref{par:parser} verendet.}.
 \end{Definition}
 
 In Bezug auf Compilerbau hat ein \colorbold{Parser} meist die Aufgabe aus einem \colorbold{Inputstring} einen \colorbold{Derivation Tree} (Definition \ref{def:derivation_tree}) zu generieren.
@@ -132,7 +141,7 @@ Ein \colorbold{Parser} ist aber auch ein erweiterter \colorbold{Recognizer}, den
 \begin{Definition}{Derivation Tree (bzw. Parse Tree)}{derivation_tree}
 Form in Compiler.
 
- Inside the compiler, we
+Inside the compiler, we
 use abstract syntax trees (ASTs) to represent programs in a way that efficiently
 supports the operations that the compiler needs to perform
 \end{Definition}
