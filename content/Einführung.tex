@@ -72,6 +72,8 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
 
   Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $L_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein Symbol} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$}, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind.
 
+% TODO: später erwähnen, dass alle Regeln der Grammatik G_lex eine reguläre Form haben, was der Beweis ist
+
 \begin{Special_Paragraph}
   Um Verwirrung verzubäugen ist es wichtig folgende Unterscheidung hervorzuheben: Wenn von \colorbold{Symbolen} die Rede ist, so werden in der \colorbold{Lexikalischen Analyse}, der \colorbold{Syntaktische Analyse} und der \colorbold{Code Generierung}, auf diesen verschiedenen Ebenen unterschiedliche Konzepte als Symbole bezeichnet.
 
@@ -94,32 +96,38 @@ Eine weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für 
 
 In der \colorbold{Syntaktischen Analyse} ist für einige Sprachen eine \colorbold{Kontextfreie Grammatik} $G_{Parse}$ notwendig, um die diese Sprache zu beschreiben, da viele Programmiersprachen z.B. für \colorbold{Funktionsaufrufe} \verb|fun(arg)| und \colorbold{Codeblöcke} \verb|if(1){}| syntaktische Mittel verwenden, die es notwendig machen sich zu merken wieviele öffnende Klammern \verb|'('| bzw. öffnende geschweifte Klammern \verb|'{'| es momentan gibt, die noch nicht durch eine enstsprechende schließende Klammer \verb|')'| bzw. schließende geschweifte Klammer \verb|'}'| geschlossen wurden.
 
-Die vom \colorbold{Lexer} im Inputstring identifizierten \colorbold{Token} der werden in der \colorbold{Syntaktischen Analyse} als Wegweiser verwendet, da je nachdem, was
+% TODO: später erwähnen, dass alle Regeln der Grammatik G_parse eine kontexfreie Form haben, was der Beweis ist
+
+\begin{Definition}{Konkrette Syntax}{konkrette_syntax}
+   Syntax, die verwendet wird.
+   Ein \colorbold{Programm} in seiner \colorbold{Textrepräsentation}, wie man es in einer Textdatei auschreibt, ist in konkretter Syntax aufgeschrieben.
+\end{Definition}
+
+Die vom \colorbold{Lexer} im Inputstring identifizierten \colorbold{Token} werden in der \colorbold{Syntaktischen Analyse} vom \colorbold{Parser} (Definition \ref{def:parser}) als \colorbold{Wegweiser} verwendet, da je nachdem, in welcher Reihenfolge die \colorbold{Token} auftauchen, dies einer anderen Ableitung nach der \colorbold{Grammatik} $G_{Parse}$ entspricht. Dabei wird in der Grammatik nach dem \colorbold{Tokennamen} unterschieden und nicht nach dem Tokenwert, da es nur von Interesse ist, ob an einer bestimmten Stelle z.B. eine \verb|Zahl| steht und nicht, welchen konkretten Wert dieser \verb|Zahl| hat.
 
 \begin{Definition}{Parser}{parser}
   Ein Programm, dass eine \colorbold{Eingabe} in ein für die \colorbold{Weiterverbeitung} taugliche Form bringt.
 \end{Definition}
 
+In Bezug auf einen Compilerbau hat ein Parser meist die Aufgabe aus einem \colorbold{Inputstring} einen \colorbold{Derivation Tree} (Definition \ref{def:derivation_tree}) zu generieren.
+
 \begin{Special_Paragraph}
-  An dieser Stelle könnte möglicherweise eine Begriffsverwirrung enstehen.
+  An dieser Stelle könnte möglicherweise eine Begriffsverwirrung enstehen, ob ein \colorbold{Lexer} nach der obigen Definition nicht auch ein \colorbold{Parser} ist.
+
+  In Bezug auf Compilerbau ist ein \colorbold{Lexer} ein Teil eines Parsers und der Parser vereinigt sowohl die \colorbold{Lexikalische Analyse}, als auch einen Teil der \colorbold{Syntaktischen Analyse} in sich, aber für sich isoliert betrachtet ist ein Lexer nach Definition \ref{def:parser} ebenfalls ein Parser. Aber im Compilerbau überwiegt seine Funktionalität, dass er den Inputstring lexikalisch weiterverarbeitet, um ihn als Lexer zu bezeichnen, der Teil eines Parsers ist.
 \end{Special_Paragraph}
 
+Ein \colorbold{Parser} ist aber auch ein erweiterter \colorbold{Recognizer}, denn einmal hat der \colorbold{Parser} die Aufgabe eines \colorbold{Recognizers} (Definition \ref{def:recognizer}), nämlich zu überprüfen, ob ein Inputstring sich den Regeln der Grammatik $G_Parse$ ableiten lässt und ein \colorbold{Wort} der Sprache $L_{Parse}$ ist.
 
-In Bezug auf einen Compiler hat ein Parser meist die Aufgabe aus einem \colorbold{Inputstring} einen \colorbold{Derivation Tree} zu generieren.
-
-% Ein \colorbold{Parser} ist aber auch ein erweiterter \colorbold{Recognizer}, einmal hat der \colorbold{Parser} die Aufgabe eines \colorbold{Recognizers}, nämlich zu überprüfen, ob ein Inputstring sich den Regeln der Grammatik $$, ein \colorbold{Wort} der Sprache $L_{Parse}$.
-
-\begin{Definition}{Recognizer}{Recognizer}
+\begin{Definition}{Recognizer}{recognizer}
 
 \end{Definition}
 
-\begin{Definition}{Konkrette Syntax}{konkrette_syntax}
-\end{Definition}
-
-\begin{Definition}{Derivation Tree}{derivation tree}
+\begin{Definition}{Derivation Tree (bzw. Parse Tree)}{derivation_tree}
 \end{Definition}
 
 \begin{Definition}{Abstrakte Syntax}{abstrakte_syntax}
+
 \end{Definition}
 
 \begin{Definition}{Abstrakte Syntax Tree}{abstrakte_syntax_tree}
