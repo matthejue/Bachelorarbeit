@@ -26,8 +26,10 @@
 \end{Definition}
 \subsection{Mehrdeutige Grammatiken}
 \begin{Definition}{Ableitungsbaum}{ableitungsbaum}
+% TODO: Bild hierfür
 \end{Definition}
 \begin{Definition}{Mehrdeutige Grammatik}{mehrdeutige_grammatik}
+% TODO: (Bild hierfür)
 \end{Definition}
 \subsection{Präzidenz und Assoziativität}
 \begin{Definition}{Assoziativität}{assoziativität}
@@ -62,11 +64,13 @@ Ein \colorbold{Lexer} ist im Allgemeinen eine \colorbold{partielle Funktion}, da
 
 Falls der Inputstring, den der \colorbold{Lexer} erhält noch Leerzeichen \,\textvisiblespace\, oder andere für die \colorbold{Syntaktische Analyse} unwichtige Zeichen enthält ist das auch im Sinne der Definition. Dann wird diesen das \colorbold{leere Wort} $\epsilon$ zugeordnet, denn $\epsilon \in \Sigma^{*}$.
 
-In den  $G_{Lex}$ Grammatiken einiger Programmiersprachen sind allerdinds alle möglichen Zeichenfolgen allein dadurch schon möglich, weil diese Programmiesprachen das Konzept eines \colorbold{Identifiers} o.ä. umsetzen, der alle möglichen Zeichenfolgen abfängt\footnote{Bei der Grammatik von C und auch PicoC ist das allerdings nicht der Fall, weil Identifier dort nicht mit einer Zahl anfangen dürfen.}. Wodurch der Lexer wiederum doch eine \colorbold{linkstotale partielle Funktion} ist, die man im Allgemeinen einfach als Funktion bezeichnet: $lex: \Sigma^{*} \rightarrow (N \times W)^{*}$.
+In den  $G_{Lex}$ Grammatiken einiger Programmiersprachen sind allerdinds alle möglichen Zeichenfolgen allein dadurch schon möglich, weil diese Programmiesprachen das Konzept eines \colorbold{Identifiers} o.ä. umsetzen, der alle möglichen Zeichenfolgen abfängt\footnote{Bei der Grammatik von C und auch PicoC ist das allerdings nicht der Fall, weil Identifier dort nicht mit einer Zahl anfangen dürfen.}. Wodurch der Lexer wiederum doch eine linkstotale partielle Funktion ist, die man im Allgemeinen einfach als \colorbold{Funktion} bezeichnet: $lex: \Sigma^{*} \rightarrow (N \times W)^{*}$.
 
 Der Grund warum nicht einfach nur die \colorbold{Lexeme} an die \colorbold{Syntaktische Analyse} weitergegeben werden und der Grund für die Aufteilung des \colorbold{Tokens} in \colorbold{Tokenname} und \colorbold{Tokenwert} ist, weil z.B. die Bezeichner von Variablen, Konstanten und Funktionen beliebige Zeichenfolgen sein können, wie \smalltt{my\_fun}, \smalltt{my\_var} oder \smalltt{my\_const} und es auch viele verschiedenen Zahlen gibt, wie \smalltt{42}, \smalltt{314} oder \smalltt{12}. Die Überbegriffe bzw. Tokennamen für beliebige Bezeichner von Variablen, Konstanten und Funktionen und beliebige Zahlen sind aber trotz allem z.B. \smalltt{Zahl} und \smalltt{Bezeichner}.
 
 Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Tokenwert}, denn z.B. im Falle von PicoC kann z.B. der Wert $99$ durch zwei verschiedene Literale darstellt werden, einmal als ASCII-Zeichen \smalltt{'c'} und des Weiteren auch in Dezimalschreibweise als \smalltt{99}\footnote{Die Programmiersprache Python erlaubt es z.B. diesern Wert auch mit den Literalen \smalltt{0b1100011} und \smalltt{0x63} darzustellen.}. Der \colorbold{Tokenwert} ist jedoch der letztendliche Wert an sich, unabhängig von der Darstellungsform.
+
+  Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $L_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein Symbol} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$}, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind.
 
 \begin{Special_Paragraph}
   Um Verwirrung verzubäugen ist es wichtig folgende Unterscheidung hervorzuheben: Wenn von \colorbold{Symbolen} die Rede ist, so werden in der \colorbold{Lexikalischen Analyse}, der \colorbold{Syntaktische Analyse} und der \colorbold{Code Generierung}, auf diesen verschiedenen Ebenen unterschiedliche Konzepte als Symbole bezeichnet.
@@ -84,18 +88,13 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
 
 Eine weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für die Weiterverarbeitung unwichtigen Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herauszufiltern, entweder vom Lexer oder schon bevor der Inputstring an den Lexer übergeben wird. Nur das, was für die \colorbold{Syntaktische Analyse} wichtig ist, soll weiterverarbeitet werden, alles andere wird herausgefiltert.
 
-\begin{Special_Paragraph}
-  Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ einer regulären Sprache $L_{Lex}$ verwendet wird, ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein oder wenige Symbole} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$ oder $k$}, unabhängig davon, was für Symbole davor aufgetaucht sind. Die übliche Implementierung eines \colorbold{Lexers} merkt sich nicht, was für Symbole davor aufgetaucht sind, der \colorbold{Kontext} in dem ein Symbol auftaucht ist also \colorbold{nicht wichtig}.
-\end{Special_Paragraph}
-
 % TODO: zusammenfassendes Bild
 
 \section{Syntaktische Analyse}
 
-Die vom \colorbold{Lexer} identifizierten \colorbold{Token} der \colorbold{Sprache} $L_{Lex}$ werden nun im Folgenden
-% Wegweiser
+In der \colorbold{Syntaktischen Analyse} ist für einige Sprachen eine \colorbold{Kontextfreie Grammatik} $G_{Parse}$ notwendig, um die diese Sprache zu beschreiben, da viele Programmiersprachen z.B. für \colorbold{Funktionsaufrufe} \verb|fun(arg)| und \colorbold{Codeblöcke} \verb|if(1){}| syntaktische Mittel verwenden, die es notwendig machen sich zu merken wieviele öffnende Klammern \verb|'('| bzw. öffnende geschweifte Klammern \verb|'{'| es momentan gibt, die noch nicht durch eine enstsprechende schließende Klammer \verb|')'| bzw. schließende geschweifte Klammer \verb|'}'| geschlossen wurden.
 
-Der \colorbold{Parser} nutzt \colorbold{Token} $\mathtt{T}$ als Wegweiser, um herauszufinden,
+Die vom \colorbold{Lexer} im Inputstring identifizierten \colorbold{Token} der werden in der \colorbold{Syntaktischen Analyse} als Wegweiser verwendet, da je nachdem, was
 
 \begin{Definition}{Parser}{parser}
   Ein Programm, dass eine \colorbold{Eingabe} in ein für die \colorbold{Weiterverbeitung} taugliche Form bringt.
