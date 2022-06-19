@@ -138,7 +138,18 @@ Ein \colorbold{Parser} ist aber auch ein erweiterter \colorbold{Recognizer}, den
   Ein \colorbold{Programm} in seiner \colorbold{Textrepräsentation}, wie es in einer Textdatei nach den Regeln der \colorbold{Grammatiken} $G_{Lex}$ und $G_{Parse}$ abgeleitet steht, bevor man es kompiliert, ist in \colorbold{konkretter Syntax} aufgeschrieben.\footcite{noauthor_course_2022}
 \end{Definition}
 
+
+\begin{Definition}{Node}{node}
+\end{Definition}
+% TODO: Node irgendwo davor mal erwähnen
+
+
 \begin{Definition}{Derivation Tree (bzw. Parse Tree)}{derivation_tree}
+  \colorbold{Compilerinterne Darstellung} eines Programs in  als Baumdatenstruktur, in der \colorbold(Nichtterminalsybmole) die \colorbold{Inneren Knoten} des Baumes bilden und \colorbold{Terminalsymbole} die \colorbold{Blätter} des Baumes bilden.
+
+
+  , \colorbold(welches) aus einem \colorbold{Inputstring}, der in \colorbold{Konkretter Syntax} angegeben ist generiert wurde, welche
+
 Form in Compiler.
 
 Inside the compiler, we
@@ -156,13 +167,13 @@ supports the operations that the compiler needs to perform
   \colorbold{Syntax} die beschreibt, was für Arten von \colorbold{Komposition} bei den \colorbold{Nodes} eines \colorbold{Abstrakt Syntax Trees} möglich sind.
 \end{Definition}
 
-\begin{Definition}{Node}{node}
-\end{Definition}
-
 \begin{Definition}{Abstrakte Syntax Tree}{abstrakte_syntax_tree}
-  \colorbold{Compilerinterne Darstellung} eines Programs, welches aus einem \colorbold{Inputstring}, der in \colorbold{Konkretter Syntax} angegeben ist generiert wurde, die es erlaubt die Operationen, die der Compiler ausführen muss, möglichst effizient auszuführen.
+  \colorbold{Compilerinterne Darstellung} eines Programs, welches TODO die es erlaubt die Operationen, die der Compiler ausführen muss, möglichst effizient auszuführen.\footcite{noauthor_course_2022}
 
-  Im Gegensatz zur
+  % näher an RETI Instructions, besser für Weiterverarbeitung
+  % keine Schachtelung von Regeln
+
+  Im Gegensatz zum \colorbold{Derivation Tree}, sind im \colorbold{Abstrakt Syntax Tree} alle Nodes
 \end{Definition}
 
 % TODO: zusammenfassendes Bild
