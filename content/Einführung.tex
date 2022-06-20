@@ -140,17 +140,23 @@ Ein \colorbold{Parser} ist einerseits ein erweiterter \colorbold{Recognizer}, de
   Entspricht dem Maschinenmodell eines \colorbold{Automaten}. Im Bezug auf Compilerbau entspricht der \colorbold{Recognizer} einem \colorbold{Kellerautomaten}, in dem \colorbold{Wörter} bestimmter \colorbold{Kontextfreier Sprachen} erkannt werden. Der \colorbold{Recognizer} erkennt, ob ein Iputstring bzw. Wort sich mit den Produktionen der \colorbold{Konkrette Syntax} ableiten lässt, also ob er bzw. es Teil der Sprache ist, die von der \colorbold{Konkretten Syntax} beschrieben wird oder nicht.
 \end{Definition}
 
-\newenvironment{definitionitemize}[1]
-  {\renewcommand{\descriptionlabel}[1]{\hspace\labelsep\normalfont\bfseries$#1$-induction, $##1$}%
-   \begin{description}}
-  {\end{description}}
-
-
 Für das \colorbold{Parsen} gibt es verschiedene Ansätze:
-\begin{definitionitemize}
-  \item[\colorbold{Top-Down Parsing:}]
-  \item[\colorbold{Bottom-Up Parsing:}]
-\end{definitionitemize}
+
+
+\begin{itemize}[itemsep=-2mm]
+  % https://tex.stackexchange.com/questions/12373/how-to-change-the-space-between-the-itemize-items-in-latex
+  \coloritem[Top-Down Parsing]
+   % https://latex.org/forum/viewtopic.php?t=22612
+  \vspace*{-0.5\baselineskip}
+  \begin{itemize}[itemsep=-2mm]
+    \coloritem asdf
+  \end{itemize}
+  \coloritem[Buttom-Up Parsing] Es wird mit dem Inputstring gestartet und versucht diesen durch Rückwärtsanwenden der \colorbold{Produktionen} der  \colorbold{Konkretten Syntax} bis zum  \colorbold{Startsymbol} zurückzuverfolgen.
+  \vspace*{-0.5\baselineskip}
+  \begin{itemize}[itemsep=-2mm]
+    \coloritem asdf
+  \end{itemize}
+\end{itemize}
 
 
 Der \colorbold{Abstrakt Syntax Tree} wird mithilfe von \colorbold{Transformern} (Definition \ref{def:transformer}) und \colorbold{Visitors} (Definition \ref{def:visitor}) generiert und ist das Endprodukt der \colorbold{Syntaktischen Analyse}. Wenn man die gesamte \colorbold{Syntaktische Analyse} betrachtet, so übersetzt diese einen Inpustring von der \colorbold{Konkretten Syntax} in die \colorbold{Abstrakte Syntax} (Definition \ref{def:abstrakte_syntax}).

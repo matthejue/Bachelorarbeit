@@ -1,4 +1,8 @@
 %!Tex Root = ../Main.tex
+% ./Motivation.tex
+% ./Einführung.tex
+% ./Implementierung.tex
+% ./Ergebnisse_und_Ausblick.tex
 \documentclass{report}
 \usepackage[showframe, margin=1.5cm]{geometry}
 \usepackage[ngerman]{babel}
@@ -84,3 +88,19 @@
 
 % https://tex.stackexchange.com/questions/358292/creating-a-subcounter-to-a-counter-i-created
 \usepackage{chngcntr}
+
+% https://tex.stackexchange.com/questions/18870/defining-an-new-itemize-like-environment-where-itemfoo-passes-foo-to-a-macro
+\usepackage{ifmtarg}
+
+% https://tex.stackexchange.com/questions/8351/what-do-makeatletter-and-makeatother-do
+\makeatletter
+
+\newcommand{\coloritem[1]}[]{%
+\@ifmtarg{#1}{\item[\textcolor{PrimaryColor}{$\bullet$}]}%
+{\item[\textcolor{PrimaryColor}{$\bullet$}] \colorbold{\textbf{#1:}}}
+          }
+
+\makeatother
+
+% https://stackoverflow.com/questions/38144458/decreasing-line-spacing-itemize-latex
+\usepackage{enumitem}
