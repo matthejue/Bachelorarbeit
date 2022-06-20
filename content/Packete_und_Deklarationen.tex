@@ -95,12 +95,16 @@
 % https://tex.stackexchange.com/questions/8351/what-do-makeatletter-and-makeatother-do
 \makeatletter
 
+% ignorespace: https://runebook.dev/de/docs/latex/_005cignorespaces-_0026-_005cignorespacesafterend
+% enspace: https://math-linux.com/latex-26/faq/latex-faq/article/latex-horizontal-space-qquad-hspace-thinspace-enspace
 \newcommand{\coloritem[1]}[]{%
 \@ifmtarg{#1}{\item[\textcolor{PrimaryColor}{$\bullet$}]}%
-{\item[\textcolor{PrimaryColor}{$\bullet$}] \colorbold{\textbf{#1:}}}
-          }
+{\item[\textcolor{PrimaryColor}{$\bullet$}] \colorbold{\textbf{#1:}}}\enspace\ignorespaces}
 
 \makeatother
 
-% https://stackoverflow.com/questions/38144458/decreasing-line-spacing-itemize-latex
+% https://stackoverflow.com/questions/1061112/eliminate-space-before-beginitemize
 \usepackage{enumitem}
+
+% https://tex.stackexchange.com/a/263470
+\usepackage{microtype}

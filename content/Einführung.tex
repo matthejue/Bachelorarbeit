@@ -142,22 +142,18 @@ Ein \colorbold{Parser} ist einerseits ein erweiterter \colorbold{Recognizer}, de
 
 Für das \colorbold{Parsen} gibt es verschiedene Ansätze:
 
-
-\begin{itemize}[itemsep=-2mm]
-  % https://tex.stackexchange.com/questions/12373/how-to-change-the-space-between-the-itemize-items-in-latex
-  \coloritem[Top-Down Parsing]
-   % https://latex.org/forum/viewtopic.php?t=22612
-  \vspace*{-0.5\baselineskip}
-  \begin{itemize}[itemsep=-2mm]
-    \coloritem asdf
+% https://tex.stackexchange.com/questions/12373/how-to-change-the-space-between-the-itemize-items-in-latex
+% https://stackoverflow.com/questions/1061112/eliminate-space-before-beginitemize
+\begin{itemize}[itemsep=-2mm, topsep=-2mm]
+  \coloritem[Top-Down Parsing] asdf.
+  \begin{itemize}[itemsep=-2mm, topsep=-2mm]
+    \coloritem asd
   \end{itemize}
-  \coloritem[Buttom-Up Parsing] Es wird mit dem Inputstring gestartet und versucht diesen durch Rückwärtsanwenden der \colorbold{Produktionen} der  \colorbold{Konkretten Syntax} bis zum  \colorbold{Startsymbol} zurückzuverfolgen.
-  \vspace*{-0.5\baselineskip}
-  \begin{itemize}[itemsep=-2mm]
-    \coloritem asdf
+  \coloritem[Bottom-Up Parsing] Es wird mit dem Inputstring gestartet und versucht diesen durch Rückwärtsanwenden der \colorbold{Produktionen} der  \colorbold{Konkretten Syntax} bis zum  \colorbold{Startsymbol} zurückzuverfolgen.
+  \begin{itemize}[itemsep=-2mm, topsep=-2mm]
+    \coloritem LR Parsing:
   \end{itemize}
 \end{itemize}
-
 
 Der \colorbold{Abstrakt Syntax Tree} wird mithilfe von \colorbold{Transformern} (Definition \ref{def:transformer}) und \colorbold{Visitors} (Definition \ref{def:visitor}) generiert und ist das Endprodukt der \colorbold{Syntaktischen Analyse}. Wenn man die gesamte \colorbold{Syntaktische Analyse} betrachtet, so übersetzt diese einen Inpustring von der \colorbold{Konkretten Syntax} in die \colorbold{Abstrakte Syntax} (Definition \ref{def:abstrakte_syntax}).
 
@@ -198,4 +194,10 @@ Der \colorbold{Abstrakt Syntax Tree} hat einmal den Zweck, dass die Kompositione
 \section{Fehlermeldungen}
 \begin{Definition}{Fehlermeldung}{fehlermeldung}
 \end{Definition}
+
+% \begin{itemize}
+%   \item asdlfkjasdf asdfa asdf asdf asdf sdaasd f asdf sadf sadf sdf sadf ds sdf asdf sdf sdf sadf sdf sdf sdf asdf sdf sdf sdf sadf sdf
+%   \item asdlfkjasdf asdfa asdf asdf asdf sdaasd f asdf sadf sadf sdf sadf ds sdf asdf sdf sdf sadf sdf sdf sdf asdf sdf sdf sdf sadf sdf
+% \end{itemize}
+
 % Kategorien von Fehlermeldungen
