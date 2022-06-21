@@ -28,11 +28,6 @@
 \end{Definition}
 \begin{Definition}{Linksrekursive Grammatiken}{linksrekursive_grammatiken}
 \end{Definition}
-\begin{Definition}{Wortproblem}{wortproblem}
-  % zu Grammatiken schieben
-\end{Definition}
-\begin{Definition}{Kontextfreie Sprachen}{kontextfreie_sprachen}
-\end{Definition}
 \subsection{Mehrdeutige Grammatiken}
 \begin{Definition}{Ableitungsbaum}{ableitungsbaum}
 % TODO: Bild hierfür
@@ -44,6 +39,14 @@
 \begin{Definition}{Assoziativität}{assoziativität}
 \end{Definition}
 \begin{Definition}{Präzidenz}{präzidenz}
+\end{Definition}
+\begin{Definition}{Wortproblem}{wortproblem}
+  % zu Grammatiken schieben
+\end{Definition}
+\begin{Definition}{LL(k)-Grammatik}{llk_grammatik}
+  Eine Grammatik ist \colorbold{LL(k)} für $k\in\mathbb{N}$, falls jeder Ableitungsschritt eindeutig durch die nächsten $k$ Symbole des \colorbold{Eingabeworts} bzw. in Bezug zu Compilerbau \colorbold{Token} des Inputstrings zu bestimmen ist\footnote{Das wird auch als \colorbold{Lookahead} von $k$ bezeichnet.}. Dabei steht \colorbold{LL} für \colorbold{l}eft-to-right und \colorbold{l}eftmost-derivation, da das \colorbold{Eingabewort} von \colorbold{links nach rechts} geparsed und immer \colorbold{Linksableitungen} genommen werden müssen\footnote{Wobei sich das mit den \colorbold{Linksableitungen} automatisch ergibt, wenn man das Eingabewort von  \colorbold{links-nach-rechts} parsed und jeder der nächsten $k$ \colorbold{Ableitungsschritte} eindeutig sein soll.}, damit die obige Bedingung mit den \colorbold{nächsten} $k$ Symbolen gilt.
+\end{Definition}
+\begin{Definition}{Kontextfreie Sprachen}{kontextfreie_sprachen}
 \end{Definition}
 % \subsection{Linksrekursiv und Rechtrekursiv}
 \section{Lexikalische Analyse}
@@ -155,17 +158,23 @@ Für das \colorbold{Parsen} gibt es grundsätzlich \colorbold{zwei} verschiedene
 % https://tex.stackexchange.com/questions/12373/how-to-change-the-space-between-the-itemize-items-in-latex
 % https://stackoverflow.com/questions/1061112/eliminate-space-before-beginitemize
 \begin{itemize}[itemsep=-1mm, topsep=-1mm]
-  \coloritem[Top-Down Parsing] Die Struktur dieser \colorbold{Parser} ist sehr nah an der \colorbold{Konkretten Syntax}, deren Sprache sie erkennen sollen. Es wird versucht durch Expansion der Produktionen der \colorbold{Konkretten Syntax} bis zu den Blättern, \colorbold{Linksableitungen} zu finden, sodass die \colorbold{Terminalsymbole} der \colorbold{Blätter} mit dem \colorbold{Inputstring} matchen\footnote{\colorbold{Rechtsableitungen} wären mit \colorbold{Recursive-Descent} auch möglich, wenn man dann auch über den Inputstring \colorbold{rückwärts} iteriert. Es gibt allerdings keinen guten Grund, warum man immer das \colorbold{rechteste} \colorbold{Non-Terminal} zuerst expandieren sollte, da für \colorbold{Kontextfreie Grammatiken} sowohl mit \colorbold{Links- als auch Rechtsableitungen} alle Wörter der Sprache, die die \colorbold{Kontextfreie Grammatik} beschreibt, ableitbar sind.}. Die richtigen \colorbold{Linksableitungen} für die \colorbold{Non-Terminale} der \colorbold{Konkretten Syntax}, welche oftmals nach den Regeln der Konkretten Syntax \colorbold{Nicht-deterministisch} mehrere Möglichkeiten der Expansion haben, werden entweder durch \colorbold{Backtracking} oder \colorbold{Vorausschauen} gefunden bzw. korrekt gewählt.
+  \coloritem[Top-Down Parsing]
 
-  Test
-  \begin{itemize}[itemsep=-1mm, topsep=-1mm]
-    \coloritem[Recursive-Descent / Backtracking Parser]
-    \coloritem \footnote{Diese Art von Parser wurde im \colorbold{PicoC-Compiler} implementiert, als dieser noch auf dem Stand des \colorbold{Bachelorprojektes} war, bevor er durch den nicht selbst implementierten \colorbold{Earlay Parser} von Lark ersetzt wurde.}
-    \coloritem \footnote{Diese Art von Parser ist im \colorbold{RETI-Interpreter} implementiert, da die \colorbold{RETI-Sprache} eine besonders simple \colorbold{LL(1) Grammatik} besitzt.}
-    \coloritem \footnote{Das wird auch als \colorbold{Lookahead} von $k$ bezeichnet.}
-  \coloritem[LL Parser] Diese Parser erkennen \colorbold{LL(k) Grammatiken}. Wobei eine Grammatik \colorbold{LL(k)} ist, wenn ein \colorbold{LL(k) Recognizer} dafür konstruiert werden kann, der diese erkennt. Dabei steht \colorbold{LL} für \colorbold{l}eft-to-right und \colorbold{l}eftmost-derivation, da die \colorbold{Token} von \colorbold{links nach rechts} gematched werden und immer das \colorbold{linkeste Non-Terminal} expandiert wird. Das $k$ steht dafür, dass dieser \colorbold{Parser}, um eine konstante Zahl $k$ von \colorbold{Tokens} vorausschauen kann. Diese Parser sind nicht in der Lage mit \colorbold{Linksrekursive} Grammatiken TODO
-  \end{itemize}
-  \coloritem[Bottom-Up Parsing] Es wird mit dem Inputstring gestartet und versucht, die \colorbold{Folge von Ableitungen}, die zu seiner Entstehung führt durch Rückwärtsanwenden der \colorbold{Produktionen} der \colorbold{Konkretten Syntax} bis zum  \colorbold{Startsymbol} zurückzuverfolgen.
+  Es wird versucht durch Expansion der Produktionen der \colorbold{Konkretten Syntax} bis zu den Blättern, \colorbold{Linksableitungen} zu finden, sodass die \colorbold{Terminalsymbole} der \colorbold{Blätter} mit dem \colorbold{Inputstring} matchen.
+%
+  Die richtigen \colorbold{Linksableitungen} für die \colorbold{Non-Terminale} der \colorbold{Konkretten Syntax}, welche oftmals nach den Regeln der Konkretten Syntax \colorbold{Nicht-deterministisch} mehrere mögliche Ableitungen haben, werden entweder durch \colorbold{Backtracking} oder \colorbold{Vorausschauen} gefunden bzw. korrekt gewählt.
+
+  % -------------------------------------------------------------------------------
+
+  Eine sehr einfach zu implementierende Technik für \colorbold{Top-Down Parser} ist hierbei der \colorbold{Rekursive Abstieg}. Dabei wird jedem \colorbold{Nicht-Terminalsymbol} eine \colorbold{Prozedur} zugeordnet, welche die Produktionsregeln dieses \colorbold{Nicht-Terminalsymbols} umsetzt. Prozeduren rufen sich dabei wechselseitig gegenseitig entsprechend der \colorbold{Produktionsregeln} auf, falls eine entsprechende Produktionsregel eine \colorbold{Rekursion} enthält.\footnote{Diese Art von Parser wurde im \colorbold{PicoC-Compiler} implementiert, als dieser noch auf dem Stand des \colorbold{Bachelorprojektes} war, bevor er durch den nicht selbst implementierten \colorbold{Earley Parser} von Lark ersetzt wurde.}
+
+  \colorbold{Rekursiver Abstieg} kann mit \colorbold{Backtracking} verbunden werden, um auch Grammatiken parsen zu können, die nicht \colorbold{LL(k)} (Definition \ref{def:llk_grammatik}) sind.
+
+
+  \footnote{Diese Art von Parser ist im \colorbold{RETI-Interpreter} implementiert, da die \colorbold{RETI-Sprache} eine besonders simple \colorbold{LL(1) Grammatik} besitzt.}
+
+
+  \coloritem[Bottom-Up Parsing] Es wird mit dem Inputstring gestartet und versucht, die \colorbold{Folge von Ableitungen}, die zu seiner Entstehung führt durch Rückwärtsanwenden der \colorbold{Produktionen} der \colorbold{Konkretten Syntax} bis zum  \colorbold{Startsymbol} zurückzuverfolgen.\footnote{Unter dieser Kategorie fällt der \colorbold{Eargg}}
 \end{itemize}
   % ein hübsches Bildchen, wo man einen Überblick bekommt
 \end{Special_Paragraph}
