@@ -158,18 +158,15 @@ Für das \colorbold{Parsen} gibt es grundsätzlich \colorbold{zwei} verschiedene
 % https://tex.stackexchange.com/questions/12373/how-to-change-the-space-between-the-itemize-items-in-latex
 % https://stackoverflow.com/questions/1061112/eliminate-space-before-beginitemize
 \begin{itemize}[itemsep=-1mm, topsep=-1mm]
-  \coloritem[Top-Down Parsing]
+  \coloritem[Top-Down Parsing] Der \colorbold{Derivation Tree} wird von \colorbold{oben-nach-unten} generiert, also von der \colorbold{Wurzel} zu den \colorbold{Blättern}. Dementsprechend fängt die Generierung des \colorbold{Derivation Tree} mit dem Startsymbol der Grammatik an und wendet in jedem Schritt eine \colorbold{Linksableitung} auf die \colorbold{Nicht-Terminalsymbole} an, bis in den \colorbold{Blättern} der gewünschte \colorbold{Inputstring} abzulesen ist oder es sich herausstellt, dass dieser nicht generiert werden kann.
 
-  Es wird versucht durch Expansion der Produktionen der \colorbold{Konkretten Syntax} bis zu den Blättern, \colorbold{Linksableitungen} zu finden, sodass die \colorbold{Terminalsymbole} der \colorbold{Blätter} mit dem \colorbold{Inputstring} matchen.
-%
-  Die richtigen \colorbold{Linksableitungen} für die \colorbold{Non-Terminale} der \colorbold{Konkretten Syntax}, welche oftmals nach den Regeln der Konkretten Syntax \colorbold{Nicht-deterministisch} mehrere mögliche Ableitungen haben, werden entweder durch \colorbold{Backtracking} oder \colorbold{Vorausschauen} gefunden bzw. korrekt gewählt.
+  Der Grund, warum die \colorbold{Linksableitung} verwendet wird und nicht z.B. die \colorbold{Rechtsableitung} ist, weil der das \colorbold{Eingabewert} bzw. der \colorbold{Inputstring} von \colorbold{links nach rechts} eingelesen wird, was gut damit zusammenpasst, dass die \colorbold{Linksableitung} die \colorbold{Blätter} von \colorbold{links-nach-rechts} generiert.
 
-  % -------------------------------------------------------------------------------
+  Welche der \colorbold{Produktionen} für ein \colorbold{Nicht-Terminalsymbol} angewandt wird, wenn es mehrere Alternativen gibt, wird entweder durch \colorbold{Backtracking} oder durch \colorbold{Vorausschauen} gelöst.
 
-  Eine sehr einfach zu implementierende Technik für \colorbold{Top-Down Parser} ist hierbei der \colorbold{Rekursive Abstieg}. Dabei wird jedem \colorbold{Nicht-Terminalsymbol} eine \colorbold{Prozedur} zugeordnet, welche die Produktionsregeln dieses \colorbold{Nicht-Terminalsymbols} umsetzt. Prozeduren rufen sich dabei wechselseitig gegenseitig entsprechend der \colorbold{Produktionsregeln} auf, falls eine entsprechende Produktionsregel eine \colorbold{Rekursion} enthält.\footnote{Diese Art von Parser wurde im \colorbold{PicoC-Compiler} implementiert, als dieser noch auf dem Stand des \colorbold{Bachelorprojektes} war, bevor er durch den nicht selbst implementierten \colorbold{Earley Parser} von Lark ersetzt wurde.}
+  Eine sehr einfach zu implementierende Technik für \colorbold{Top-Down Parser} ist hierbei der \colorbold{Rekursive Abstieg}. Dabei wird jedem \colorbold{Nicht-Terminalsymbol} eine \colorbold{Prozedur} zugeordnet, welche die Produktionsregeln dieses \colorbold{Nicht-Terminalsymbols} umsetzt. Prozeduren rufen sich dabei wechselseitig gegenseitig entsprechend der \colorbold{Produktionsregeln} auf, falls eine entsprechende Produktionsregel eine \colorbold{Rekursion} enthält.
 
-  \colorbold{Rekursiver Abstieg} kann mit \colorbold{Backtracking} verbunden werden, um auch Grammatiken parsen zu können, die nicht \colorbold{LL(k)} (Definition \ref{def:llk_grammatik}) sind.
-
+  \colorbold{Rekursiver Abstieg} kann mit \colorbold{Backtracking} verbunden werden, um auch Grammatiken parsen zu können, die nicht \colorbold{LL(k)} (Definition \ref{def:llk_grammatik}) sind. Dabei werden meist nach dem \colorbold{Depth-First-Search Prinzip} alle \colorbold{Produktionen} für ein \colorbold{Nicht-Terminalsymbol} solange durchgegangen bis der gewüschte Inpustring sich in den \colorbold{Blättern} ablesen lässt oder alle \colorbold{Alternativen} für einen Schritt abgesucht sind, bis man wieder beim ersten Schritt angekommen ist und da auch alle \colorbold{Alternativen} abgesucht sind.\footnote{Diese Art von Parser wurde im \colorbold{PicoC-Compiler} implementiert, als dieser noch auf dem Stand des \colorbold{Bachelorprojektes} war, bevor er durch den nicht selbst implementierten \colorbold{Earley Parser} von Lark ersetzt wurde.}
 
   \footnote{Diese Art von Parser ist im \colorbold{RETI-Interpreter} implementiert, da die \colorbold{RETI-Sprache} eine besonders simple \colorbold{LL(1) Grammatik} besitzt.}
 
