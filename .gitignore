@@ -17,3 +17,4 @@ My Library/files/
 *.lof
 _minted-Main/
 *.listing
+*.theorem_list
