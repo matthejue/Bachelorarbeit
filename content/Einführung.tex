@@ -108,16 +108,14 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
   Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} für ein und denselben \colorbold{Wert}.
 \end{Definition}
 
-  \newtcblisting{codebox}[1][]{enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter, listing only, minted language=C}
+  \newtcbinputlisting{\codebasdf}[2][]{
+  listing file={#2},
+  enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter, listing only, minted language=C}
 
   \newtcblisting{treebox}[1][]{enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter, listing only}
 
 \begin{figure}[h]
-  \begin{codebox}[title=Inputstring, remember as=inputstring]
-    void main() {
-      int var = 42;
-    }
-  \end{codebox}
+  \codebasdf[title=Inputstring, remember as=inputstring]{./code_examples/example1.picoc}
   \hfill
   \begin{treebox}[title=Tokenfolge, remember as=tokenfolge]
     void main() {
