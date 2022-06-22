@@ -5,6 +5,8 @@
 
 \section{Compiler und Interpreter}
 \begin{Definition}{Compiler}{compiler}
+
+
 \end{Definition}
 \begin{Definition}{Interpreter}{Interpreter}
 % TODO: Bild semantisch gleiche Bedeutung
@@ -106,7 +108,20 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
   Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} für ein und denselben \colorbold{Wert}.
 \end{Definition}
 
-% TODO: zusammenfassendes Bild
+  \newtcolorbox{codebox}[1][]{enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter}
+
+\begin{figure}[h]
+  \begin{codebox}[title=Inputstring, remember as=inputstring]
+\end{codebox}
+  \hfill
+  \begin{codebox}[title=Tokenfolge, remember as=tokenfolge]
+  This is a test.
+  \end{codebox}
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+    \draw[->] (inputstring.east) to[bend right] node[above] {Lexer} (tokenfolge.west);
+  \end{tikzpicture}
+  \caption{Veranschaulichung der Lexikalischen Analyse}
+\end{figure}
 
 \section{Syntaktische Analyse}
 In der \colorbold{Syntaktischen Analyse} ist für einige Sprachen eine \colorbold{Kontextfreie Grammatik} $G_{Parse}$ notwendig, um diese Sprache zu beschreiben, da viele Programmiersprachen z.B. für \colorbold{Funktionsaufrufe} \verb|fun(arg)| und \colorbold{Codeblöcke} \verb|if(1){}| syntaktische Mittel verwenden, die es notwendig machen sich zu merken wieviele öffnende Klammern \verb|'('| bzw. öffnende geschweifte Klammern \verb|'{'| es momentan gibt, die noch nicht durch eine enstsprechende schließende Klammer \verb|')'| bzw. schließende geschweifte Klammer \verb|'}'| geschlossen wurden.
