@@ -1,7 +1,4 @@
-  <?xml version="1.0"?>
-  <project name="Package tcolorbox" default="documentation" basedir=".">
-  <description>
-  Apache Ant build file (http://ant.apache.org/)
-  </description>
-  </project>
+    void main() {
+      int var = 42;
+    }
   

@@ -12,6 +12,22 @@
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=PrimaryColor]{hyperref} %hidelinks
+
+% colorbox stuff
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadings}
+\tcbuselibrary{theorems}
+\tcbuselibrary{listings}
+% https://tex.stackexchange.com/questions/550052/command-parboxrestore-has-changed
+\tcbuselibrary{minted}
+\tcbset{listing engine=minted}
+% \tcbset{listing engine=listings}
+\usepackage{cleveref}
+
 \usepackage{csquotes}
 \usepackage[style=authortitle]{biblatex}
 \addbibresource{./My Library/My Library.bib}
@@ -23,19 +39,6 @@
 \usepackage{multirow}
 \usepackage{amssymb}
 
-% colorbox stuff
-\usepackage{tcolorbox}
-\usepackage{tikz}
-\tcbuselibrary{skins}
-\tcbuselibrary{breakable}
-\usetikzlibrary{patterns}
-\usetikzlibrary{shadings}
-\tcbuselibrary{theorems}
-\tcbuselibrary{listings}
-\tcbuselibrary{minted}
-\tcbset{listing engine=minted}
-% \tcbset{listing engine=listings}
-\usepackage{cleveref}
 
 \usepackage{xcolor}
 \definecolor{PrimaryColor}{HTML}{4D2875}

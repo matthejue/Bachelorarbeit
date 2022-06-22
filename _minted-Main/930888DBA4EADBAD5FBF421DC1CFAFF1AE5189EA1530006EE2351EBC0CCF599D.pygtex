@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+void main() \PYG{n+nb}{\PYGZob{}}
+  int var = 42;
+\PYG{n+nb}{\PYGZcb{}}
+
+\end{Verbatim}

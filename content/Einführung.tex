@@ -108,15 +108,22 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
   Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} für ein und denselben \colorbold{Wert}.
 \end{Definition}
 
-  \newtcolorbox{codebox}[1][]{enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter}
+  \newtcblisting{codebox}[1][]{enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter, listing only, minted language=C}
+
+  \newtcblisting{treebox}[1][]{enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter, listing only}
 
 \begin{figure}[h]
   \begin{codebox}[title=Inputstring, remember as=inputstring]
-\end{codebox}
-  \hfill
-  \begin{codebox}[title=Tokenfolge, remember as=tokenfolge]
-  This is a test.
+    void main() {
+      int var = 42;
+    }
   \end{codebox}
+  \hfill
+  \begin{treebox}[title=Tokenfolge, remember as=tokenfolge]
+    void main() {
+      int var = 42;
+    }
+  \end{treebox}
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
     \draw[->] (inputstring.east) to[bend right] node[above] {Lexer} (tokenfolge.west);
   \end{tikzpicture}
