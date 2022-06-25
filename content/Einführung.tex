@@ -106,18 +106,15 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
 
 \begin{Definition}{Literal}{literal}
   Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} für ein und denselben \colorbold{Wert}.
+  % TODO: vielleicht schönes Bildchen
 \end{Definition}
 
 In Abbildung~\ref{fig:lexikalische_analyse_veranschaulichung} ist die gesamte \colorbold{Lexikalische Analyse} nochmal abschließend veranschaulicht, um eine Gesamtübersicht zu geben.
 
 \begin{figure}[h]
-  \codebasdf[title=Inputstring, remember as=inputstring]{./code_examples/example1.picoc}
+  \codebox[title=Inputstring, remember as=inputstring, width=0.2\linewidth]{./code_examples/example1.picoc}
   \hfill
-  \begin{treebox}[title=Tokenfolge, remember as=tokenfolge]
-    void main() {
-      int var = 42;
-    }
-  \end{treebox}
+  \treebox[title=Tokenfolge, remember as=tokenfolge, width=0.6\linewidth]{./code_examples/example1.tokens}
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
     \draw[->] (inputstring.east) to[bend right] node[above] {Lexer} (tokenfolge.west);
   \end{tikzpicture}
@@ -227,9 +224,23 @@ Kann theoretisch auch zur Konstruktion eines \colorbold{Abstrakt Syntax Tree} ve
 Der \colorbold{Abstrakt Syntax Tree} hat einmal den Zweck, dass die Kompositionen, die die Konten bilden können \colorbold{semantisch} näher an den \colorbold{Instructions eines Assemblers} dran sind und, dass man mit ihm bei der Betrachtung eines \colorbold{Knoten}, der für einen Teil des Programms steht, möglichst schnell die Frage beantworten kann, welche \colorbold{Funktionalität} der Sprache dieser umsetzt, welche \colorbold{Bestandteile} er hat und welche Funktionalität der Sprache diese Bestandteile umsetzen usw.\footcite{noauthor_course_2022}
 \end{Definition}
 
-  Je weiter \colorbold{unten}\footnote{In der Informatik wachsen \colorbold{Bäume} von \colorbold{oben-nach-unten}. Die \colorbold{Wurzel} ist also \colorbold{oben}.} und \colorbold{links} ein Knoten im \colorbold{Abstrakt Syntax Tree} liegt, desto eher wird dieser Knoten komplett abgearbeitet sein, da in der \colorbold{Code Generierung} die Knoten nach dem \colorbold{Depth First Search Prinzip} abgearbeitet werden.
+Je weiter \colorbold{unten}\footnote{In der Informatik wachsen \colorbold{Bäume} von \colorbold{oben-nach-unten}. Die \colorbold{Wurzel} ist also \colorbold{oben}.} und \colorbold{links} ein Knoten im \colorbold{Abstrakt Syntax Tree} liegt, desto eher wird dieser Knoten komplett abgearbeitet sein, da in der \colorbold{Code Generierung} die Knoten nach dem \colorbold{Depth First Search} Prinzip abgearbeitet werden.
 
 % TODO: zusammenfassendes Bild
+\begin{figure}[h]
+  \treebox[title=Tokenfolge, remember as=Tokenfolge, width=0.8\linewidth]{./code_examples/example1.picoc}
+  \vspace{3cm}
+  \treebox[title=Derivation Tree, remember as=derivation_tree, width=0.8\linewidth]{./code_examples/example1.dt}
+  \vspace{3cm}
+  \treebox[title=Abstract Syntax Tree, remember as=abstract_syntax_tree, width=0.8\linewidth]{./code_examples/example1.ast}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+    \draw[->] (tokenfolge.south) to[bend down] node[above] {Parser} (derivation_tree.north);
+    \draw[->] (derivation_tree.south) to[bend down] node[above] {Visitor und Transformer} (abstract_syntax_tree.north);
+  \end{tikzpicture}
+  \caption{Veranschaulichung der Syntaktischen Analyse}
+  \label{fig:syntaktische_analyse_veranschaulichung}
+\end{figure}
 
 \section{Code Generierung}
 \label{sec:code_generierung}

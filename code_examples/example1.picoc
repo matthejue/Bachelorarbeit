@@ -1,5 +1,6 @@
 void main() {
+  int var;
   if(1) {
-    int var = 41;
+    var = 41;
   }
 }

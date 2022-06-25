@@ -1,0 +1,22 @@
+File 
+  Name './example1.picoc_shrink', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp 
+          Alloc 
+            Writeable, 
+            IntType 'int', 
+            Name 'var', 
+        If 
+          Num '1', 
+          [
+            Assign 
+              Name 'var', 
+              Num '41'
+          ]
+      ]
+  ]

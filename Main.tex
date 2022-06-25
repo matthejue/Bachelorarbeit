@@ -45,11 +45,15 @@ frame style={color=white},
 before upper=\setlength{\parskip}{1em}
 }
 
-\newtcbinputlisting{\codebasdf}[2][]{
+\newtcbinputlisting{\codebox}[2][]{
 listing file={#2},
-enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter, listing only, minted language=C}
+enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, nobeforeafter, listing only, minted language=C
+}
 
-\newtcblisting{treebox}[1][]{enhanced,colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=5cm, arc=0mm, #1, nobeforeafter, listing only}
+\newtcbinputlisting{\treebox}[2][]{
+listing file={#2},
+enhanced, breakable, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, nobeforeafter, listing only
+}
 
 \include{./content/Motivation}              % ./content/Motivation.tex
 \include{./content/Einführung}              % ./content/Einführung.tex

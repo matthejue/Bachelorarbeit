@@ -1,0 +1,9 @@
+./example1.picoc:3:4: UnexpectedToken: Expected e.g. 'do' or LOGIC_NOT or '-' or REF_AND or identifier or '{', found 'int'
+void main() {
+  if(1) {
+         ^
+         'do' or LOGIC_NOT or '-' or REF_AND or identifier or '{'
+    int var = 41;
+    ~~~           
+  }
+}
