@@ -112,11 +112,12 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
 In Abbildung~\ref{fig:lexikalische_analyse_veranschaulichung} ist die gesamte \colorbold{Lexikalische Analyse} nochmal abschließend veranschaulicht, um eine Gesamtübersicht zu geben.
 
 \begin{figure}[h]
-  \codebox[title=Inputstring, remember as=inputstring, width=0.2\linewidth]{./code_examples/example1.picoc}
+  \codebox[title=Inputstring, remember as=inputstring, width=0.2\linewidth, nobeforeafter]{./code_examples/example1.picoc}
   \hfill
-  \treebox[title=Tokenfolge, remember as=tokenfolge, width=0.6\linewidth]{./code_examples/example1.tokens}
+  \treebox[title=Tokenfolge, remember as=tokenfolge, width=0.6\linewidth, nobeforeafter]{./code_examples/example1.tokens}
+
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
-    \draw[->] (inputstring.east) to[bend right] node[above] {Lexer} (tokenfolge.west);
+  \draw[->] (inputstring.east) to[bend right] node[above] {Lexer} (tokenfolge.west);
   \end{tikzpicture}
   \caption{Veranschaulichung der Lexikalischen Analyse}
   \label{fig:lexikalische_analyse_veranschaulichung}
@@ -226,17 +227,22 @@ Der \colorbold{Abstrakt Syntax Tree} hat einmal den Zweck, dass die Kompositione
 
 Je weiter \colorbold{unten}\footnote{In der Informatik wachsen \colorbold{Bäume} von \colorbold{oben-nach-unten}. Die \colorbold{Wurzel} ist also \colorbold{oben}.} und \colorbold{links} ein Knoten im \colorbold{Abstrakt Syntax Tree} liegt, desto eher wird dieser Knoten komplett abgearbeitet sein, da in der \colorbold{Code Generierung} die Knoten nach dem \colorbold{Depth First Search} Prinzip abgearbeitet werden.
 
-% TODO: zusammenfassendes Bild
-\begin{figure}[h]
-  \treebox[title=Tokenfolge, remember as=Tokenfolge, width=0.8\linewidth]{./code_examples/example1.picoc}
-  \vspace{3cm}
-  \treebox[title=Derivation Tree, remember as=derivation_tree, width=0.8\linewidth]{./code_examples/example1.dt}
-  \vspace{3cm}
-  \treebox[title=Abstract Syntax Tree, remember as=abstract_syntax_tree, width=0.8\linewidth]{./code_examples/example1.ast}
+T
+
+\pagebreak
+% TODO: text
+% https://tex.stackexchange.com/questions/8625/force-figure-placement-in-text
+\begin{figure}[H]
+  \centering
+  \treebox[title=Tokenfolge, remember as=tokenfolge, width=0.5\linewidth, nobeforeafter]{./code_examples/example1.tokens}
+  \hfill
+  \treebox[title=Abstract Syntax Tree, remember as=abstract_sytax_tree, width=0.4\linewidth, nobeforeafter]{./code_examples/example1.ast}
+  \vspace{2cm}
+  \treebox[title=Derivation Tree, remember as=derivation_tree, width=0.6\linewidth]{./code_examples/example1.dt}
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
-    \draw[->] (tokenfolge.south) to[bend down] node[above] {Parser} (derivation_tree.north);
-    \draw[->] (derivation_tree.south) to[bend down] node[above] {Visitor und Transformer} (abstract_syntax_tree.north);
+    \draw[->] (tokenfolge.south) to node[left] {Parser} (derivation_tree.north);
+    \draw[->] (derivation_tree.north) to node[right] {Visitor und Transformer} (abstract_sytax_tree.south);
   \end{tikzpicture}
   \caption{Veranschaulichung der Syntaktischen Analyse}
   \label{fig:syntaktische_analyse_veranschaulichung}

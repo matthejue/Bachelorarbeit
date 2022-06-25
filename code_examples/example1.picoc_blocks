@@ -10,14 +10,9 @@ File
           Name 'main.2', 
           [
             // Block(Name('main.2'), []), 
-            Exp 
-              Alloc 
-                Writeable, 
-                IntType 'int', 
-                Name 'var', 
-            // If(Num('1'), []), 
+            // If(Num('42'), []), 
             IfElse 
-              Num '1', 
+              Num '42', 
               GoTo 
                 Name 'if.1', 
               GoTo 
@@ -27,9 +22,6 @@ File
           Name 'if.1', 
           [
             // Block(Name('if.1'), []), 
-            Assign 
-              Name 'var', 
-              Num '41', 
             GoTo 
               Name 'if_else_after.0'
           ], 

@@ -6,17 +6,8 @@ File
       Name 'main', 
       [], 
       [
-        Exp 
-          Alloc 
-            Writeable, 
-            IntType 'int', 
-            Name 'var', 
         If 
-          Num '1', 
-          [
-            Assign 
-              Name 'var', 
-              Num '41'
-          ]
+          Num '42', 
+          []
       ]
   ]

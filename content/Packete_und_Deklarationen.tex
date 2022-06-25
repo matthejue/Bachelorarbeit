@@ -23,8 +23,9 @@
 \tcbuselibrary{theorems}
 \tcbuselibrary{listings}
 % https://tex.stackexchange.com/questions/550052/command-parboxrestore-has-changed
-\tcbuselibrary{minted}
-\tcbset{listing engine=minted}
+% \tcbuselibrary{minted}
+\tcbset{listing engine=listings}
+
 % \tcbset{listing engine=listings}
 \usepackage{cleveref}
 
@@ -39,6 +40,11 @@
 \usepackage{multirow}
 \usepackage{amssymb}
 
+% https://tex.stackexchange.com/questions/9425/how-to-fix-footnote-position-at-the-bottom-of-the-page
+\usepackage[bottom]{footmisc}
+
+% https://tex.stackexchange.com/questions/8625/force-figure-placement-in-text
+\usepackage{float}
 
 \usepackage{xcolor}
 \definecolor{PrimaryColor}{HTML}{4D2875}
