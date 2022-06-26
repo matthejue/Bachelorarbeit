@@ -4,12 +4,12 @@
 \label{ch:einführung}
 
 \section{Compiler und Interpreter}
-Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers} (Definition~\ref{def:compiler}) und eines  \colorbold{Interpreters} (Definition~\ref{def:interpreter}), da das Schreiben eines Compilers von der \colorbold{PicoC-Sprache} in die \colorbold{RETI-Sprache} das Thema dieser Bachelorarbeit ist und die Definition eines \colorbold{Interpreters} notwendig ist, um zu definieren was ein \colorbold{Compiler} ist. Des Weiteren wurde zur \colorbold{Qualitätsicherung} ein \colorbold{RETI-Interpreter} implementiert, um mithilfe von \colorbold{Tests} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen} sicherzustellen (siehe Subkapitel~\ref{sec:qualitätssicherung}).
+Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers} (Definition~\ref{def:compiler}) und eines  \colorbold{Interpreters} (Definition~\ref{def:interpreter}), da das Schreiben eines Compilers von der \colorbold{PicoC-Sprache} in die \colorbold{RETI-Sprache} das Thema dieser Bachelorarbeit ist und die Definition eines \colorbold{Interpreters} genutzt wird, um zu definieren was ein \colorbold{Compiler} ist. Des Weiteren wurde zur \colorbold{Qualitätsicherung} ein \colorbold{RETI-Interpreter} implementiert, um mithilfe von \colorbold{Tests} und des \colorbold{GCC}\footnote{Sammlung von Compilern für Linux bzw. GNU-Linux, steht für \colorbold{G}NU \colorbold{C}ompiler \colorbold{C}ollection} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen} zu belegen (siehe Subkapitel~\ref{sec:qualitätssicherung}).
 
 \begin{Definition}{Interpreter}{interpreter}
   Ein Interpreter \colorbold{interpretiert} die \colorbold{Instructions} bzw. \colorbold{Statements} eines Programes $P$ direkt.
 
-  Spezifischer ausgedrückt
+  Auf die Implementierung bezogen arbeitet ein Interpreter auf \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree unterschiedliche Anweisungen aus.
   % Darstellung als T-Diagram
 \end{Definition}
 
