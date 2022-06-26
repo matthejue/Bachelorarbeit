@@ -10,64 +10,67 @@
 
 
 \begin{document}
-\sloppy
-\newtcolorbox{titlebox}[1]{skin=enhanced, arc=0mm, boxrule=0mm,
-    title style={preaction={fill=PrimaryColor}, pattern=fivepointed stars, pattern color=white, opacity=0.1},
-    interior style={preaction={fill=SecondaryColor}, pattern=fivepointed stars, pattern  color=white, opacity=0.3},
-    frame style={color=white},
-    % segmentation style={black,solid,opacity=0.2,line width=1pt}
-    title={#1}
+  \sloppy
+  % https://www.overleaf.com/learn/latex/Counters
+  \newcounter{subdefcounter}
+
+  \newtcolorbox{titlebox}[1]{skin=enhanced, arc=0mm, boxrule=0mm,
+      title style={preaction={fill=PrimaryColor}, pattern=fivepointed stars, pattern color=white, opacity=0.1},
+      interior style={preaction={fill=SecondaryColor}, pattern=fivepointed stars, pattern  color=white, opacity=0.3},
+      frame style={color=white},
+      % segmentation style={black,solid,opacity=0.2,line width=1pt}
+      title={#1}
+    }
+
+  \input{./content/Titlepage}                 % ./content/Titlepage.tex
+  \newgeometry{margin=2.5cm}
+  \setlength{\footskip}{30pt}                 % move pagenumber up and down
+  \includepdf[pages=-]{./ErklrungfrdieAbschlussarbeit_unterschrieben.pdf}
+
+  \tableofcontents
+  \listoffigures
+  \listoftables
+  % https://tex.stackexchange.com/questions/538528/tcolorbox-newtcbtheorem-index-with-tcolorbox
+  \tcblistof[\chapter*]{theorem_list}{Definitionen}
+
+  \newtcbtheorem[list inside={theorem_list},crefname={definition}{definitions}, number within=chapter]{Definition}{Definition}%
+  {enhanced, arc=0mm,top=3mm,bottom=3mm, boxrule=0mm, borderline south={1mm}{0pt}{PrimaryColor}, title style={color=PrimaryColor},
+  interior style={opacity=0.2, fill=PrimaryColor},
+  frame style={color=white}, fonttitle=\bfseries, fontupper=\itshape,
+  before upper=\setlength{\parskip}{1em}
+  }{def}
+
+  \newtcolorbox{Special_Paragraph}{enhanced, breakable, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},
+  interior style={fill=SecondaryColor},
+  frame style={color=white},
+  % https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
+  before upper=\setlength{\parskip}{1em}
   }
 
-\input{./content/Titlepage}                 % ./content/Titlepage.tex
-\newgeometry{margin=2.5cm}
-\setlength{\footskip}{30pt}                 % move pagenumber up and down
-\includepdf[pages=-]{./ErklrungfrdieAbschlussarbeit_unterschrieben.pdf}
+  \newtcbinputlisting{\codebox}[2][]{
+  listing file={#2},
+  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, listing only, halign title=center
+  }
+  % minted language=C,
 
-\tableofcontents
-\listoffigures
-\listoftables
-% https://tex.stackexchange.com/questions/538528/tcolorbox-newtcbtheorem-index-with-tcolorbox
-\tcblistof[\chapter*]{theorem_list}{Definitionen}
+  \newtcbinputlisting{\treebox}[2][]{
+  listing file={#2},
+  enhanced, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, listing only, halign title=center
+  }
 
-\newtcbtheorem[list inside={theorem_list},crefname={definition}{definitions}, number within=chapter]{Definition}{Definition}%
-{enhanced, arc=0mm,top=3mm,bottom=3mm, boxrule=0mm, borderline south={1mm}{0pt}{PrimaryColor}, title style={color=PrimaryColor},
-interior style={opacity=0.2, fill=PrimaryColor},
-frame style={color=white}, fonttitle=\bfseries, fontupper=\itshape,
-before upper=\setlength{\parskip}{1em}
-}{def}
+  \include{./content/Motivation}              % ./content/Motivation.tex
+  \include{./content/Einführung}              % ./content/Einführung.tex
+  \include{./content/Implementierung}         % ./content/Implementierung.tex
+  \include{./content/Ergebnisse_und_Ausblick} % ./content/Ergebnisse_und_Ausblick.tex
 
-\newtcolorbox{Special_Paragraph}{enhanced, breakable, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},
-interior style={fill=SecondaryColor},
-frame style={color=white},
-% https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
-before upper=\setlength{\parskip}{1em}
-}
+  \appendix
+  \include{./content/Appendix}                % ./content/Appendix.tex
+  \include{./content/Danksagungen}            % ./content/Danksagungen.tex
 
-\newtcbinputlisting{\codebox}[2][]{
-listing file={#2},
-enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, listing only, halign title=center
-}
-% minted language=C,
-
-\newtcbinputlisting{\treebox}[2][]{
-listing file={#2},
-enhanced, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, listing only, halign title=center
-}
-
-\include{./content/Motivation}              % ./content/Motivation.tex
-\include{./content/Einführung}              % ./content/Einführung.tex
-\include{./content/Implementierung}         % ./content/Implementierung.tex
-\include{./content/Ergebnisse_und_Ausblick} % ./content/Ergebnisse_und_Ausblick.tex
-
-\appendix
-\include{./content/Appendix}                % ./content/Appendix.tex
-\include{./content/Danksagungen}            % ./content/Danksagungen.tex
-
-\printbibheading
-% \printbibliography[type=book,heading=subbibliography,title={Bücher}]
-% \printbibliography[type=article,heading=subbibliography,title={Artikel}]
-\printbibliography[type=online,heading=subbibliography,title={Online}]
-% \printbibliography[nottype=book, nottype=article, nottype=online,heading=subbibliography,title={Sonstige Quellen}]
-% ./Library.bib
+  \printbibheading
+  % \printbibliography[type=book,heading=subbibliography,title={Bücher}]
+  % \printbibliography[type=article,heading=subbibliography,title={Artikel}]
+  \printbibliography[type=online,heading=subbibliography,title={Online}]
+  % \printbibliography[nottype=book, nottype=article, nottype=online,heading=subbibliography,title={Sonstige Quellen}]
+  % ./Library.bib
 \end{document}

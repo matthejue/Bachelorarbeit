@@ -9,7 +9,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \begin{Definition}{Interpreter}{interpreter}
   \colorbold{Interpretiert} die \colorbold{Instructions} bzw. \colorbold{Statements} eines Programmes $P$ direkt.
 
-  Auf die Implementierung bezogen arbeitet ein Interpreter auf \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree, auf die er während des Darüber-Iterierens stösst unterschiedliche Anweisungen aus.
+  Auf die Implementierung bezogen arbeitet ein Interpreter auf den compilerinternen \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} (Definition~\ref{def:abstrakte_syntax_tree}) und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree, auf die er während des Darüber-Iterierens stösst unterschiedliche Anweisungen aus.
 \end{Definition}
 
 % https://tex.stackexchange.com/questions/51228/how-to-increase-the-horizontal-distance-between-nodes
@@ -31,7 +31,6 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
     \end{tikzpicture}
     \label{eq:compiler_beziehungen}
   \end{equation}
-  % Darstellung als T-Diagram
 \end{Definition}
 
 Üblicherweise kompiliert ein \colorbold{Compiler} von einer \colorbold{komplexeren Sprache} zu \colorbold{Maschinensprache}, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
@@ -45,24 +44,45 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \end{Definition}
 
 \begin{Definition}{Cross-Compiler}{cross_compiler}
-  Kompiliert ein Program für eine Sprache, die auf dem eigenen System bzw. Rechner garnicht läuft.
+  Kompiliert ein Program für eine Sprache, die auf der eigenen Maschine garnicht läuft.
   \footnote{Lego Mindstorms} % TODO:
 \end{Definition}
 
-  Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn es noch gar keinen Compiler der Wunschsprache für die \colorbold{Maschienensprache} eines Zielrechners gibt und man nicht den kompletten Compiler der Wunschsprache für den Zielrechner in der \colorbold{Maschienensprache} des Zielrechners schreiben will oder % TODO
+  Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn es noch gar keinen Compiler der Wunschsprache für die \colorbold{Maschienensprache} einer Zielmaschine gibt und man nicht den kompletten minimalen Compiler der Wunschsprache für die Zielmaschine in der \colorbold{Maschienensprache} der Zielmaschine schreiben will oder % TODO
 
-  Daher ist eine mögliche Vorgehensweise einen \colorbold{minimalen Compiler} zu schreiben, der die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} des Zielrechners kompiliert und sich dafür die \colorbold{Rechenleistung} einer anderen Maschine borgt und eine beliebige \colorbold{höhere Sprache}, die auf dieser Maschien läuft, in der dieser Minimale Compiler geschrieben wird.
+  Daher ist eine mögliche Vorgehensweise einen \colorbold{minimalen Compiler} zu schreiben, der die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} der Zielmaschine kompiliert und sich dafür die \colorbold{Rechenleistung} einer anderen Maschine borgt und eine beliebige \colorbold{höhere Sprache}, die auf dieser Maschien läuft, in der dieser Minimale Compiler geschrieben wird.
 
-  Hat man diesen \colorbold{minimalen Compiler} kann man Programme in der Wunschsprache schreiben und mithilfe des  \colorbold{minimalen Compilers} kompilieren, sodass diese Programme auf dem Zielrechner laufen.
+  Hat man diesen \colorbold{minimalen Compiler} kann man Programme in der Wunschsprache schreiben und mithilfe des  \colorbold{minimalen Compilers} kompilieren, sodass diese Programme auf der Zielmaschine laufen.
 
-  Nun kann man den \colorbold{minimalen Compiler}, denn man gerade eben in einer \colorbold{höheren Programmesprache} implementiert hat, in der \colorbold{Wunschsprache} selbst implementieren und dann mit dem \colorbold{minamlen Compiler} für ebendiese Wunschsprache selbst kompilieren. Was man als Output bekommt ist ein \colorbold{minimmaler Compiler}, der aber auf dem \colorbold{Zielrechner} läuft und die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} des Zielrechners kompiliert.
+  Nun kann man den \colorbold{minimalen Compiler}, denn man gerade eben in einer \colorbold{höheren Programmesprache} implementiert hat, in der \colorbold{Wunschsprache} selbst implementieren und dann mit dem \colorbold{minamlen Compiler} für ebendiese Wunschsprache selbst kompilieren. Was man als Output bekommt ist ein \colorbold{minimmaler Compiler}, der aber auf der \colorbold{Zielmaschine} läuft und die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} der Zielmaschine kompiliert.
 
-  Aufbauend auf diesem \colorbold{minimalen Compiler}, der auf dem \colorbold{Zielrechner} läuft, kann man nun auf dem Zielrechner selbst iterativ den \colorbold{minimalen} Compiler schrittweise zu einem umfangreicheren Compiler, der mehr Funktionalitäten unterstützt weiterentwickeln und braucht den ursprünglichen Rechner, auf dem man die allererste Version des minimalen Compilers implementiert hat nicht mehr.
+  Aufbauend auf diesem \colorbold{minimalen Compiler}, der auf der \colorbold{Zielmaschine} läuft, kann man nun auf der Zielmaschine selbst \colorbold{iterativ} den minimalen Compiler schrittweise zu einem umfangreicheren Compiler, der mehr Funktionalitäten unterstützt weiterentwickeln und braucht die ursprüngliche Maschine, auf dem man die allererste Version des minimalen Compilers implementiert hat nicht mehr.
+
+  Dieses Vorgehen wird auch als \colorbold{Bootstrapping} (Definition~\ref{def:bootstrapping}) bezeichnet. Der Begriff ist sinnverwandt mit dem \colorbold{Booten} eines Computers, wo die wichtigste Software, der \colorbold{Kernel} zuerst in den Speicher geladen wird und darauf aufbauend von diesem dann das Betriebssysteme, welches bei Bedarf dann \colorbold{Systemsoftware}\footnote{Software, die das Ausführen von Anwendungssoftware ermöglicht oder unterstützt, wie z.B. Treiber.} und \colorbold{Anwendungssoftware}\footnote{Software, deren Anwendung darin besteht, dass sie dem Benutzer unmittelbar eine Dienstleistung zur Verfügung stellt.} lädt.
+
 % Das ist das, was der PicoC-Compiler ist
-% Bootstrapping
 
-  \begin{Definition}{Bootstrapping}{bootstrapping}
-  asdf
+\begin{Definition}{Bootstrapping}{bootstrapping}
+  Es gibt verschiedene Formen von \colorbold{Bootstrapping}:
+
+  % https://www.overleaf.com/learn/latex/Counters
+  \counterwithin{subdefcounter}{\tcbcounter}
+  \setcounter{subdefcounter}{1}
+
+  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
+
+  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+  \paragraph{\thesubdefcounter}\label{par:parser}
+  Wenn man ein \colorbold{Programm}, dass auf \colorbold{einer Maschine} läuft, auch auf einer \colorbold{anderen Maschine} zum laufen bringt, wobei beide Maschinen eine unterschiedliche unterliegende Maschinensprache haben. Diese Form von Bootstrapping bildet im Falle dessen, dass es sich beim dem Programm um einen Compiler für eine höhere Sprache handelt die Lösung für das \colorbold{Henne-Ei-Problem}.
+
+  Wenn es noch gar keinen Compiler für die höhere Programmiersprache gibt, in der der Compiler für eine andere oder ebendiese höhere Programmiersprache geschrieben steht, so liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine externe Entität zur Hilfe nimmt.
+
+  \stepcounter{subdefcounter}
+
+  \paragraph{\thesubdefcounter}\label{par:parser}
+  Wenn man einen Compiler mithilfe von \colorbold{früheren Versionen} seiner selbst schreibt. Man schreibt den erweiterten Compiler in der Sprache, welche von der früheren Version des Compilers kompiliert wird und schafft es so iterativ immer umfangreichere Compiler zu bauen.\footcite{earley_formalism_1970}
+
 \end{Definition}
 
 \subsection{T-Diagramme}
@@ -205,7 +225,6 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
   Ein Programm, dass eine \colorbold{Eingabe} in eine für die \colorbold{Weiterverbeitung} taugliche Form bringt.
 
   % https://www.overleaf.com/learn/latex/Counters
-  \newcounter{subdefcounter}
   \counterwithin{subdefcounter}{\tcbcounter}
   \setcounter{subdefcounter}{1}
 
