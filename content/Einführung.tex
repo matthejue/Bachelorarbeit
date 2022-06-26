@@ -76,7 +76,9 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
   \paragraph{\thesubdefcounter}\label{par:parser}
   Wenn man ein \colorbold{Programm}, dass auf \colorbold{einer Maschine} läuft, auch auf einer \colorbold{anderen Maschine} zum laufen bringt, wobei beide Maschinen eine unterschiedliche unterliegende Maschinensprache haben. Diese Form von Bootstrapping bildet im Falle dessen, dass es sich beim dem Programm um einen Compiler für eine höhere Sprache handelt die Lösung für ein Problem, dass auf das \colorbold{Henne-Ei-Problem}\footnote{Beschreibt die Situation, wenn ein System sich selbst als Abhängigkeit hat, damit es überhaupt einen Anfang für dieses System geben kann, wofür das Problem mit der Henne und dem Ei, wobei man nicht, weiß, was von beidem zuerst da war sinnbildlich steht.} reduziert werden kann.
 
-  Wenn es auf der Zielmaschine noch gar keinen Compiler für die höhere Programmiersprache gibt, in der der Compiler für ebendiese höhere Programmiersprache geschrieben steht, so liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine \colorbold{externe Entität} zur Hilfe nimmt. Z.B. indem man einen \colorbold{Cross-Compiler} auf einer anderen Maschine nutzt, die
+  Wenn es auf der Zielmaschine noch gar keinen Compiler für die höhere Programmiersprache gibt, in der der Compiler für ebendiese höhere Programmiersprache geschrieben steht, so liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine \colorbold{externe Entität} zur Hilfe nimmt.
+
+  Eine Möglichkeit ist, indem man einen \colorbold{Cross-Compiler} auf einer anderen Maschine nutzt, die einem den \colorbold{Compiler} der höhreren Programmiersprache für die andere Maschine kompiliert bzw. \colorbold{bootstraped}.
 
   \stepcounter{subdefcounter}
 
