@@ -4,13 +4,49 @@
 \label{ch:einführung}
 
 \section{Compiler und Interpreter}
+Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers} (Definition~\ref{def:compiler}) und eines  \colorbold{Interpreters} (Definition~\ref{def:interpreter}), da das Schreiben eines Compilers von der \colorbold{PicoC-Sprache} in die \colorbold{RETI-Sprache} das Thema dieser Bachelorarbeit ist und die Definition eines \colorbold{Interpreters} notwendig ist, um zu definieren was ein \colorbold{Compiler} ist. Des Weiteren wurde zur \colorbold{Qualitätsicherung} ein \colorbold{RETI-Interpreter} implementiert, um mithilfe von \colorbold{Tests} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen} sicherzustellen (siehe Subkapitel~\ref{sec:qualitätssicherung}).
+
+\begin{Definition}{Interpreter}{interpreter}
+  Ein Interpreter \colorbold{interpretiert} die \colorbold{Instructions} bzw. \colorbold{Statements} eines Programes $P$ direkt.
+
+  Spezifischer ausgedrückt
+  % Darstellung als T-Diagram
+\end{Definition}
+
+% https://tex.stackexchange.com/questions/51228/how-to-increase-the-horizontal-distance-between-nodes
 \begin{Definition}{Compiler}{compiler}
+  Ein Compiler \colorbold{kompiliert} ein Program $P_1$, welches in einer Sprache $L_1$ geschrieben ist, in ein Program $P_2$, welches in einer Sprache $L_2$ geschrieben ist.
 
+  Wobei \colorbold{Kompilieren} meint, dass das Program $P_1$ in das Program $P_2$ übersetzt und bei beiden Programmen, wenn sie von \colorbold{Interpreter} ihrer jeweiligen Sprachen $L_1$ und $L_2$ \colorbold{interpretiert} werden, der gleiche \colorbold{Output} rauskommt. Also beide Programme $P_1$ und $P_2$ die gleiche \colorbold{Semantik} haben und sich nur \colorbold{syntaktisch} durch die Sprachen $L_1$ und $L_2$, in denen sie geschrieben stehen unterscheiden.
 
+  \begin{equation}
+    \begin{tikzpicture}[auto, baseline=(current  bounding  box.center)]
+      \node (program1) at (135:3) {$P_{1}$};
+      \node (program2) at (45:3) {$P_{2}$};
+      \node (output)  at (270:0) {$Output$};
+
+      % https://tex.stackexchange.com/questions/24372/how-to-add-newline-within-node-using-tikz
+      \draw[->] (program1) to node[above] {$kompiliere$} (program2);
+      \draw[->] (program1) to[bend right] node[left, align=center] {interpretiere $P_{1}$\\ als $L_{1}$ Program} (output);
+      \draw[->] (program2) to[bend left] node[right, align=center] {interpretiere $P_{2}$\\ als $L_{2}$ Program} (output);
+    \end{tikzpicture}
+    \label{eq:compiler_beziehungen}
+  \end{equation}
+  % Darstellung als T-Diagram
 \end{Definition}
-\begin{Definition}{Interpreter}{Interpreter}
-% TODO: Bild semantisch gleiche Bedeutung
+
+Üblicherweise kompiliert ein \colorbold{Compiler} von einer \colorbold{komplexeren Sprache} zu \colorbold{Maschinensprache}, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
+
+\begin{Definition}{Transpiler (bzw. Source-to-source Compiler))}{transpiler}
+
+  % Darstellung als T-Diagram
 \end{Definition}
+
+\begin{Definition}{Cross-Compiler)}{cross_compiler}
+
+  % Darstellung als T-Diagram
+\end{Definition}
+
 \subsection{T-Diagramme}
 \begin{Definition}{T-Diagram}{t_diagram}
 \end{Definition}
