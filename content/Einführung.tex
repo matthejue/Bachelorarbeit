@@ -4,18 +4,17 @@
 \label{ch:einführung}
 
 \section{Compiler und Interpreter}
-Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers} (Definition~\ref{def:compiler}) und eines  \colorbold{Interpreters} (Definition~\ref{def:interpreter}), da das Schreiben eines Compilers von der \colorbold{PicoC-Sprache} in die \colorbold{RETI-Sprache} das Thema dieser Bachelorarbeit ist und die Definition eines \colorbold{Interpreters} genutzt wird, um zu definieren was ein \colorbold{Compiler} ist. Des Weiteren wurde zur \colorbold{Qualitätsicherung} ein \colorbold{RETI-Interpreter} implementiert, um mithilfe von \colorbold{Tests} und des \colorbold{GCC}\footnote{Sammlung von Compilern für Linux bzw. GNU-Linux, steht für \colorbold{G}NU \colorbold{C}ompiler \colorbold{C}ollection} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen} zu belegen (siehe Subkapitel~\ref{sec:qualitätssicherung}).
+Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers} (Definition~\ref{def:compiler}) und eines  \colorbold{Interpreters} (Definition~\ref{def:interpreter}), da das Schreiben eines Compilers von der \colorbold{PicoC-Sprache} in die \colorbold{RETI-Sprache} das Thema dieser Bachelorarbeit ist und die Definition eines \colorbold{Interpreters} genutzt wird, um zu definieren was ein \colorbold{Compiler} ist. Des Weiteren wurde zur \colorbold{Qualitätsicherung} ein \colorbold{RETI-Interpreter} implementiert, um mithilfe des \colorbold{GCC}\footnote{Sammlung von Compilern für Linux bzw. GNU-Linux, steht für \colorbold{G}NU \colorbold{C}ompiler \colorbold{C}ollection} und von \colorbold{Tests} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen} zu belegen (siehe Subkapitel~\ref{sec:qualitätssicherung}).
 
 \begin{Definition}{Interpreter}{interpreter}
-  Ein Interpreter \colorbold{interpretiert} die \colorbold{Instructions} bzw. \colorbold{Statements} eines Programes $P$ direkt.
+  \colorbold{Interpretiert} die \colorbold{Instructions} bzw. \colorbold{Statements} eines Programmes $P$ direkt.
 
-  Auf die Implementierung bezogen arbeitet ein Interpreter auf \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree unterschiedliche Anweisungen aus.
-  % Darstellung als T-Diagram
+  Auf die Implementierung bezogen arbeitet ein Interpreter auf \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree, auf die er während des Darüber-Iterierens stösst unterschiedliche Anweisungen aus.
 \end{Definition}
 
 % https://tex.stackexchange.com/questions/51228/how-to-increase-the-horizontal-distance-between-nodes
 \begin{Definition}{Compiler}{compiler}
-  Ein Compiler \colorbold{kompiliert} ein Program $P_1$, welches in einer Sprache $L_1$ geschrieben ist, in ein Program $P_2$, welches in einer Sprache $L_2$ geschrieben ist.
+  \colorbold{Kompiliert} ein Program $P_1$, welches in einer Sprache $L_1$ geschrieben ist, in ein Program $P_2$, welches in einer Sprache $L_2$ geschrieben ist.
 
   Wobei \colorbold{Kompilieren} meint, dass das Program $P_1$ in das Program $P_2$ übersetzt und bei beiden Programmen, wenn sie von \colorbold{Interpreter} ihrer jeweiligen Sprachen $L_1$ und $L_2$ \colorbold{interpretiert} werden, der gleiche \colorbold{Output} rauskommt. Also beide Programme $P_1$ und $P_2$ die gleiche \colorbold{Semantik} haben und sich nur \colorbold{syntaktisch} durch die Sprachen $L_1$ und $L_2$, in denen sie geschrieben stehen unterscheiden.
 
@@ -37,19 +36,41 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 
 Üblicherweise kompiliert ein \colorbold{Compiler} von einer \colorbold{komplexeren Sprache} zu \colorbold{Maschinensprache}, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
 
-\begin{Definition}{Transpiler (bzw. Source-to-source Compiler))}{transpiler}
+% TODO vielleicht noch die Sache mit den 2 Bedeutungen von Assembler
+% TODO: die Sache mit Blocks und GOTO in x_86, aber ehe später
 
-  % Darstellung als T-Diagram
+\begin{Definition}{Transpiler (bzw. Source-to-source Compiler)}{transpiler}
+  Kompiliert zwischen Sprachen, die ungefähr auf dem \colorbold{gleichen} Level an \colorbold{Abstraktion} arbeiten\footnote{Die im aktuellen Zeitgeist in Mode gekommene Sprache \colorbold{TypeScript} will als Obermenge von JavaScript und wird daher zu \colorbold{JavaScript} transpiliert.}.
+  % TODO:
 \end{Definition}
 
-\begin{Definition}{Cross-Compiler)}{cross_compiler}
+\begin{Definition}{Cross-Compiler}{cross_compiler}
+  Kompiliert ein Program für eine Sprache, die auf dem eigenen System bzw. Rechner garnicht läuft.
+  \footnote{Lego Mindstorms} % TODO:
+\end{Definition}
 
-  % Darstellung als T-Diagram
+  Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn es noch gar keinen Compiler der Wunschsprache für die \colorbold{Maschienensprache} eines Zielrechners gibt und man nicht den kompletten Compiler der Wunschsprache für den Zielrechner in der \colorbold{Maschienensprache} des Zielrechners schreiben will oder % TODO
+
+  Daher ist eine mögliche Vorgehensweise einen \colorbold{minimalen Compiler} zu schreiben, der die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} des Zielrechners kompiliert und sich dafür die \colorbold{Rechenleistung} einer anderen Maschine borgt und eine beliebige \colorbold{höhere Sprache}, die auf dieser Maschien läuft, in der dieser Minimale Compiler geschrieben wird.
+
+  Hat man diesen \colorbold{minimalen Compiler} kann man Programme in der Wunschsprache schreiben und mithilfe des  \colorbold{minimalen Compilers} kompilieren, sodass diese Programme auf dem Zielrechner laufen.
+
+  Nun kann man den \colorbold{minimalen Compiler}, denn man gerade eben in einer \colorbold{höheren Programmesprache} implementiert hat, in der \colorbold{Wunschsprache} selbst implementieren und dann mit dem \colorbold{minamlen Compiler} für ebendiese Wunschsprache selbst kompilieren. Was man als Output bekommt ist ein \colorbold{minimmaler Compiler}, der aber auf dem \colorbold{Zielrechner} läuft und die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} des Zielrechners kompiliert.
+
+  Aufbauend auf diesem \colorbold{minimalen Compiler}, der auf dem \colorbold{Zielrechner} läuft, kann man nun auf dem Zielrechner selbst iterativ den \colorbold{minimalen} Compiler schrittweise zu einem umfangreicheren Compiler, der mehr Funktionalitäten unterstützt weiterentwickeln und braucht den ursprünglichen Rechner, auf dem man die allererste Version des minimalen Compilers implementiert hat nicht mehr.
+% Das ist das, was der PicoC-Compiler ist
+% Bootstrapping
+
+  \begin{Definition}{Bootstrapping}{bootstrapping}
+  asdf
 \end{Definition}
 
 \subsection{T-Diagramme}
 \begin{Definition}{T-Diagram}{t_diagram}
 \end{Definition}
+% TODO: Darstelunng von Interpreter, Compiler und Cross-Compiler als T-Diagram.
+% TODO: mehrere T's entsprehcen einem Comipler, Compilieren und dann Intepretieren entspricht einem großen Interpreter.
+% TODO: Quelle nennen
 \section{Grammatiken}
 \section{Grundlagen}
 \begin{Definition}{Sprache}{Sprache}
@@ -277,7 +298,7 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
     \draw[->] (tokenfolge.south) to node[left] {Parser} (derivation_tree.north);
-    \draw[->] (derivation_tree.north) to node[right] {Visitor und Transformer} (abstract_sytax_tree.south);
+    \draw[->] (derivation_tree.north) to node[right] {Visitors und Transformer} (abstract_sytax_tree.south);
   \end{tikzpicture}
   \caption{Veranschaulichung der Syntaktischen Analyse}
   \label{fig:syntaktische_analyse_veranschaulichung}
