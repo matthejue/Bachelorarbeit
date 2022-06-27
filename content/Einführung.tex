@@ -33,11 +33,33 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
   \end{equation}
 \end{Definition}
 
-Üblicherweise kompiliert ein \colorbold{Compiler} von einer \colorbold{komplexeren Sprache} zu \colorbold{Maschinensprache} (Definition~\ref{def:maschienensprache}), aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
+Üblicherweise kompiliert ein \colorbold{Compiler} ein Program, dass in einer \colorbold{Programmiersprache} geschrieben ist zu \colorbold{Maschienenncode}, der in \colorbold{Maschienensprache} (Definition~\ref{def:maschienensprache}) geschrieben ist, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
+
+Der \colorbold{Maschienencode}, denn ein üblicher \colorbold{Compiler} einer \colorbold{Programmiersprache} generiert, enthält die Maschienenbefehle üblicherweise in binärer Repräsentation, da diese in erster Linie für die Maschiene, die binär arbeitet verständlich sein sollen und nicht für den Programmierer. Ebenso wird bei komplexeren Compilern, die es erlauben, den Programmcode in mehrere Dateien aufzuteilen meist \colorbold{Objectcode} erzeugt.
+% Der PicoC-Compiler
+
+
+  \begin{Definition}{Assemblersprache (bzw. engl. Assembly Language)}{assemblersprache}
+    Eine sehr \colorbold{hardwarenahe} Programmiersprache, derren \colorbold{Instructions} eine starke Entsprechung zu bestimmten Maschienenbefehlen bzw. Folgen von Maschienenbefehlen\footnote{Solche Maschienenbefehle werden auch als \colorbold{Pseudo-Maschienenbefehle} bezeichnet und entsprechen dem, was man im allgemeinen als \colorbold{Macro} bezeichnet.} haben.
+    Viele \colorbold{Instructions} haben einen ähnliche Struktur mit \verb|Operation <Operandenliste>|, mit einer \colorbold{Operation}, die einem \colorbold{Opcode} eines Maschienenbefehls bezeichnet und keinen oder mehreren \colorbold{Operanden}, wie die späteren Maschienenbefehle, denen sie entsprechen. Allerdings gibt es oftmals noch viel \glqq syntaktischen Zucker\grqq\; innerhalb\footnote{Z.B. erlaubt die Assemblersprache des \colorbold{GCC} für die \colorbold{$X_{86\_64}$-Architektur} für manche Operanden die Syntax \smalltt{n(\%r)}, die einen \colorbold{Speicherzugriff} mit \colorbold{Offset} $n$ zur Adresse, die im \colorbold{Register} \smalltt{\%r} steht durchführt, wobei z.B. die Klammern \smalltt{()} usw. nur syntaktischer Zucker sind und natürlich nicht mitcodiert werden.} der Instructions und drumherum\footnote{Z.B. sind in $X_{86\_64}$ die Instructions in Blöcken untergebracht, die ein \colorbold{Label} haben und zu denen mittels  \smalltt{jmp <label>} gesprungen werden kann, wobei ein solches Konstrukt, was vor allem auch noch relativ beliebig wählbare Bezeichner verwendet keine Entsprechung in einem Prozessor und Hauptspeicher haben kann.}.
+  \end{Definition}
+
+  \begin{Definition}{Maschienensprache}{maschienensprache}
+    Programmiersprache, deren mögliche Programme die \colorbold{hardwarenaheste Repräsentation} eines möglicherweise zuvor hierzu kompilierten bzw. assemblierten Programmes darstellen. Jeder Maschienenbefehl entspricht einer bestimmten \colorbold{Aufgabe}, die CPU übernehmen kann und die Maschienenbefehle sind meist so designed, dass sie sich innerhalb bestimmter \colorbold{Wortbreiten}, die $2$er Potenzen sind codieren lassen. Im einfachsten Fall innerhalb einer \colorbold{Speicherzelle} des \colorbold{Hauptspeichers}.\footnote{Viele Prozessorarchitekturen erlauben es allerdings auch z.B. zwei Maschienenbefehle in eine Speicherzelle des Hauptspeichers zu komprimieren, wenn diese zwei Maschienenbefehle keine Operanden mit zu großen Immediate Values (Definition~\ref{def:immediate_value}) haben oder eine Maschienenbefehle über mehrere Speicherzellen}.
+  \end{Definition}
+
+  \begin{Definition}{Assembler}{assembler}
+    Übersetzt im allgemeinen \colorbold{Assemblercode}, der in \colorbold{Assemblersprache} geschrieben ist zu \colorbold{Maschienencode} der in \colorbold{Maschienensprache} geschrieben ist.\footnote{Ein Assembler ist in üblichen Compilern in irgendeiner Form meist schon integriert, da Compiler direkt Maschienencode erzeugen. Ein \colorbold{Compiler} soll möglichst viel von seiner internen Funktionsweise für den Benutzer abstrahieren und dem Benutzer standardmäßig einfach nur Maschienencode oder Objectcode bereitstellen soll, der direkt ausführbar ist bzw. wenn er später mit dem Linker zu Maschiendencode zusammengesetzt wird ausführbar ist.}
+  \end{Definition}
+
+  \begin{Definition}{Immediate Value}{immediate_value}
+
+  \end{Definition}
 
 
 \begin{Definition}{Transpiler (bzw. Source-to-source Compiler)}{transpiler}
-  Kompiliert zwischen Sprachen, die ungefähr auf dem \colorbold{gleichen} Level an \colorbold{Abstraktion} arbeiten\footnote{Die im aktuellen Zeitgeist in Mode gekommene Sprache \colorbold{TypeScript} will als Obermenge von JavaScript und wird daher zu \colorbold{JavaScript} transpiliert.}.
+  Kompiliert zwischen Sprachen, die ungefähr auf dem \colorbold{gleichen} Level an \colorbold{Abstraktion} arbeiten\footnote{Die im aktuellen Zeitgeist in Mode gekommene Sprache \colorbold{TypeScript} will als Obermenge von JavaScript % TODO
+  und wird daher zu \colorbold{JavaScript} transpiliert.}.
   % TODO:
 \end{Definition}
 
@@ -50,23 +72,6 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
   Hat die Zielmaschine $M_2$ allerdings ausreichend Rechenleistung, um Programme, die in $L_w$ selbst zu kompilieren und es fehlt lediglich ein Compiler $C_w$, der das übernimmt, so ist eine mögliche Lösung, in einem ersten Schritt einen \colorbold{minimalen Compiler} $C_{w_{min}}$ zu schreiben, der die \colorbold{Wunschsprache} $L_w$ in die \colorbold{Maschienensprache} $B_2$ der Zielmaschine $M_2$ kompiliert.
 
   Diesen \colorbold{minimalen Compiler} $C_{w_{min}}$ könnte man nun auf dem aufwendigen Weg komplett in der \colorbold{Assemblersprache} $A_2$ (Definition~\ref{def:assemblersprache}) der \colorbold{Maschienensprache} $B_2$ schreiben oder man verwendet einen anderen Compiler $C_o$, der eine Sprache $L_o$ kompiliert und schreibt diesen \colorbold{minimalen Compiler} $C_{w_{min}}$ in dieser Sprache $L_o$ und kompiliert diesen dann mit dem Compiler $C_o$. Dieser andere Compiler $C_o$ kann entweder ein \colorbold{Cross-Compiler} sein, der auf einer anderen Maschine $M_1$ läuft oder ein Compiler, der bereits auf der Zielmaschine $M_2$ mittels \colorbold{Bootstrapping} (Definition~\ref{def:bootstrapping}) zum laufen gebracht wurde.
-
-  \begin{Definition}{Assemblersprache (bzw. engl. Assembly Language)}{assemblersprache}
-    Eine sehr \colorbold{hardwarenahe} Programmiersprache, derren \colorbold{Instructions} eine starke Entsprechung zu bestimmten Maschienenbefehlen bzw. Folgen von Maschienenbefehlen\footnote{Solche Maschienenbefehle werden auch als \colorbold{Pseudo-Maschienenbefehle} bezeichnet und entsprechen dem, was man im allgemeinen als \colorbold{Macro} bezeichnet.} haben.
-    Viele \colorbold{Instructions} haben einen ähnliche Struktur mit \verb|Operation <Operandenliste>|, mit einer \colorbold{Operation}, die einem \colorbold{Opcode} eines Maschienenbefehls bezeichnet und keinen oder mehreren \colorbold{Operanden}, wie die späteren Maschienenbefehle, denen sie entsprechen. Allerdings gibt es oftmals noch viel \glqq syntaktischen Zucker\grqq\; innerhalb\footnote{Z.B. erlaubt die Assemblersprache des \colorbold{GCC} für die \colorbold{$X_{86\_64}$-Architektur} für manche Operanden die Syntax \smalltt{n(\%r)}, die einen \colorbold{Speicherzugriff} mit \colorbold{Offset} $n$ zur Adresse, die im \colorbold{Register} \smalltt{\%r} steht durchführt, wobei z.B. die Klammern \smalltt{()} usw. nur syntaktischer Zucker sind und natürlich nicht mitcodiert werden.} der Instructions und drumherum\footnote{Z.B. sind in $X_{86\_64}$ die Instructions in Blöcken untergebracht, die ein \colorbold{Label} haben und zu denen mittels  \smalltt{jmp <label>} gesprungen werden kann, wobei ein solches Konstrukt, was vor allem auch noch relativ beliebig wählbare Bezeichner verwendet keine Entsprechung in einem Prozessor und Hauptspeicher haben kann.}.
-  \end{Definition}
-
-  \begin{Definition}{Maschienensprache}{maschienensprache}
-    Programmiersprache, deren mögliche Programme die \colorbold{hardwarenaheste Repräsentation} eines möglicherweise zuvor hierzu kompilierten bzw. assemblierten Programmes darstellen. Jeder Maschienenbefehl entspricht einer bestimmten \colorbold{Aufgabe}, die CPU übernehmen kann und die Maschienenbefehle sind meist so designed, dass sie sich innerhalb bestimmter \colorbold{Wortbreiten}, die $2$er Potenzen sind codieren lassen. Im einfachsten Fall innerhalb einer \colorbold{Speicherzelle} des \colorbold{Hauptspeichers}.\footnote{Viele Prozessorarchitekturen erlauben es allerdings auch z.B. zwei Maschienenbefehle in eine Speicherzelle des Hauptspeichers zu komprimieren, wenn diese zwei Maschienenbefehle keine Operanden mit zu großen Immediate Values (Definition~\ref{def:immediate_value}) haben oder eine Maschienenbefehle über mehrere Speicherzellen}.
-  \end{Definition}
-
-  \begin{Definition}{Assembler}{assembler}
-    Übersetzt im allgemeinen \colorbold{Assemblercode}, der in \colorbold{Assemblersprache} geschrieben ist zu \colorbold{Maschienencode} der in \colorbold{Maschienensprache} geschrieben ist.
-  \end{Definition}
-
-  \begin{Definition}{Immediate Value}{immediate_value}
-
-  \end{Definition}
 
   und sich dafür die \colorbold{Rechenleistung} einer anderen Maschine borgt und eine beliebige \colorbold{Sprache}, die auf dieser Maschien läuft, in der dieser Minimale Compiler geschrieben wird.
 
