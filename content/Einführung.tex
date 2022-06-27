@@ -33,10 +33,8 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
   \end{equation}
 \end{Definition}
 
-Üblicherweise kompiliert ein \colorbold{Compiler} von einer \colorbold{komplexeren Sprache} zu \colorbold{Maschinensprache}, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
+Üblicherweise kompiliert ein \colorbold{Compiler} von einer \colorbold{komplexeren Sprache} zu \colorbold{Maschinensprache} (Definition~\ref{def:maschienensprache}), aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
 
-% TODO vielleicht noch die Sache mit den 2 Bedeutungen von Assembler
-% TODO: die Sache mit Blocks und GOTO in x_86, aber ehe später
 
 \begin{Definition}{Transpiler (bzw. Source-to-source Compiler)}{transpiler}
   Kompiliert zwischen Sprachen, die ungefähr auf dem \colorbold{gleichen} Level an \colorbold{Abstraktion} arbeiten\footnote{Die im aktuellen Zeitgeist in Mode gekommene Sprache \colorbold{TypeScript} will als Obermenge von JavaScript und wird daher zu \colorbold{JavaScript} transpiliert.}.
@@ -44,14 +42,27 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \end{Definition}
 
 \begin{Definition}{Cross-Compiler}{cross_compiler}
-  Kompiliert ein Program für eine Sprache, die auf der eigenen Maschine garnicht läuft.
+  Kompiliert auf einer \colorbold{Maschine} $M_1$ ein Program, dass in einer \colorbold{Sprache} $L_w$ geschrieben ist für eine \colorbold{andere Maschine} $M_2$, wobei beide Maschinen $M_1$ und $M_2$ unterschiedliche \colorbold{Maschienensprachen} $B_1$ und $B_2$ haben.
 \end{Definition}
 
-  Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein oder niemals ein Compiler für die Wunschsprache existiert, der unter der \colorbold{Maschienensprache} $L_2$ einer Zielmaschine $M_2$ läuft oder die Zielmaschine $M_2$ nicht ausreichend \colorbold{Rechenleistung} hat, um ein Programm in der Wunschsprache zeitnah selbst zu kompilieren.
-  \footnote{Lego Mindstorms} % TODO:
+  Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein oder niemals ein Compiler $C_w$ für die \colorbold{Wunschsprache} $L_w$ existiert bzw. existieren wird, der unter der \colorbold{Maschienensprache} $B_2$ einer Zielmaschine $M_2$ läuft oder die Zielmaschine $M_2$ nicht ausreichend \colorbold{Rechenleistung} hat, um ein Programm in der Wunschsprache $L_w$ zeitnah selbst zu kompilieren.\footnote{Die an vielen Universitäten und Schulen eingesetzen programmierbaren Roboter von \colorbold{Lego Mindstorms} nutzen z.B. einen \colorbold{Cross-Compiler}, um für den programmierbaren Microcontroller eine \colorbold{C-ähnliche Sprache} in die Maschienensprache des Microcontrollers zu kompilieren, da der Microcontroller selbst nicht genug Rechenleistung besitzt, um selbst zeinah zu kompilieren.}
 
-  Hat die Zielmaschine $M_2$ allerdings ausreichend Leistung, um Programme selbst zu kompilieren und es fehlt lediglich ein Compiler, der das übernimmt, so ist eine mögliche Lösung in einem ersten einen \colorbold{minimalen Compiler} zu schreiben, der die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} der Zielmaschine $M_2$ kompiliert. Diesen \colorbold{minimalen Compiler} könnte man nun komplett in der Maschinensprache
+  Hat die Zielmaschine $M_2$ allerdings ausreichend Rechenleistung, um Programme, die in $L_w$ selbst zu kompilieren und es fehlt lediglich ein Compiler $C_w$, der das übernimmt, so ist eine mögliche Lösung, in einem ersten Schritt einen \colorbold{minimalen Compiler} $C_{w_{min}}$ zu schreiben, der die \colorbold{Wunschsprache} $L_w$ in die \colorbold{Maschienensprache} $B_2$ der Zielmaschine $M_2$ kompiliert.
 
+  Diesen \colorbold{minimalen Compiler} $C_{w_{min}}$ könnte man nun auf dem aufwendigen Weg komplett in der \colorbold{Assembly Language} $A_2$ (Definition~\ref{def:assembly_language}) der \colorbold{Maschienensprache} $M_2$ schreiben oder man verwendet einen anderen Compiler $C_o$, der eine Sprache $L_o$ kompiliert und schreibt diesen \colorbold{minimalen Compiler} $C_{w_{min}}$ in dieser Sprache $L_o$ und kompiliert diesen dann mit dem Compiler $C_o$. Dieser andere Compiler $C_o$ kann entweder ein \colorbold{Cross-Compiler} sein, der auf einer anderen Maschine $M_1$ läuft oder ein Compiler, der bereits auf der Zielmaschine $M_2$ mittels \colorbold{Bootstrapping} (Definition~\ref{def:bootstrapping}) zum laufen gebracht wurde.
+
+  \begin{Definition}{Assembly Language}{assembly_language}
+
+  \end{Definition}
+  % TODO: die Sache mit Blocks und GOTO in x_86, aber eher später
+
+  \begin{Definition}{Assembler}{assembler}
+
+  \end{Definition}
+
+  \begin{Definition}{Maschienensprache}{maschienensprache}
+
+  \end{Definition}
 
   und sich dafür die \colorbold{Rechenleistung} einer anderen Maschine borgt und eine beliebige \colorbold{Sprache}, die auf dieser Maschien läuft, in der dieser Minimale Compiler geschrieben wird.
 
