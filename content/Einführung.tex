@@ -45,20 +45,23 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 
 \begin{Definition}{Cross-Compiler}{cross_compiler}
   Kompiliert ein Program für eine Sprache, die auf der eigenen Maschine garnicht läuft.
-  \footnote{Lego Mindstorms} % TODO:
 \end{Definition}
 
-  Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn es noch gar keinen Compiler der Wunschsprache für die \colorbold{Maschienensprache} einer Zielmaschine gibt und man nicht den kompletten minimalen Compiler der Wunschsprache für die Zielmaschine in der \colorbold{Maschienensprache} der Zielmaschine schreiben will oder % TODO
+  Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein oder niemals ein Compiler für die Wunschsprache existiert, der unter der \colorbold{Maschienensprache} $L_2$ einer Zielmaschine $M_2$ läuft oder die Zielmaschine $M_2$ nicht ausreichend \colorbold{Rechenleistung} hat, um ein Programm in der Wunschsprache zeitnah selbst zu kompilieren.
+  \footnote{Lego Mindstorms} % TODO:
 
-  Daher ist eine mögliche Vorgehensweise einen \colorbold{minimalen Compiler} zu schreiben, der die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} der Zielmaschine kompiliert und sich dafür die \colorbold{Rechenleistung} einer anderen Maschine borgt und eine beliebige \colorbold{Sprache}, die auf dieser Maschien läuft, in der dieser Minimale Compiler geschrieben wird.
+  Hat die Zielmaschine $M_2$ allerdings ausreichend Leistung, um Programme selbst zu kompilieren und es fehlt lediglich ein Compiler, der das übernimmt, so ist eine mögliche Lösung in einem ersten einen \colorbold{minimalen Compiler} zu schreiben, der die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} der Zielmaschine $M_2$ kompiliert. Diesen \colorbold{minimalen Compiler} könnte man nun komplett in der Maschinensprache
+
+
+  und sich dafür die \colorbold{Rechenleistung} einer anderen Maschine borgt und eine beliebige \colorbold{Sprache}, die auf dieser Maschien läuft, in der dieser Minimale Compiler geschrieben wird.
 
   Hat man diesen \colorbold{minimalen Compiler} kann man Programme in der Wunschsprache schreiben und mithilfe des  \colorbold{minimalen Compilers} kompilieren, sodass diese Programme auf der Zielmaschine laufen.
 
   Nun kann man den \colorbold{minimalen Compiler}, denn man gerade eben in einer \colorbold{Programmesprache} implementiert hat, in der \colorbold{Wunschsprache} selbst implementieren und dann mit dem \colorbold{minamlen Compiler} für ebendiese Wunschsprache selbst kompilieren. Was man als Output bekommt ist ein \colorbold{minimmaler Compiler}, der aber auf der \colorbold{Zielmaschine} läuft und die \colorbold{Wunschsprache} in die \colorbold{Maschienensprache} der Zielmaschine kompiliert.
 
-  Aufbauend auf diesem \colorbold{minimalen Compiler}, der auf der \colorbold{Zielmaschine} läuft, kann man nun auf der Zielmaschine selbst \colorbold{iterativ} den minimalen Compiler schrittweise zu einem umfangreicheren Compiler, der mehr Funktionalitäten unterstützt weiterentwickeln und braucht die ursprüngliche Maschine, auf dem man die allererste Version des minimalen Compilers implementiert hat nicht mehr.
+  Aufbauend auf diesem \colorbold{minimalen Compiler}, der auf der \colorbold{Zielmaschine} läuft, kann man nun auf der Zielmaschine selbst \colorbold{iterativ} den minimalen Compiler schrittweise zu einem umfangreicheren Compiler, der mehr Funktionalitäten unterstützt weiterentwickeln und braucht die ursprüngliche Maschine, auf dem man die allererste Version des minimalen Compilers implementiert hat nicht mehr. Dieses Vorgehen wird auch als \colorbold{Bootstrapping} (Definition~\ref{def:bootstrapping}) bezeichnet.\footnote{Der Begriff hat seinen Ursprung in der englischen Redewendung \glqq pulling yourself up by your own bootstraps\grqq, was im deutschen ungefähr der aus den Lügengeschichten des Freiherrn von Münchhausen bekannten Redewendung \glqq sich am eigenen Schopf aus dem Sumpf ziehen\grqq entspricht.}
 
-  Dieses Vorgehen wird auch als \colorbold{Bootstrapping} (Definition~\ref{def:bootstrapping}) bezeichnet. Der Begriff ist sinnverwandt mit dem \colorbold{Booten} eines Computers, wo die wichtigste Software, der \colorbold{Kernel} zuerst in den Speicher geladen wird und darauf aufbauend von diesem dann das Betriebssysteme, welches bei Bedarf dann \colorbold{Systemsoftware}\footnote{Software, die das Ausführen von Anwendungssoftware ermöglicht oder unterstützt, wie z.B. Treiber.} und \colorbold{Anwendungssoftware}\footnote{Software, deren Anwendung darin besteht, dass sie dem Benutzer unmittelbar eine Dienstleistung zur Verfügung stellt.} lädt.
+  % Der Begriff ist sinnverwandt mit dem \colorbold{Booten} eines Computers, wo die wichtigste Software, der \colorbold{Kernel} zuerst in den Speicher geladen wird und darauf aufbauend von diesem dann das Betriebssysteme, welches bei Bedarf dann \colorbold{Systemsoftware}\footnote{Software, die das Ausführen von Anwendungssoftware ermöglicht oder unterstützt, wie z.B. Treiber.} und \colorbold{Anwendungssoftware}\footnote{Software, deren Anwendung darin besteht, dass sie dem Benutzer unmittelbar eine Dienstleistung zur Verfügung stellt.} lädt.
 
 % Das ist das, was der PicoC-Compiler ist
 
@@ -73,21 +76,21 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
   \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
 
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
-  \paragraph{\thesubdefcounter}\label{par:bootstrapping1}
+  \paragraph{\thesubdefcounter}\label{par:bootstrapping1}\hspace{-0.25cm}
   Wenn man ein \colorbold{Programm}, dass auf einer \colorbold{Maschine} $M_1$ läuft, auch auf einer \colorbold{Zielmaschine} $M_2$ zum laufen bringt.
 
   \stepcounter{subdefcounter}
 
-  \paragraph{\thesubdefcounter}\label{par:bootstrapping2}
+  \paragraph{\thesubdefcounter}\label{par:bootstrapping2}\hspace{-0.25cm}
   Wenn man einen Compiler mithilfe von \colorbold{früheren Versionen} seiner selbst schreibt. Man schreibt den erweiterten Compiler in der Sprache, welche von der früheren Version des Compilers kompiliert wird und schafft es so iterativ immer umfangreichere Compiler zu bauen.\footcite{earley_formalism_1970}
 
 \end{Definition}
 
-Diese Form von Bootstrapping in \nameref{par:bootstrapping1} bildet im Falle dessen, dass es sich beim dem Programm um einen Compiler für eine Programmiersprache handelt die Lösung für ein Problem, dass auf das \colorbold{Henne-Ei-Problem}\footnote{Beschreibt die Situation, wenn ein System sich selbst als Abhängigkeit hat, damit es überhaupt einen Anfang für dieses System geben kann. Dafür steht das Problem mit der Henne und dem Ei sinnbildlich, da hier die Frage ist, wie das ganze seinen Anfang genommen hat, da beides zirkular voneinander abhängt.} reduziert werden kann.
+Die Form von Bootstrapping in \nameref{par:bootstrapping1} bildet im Falle dessen, dass es sich beim dem Programm um einen Compiler für eine Programmiersprache handelt die Lösung für ein Problem, dass auf das \colorbold{Henne-Ei-Problem}\footnote{Beschreibt die Situation, wenn ein System sich selbst als Abhängigkeit hat, damit es überhaupt einen Anfang für dieses System geben kann. Dafür steht das Problem mit der Henne und dem Ei sinnbildlich, da hier die Frage ist, wie das ganze seinen Anfang genommen hat, da beides zirkular voneinander abhängt.} reduziert werden kann.
 
   Wenn es auf der Zielmaschine $M_2$ noch gar keinen Compiler für die Programmiersprache gibt, in der der Compiler für ebendiese Programmiersprache geschrieben steht, so liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine \colorbold{externe Entität} zur Hilfe nimmt.
 
-  Eine Möglichkeit ist, indem man einen \colorbold{Cross-Compiler} auf der Maschine $M_1$ nutzt, die einem den \colorbold{Compiler} der Programmiersprache für die andere Maschine $M_2$ kompiliert bzw. \colorbold{bootstraped}.
+  Eine Möglichkeit ist, indem man einen \colorbold{Cross-Compiler} auf der Maschine $M_1$ nutzt, der den \colorbold{Compiler} der Programmiersprache für die andere Maschine $M_2$ kompiliert bzw. \colorbold{bootstraped}.
 
 
 \subsection{T-Diagramme}
@@ -237,7 +240,7 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
   \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
 
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
-  \paragraph{\thesubdefcounter}\label{par:parser}
+  \paragraph{\thesubdefcounter}\label{par:parser}\hspace{-0.25cm}
   In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \nameref{par:parser} verendet.}.\footcite{noauthor_compiler_nodate}
 \end{Definition}
 
