@@ -35,9 +35,9 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 
 Üblicherweise kompiliert ein \colorbold{Compiler} ein Program, dass in einer \colorbold{Programmiersprache} geschrieben ist zu \colorbold{Maschienenncode}, der in \colorbold{Maschienensprache} (Definition~\ref{def:maschienensprache}) geschrieben ist, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}).
 
-Der \colorbold{Maschienencode}, denn ein üblicher \colorbold{Compiler} einer \colorbold{Programmiersprache} generiert, enthält die Maschienenbefehle üblicherweise in binärer Repräsentation, da diese in erster Linie für die Maschiene, die binär arbeitet verständlich sein sollen und nicht für den Programmierer. Ebenso wird bei komplexeren Compilern, die es erlauben, den Programmcode in mehrere Dateien aufzuteilen meist \colorbold{Objectcode} erzeugt.
-% Der PicoC-Compiler
+Der \colorbold{Maschienencode}, denn ein üblicher Compiler einer Programmiersprache generiert, enthält seine Folge von Maschienenbefehlen üblicherweise in \colorbold{binärer Repräsentation}, da diese in erster Linie für die Maschiene, die binär arbeitet verständlich sein sollen und nicht für den Programmierer. Ebenso wird bei komplexeren Compilern, die es erlauben, den Programmcode in mehrere Dateien aufzuteilen meist \colorbold{Objectcode} erzeugt, der neben der Folge von Maschienenbefehlen in binärer Repräsentation auch noch Informationen für den \colorbold{Linker} (Definition~\ref{def:linker}) enthält, die im späteren \colorbold{Maschiendencode} nicht mehr enthalten sind, sobald der \colorbold{Linker} die Objektdateien zum Maschienencode zusammengesetzt hat.
 
+Der \colorbold{PicoC-Compiler}, der den Zweck erfüllt für Studenten ein \colorbold{Anschauungs- und Lernwerkzeug} zu sein, generiert allerdings \colorbold{Maschienencode}, der die \colorbold{Maschienenbefehle} bzw. \colorbold{RETI-Befehle} in menschenlesbarer Form als, ausgeschriebene Bezeichnungen der \colorbold{RETI-Operationen}, \colorbold{RETI-Register} und \colorbold{Immediates} (Definition~\ref{def:immediate_value}) enthält. Der Maschienencode des \colorbold{PicoC-Compilers} braucht die Maschienenbefehle auch nicht in binärer Darstellung, damit der \colorbold{RETI-Interpreter} sie interpretieren kann, sondern es für den \colorbold{RETI-Interpreter} ebenfalls leichter diese direkt in menschenlesbarer Form zu haben, da der \colorbold{RETI-Interpreter} einen echten RETI-Prozessor, der so noch nicht existiert nur simuliert\footnote{Einen \colorbold{RETI-Prozessor} zu bauen, der menscnenlesbaren Maschienencode in z.B. \colorbold{UTF-8 Codierung} implementiert wäre vermutlich sehr kompliziert und unnötiger Aufwand, da Hardware binär arbeitet und man dieser daher lieber direkt die binär codierten Maschiendenbefehle übergibt, anstatt z.B. eine unnötig Platzverbrauchenden \colorbold{UTF-8 Codierung} zu verwenden, die man nicht in einem Schritt verarbeiten kann, da die Register und Speicherzellen nur 32 bzw. 64 Bit Breite haben}.
 
   \begin{Definition}{Assemblersprache (bzw. engl. Assembly Language)}{assemblersprache}
     Eine sehr \colorbold{hardwarenahe} Programmiersprache, derren \colorbold{Instructions} eine starke Entsprechung zu bestimmten Maschienenbefehlen bzw. Folgen von Maschienenbefehlen\footnote{Solche Maschienenbefehle werden auch als \colorbold{Pseudo-Maschienenbefehle} bezeichnet und entsprechen dem, was man im allgemeinen als \colorbold{Macro} bezeichnet.} haben.
@@ -52,10 +52,13 @@ Der \colorbold{Maschienencode}, denn ein üblicher \colorbold{Compiler} einer \c
     Übersetzt im allgemeinen \colorbold{Assemblercode}, der in \colorbold{Assemblersprache} geschrieben ist zu \colorbold{Maschienencode} der in \colorbold{Maschienensprache} geschrieben ist.\footnote{Ein Assembler ist in üblichen Compilern in irgendeiner Form meist schon integriert, da Compiler direkt Maschienencode erzeugen. Ein \colorbold{Compiler} soll möglichst viel von seiner internen Funktionsweise für den Benutzer abstrahieren und dem Benutzer standardmäßig einfach nur Maschienencode oder Objectcode bereitstellen soll, der direkt ausführbar ist bzw. wenn er später mit dem Linker zu Maschiendencode zusammengesetzt wird ausführbar ist.}
   \end{Definition}
 
+  \begin{Definition}{Linker}{linker}
+    Programm, dass \colorbold{Objektcode} aus mehreren Objektdateien zu ausführbarem \colorbold{Maschienencode} in eine ausführbare Datei oder Bibliotheksdatei \colorbold{linkt}, sodass kein vermeidbarer \colorbold{doppelter} Code darin vorkommt.
+  \end{Definition}
+
   \begin{Definition}{Immediate Value}{immediate_value}
 
   \end{Definition}
-
 
 \begin{Definition}{Transpiler (bzw. Source-to-source Compiler)}{transpiler}
   Kompiliert zwischen Sprachen, die ungefähr auf dem \colorbold{gleichen} Level an \colorbold{Abstraktion} arbeiten\footnote{Die im aktuellen Zeitgeist in Mode gekommene Sprache \colorbold{TypeScript} will als Obermenge von JavaScript % TODO
