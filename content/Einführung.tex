@@ -76,9 +76,26 @@ Der \colorbold{PicoC-Compiler}, der den Zweck erfüllt für Studenten ein \color
   Kompiliert auf einer \colorbold{Maschine} $M_1$ ein Program, dass in einer \colorbold{Sprache} $L_w$ geschrieben ist für eine \colorbold{andere Maschine} $M_2$, wobei beide Maschinen $M_1$ und $M_2$ unterschiedliche \colorbold{Maschienensprachen} $B_1$ und $B_2$ haben.
 \end{Definition}
 
-Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein oder niemals ein Compiler $C_w$ für die \colorbold{Wunschsprache} $L_w$ existiert bzw. existieren wird, der unter der \colorbold{Maschienensprache} $B_2$ einer Zielmaschine $M_2$ läuft oder die Zielmaschine $M_2$ nicht ausreichend \colorbold{Rechenleistung} hat, um ein Programm in der Wunschsprache $L_w$ selbst zeitnah zu kompilieren.\footnote{Die an vielen Universitäten und Schulen eingesetzen programmierbaren Roboter von \colorbold{Lego Mindstorms} nutzen z.B. einen \colorbold{Cross-Compiler}, um für den programmierbaren Microcontroller eine \colorbold{C-ähnliche Sprache} in die Maschienensprache des Microcontrollers zu kompilieren, da der Microcontroller selbst nicht genug Rechenleistung besitzt, um ein Programm selbst zeitnah zu kompilieren.}
+Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein Compiler $C_w$ für die \colorbold{Wunschsprache} $L_w$ existiert, der unter der \colorbold{Maschienensprache} $B_2$ einer Zielmaschine $M_2$ läuft oder die Zielmaschine $M_2$ nicht ausreichend \colorbold{Rechenleistung} hat, um ein Programm in der Wunschsprache $L_w$ selbst zeitnah zu kompilieren.\footnote{Die an vielen Universitäten und Schulen eingesetzen programmierbaren Roboter von \colorbold{Lego Mindstorms} nutzen z.B. einen \colorbold{Cross-Compiler}, um für den programmierbaren Microcontroller eine \colorbold{C-ähnliche Sprache} in die Maschienensprache des Microcontrollers zu kompilieren, da der Microcontroller selbst nicht genug Rechenleistung besitzt, um ein Programm selbst zeitnah zu kompilieren.}
 
-Hat die Zielmaschine $M_2$ allerdings ausreichend Rechenleistung, um Programme, die in $L_w$ geschrieben sind, selbst in ihre Maschienensprache $B_2$ zu kompilieren und es fehlt lediglich ein Compiler $C_w$, der das übernimmt, so ist eine mögliche Lösung, um diesen \colorbold{Compiler} $C_w$ zu erhalten, in einem ersten Schritt einen \colorbold{minimalen Compiler} $C_{w_{min}}$ zu schreiben, der eine reduzierte \colorbold{Wunschsprache} $L_{w_{min}}$ in die \colorbold{Maschienensprache} $B_2$ der Zielmaschine $M_2$ kompiliert.
+Hat die Zielmaschine $M_2$ allerdings ausreichend Rechenleistung, um Programme, die in $L_w$ geschrieben sind, selbst in ihre Maschienensprache $B_2$ zu kompilieren und es fehlt lediglich ein Compiler $C_w$, der das übernimmt, so stösst man, wenn man auf der Maschiene $M_2$ einen Compiler $C_w$ implementieren will und diesen nicht komplett in der Assemblersprache $A_2$ der Zielmaschine\footnote{Es wird davon ausgegangen, dass für die Maschiene $M_2$ zumindest ein \colorbold{Assembler} existiert.} implementieren will auf ein Problem, wenn man den Compiler $C_w$ in der Sprache $L_w$ schrieben will, die er selbst kompiliert.
+
+
+
+
+
+Die Form von Bootstrapping in \nameref{par:bootstrapping1} bildet im Falle dessen, dass es sich beim dem Programm um einen Compiler für eine Programmiersprache handelt die Lösung für ein Problem, dass auf das \colorbold{Henne-Ei-Problem}\footnote{Beschreibt die Situation, wenn ein System sich selbst als Abhängigkeit hat, damit es überhaupt einen Anfang für dieses System geben kann. Dafür steht das Problem mit der Henne und dem Ei sinnbildlich, da hier die Frage ist, wie das ganze seinen Anfang genommen hat, da beides zirkular voneinander abhängt.} reduziert werden kann.
+
+  Wenn es auf der Zielmaschine $M_2$ noch gar keinen Compiler für die Programmiersprache gibt, in der der Compiler für ebendiese Programmiersprache geschrieben steht, so liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine \colorbold{externe Entität} zur Hilfe nimmt.
+
+  Eine Möglichkeit ist, indem man einen \colorbold{Cross-Compiler} auf der Maschine $M_1$ nutzt, der den \colorbold{Compiler} der Programmiersprache für die andere Maschine $M_2$ kompiliert bzw. \colorbold{bootstraped}.
+
+
+
+
+
+
+so ist eine mögliche Lösung, um diesen \colorbold{Compiler} $C_w$ zu erhalten, in einem ersten Schritt einen \colorbold{minimalen Compiler} $C_{w_{min}}$ zu schreiben, der eine reduzierte \colorbold{Wunschsprache} $L_{w_{min}}$ in die \colorbold{Maschienensprache} $B_2$ der Zielmaschine $M_2$ kompiliert.
 
 Diesen \colorbold{minimalen Compiler} $C_{w_{min}}$ könnte man nun auf dem aufwendigen Weg komplett in der \colorbold{Assemblersprache} $A_2$ (Definition~\ref{def:assemblersprache}) der \colorbold{Maschienensprache} $B_2$ schreiben. Oder man verwendet einen anderen Compiler $C_o$, der eine Sprache $L_o$ kompiliert und schreibt diesen \colorbold{minimalen Compiler} $C_{w_{min}}$ in dieser Sprache $L_o$ und kompiliert diesen dann mit dem Compiler $C_o$. Dieser andere Compiler $C_o$ kann entweder ein \colorbold{Cross-Compiler} sein, der auf einer anderen Maschine $M_1$ läuft oder ein Compiler, der bereits auf der Zielmaschine $M_2$ mittels \colorbold{Bootstrapping} (Definition~\ref{def:bootstrapping}) zum laufen gebracht wurde.
 
@@ -104,21 +121,14 @@ Aufbauend auf diesem \colorbold{minimalen Compiler}, der auf der \colorbold{Ziel
 
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
   \paragraph{\thesubdefcounter}\label{par:bootstrapping1}\hspace{-0.25cm}
-  Wenn man ein \colorbold{Programm}, dass auf einer \colorbold{Maschine} $M_1$ läuft, auch auf einer \colorbold{Zielmaschine} $M_2$ zum laufen bringt.
+  Wenn man einen \colorbold{Compiler} $C_w$ für eine Wunschsprache $L_w$, der auf einer \colorbold{Maschine} $M_1$ läuft, auch auf einer \colorbold{Zielmaschine} $M_2$ zum laufen bringt, wobei der \colorbold{Compiler} $C_w$ selbst in der Sprache $L_w$ geschrieben ist, die er selbst kompiliert.
 
   \stepcounter{subdefcounter}
 
   \paragraph{\thesubdefcounter}\label{par:bootstrapping2}\hspace{-0.25cm}
-  Wenn man einen Compiler mithilfe von \colorbold{früheren Versionen} seiner selbst schreibt. Man schreibt den erweiterten Compiler in der Sprache, welche von der früheren Version des Compilers kompiliert wird und schafft es so iterativ immer umfangreichere Compiler zu bauen.\footcite{earley_formalism_1970}
+  Wenn man die akutelle Version eines Compiler $C_{w_i}$ für die momentane Version einer Wunschsprache $L_{w_i}$ mithilfe von \colorbold{früheren Versionen} seiner selbst schreibt. Man schreibt den erweiterten Compiler in der Sprache $L_{w_{i-1}}$, welche von der früheren Version des Compilers, $C_{w_{i-1}}$ kompiliert wird und schafft es so iterativ immer umfangreichere Compiler zu bauen.\footcite{earley_formalism_1970}
 
 \end{Definition}
-
-Die Form von Bootstrapping in \nameref{par:bootstrapping1} bildet im Falle dessen, dass es sich beim dem Programm um einen Compiler für eine Programmiersprache handelt die Lösung für ein Problem, dass auf das \colorbold{Henne-Ei-Problem}\footnote{Beschreibt die Situation, wenn ein System sich selbst als Abhängigkeit hat, damit es überhaupt einen Anfang für dieses System geben kann. Dafür steht das Problem mit der Henne und dem Ei sinnbildlich, da hier die Frage ist, wie das ganze seinen Anfang genommen hat, da beides zirkular voneinander abhängt.} reduziert werden kann.
-
-  Wenn es auf der Zielmaschine $M_2$ noch gar keinen Compiler für die Programmiersprache gibt, in der der Compiler für ebendiese Programmiersprache geschrieben steht, so liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine \colorbold{externe Entität} zur Hilfe nimmt.
-
-  Eine Möglichkeit ist, indem man einen \colorbold{Cross-Compiler} auf der Maschine $M_1$ nutzt, der den \colorbold{Compiler} der Programmiersprache für die andere Maschine $M_2$ kompiliert bzw. \colorbold{bootstraped}.
-
 
 \subsection{T-Diagramme}
 \begin{Definition}{T-Diagram}{t_diagram}
