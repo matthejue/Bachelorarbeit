@@ -3,6 +3,8 @@
 \chapter{Einführung}
 \label{ch:einführung}
 
+\counterwithin{defcounter}{chapter}
+
 \section{Compiler und Interpreter}
 Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers} (Definition~\ref{def:compiler}) und eines  \colorbold{Interpreters} (Definition~\ref{def:interpreter}), da das Schreiben eines Compilers von der \colorbold{PicoC-Sprache} in die \colorbold{RETI-Sprache} das Thema dieser Bachelorarbeit ist und die Definition eines \colorbold{Interpreters} genutzt wird, um zu definieren was ein \colorbold{Compiler} ist. Des Weiteren wurde zur \colorbold{Qualitätsicherung} ein \colorbold{RETI-Interpreter} implementiert, um mithilfe des \colorbold{GCC}\footnote{Sammlung von Compilern für Linux bzw. GNU-Linux, steht für \colorbold{G}NU \colorbold{C}ompiler \colorbold{C}ollection} und von \colorbold{Tests} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen} zu belegen (siehe Subkapitel~\ref{sec:qualitätssicherung}).
 
@@ -41,7 +43,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 
 \begin{Definition}{Assemblersprache (bzw. engl. Assembly Language)}{assemblersprache}
   Eine sehr \colorbold{hardwarenahe} Programmiersprache, derren \colorbold{Instructions} eine starke Entsprechung zu bestimmten Maschienenbefehlen bzw. Folgen von Maschienenbefehlen\footnote{Instructions der Assemblersprache, die mehreren Maschienenbefehlen entsprechen werden auch als \colorbold{Pseudo-Instructions} bezeichnet und entsprechen dem, was man im allgemeinen als Macro bezeichnet.} haben.
-  Viele \colorbold{Instructions} haben einen ähnliche Struktur mit \verb|Operation <Operanden>|, mit einer \colorbold{Operation}, die einem \colorbold{Opcode} eines Maschienenbefehls bezeichnet und keinen oder mehreren \colorbold{Operanden}, wie die späteren Maschienenbefehle, denen sie entsprechen. Allerdings gibt es oftmals noch viel \glqq syntaktischen Zucker\grqq\; innerhalb\footnote{Z.B. erlaubt die Assemblersprache des \colorbold{GCC} für die \colorbold{$X_{86\_64}$-Architektur} für manche Operanden die Syntax \smalltt{n(\%r)}, die einen \colorbold{Speicherzugriff} mit \colorbold{Offset} $n$ zur Adresse, die im \colorbold{Register} \smalltt{\%r} steht durchführt, wobei z.B. die Klammern \smalltt{()} usw. nur \glqq syntaktischer Zucker\grqq sind und natürlich nicht mitcodiert werden.} der Instructions und drumherum\footnote{Z.B. sind in $X_{86\_64}$ die Instructions in \colorbold{Blöcken} untergebracht, die ein \colorbold{Label} haben und zu denen mittels  \smalltt{jmp <label>} gesprungen werden kann. Ein solches Konstrukt, was vor allem auch noch relativ beliebig wählbare Bezeichner verwendet kann keine direkte Entsprechung in einem Prozessor und Hauptspeicher haben.}.
+  Viele \colorbold{Instructions} haben eine ähnliche übliche Struktur \verb|Operation <Operanden>|, mit einer \colorbold{Operation}, die einem \colorbold{Opcode} eines Maschienenbefehls bezeichnet und keinen oder mehreren \colorbold{Operanden}, wie die späteren Maschienenbefehle, denen sie entsprechen. Allerdings gibt es oftmals noch viel \glqq syntaktischen Zucker\grqq\; innerhalb\footnote{Z.B. erlaubt die Assemblersprache des \colorbold{GCC} für die \colorbold{$X_{86\_64}$-Architektur} für manche Operanden die Syntax \smalltt{n(\%r)}, die einen \colorbold{Speicherzugriff} mit \colorbold{Offset} $n$ zur Adresse, die im \colorbold{Register} \smalltt{\%r} steht durchführt, wobei z.B. die Klammern \smalltt{()} usw. nur \glqq syntaktischer Zucker\grqq sind und natürlich nicht mitcodiert werden.} der Instructions und drumherum\footnote{Z.B. sind in $X_{86\_64}$ die Instructions in \colorbold{Blöcken} untergebracht, die ein \colorbold{Label} haben und zu denen mittels  \smalltt{jmp <label>} gesprungen werden kann. Ein solches Konstrukt, was vor allem auch noch relativ beliebig wählbare Bezeichner verwendet kann keine direkte Entsprechung in einem Prozessor und Hauptspeicher haben.}.
 \end{Definition}
 
 Ein \colorbold{Assembler} (Definition~\ref{def:assembler}) ist in üblichen Compilern in einer bestimmten Form meist schon integriert sein, da Compiler üblicherweise direkt \colorbold{Maschienencode} bzw. \colorbold{Objectcode} (Definition~\ref{def:objectcode}) erzeugen. Ein \colorbold{Compiler} soll möglichst viel von seiner internen Funktionsweise und der damit verbundenen Theorie für den Benutzer abstrahieren und dem Benutzer daher standardmäßig einfach nur das als Output liefern, was er eigentlich haben will, nämlich den \colorbold{Maschienencode} bzw. \colorbold{Objectcode}, der direkt ausführbar ist bzw. wenn er später mit dem \colorbold{Linker} (Definition~\ref{def:linker}) zu Maschiendencode zusammengesetzt wird ausführbar ist.
@@ -214,21 +216,22 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
   Der \colorbold{Derivation Tree} wird optimalerweise immer so konstruiert bzw. die \colorbold{Konkrette Syntax} immer so definiert, dass sich möglichst einfach ein \colorbold{Abstrakt Syntax Tree} daraus konstruieren lässt.
 
 % TODO: vielleicht ein hübsches Bildchen
+
+  % https://tex.stackexchange.com/questions/145070/how-to-store-a-counter-value-at-some-point-in-the-document
+  \setcounter{defcounter}{\value{\tcbcounter}}
+  % https://www.overleaf.com/learn/latex/Counters
+  \stepcounter{defcounter}
 \end{Definition}
 
 \begin{Definition}{Parser}{parser}
   Ein Programm, dass eine \colorbold{Eingabe} in eine für die \colorbold{Weiterverbeitung} taugliche Form bringt.
 
-  % https://www.overleaf.com/learn/latex/Counters
-  \counterwithin{subdefcounter}{\tcbcounter}
-  \setcounter{subdefcounter}{1}
-
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
   \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
 
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
-  \paragraph{\thesubdefcounter}\label{par:parser}\hspace{-0.25cm}
-  In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \nameref{par:parser} verendet.}.\footcite{noauthor_compiler_nodate}
+  \paragraph{\thedefcounter{.1}}\label{par:parser}\hspace{-0.25cm}
+  In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \nameref{par:parser} verwendet.}.\footcite{noauthor_compiler_nodate}
 \end{Definition}
 
 \begin{Special_Paragraph}

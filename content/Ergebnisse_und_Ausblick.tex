@@ -3,6 +3,9 @@
 \chapter{Ergebnisse und Ausblick}
 \label{ch:ergebnisse_und_ausblick}
 
+  % https://www.overleaf.com/learn/latex/Counters
+\setcounter{defcounter}{1}
+\counterwithin{defcounter}{chapter}
 
 newtotcounter{tmpprim}
 
@@ -14,13 +17,13 @@ newtotcounter{tmpprim}
 % TODO: zusammenfassendes Bild
 \section{Kommentierter Kompiliervorgang}
 \section{Erweiterungsideen}
-Sollte tatsächlich eines Tages eine \colorbold{RETI-CPU} in Hardware implementiert worden sein und auf einem \colorbold{FPGA} laufen, sodass ein \colorbold{provisorisches Betriebssystem} darauf läuft, dann wäre der nächste Schritt einen PicoC-Compiler zu schreiben, der in der Programmiersprache PicoC, $L_{PicoC}$ selbst geschrieben ist und sich selbst kompilieren kann. Je nach Implementierungsart dieses \colorbold{Self-compiling Compiler} kann dadurch \colorbold{Unabhängigkeit} von der Programmiersprache \colorbold{Python}, in der er momentan implementiert ist und Unabhängigkeit von einer anderen Maschiene, die bisher immer für das \colorbold{Cross-Compiling} notwendig war erreicht werden.
+Sollte tatsächlich eines Tages eine \colorbold{RETI-CPU} auf einem \colorbold{FPGA} implementiert werden, sodass ein \colorbold{provisorisches Betriebssystem} darauf laufen könnte, dann wäre der nächste Schritt einen PicoC-Compiler zu schreiben, der in der Programmiersprache $L_{PicoC}$ selbst geschrieben ist und sich selbst kompilieren kann. Je nach Implementierungsart dieses \colorbold{Self-compiling Compiler} kann dadurch \colorbold{Unabhängigkeit} von der Programmiersprache \colorbold{Python}, in der der momentane Compiler $C_{PicoC}$ für $L_{PicoC}$ momentan implementiert ist und Unabhängigkeit von einer anderen Maschiene, die bisher immer für das \colorbold{Cross-Compiling} notwendig war erreicht werden.
 
-Will man nun auf dem \colorbold{FPGA} $M_{FPGA}$ den gerade beschriebenen \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ implementieren und hat bereits den gesamtem Compiler $C_{PicoC}$ in der Sprache  $L_{PicoC}$ geschrieben, so stösst man auf ein Problem, dass auf das \colorbold{Henne-Ei-Problem}\footnote{Beschreibt die Situation, wenn ein System sich selbst als Abhängigkeit hat, damit es überhaupt einen Anfang für dieses System geben kann. Dafür steht das Problem mit der Henne und dem Ei sinnbildlich, da hier die Frage ist, wie das ganze seinen Anfang genommen hat, da beides zirkular voneinander abhängt.} reduziert werden kann. Man bräuchte, um den Compiler $C_{PicoC}$ auf dem \colorbold{FPGA} $M_{FPGA}$ zu kompilieren bereits einen kompilierten Compiler $C_{PicoC}$, der mit der Maschienensprache \colorbold{RETI} läuft. Es liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine \colorbold{externe Entität} zur Hilfe nimmt.
+Will man nun für eine Maschiene $M_{RETI}$, auf der keine anderen Programmiersprachen mittels \colorbold{Bootstrapping} zum laufen gebracht wurden den gerade beschriebenen \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ implementieren und hat bereits den gesamtem \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ in der Sprache  $L_{PicoC}$ geschrieben, so stösst man auf ein Problem, dass auf das \colorbold{Henne-Ei-Problem}\footnote{Beschreibt die Situation, wenn ein System sich selbst als \colorbold{Abhängigkeit} hat, damit es überhaupt einen \colorbold{Anfang} für dieses System geben kann. Dafür steht das Problem mit der \colorbold{Henne} und dem \colorbold{Ei} sinnbildlich, da hier die Frage ist, wie das ganze seinen Anfang genommen hat, da beides \colorbold{zirkular} voneinander abhängt.} reduziert werden kann. Man bräuchte, um den \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ auf der \colorbold{Maschiene} $M_{RETI}$ zu kompilieren bereits einen kompilierten \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$, der mit der Maschienensprache \colorbold{RETI} läuft. Es liegt eine \colorbold{zirkulare Abhängigkeit vor}, die man nur auflösen kann, indem eine \colorbold{externe Entität} zur Hilfe nimmt.
 
-Wenn man den gesamten \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ nicht selbst komplett in der Maschienensprache \colorbold{RETI} schreiben will, wäre eine Möglichkeit, indem man den \colorbold{Cross-Compiler} $C_{PicoC\_PicoC}$, den man bereits in der Programmiersprache \colorbold{Python} implementiert hat auf einer anderen Maschiene $M$ dafür nutzt, dass dieser den \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ für den FPGA $M_{FPGA}$ kompiliert bzw. \colorbold{bootstraped} (Definition~\nameref{par:bootstrapping1}). Im Fall, dass auf dem FPGA $M_{FPGA}$ die Programmiersprache $L_{Python}$ bereits mittels \colorbold{Bootstrapping} auf vielen denkbaren Wegen zum Laufen gebracht wurde, könnte der \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ auch mithife des \colorbold{Cross-Compilers} $C_{PicoC\_Python}$ und der Programmiersprache \colorbold{Python} auf dem \colorbold{FPGA} selbst kompiliert werden.
+Da man den gesamten \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ nicht selbst komplett in der Maschienensprache \colorbold{RETI} schreiben will, wäre eine Möglichkeit, dass man den \colorbold{Cross-Compiler} $C_{PicoC\_PicoC}$, den man bereits in der Programmiersprache \colorbold{Python} implementiert hat, der in diesem Fall die \colorbold{externe Entität} darstellt, auf einer anderen Maschiene $M$ dafür nutzt, damit dieser den \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ für die Maschiene $M_{RETI}$ kompiliert bzw. \colorbold{bootstraped} (Definition~\nameref{par:bootstrapping1}) und man den kompilierten \colorbold{RETI-Maschiendencode} dann einfach auf die Maschiene $M_{RETI}$ kopiert.\footnote{Im Fall, dass auf der Maschiene $M_{RETI}$ die Programmiersprache $L_{Python}$ bereits mittels \colorbold{Bootstrapping} zum Laufen gebracht wurde, könnte der \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$ auch mithife des \colorbold{Cross-Compilers} $C_{PicoC\_Python}$ als \colorbold{externe Entität} und der Programmiersprache \colorbold{Python} auf der Maschiene $M_{RETI}$ selbst kompiliert werden.}
 
-Aufbauend auf dem \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$, der einen \colorbold{minimalen Compiler} für die \colorbold{Programmiersprache} $C$, $L_C$ darstellt, könnte man auch die komplette Sprache $L_C$ für den \colorbold{FPGA} $M_{FPGA}$ ebenfalls mittels \colorbold{Bootstrapping} (Defintion~\nameref{par:bootstrapping2}) implementieren.
+Aufbauend auf dem \colorbold{Self-compiling Compiler} $C_{PicoC\_PicoC}$, der einen \colorbold{minimalen Compiler} für die \colorbold{Programmiersprache} $C$, $L_C$ darstellt, könnte man auch die komplette Sprache $L_C$ für die Maschiene $M_{FPGA}$ ebenfalls mittels \colorbold{Bootstrapping} (Defintion~\nameref{par:bootstrapping2}) implementieren.
 
 So ist eine mögliche Lösung, um diesen \colorbold{Compiler} $C_w$ zu erhalten, in einem ersten Schritt einen \colorbold{minimalen Compiler} $C_{w_{min}}$ zu schreiben, der eine reduzierte \colorbold{Wunschsprache} $L_{w_{min}}$ in die \colorbold{Maschienensprache} $B_2$ der Zielmaschine $M_2$ kompiliert.
 
@@ -35,21 +38,14 @@ Aufbauend auf diesem \colorbold{minimalen Compiler}, der auf der \colorbold{Ziel
 \begin{Definition}{Bootstrapping}{bootstrapping}
   Es gibt zwei verschiedene Formen von \colorbold{Bootstrapping}:
 
-  % https://www.overleaf.com/learn/latex/Counters
-  \counterwithin{subdefcounter}{\tcbcounter}
-  \setcounter{subdefcounter}{1}
-
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
   \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
 
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
-  setcounter{tmpprim}{\value{tcbcounter}}
-  \paragraph{}\label{par:bootstrapping1}\hspace{-0.25cm}
+  \paragraph{\thedefcounter{.1}}\label{par:bootstrapping1}\hspace{-0.25cm}
   Wenn man einen \colorbold{Compiler} $C_w$ für eine Wunschsprache $L_w$, der auf einer \colorbold{Maschine} $M_1$ läuft, auch auf einer \colorbold{Zielmaschine} $M_2$ zum laufen bringt, wobei der \colorbold{Compiler} $C_w$ selbst in der Sprache $L_w$ geschrieben ist, die er selbst kompiliert.
 
-  \stepcounter{subdefcounter}
-
-  \paragraph{2}\label{par:bootstrapping2}\hspace{-0.25cm}
+  \paragraph{\thedefcounter{.2}}\label{par:bootstrapping2}\hspace{-0.25cm}
   Wenn man die akutelle Version eines Compiler $C_{w_i}$ für die momentane Version einer Wunschsprache $L_{w_i}$ mithilfe von \colorbold{früheren Versionen} seiner selbst schreibt. Man schreibt den erweiterten Compiler in der Sprache $L_{w_{i-1}}$, welche von der früheren Version des Compilers, $C_{w_{i-1}}$ kompiliert wird und schafft es so iterativ immer umfangreichere Compiler zu bauen.\footcite{earley_formalism_1970}\footnote{Der Begriff ist sinnverwandt mit dem \colorbold{Booten} eines Computers, wo die wichtigste Software, der \colorbold{Kernel} zuerst in den Speicher geladen wird und darauf aufbauend von diesem dann das Betriebssysteme, welches bei Bedarf dann \colorbold{Systemsoftware}, Software, die das Ausführen von Anwendungssoftware ermöglicht oder unterstützt, wie z.B. Treiber. und \colorbold{Anwendungssoftware}, Software, deren Anwendung darin besteht, dass sie dem Benutzer unmittelbar eine Dienstleistung zur Verfügung stellt, lädt.}
 \end{Definition}
 
