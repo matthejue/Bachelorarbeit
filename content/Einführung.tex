@@ -3,8 +3,6 @@
 \chapter{Einführung}
 \label{ch:einführung}
 
-\counterwithin{defcounter}{chapter}
-
 \section{Compiler und Interpreter}
 Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers} (Definition~\ref{def:compiler}) und eines  \colorbold{Interpreters} (Definition~\ref{def:interpreter}), da das Schreiben eines Compilers von der \colorbold{PicoC-Sprache} in die \colorbold{RETI-Sprache} das Thema dieser Bachelorarbeit ist und die Definition eines \colorbold{Interpreters} genutzt wird, um zu definieren was ein \colorbold{Compiler} ist. Des Weiteren wurde zur \colorbold{Qualitätsicherung} ein \colorbold{RETI-Interpreter} implementiert, um mithilfe des \colorbold{GCC}\footnote{Sammlung von Compilern für Linux bzw. GNU-Linux, steht für \colorbold{G}NU \colorbold{C}ompiler \colorbold{C}ollection} und von \colorbold{Tests} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen} zu belegen (siehe Subkapitel~\ref{sec:qualitätssicherung}).
 
@@ -36,7 +34,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \end{Definition}
 
 \begin{Special_Paragraph}
-  Im Folgenden wird ein \colorbold{Compiler} voll ausgeschrieben als $C_{i\_w\_k}^{o\_j}$ geschrieben, wobei $C_w$ die \colorbold{Sprache} bezeichnet, die der Compiler als \colorbold{Input} nimmt und zu einer nicht näher spezifizierten Maschienensprache $L_{B_i}$ einer Maschiene $M_i$ kompiliert. Fall die Notwendigkeit besteht die \colorbold{Maschiene} $M_i$ anzugeben, zu dessen \colorbold{Maschienensprache} $L_{B_i}$ der Compiler kompiliert, wird das als $C_{i\_W}$ geschrieben. Falls die Notwendigkeit besteht die \colorbold{Sprache} $L_o$ anzugeben, in der der Compiler selbst geschrieben ist, wird das als $C^o$ geschrieben. Falls die Notwendigkeit besteht die Version der Sprache, in die der Compiler kompiliert $L_{w\_k}$ oder in der er selbst geschrieben ist $L_{o\_j}$ anzugeben, wird das als $C_{w\_k}^{o\_j}$ geschrieben.
+  Im Folgenden wird ein voll ausgeschriebener \colorbold{Compiler} als $C_{i\_w\_k\_{min}}^{o\_j}$ geschrieben, wobei $C_w$ die \colorbold{Sprache} bezeichnet, die der Compiler als \colorbold{Input} nimmt und zu einer nicht näher spezifizierten Maschienensprache $L_{B_i}$ einer Maschiene $M_i$ kompiliert. Fall die Notwendigkeit besteht die \colorbold{Maschiene} $M_i$ anzugeben, zu dessen \colorbold{Maschienensprache} $L_{B_i}$ der Compiler kompiliert, wird das als $C_{i}$ geschrieben. Falls die Notwendigkeit besteht die \colorbold{Sprache} $L_o$ anzugeben, in der der Compiler selbst geschrieben ist, wird das als $C^o$ geschrieben. Falls die Notwendigkeit besteht die Version der Sprache, in die der Compiler kompiliert $L_{w\_k}$ oder in der er selbst geschrieben ist $L_{o\_j}$ anzugeben, wird das als $C_{w\_k}^{o\_j}$ geschrieben. Falls es sich um einen \colorbold{minimalen Compiler} handelt (Definition~\ref{def:minimaler_compiler}) kann man das als $C_{min}$ schreiben.
 \end{Special_Paragraph}
 
 Üblicherweise kompiliert ein \colorbold{Compiler} ein \colorbold{Program}, dass in einer \colorbold{Programmiersprache} geschrieben ist zu \colorbold{Maschienenncode}, der in \colorbold{Maschienensprache} (Definition~\ref{def:maschienensprache}) geschrieben ist, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}). Des Weiteren sind \colorbold{Maschienensprache} und \colorbold{Assemblersprache} (Definition~\ref{def:assemblersprache}) voneinander zu unterscheiden.
@@ -79,7 +77,7 @@ Der \colorbold{PicoC-Compiler}, der den Zweck erfüllt für Studenten ein \color
 \end{Definition}
 
 \begin{Definition}{Cross-Compiler}{cross_compiler}
-  Kompiliert auf einer \colorbold{Maschine} $M_1$ ein Program, dass in einer \colorbold{Sprache} $L_w$ geschrieben ist für eine \colorbold{andere Maschine} $M_2$, wobei beide Maschinen $M_1$ und $M_2$ unterschiedliche \colorbold{Maschienensprachen} $B_1$ und $B_2$ haben.
+  Kompiliert auf einer \colorbold{Maschine} $M_1$ ein Program, dass in einer \colorbold{Sprache} $L_w$ geschrieben ist für eine \colorbold{andere Maschine} $M_2$, wobei beide Maschinen $M_1$ und $M_2$ unterschiedliche \colorbold{Maschienensprachen} $B_1$ und $B_2$ haben.\footnote{Beim \colorbold{PicoC-Compiler} handelt es sich um einen \colorbold{Cross-Compiler} $C_{PicoC}^{Python}$.}
 \end{Definition}
 
 Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein Compiler $C_w$ für die \colorbold{Wunschsprache} $L_w$ existiert, der unter der \colorbold{Maschienensprache} $B_2$ einer Zielmaschine $M_2$ läuft oder die Zielmaschine $M_2$ nicht ausreichend \colorbold{Rechenleistung} hat, um ein Programm in der Wunschsprache $L_w$ selbst zeitnah zu kompilieren.\footnote{Die an vielen Universitäten und Schulen eingesetzen programmierbaren Roboter von \colorbold{Lego Mindstorms} nutzen z.B. einen \colorbold{Cross-Compiler}, um für den programmierbaren Microcontroller eine \colorbold{C-ähnliche Sprache} in die Maschienensprache des Microcontrollers zu kompilieren, da der Microcontroller selbst nicht genug Rechenleistung besitzt, um ein Programm selbst zeitnah zu kompilieren.}
@@ -227,10 +225,6 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
 
 % TODO: vielleicht ein hübsches Bildchen
 
-  % https://tex.stackexchange.com/questions/145070/how-to-store-a-counter-value-at-some-point-in-the-document
-  \setcounter{defcounter}{\value{\tcbcounter}}
-  % https://www.overleaf.com/learn/latex/Counters
-  \stepcounter{defcounter}
 \end{Definition}
 
 \begin{Definition}{Parser}{parser}
@@ -240,8 +234,8 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
   \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
 
   % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
-  \paragraph{\thedefcounter{.1}}\label{par:parser}\hspace{-0.25cm}
-  In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \nameref{par:parser} verwendet.}.\footcite{noauthor_compiler_nodate}
+  \paragraph{\thetcbcounter{.1}}\label{par:parser}\hspace{-0.25cm}
+  In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \ref{def:parser}{.1} verwendet.}.\footcite{noauthor_compiler_nodate}
 \end{Definition}
 
 \begin{Special_Paragraph}

@@ -43,6 +43,9 @@
 % https://tex.stackexchange.com/questions/9425/how-to-fix-footnote-position-at-the-bottom-of-the-page
 \usepackage[bottom, flushmargin]{footmisc}
 
+% https://tex.stackexchange.com/a/32212
+\interfootnotelinepenalty=10000
+
 % https://tex.stackexchange.com/questions/8625/force-figure-placement-in-text
 \usepackage{float}
 
@@ -121,3 +124,7 @@
 
 % https://tex.stackexchange.com/a/263470
 \usepackage{microtype}
+
+% https://tex.stackexchange.com/questions/165178/nameref-hyperref-evaluating-counter-instead-of-section-name
+\usepackage{nameref}
+\GetTitleStringSetup{expand}
