@@ -36,7 +36,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \end{Definition}
 
 \begin{Special_Paragraph}
-  Im Folgenden wird ein \colorbold{Compiler} als $C_w^o$ bezeichnet, wobei $C_w$ die \colorbold{Sprache} bezeichnet, die der Compiler als \colorbold{Input} nimmt und zu einer nicht näher spezifizierten Maschienensprache $L_B$ kompiliert. Fall die Notwendigkeit besteht die \colorbold{Maschiene} $M_i$ anzugeben, zu dessen \colorbold{Maschienensprache} der Compiler kompiliert, wird das als $C_{i\_W}$ geschrieben. Fall die Notwendigkeit besteht. Falls die Notwendigkeit besteht die \colorbold{Sprache} anzugeben, in der der Compiler selbst geschrieben ist, wird das mit $C^o$ bezeichnet.
+  Im Folgenden wird ein \colorbold{Compiler} voll ausgeschrieben als $C_{i\_w\_k}^{o\_j}$ geschrieben, wobei $C_w$ die \colorbold{Sprache} bezeichnet, die der Compiler als \colorbold{Input} nimmt und zu einer nicht näher spezifizierten Maschienensprache $L_{B_i}$ einer Maschiene $M_i$ kompiliert. Fall die Notwendigkeit besteht die \colorbold{Maschiene} $M_i$ anzugeben, zu dessen \colorbold{Maschienensprache} $L_{B_i}$ der Compiler kompiliert, wird das als $C_{i\_W}$ geschrieben. Falls die Notwendigkeit besteht die \colorbold{Sprache} $L_o$ anzugeben, in der der Compiler selbst geschrieben ist, wird das als $C^o$ geschrieben. Falls die Notwendigkeit besteht die Version der Sprache, in die der Compiler kompiliert $L_{w\_k}$ oder in der er selbst geschrieben ist $L_{o\_j}$ anzugeben, wird das als $C_{w\_k}^{o\_j}$ geschrieben.
 \end{Special_Paragraph}
 
 Üblicherweise kompiliert ein \colorbold{Compiler} ein \colorbold{Program}, dass in einer \colorbold{Programmiersprache} geschrieben ist zu \colorbold{Maschienenncode}, der in \colorbold{Maschienensprache} (Definition~\ref{def:maschienensprache}) geschrieben ist, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}). Des Weiteren sind \colorbold{Maschienensprache} und \colorbold{Assemblersprache} (Definition~\ref{def:assemblersprache}) voneinander zu unterscheiden.
@@ -161,10 +161,26 @@ Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} im \colorbold{Inputstring}
 
 Ein \colorbold{Lexer} ist im Allgemeinen eine \colorbold{partielle Funktion}, da es Zeichenfolgen geben kann, die kein \colorbold{Pattern} eines \colorbold{Tokens} der Sprache $L_{Lex}$ matchen. In Bezug auf eine Implementierung, wird, wenn der Lexer Teil der Implementierung eines Compilers ist, in diesem Fall eine \colorbold{Fehlermeldung} ausgegeben.
 
+\begin{Special_Paragraph}
+  Um Verwirrung verzubäugen ist es wichtig folgende Unterscheidung hervorzuheben:
+
+  Wenn von \colorbold{Symbolen} die Rede ist, so werden in der \colorbold{Lexikalischen Analyse}, der \colorbold{Syntaktische Analyse} und der \colorbold{Code Generierung}, auf diesen verschiedenen Ebenen unterschiedliche Konzepte als Symbole bezeichnet.
+
+  In der Lexikalischen Analyse sind einzelne \colorbold{Zeichen eines Zeichensatzes} die Symbole.
+
+  In der Syntaktischen Analyse sind die \colorbold{Tokennamen} die Symbole.
+
+  In der Code Generierung sind die \colorbold{Bezeichner} (Definition~\ref{def:bezeichner}) von \colorbold{Variablen, Konstanten und Funktionen} die Symbole\footnote{Das ist der Grund, warum die \colorbold{Tabelle}, in der Informationen zu \colorbold{Bezeichnern} gespeichert werden, in Kapitel~\ref{ch:implementierung} \colorbold{Symboltabelle} genannt wird.}.
+\end{Special_Paragraph}
+
+\begin{Definition}{Bezeichner (bzw. Identifier)}{bezeichner}
+  \colorbold{Lexeme} bzw. \colorbold{Tokenwert}, das bzw. der eine Konstante, Variable, Funktion usw. \colorbold{eindeutig} benennt, außer wenn z.B. bei Funktionen die Programmiersprache das Überladen erlaubt usw.\footnote{In diesem Fall wird die \colorbold{Signatur} der Funktion als weiteres Unterschiedungsmerkmal hinzugenommen, damit es eindeutig ist}
+\end{Definition}
+
 Eine weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für die Weiterverarbeitung unwichtigen Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herauszufiltern. Das geschieht mittels des \colorbold{Lexers}, der allen für die \colorbold{Syntaktische Analyse} unwichtige Zeichen das leere Wort $\epsilon$ zuordnet. Das ist auch im Sinne der Definition, denn $\epsilon \in \Sigma^{*}$.
 Nur das, was für die \colorbold{Syntaktische Analyse} wichtig ist, soll weiterverarbeitet werden, alles andere wird herausgefiltert.
 
-Der Grund warum nicht einfach nur die \colorbold{Lexeme} an die \colorbold{Syntaktische Analyse} weitergegeben werden und der Grund für die Aufteilung des \colorbold{Tokens} in \colorbold{Tokenname} und \colorbold{Tokenwert} ist, weil z.B. die Bezeichner von Variablen, Konstanten und Funktionen beliebige Zeichenfolgen sein können, wie \smalltt{my\_fun}, \smalltt{my\_var} oder \smalltt{my\_const} und es auch viele verschiedenen Zahlen gibt, wie \smalltt{42}, \smalltt{314} oder \smalltt{12}. Die Überbegriffe bzw. Tokennamen für beliebige Bezeichner von Variablen, Konstanten und Funktionen und beliebige Zahlen sind aber trotz allem z.B. \smalltt{Zahl} und \smalltt{Bezeichner}.
+Der Grund warum nicht einfach nur die \colorbold{Lexeme} an die \colorbold{Syntaktische Analyse} weitergegeben werden und der Grund für die Aufteilung des \colorbold{Tokens} in \colorbold{Tokenname} und \colorbold{Tokenwert} ist, weil z.B. die Bezeichner von Variablen, Konstanten und Funktionen beliebige Zeichenfolgen sein können, wie \smalltt{my\_fun}, \smalltt{my\_var} oder \smalltt{my\_const} und es auch viele verschiedenen Zahlen gibt, wie \smalltt{42}, \smalltt{314} oder \smalltt{12}. Die \colorbold{Überbegriffe} bzw. \colorbold{Tokennamen} für beliebige Bezeichner von Variablen, Konstanten und Funktionen und beliebige Zahlen sind aber trotz allem z.B. \smalltt{NAME} und \smalltt{NUM}, bzw. wenn man sich nicht Kurzformen sucht \smalltt{IDENTIFIER} und \smalltt{NUMBER}. Für Zeichenfolgen, wie \verb|if| oder \verb|}| sind die \colorbold{Überbegriffe} genau die Bezeichnungen, die man diesen Zeichenfolgen geben würde, nämlich \smalltt{IF} und \smalltt{RBRACE}.
 
 Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Tokenwert}, denn z.B. im Falle von PicoC kann z.B. der Wert $99$ durch zwei verschiedene Literale darstellt werden, einmal als ASCII-Zeichen \smalltt{'c'} und des Weiteren auch in Dezimalschreibweise als \smalltt{99}\footnote{Die Programmiersprache Python erlaubt es z.B. diesern Wert auch mit den Literalen \smalltt{0b1100011} und \smalltt{0x63} darzustellen.}. Der \colorbold{Tokenwert} ist jedoch der letztendliche Wert an sich, unabhängig von der Darstellungsform.
 
@@ -172,19 +188,9 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
 
 % TODO: später erwähnen, dass alle Produtkionen der Grammatik G_lex eine reguläre Form haben, was der Beweis ist
 
-\begin{Special_Paragraph}
-  Um Verwirrung verzubäugen ist es wichtig folgende Unterscheidung hervorzuheben: Wenn von \colorbold{Symbolen} die Rede ist, so werden in der \colorbold{Lexikalischen Analyse}, der \colorbold{Syntaktische Analyse} und der \colorbold{Code Generierung}, auf diesen verschiedenen Ebenen unterschiedliche Konzepte als Symbole bezeichnet.
-
-  In der Lexikalischen Analyse sind einzelne \colorbold{Zeichen eines Zeichensatzes} die Symbole.
-
-  In der Syntaktischen Analyse sind die \colorbold{Tokennamen} die Symbole.
-
-  In der Code Generierung sind die \colorbold{Bezeichner von Variablen, Konstanten und Funktionnen} die Symbole\footnote{Das ist der Grund, warum die Tabelle, in der Informationen zu Identifiern gespeichert werden aus Kapitel~\ref{ch:implementierung} Symboltabelle genannt wird.}.
-\end{Special_Paragraph}
-
 \begin{Definition}{Literal}{literal}
   Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} für ein und denselben \colorbold{Wert}.
-  % TODO: vielleicht schönes Bildchen
+  % TODO: vielleicht schönes Bildchen, wie in der EIP Zusammenfassung
 \end{Definition}
 
 Um eine Gesamtübersicht über die \colorbold{Lexikalische Analyse} zu geben, ist in Abbildung~\ref{fig:lexikalische_analyse_veranschaulichung} die Lexikalische Analyse an einem Beispiel veranschaulicht.
