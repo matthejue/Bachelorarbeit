@@ -21,6 +21,12 @@ Will man nun für eine Maschiene $M_{RETI}$, auf der bisher keine anderen Progra
 
 Da man den gesamten \colorbold{Self-compiling Compiler} $C_{RETI\_PicoC}^{PicoC}$ nicht selbst komplett in der Maschienensprache $B_{RETI}$ schreiben will, wäre eine Möglichkeit, dass man den \colorbold{Cross-Compiler} $C_{PicoC}^{Python}$, den man bereits in der Programmiersprache $L_{Python}$ implementiert hat, der in diesem Fall einen \colorbold{Bootstrapping Compiler} (Definition~\ref{def:bootstrap_compiler}) darstellt, auf einer anderen Maschiene $M_{other}$ dafür nutzt, damit dieser den \colorbold{Self-compiling Compiler} $C_{RETI\_PicoC}^{PicoC}$ für die Maschiene $M_{RETI}$ kompiliert bzw. \colorbold{bootstraped} und man den kompilierten \colorbold{RETI-Maschiendencode} dann einfach von der Maschiene $M_{other}$ auf die Maschiene $M_{RETI}$ kopiert.\footnote{Im Fall, dass auf der Maschiene $M_{RETI}$ die Programmiersprache $L_{Python}$ bereits mittels \colorbold{Bootstrapping} zum Laufen gebracht wurde, könnte der \colorbold{Self-compiling Compiler} $C_{RETI\_PicoC}^{PicoC}$ auch mithife des \colorbold{Cross-Compilers} $C_{PicoC}^{Python}$ als \colorbold{externe Entität} und der Programmiersprache $L_{Python}$ auf der Maschiene $M_{RETI}$ selbst kompiliert werden.}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{./figures/cross_compiling.png}
+  \caption{Cross-Compiler als Bootstrap Compiler}
+\end{figure}
+
 \begin{Special_Paragraph}
   Einen ersten \colorbold{minimalen Compiler} $C_{2\_w\_min}$ für eine Maschiene $M_2$ und Wunschsprache $L_w$ kann man entweder mittels eines \colorbold{externen} \colorbold{Bootstrap Compilers} $C_w^o$ kompilieren\footnote{In diesem Fall, dem \colorbold{Cross-Compiler} $C_{PicoC}^{Python}$.} oder man schreibt ihn direkt in der \colorbold{Maschienensprache} $B_2$ bzw. wenn ein \colorbold{Assembler} vorhanden ist, in der \colorbold{Assemblesprache} $A_2$.
 
@@ -49,6 +55,12 @@ Das bewerkstelligt man, indem man \colorbold{iterativ} auf der Zielmaschine $M_{
   \paragraph{\thetcbcounter{.1}}\label{par:bootstrapping}\hspace{-0.25cm}
   Wenn man die \colorbold{aktuelle Version} eines \colorbold{Self-compiling Compilers} $C_{w_i}^{w_i}$ der Wunschsprache $L_{w_i}$ mithilfe von \colorbold{früheren Versionen} seiner selbst kompiliert. Man schreibt also z.B. die aktuelle Version des Self-compiling Compilers in der Sprache $L_{w_{i-1}}$, welche von der früheren Version des Compilers, dem Self-compiling Compiler $C_{w_{i-1}}^{w_{i-1}}$ kompiliert wird und schafft es so \colorbold{iterativ} immer umfangreichere Compiler zu bauen.\footnote{Es ist hierbei theoretisch nicht notwendig den \colorbold{letzten} Self-compiling Compiler $C_{w_{i-1}}^{w_{i-1}}$ für das Kompilieren des \colorbold{neuen} Self-compiling Compilers $C_{w_i}^{w_i}$ zu verwenden, wenn z.B. der \colorbold{Self-compiling Compiler} $C_{w_{i-3}}^{w_{i-3}}$ auch bereits alle Funktionalitäten, die beim Schreiben des \colorbold{Self-compiling Compilers} $C_w^w$ verwendet werden kompilieren kann.}\footnote{Der Begriff ist sinnverwandt mit dem \colorbold{Booten} eines Computers, wo die wichtigste Software, der \colorbold{Kernel} zuerst in den Speicher geladen wird und darauf aufbauend von diesem dann das Betriebssysteme, welches bei Bedarf dann \colorbold{Systemsoftware}, Software, die das Ausführen von Anwendungssoftware ermöglicht oder unterstützt, wie z.B. Treiber. und \colorbold{Anwendungssoftware}, Software, deren Anwendung darin besteht, dass sie dem Benutzer unmittelbar eine Dienstleistung zur Verfügung stellt, lädt.}\footcite{earley_formalism_1970}
 \end{Definition}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.66\linewidth]{./figures/bootstrapping.png}
+  \caption{Iteratives Bootstrapping}
+\end{figure}
 
 \begin{Special_Paragraph}
   Auch wenn ein \colorbold{Self-compiling Compiler} $C_{w_i}^{w_i}$ in der Subdefinition~\ref{def:bootstrapping}{.1} selbst in einer früheren Version $L_{w_{i-1}}$ der Programmiersprache $L_{w_i}$ geschrieben wird, wird dieser nicht mit $C_{w_i}^{w_{i-1}}$ bezeichnet, sondern mit $C_{w_i}^{w_i}$, da es bei \colorbold{Self-compiling Compilern} darum geht, dass diese zwar in der Subdefinition~\ref{def:bootstrapping}{.1} eine frühere Version $C_{w_{i-1}}^{w_{i-1}}$ nutzen, um sich selbst kompilieren zu lassen, aber sie auch in der Lage sind sich selber zu kompilieren.
