@@ -85,17 +85,22 @@ Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein Compiler $
 \subsection{T-Diagramme}
 Um die Architektur von \colorbold{Compilern} und \colorbold{Interpretern} übersichtlich darzustellen eignen sich \colorbold{T-Diagramme}\footcite{earley_formalism_1970} besonders gut, da diese optimal darauf \colorbold{zugeschnitten} sind die Eigenheiten von Compilern in ihrer Art der Darstellung unterzubringen.
 
-Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ein Program (Definition~\ref{def:t_diagram_program}), einen Übersetzer (Definition~\ref{def:t_diagram_uebersetzer}), einen Interpreter (Definition~\ref{def:t_diagram_interpreter}) und eine Maschiene (Definition~\ref{def:t_diagram_maschiene}) zusammen.
+Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ein Program (Definition~\ref{def:t_diagram_program}), einen Übersetzer (Definition~\ref{def:t_diagram_compiler}), einen Interpreter (Definition~\ref{def:t_diagram_interpreter}) und eine Maschiene (Definition~\ref{def:t_diagram_maschiene}) zusammen.
 
 \begin{Definition}{T-Diagram Programm}{t_diagram_program}
-  Es ist nicht notwendig den Namen der Sprache an ein $L$ dranzuhängen, weil hier immer eine Sprache steht.
+  Repräsentiert ein \colorbold{Programm}, dass in der \colorbold{Sprache} $L_1$ geschrieben ist und die \colorbold{Funktion} $f$ berechnet.
   \begin{figure}[H]
     \centering
     \includegraphics[height=3cm]{./figures/programm.png}
   \end{figure}
 \end{Definition}
 
-\begin{Definition}{T-Diagram Übersetzer}{t_diagram_uebersetzer}
+\begin{Special_Paragraph}
+  Es ist nicht notwendig beim einem entsprechenden \colorbold{Platzhalter} für einen \colorbold{Namen}, den \colorbold{Namen der Sprache} an ein $L$ dranzuhängen, weil hier immer eine \colorbold{Sprache} steht.
+\end{Special_Paragraph}
+
+\begin{Definition}{T-Diagram Compiler}{t_diagram_compiler}
+  Repräsentiert einen \colorbold{Compiler}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} von der \colorbold{Sprache} $L_2$ in die \colorbold{Sprache} $L_3$ kompiliert.
   \begin{figure}[H]
     \centering
     \includegraphics[height=3cm]{./figures/uerbersetzer.png}
@@ -103,6 +108,7 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ei
 \end{Definition}
 
 \begin{Definition}{T-Diagram Interpreter}{t_diagram_interpreter}
+  Repräsentiert einen \colorbold{Interpreter}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} in der \colorbold{Sprache} $L_2$ interpretiert.
   \begin{figure}[H]
     \centering
     \includegraphics[height=3cm]{./figures/interpreter.png}
@@ -110,23 +116,25 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ei
 \end{Definition}
 
 \begin{Definition}{T-Diagram Maschiene}{t_diagram_maschiene}
+  Repräsentiert eine \colorbold{Maschiene}, welche die \colorbold{Maschienensprache} ausführt.
   \begin{figure}[H]
     \centering
     \includegraphics[height=1.5cm]{./figures/machiene.png}
   \end{figure}
 \end{Definition}
 
+Sowohl horinzontal und vertikal kann man
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.66\linewidth]{./figures/summarize_compiler.png}
-  \caption{Mehrere T's entsprehcen einem Comipler.}
+  \caption{Horinzontale Übersetzungszwischenschritte zusammenfassen}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\linewidth]{./figures/summarize_interpreter.png}
-  \caption{und dann Intepretieren entspricht einem großen Interpreter.}
+  \caption{Vertikale Interpretierungszwischenschritte zusammenfassen}
 \end{figure}
 
 \section{Grammatiken}
