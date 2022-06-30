@@ -85,7 +85,7 @@ Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein Compiler $
 \subsection{T-Diagramme}
 Um die Architektur von \colorbold{Compilern} und \colorbold{Interpretern} übersichtlich darzustellen eignen sich \colorbold{T-Diagramme}\footcite{earley_formalism_1970} besonders gut, da diese optimal darauf \colorbold{zugeschnitten} sind die Eigenheiten von Compilern in ihrer Art der Darstellung unterzubringen.
 
-Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ein Program (Definition~\ref{def:t_diagram_program}), einen Übersetzer (Definition~\ref{def:t_diagram_compiler}), einen Interpreter (Definition~\ref{def:t_diagram_interpreter}) und eine Maschiene (Definition~\ref{def:t_diagram_maschiene}) zusammen.
+Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Blöcken} für ein Program (Definition~\ref{def:t_diagram_program}), einen Übersetzer (Definition~\ref{def:t_diagram_übersetzer}), einen Interpreter (Definition~\ref{def:t_diagram_interpreter}) und eine Maschiene (Definition~\ref{def:t_diagram_maschiene}) zusammen.
 
 \begin{Definition}{T-Diagram Programm}{t_diagram_program}
   Repräsentiert ein \colorbold{Programm}, dass in der \colorbold{Sprache} $L_1$ geschrieben ist und die \colorbold{Funktion} $f$ berechnet.
@@ -99,13 +99,17 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ei
   Es ist nicht notwendig beim einem entsprechenden \colorbold{Platzhalter} für einen \colorbold{Namen}, den \colorbold{Namen der Sprache} an ein $L$ dranzuhängen, weil hier immer eine \colorbold{Sprache} steht.
 \end{Special_Paragraph}
 
-\begin{Definition}{T-Diagram Compiler}{t_diagram_compiler}
-  Repräsentiert einen \colorbold{Compiler}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} von der \colorbold{Sprache} $L_2$ in die \colorbold{Sprache} $L_3$ kompiliert.
+\begin{Definition}{T-Diagram Übersetzer}{t_diagram_übersetzer}
+  Repräsentiert einen \colorbold{Übersetzer}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} von der \colorbold{Sprache} $L_2$ in die \colorbold{Sprache} $L_3$ kompiliert.
   \begin{figure}[H]
     \centering
     \includegraphics[height=3cm]{./figures/uerbersetzer.png}
   \end{figure}
 \end{Definition}
+
+\begin{Special_Paragraph}
+Zwischen den Begriffen \colorbold{Übersetzung} und \colorbold{Kompilierung} gibt es einen kleinen Unterschied, \colorbold{Übersetzung} ist \colorbold{kleinschrittiger} als \colorbold{Kompilierung} und ist auch zwischen \colorbold{Passes} möglich, \colorbold{Kompilierung} beinhaltet dagegen bereits alle \colorbold{Passes} ein einem Schritt. \colorbold{Kompilieren} ist also auch \colorbold{Übsersetzen}, aber \colorbold{Übersetzen} ist nicht immer auch \colorbold{Kompilieren}.
+\end{Special_Paragraph}
 
 \begin{Definition}{T-Diagram Interpreter}{t_diagram_interpreter}
   Repräsentiert einen \colorbold{Interpreter}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} in der \colorbold{Sprache} $L_2$ interpretiert.
@@ -116,25 +120,29 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ei
 \end{Definition}
 
 \begin{Definition}{T-Diagram Maschiene}{t_diagram_maschiene}
-  Repräsentiert eine \colorbold{Maschiene}, welche die \colorbold{Maschienensprache} ausführt.
+  Repräsentiert eine \colorbold{Maschiene}, welche ein \colorbold{Programm} in \colorbold{Maschienensprache} $L_1$ ausführt.\footnote{Wenn die Maschiene \colorbold{Programme} in einer höheren Sprache als \colorbold{Maschienensprache} ausführt, ist das auch erlaubt das so aufzuschreiben, dann handelt es sich um eine \colorbold{Abstrakte Maschiene}, wie z.B. die \colorbold{Python Virtual Machine} (PVM) oder \colorbold{Java Virtual Machine} (JVM)}
   \begin{figure}[H]
     \centering
     \includegraphics[height=1.5cm]{./figures/machiene.png}
   \end{figure}
 \end{Definition}
 
-Sowohl horinzontal und vertikal kann man
+Aus den verschiedenen \colorbold{Blöcken} lassen \colorbold{Kompostionen} bilden, indem man sie \colorbold{adjazent} zueinander platziert. Allgemein lässt sich grob sagen, dass \colorbold{vertikale Adjazents} für \colorbold{Interpretation} und  \colorbold{horinzontale Adjazents} für \colorbold{Übersetzung} steht.
+
+Sowohl \colorbold{horinzontale} als auch \colorbold{vertikale Adjazents} lassen sich, wie man in den Abbildungen \ref{fig:t_diagram_horinzontal_zusammenfassen} und \ref{fig:t_diagram_vertikal_zusammenfassen} erkennen kann zusammenfassen.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.66\linewidth]{./figures/summarize_compiler.png}
   \caption{Horinzontale Übersetzungszwischenschritte zusammenfassen}
+  \label{fig:t_diagram_horinzontal_zusammenfassen}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\linewidth]{./figures/summarize_interpreter.png}
   \caption{Vertikale Interpretierungszwischenschritte zusammenfassen}
+  \label{fig:t_diagram_vertikal_zusammenfassen}
 \end{figure}
 
 \section{Grammatiken}
