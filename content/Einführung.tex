@@ -71,9 +71,7 @@ Der \colorbold{PicoC-Compiler}, der den Zweck erfüllt für Studenten ein \color
 \end{Definition}
 
 \begin{Definition}{Transpiler (bzw. Source-to-source Compiler)}{transpiler}
-  Kompiliert zwischen Sprachen, die ungefähr auf dem \colorbold{gleichen} Level an \colorbold{Abstraktion} arbeiten\footnote{Die im aktuellen Zeitgeist in Mode gekommene Sprache \colorbold{TypeScript} will als Obermenge von JavaScript % TODO
-  und wird daher zu \colorbold{JavaScript} transpiliert.}.
-  % TODO:
+  Kompiliert zwischen Sprachen, die ungefähr auf dem \colorbold{gleichen} Level an \colorbold{Abstraktion} arbeiten\footnote{Die Programmiersprache \colorbold{TypeScript} will als \colorbold{Obermenge} von \colorbold{JavaScript} die Sprachhe Javascript \colorbold{erweitern} und gleichzeitig die \colorbold{syntaktischen Mittel} von JavaScript unterstützen. Daher bietet es sich Typescript zu Javascript zu \colorbold{transpilieren}.}
 \end{Definition}
 
 \begin{Definition}{Cross-Compiler}{cross_compiler}
@@ -85,7 +83,21 @@ Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein Compiler $
 % Das ist das, was der PicoC-Compiler ist
 
 \subsection{T-Diagramme}
-\begin{Definition}{T-Diagram}{t_diagram}
+Um die Architektur von \colorbold{Compilern} und \colorbold{Interpretern} übersichtlich darzustellen eignen sich \colorbold{T-Diagramme}\footcite{earley_formalism_1970} besonders gut, da diese optimal darauf \colorbold{zugeschnitten} sind die Eigenheiten von Compilern in ihrer Art der Darstellung unterzubringen.
+
+Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Bausteinen} für ein Program (Definition~\ref{def:t_diagram_program}), einen Übersetzer (Definition~\ref{def:t_diagram_uebersetzer}), einen Interpreter (Definition~\ref{def:t_diagram_interpreter}) und eine Maschiene (Definition~\ref{def:t_diagram_maschiene}) zusammen.
+
+\begin{Definition}{T-Diagram Programm}{t_diagram_program}
+  Es ist nicht notwendig den Namen der Sprache an ein $L$ dranzuhängen, weil hier immer eine Sprache steht.
+\end{Definition}
+
+\begin{Definition}{T-Diagram Übersetzer}{t_diagram_uebersetzer}
+\end{Definition}
+
+\begin{Definition}{T-Diagram Interpreter}{t_diagram_interpreter}
+\end{Definition}
+
+\begin{Definition}{T-Diagram Maschiene}{t_diagram_maschiene}
 \end{Definition}
 % TODO: Darstelunng von Interpreter, Compiler und Cross-Compiler als T-Diagram.
 % TODO: mehrere T's entsprehcen einem Comipler, Compilieren und dann Intepretieren entspricht einem großen Interpreter.
@@ -99,6 +111,8 @@ Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn noch kein Compiler $
 \begin{Definition}{Grammatik}{grammatik}
 \end{Definition}
 \begin{Definition}{Reguläre Sprachen}{reguläre_sprachen}
+\end{Definition}
+\begin{Definition}{Kontextfreie Sprachen}{kontextfreie_sprachen}
 \end{Definition}
 \begin{Definition}{Ableitung}{ableitung}
 \end{Definition}
@@ -130,8 +144,6 @@ wobei $a$ eine beliebige Folge von \colorbold{Terminalsymbolen} und \colorbold{N
 \end{Definition}
 \begin{Definition}{LL(k)-Grammatik}{llk_grammatik}
   Eine Grammatik ist \colorbold{LL(k)} für $k\in\mathbb{N}$, falls jeder Ableitungsschritt eindeutig durch die nächsten $k$ \colorbold{Symbole} des \colorbold{Eingabeworts} bzw. in Bezug zu Compilerbau \colorbold{Token} des \colorbold{Inputstrings} zu bestimmen ist\footnote{Das wird auch als \colorbold{Lookahead} von $k$ bezeichnet.}. Dabei steht \colorbold{LL} für \colorbold{l}eft-to-right und \colorbold{l}eftmost-derivation, da das \colorbold{Eingabewort} von \colorbold{links nach rechts} geparsed und immer \colorbold{Linksableitungen} genommen werden müssen\footnote{Wobei sich das mit den \colorbold{Linksableitungen} automatisch ergibt, wenn man das Eingabewort von  \colorbold{links-nach-rechts} parsed und jeder der nächsten $k$ \colorbold{Ableitungsschritte} eindeutig sein soll.}, damit die obige Bedingung mit den \colorbold{nächsten} $k$ Symbolen gilt.
-\end{Definition}
-\begin{Definition}{Kontextfreie Sprachen}{kontextfreie_sprachen}
 \end{Definition}
 % \subsection{Linksrekursiv und Rechtrekursiv}
 \section{Lexikalische Analyse}
