@@ -74,8 +74,8 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
   13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
   \bottomrule
 \end{tabulary}
-\label{tab:reference_table}
 \caption{Präzidenzregeln von PicoC}
+\label{tab:reference_table}
 \end{table}
 % erwähnen von Mehrdeutigkeit und Assoziativität
 % finalle Grammatik im Appendix
@@ -111,16 +111,11 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 \subsubsection{Zugriff auf Arrayindex}
 Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
-\begin{minipage}{0.4\textwidth}
-  \lipsum[1-2]
-\end{minipage}
-\hfill
-\begin{minipage}{0.6\textwidth}
-  \raggedleft
-  \treebox[title=PicoC Code, remember as=array_access_picoc_code, width=0.6\textwidth, breakable]{./code_examples/example_array_access.picoc}
+  \begin{figure}
+    \treebox[remember as=array_access_picoc_code, width=0.6\textwidth, breakable]{./code_examples/example_array_access.picoc}
+  \end{figure}
   \vspace{0.5cm}
-  \treebox[title=Abstract Syntax Tree, remember as=array_access_ast, width=0.6\textwidth, breakable]{./code_examples/example_array_access.ast}
-\end{minipage}
+  \treebox[remember as=array_access_ast, width=0.6\textwidth, breakable]{./code_examples/example_array_access.ast}
   \treebox[title=PicoC Blocks, remember as=array_access_picoc_blocks, width=0.6\linewidth, breakable]{./code_examples/example_array_access.picoc_blocks}
   % \treebox[title=PicoC Mon, remember as=array_access_picoc_mon, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.picoc_mon}
   % \treebox[title=RETI Blocks, remember as=array_access_reti_blocks, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.reti_blocks}
