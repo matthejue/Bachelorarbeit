@@ -1,0 +1,34 @@
+File 
+  Name './code_examples/example_function_call_with_return_value.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'stack_fun', 
+      [], 
+      [
+        Block 
+          Name 'stack_fun.1', 
+          [
+            Return 
+              Num '42'
+          ]
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            Assign 
+              Alloc 
+                Writeable, 
+                IntType 'int', 
+                Name 'var', 
+              Call 
+                Name 'stack_fun', 
+                []
+          ]
+      ]
+  ]

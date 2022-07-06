@@ -2,6 +2,13 @@ file
   ./code_examples/example_function_call_no_return_value.dt
   decls_defs
     decl_def
+      fun_decl
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	stack_fun
+        fun_params
+    decl_def
       fun_def
         type_spec
           prim_dt	void

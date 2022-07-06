@@ -1,3 +1,5 @@
+void stack_fun();
+
 void main() {
   stack_fun();
   return;

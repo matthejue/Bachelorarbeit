@@ -1,5 +1,5 @@
 File 
-  Name './code_examples/example_function_call_no_return_value.ast', 
+  Name './code_examples/example_function_call_no_return_value.picoc_shrink', 
   [
     FunDecl 
       VoidType 'void', 
