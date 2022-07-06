@@ -1,10 +1,10 @@
 \input{./content/Packete_und_Deklarationen} % ./content/Packete_und_Deklarationen.tex
 
 \includeonly{
-  % ./content/Motivation,
-  % ./content/Einführung,
+  ./content/Motivation,
+  ./content/Einführung,
   ./content/Implementierung,
-  % ./content/Ergebnisse_und_Ausblick,
+  ./content/Ergebnisse_und_Ausblick,
   ./content/Appendix
 }
 
@@ -38,23 +38,29 @@
   before upper=\setlength{\parskip}{1em}
   }{def}
 
-  \newtcolorbox{Special_Paragraph}{enhanced, breakable, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},
+  \newtcolorbox{Special_Paragraph}{enhanced, breakable, sharpish corners, notitle, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},
   interior style={fill=SecondaryColor},
   frame style={color=white},
   % https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
   before upper=\setlength{\parskip}{1em}
   }
 
+  % https://tex.stackexchange.com/questions/319355/tcolorbox-breakable-option-not-working
   \newtcbinputlisting{\codebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted language=C, halign title=center, drop fuzzy shadow
+  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted language=Text, minted style=colorful, halign title=center, sharpish corners, drop fuzzy shadow
   }
-  % minted language=C,
+% drop fuzzy shadow, drop lifted shadow, listing engine=listings
 
-  \newtcbinputlisting{\treebox}[2][]{
+  \newtcbinputlisting{\numberedcodebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=listings, halign title=center, drop fuzzy shadow
+  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted language=Text, minted style=colorful, minted options={fontsize=\small,breaklines,autogobble,linenos,numbersep=2.5mm}, halign title=center, sharpish corners, drop fuzzy shadow, overlay={\begin{tcbclipinterior}\fill[white] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
   }
+
+  % \newtcbinputlisting{\treebox}[2][]{
+  % listing file={#2},
+  % enhanced, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, , halign title=center, sharpish corners, drop fuzzy shadow
+  % }
 
   \include{./content/Motivation}              % ./content/Motivation.tex
   \include{./content/Einführung}              % ./content/Einführung.tex

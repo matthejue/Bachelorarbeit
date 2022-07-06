@@ -1,6 +1,5 @@
 .PHONY: clean
-
-all: clean
+all: clean compile
 
 clean:
 	find . -type f -name "*.tokens" -delete
@@ -20,6 +19,17 @@ clean:
 	find . -type f -name "*.reti_tokens" -delete
 	find . -type f -name "*.reti_ast" -delete
 	find . -type f -name "*.in" -delete
+	find . -type f -name "*.out" -delete
 	find . -type f -name "*.out_expected" -delete
 	find . -type f -name "*.datasegment_size" -delete
 	find . -type f -name "*.reti_states" -delete
+
+compile:
+	for file in *.picoc; do \
+		picoc_compiler $$(cat ./most_used_compile_opts.txt) $$file; \
+	done
+
+interpret:
+	for file in *.picoc; do \
+		picoc_compiler $$(cat ./most_used_interpret_opts.txt) $$file; \
+	done

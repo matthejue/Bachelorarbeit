@@ -1,0 +1,70 @@
+file
+  ./example_variable_definition_derived_datatypes_global_static_data.dt_simple
+  decls_defs
+    decl_def
+      struct_decl
+        name	ar_with_len
+        struct_params
+          alloc
+            pntr_decl
+              pntr_deg
+              array_decl
+                array_dims	2
+                type_spec
+                  prim_dt	int
+            name	ar
+          alloc
+            pntr_decl
+              pntr_deg
+              array_decl
+                array_dims
+                type_spec
+                  prim_dt	int
+            name	len
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	main
+        fun_params
+        decl_exec_stmts
+          decl_part
+            decl_exp_stmt
+              alloc
+                pntr_decl
+                  pntr_deg
+                  array_decl
+                    array_dims	3
+                    type_spec
+                      struct_spec
+                        name	ar_with_len
+                name	st_ar
+          decl_part
+            decl_exp_stmt
+              alloc
+                pntr_decl
+                  pntr_deg
+                  array_decl
+                    array_dims	3
+                    pntr_decl
+                      pntr_deg	*
+                      array_decl
+                        array_dims
+                        type_spec
+                          prim_dt	int
+                name	pntr1
+          decl_part
+            decl_exp_stmt
+              alloc
+                pntr_decl
+                  pntr_deg	*
+                  array_decl
+                    array_dims	3
+                    pntr_decl
+                      pntr_deg	*
+                      array_decl
+                        array_dims
+                        type_spec
+                          prim_dt	int
+                name	pntr2
