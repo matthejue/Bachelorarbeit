@@ -250,7 +250,7 @@ Ein \colorbold{Lexeme} ist damit aber nicht das gleiche, wie der \colorbold{Toke
 Um eine Gesamtübersicht über die \colorbold{Lexikalische Analyse} zu geben, ist in Abbildung~\ref{fig:lexikalische_analyse_veranschaulichung} die Lexikalische Analyse an einem Beispiel veranschaulicht.
 
 \begin{figure}[H]
-  \codebox[title=Inputstring, remember as=inputstring, width=0.2\linewidth, nobeforeafter]{./code_examples/example1.picoc}
+  \codebox[title=Inputstring, remember as=inputstring, hbox, nobeforeafter]{./code_examples/example1.picoc}
   \hfill
   \treebox[title=Tokenfolge, remember as=tokenfolge, width=0.6\linewidth, nobeforeafter]{./code_examples/example1.tokens}
 
@@ -371,9 +371,9 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
   \centering
   \treebox[title=Tokenfolge, remember as=tokenfolge, width=0.6\linewidth, nobeforeafter]{./code_examples/example1.tokens}
   \hfill
-  \treebox[title=Abstract Syntax Tree, remember as=abstract_sytax_tree, width=0.3\linewidth, nobeforeafter]{./code_examples/example1.ast}
+  \treebox[title=Abstract Syntax Tree, remember as=abstract_sytax_tree, hbox, nobeforeafter]{./code_examples/example1.ast}
   \vspace{2cm}
-  \treebox[title=Derivation Tree, remember as=derivation_tree, width=0.6\linewidth]{./code_examples/example1.dt}
+  \treebox[title=Derivation Tree, remember as=derivation_tree, hbox]{./code_examples/example1.dt}
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
     \draw[->] (tokenfolge.south) to node[left] {Parser} (derivation_tree.north);

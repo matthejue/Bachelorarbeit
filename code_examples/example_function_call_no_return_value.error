@@ -1,0 +1,11 @@
+./code_examples/example_function_call_no_return_value.picoc:4:0: UnexpectedToken: Expected e.g. number or REF_AND or 'input' or character or identifier or '(', found '}'
+void main() {
+  stack_fun();
+  return
+        ^
+        number or REF_AND or 'input' or character or identifier or '('
+}
+~ 
+
+void stack_fun() {
+}

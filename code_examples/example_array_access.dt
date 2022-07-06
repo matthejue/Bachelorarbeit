@@ -61,7 +61,10 @@ file
                               arith_prec1
                                 un_exp
                                   post_exp
-                                    print_exp
+                                    array_subscr
+                                      post_exp
+                                        prim_exp
+                                          name	ar
                                       logic_or
                                         logic_and
                                           eq_exp
@@ -73,19 +76,4 @@ file
                                                       arith_prec1
                                                         un_exp
                                                           post_exp
-                                                            array_subscr
-                                                              post_exp
-                                                                prim_exp
-                                                                  name	ar
-                                                              logic_or
-                                                                logic_and
-                                                                  eq_exp
-                                                                    rel_exp
-                                                                      arith_or
-                                                                        arith_oplus
-                                                                          arith_and
-                                                                            arith_prec2
-                                                                              arith_prec1
-                                                                                un_exp
-                                                                                  post_exp
-                                                                                    prim_exp	2
+                                                            prim_exp	2

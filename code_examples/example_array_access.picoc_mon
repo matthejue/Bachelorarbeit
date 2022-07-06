@@ -4,10 +4,6 @@ File
     Block 
       Name 'main.0', 
       [
-        // FunDef(VoidType('void'), Name('main'), [], []), 
-        // Block(Name('main.0'), []), 
-        // Assign(Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar')), Array([Num('1'), Num('2')])), 
-        // Assign(Name('ar'), Array([Num('1'), Num('2')])), 
         Exp 
           Num '1', 
         Exp 
@@ -17,7 +13,6 @@ File
             Num '0', 
           Tmp 
             Num '2', 
-        // Exp(Call(Name('print'), [Subscr(Name('ar'), Num('2'))])), 
         Ref 
           GlobalRead 
             Num '0', 
@@ -34,13 +29,6 @@ File
             Tmp 
               Num '1', 
             Num '0', 
-        Exp 
-          Call 
-            Name 'print', 
-            [
-              Tmp 
-                Num '1'
-            ], 
         Return 
           Empty
       ]

@@ -21,12 +21,8 @@ File
               Num '2'
             ], 
         Exp 
-          Call 
-            Name 'print', 
-            [
-              Subscr 
-                Name 'ar', 
-                Num '2'
-            ]
+          Subscr 
+            Name 'ar', 
+            Num '2'
       ]
   ]

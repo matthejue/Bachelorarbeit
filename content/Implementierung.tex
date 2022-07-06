@@ -104,36 +104,167 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 \subsubsection{RETI-Patch Pass}
 \subsubsection{RETI Pass}
 % TODO: zusammenfassendes Bild
+
 \subsection{Umsetzung von Pointern}
+\subsubsection{Pointer Definition}
+% Stack und Globale Statische Daten
+
+\subsubsection{Pointer Dereferenzierung durch Zugriff auf Arrayindex ersetzen}
+\begin{figure}[H]
+  \centering
+  \codebox[remember as=pointer_dereferenzierung_picoc_code, hbox]{./code_examples/example_pntr_deref.picoc}
+  \caption{PicoC Code für Pointer Dereferenzierung}
+  \label{fig:picoc_code_für_pointer_dereferenzierung}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=pointer_dereferenzierung_ast, hbox]{./code_examples/example_pntr_deref.ast}
+  \caption{Abstract Syntax Tree für Pointer Dereferenzierung}
+  \label{fig:abstract_syntax_tree_für_pointer_dereferenzierung}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=pointer_dereferenzierung_picoc_shrink, hbox]{./code_examples/example_pntr_deref.picoc_shrink}
+  \caption{PicoC Shrink Pass für Pointer Dereferenzierung}
+  \label{fig:picoc_shrink_für_pointer_dereferenzierung}
+\end{figure}
+
+\subsubsection{Referenzierung}
+
 \subsection{Umsetzung von Arrays}
+\subsubsection{Definition von Arrays}
+% Stack und Globale Statische Daten
+
 \subsubsection{Initialisierung von Arrays}
+% Stack und Globale Statische Daten
+\begin{figure}[H]
+  \centering
+  \codebox[remember as=array_init_picoc_code, hbox]{./code_examples/example_array_init.picoc}
+  \caption{PicoC Code für Array Initialisierung}
+  \label{fig:picoc_code_für_array_initialisierung}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_init_ast, hbox]{./code_examples/example_array_init.ast}
+  \caption{Abstract Syntax Tree für Array Initialisierung}
+  \label{fig:abstract_syntax_tree_für_array_initialisierung}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_init_picoc_mon, hbox]{./code_examples/example_array_init.picoc_mon}
+  \caption{PicoC Mon Pass für Array Initialisierung}
+  \label{fig:picoc_mon_für_array_initialisierung}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_init_reti_blocks, hbox]{./code_examples/example_array_init.reti_blocks}
+  \caption{RETI Blocks Pass für Array Initialisierung}
+  \label{fig:reti_blocks_für_array_initialisierung}
+\end{figure}
+
+
 % kleines Extra
 \subsubsection{Zugriff auf Arrayindex}
 Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
-  \begin{figure}
-    \treebox[remember as=array_access_picoc_code, width=0.6\textwidth, breakable]{./code_examples/example_array_access.picoc}
-  \end{figure}
-  \vspace{0.5cm}
-  \treebox[remember as=array_access_ast, width=0.6\textwidth, breakable]{./code_examples/example_array_access.ast}
-  \treebox[title=PicoC Blocks, remember as=array_access_picoc_blocks, width=0.6\linewidth, breakable]{./code_examples/example_array_access.picoc_blocks}
-  % \treebox[title=PicoC Mon, remember as=array_access_picoc_mon, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.picoc_mon}
-  % \treebox[title=RETI Blocks, remember as=array_access_reti_blocks, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.reti_blocks}
-  % \treebox[title=RETI Patch, remember as=array_access_reti_patch, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.reti_patch}
-  % \treebox[title=RETI, remember as=array_access_reti, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.reti}
-  % \caption{Veranschaulichung des Kompiliervorgangs für den Zugriff auf einen Arrayindex}
-  % \label{fig:zugriff_auf_einen_arrayindex}
-% TODO: extra untersciedliche Darstellungsweise gewählt für DT und AST
+\begin{figure}[H]
+  \centering
+  \codebox[remember as=array_access_picoc_code, hbox]{./code_examples/example_array_access.picoc}
+  \caption{PicoC Code für Zugriff auf Arrayindex}
+  \label{fig:picoc_code_für_zugriff_auf_arrayindex}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_access_ast, hbox]{./code_examples/example_array_access.ast}
+  \caption{Abstract Syntax Tree für Zugriff auf Arrayindex}
+  \label{fig:abstract_syntax_tree_für_zugriff_auf_arrayindex}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_access_picoc_mon, hbox]{./code_examples/example_array_access.picoc_mon}
+  \caption{PicoC Mon Pass für Zugriff auf Arrayindex}
+  \label{fig:picoc_mon_für_zugriff_auf_arrayindex}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_access_reti_blocks, hbox]{./code_examples/example_array_access.reti_blocks}
+  \caption{RETI Blocks Pass für Zugriff auf Arrayindex}
+  \label{fig:reti_blocks_für_zugriff_auf_arrayindex}
+\end{figure}
 
 \subsubsection{Zuweisung an Arrayindex}
+\begin{figure}[H]
+  \centering
+  \codebox[remember as=array_assignment_picoc_code, hbox]{./code_examples/example_array_assignment.picoc}
+  \caption{PicoC Code für Zuweisung an Arrayindex}
+  \label{fig:picoc_code_für_array_assignment}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_assignment_ast, hbox]{./code_examples/example_array_assignment.ast}
+  \caption{Abstract Syntax Tree für Zuweisung an Arrayindex}
+  \label{fig:abstract_syntax_tree_für_array_assignment}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_assignment_picoc_mon, hbox]{./code_examples/example_array_assignment.picoc_mon}
+  \caption{PicoC Mon Pass für Zuweisung an Arrayindex}
+  \label{fig:picoc_mon_für_array_assignment}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[remember as=array_assignment_reti_blocks, hbox]{./code_examples/example_array_assignment.reti_blocks}
+  \caption{RETI Blocks Pass für Zuweisung an Arrayindex}
+  \label{fig:reti_blocks_für_array_assignment}
+\end{figure}
+
 \subsection{Umsetzung von Structs}
+\subsubsection{Deklaration von Structs}
+\subsubsection{Definition von Structs}
+% Stack und Globale Statische Daten
 \subsubsection{Initialisierung von Structs}
+% Stack und Globale Statische Daten
 \subsubsection{Zugriff auf Structattribut}
 \subsubsection{Zuweisung an Structattribut}
+
+\subsection{Umsetzung des Zusammenspiels der Derived Datatypes}
+% Allgemeine Form, Start, Mittelteil und Ende
+% Umgang mit PntrDecl (inmitten von ArrayDecl)
+% Umgang, wenn Datentyp abrubt aufhört am Ende
+
 \subsection{Umsetzung von Funktionen}
-\subsubsection{Sprung zur Main Funktion}
-\subsubsection{Funktionsdeklaration und -definition}
+\subsubsection{Funktionen auflösen zu RETI Code}
+\newlineparagraph{Sprung zur Main Funktion}
+\subsubsection{Funktionsdeklaration}
+\subsubsection{Funktionsdefinition}
+\newlineparagraph{Allocation von Variablen}
+% Stack und Globale Statische Daten
+% die Sache mit Assign(Tmp, Global) und Assign(Global, Tmp)
+% erwähnen, das Main Funktion keinen Stackframe hat
+% zählen der Größe der lokalen Daten und Parameter
+% TODO: Signatur zu Parameter umbenennen
 \subsubsection{Funktionsaufruf}
+\newlineparagraph{Mit Rückgabewert}
+
+\newlineparagraph{Ohne Rückgabewert}
+% Unsichtbares return
+
+\newlineparagraph{Umsetzung von Call by Sharing für Arrays}
+
+\newlineparagraph{Umsetzung von Call by Value für Structs}
+% argmode für Struct Call by Value
+
 \subsection{Umsetzung kleinerer Details}
 % langen Sprüngen, großen Konstanten, Division durch 0
 \section{Fehlermeldungen}

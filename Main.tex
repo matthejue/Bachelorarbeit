@@ -1,10 +1,10 @@
 \input{./content/Packete_und_Deklarationen} % ./content/Packete_und_Deklarationen.tex
 
 \includeonly{
-  ./content/Motivation,
-  ./content/Einführung,
+  % ./content/Motivation,
+  % ./content/Einführung,
   ./content/Implementierung,
-  ./content/Ergebnisse_und_Ausblick,
+  % ./content/Ergebnisse_und_Ausblick,
   ./content/Appendix
 }
 
@@ -47,13 +47,13 @@
 
   \newtcbinputlisting{\codebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, listing only, minted language=C, halign title=center
+  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted language=C, halign title=center, drop fuzzy shadow
   }
   % minted language=C,
 
   \newtcbinputlisting{\treebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, width=0.25\linewidth, arc=0mm, #1, listing only, halign title=center
+  enhanced, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=listings, halign title=center, drop fuzzy shadow
   }
 
   \include{./content/Motivation}              % ./content/Motivation.tex

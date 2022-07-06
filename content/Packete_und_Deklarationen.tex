@@ -24,7 +24,7 @@
 \tcbuselibrary{listings}
 % https://tex.stackexchange.com/questions/550052/command-parboxrestore-has-changed
 \tcbuselibrary{minted}
-\tcbset{listing engine=listings}
+\tcbset{listing engine=minted}
 % \tcbuselibrary{raster}
 
 \usepackage{cleveref}
@@ -131,3 +131,9 @@
 
 % https://stackoverflow.com/questions/1078370/subfigs-of-a-figure-on-multiple-pages
 \usepackage{subfig}
+
+% https://tex.stackexchange.com/questions/130795/how-can-i-number-sections-below-subsection-in-latex
+\setcounter{secnumdepth}{5}
+
+% https://tex.stackexchange.com/questions/32160/new-line-after-paragraph
+\newcommand{\newlineparagraph}[1]{\paragraph{#1}\mbox{}\\\vspace{-0.5cm}}

@@ -9,7 +9,6 @@ File
         Block 
           Name 'main.0', 
           [
-            // Block(Name('main.0'), []), 
             Assign 
               Alloc 
                 Writeable, 
@@ -25,13 +24,9 @@ File
                   Num '2'
                 ], 
             Exp 
-              Call 
-                Name 'print', 
-                [
-                  Subscr 
-                    Name 'ar', 
-                    Num '2'
-                ]
+              Subscr 
+                Name 'ar', 
+                Num '2'
           ]
       ]
   ]

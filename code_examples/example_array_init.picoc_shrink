@@ -1,5 +1,5 @@
 File 
-  Name './example_array_init.picoc_shrink', 
+  Name './code_examples/example_array_init.picoc_shrink', 
   [
     FunDef 
       VoidType 'void', 
@@ -12,7 +12,7 @@ File
             ArrayDecl 
               [
                 Num '2', 
-                Num '2'
+                Num '1'
               ], 
               IntType 'int', 
             Name 'ar', 
@@ -20,13 +20,11 @@ File
             [
               Array 
                 [
-                  Num '1', 
-                  Num '2'
+                  Num '4'
                 ], 
               Array 
                 [
-                  Num '3', 
-                  Num '4'
+                  Num '2'
                 ]
             ]
       ]
