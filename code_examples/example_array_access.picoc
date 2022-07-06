@@ -1,0 +1,4 @@
+void main() {
+  int ar[2] = {1, 2};
+  print(ar[2]);
+}

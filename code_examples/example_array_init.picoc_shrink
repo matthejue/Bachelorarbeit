@@ -1,0 +1,33 @@
+File 
+  Name './example_array_init.picoc_shrink', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Assign 
+          Alloc 
+            Writeable, 
+            ArrayDecl 
+              [
+                Num '2', 
+                Num '2'
+              ], 
+              IntType 'int', 
+            Name 'ar', 
+          Array 
+            [
+              Array 
+                [
+                  Num '1', 
+                  Num '2'
+                ], 
+              Array 
+                [
+                  Num '3', 
+                  Num '4'
+                ]
+            ]
+      ]
+  ]

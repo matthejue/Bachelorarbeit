@@ -1,0 +1,29 @@
+File 
+  Name './example_array_assignment.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            // Block(Name('main.0'), []), 
+            Exp 
+              Alloc 
+                Writeable, 
+                ArrayDecl 
+                  [
+                    Num '2'
+                  ], 
+                  IntType 'int', 
+                Name 'ar', 
+            Assign 
+              Subscr 
+                Name 'ar', 
+                Num '2', 
+              Num '42'
+          ]
+      ]
+  ]

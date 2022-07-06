@@ -1,0 +1,32 @@
+File 
+  Name './example_array_access.ast', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Assign 
+          Alloc 
+            Writeable, 
+            ArrayDecl 
+              [
+                Num '2'
+              ], 
+              IntType 'int', 
+            Name 'ar', 
+          Array 
+            [
+              Num '1', 
+              Num '2'
+            ], 
+        Exp 
+          Call 
+            Name 'print', 
+            [
+              Subscr 
+                Name 'ar', 
+                Num '2'
+            ]
+      ]
+  ]

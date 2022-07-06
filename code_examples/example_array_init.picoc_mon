@@ -1,0 +1,27 @@
+File 
+  Name './example_array_init.picoc_mon', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        // FunDef(VoidType('void'), Name('main'), [], []), 
+        // Block(Name('main.0'), []), 
+        // Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('2')], IntType('int')), Name('ar')), Array([Array([Num('1'), Num('2')]), Array([Num('3'), Num('4')])])), 
+        // Assign(Name('ar'), Array([Array([Num('1'), Num('2')]), Array([Num('3'), Num('4')])])), 
+        Exp 
+          Num '1', 
+        Exp 
+          Num '2', 
+        Exp 
+          Num '3', 
+        Exp 
+          Num '4', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '4', 
+        Return 
+          Empty
+      ]
+  ]

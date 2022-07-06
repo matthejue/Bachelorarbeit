@@ -1,0 +1,4 @@
+void main() {
+  int ar[2];
+  ar[2] = 42;
+}

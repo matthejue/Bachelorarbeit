@@ -95,6 +95,7 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 \section{Code Generierung}
 \subsection{Passes}
 \subsubsection{PicoC-Shrink Pass}
+% dieser Pass wurde wegen
 \subsubsection{PicoC-Blocks Pass}
 \subsubsection{PicoC-Mon Pass}
 \begin{Definition}{Symboltabelle}{symboltabelle}
@@ -103,21 +104,47 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 \subsubsection{RETI-Patch Pass}
 \subsubsection{RETI Pass}
 % TODO: zusammenfassendes Bild
-\subsection{Umsetzung von Pointern und Arrays}
-
+\subsection{Umsetzung von Pointern}
+\subsection{Umsetzung von Arrays}
 \subsubsection{Initialisierung von Arrays}
 % kleines Extra
 \subsubsection{Zugriff auf Arrayindex}
+Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
+
+\begin{minipage}{0.4\textwidth}
+  \lipsum[1-2]
+\end{minipage}
+\hfill
+\begin{minipage}{0.6\textwidth}
+  \raggedleft
+  \treebox[title=PicoC Code, remember as=array_access_picoc_code, width=0.6\textwidth, breakable]{./code_examples/example_array_access.picoc}
+  \vspace{0.5cm}
+  \treebox[title=Abstract Syntax Tree, remember as=array_access_ast, width=0.6\textwidth, breakable]{./code_examples/example_array_access.ast}
+\end{minipage}
+  \treebox[title=PicoC Blocks, remember as=array_access_picoc_blocks, width=0.6\linewidth, breakable]{./code_examples/example_array_access.picoc_blocks}
+  % \treebox[title=PicoC Mon, remember as=array_access_picoc_mon, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.picoc_mon}
+  % \treebox[title=RETI Blocks, remember as=array_access_reti_blocks, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.reti_blocks}
+  % \treebox[title=RETI Patch, remember as=array_access_reti_patch, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.reti_patch}
+  % \treebox[title=RETI, remember as=array_access_reti, width=0.6\linewidth, nobeforeafter]{./code_examples/example_array_access.reti}
+  % \caption{Veranschaulichung des Kompiliervorgangs für den Zugriff auf einen Arrayindex}
+  % \label{fig:zugriff_auf_einen_arrayindex}
+% TODO: extra untersciedliche Darstellungsweise gewählt für DT und AST
+
 \subsubsection{Zuweisung an Arrayindex}
 \subsection{Umsetzung von Structs}
 \subsubsection{Initialisierung von Structs}
 \subsubsection{Zugriff auf Structattribut}
 \subsubsection{Zuweisung an Structattribut}
 \subsection{Umsetzung von Funktionen}
+\subsubsection{Sprung zur Main Funktion}
+\subsubsection{Funktionsdeklaration und -definition}
+\subsubsection{Funktionsaufruf}
 \subsection{Umsetzung kleinerer Details}
 % langen Sprüngen, großen Konstanten, Division durch 0
 \section{Fehlermeldungen}
 \subsection{Error Handler}
 \subsection{Arten von Fehlermeldungen}
+\subsubsection{Syntaxfehler}
+\subsubsection{Laufzeitfehler}
 % Fehlermeldung ist, wenn der Lexer (partielle Funktion) oder Parser nicht matcht
 % Token und Nodes enthalten Position, im Transformer wird die Position von den Token auf die Nodes übertragen und auch die Symboltabelle speichert Position
