@@ -106,9 +106,6 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 % TODO: zusammenfassendes Bild
 
 \subsection{Umsetzung von Pointern}
-\subsubsection{Pointer Definition}
-% Stack und Globale Statische Daten
-
 \subsubsection{Pointer Dereferenzierung durch Zugriff auf Arrayindex ersetzen}
 \begin{figure}[H]
   \centering
@@ -134,9 +131,6 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 \subsubsection{Referenzierung}
 
 \subsection{Umsetzung von Arrays}
-\subsubsection{Definition von Arrays}
-% Stack und Globale Statische Daten
-
 \subsubsection{Initialisierung von Arrays}
 % Stack und Globale Statische Daten
 \begin{figure}[H]
@@ -231,8 +225,6 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \subsection{Umsetzung von Structs}
 \subsubsection{Deklaration von Structs}
-\subsubsection{Definition von Structs}
-% Stack und Globale Statische Daten
 \subsubsection{Initialisierung von Structs}
 % Stack und Globale Statische Daten
 \subsubsection{Zugriff auf Structattribut}
@@ -242,6 +234,8 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 % Allgemeine Form, Start, Mittelteil und Ende
 % Umgang mit PntrDecl (inmitten von ArrayDecl)
 % Umgang, wenn Datentyp abrubt aufhört am Ende
+\subsubsection{Definition von Variablen mit den Derived Datatypes}
+% Stack und Globale Statische Daten
 
 \subsection{Umsetzung von Funktionen}
 \subsubsection{Funktionen auflösen zu RETI Code}
@@ -255,16 +249,65 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 % zählen der Größe der lokalen Daten und Parameter
 % TODO: Signatur zu Parameter umbenennen
 \subsubsection{Funktionsaufruf}
+\newlineparagraph{Ohne Rückgabewert}
+% Unsichtbares return
+\begin{figure}[H]
+  \centering
+  \codebox[hbox]{./code_examples/example_function_call_no_return_value.picoc}
+  \caption{PicoC Code für Funktionsaufruf ohne Rückgabewert}
+  \label{fig:picoc_code_für_funktionsaufruf_ohne_rückgabewert}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[hbox]{./code_examples/example_function_call_no_return_value.picoc_mon}
+  \caption{PicoC Mon Pass für Funktionsaufruf ohne Rückgabewert}
+  \label{fig:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[hbox]{./code_examples/example_function_call_no_return_value.reti_blocks}
+  \caption{RETI Blocks Pass für Funktionsaufruf ohne Rückgabewert}
+  \label{fig:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[hbox]{./code_examples/example_function_call_no_return_value.reti}
+  \caption{RETI Pass für Funktionsaufruf ohne Rückgabewert}
+  \label{fig:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
+\end{figure}
+
+
 \newlineparagraph{Mit Rückgabewert}
 \begin{figure}[H]
   \centering
   \codebox[hbox]{./code_examples/example_function_call_with_return_value.picoc}
-  \caption{PicoC Code für Funktionsaufruf}
-  \label{fig:picoc_code_für_funktionsaufruf}
+  \caption{PicoC Code für Funktionsaufruf mit Rückgabewert}
+  \label{fig:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{figure}
 
-\newlineparagraph{Ohne Rückgabewert}
-% Unsichtbares return
+\begin{figure}[H]
+  \centering
+  \treebox[hbox]{./code_examples/example_function_call_with_return_value.picoc_mon}
+  \caption{PicoC Mon Pass für Funktionsaufruf mit Rückgabewert}
+  \label{fig:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[hbox]{./code_examples/example_function_call_with_return_value.reti_blocks}
+  \caption{RETI Blocks Pass für Funktionsaufruf mit Rückgabewert}
+  \label{fig:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \treebox[hbox]{./code_examples/example_function_call_with_return_value.reti}
+  \caption{RETI Pass für Funktionsaufruf mit Rückgabewert}
+  \label{fig:reti_pass_für_funktionsaufruf_mit_rückgabewert}
+\end{figure}
 
 \newlineparagraph{Umsetzung von Call by Sharing für Arrays}
 

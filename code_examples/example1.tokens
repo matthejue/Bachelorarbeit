@@ -1,1 +1,0 @@
-[Token('FILENAME', './example1.picoc'), Token('VOID_DT', 'void'), Token('NAME', 'main'), Token('LPAR', '('), Token('RPAR', ')'), Token('LBRACE', '{'), Token('IF', 'if'), Token('LPAR', '('), Token('NUM', '42'), Token('RPAR', ')'), Token('LBRACE', '{'), Token('RBRACE', '}'), Token('RBRACE', '}')]
