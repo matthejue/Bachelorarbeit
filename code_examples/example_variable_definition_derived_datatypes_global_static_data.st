@@ -21,7 +21,7 @@ SymbolTable
   Symbol(
     {
       type qualifier:         Empty()
-      datatype:               SelfDeclared()
+      datatype:               StructDecl(Name('ar_with_len'), [Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar')), Alloc(Writeable(), IntType('int'), Name('len'))])
       name:                   Name('ar_with_len')
       value or address:       [Name('ar@ar_with_len'), Name('len@ar_with_len')]
       position:               Pos(Num('1'), Num('7'))
@@ -29,7 +29,7 @@ SymbolTable
     }, 
   Symbol(
     {
-      type qualifier:         Const()
+      type qualifier:         Empty()
       datatype:               FunDecl(VoidType('void'), Name('main'), [])
       name:                   Name('main')
       value or address:       Empty()

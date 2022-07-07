@@ -1,0 +1,6 @@
+struct st1 {int *ar[3];};
+
+struct st2 {struct st1 st;};
+
+void main() {
+}

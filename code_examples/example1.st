@@ -2,7 +2,7 @@ SymbolTable
   [
   Symbol(
     {
-      type qualifier:         Const()
+      type qualifier:         Empty()
       datatype:               FunDecl(VoidType('void'), Name('main'), [])
       name:                   Name('main')
       value or address:       Empty()

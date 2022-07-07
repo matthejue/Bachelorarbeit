@@ -1,0 +1,36 @@
+file
+  ./example_struct_decl.dt
+  decls_defs
+    decl_def
+      struct_decl
+        name	st1
+        struct_params
+          alloc
+            type_spec
+              prim_dt	int
+            pntr_decl
+              pntr_deg	*
+              array_decl
+                name	ar
+                array_dims	3
+    decl_def
+      struct_decl
+        name	st2
+        struct_params
+          alloc
+            type_spec
+              struct_spec
+                name	st1
+            pntr_decl
+              pntr_deg
+              array_decl
+                name	st
+                array_dims
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	main
+        fun_params
+        decl_exec_stmts

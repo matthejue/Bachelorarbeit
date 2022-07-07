@@ -1,0 +1,25 @@
+File 
+  Name './example_struct_init.picoc_mon', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        Exp 
+          Num '42', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '1', 
+        Ref 
+          GlobalRead 
+            Num '0', 
+        Assign 
+          GlobalWrite 
+            Num '1', 
+          Tmp 
+            Num '1', 
+        Return 
+          Empty
+      ]
+  ]

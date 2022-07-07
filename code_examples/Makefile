@@ -1,3 +1,4 @@
+TESTNAME_BASE = $(shell basename --suffix=.picoc $(TESTNAME))
 .PHONY: clean
 all: clean compile
 
@@ -25,11 +26,11 @@ clean:
 	find . -type f -name "*.reti_states" -delete
 
 compile:
-	for file in *.picoc; do \
-		picoc_compiler $$(cat ./most_used_compile_opts.txt) $$file; \
+	for file in *$(TESTNAME_BASE)*.picoc; do \
+		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) $$file; \
 	done
 
 interpret:
-	for file in *.picoc; do \
-		picoc_compiler $$(cat ./most_used_interpret_opts.txt) $$file; \
+	for file in *$(TESTNAME_BASE)*.picoc; do \
+		picoc_compiler $$(cat ./most_used_interpret_opts.txt) -c $(DEBUG) $$file; \
 	done

@@ -29,6 +29,10 @@
 \tcbset{listing engine=minted}
 % \tcbuselibrary{raster}
 
+% https://tex.stackexchange.com/questions/585582/inside-of-a-newtcbinputlisting-how-can-i-change-the-color-of-the-line-number-as
+\renewcommand{\theFancyVerbLine}{\ttfamily
+    \colorbold{\small{\arabic{FancyVerbLine}}}}
+
 \usepackage{cleveref}
 
 \usepackage{csquotes}

@@ -2,7 +2,7 @@ SymbolTable
   [
   Symbol(
     {
-      type qualifier:         Const()
+      type qualifier:         Empty()
       datatype:               FunDecl(VoidType('void'), Name('stack_fun'), [])
       name:                   Name('stack_fun')
       value or address:       Empty()
@@ -11,7 +11,7 @@ SymbolTable
     }, 
   Symbol(
     {
-      type qualifier:         Const()
+      type qualifier:         Empty()
       datatype:               FunDecl(VoidType('void'), Name('main'), [])
       name:                   Name('main')
       value or address:       Empty()
