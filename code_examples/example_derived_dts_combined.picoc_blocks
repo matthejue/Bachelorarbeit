@@ -1,0 +1,92 @@
+File 
+  Name './example_derived_dts_combined.picoc_blocks', 
+  [
+    StructDecl 
+      Name 'st1', 
+      [
+        Alloc 
+          Writeable, 
+          PntrDecl 
+            Num '1', 
+            ArrayDecl 
+              [
+                Num '1'
+              ], 
+              IntType 'int', 
+          Name 'ar'
+      ], 
+    StructDecl 
+      Name 'st2', 
+      [
+        Alloc 
+          Writeable, 
+          PntrDecl 
+            Num '1', 
+            StructSpec 
+              Name 'st1', 
+          Name 'st'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            Assign 
+              Alloc 
+                Writeable, 
+                ArrayDecl 
+                  [
+                    Num '1'
+                  ], 
+                  IntType 'int', 
+                Name 'var', 
+              Array 
+                [
+                  Num '42'
+                ], 
+            Assign 
+              Alloc 
+                Writeable, 
+                StructSpec 
+                  Name 'st1', 
+                Name 'st_first', 
+              Struct 
+                [
+                  Assign 
+                    Name 'ar', 
+                    Ref 
+                      Name 'var'
+                ], 
+            Assign 
+              Alloc 
+                Writeable, 
+                StructSpec 
+                  Name 'st2', 
+                Name 'st_second', 
+              Struct 
+                [
+                  Assign 
+                    Name 'st', 
+                    Ref 
+                      Name 'st_first'
+                ], 
+            Exp 
+              Call 
+                Name 'print', 
+                [
+                  Subscr 
+                    Subscr 
+                      Attr 
+                        Subscr 
+                          Name 'st_second', 
+                          Num '0', 
+                        Name 'st', 
+                      Num '0', 
+                    Num '0'
+                ]
+          ]
+      ]
+  ]
