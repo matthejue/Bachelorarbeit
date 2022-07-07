@@ -11,23 +11,23 @@
 % Unterscheid zur Architektur aus dem Bachelorprojekt
 
 % Cross Compiler
-\begin{figure}[H]
+{
   \centering
   \includegraphics[width=0.5\linewidth]{./figures/summarized_cross_compiler.png}
-  \caption{Cross-Compiler Kompiliervorgang ausgeschrieben}
-\end{figure}
+  \captionof{figure}{Cross-Compiler Kompiliervorgang ausgeschrieben}
+}
 
-\begin{figure}[H]
+{
   \centering
   \includegraphics[width=0.33\linewidth]{./figures/compiliervorang_mit_machiene.png}
-  \caption{Cross-Compiler Kompiliervorgang Kurzform}
-\end{figure}
+  \captionof{figure}{Cross-Compiler Kompiliervorgang Kurzform}
+}
 
-\begin{figure}[H]
+{
   \centering
   \includegraphics[width=\linewidth]{./figures/passes.png}
-  \caption{Architektur mit allen Passes ausgeschrieben}
-\end{figure}
+  \captionof{figure}{Architektur mit allen Passes ausgeschrieben}
+}
 
 \section{Lexikalische Analyse}
 \subsection{Verwendung von Lark}
@@ -78,7 +78,7 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
   13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
   \bottomrule
 \end{tabulary}
-\caption{Präzidenzregeln von PicoC}
+\captionof{figure}{Präzidenzregeln von PicoC}
 \label{tab:reference_table}
 \end{table}
 % erwähnen von Mehrdeutigkeit und Assoziativität
@@ -111,130 +111,131 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 
 \subsection{Umsetzung von Pointern}
 \subsubsection{Pointer Dereferenzierung durch Zugriff auf Arrayindex ersetzen}
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_pntr_deref.picoc}
-  \caption{PicoC Code für Pointer Dereferenzierung}
+  \captionof{figure}{PicoC Code für Pointer Dereferenzierung}
   \label{fig:picoc_code_für_pointer_dereferenzierung}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_pntr_deref.ast}
-  \caption{Abstract Syntax Tree für Pointer Dereferenzierung}
+  \captionof{figure}{Abstract Syntax Tree für Pointer Dereferenzierung}
   \label{fig:abstract_syntax_tree_für_pointer_dereferenzierung}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_pntr_deref.picoc_shrink}
-  \caption{PicoC Shrink Pass für Pointer Dereferenzierung}
+  \captionof{figure}{PicoC Shrink Pass für Pointer Dereferenzierung}
   \label{fig:picoc_shrink_für_pointer_dereferenzierung}
-\end{figure}
+}
 
 \subsubsection{Referenzierung}
+% Initialisierung eines Pointers
 
 \subsection{Umsetzung von Arrays}
 \subsubsection{Initialisierung von Arrays}
 % Stack und Globale Statische Daten
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_array_init.picoc}
-  \caption{PicoC Code für Array Initialisierung}
+  \captionof{figure}{PicoC Code für Array Initialisierung}
   \label{fig:picoc_code_für_array_initialisierung}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_init.ast}
-  \caption{Abstract Syntax Tree für Array Initialisierung}
+  \captionof{figure}{Abstract Syntax Tree für Array Initialisierung}
   \label{fig:abstract_syntax_tree_für_array_initialisierung}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_init.picoc_mon}
-  \caption{PicoC Mon Pass für Array Initialisierung}
+  \captionof{figure}{PicoC Mon Pass für Array Initialisierung}
   \label{fig:picoc_mon_für_array_initialisierung}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_init.reti_blocks}
-  \caption{RETI Blocks Pass für Array Initialisierung}
+  \captionof{figure}{RETI Blocks Pass für Array Initialisierung}
   \label{fig:reti_blocks_für_array_initialisierung}
-\end{figure}
+}
 
 
 % kleines Extra
 \subsubsection{Zugriff auf Arrayindex}
 Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_array_access.picoc}
-  \caption{PicoC Code für Zugriff auf Arrayindex}
+  \captionof{figure}{PicoC Code für Zugriff auf Arrayindex}
   \label{fig:picoc_code_für_zugriff_auf_arrayindex}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_access.ast}
-  \caption{Abstract Syntax Tree für Zugriff auf Arrayindex}
+  \captionof{figure}{Abstract Syntax Tree für Zugriff auf Arrayindex}
   \label{fig:abstract_syntax_tree_für_zugriff_auf_arrayindex}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_access.picoc_mon}
-  \caption{PicoC Mon Pass für Zugriff auf Arrayindex}
+  \captionof{figure}{PicoC Mon Pass für Zugriff auf Arrayindex}
   \label{fig:picoc_mon_für_zugriff_auf_arrayindex}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_access.reti_blocks}
-  \caption{RETI Blocks Pass für Zugriff auf Arrayindex}
+  \captionof{figure}{RETI Blocks Pass für Zugriff auf Arrayindex}
   \label{fig:reti_blocks_für_zugriff_auf_arrayindex}
-\end{figure}
+}
 
 \subsubsection{Zuweisung an Arrayindex}
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_array_assignment.picoc}
-  \caption{PicoC Code für Zuweisung an Arrayindex}
+  \captionof{figure}{PicoC Code für Zuweisung an Arrayindex}
   \label{fig:picoc_code_für_array_assignment}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.ast}
-  \caption{Abstract Syntax Tree für Zuweisung an Arrayindex}
+  \captionof{figure}{Abstract Syntax Tree für Zuweisung an Arrayindex}
   \label{fig:abstract_syntax_tree_für_array_assignment}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.picoc_mon}
-  \caption{PicoC Mon Pass für Zuweisung an Arrayindex}
+  \captionof{figure}{PicoC Mon Pass für Zuweisung an Arrayindex}
   \label{fig:picoc_mon_für_array_assignment}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.reti_blocks}
-  \caption{RETI Blocks Pass für Zuweisung an Arrayindex}
+  \captionof{figure}{RETI Blocks Pass für Zuweisung an Arrayindex}
   \label{fig:reti_blocks_für_array_assignment}
-\end{figure}
+}
 
 \subsection{Umsetzung von Structs}
 \subsubsection{Deklaration von Structs}
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_struct_decl.picoc}
-  \caption{PicoC Code für Deklaration von Structs}
+  \captionof{figure}{PicoC Code für Deklaration von Structs}
   \label{fig:picoc_code_für_deklaration_von_structs}
-\end{figure}
+}
 
 {
   \centering
@@ -244,12 +245,12 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 }
 
 \subsubsection{Initialisierung von Structs}
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_struct_init.picoc}
-  \caption{PicoC Code für Initialisierung von Structs}
+  \captionof{figure}{PicoC Code für Initialisierung von Structs}
   \label{fig:picoc_code_für_initialisierung_von_structs}
-\end{figure}
+}
 
 {
   \centering
@@ -258,28 +259,28 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{fig:abstract_syntax_tree_für_initialisierung_von_structs}
 }
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_init.picoc_mon}
-  \caption{PicoC Mon Pass für Initialisierung von Structs}
+  \captionof{figure}{PicoC Mon Pass für Initialisierung von Structs}
   \label{fig:picoc_mon_pass_für_initialisierung_von_structs}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_init.reti_blocks}
-  \caption{RETI Blocks Pass für Initialisierung von Structs}
+  \captionof{figure}{RETI Blocks Pass für Initialisierung von Structs}
   \label{fig:reti_blocks_pass_für_initialisierung_von_structs}
-\end{figure}
+}
 
 % Stack und Globale Statische Daten
 \subsubsection{Zugriff auf Structattribut}
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_struct_attr_access.picoc}
-  \caption{PicoC Code für Zugriff auf Structattribut}
+  \captionof{figure}{PicoC Code für Zugriff auf Structattribut}
   \label{fig:picoc_code_für_zugriff_auf_structattribut}
-\end{figure}
+}
 
 {
   \centering
@@ -288,21 +289,48 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{fig:abstract_syntax_tree_für_zugriff_auf_structattribut}
 }
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.picoc_mon}
-  \caption{PicoC Mon Pass für Zugriff auf Structattribut}
+  \captionof{figure}{PicoC Mon Pass für Zugriff auf Structattribut}
   \label{fig:picoc_mon_pass_für_zugriff_auf_structattribut}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.reti_blocks}
-  \caption{RETI Blocks Pass für Zugriff auf Structattribut}
+  \captionof{figure}{RETI Blocks Pass für Zugriff auf Structattribut}
   \label{fig:reti_blocks_pass_für_zugriff_auf_structattribut}
-\end{figure}
+}
 
 \subsubsection{Zuweisung an Structattribut}
+{
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_struct_attr_assignment.picoc}
+  \captionof{figure}{PicoC Code für Zuweisung an Structattribut}
+  \label{fig:picoc_code_für_zuweisung_an_structattribut}
+}
+
+{
+  \centering
+  \numberedcodebox[minted language=text, breakable]{./code_examples/example_struct_attr_assignment.ast}
+  \captionof{figure}{Abstract Syntax Tree für Zuweisung an Structattribut}
+  \label{fig:abstract_syntax_tree_für_zuweisung_an_structattribut}
+}
+
+{
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.picoc_mon}
+  \captionof{figure}{PicoC Mon Pass für Zuweisung an Structattribut}
+  \label{fig:picoc_mon_pass_für_zuweisung_an_structattribut}
+}
+
+{
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.reti_blocks}
+  \captionof{figure}{RETI Blocks Pass für Zuweisung an Structattribut}
+  \label{fig:reti_blocks_pass_für_zuweisung_an_structattribut}
+}
 
 \subsection{Umsetzung des Zusammenspiels der Derived Datatypes}
 % Allgemeine Form, Start, Mittelteil und Ende
@@ -310,12 +338,12 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 % Umgang, wenn Datentyp abrubt aufhört am Ende
 \subsubsection{Definition von Variablen mit den Derived Datatypes}
 % Stack und Globale Statische Daten
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_variable_definition_derived_datatypes_global_static_data.picoc}
-  \caption{PicoC Code für Definition von Variablen}
+  \captionof{figure}{PicoC Code für Definition von Variablen}
   \label{fig:picoc_code_für_definition_von_variablen}
-\end{figure}
+}
 
 {
   \centering
@@ -339,63 +367,63 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 \subsubsection{Funktionsaufruf}
 \newlineparagraph{Ohne Rückgabewert}
 % Unsichtbares return
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_function_call_no_return_value.picoc}
-  \caption{PicoC Code für Funktionsaufruf ohne Rückgabewert}
+  \captionof{figure}{PicoC Code für Funktionsaufruf ohne Rückgabewert}
   \label{fig:picoc_code_für_funktionsaufruf_ohne_rückgabewert}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_function_call_no_return_value.picoc_mon}
-  \caption{PicoC Mon Pass für Funktionsaufruf ohne Rückgabewert}
+  \captionof{figure}{PicoC Mon Pass für Funktionsaufruf ohne Rückgabewert}
   \label{fig:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_function_call_no_return_value.reti_blocks}
-  \caption{RETI Blocks Pass für Funktionsaufruf ohne Rückgabewert}
+  \captionof{figure}{RETI Blocks Pass für Funktionsaufruf ohne Rückgabewert}
   \label{fig:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_function_call_no_return_value.reti}
-  \caption{RETI Pass für Funktionsaufruf ohne Rückgabewert}
+  \captionof{figure}{RETI Pass für Funktionsaufruf ohne Rückgabewert}
   \label{fig:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
-\end{figure}
+}
 
 
 \newlineparagraph{Mit Rückgabewert}
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_function_call_with_return_value.picoc}
-  \caption{PicoC Code für Funktionsaufruf mit Rückgabewert}
+  \captionof{figure}{PicoC Code für Funktionsaufruf mit Rückgabewert}
   \label{fig:picoc_code_für_funktionsaufruf_mit_rückgabewert}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_function_call_with_return_value.picoc_mon}
-  \caption{PicoC Mon Pass für Funktionsaufruf mit Rückgabewert}
+  \captionof{figure}{PicoC Mon Pass für Funktionsaufruf mit Rückgabewert}
   \label{fig:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_function_call_with_return_value.reti_blocks}
-  \caption{RETI Blocks Pass für Funktionsaufruf mit Rückgabewert}
+  \captionof{figure}{RETI Blocks Pass für Funktionsaufruf mit Rückgabewert}
   \label{fig:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
-\end{figure}
+}
 
-\begin{figure}[H]
+{
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_function_call_with_return_value.reti}
-  \caption{RETI Pass für Funktionsaufruf mit Rückgabewert}
+  \captionof{figure}{RETI Pass für Funktionsaufruf mit Rückgabewert}
   \label{fig:reti_pass_für_funktionsaufruf_mit_rückgabewert}
-\end{figure}
+}
 
 \newlineparagraph{Umsetzung von Call by Sharing für Arrays}
 

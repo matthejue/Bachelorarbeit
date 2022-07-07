@@ -145,11 +145,13 @@
 \newcommand{\newlineparagraph}[1]{\paragraph{#1}\mbox{}\\\vspace{-0.5cm}}
 
 % https://tex.stackexchange.com/questions/369421/how-to-have-a-figure-going-over-several-pages
-% \usepackage{caption}
+% TODO: set hypcap = true when compiling for the last time
+\usepackage[hypcap=false]{caption}
 
 % https://tex.stackexchange.com/questions/7210/label-and-caption-without-float
 % \DeclareCaptionType{captiontype}[Abbildung][List of captiontype]
 % \newenvironment{captionenv}{\captionsetup{type=captiontype}}{}
 
 % https://texblog.net/latex-archive/uncategorized/prevent-floating-image-figure-table/
-\newcommand\captionof[1]{\def\@captype{#1}\caption}
+% \newcommand\captionof[1]{\def\@captype{#1}\caption}
+\usepackage{capt-of}

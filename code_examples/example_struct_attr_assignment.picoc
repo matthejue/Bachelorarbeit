@@ -1,0 +1,6 @@
+struct pos {int x; int y;};
+
+void main() {
+  struct pos st = {.x=4, .y=2};
+  st.y = 42;
+}
