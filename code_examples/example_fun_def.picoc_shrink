@@ -1,0 +1,68 @@
+File 
+  Name './example_fun_def.picoc_shrink', 
+  [
+    FunDef 
+      IntType 'int', 
+      Name 'stack_fun', 
+      [
+        Alloc 
+          Writeable, 
+          PntrDecl 
+            Num '1', 
+            ArrayDecl 
+              [
+                Num '3'
+              ], 
+              IntType 'int', 
+          Name 'param1', 
+        Alloc 
+          Writeable, 
+          ArrayDecl 
+            [
+              Num '2', 
+              Num '3'
+            ], 
+            IntType 'int', 
+          Name 'param2'
+      ], 
+      [
+        Exp 
+          Alloc 
+            Writeable, 
+            IntType 'int', 
+            Name 'local_var'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp 
+          Alloc 
+            Writeable, 
+            ArrayDecl 
+              [
+                Num '2', 
+                Num '3'
+              ], 
+              IntType 'int', 
+            Name 'local_var1', 
+        Exp 
+          Alloc 
+            Writeable, 
+            ArrayDecl 
+              [
+                Num '2', 
+                Num '3'
+              ], 
+              IntType 'int', 
+            Name 'local_var2', 
+        Exp 
+          Call 
+            Name 'stack_fun', 
+            [
+              Name 'local_var1', 
+              Name 'local_var2'
+            ]
+      ]
+  ]

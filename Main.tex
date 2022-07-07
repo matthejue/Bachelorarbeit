@@ -49,13 +49,14 @@
   % https://tex.stackexchange.com/questions/319355/tcolorbox-breakable-option-not-working
   \newtcbinputlisting{\codebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, minted options={fontsize=\small,breaklines,autogobble}, halign title=center, sharpish corners, drop fuzzy shadow
+  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, minted options={fontsize=\small,breaklines,autogobble}, halign title=center, sharpish corners, drop fuzzy shadow, minted options={linenos=false, numbersep=0mm}
   }
 % drop fuzzy shadow, drop lifted shadow, listing engine=listings
 
+
   \newtcbinputlisting{\numberedcodebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, minted options={fontsize=\small,breaklines,autogobble,linenos,numbersep=1.25mm}, halign title=center, sharpish corners, drop fuzzy shadow, overlay={\begin{tcbclipinterior}\fill[white] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
+  enhanced, colframe=PrimaryColor,colback=white, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, sharpish corners, drop fuzzy shadow, overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
   }
 
   % \newtcbinputlisting{\treebox}[2][]{

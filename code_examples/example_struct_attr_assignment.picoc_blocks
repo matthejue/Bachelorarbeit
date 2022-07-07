@@ -1,0 +1,46 @@
+File 
+  Name './example_struct_attr_assignment.picoc_blocks', 
+  [
+    StructDecl 
+      Name 'pos', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'x', 
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'y'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            Assign 
+              Alloc 
+                Writeable, 
+                StructSpec 
+                  Name 'pos', 
+                Name 'st', 
+              Struct 
+                [
+                  Assign 
+                    Name 'x', 
+                    Num '4', 
+                  Assign 
+                    Name 'y', 
+                    Num '2'
+                ], 
+            Assign 
+              Attr 
+                Name 'st', 
+                Name 'y', 
+              Num '42'
+          ]
+      ]
+  ]

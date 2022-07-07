@@ -1,0 +1,9 @@
+[1m[37mexample_fun_call_no_return_value.picoc:[35m6:18: [33mUnexpectedToken:[0m Expected e.g. [34mMUL_DEREF_PNTR[0m or [34m'('[0m or [34midentifier[0m, found [31m'['[39m
+
+void main() {
+  struct local_var[2][3];
+                  [31m^[0m                 
+                  [31m[34mMUL_DEREF_PNTR[0m or [34m'('[0m or [34midentifier[0m[0m
+  stack_fun(local_var);
+  return;
+}

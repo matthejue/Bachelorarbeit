@@ -478,7 +478,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{fig:picoc_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
-\subsubsection{Funktionsdeklaration}
+\subsubsection{Funktionsdeklaration und -definition}
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_3_funs_fun_decl.picoc}
@@ -492,17 +492,6 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \caption{Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{fig:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
-
-\subsubsection{Funktionsdefinition}
-
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_fun_def.picoc}
-  \caption{PicoC Code für eine Funktionsdefinition}
-  \label{fig:picoc_code_für_eine_funktionsdefinition}
-\end{code}
-
-% die Sache mit dem erstetzen von ArryDecl durch PntrDecl
 
 \newlineparagraph{Allocation von Variablen}
 % Stack und Globale Statische Daten
@@ -574,6 +563,23 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 \end{code}
 
 \newlineparagraph{Umsetzung von Call by Sharing für Arrays}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines=1}]{./code_examples/example_fun_def.picoc}
+  \caption{PicoC Code für eine Funktionsdefinition}
+  \label{fig:picoc_code_für_eine_funktionsdefinition}
+\end{code}
+
+% https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, breakable, minted options={highlightlines={15,24}}]{./code_examples/example_fun_def.st}
+  \caption{Symboltabelle für eine Funktionsdefinition}
+  \label{fig:symboltabelle_für_eine_funktionsdefinition}
+\end{code}
+
+% die Sache mit dem erstetzen von ArryDecl durch PntrDecl
 
 \newlineparagraph{Umsetzung von Call by Value für Structs}
 % argmode für Struct Call by Value

@@ -1,0 +1,60 @@
+File 
+  Name './example_variable_definition_derived_datatypes.picoc_shrink', 
+  [
+    StructDecl 
+      Name 'ar_with_len', 
+      [
+        Alloc 
+          Writeable, 
+          ArrayDecl 
+            [
+              Num '2'
+            ], 
+            IntType 'int', 
+          Name 'ar', 
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'len'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp 
+          Alloc 
+            Writeable, 
+            ArrayDecl 
+              [
+                Num '3'
+              ], 
+              StructSpec 
+                Name 'ar_with_len', 
+            Name 'st_ar', 
+        Exp 
+          Alloc 
+            Writeable, 
+            PntrDecl 
+              Num '1', 
+              ArrayDecl 
+                [
+                  Num '3'
+                ], 
+                IntType 'int', 
+            Name 'pntr1', 
+        Exp 
+          Alloc 
+            Writeable, 
+            PntrDecl 
+              Num '1', 
+              ArrayDecl 
+                [
+                  Num '3'
+                ], 
+                PntrDecl 
+                  Num '1', 
+                  IntType 'int', 
+            Name 'pntr2'
+      ]
+  ]

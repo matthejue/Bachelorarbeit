@@ -1,0 +1,13 @@
+File 
+  Name './example1.picoc_shrink', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        If 
+          Num '42', 
+          []
+      ]
+  ]

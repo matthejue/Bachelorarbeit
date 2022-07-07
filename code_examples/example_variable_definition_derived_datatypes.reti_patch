@@ -1,0 +1,12 @@
+File 
+  Name './example_variable_definition_derived_datatypes.reti_patch', 
+  [
+    Block 
+      Name 'start.1', 
+      [], 
+    Block 
+      Name 'main.0', 
+      [
+        LOADIN BAF PC -1
+      ]
+  ]

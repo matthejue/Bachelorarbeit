@@ -1,0 +1,54 @@
+File 
+  Name './example_derived_dts_combined.picoc_mon', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        Exp 
+          Num '42', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '1', 
+        Ref 
+          GlobalRead 
+            Num '0', 
+        Assign 
+          GlobalWrite 
+            Num '1', 
+          Tmp 
+            Num '1', 
+        Ref 
+          GlobalRead 
+            Num '1', 
+        Ref 
+          Attr 
+            Tmp 
+              Num '1', 
+            Name 'ar', 
+        Exp 
+          Num '0', 
+        Ref 
+          Subscr 
+            Tmp 
+              Num '2', 
+            Tmp 
+              Num '1', 
+        Exp 
+          Num '0', 
+        Ref 
+          Subscr 
+            Tmp 
+              Num '2', 
+            Tmp 
+              Num '1', 
+        Exp 
+          Subscr 
+            Tmp 
+              Num '1', 
+            Num '0', 
+        Return 
+          Empty
+      ]
+  ]

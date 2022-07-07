@@ -1,9 +1,9 @@
-int stack_fun(int *param1[3], int param2[2][3]) {
+int stack_fun(int (*param1)[3], int param2[2][3]) {
   int local_var;
-  int local_var[2];
 }
 
 void main() {
-  int ar[2];
-  fun(ar);
+  int local_var1[2][3];
+  int local_var2[2][3];
+  stack_fun(local_var1, local_var2);
 }

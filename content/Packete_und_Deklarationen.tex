@@ -30,9 +30,12 @@
 \tcbset{listing engine=minted}
 % \tcbuselibrary{raster}
 
+% https://tex.stackexchange.com/questions/345976/global-settings-for-minted
+\setminted{fontsize=\small,breaklines,autogobble,linenos,numbersep=1.25mm, highlightcolor=SecondaryColor}
+
 % https://tex.stackexchange.com/questions/585582/inside-of-a-newtcbinputlisting-how-can-i-change-the-color-of-the-line-number-as
-\renewcommand{\theFancyVerbLine}{\ttfamily
-    \colorbold{\small{\arabic{FancyVerbLine}}}}
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+\renewcommand{\theFancyVerbLine}{\ttfamily\textcolor{white}{\small{\arabic{FancyVerbLine}}}}
 
 \usepackage{cleveref}
 
@@ -153,7 +156,7 @@
 % https://tex.stackexchange.com/questions/7210/label-and-caption-without-float
 \DeclareCaptionType{codecaption}[Code][Codeverzeichnis]
 % https://tex.stackexchange.com/questions/449677/spaces-in-newenvironment
-\newenvironment{code}{\medskip\captionsetup{type=codecaption}}{\smallskip}
+\newenvironment{code}{\bigskip\captionsetup{type=codecaption}}{\medskip}
 
 % https://texblog.net/latex-archive/uncategorized/prevent-floating-image-figure-table/
 % \newcommand\captionof[1]{\def\@captype{#1}\caption}

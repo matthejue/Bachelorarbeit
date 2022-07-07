@@ -1,13 +1,13 @@
-struct st {int var; int ar[2];};
+struct st {int attr1; int attr2[2];};
 
-void stack_fun(int *param[]);
+void stack_fun(struct st param[2][3]);
 
 void main() {
-  int local_var[2][3];
+  struct st local_var[2][3];
   stack_fun(local_var);
   return;
 }
 
-void stack_fun(int *param[]) {
-  int local_var[3][2];
+void stack_fun(struct st param[2][3]) {
+  int local_var;
 }

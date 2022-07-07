@@ -1,0 +1,68 @@
+File 
+  Name './example_3_funs_fun_decl.reti_patch', 
+  [
+    Block 
+      Name 'start.3', 
+      [
+        Exp 
+          GoTo 
+            Name 'main.1'
+      ], 
+    Block 
+      Name 'fun1.2', 
+      [
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'main.1', 
+      [
+        SUBI SP 2, 
+        MOVE BAF ACC, 
+        ADDI SP 2, 
+        MOVE SP BAF, 
+        SUBI SP 2, 
+        STOREIN BAF ACC 0, 
+        LOADI ACC GoTo 
+                    Name 'addr@next_instr', 
+        ADD ACC CS, 
+        STOREIN BAF ACC -1, 
+        Exp 
+          GoTo 
+            Name 'fun1.2', 
+        MOVE BAF IN1, 
+        LOADIN IN1 BAF 0, 
+        MOVE IN1 SP, 
+        SUBI SP 2, 
+        SUBI SP 1, 
+        LOADI ACC 42, 
+        STOREIN SP ACC 1, 
+        MOVE BAF ACC, 
+        ADDI SP 3, 
+        MOVE SP BAF, 
+        SUBI SP 3, 
+        STOREIN BAF ACC 0, 
+        LOADI ACC GoTo 
+                    Name 'addr@next_instr', 
+        ADD ACC CS, 
+        STOREIN BAF ACC -1, 
+        Exp 
+          GoTo 
+            Name 'fun2.0', 
+        MOVE BAF IN1, 
+        LOADIN IN1 BAF 0, 
+        MOVE IN1 SP, 
+        SUBI SP 1, 
+        STOREIN SP ACC 1, 
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'fun2.0', 
+      [
+        SUBI SP 1, 
+        LOADIN BAF ACC -2, 
+        STOREIN SP ACC 1, 
+        LOADIN SP ACC 1, 
+        ADDI SP 1, 
+        LOADIN BAF PC -1
+      ]
+  ]

@@ -1,0 +1,22 @@
+File 
+  Name './example_pntr_ref.reti_blocks', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        SUBI SP 1, 
+        LOADI ACC 42, 
+        STOREIN SP ACC 1, 
+        LOADIN SP ACC 1, 
+        STOREIN DS ACC 0, 
+        ADDI SP 1, 
+        SUBI SP 1, 
+        LOADI IN1 0, 
+        ADD IN1 DS, 
+        STOREIN SP IN1 1, 
+        LOADIN SP ACC 1, 
+        STOREIN DS ACC 1, 
+        ADDI SP 1, 
+        LOADIN BAF PC -1
+      ]
+  ]

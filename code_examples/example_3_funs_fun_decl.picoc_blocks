@@ -1,0 +1,61 @@
+File 
+  Name './example_3_funs_fun_decl.picoc_blocks', 
+  [
+    FunDecl 
+      IntType 'int', 
+      Name 'fun2', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'var'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'fun1', 
+      [], 
+      [
+        Block 
+          Name 'fun1.2', 
+          []
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.1', 
+          [
+            Exp 
+              Call 
+                Name 'fun1', 
+                [], 
+            Exp 
+              Call 
+                Name 'fun2', 
+                [
+                  Num '42'
+                ], 
+            Return 
+              Empty
+          ]
+      ], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun2', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'var'
+      ], 
+      [
+        Block 
+          Name 'fun2.0', 
+          [
+            Return 
+              Name 'var'
+          ]
+      ]
+  ]
