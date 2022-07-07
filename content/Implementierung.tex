@@ -483,17 +483,27 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_3_funs_fun_decl.picoc}
   \caption{PicoC Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
-  \label{fig:picoc_code_für_funktionen_picoc_code_für_funktionen,_wobei_eine_funktion_vorher_deklariert_werden_muss}
+  \label{fig:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_3_funs_fun_decl.st}
   \caption{Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss}
-  \label{fig:symboltabelle_für_funktionen_picoc_code_für_funktionen,_wobei_eine_funktion_vorher_deklariert_werden_muss}
+  \label{fig:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
 
 \subsubsection{Funktionsdefinition}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_fun_def.picoc}
+  \caption{PicoC Code für eine Funktionsdefinition}
+  \label{fig:picoc_code_für_eine_funktionsdefinition}
+\end{code}
+
+% die Sache mit dem erstetzen von ArryDecl durch PntrDecl
+
 \newlineparagraph{Allocation von Variablen}
 % Stack und Globale Statische Daten
 % die Sache mit Assign(Tmp, Global) und Assign(Global, Tmp)
@@ -507,28 +517,28 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 % Unsichtbares return
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_function_call_no_return_value.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_no_return_value.picoc}
   \caption{PicoC Code für Funktionsaufruf ohne Rückgabewert}
   \label{fig:picoc_code_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_function_call_no_return_value.picoc_mon}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.picoc_mon}
   \caption{PicoC Mon Pass für Funktionsaufruf ohne Rückgabewert}
   \label{fig:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_function_call_no_return_value.reti_blocks}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti_blocks}
   \caption{RETI Blocks Pass für Funktionsaufruf ohne Rückgabewert}
   \label{fig:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_function_call_no_return_value.reti}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti}
   \caption{RETI Pass für Funktionsaufruf ohne Rückgabewert}
   \label{fig:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
@@ -537,28 +547,28 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_function_call_with_return_value.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_with_return_value.picoc}
   \caption{PicoC Code für Funktionsaufruf mit Rückgabewert}
   \label{fig:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_function_call_with_return_value.picoc_mon}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
   \caption{PicoC Mon Pass für Funktionsaufruf mit Rückgabewert}
   \label{fig:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_function_call_with_return_value.reti_blocks}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti_blocks}
   \caption{RETI Blocks Pass für Funktionsaufruf mit Rückgabewert}
   \label{fig:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_function_call_with_return_value.reti}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti}
   \caption{RETI Pass für Funktionsaufruf mit Rückgabewert}
   \label{fig:reti_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}

@@ -1,9 +1,0 @@
-File 
-  Name './example_variable_definition_derived_datatypes.reti_blocks', 
-  [
-    Block 
-      Name 'main.0', 
-      [
-        LOADIN BAF PC -1
-      ]
-  ]
