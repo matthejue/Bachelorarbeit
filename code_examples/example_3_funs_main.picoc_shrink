@@ -1,0 +1,25 @@
+File 
+  Name './example_3_funs_main.picoc_shrink', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'fun1', 
+      [], 
+      [], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun2', 
+      [], 
+      [
+        Return 
+          Num '1'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Return 
+          Empty
+      ]
+  ]

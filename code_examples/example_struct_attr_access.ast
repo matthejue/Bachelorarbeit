@@ -1,0 +1,41 @@
+File 
+  Name './example_struct_attr_access.ast', 
+  [
+    StructDecl 
+      Name 'pos', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'x', 
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'y'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Assign 
+          Alloc 
+            Writeable, 
+            StructSpec 
+              Name 'pos', 
+            Name 'st', 
+          Struct 
+            [
+              Assign 
+                Name 'x', 
+                Num '4', 
+              Assign 
+                Name 'y', 
+                Num '2'
+            ], 
+        Exp 
+          Attr 
+            Name 'st', 
+            Name 'y'
+      ]
+  ]

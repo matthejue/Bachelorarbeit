@@ -1,0 +1,7 @@
+[1m[37mexample_3_funs_fun_decl.picoc:[35m1:16: [33mUnexpectedToken:[0m Expected e.g. [34m'['[0m or [34m','[0m or [34m')'[0m, found [31m';'[39m
+int fun2(int var;);
+                [31m^[0m             
+                [31m[34m'['[0m or [34m','[0m or [34m')'[0m[0m
+
+void fun1() {
+}

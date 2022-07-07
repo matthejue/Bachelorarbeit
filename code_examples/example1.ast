@@ -1,0 +1,13 @@
+File 
+  Name './example1.ast', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        If 
+          Num '42', 
+          []
+      ]
+  ]

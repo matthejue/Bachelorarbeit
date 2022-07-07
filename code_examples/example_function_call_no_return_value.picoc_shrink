@@ -1,0 +1,25 @@
+File 
+  Name './example_function_call_no_return_value.picoc_shrink', 
+  [
+    FunDecl 
+      VoidType 'void', 
+      Name 'stack_fun', 
+      [], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp 
+          Call 
+            Name 'stack_fun', 
+            [], 
+        Return 
+          Empty
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'stack_fun', 
+      [], 
+      []
+  ]

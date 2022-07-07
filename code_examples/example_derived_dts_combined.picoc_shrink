@@ -15,17 +15,6 @@ File
               IntType 'int', 
           Name 'ar'
       ], 
-    StructDecl 
-      Name 'st2', 
-      [
-        Alloc 
-          Writeable, 
-          PntrDecl 
-            Num '1', 
-            StructSpec 
-              Name 'st1', 
-          Name 'st'
-      ], 
     FunDef 
       VoidType 'void', 
       Name 'main', 
@@ -57,46 +46,13 @@ File
                 Ref 
                   Name 'var'
             ], 
-        Assign 
-          Alloc 
-            Writeable, 
-            StructSpec 
-              Name 'st2', 
-            Name 'st_second', 
-          Struct 
-            [
-              Assign 
-                Name 'st', 
-                Ref 
-                  Name 'st_first'
-            ], 
         Exp 
-          Call 
-            Name 'print', 
-            [
-              Subscr 
-                Subscr 
-                  Attr 
-                    Name 'st_first', 
-                    Name 'ar', 
-                  Num '0', 
-                Num '0'
-            ], 
-        Exp 
-          Call 
-            Name 'print', 
-            [
-              Subscr 
-                Subscr 
-                  Attr 
-                    Subscr 
-                      Attr 
-                        Name 'st_second', 
-                        Name 'st', 
-                      Num '0', 
-                    Name 'ar', 
-                  Num '0', 
-                Num '0'
-            ]
+          Subscr 
+            Subscr 
+              Attr 
+                Name 'st_first', 
+                Name 'ar', 
+              Num '0', 
+            Num '0'
       ]
   ]

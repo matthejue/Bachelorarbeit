@@ -1,0 +1,24 @@
+File 
+  Name './example_3_funs_main.reti_blocks', 
+  [
+    Block 
+      Name 'fun1.2', 
+      [
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'fun2.1', 
+      [
+        SUBI SP 1, 
+        LOADI ACC 1, 
+        STOREIN SP ACC 1, 
+        LOADIN SP ACC 1, 
+        ADDI SP 1, 
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'main.0', 
+      [
+        LOADIN BAF PC -1
+      ]
+  ]

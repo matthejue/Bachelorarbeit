@@ -1,0 +1,29 @@
+File 
+  Name './example_pntr_deref.ast', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Assign 
+          Alloc 
+            Writeable, 
+            IntType 'int', 
+            Name 'var', 
+          Num '42', 
+        Assign 
+          Alloc 
+            Writeable, 
+            PntrDecl 
+              Num '1', 
+              IntType 'int', 
+            Name 'pntr', 
+          Ref 
+            Name 'var', 
+        Exp 
+          Deref 
+            Name 'pntr', 
+            Num '0'
+      ]
+  ]

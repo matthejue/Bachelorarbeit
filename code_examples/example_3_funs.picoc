@@ -1,0 +1,10 @@
+void main() {
+  return;
+}
+
+void fun1() {
+}
+
+int fun2() {
+  return 1;
+}
