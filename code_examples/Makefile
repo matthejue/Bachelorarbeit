@@ -27,7 +27,7 @@ clean:
 
 compile:
 	for file in *$(TESTNAME_BASE)*.picoc; do \
-		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) $$file; \
+		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) $(VERBOSE) $$file; \
 	done
 
 interpret:

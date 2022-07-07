@@ -74,13 +74,27 @@ File
           Call 
             Name 'print', 
             [
-              Deref 
-                Subscr 
+              Subscr 
+                Deref 
+                  Attr 
+                    Name 'st_first', 
+                    Name 'ar', 
+                  Num '0', 
+                Num '0'
+            ], 
+        Exp 
+          Call 
+            Name 'print', 
+            [
+              Subscr 
+                Deref 
                   Attr 
                     Deref 
-                      Name 'st_second', 
+                      Attr 
+                        Name 'st_second', 
+                        Name 'st', 
                       Num '0', 
-                    Name 'st', 
+                    Name 'ar', 
                   Num '0', 
                 Num '0'
             ]

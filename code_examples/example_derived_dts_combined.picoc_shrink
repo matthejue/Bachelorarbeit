@@ -77,10 +77,24 @@ File
               Subscr 
                 Subscr 
                   Attr 
+                    Name 'st_first', 
+                    Name 'ar', 
+                  Num '0', 
+                Num '0'
+            ], 
+        Exp 
+          Call 
+            Name 'print', 
+            [
+              Subscr 
+                Subscr 
+                  Attr 
                     Subscr 
-                      Name 'st_second', 
+                      Attr 
+                        Name 'st_second', 
+                        Name 'st', 
                       Num '0', 
-                    Name 'st', 
+                    Name 'ar', 
                   Num '0', 
                 Num '0'
             ]

@@ -1,7 +1,10 @@
-[1m[37mexample_derived_dts_combined.picoc:[35m8:11: [33mDatatypeMismatch:[0m Datatype [31mstruct[39m of variable [31mst_second[39m isn't matching in the present context. Expected [34marray or ponter[39m
+[1m[37mexample_derived_dts_combined.picoc:[35m8:2: [33mUnexpectedToken:[0m Expected e.g. [34midentifier[0m or [34m'}'[0m or [34m'print'[0m or [34m'-'[0m or [34mRETI_COMMENT[0m or [34mLOGIC_NOT[0m, found [31m'struct'[39m
+  int var[1] = {42};
   struct st1 st_first = {.ar=&var};
+  print((*st_first.ar)[0]);
+                           [31m^[0m
+                           [31m[34midentifier[0m or [34m'}'[0m or [34m'print'[0m or [34m'-'[0m or [34mRETI_COMMENT[0m or [34mLOGIC_NOT[0m[0m
   struct st2 st_second = {.st=&st_first};
-  print(*(*st_second).st[0]);
-           [31m^[0m                            
-           [31mexpected 'array or ponter', found 'struct'[0m
+  [31m~~~~~~[0m                                  
+  print((*(*st_second.st).ar)[0]);
 }
