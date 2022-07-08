@@ -1,0 +1,119 @@
+file
+  ./example_derived_dts_introduction.dt
+  decls_defs
+    decl_def
+      struct_decl
+        name	ar_with_len
+        struct_params
+          alloc
+            type_spec
+              prim_dt	int
+            pntr_decl
+              pntr_deg
+              array_decl
+                name	len
+                array_dims
+          alloc
+            type_spec
+              prim_dt	int
+            pntr_decl
+              pntr_deg
+              array_decl
+                name	ar
+                array_dims	2
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	main
+        fun_params
+        decl_exec_stmts
+          decl_part
+            decl_exp_stmt
+              alloc
+                type_spec
+                  struct_spec
+                    name	ar_with_len
+                pntr_decl
+                  pntr_deg
+                  array_decl
+                    name	st_ar
+                    array_dims	3
+          decl_part
+            decl_exp_stmt
+              alloc
+                type_spec
+                  prim_dt	int
+                pntr_decl
+                  pntr_deg	*
+                  array_decl
+                    pntr_decl
+                      pntr_deg	*
+                      array_decl
+                        name	pntr2
+                        array_dims
+                    array_dims	3
+          exec_part
+            exec_exp_stmt
+              logic_or
+                logic_and
+                  eq_exp
+                    rel_exp
+                      arith_or
+                        arith_oplus
+                          arith_and
+                            arith_prec2
+                              arith_prec1
+                                un_exp
+                                  post_exp
+                                    prim_exp
+                                      name	pntr2
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	fun
+        fun_params
+        decl_exec_stmts
+          decl_part
+            decl_exp_stmt
+              alloc
+                type_spec
+                  struct_spec
+                    name	ar_with_len
+                pntr_decl
+                  pntr_deg
+                  array_decl
+                    name	st_ar
+                    array_dims	3
+          decl_part
+            decl_exp_stmt
+              alloc
+                type_spec
+                  prim_dt	int
+                pntr_decl
+                  pntr_deg
+                  array_decl
+                    pntr_decl
+                      pntr_deg	*
+                      array_decl
+                        name	pntr1
+                        array_dims
+                    array_dims	3
+          exec_part
+            exec_exp_stmt
+              logic_or
+                logic_and
+                  eq_exp
+                    rel_exp
+                      arith_or
+                        arith_oplus
+                          arith_and
+                            arith_prec2
+                              arith_prec1
+                                un_exp
+                                  post_exp
+                                    prim_exp
+                                      name	pntr1

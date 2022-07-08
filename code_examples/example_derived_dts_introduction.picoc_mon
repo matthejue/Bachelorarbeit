@@ -1,0 +1,22 @@
+File 
+  Name './example_derived_dts_introduction.picoc_mon', 
+  [
+    Block 
+      Name 'main.1', 
+      [
+        Exp 
+          GlobalRead 
+            Num '9', 
+        Return 
+          Empty
+      ], 
+    Block 
+      Name 'fun.0', 
+      [
+        Exp 
+          StackRead 
+            Num '9', 
+        Return 
+          Empty
+      ]
+  ]

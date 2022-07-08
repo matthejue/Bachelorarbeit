@@ -1,0 +1,32 @@
+File 
+  Name './example_fun_call_by_sharing_array.picoc_mon', 
+  [
+    Block 
+      Name 'stack_fun.1', 
+      [
+        Return 
+          Empty
+      ], 
+    Block 
+      Name 'main.0', 
+      [
+        StackMalloc 
+          Num '2', 
+        Ref 
+          GlobalRead 
+            Num '0', 
+        Ref 
+          GlobalRead 
+            Num '6', 
+        NewStackframe 
+          Name 'stack_fun', 
+          GoTo 
+            Name 'addr@next_instr', 
+        Exp 
+          GoTo 
+            Name 'stack_fun.1', 
+        RemoveStackframe, 
+        Return 
+          Empty
+      ]
+  ]

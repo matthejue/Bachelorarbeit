@@ -1,0 +1,70 @@
+File 
+  Name './example_fun_call_by_sharing_array.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'stack_fun', 
+      [
+        Alloc 
+          Writeable, 
+          PntrDecl 
+            Num '1', 
+            ArrayDecl 
+              [
+                Num '3'
+              ], 
+              IntType 'int', 
+          Name 'param1', 
+        Alloc 
+          Writeable, 
+          ArrayDecl 
+            [
+              Num '2', 
+              Num '3'
+            ], 
+            IntType 'int', 
+          Name 'param2'
+      ], 
+      [
+        Block 
+          Name 'stack_fun.1', 
+          []
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            Exp 
+              Alloc 
+                Writeable, 
+                ArrayDecl 
+                  [
+                    Num '2', 
+                    Num '3'
+                  ], 
+                  IntType 'int', 
+                Name 'local_var1', 
+            Exp 
+              Alloc 
+                Writeable, 
+                ArrayDecl 
+                  [
+                    Num '2', 
+                    Num '3'
+                  ], 
+                  IntType 'int', 
+                Name 'local_var2', 
+            Exp 
+              Call 
+                Name 'stack_fun', 
+                [
+                  Name 'local_var1', 
+                  Name 'local_var2'
+                ]
+          ]
+      ]
+  ]

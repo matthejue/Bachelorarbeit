@@ -1,7 +1,0 @@
-struct ar_with_len {int ar[2]; int len;};
-
-void main() {
-  struct ar_with_len st_ar[3];
-  int (*pntr1)[3];
-  int *(*pntr2)[3];
-}

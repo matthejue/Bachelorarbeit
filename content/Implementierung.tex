@@ -195,6 +195,7 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 
 % kleines Extra
 \subsubsection{Zugriff auf Arrayindex}
+
 Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
@@ -360,30 +361,33 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{fig:reti_blocks_pass_für_zuweisung_an_structattribut}
 \end{code}
 
-\subsection{Umsetzung des Zusammenspiels der Derived Datatypes}
-\subsubsection{Definition von Variablen mit den Derived Datatypes}
-% Stack und Globale Statische Daten
+\subsection{Umsetzung der Derived Datatypes allgemein}
+\subsubsection{Einleitungsteil für Globale Statische Daten und Stackframe}
+% Stack und Globale Statische Daten, unterschieldihe Berechnung der Adressen
+% unterschiedliche Adressberechnung
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_variable_definition_derived_datatypes.picoc}
-  \caption{PicoC Code für Definition von Variablen}
-  \label{fig:picoc_code_für_definition_von_variablen}
+  \numberedcodebox[minted language=c]{./code_examples/example_var_def_derived_dts.picoc}
+  \caption{PicoC Code für unterschiedliche Adressberechnung bei Globalen Statischen Daten und Stackframe}
+  \label{fig:picoc_code_für_unterschiedliche_adressberechnung_bei_globalen_statischen_daten_und_stackframe}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[breakable, minted language=text]{./code_examples/example_variable_definition_derived_datatypes.st}
-  \caption{Symboltabelle für Definition von Variablen}
-  \label{fig:symboltabelle_für_definition_von_variablen}
+  \numberedcodebox[breakable, minted language=text]{./code_examples/example_var_def_derived_dts.st}
+  \caption{Symboltabelle für unterschiedliche Adressberechnung bei Globalen Statischen Daten und Stackframe}
+  \label{fig:symboltabelle_für_unterschiedliche_adressberechnung_bei_globalen_statischen_daten_und_stackframe}
 \end{code}
 
-\subsubsection{Zugriff auf Variablen mit Derived Datatypes}
+\subsubsection{Mittelteil für Globale Statische Daten und Stackframe}
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_combined.picoc}
   \caption{PicoC Code für Zugriff auf Variablen mit Derived Datatypes}
   \label{fig:picoc_code_für_zugriff_auf_variablen_mit_derived_datatypes}
 \end{code}
+
+% spezielles Vorgehen bei PntrDecl
 
 \begin{code}
   \centering
@@ -405,6 +409,8 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \caption{RETI Blocks Pass für Zugriff auf Variablen mit Derived Datatypes}
   \label{fig:reti_blocks_pass_für_zugriff_auf_variablen_mit_derived_datatypes}
 \end{code}
+
+\subsubsection{Schlussteil für Globale Statische Daten und Stackframe}
 
 % Allgemeine Form, Start, Mittelteil und Ende
 % Umgang mit PntrDecl (inmitten von ArrayDecl)
@@ -566,23 +572,72 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines=1}]{./code_examples/example_fun_def.picoc}
-  \caption{PicoC Code für eine Funktionsdefinition}
-  \label{fig:picoc_code_für_eine_funktionsdefinition}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,8}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
+  \caption{PicoC Code für Call by Sharing für Arrays}
+  \label{fig:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
+  \caption{PicoC Mon Pass für Call by Sharing für Arrays}
+  \label{fig:picoc_mon_pass_für_call_by_sharing_für_arrays}
+\end{code}
+
 
 % https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, breakable, minted options={highlightlines={15,24}}]{./code_examples/example_fun_def.st}
-  \caption{Symboltabelle für eine Funktionsdefinition}
-  \label{fig:symboltabelle_für_eine_funktionsdefinition}
+  \numberedcodebox[minted language=text, breakable, minted options={highlightlines={15,24}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \caption{Symboltabelle für Call by Sharing für Arrays}
+  \label{fig:symboltabelle_für_call_by_sharing_für_arrays}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
+  \caption{RETI Block Pass für Call by Sharing für Arrays}
+  \label{fig:reti_blocks_pass_für_call_by_sharing_für_arrays}
 \end{code}
 
 % die Sache mit dem erstetzen von ArryDecl durch PntrDecl
 
 \newlineparagraph{Umsetzung von Call by Value für Structs}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/example_fun_call_by_value_struct.picoc}
+  \caption{PicoC Code für Call by Value für Structs}
+  \label{fig:picoc_code_für_call_by_value_für_structs}
+\end{code}
+
 % argmode für Struct Call by Value
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
+  \caption{PicoC Mon Pass für Call by Value für Structs}
+  \label{fig:picoc_mon_pass_für_call_by_value_for_structs}
+\end{code}
+
+
+% https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
+% \begin{code}
+%   \centering
+%   \numberedcodebox[minted language=text, breakable, minted options={highlightlines={44, 46, 62, 64}}]{./code_examples/example_fun_call_by_value_struct.st}
+%   \caption{Symboltabelle für Call by Value für Structs}
+%   \label{fig:symboltabelle_für_call_by_value_for_structs}
+% \end{code}
+% hier könnte man anmerken, dass die Adressen unterschiedlich berechnet werden für Stack und Globale...
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
+  \caption{RETI Block Pass für Call by Value für Structs}
+  \label{fig:reti_blocks_pass_für_call_by_value_for_structs}
+\end{code}
+
+% Struct wird wirklich kopiert durch speziellen Argmode
 
 \subsection{Umsetzung kleinerer Details}
 % langen Sprüngen, großen Konstanten, Division durch 0
