@@ -103,7 +103,7 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Blöcken} für ein 
 \end{Definition}
 
 \begin{Special_Paragraph}
-  Es ist nicht notwendig beim einem entsprechenden \colorbold{Platzhalter} für einen \colorbold{Namen}, den \colorbold{Namen der Sprache} an ein $L$ dranzuhängen, weil hier immer eine \colorbold{Sprache} steht.
+  Es ist bei \colorbold{T-Diagrammen} nicht notwendig beim entsprechenden \colorbold{Platzhalter}, in den man die genutzte \colorbold{Sprache} schreibt, den \colorbold{Namen der Sprache} an ein $L$ dranzuhängen, weil hier immer eine \colorbold{Sprache} steht. Es würde in Definition~\ref{def:t_diagram_program} also reichen einfach eine $1$ hinzuschreiben.
 \end{Special_Paragraph}
 
 \begin{Definition}{T-Diagram Übersetzer (bzw. eng. Translator)}{t_diagram_übersetzer}
@@ -126,14 +126,14 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Blöcken} für ein 
 \end{Definition}
 
 \begin{Definition}{T-Diagram Maschiene}{t_diagram_maschiene}
-  Repräsentiert eine \colorbold{Maschiene}, welche ein \colorbold{Programm} in \colorbold{Maschienensprache} $L_1$ ausführt.\footnote{Wenn die Maschiene \colorbold{Programme} in einer höheren Sprache als \colorbold{Maschienensprache} ausführt, ist das auch erlaubt das so aufzuschreiben, dann handelt es sich um eine \colorbold{Abstrakte Maschiene}, wie z.B. die \colorbold{Python Virtual Machine} (PVM) oder \colorbold{Java Virtual Machine} (JVM)}
+  Repräsentiert eine \colorbold{Maschiene}, welche ein \colorbold{Programm} in \colorbold{Maschienensprache} $L_1$ ausführt.\footnote{Wenn die Maschiene \colorbold{Programme} in einer höheren Sprache als \colorbold{Maschienensprache} ausführt, ist es auch erlaubt diese Notation zu verwenden, dann handelt es sich um eine \colorbold{Abstrakte Maschiene}, wie z.B. die \colorbold{Python Virtual Machine} (PVM) oder \colorbold{Java Virtual Machine} (JVM).}
   \begin{figure}[H]
     \centering
     \includegraphics[height=1.5cm]{./figures/machiene.png}
   \end{figure}
 \end{Definition}
 
-Aus den verschiedenen \colorbold{Blöcken} lassen \colorbold{Kompostionen} bilden, indem man sie \colorbold{adjazent} zueinander platziert. Allgemein lässt sich grob sagen, dass \colorbold{vertikale Adjazents} für \colorbold{Interpretation} und  \colorbold{horinzontale Adjazents} für \colorbold{Übersetzung} steht.
+Aus den verschiedenen \colorbold{Blöcken} lassen sich \colorbold{Kompostionen} bilden, indem man sie \colorbold{adjazent} zueinander platziert. Allgemein lässt sich grob sagen, dass \colorbold{vertikale Adjazents} für \colorbold{Interpretation} und  \colorbold{horinzontale Adjazents} für \colorbold{Übersetzung} steht.
 
 Sowohl \colorbold{horinzontale} als auch \colorbold{vertikale Adjazents} lassen sich, wie man in den Abbildungen \ref{fig:t_diagram_horinzontal_zusammenfassen} und \ref{fig:t_diagram_vertikal_zusammenfassen} erkennen kann zusammenfassen.
 
@@ -201,12 +201,12 @@ wobei $a$ eine beliebige Folge von \colorbold{Terminalsymbolen} und \colorbold{N
 
 Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist vereinfacht gesagt, in einem Inputstring, z.B. dem Inhalt einer Datei, welche in \colorbold{UTF-8} codiert ist, Folgen endlicher Symbole (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} (Definition~\ref{def:pattern}) matchen, die durch eine \colorbold{reguläre Grammatik} spezifiziert sind.
 
+Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition~\ref{def:lexeme}) genannt.
+
 \begin{Definition}{Pattern}{pattern}
   \colorbold{Beschreibung} aller möglichen \colorbold{Lexeme} einer Menge $\mathbb{P}_{T}$, die einem bestimmten \colorbold{Token} $T$ zugeordnet werden.
   Die Menge $\mathbb{P}_{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich mit den Produktionen einer \colorbold{regulären Grammatik} ${G}_{Lex}$ einer \colorbold{regulären Sprache} ${L}_{Lex}$ beschreiben lassen \footnote{Als Beschreibungswerkzeug können aber auch z.B. reguläre Ausdrücke hergenommen werden.}, die für die Beschreibung eines \colorbold{Tokens} $T$ zuständig sind.\footcite{noauthor_what_nodate}
 \end{Definition}
-
-Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition~\ref{def:lexeme}) genannt.
 
 \begin{Definition}{Lexeme}{lexeme}
   Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} $T$ einer \colorbold{Sprache} ${L}_{Lex}$ matched.
