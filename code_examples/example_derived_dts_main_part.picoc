@@ -5,9 +5,3 @@ void main() {
   struct st1 st_first = {.ar=&var};
   (*st_first.ar)[0];
 }
-
-void fun() {
-  int var[1] = {42};
-  struct st1 st_first = {.ar=&var};
-  (*st_first.ar)[0];
-}

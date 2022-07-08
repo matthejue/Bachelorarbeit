@@ -2,18 +2,16 @@ File
   Name './example_derived_dts_final_part.picoc_blocks', 
   [
     StructDecl 
-      Name 'st1', 
+      Name 'st', 
       [
         Alloc 
           Writeable, 
-          PntrDecl 
-            Num '1', 
-            ArrayDecl 
-              [
-                Num '1'
-              ], 
-              IntType 'int', 
-          Name 'ar'
+          ArrayDecl 
+            [
+              Num '2'
+            ], 
+            IntType 'int', 
+          Name 'attr'
       ], 
     FunDef 
       VoidType 'void', 
@@ -21,8 +19,26 @@ File
       [], 
       [
         Block 
-          Name 'main.1', 
+          Name 'main.0', 
           [
+            Assign 
+              Alloc 
+                Writeable, 
+                ArrayDecl 
+                  [
+                    Num '1', 
+                    Num '2'
+                  ], 
+                  IntType 'int', 
+                Name 'ar1', 
+              Array 
+                [
+                  Array 
+                    [
+                      Num '42', 
+                      Num '314'
+                    ]
+                ], 
             Assign 
               Alloc 
                 Writeable, 
@@ -30,76 +46,54 @@ File
                   [
                     Num '1'
                   ], 
-                  IntType 'int', 
-                Name 'var', 
-              Array 
-                [
-                  Num '42'
-                ], 
-            Assign 
-              Alloc 
-                Writeable, 
-                StructSpec 
-                  Name 'st1', 
-                Name 'st_first', 
+                  StructSpec 
+                    Name 'st', 
+                Name 'ar2', 
               Struct 
                 [
                   Assign 
-                    Name 'ar', 
-                    Ref 
-                      Name 'var'
+                    Name 'attr', 
+                    Array 
+                      [
+                        Num '42', 
+                        Num '314'
+                      ]
                 ], 
-            Exp 
-              Subscr 
-                Subscr 
-                  Attr 
-                    Name 'st_first', 
-                    Name 'ar', 
-                  Num '0', 
-                Num '0'
-          ]
-      ], 
-    FunDef 
-      VoidType 'void', 
-      Name 'fun', 
-      [], 
-      [
-        Block 
-          Name 'fun.0', 
-          [
             Assign 
               Alloc 
                 Writeable, 
-                ArrayDecl 
-                  [
-                    Num '1'
-                  ], 
-                  IntType 'int', 
+                IntType 'int', 
                 Name 'var', 
-              Array 
-                [
-                  Num '42'
-                ], 
+              Num '42', 
             Assign 
               Alloc 
                 Writeable, 
-                StructSpec 
-                  Name 'st1', 
-                Name 'st_first', 
-              Struct 
-                [
-                  Assign 
-                    Name 'ar', 
-                    Ref 
-                      Name 'var'
-                ], 
+                PntrDecl 
+                  Num '1', 
+                  IntType 'int', 
+                Name 'pntr1', 
+              Ref 
+                Name 'var', 
+            Assign 
+              Alloc 
+                Writeable, 
+                PntrDecl 
+                  Num '2', 
+                  IntType 'int', 
+                Name 'pntr2', 
+              Ref 
+                Name 'pntr1', 
             Exp 
               Subscr 
-                Subscr 
-                  Attr 
-                    Name 'st_first', 
-                    Name 'ar', 
-                  Num '0', 
+                Name 'ar1', 
+                Num '0', 
+            Exp 
+              Subscr 
+                Name 'ar2', 
+                Num '0', 
+            Exp 
+              Subscr 
+                Name 'pntr2', 
                 Num '0'
           ]
       ]

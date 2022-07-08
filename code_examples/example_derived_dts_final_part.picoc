@@ -1,13 +1,13 @@
-struct st1 {int (*ar)[1];};
+struct st {int attr[2];};
 
 void main() {
-  int var[1] = {42};
-  struct st1 st_first = {.ar=&var};
-  (*st_first.ar)[0];
-}
+  int ar1[1][2] = {{42, 314}};
+  struct st ar2[1] = {.attr={42, 314}};
+  int var = 42;
+  int *pntr1 = &var;
+  int **pntr2 = &pntr1;
 
-void fun() {
-  int var[1] = {42};
-  struct st1 st_first = {.ar=&var};
-  (*st_first.ar)[0];
+  ar1[0];
+  ar2[0];
+  *pntr2;
 }

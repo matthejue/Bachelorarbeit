@@ -44,32 +44,5 @@ SymbolTable
         value or address:       Num('1')
         position:               Pos(Num('5'), Num('13'))
         size:                   Num('1')
-      }, 
-    Symbol(
-      {
-        type qualifier:         Empty()
-        datatype:               FunDecl(VoidType('void'), Name('fun'), [])
-        name:                   Name('fun')
-        value or address:       Empty()
-        position:               Pos(Num('9'), Num('5'))
-        size:                   Empty()
-      }, 
-    Symbol(
-      {
-        type qualifier:         Writeable()
-        datatype:               ArrayDecl([Num('1')], IntType('int'))
-        name:                   Name('var@fun')
-        value or address:       Num('0')
-        position:               Pos(Num('10'), Num('6'))
-        size:                   Num('1')
-      }, 
-    Symbol(
-      {
-        type qualifier:         Writeable()
-        datatype:               StructSpec(Name('st1'))
-        name:                   Name('st_first@fun')
-        value or address:       Num('1')
-        position:               Pos(Num('11'), Num('13'))
-        size:                   Num('1')
       }
   ]

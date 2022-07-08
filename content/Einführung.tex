@@ -291,11 +291,8 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
 \begin{Definition}{Parser}{parser}
   Ein Programm, dass eine \colorbold{Eingabe} in eine für die \colorbold{Weiterverbeitung} taugliche Form bringt.
 
-  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
-  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
-
-  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
-  \paragraph{\thetcbcounter{.1}}\label{par:parser}\hspace{-0.25cm}
+  % https://tex.stackexchange.com/questions/147777/how-to-change-text-to-normal-font-inside-itshape
+  {\normalfont\bfseries \thetcbcounter{.1}:\:\ignorespaces}
   In Bezug auf Compilerbau ist ein \colorbold{Parser} ein Programm, dass einen Inputstring von \colorbold{Konkretter Syntax} in die compilerinterne Darstellung eines \colorbold{Derivation Tree} übersetzt, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die obigte Definition \ref{def:parser}{.1} verwendet.}.\footcite{noauthor_compiler_nodate}
 \end{Definition}
 

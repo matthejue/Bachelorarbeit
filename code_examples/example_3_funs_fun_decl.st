@@ -31,9 +31,18 @@ SymbolTable
       {
         type qualifier:         Writeable()
         datatype:               IntType('int')
+        name:                   Name('var@main')
+        value or address:       Num('0')
+        position:               Pos(Num('7'), Num('6'))
+        size:                   Num('1')
+      }, 
+    Symbol(
+      {
+        type qualifier:         Writeable()
+        datatype:               IntType('int')
         name:                   Name('var@fun2')
         value or address:       Num('0')
-        position:               Pos(Num('12'), Num('13'))
+        position:               Pos(Num('11'), Num('13'))
         size:                   Num('1')
       }
   ]

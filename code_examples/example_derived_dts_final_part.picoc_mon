@@ -2,39 +2,68 @@ File
   Name './example_derived_dts_final_part.picoc_mon', 
   [
     Block 
-      Name 'main.1', 
+      Name 'main.0', 
       [
+        Exp 
+          Num '42', 
+        Exp 
+          Num '314', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '2', 
+        Exp 
+          Num '42', 
+        Exp 
+          Num '314', 
+        Assign 
+          GlobalWrite 
+            Num '2', 
+          Tmp 
+            Num '2', 
         Exp 
           Num '42', 
         Assign 
           GlobalWrite 
-            Num '0', 
+            Num '4', 
+          Tmp 
+            Num '1', 
+        Ref 
+          GlobalRead 
+            Num '4', 
+        Assign 
+          GlobalWrite 
+            Num '5', 
+          Tmp 
+            Num '1', 
+        Ref 
+          GlobalRead 
+            Num '5', 
+        Assign 
+          GlobalWrite 
+            Num '6', 
           Tmp 
             Num '1', 
         Ref 
           GlobalRead 
             Num '0', 
-        Assign 
-          GlobalWrite 
-            Num '1', 
-          Tmp 
-            Num '1', 
+        Exp 
+          Num '0', 
+        Ref 
+          Subscr 
+            Tmp 
+              Num '2', 
+            Tmp 
+              Num '1', 
+        Exp 
+          Subscr 
+            Tmp 
+              Num '1', 
+            Num '0', 
         Ref 
           GlobalRead 
-            Num '1', 
-        Ref 
-          Attr 
-            Tmp 
-              Num '1', 
-            Name 'ar', 
-        Exp 
-          Num '0', 
-        Ref 
-          Subscr 
-            Tmp 
-              Num '2', 
-            Tmp 
-              Num '1', 
+            Num '2', 
         Exp 
           Num '0', 
         Ref 
@@ -48,43 +77,9 @@ File
             Tmp 
               Num '1', 
             Num '0', 
-        Return 
-          Empty
-      ], 
-    Block 
-      Name 'fun.0', 
-      [
-        Exp 
-          Num '42', 
-        Assign 
-          StackWrite 
-            Num '0', 
-          Tmp 
-            Num '1', 
         Ref 
-          StackRead 
-            Num '0', 
-        Assign 
-          StackWrite 
-            Num '1', 
-          Tmp 
-            Num '1', 
-        Ref 
-          StackRead 
-            Num '1', 
-        Ref 
-          Attr 
-            Tmp 
-              Num '1', 
-            Name 'ar', 
-        Exp 
-          Num '0', 
-        Ref 
-          Subscr 
-            Tmp 
-              Num '2', 
-            Tmp 
-              Num '1', 
+          GlobalRead 
+            Num '6', 
         Exp 
           Num '0', 
         Ref 

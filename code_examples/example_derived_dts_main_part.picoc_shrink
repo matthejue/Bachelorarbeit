@@ -54,45 +54,5 @@ File
                 Name 'ar', 
               Num '0', 
             Num '0'
-      ], 
-    FunDef 
-      VoidType 'void', 
-      Name 'fun', 
-      [], 
-      [
-        Assign 
-          Alloc 
-            Writeable, 
-            ArrayDecl 
-              [
-                Num '1'
-              ], 
-              IntType 'int', 
-            Name 'var', 
-          Array 
-            [
-              Num '42'
-            ], 
-        Assign 
-          Alloc 
-            Writeable, 
-            StructSpec 
-              Name 'st1', 
-            Name 'st_first', 
-          Struct 
-            [
-              Assign 
-                Name 'ar', 
-                Ref 
-                  Name 'var'
-            ], 
-        Exp 
-          Subscr 
-            Subscr 
-              Attr 
-                Name 'st_first', 
-                Name 'ar', 
-              Num '0', 
-            Num '0'
       ]
   ]

@@ -12,16 +12,6 @@ File
       [
         StackMalloc 
           Num '2', 
-        NewStackframe 
-          Name 'fun1', 
-          GoTo 
-            Name 'addr@next_instr', 
-        Exp 
-          GoTo 
-            Name 'fun1.2', 
-        RemoveStackframe, 
-        StackMalloc 
-          Num '2', 
         Exp 
           Num '42', 
         NewStackframe 
@@ -34,6 +24,11 @@ File
         RemoveStackframe, 
         Exp 
           ACC, 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '1', 
         Return 
           Empty
       ], 

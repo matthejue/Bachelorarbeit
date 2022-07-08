@@ -2,18 +2,16 @@ File
   Name './example_derived_dts_final_part.ast', 
   [
     StructDecl 
-      Name 'st1', 
+      Name 'st', 
       [
         Alloc 
           Writeable, 
-          PntrDecl 
-            Num '1', 
-            ArrayDecl 
-              [
-                Num '1'
-              ], 
-              IntType 'int', 
-          Name 'ar'
+          ArrayDecl 
+            [
+              Num '2'
+            ], 
+            IntType 'int', 
+          Name 'attr'
       ], 
     FunDef 
       VoidType 'void', 
@@ -25,41 +23,19 @@ File
             Writeable, 
             ArrayDecl 
               [
-                Num '1'
+                Num '1', 
+                Num '2'
               ], 
               IntType 'int', 
-            Name 'var', 
+            Name 'ar1', 
           Array 
             [
-              Num '42'
+              Array 
+                [
+                  Num '42', 
+                  Num '314'
+                ]
             ], 
-        Assign 
-          Alloc 
-            Writeable, 
-            StructSpec 
-              Name 'st1', 
-            Name 'st_first', 
-          Struct 
-            [
-              Assign 
-                Name 'ar', 
-                Ref 
-                  Name 'var'
-            ], 
-        Exp 
-          Subscr 
-            Deref 
-              Attr 
-                Name 'st_first', 
-                Name 'ar', 
-              Num '0', 
-            Num '0'
-      ], 
-    FunDef 
-      VoidType 'void', 
-      Name 'fun', 
-      [], 
-      [
         Assign 
           Alloc 
             Writeable, 
@@ -67,32 +43,54 @@ File
               [
                 Num '1'
               ], 
-              IntType 'int', 
-            Name 'var', 
-          Array 
+              StructSpec 
+                Name 'st', 
+            Name 'ar2', 
+          Struct 
             [
-              Num '42'
+              Assign 
+                Name 'attr', 
+                Array 
+                  [
+                    Num '42', 
+                    Num '314'
+                  ]
             ], 
         Assign 
           Alloc 
             Writeable, 
-            StructSpec 
-              Name 'st1', 
-            Name 'st_first', 
-          Struct 
-            [
-              Assign 
-                Name 'ar', 
-                Ref 
-                  Name 'var'
-            ], 
+            IntType 'int', 
+            Name 'var', 
+          Num '42', 
+        Assign 
+          Alloc 
+            Writeable, 
+            PntrDecl 
+              Num '1', 
+              IntType 'int', 
+            Name 'pntr1', 
+          Ref 
+            Name 'var', 
+        Assign 
+          Alloc 
+            Writeable, 
+            PntrDecl 
+              Num '2', 
+              IntType 'int', 
+            Name 'pntr2', 
+          Ref 
+            Name 'pntr1', 
         Exp 
           Subscr 
-            Deref 
-              Attr 
-                Name 'st_first', 
-                Name 'ar', 
-              Num '0', 
+            Name 'ar1', 
+            Num '0', 
+        Exp 
+          Subscr 
+            Name 'ar2', 
+            Num '0', 
+        Exp 
+          Deref 
+            Name 'pntr2', 
             Num '0'
       ]
   ]

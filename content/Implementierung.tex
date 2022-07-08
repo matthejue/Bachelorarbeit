@@ -127,6 +127,13 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
 
 \begin{code}
   \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_pntr_ref.st}
+  \caption{Symboltabelle für Pointer Referenzierung}
+  \label{fig:symboltabelle_für_pointer_referenzierung}
+\end{code}
+
+\begin{code}
+  \centering
   \numberedcodebox[minted language=text]{./code_examples/example_pntr_ref.picoc_mon}
   \caption{PicoC Mon Pass für Pointer Referenzierung}
   \label{fig:picoc_mon_für_pointer_referenzierung}
@@ -176,6 +183,13 @@ Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} impleme
   \numberedcodebox[minted language=text]{./code_examples/example_array_init.ast}
   \caption{Abstract Syntax Tree für Array Initialisierung}
   \label{fig:abstract_syntax_tree_für_array_initialisierung}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_array_init.st}
+  \caption{Symboltabelle für Array Initialisierung}
+  \label{fig:symboltabelle_für_array_initialisierung}
 \end{code}
 
 \begin{code}
@@ -267,7 +281,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
   \centering
-  \numberedcodebox[breakable, minted language=text]{./code_examples/example_struct_decl.st}
+  \numberedcodebox[minted language=text]{./code_examples/example_struct_decl.st}
   \caption{Symboltabelle für Deklaration von Structs}
   \label{fig:symboltabelle_für_deklaration_von_structs}
 \end{code}
@@ -282,9 +296,16 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, breakable]{./code_examples/example_struct_init.ast}
+  \numberedcodebox[minted language=text]{./code_examples/example_struct_init.ast}
   \caption{Abstract Syntax Tree für Initialisierung von Structs}
   \label{fig:abstract_syntax_tree_für_initialisierung_von_structs}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_struct_init.st}
+  \caption{Symboltabelle für Initialisierung von Structs}
+  \label{fig:symboltabelle_für_initialisierung_von_structs}
 \end{code}
 
 \begin{code}
@@ -313,7 +334,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, breakable]{./code_examples/example_struct_attr_access.ast}
+  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.ast}
   \caption{Abstract Syntax Tree für Zugriff auf Structattribut}
   \label{fig:abstract_syntax_tree_für_zugriff_auf_structattribut}
 \end{code}
@@ -342,7 +363,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, breakable]{./code_examples/example_struct_attr_assignment.ast}
+  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.ast}
   \caption{Abstract Syntax Tree für Zuweisung an Structattribut}
   \label{fig:abstract_syntax_tree_für_zuweisung_an_structattribut}
 \end{code}
@@ -361,59 +382,102 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{fig:reti_blocks_pass_für_zuweisung_an_structattribut}
 \end{code}
 
-\subsection{Umsetzung der Derived Datatypes allgemein}
+\subsection{Umsetzung der Derived Datatypes im Zusammenspiel}
 \subsubsection{Einleitungsteil für Globale Statische Daten und Stackframe}
 % Stack und Globale Statische Daten, unterschieldihe Berechnung der Adressen
 % unterschiedliche Adressberechnung
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_var_def_derived_dts.picoc}
-  \caption{PicoC Code für unterschiedliche Adressberechnung bei Globalen Statischen Daten und Stackframe}
-  \label{fig:picoc_code_für_unterschiedliche_adressberechnung_bei_globalen_statischen_daten_und_stackframe}
-\end{code}
-
-\begin{code}
-  \centering
-  \numberedcodebox[breakable, minted language=text]{./code_examples/example_var_def_derived_dts.st}
-  \caption{Symboltabelle für unterschiedliche Adressberechnung bei Globalen Statischen Daten und Stackframe}
-  \label{fig:symboltabelle_für_unterschiedliche_adressberechnung_bei_globalen_statischen_daten_und_stackframe}
-\end{code}
-
-\subsubsection{Mittelteil für Globale Statische Daten und Stackframe}
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_combined.picoc}
-  \caption{PicoC Code für Zugriff auf Variablen mit Derived Datatypes}
-  \label{fig:picoc_code_für_zugriff_auf_variablen_mit_derived_datatypes}
+  \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_introduction_part.picoc}
+  \caption{PicoC Code für den Einleitungsteil}
+  \label{fig:picoc_code_einleitungsteil}
 \end{code}
 
 % spezielles Vorgehen bei PntrDecl
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, breakable]{./code_examples/example_derived_dts_combined.ast}
-  \caption{Abstract Syntax Tree für Zugriff auf Variablen mit Derived Datatypes}
-  \label{fig:abstract_syntax_tree_für_zugriff_auf_variablen_mit_derived_datatypes}
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.ast}
+  \caption{Abstract Syntax Tree für den Einleitungsteil}
+  \label{fig:abstract_syntax_tree_einleitungsteil}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_combined.picoc_mon}
-  \caption{PicoC Mon Pass für Zugriff auf Variablen mit Derived Datatypes}
-  \label{fig:picoc_mon_pass_für_zugriff_auf_variablen_mit_derived_datatypes}
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.picoc_mon}
+  \caption{PicoC Mon Pass für den Einleitungsteil}
+  \label{fig:picoc_mon_pass_einleitungsteil}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_combined.reti_blocks}
-  \caption{RETI Blocks Pass für Zugriff auf Variablen mit Derived Datatypes}
-  \label{fig:reti_blocks_pass_für_zugriff_auf_variablen_mit_derived_datatypes}
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.reti_blocks}
+  \caption{RETI Blocks Pass für den Einleitungsteil}
+  \label{fig:reti_blocks_pass_einleitungsteil}
 \end{code}
 
-\subsubsection{Schlussteil für Globale Statische Daten und Stackframe}
+\subsubsection{Mittelteil für die verschiedenen Derived Datatypes}
 
-% Allgemeine Form, Start, Mittelteil und Ende
-% Umgang mit PntrDecl (inmitten von ArrayDecl)
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_main_part.picoc}
+  \caption{PicoC Code für den Mittelteil}
+  \label{fig:picoc_code_mittelteil}
+\end{code}
+
+% spezielles Vorgehen bei PntrDecl
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.ast}
+  \caption{Abstract Syntax Tree für den Mittelteil}
+  \label{fig:abstract_syntax_tree_mittelteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.picoc_mon}
+  \caption{PicoC Mon Pass für den Mittelteil}
+  \label{fig:picoc_mon_pass_mittelteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.reti_blocks}
+  \caption{RETI Blocks Pass für den Mittelteil}
+  \label{fig:reti_blocks_pass_mittelteil}
+\end{code}
+% spezielles Vorgehen bei PntrDecl
+
+\subsubsection{Schlussteil für die verschiedenen Derived Datatypes}
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_final_part.picoc}
+  \caption{PicoC Code für den Schlussteil}
+  \label{fig:picoc_code_schlussteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.ast}
+  \caption{Abstract Syntax Tree für den Schlussteil}
+  \label{fig:abstract_syntax_tree_schlussteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.picoc_mon}
+  \caption{PicoC Mon Pass für den Schlussteil}
+  \label{fig:picoc_mon_pass_schlussteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.reti_blocks}
+  \caption{RETI Blocks Pass für den Schlussteil}
+  \label{fig:reti_blocks_pass_schlussteil}
+\end{code}
+
 % Umgang, wenn Datentyp abrubt aufhört am Ende
 
 \subsection{Umsetzung von Funktionen}
@@ -499,7 +563,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{fig:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
 
-\newlineparagraph{Allocation von Variablen}
+% Allocation von Variablen
 % Stack und Globale Statische Daten
 % die Sache mit Assign(Tmp, Global) und Assign(Global, Tmp)
 % erwähnen, das Main Funktion keinen Stackframe hat
@@ -572,7 +636,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={1,8}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
   \caption{PicoC Code für Call by Sharing für Arrays}
   \label{fig:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
@@ -588,7 +652,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 % https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, breakable, minted options={highlightlines={15,24}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15,24}}]{./code_examples/example_fun_call_by_sharing_array.st}
   \caption{Symboltabelle für Call by Sharing für Arrays}
   \label{fig:symboltabelle_für_call_by_sharing_für_arrays}
 \end{code}
@@ -620,14 +684,6 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{fig:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
 
-
-% https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
-% \begin{code}
-%   \centering
-%   \numberedcodebox[minted language=text, breakable, minted options={highlightlines={44, 46, 62, 64}}]{./code_examples/example_fun_call_by_value_struct.st}
-%   \caption{Symboltabelle für Call by Value für Structs}
-%   \label{fig:symboltabelle_für_call_by_value_for_structs}
-% \end{code}
 % hier könnte man anmerken, dass die Adressen unterschiedlich berechnet werden für Stack und Globale...
 
 \begin{code}

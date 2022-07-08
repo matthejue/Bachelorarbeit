@@ -20,11 +20,11 @@ File
       Name 'main', 
       [], 
       [
-        Exp 
-          Call 
-            Name 'fun1', 
-            [], 
-        Exp 
+        Assign 
+          Alloc 
+            Writeable, 
+            IntType 'int', 
+            Name 'var', 
           Call 
             Name 'fun2', 
             [

@@ -3,7 +3,7 @@ file
   decls_defs
     decl_def
       struct_decl
-        name	st1
+        name	st
         struct_params
           alloc
             type_spec
@@ -11,12 +11,8 @@ file
             pntr_decl
               pntr_deg
               array_decl
-                pntr_decl
-                  pntr_deg	*
-                  array_decl
-                    name	ar
-                    array_dims
-                array_dims	1
+                name	attr
+                array_dims	2
     decl_def
       fun_def
         type_spec
@@ -34,108 +30,83 @@ file
                   pntr_decl
                     pntr_deg
                     array_decl
-                      name	var
-                      array_dims	1
+                      name	ar1
+                      array_dims
+                        1
+                        2
                 bug_initializer
                   array_init
                     bug_initializer
-                      logic_or
-                        logic_and
-                          eq_exp
-                            rel_exp
-                              arith_or
-                                arith_oplus
-                                  arith_and
-                                    arith_prec2
-                                      arith_prec1
-                                        un_exp
-                                          post_exp
-                                            prim_exp	42
+                      array_init
+                        bug_initializer
+                          logic_or
+                            logic_and
+                              eq_exp
+                                rel_exp
+                                  arith_or
+                                    arith_oplus
+                                      arith_and
+                                        arith_prec2
+                                          arith_prec1
+                                            un_exp
+                                              post_exp
+                                                prim_exp	42
+                        bug_initializer
+                          logic_or
+                            logic_and
+                              eq_exp
+                                rel_exp
+                                  arith_or
+                                    arith_oplus
+                                      arith_and
+                                        arith_prec2
+                                          arith_prec1
+                                            un_exp
+                                              post_exp
+                                                prim_exp	314
           decl_part
             decl_direct_stmt
               init_stmt
                 alloc
                   type_spec
                     struct_spec
-                      name	st1
+                      name	st
                   pntr_decl
                     pntr_deg
                     array_decl
-                      name	st_first
-                      array_dims
+                      name	ar2
+                      array_dims	1
                 bug_initializer
                   struct_init
-                    name	ar
+                    name	attr
                     bug_initializer
-                      logic_or
-                        logic_and
-                          eq_exp
-                            rel_exp
-                              arith_or
-                                arith_oplus
-                                  arith_and
-                                    arith_prec2
-                                      arith_prec1
-                                        un_exp
-                                          un_op	&
-                                          un_exp
-                                            post_exp
-                                              prim_exp
-                                                name	var
-          exec_part
-            exec_exp_stmt
-              logic_or
-                logic_and
-                  eq_exp
-                    rel_exp
-                      arith_or
-                        arith_oplus
-                          arith_and
-                            arith_prec2
-                              arith_prec1
-                                un_exp
-                                  post_exp
-                                    array_subscr
-                                      post_exp
-                                        prim_exp
-                                          logic_or
-                                            logic_and
-                                              eq_exp
-                                                rel_exp
-                                                  arith_or
-                                                    arith_oplus
-                                                      arith_and
-                                                        arith_prec2
-                                                          arith_prec1
-                                                            un_exp
-                                                              un_op	*
-                                                              un_exp
-                                                                post_exp
-                                                                  struct_attr
-                                                                    post_exp
-                                                                      prim_exp
-                                                                        name	st_first
-                                                                    name	ar
-                                      logic_or
-                                        logic_and
-                                          eq_exp
-                                            rel_exp
-                                              arith_or
-                                                arith_oplus
-                                                  arith_and
-                                                    arith_prec2
-                                                      arith_prec1
-                                                        un_exp
-                                                          post_exp
-                                                            prim_exp	0
-    decl_def
-      fun_def
-        type_spec
-          prim_dt	void
-        pntr_deg
-        name	fun
-        fun_params
-        decl_exec_stmts
+                      array_init
+                        bug_initializer
+                          logic_or
+                            logic_and
+                              eq_exp
+                                rel_exp
+                                  arith_or
+                                    arith_oplus
+                                      arith_and
+                                        arith_prec2
+                                          arith_prec1
+                                            un_exp
+                                              post_exp
+                                                prim_exp	42
+                        bug_initializer
+                          logic_or
+                            logic_and
+                              eq_exp
+                                rel_exp
+                                  arith_or
+                                    arith_oplus
+                                      arith_and
+                                        arith_prec2
+                                          arith_prec1
+                                            un_exp
+                                              post_exp
+                                                prim_exp	314
           decl_part
             decl_direct_stmt
               init_stmt
@@ -146,53 +117,76 @@ file
                     pntr_deg
                     array_decl
                       name	var
-                      array_dims	1
+                      array_dims
                 bug_initializer
-                  array_init
-                    bug_initializer
-                      logic_or
-                        logic_and
-                          eq_exp
-                            rel_exp
-                              arith_or
-                                arith_oplus
-                                  arith_and
-                                    arith_prec2
-                                      arith_prec1
-                                        un_exp
-                                          post_exp
-                                            prim_exp	42
+                  logic_or
+                    logic_and
+                      eq_exp
+                        rel_exp
+                          arith_or
+                            arith_oplus
+                              arith_and
+                                arith_prec2
+                                  arith_prec1
+                                    un_exp
+                                      post_exp
+                                        prim_exp	42
           decl_part
             decl_direct_stmt
               init_stmt
                 alloc
                   type_spec
-                    struct_spec
-                      name	st1
+                    prim_dt	int
                   pntr_decl
-                    pntr_deg
+                    pntr_deg	*
                     array_decl
-                      name	st_first
+                      name	pntr1
                       array_dims
                 bug_initializer
-                  struct_init
-                    name	ar
-                    bug_initializer
-                      logic_or
-                        logic_and
-                          eq_exp
-                            rel_exp
-                              arith_or
-                                arith_oplus
-                                  arith_and
-                                    arith_prec2
-                                      arith_prec1
-                                        un_exp
-                                          un_op	&
-                                          un_exp
-                                            post_exp
-                                              prim_exp
-                                                name	var
+                  logic_or
+                    logic_and
+                      eq_exp
+                        rel_exp
+                          arith_or
+                            arith_oplus
+                              arith_and
+                                arith_prec2
+                                  arith_prec1
+                                    un_exp
+                                      un_op	&
+                                      un_exp
+                                        post_exp
+                                          prim_exp
+                                            name	var
+          decl_part
+            decl_direct_stmt
+              init_stmt
+                alloc
+                  type_spec
+                    prim_dt	int
+                  pntr_decl
+                    pntr_deg
+                      *
+                      *
+                    array_decl
+                      name	pntr2
+                      array_dims
+                bug_initializer
+                  logic_or
+                    logic_and
+                      eq_exp
+                        rel_exp
+                          arith_or
+                            arith_oplus
+                              arith_and
+                                arith_prec2
+                                  arith_prec1
+                                    un_exp
+                                      un_op	&
+                                      un_exp
+                                        post_exp
+                                          prim_exp
+                                            name	pntr1
           exec_part
             exec_exp_stmt
               logic_or
@@ -209,24 +203,7 @@ file
                                     array_subscr
                                       post_exp
                                         prim_exp
-                                          logic_or
-                                            logic_and
-                                              eq_exp
-                                                rel_exp
-                                                  arith_or
-                                                    arith_oplus
-                                                      arith_and
-                                                        arith_prec2
-                                                          arith_prec1
-                                                            un_exp
-                                                              un_op	*
-                                                              un_exp
-                                                                post_exp
-                                                                  struct_attr
-                                                                    post_exp
-                                                                      prim_exp
-                                                                        name	st_first
-                                                                    name	ar
+                                          name	ar1
                                       logic_or
                                         logic_and
                                           eq_exp
@@ -239,3 +216,49 @@ file
                                                         un_exp
                                                           post_exp
                                                             prim_exp	0
+          exec_part
+            exec_exp_stmt
+              logic_or
+                logic_and
+                  eq_exp
+                    rel_exp
+                      arith_or
+                        arith_oplus
+                          arith_and
+                            arith_prec2
+                              arith_prec1
+                                un_exp
+                                  post_exp
+                                    array_subscr
+                                      post_exp
+                                        prim_exp
+                                          name	ar2
+                                      logic_or
+                                        logic_and
+                                          eq_exp
+                                            rel_exp
+                                              arith_or
+                                                arith_oplus
+                                                  arith_and
+                                                    arith_prec2
+                                                      arith_prec1
+                                                        un_exp
+                                                          post_exp
+                                                            prim_exp	0
+          exec_part
+            exec_exp_stmt
+              logic_or
+                logic_and
+                  eq_exp
+                    rel_exp
+                      arith_or
+                        arith_oplus
+                          arith_and
+                            arith_prec2
+                              arith_prec1
+                                un_exp
+                                  un_op	*
+                                  un_exp
+                                    post_exp
+                                      prim_exp
+                                        name	pntr2

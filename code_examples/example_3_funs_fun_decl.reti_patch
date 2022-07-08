@@ -17,22 +17,6 @@ File
       Name 'main.1', 
       [
         SUBI SP 2, 
-        MOVE BAF ACC, 
-        ADDI SP 2, 
-        MOVE SP BAF, 
-        SUBI SP 2, 
-        STOREIN BAF ACC 0, 
-        LOADI ACC GoTo 
-                    Name 'addr@next_instr', 
-        ADD ACC CS, 
-        STOREIN BAF ACC -1, 
-        Exp 
-          GoTo 
-            Name 'fun1.2', 
-        MOVE BAF IN1, 
-        LOADIN IN1 BAF 0, 
-        MOVE IN1 SP, 
-        SUBI SP 2, 
         SUBI SP 1, 
         LOADI ACC 42, 
         STOREIN SP ACC 1, 
@@ -53,6 +37,9 @@ File
         MOVE IN1 SP, 
         SUBI SP 1, 
         STOREIN SP ACC 1, 
+        LOADIN SP ACC 1, 
+        STOREIN DS ACC 0, 
+        ADDI SP 1, 
         LOADIN BAF PC -1
       ], 
     Block 

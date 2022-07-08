@@ -148,6 +148,9 @@
 % https://tex.stackexchange.com/questions/32160/new-line-after-paragraph
 \newcommand{\newlineparagraph}[1]{\paragraph{#1}\mbox{}\\\vspace{-0.5cm}}
 
+% https://stackoverflow.com/questions/2854299/getting-subsection-to-list-in-table-of-contents-in-latex
+\setcounter{tocdepth}{4}
+
 % https://tex.stackexchange.com/questions/369421/how-to-have-a-figure-going-over-several-pages
 % TODO: set hypcap = true when compiling for the last time
 % \usepackage{caption}
@@ -161,3 +164,13 @@
 % https://texblog.net/latex-archive/uncategorized/prevent-floating-image-figure-table/
 % \newcommand\captionof[1]{\def\@captype{#1}\caption}
 % \usepackage{capt-of}
+
+% https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
+
+
+  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
+
+  % https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
