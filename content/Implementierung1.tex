@@ -86,47 +86,57 @@
 	\downplay
   \firstcase{const\_init\_stmt}{\dq const\dq\enspace type\_spec\enspace name\enspace \dq {=}\dq\enspace NUM\dq ;\dq }{}
   \midrule
+  \firstcase{pntr\_deg}{\dq {*}\dq *}{L\_Pntr}
+  \firstcase{pntr\_decl}{pntr\_deg\enspace array\_decl\gralt array\_decl}{}
+  \midrule
   \firstcase{array\_dims}{(\dq [\dq NUM\dq ]\dq )*}{L\_Array}
   \firstcase{array\_decl}{name\enspace array\_dims\gralt \dq (\dq pntr\_decl\dq )\dq  array\_dims}{}
   \firstcase{array\_init}{\dq \{\dq initializer(\dq ,\dq\enspace initializer)*\dq \}\dq }{}
   \firstcase{array\_subscr}{post\_exp\dq [\dq logic\_or\dq ]\dq }{}
   \midrule
-  \firstcase{pntr\_deg}{\dq {*}\dq *}{L\_Pntr}
-  \firstcase{pntr\_decl}{pntr\_deg\enspace array\_decl\gralt array\_decl}{}
-  \midrule
   \firstcase{struct\_spec}{\dq struct\dq\enspace name}{L\_Struct}
   \firstcase{struct\_params}{(alloc\dq ;\dq )+}{}
   \firstcase{struct\_decl}{\dq struct\dq\enspace name\enspace \dq \{\dq struct\_params\dq \}\dq }{}
-  \firstcase{struct\_init}{\dq {\dq \dq .\dq name\dq =\dq initializer (\dq ,\dq  \dq .\dq name\dq {=}\dq initializer)*\dq }\dq }{}
+  \firstcase{struct\_init}{\dq \{\dq \dq .\dq name\dq {=}\dq initializer (\dq ,\dq  \dq .\dq name\dq {=}\dq initializer)*\dq \}\dq }{}
   \firstcase{struct\_attr}{post\_exp\dq .\dq name}{}
-  % \midrule
-  % \firstcase{if\_stmt}{\dq if\dq \dq (\dq logic\_or\dq )\dq  exec\_part}{L\_If\_Else}
-  % \firstcase{if\_else\_stmt}{\dq if\dq \dq (\dq logic\_or\dq )\dq  exec\_part \dq else\dq  exec\_part}{}
-  % \midrule
-  % \firstcase{while\_stmt}{\dq while\dq \dq (\dq logic\_or\dq )\dq  exec\_part}{L\_Loop}
-  % \firstcase{do\_while\_stmt}{\dq do\dq  exec\_part \dq while\dq \dq (\dq logic\_or\dq )\dq \dq ;\dq }{}
-  % \midrule
-  % \firstcase{decl\_exp\_stmt}{alloc\dq ;\dq }{L\_Stmt}
-  % \firstcase{decl\_direct\_stmt}{ assign\_stmt\gralt init\_stmt\gralt const\_init\_stmt}{}
-  % \firstcase{decl\_part}{ decl\_exp\_stmt\gralt decl\_direct\_stmt\gralt RETI\_COMMENT}{}
-  % \hdashline
-  % \firstcase{compound\_stmt}{ \dq {\dq  exec\_part* \dq }\dq }{}
-  % \firstcase{exec\_exp\_stmt}{logic\_or\dq ;\dq }{}
-  % \firstcase{exec\_direct\_stmt}{if\_stmt\gralt if\_else\_stmt\gralt while\_stmt\gralt do\_while\_stmt\gralt assign\_stmt\gralt fun\_return\_stmt}{}
-  % \firstcase{exec\_part}{compound\_stmt\gralt exec\_exp\_stmt\gralt exec\_direct\_stmt\gralt RETI\_COMMENT}{}
-  % \hdashline
-  % \firstcase{decl\_exec\_stmts}{decl\_part* exec\_part*}{}
-  % \midrule
-  % \firstcase{fun\_args}{[logic\_or(\dq ,\dq  logic\_or)*]}{L\_Fun}
-  % \firstcase{fun\_call}{name\dq (\dq fun\_args\dq )\dq }{}
-  % \firstcase{fun\_return\_stmt}{\dq return\dq  [logic\_or]\dq ;\dq }{}
-  % \firstcase{fun\_params}{[alloc(\dq ,\dq  alloc)*]}{}
-  % \firstcase{fun\_decl}{type\_spec pntr\_deg name\dq (\dq fun\_params\dq )\dq }{}
-  % \firstcase{fun\_def}{type\_spec pntr\_deg name\dq (\dq fun\_params\dq )\dq  \dq {\dq  decl\_exec\_stmts \dq }\dq }{}
-  % \midrule
-  % \firstcase{decl\_def}{(struct\_decl\gralt fun\_decl)\dq ;\dq \gralt fun\_def}{L\_File}
-  % \firstcase{decls\_defs}{decl\_def*}{}
-  % \firstcase{file}{FILENAME decls\_defs}{}
+  \midrule
+	\downplay
+  \firstcase{if\_stmt}{\dq if\dq \dq (\dq logic\_or\dq )\dq\enspace exec\_part}{L\_If\_Else}
+	\downplay
+  \firstcase{if\_else\_stmt}{\dq if\dq \dq (\dq logic\_or\dq )\dq\enspace exec\_part\enspace \dq else\dq\enspace exec\_part}{}
+  \midrule
+	\downplay
+  \firstcase{while\_stmt}{\dq while\dq \dq (\dq logic\_or\dq )\dq\enspace exec\_part}{L\_Loop}
+	\downplay
+  \firstcase{do\_while\_stmt}{\dq do\dq\enspace exec\_part\enspace \dq while \dq \dq (\dq logic\_or\dq )\dq \dq ;\dq }{}
+  \bottomrule
+\end{grammar}
+
+\begin{grammar}
+  \toprule
+  \firstcase{decl\_exp\_stmt}{alloc\dq ;\dq }{L\_Stmt}
+  \firstcase{decl\_direct\_stmt}{ assign\_stmt\gralt init\_stmt\gralt const\_init\_stmt}{}
+  \firstcase{decl\_part}{ decl\_exp\_stmt\gralt decl\_direct\_stmt\gralt RETI\_COMMENT}{}
+  \\[-0.2cm]
+  \firstcase{compound\_stmt}{ \dq \{\dq exec\_part* \dq \}\dq }{}
+  \firstcase{exec\_exp\_stmt}{logic\_or\dq ;\dq }{}
+  \firstcase{exec\_direct\_stmt}{if\_stmt\gralt if\_else\_stmt\gralt while\_stmt\gralt do\_while\_stmt}{}
+  \otherform{assign\_stmt\gralt fun\_return\_stmt}{}
+  \firstcase{exec\_part}{compound\_stmt\gralt exec\_exp\_stmt\gralt exec\_direct\_stmt}{}
+  \otherform{RETI\_COMMENT}{}
+  \\[-0.2cm]
+  \firstcase{decl\_exec\_stmts}{decl\_part* exec\_part*}{}
+  \midrule
+  \firstcase{fun\_args}{[logic\_or(\dq ,\dq\enspace logic\_or)*]}{L\_Fun}
+  \firstcase{fun\_call}{name\dq (\dq fun\_args\dq )\dq }{}
+  \firstcase{fun\_return\_stmt}{\dq return\dq\enspace [logic\_or]\dq ;\dq }{}
+  \firstcase{fun\_params}{[alloc(\dq ,\dq\enspace alloc)*]}{}
+  \firstcase{fun\_decl}{type\_spec\enspace pntr\_deg\enspace name\dq (\dq fun\_params\dq )\dq }{}
+  \firstcase{fun\_def}{type\_spec\enspace pntr\_deg\enspace name\dq (\dq fun\_params\dq )\dq\enspace \dq \{\dq  decl\_exec\_stmts \dq \}\dq }{}
+  \midrule
+  \firstcase{decl\_def}{(struct\_decl\gralt fun\_decl)\dq ;\dq \gralt fun\_def}{L\_File}
+  \firstcase{decls\_defs}{decl\_def*}{}
+  \firstcase{file}{FILENAME\enspace decls\_defs}{}
   \bottomrule
 \end{grammar}
 
