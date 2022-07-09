@@ -1,0 +1,212 @@
+%!Tex Root = ../Main.tex
+% ./Packete_und_Deklarationen.tex
+% ./Titlepage.tex
+% ./Motivation.tex
+% ./Einführung.tex
+% ./Implementierung2.tex
+% ./Ergebnisse_und_Ausblick.tex
+
+\chapter{Implementierung}
+\label{ch:implementierung}
+\section{Architektur}
+% Unterscheid zur Architektur aus dem Bachelorprojekt
+
+% Cross Compiler
+% https://tex.stackexchange.com/questions/8625/force-figure-placement-in-text
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{./figures/summarized_cross_compiler.png}
+  \caption{Cross-Compiler Kompiliervorgang ausgeschrieben}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.33\linewidth]{./figures/compiliervorang_mit_machiene.png}
+  \caption{Cross-Compiler Kompiliervorgang Kurzform}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/passes.png}
+  \caption{Architektur mit allen Passes ausgeschrieben}
+\end{figure}
+
+\section{Lexikalische Analyse}
+\subsection{Verwendung von Lark}
+\label{sec:lex_analyse_verwendung_von_lark}
+
+% ./concrete_syntax_picoc.lark
+
+% https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
+\begin{grammar}[Parser Grammatik][H][gr:simple_grammar]
+  \toprule
+	\downplay
+  \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith +}
+	\downplay
+  \firstcase{post\_exp}{array\_subscr\gralt struct\_attr\gralt fun\_call}{L\_Array +}
+	\downplay
+  \otherform{input\_exp\gralt print\_exp\gralt prim\_exp}{L\_Pntr +}
+	\downplay
+  \firstcase{un\_exp}{un\_op un\_exp\gralt post\_exp}{L\_Struct + L\_Fun}
+  \midrule
+	\downplay
+  \firstcase{input\_exp}{\dq input\dq\dq(\dq\dq)\dq}{L\_Arith}
+	\downplay
+  \firstcase{print\_exp}{\dq print\dq\dq(\dq logic\_or\dq)\dq}{}
+	\downplay
+  \firstcase{arith\_prec1}{arith\_prec1\enspace prec1\_op\enspace un\_exp\gralt un\_exp}{}
+	\downplay
+  \firstcase{arith\_prec2}{arith\_prec2\enspace prec2\_op\enspace arith\_prec1\gralt arith\_prec1}{}
+	\downplay
+  \firstcase{arith\_and}{arith\_and\enspace \dq\&\dq\enspace arith\_prec2\gralt arith\_prec2}{}
+	\downplay
+  \firstcase{arith\_oplus}{arith\_oplus\enspace \dq {\wedge{}}\dq\enspace arith\_and\gralt arith\_and}{}
+	\downplay
+  \firstcase{arith\_or}{arith\_or\enspace \dq{\mid} \dq\enspace arith\_oplus\gralt arith\_oplus}{}
+  % \midrule
+  \downplay
+  \firstcase{rel\_exp}{rel\_exp\enspace rel\_op\enspace arith\_or\gralt arith\_or}{L\_Logic}
+  \downplay
+  \firstcase{eq\_exp}{eq\_exp\enspace eq\_op rel\_exp\gralt rel\_exp}{}
+  \downplay
+  \firstcase{logic\_and}{logic\_and\enspace \dq{\&\&}\dq\enspace eq\_exp\gralt eq\_exp}{}
+  \downplay
+  \firstcase{logic\_or}{logic\_or\enspace \dq{\mid\mid}\dq\enspace logic\_and\gralt logic\_and}{}
+  \midrule
+	\downplay
+  \firstcase{type\_spec}{prim\_dt\gralt struct\_spec}{L\_Assign\_Alloc}
+	\downplay
+  \firstcase{alloc}{type\_spec\enspace pntr\_decl}{}
+	\downplay
+  \firstcase{assign\_stmt}{un\_exp\enspace \dq {=}\dq\enspace logic\_or\dq ;\dq }{}
+	\downplay
+  \firstcase{initializer}{logic\_or\gralt array\_init\gralt struct\_init}{}
+	\downplay
+  \firstcase{init\_stmt}{alloc\enspace \dq {=}\dq\enspace initializer\dq ;\dq }{}
+	\downplay
+  \firstcase{const\_init\_stmt}{\dq const\dq\enspace type\_spec\enspace name\enspace \dq {=}\dq\enspace NUM\dq ;\dq }{}
+  \midrule
+  \firstcase{array\_dims}{(\dq [\dq NUM\dq ]\dq )*}{L\_Array}
+  \firstcase{array\_decl}{name\enspace array\_dims\gralt \dq (\dq pntr\_decl\dq )\dq  array\_dims}{}
+  \firstcase{array\_init}{\dq \{\dq initializer(\dq ,\dq\enspace initializer)*\dq \}\dq }{}
+  \firstcase{array\_subscr}{post\_exp\dq [\dq logic\_or\dq ]\dq }{}
+  \midrule
+  \firstcase{pntr\_deg}{\dq {*}\dq *}{L\_Pntr}
+  \firstcase{pntr\_decl}{pntr\_deg\enspace array\_decl\gralt array\_decl}{}
+  \midrule
+  \firstcase{struct\_spec}{\dq struct\dq\enspace name}{L\_Struct}
+  \firstcase{struct\_params}{(alloc\dq ;\dq )+}{}
+  \firstcase{struct\_decl}{\dq struct\dq\enspace name\enspace \dq \{\dq struct\_params\dq \}\dq }{}
+  \firstcase{struct\_init}{\dq {\dq \dq .\dq name\dq =\dq initializer (\dq ,\dq  \dq .\dq name\dq {=}\dq initializer)*\dq }\dq }{}
+  \firstcase{struct\_attr}{post\_exp\dq .\dq name}{}
+  % \midrule
+  % \firstcase{if\_stmt}{\dq if\dq \dq (\dq logic\_or\dq )\dq  exec\_part}{L\_If\_Else}
+  % \firstcase{if\_else\_stmt}{\dq if\dq \dq (\dq logic\_or\dq )\dq  exec\_part \dq else\dq  exec\_part}{}
+  % \midrule
+  % \firstcase{while\_stmt}{\dq while\dq \dq (\dq logic\_or\dq )\dq  exec\_part}{L\_Loop}
+  % \firstcase{do\_while\_stmt}{\dq do\dq  exec\_part \dq while\dq \dq (\dq logic\_or\dq )\dq \dq ;\dq }{}
+  % \midrule
+  % \firstcase{decl\_exp\_stmt}{alloc\dq ;\dq }{L\_Stmt}
+  % \firstcase{decl\_direct\_stmt}{ assign\_stmt\gralt init\_stmt\gralt const\_init\_stmt}{}
+  % \firstcase{decl\_part}{ decl\_exp\_stmt\gralt decl\_direct\_stmt\gralt RETI\_COMMENT}{}
+  % \hdashline
+  % \firstcase{compound\_stmt}{ \dq {\dq  exec\_part* \dq }\dq }{}
+  % \firstcase{exec\_exp\_stmt}{logic\_or\dq ;\dq }{}
+  % \firstcase{exec\_direct\_stmt}{if\_stmt\gralt if\_else\_stmt\gralt while\_stmt\gralt do\_while\_stmt\gralt assign\_stmt\gralt fun\_return\_stmt}{}
+  % \firstcase{exec\_part}{compound\_stmt\gralt exec\_exp\_stmt\gralt exec\_direct\_stmt\gralt RETI\_COMMENT}{}
+  % \hdashline
+  % \firstcase{decl\_exec\_stmts}{decl\_part* exec\_part*}{}
+  % \midrule
+  % \firstcase{fun\_args}{[logic\_or(\dq ,\dq  logic\_or)*]}{L\_Fun}
+  % \firstcase{fun\_call}{name\dq (\dq fun\_args\dq )\dq }{}
+  % \firstcase{fun\_return\_stmt}{\dq return\dq  [logic\_or]\dq ;\dq }{}
+  % \firstcase{fun\_params}{[alloc(\dq ,\dq  alloc)*]}{}
+  % \firstcase{fun\_decl}{type\_spec pntr\_deg name\dq (\dq fun\_params\dq )\dq }{}
+  % \firstcase{fun\_def}{type\_spec pntr\_deg name\dq (\dq fun\_params\dq )\dq  \dq {\dq  decl\_exec\_stmts \dq }\dq }{}
+  % \midrule
+  % \firstcase{decl\_def}{(struct\_decl\gralt fun\_decl)\dq ;\dq \gralt fun\_def}{L\_File}
+  % \firstcase{decls\_defs}{decl\_def*}{}
+  % \firstcase{file}{FILENAME decls\_defs}{}
+  \bottomrule
+\end{grammar}
+
+\begin{grammar}[\(\lambda\) calculus syntax][p][gr:ex1]
+	\firstcase{T}{\nonterm{V}}{Variable}
+	\otherform{(\nonterm{T}\ \nonterm{T})}{Application}
+	\otherform{\lambda \nonterm{V}\cdot\nonterm{T}}{Abstraction}
+	\firstcase{V}{x, y, \dots}{Variables}
+\end{grammar}
+\begin{grammar}[Advanced capabilities of \texttt{grammar.sty}][p][gr:ex2]
+	\firstcase{A}{\nonterm{T} \gralt \nonterm{V}}{Multiple option on a single line}
+	\highlight
+	\otherform{\nonterm{A}}{Highlighted form}
+	\downplay
+	\otherform{\nonterm{B}\gralt \nonterm{C}}{Downplayed form}
+	\otherform{\lochighlight{\nonterm{A}} \gralt \nonterm{B}}{Emphasize part of the line}
+\end{grammar}
+
+% erwähnen, dass in Lark die Grammatiken L_Lex und L_Parse gemischt sind
+% EBNF erwähnen
+% (erwähnen, dass finalle Grammatik im Appendix)
+\subsection{Basic Parser}
+\section{Syntaktische Analyse}
+\subsection{Verwendung von Lark}
+% Vorteile von Lark
+\subsection{Umsetzung von Präzidenz}
+Die \colorbold{PicoC Sprache} hat dieselben \colorbold{Präzidenzregeln} implementiert, wie die \colorbold{Sprache C} \footcite{noauthor_c_nodate}. Die \colorbold{Präzidenzregeln} von \colorbold{PicoC} sind in Tabelle~\ref{tab:reference_table} aufgelistet.
+
+\begin{table}[H]
+  \center
+  \begin{tabulary}{\linewidth}{|C|C|L|L|}
+  \toprule
+  \colorbold{Präzidenz} &	\colorbold{Operator} & \colorbold{Beschreibung} &	\colorbold{Assoziativität} \\
+  \midrule
+  1	& \verb|a()|	& Funktionsaufruf & \multirow{2}{=}{Links, dann rechts $\rightarrow$} \\
+    & \verb|a[]|	& Indexzugriff & \\
+    & \verb|a.b| & Attributzugriff & \\
+  \hline
+  2	&	\verb|-a| & Unäres Minus & \multirow{2}{=}{Rechts, dann links $\leftarrow$} \\
+    & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
+    & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
+  \hline
+  3	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & Links, dann rechts $\rightarrow$ \\
+  \cline{1-3}
+  4	& \verb|a+b a-b|	& Addition und Subtraktion & \\
+  \cline{1-3}
+  5	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
+  \cline{1-3}
+  6 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
+  \cline{1-3}
+  7 &	\verb|a&b| & Bitweise UND & \\
+  \cline{1-3}
+  8 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
+  \cline{1-3}
+  9 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
+  \cline{1-3}
+  10	& \verb|a&&b| &	Logiches UND & \\
+  \cline{1-3}
+  11	& $a{\mid\mid} b$	& Logisches ODER & \\
+  \hline
+  12 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
+  \hline
+  13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
+  \bottomrule
+\end{tabulary}
+\caption{Präzidenzregeln von PicoC}
+\label{tab:reference_table}
+\end{table}
+% erwähnen von Mehrdeutigkeit und Assoziativität
+% finalle Grammatik im Appendix
+% Crafting Compilers Quelle benennen
+\subsection{Derivation Tree Generierung}
+\subsection{Early Parser}
+\subsection{Derivation Tree Vereinfachung}
+% Visitor erwähnen
+\subsection{Abstrakt Syntax Tree Generierung}
+\subsubsection{ASTNode}
+\subsubsection{PicoC Nodes}
+% Tabelle aller PicoC Nodes
+% möglichst kurze und leicht verständliche Bezeichner für Nodes
+\subsubsection{RETI Nodes}
+% Tabelle aller RETI Nodes
+% Transformer erwähnen

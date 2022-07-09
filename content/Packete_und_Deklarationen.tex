@@ -2,8 +2,10 @@
 % ./Titlepage.tex
 % ./Motivation.tex
 % ./Einführung.tex
-% ./Implementierung.tex
+% ./Implementierung1.tex
+% ./Implementierung2.tex
 % ./Ergebnisse_und_Ausblick.tex
+
 \documentclass{report}
 \usepackage[showframe, margin=1.5cm]{geometry}
 \usepackage[ngerman]{babel}
@@ -14,7 +16,10 @@
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=PrimaryColor]{hyperref} %hidelinks
-\usepackage{listings}
+% \usepackage{listings}
+
+% https://tex.stackexchange.com/questions/169098/dotted-line-instead-of-hline-in-table-environment
+\usepackage{arydshln}
 
 % colorbox stuff
 \usepackage{tcolorbox}
@@ -169,3 +174,10 @@
 % \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
 
 \usepackage{formal-grammar}
+
+% https://framagit.org/Bromind/LaTeX-packages/-/blob/master/formal-grammar/formal-grammar.dtx
+\makeatletter
+\renewcommand{\firstcase}[3]{\(#1\) & \(\formal@Coloneqq\) & \(#2\) & {\itshape \color{gray!90!black} #3}\\}
+\makeatother
+
+\renewcommand{\downplay}[0]{\rowstyle{\color{gray!90!black}}}
