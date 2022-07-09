@@ -15,14 +15,14 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \begin{Definition}{Interpreter}{interpreter}
   \colorbold{Interpretiert} die \colorbold{Instructions} bzw. \colorbold{Statements} eines Programmes $P$ direkt.
 
-  Auf die Implementierung bezogen arbeitet ein Interpreter auf den compilerinternen \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} (Definition~\ref{def:abstrakte_syntax_tree}) und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree, auf die er während des Darüber-Iterierens stösst unterschiedliche Anweisungen aus.\footcite{noauthor_course_2022}
+  Auf die Implementierung bezogen arbeitet ein Interpreter auf den compilerinternen \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} (Definition~\ref{def:abstrakte_syntax_tree}) und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree, auf die er während des Darüber-Iterierens stösst unterschiedliche Anweisungen aus.\footcite{g_siek_course_2022}
 \end{Definition}
 
 % https://tex.stackexchange.com/questions/51228/how-to-increase-the-horizontal-distance-between-nodes
 \begin{Definition}{Compiler}{compiler}
   \colorbold{Kompiliert} ein Program $P_1$, welches in einer Sprache $L_1$ geschrieben ist, in ein Program $P_2$, welches in einer Sprache $L_2$ geschrieben ist.
 
-  Wobei \colorbold{Kompilieren} meint, dass das Program $P_1$ in das Program $P_2$ so übersetzt wird, dass bei beiden Programmen, wenn sie von \colorbold{Interpretern} ihrer jeweiligen Sprachen $L_1$ und $L_2$ \colorbold{interpretiert} werden, der gleiche \colorbold{Output} rauskommt. Also beide Programme $P_1$ und $P_2$ die gleiche \colorbold{Semantik} haben und sich nur \colorbold{syntaktisch} durch die Sprachen $L_1$ und $L_2$, in denen sie geschrieben stehen unterscheiden.\footcite{noauthor_course_2022}
+  Wobei \colorbold{Kompilieren} meint, dass das Program $P_1$ in das Program $P_2$ so übersetzt wird, dass bei beiden Programmen, wenn sie von \colorbold{Interpretern} ihrer jeweiligen Sprachen $L_1$ und $L_2$ \colorbold{interpretiert} werden, der gleiche \colorbold{Output} rauskommt. Also beide Programme $P_1$ und $P_2$ die gleiche \colorbold{Semantik} haben und sich nur \colorbold{syntaktisch} durch die Sprachen $L_1$ und $L_2$, in denen sie geschrieben stehen unterscheiden.\footcite{g_siek_course_2022}
 
   % https://tex.stackexchange.com/questions/233615/change-equation-number-latex
   % https://tex.stackexchange.com/questions/245979/numberwithinequationsubsection-fails-for-subsections-0
@@ -292,7 +292,7 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
 \begin{Definition}{Konkrette Syntax}{konkrette_syntax}
   \colorbold{Syntax} einer \colorbold{Sprache}, die durch die \colorbold{Grammatiken} $G_{Lex}$ und $G_{Parse}$ zusammengenommen beschrieben wird.
 
-  Ein \colorbold{Programm} in seiner \colorbold{Textrepräsentation}, wie es in einer Textdatei nach den Produktionen der \colorbold{Grammatiken} $G_{Lex}$ und $G_{Parse}$ abgeleitet steht, bevor man es kompiliert, ist in \colorbold{Konkretter Syntax} aufgeschrieben.\footcite{noauthor_course_2022}
+  Ein \colorbold{Programm} in seiner \colorbold{Textrepräsentation}, wie es in einer Textdatei nach den Produktionen der \colorbold{Grammatiken} $G_{Lex}$ und $G_{Parse}$ abgeleitet steht, bevor man es kompiliert, ist in \colorbold{Konkretter Syntax} aufgeschrieben.\footcite{g_siek_course_2022}
 \end{Definition}
 
 \begin{Definition}{Derivation Tree (bzw. Parse Tree)}{derivation_tree}
@@ -365,13 +365,13 @@ Der \colorbold{Abstract Syntax Tree} wird mithilfe von \colorbold{Transformern} 
 \begin{Definition}{Abstrakte Syntax}{abstrakte_syntax}
   \colorbold{Syntax}, die beschreibt, was für Arten von \colorbold{Komposition} bei den \colorbold{Knoten} eines \colorbold{Abstract Syntax Trees} möglich sind.
 
-  Jene Produktionen, die in der \colorbold{Konkretten Syntax} für die Umsetzung von \colorbold{Präzidenz} notwendig waren, sind in der \colorbold{Abstrakten Syntax} abgeflacht.\footcite{noauthor_course_2022}
+  Jene Produktionen, die in der \colorbold{Konkretten Syntax} für die Umsetzung von \colorbold{Präzidenz} notwendig waren, sind in der \colorbold{Abstrakten Syntax} abgeflacht.\footcite{g_siek_course_2022}
 \end{Definition}
 
 \begin{Definition}{Abstract Syntax Tree}{abstrakte_syntax_tree}
   \colorbold{Compilerinterne Darstellung} eines Programs, in welcher sich anhand der Knoten auf dem \colorbold{Pfad} von der \colorbold{Wurzel} zu einem \colorbold{Blatt} nicht mehr direkt nachvollziehen lässt, durch welche \colorbold{Produktionen} dieses Blatt abgeleitet wurde.
 
-Der \colorbold{Abstract Syntax Tree} hat einmal den Zweck, dass die \colorbold{Kompositionen}, die die Knoten bilden können \colorbold{semantisch} näher an den \colorbold{Instructions eines Assemblers} dran sind und, dass man mit einem \colorbold{Abstract Syntax Tree} bei der Betrachtung eines \colorbold{Knoten}, der für einen Teil des Programms steht, möglichst schnell die Fragen beantworten kann, welche \colorbold{Funktionalität} der Sprache dieser umsetzt, welche \colorbold{Bestandteile} er hat und welche \colorbold{Funktionalität} der Sprache diese Bestandteile umsetzen usw.\footcite{noauthor_course_2022}
+Der \colorbold{Abstract Syntax Tree} hat einmal den Zweck, dass die \colorbold{Kompositionen}, die die Knoten bilden können \colorbold{semantisch} näher an den \colorbold{Instructions eines Assemblers} dran sind und, dass man mit einem \colorbold{Abstract Syntax Tree} bei der Betrachtung eines \colorbold{Knoten}, der für einen Teil des Programms steht, möglichst schnell die Fragen beantworten kann, welche \colorbold{Funktionalität} der Sprache dieser umsetzt, welche \colorbold{Bestandteile} er hat und welche \colorbold{Funktionalität} der Sprache diese Bestandteile umsetzen usw.\footcite{g_siek_course_2022}
 \end{Definition}
 
 Die \colorbold{Baumdatenstruktur} des \colorbold{Derivation Tree} und \colorbold{Abstract Syntax Tree} ermöglicht es die Operationen, die ein Compiler bzw. Interpreter bei der Weiterverarbeitung des Inputstrings ausführen muss möglichst \colorbold{effizient} auszuführen und auf \colorbold{unkomplizierte} Weise direkt zu erkennen, welche er ausführen muss.
@@ -405,10 +405,10 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 \begin{Definition}{Pass}{pass}
 % TODO: Bild semantisch gleiche Bedeutung
 % TODO: auf T-Diagramme zurückkommen
-  \footcite{noauthor_course_2022}
+  \footcite{g_siek_course_2022}
 \end{Definition}
 \begin{Definition}{Monadische Normalform}{monadische_normalform}
-  \footcite{noauthor_course_2022}
+  \footcite{g_siek_course_2022}
 \end{Definition}
 \begin{Special_Paragraph}
   Ein echter Compiler verwendet Graph Coloring ... Register ...
