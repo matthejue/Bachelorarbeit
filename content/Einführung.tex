@@ -15,7 +15,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \begin{Definition}{Interpreter}{interpreter}
   \colorbold{Interpretiert} die \colorbold{Instructions} bzw. \colorbold{Statements} eines Programmes $P$ direkt.
 
-  Auf die Implementierung bezogen arbeitet ein Interpreter auf den compilerinternen \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} (Definition~\ref{def:abstrakte_syntax_tree}) und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree, auf die er während des Darüber-Iterierens stösst unterschiedliche Anweisungen aus.\footcite{thiemann_compilerbau_2021}
+  Auf die Implementierung bezogen arbeitet ein Interpreter auf den compilerinternen \colorbold{Sub-Bäumen} des \colorbold{Abstract Syntax Tree} (Definition~\ref{def:abstrakte_syntax_tree}) und führt je nach Komposition der \colorbold{Nodes} des Abstract Syntax Tree, auf die er während des Darüber-Iterierens stösst unterschiedliche Anweisungen aus.\footcite{noauthor_course_2022}
 \end{Definition}
 
 % https://tex.stackexchange.com/questions/51228/how-to-increase-the-horizontal-distance-between-nodes
@@ -49,7 +49,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 Üblicherweise kompiliert ein \colorbold{Compiler} ein \colorbold{Program}, dass in einer \colorbold{Programmiersprache} geschrieben ist zu \colorbold{Maschienenncode}, der in \colorbold{Maschienensprache} (Definition~\ref{def:maschienensprache}) geschrieben ist, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}). Des Weiteren sind \colorbold{Maschienensprache} und \colorbold{Assemblersprache} (Definition~\ref{def:assemblersprache}) voneinander zu unterscheiden.
 
 \begin{Definition}{Maschienensprache}{maschienensprache}
-  Programmiersprache, deren mögliche Programme die \colorbold{hardwarenaheste Repräsentation} eines möglicherweise zuvor hierzu kompilierten bzw. assemblierten Programmes darstellen. Jeder Maschienenbefehl entspricht einer bestimmten \colorbold{Aufgabe}, die die CPU im \colorbold{vereinfachten Fall} in einem \colorbold{Zyklus} der \colorbold{Fetch-} und \colorbold{Execute-Phase}, genauergesagt in der \colorbold{Execute-Phase} übernehmen kann oder allgemein in einer \colorbold{geringen konstanten} Anzahl von Fetch- und Execute Phasen im \colorbold{komplexeren Fall}. Die Maschienenbefehle sind meist so designed, dass sie sich innerhalb bestimmter \colorbold{Wortbreiten}, die $2$er Potenzen sind codieren lassen. Im einfachsten Fall innerhalb einer \colorbold{Speicherzelle} des \colorbold{Hauptspeichers}.\footnote{Viele Prozessorarchitekturen erlauben es allerdings auch z.B. \colorbold{zwei} Maschienenbefehle in \colorbold{eine} Speicherzelle des Hauptspeichers zu komprimieren, wenn diese zwei Maschienenbefehle keine Operanden mit zu großen \colorbold{Immediates} (Definition~\ref{def:immediate}) haben.\footcite{scholl_einfuhrung_2021}}
+  Programmiersprache, deren mögliche Programme die \colorbold{hardwarenaheste Repräsentation} eines möglicherweise zuvor hierzu kompilierten bzw. assemblierten Programmes darstellen. Jeder Maschienenbefehl entspricht einer bestimmten \colorbold{Aufgabe}, die die CPU im \colorbold{vereinfachten Fall} in einem \colorbold{Zyklus} der \colorbold{Fetch-} und \colorbold{Execute-Phase}, genauergesagt in der \colorbold{Execute-Phase} übernehmen kann oder allgemein in einer \colorbold{geringen konstanten} Anzahl von Fetch- und Execute Phasen im \colorbold{komplexeren Fall}. Die Maschienenbefehle sind meist so designed, dass sie sich innerhalb bestimmter \colorbold{Wortbreiten}, die $2$er Potenzen sind codieren lassen. Im einfachsten Fall innerhalb einer \colorbold{Speicherzelle} des \colorbold{Hauptspeichers}.\footnote{Viele Prozessorarchitekturen erlauben es allerdings auch z.B. \colorbold{zwei} Maschienenbefehle in \colorbold{eine} Speicherzelle des Hauptspeichers zu komprimieren, wenn diese zwei Maschienenbefehle keine Operanden mit zu großen \colorbold{Immediates} (Definition~\ref{def:immediate}) haben.}\footcite{scholl_betriebssysteme_2020}
 \end{Definition}
 
 \begin{Definition}{Assemblersprache (bzw. engl. Assembly Language)}{assemblersprache}
@@ -84,7 +84,7 @@ Der \colorbold{PicoC-Compiler}, der den Zweck erfüllt für Studenten ein \color
 \end{Definition}
 
 \begin{Definition}{Cross-Compiler}{cross_compiler}
-  Kompiliert auf einer \colorbold{Maschine} $M_1$ ein Program, dass in einer \colorbold{Sprache} $L_w$ geschrieben ist für eine \colorbold{andere Maschine} $M_2$, wobei beide Maschinen $M_1$ und $M_2$ unterschiedliche \colorbold{Maschienensprachen} $B_1$ und $B_2$ haben.\footnote{Beim \colorbold{PicoC-Compiler} handelt es sich um einen \colorbold{Cross-Compiler} $C_{PicoC}^{Python}$.}\footcite{thiemann_compilerbau_2021}
+  Kompiliert auf einer \colorbold{Maschine} $M_1$ ein Program, dass in einer \colorbold{Sprache} $L_w$ geschrieben ist für eine \colorbold{andere Maschine} $M_2$, wobei beide Maschinen $M_1$ und $M_2$ unterschiedliche \colorbold{Maschienensprachen} $B_1$ und $B_2$ haben.\footnote{Beim \colorbold{PicoC-Compiler} handelt es sich um einen \colorbold{Cross-Compiler} $C_{PicoC}^{Python}$.}\footcite{earley_formalism_1970}
 \end{Definition}
 
 Ein \colorbold{Cross-Compiler} ist entweder notwendig, wenn eine Zielmaschine $M_2$ nicht ausreichend \colorbold{Rechenleistung} hat, um ein Programm in der Wunschsprache $L_w$ selbst \colorbold{zeitnah} zu kompilieren oder wenn noch kein Compiler $C_w$ für die \colorbold{Wunschsprache} $L_w$ und andere Programmiersprachen $L_o$, in denen man Programmieren wollen würde existiert, der unter der \colorbold{Maschienensprache} $B_2$ einer Zielmaschine $M_2$ läuft.\footnote{Die an vielen Universitäten und Schulen eingesetzen programmierbaren Roboter von \colorbold{Lego Mindstorms} nutzen z.B. einen \colorbold{Cross-Compiler}, um für den programmierbaren Microcontroller eine \colorbold{C-ähnliche Sprache} in die Maschienensprache des Microcontrollers zu kompilieren, da der Microcontroller selbst nicht genug Rechenleistung besitzt, um ein Programm selbst zeitnah zu kompilieren.}
@@ -112,7 +112,7 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Blöcken} für ein 
 % TODO: es gilt das Diagram vom Compiler da
   Repräsentiert einen \colorbold{Übersetzer}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} von der \colorbold{Sprache} $L_2$ in die \colorbold{Sprache} $L_3$ kompiliert.
 
-  Für den \colorbold{Übersetzer} gelten genauso, wie für einen \colorbold{Compiler}\footnote{Zwischen den Begriffen \colorbold{Übersetzung} und \colorbold{Kompilierung} gibt es einen kleinen Unterschied, \colorbold{Übersetzung} ist \colorbold{kleinschrittiger} als \colorbold{Kompilierung} und ist auch zwischen \colorbold{Passes} möglich, \colorbold{Kompilierung} beinhaltet dagegen bereits alle \colorbold{Passes} in einem Schritt. \colorbold{Kompilieren} ist also auch \colorbold{Übsersetzen}, aber \colorbold{Übersetzen} ist nicht immer auch \colorbold{Kompilieren}.} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen}.
+  Für den \colorbold{Übersetzer} gelten genauso, wie für einen \colorbold{Compiler}\footnote{Zwischen den Begriffen \colorbold{Übersetzung} und \colorbold{Kompilierung} gibt es einen kleinen Unterschied, \colorbold{Übersetzung} ist \colorbold{kleinschrittiger} als \colorbold{Kompilierung} und ist auch zwischen \colorbold{Passes} möglich, \colorbold{Kompilierung} beinhaltet dagegen bereits alle \colorbold{Passes} in einem Schritt. \colorbold{Kompilieren} ist also auch \colorbold{Übsersetzen}, aber \colorbold{Übersetzen} ist nicht immer auch \colorbold{Kompilieren}.} die \colorbold{Beziehungen} in \ref{eq:compiler_beziehungen}.\footcite{earley_formalism_1970}
   \begin{figure}[H]
     \centering
     \includegraphics[height=3cm]{./figures/uerbersetzer.png}
@@ -120,7 +120,7 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Blöcken} für ein 
 \end{Definition}
 
 \begin{Definition}{T-Diagram Interpreter}{t_diagram_interpreter}
-  Repräsentiert einen \colorbold{Interpreter}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} in der \colorbold{Sprache} $L_2$ interpretiert.
+  Repräsentiert einen \colorbold{Interpreter}, der in der \colorbold{Sprache} $L_1$ geschrieben ist und \colorbold{Programme} in der \colorbold{Sprache} $L_2$ interpretiert.\footcite{earley_formalism_1970}
   \begin{figure}[H]
     \centering
     \includegraphics[height=3cm]{./figures/interpreter.png}
@@ -128,7 +128,7 @@ Die \colorbold{Notation} setzt sich dabei aus den \colorbold{Blöcken} für ein 
 \end{Definition}
 
 \begin{Definition}{T-Diagram Maschiene}{t_diagram_maschiene}
-  Repräsentiert eine \colorbold{Maschiene}, welche ein \colorbold{Programm} in \colorbold{Maschienensprache} $L_1$ ausführt.\footnote{Wenn die Maschiene \colorbold{Programme} in einer höheren Sprache als \colorbold{Maschienensprache} ausführt, ist es auch erlaubt diese Notation zu verwenden, dann handelt es sich um eine \colorbold{Abstrakte Maschiene}, wie z.B. die \colorbold{Python Virtual Machine} (PVM) oder \colorbold{Java Virtual Machine} (JVM).}
+  Repräsentiert eine \colorbold{Maschiene}, welche ein \colorbold{Programm} in \colorbold{Maschienensprache} $L_1$ ausführt.\footnote{Wenn die Maschiene \colorbold{Programme} in einer höheren Sprache als \colorbold{Maschienensprache} ausführt, ist es auch erlaubt diese Notation zu verwenden, dann handelt es sich um eine \colorbold{Abstrakte Maschiene}, wie z.B. die \colorbold{Python Virtual Machine} (PVM) oder \colorbold{Java Virtual Machine} (JVM).}\footcite{earley_formalism_1970}
   \begin{figure}[H]
     \centering
     \includegraphics[height=1.5cm]{./figures/machiene.png}
@@ -158,18 +158,25 @@ Sowohl \colorbold{horinzontale} als auch \colorbold{vertikale Adjazents} lassen 
 % TODO: Was ist ein Terminalsymbol und was ist ein Nicht-Terminalsymbol
 \section{Grundlagen}
 \begin{Definition}{Sprache}{Sprache}
+  \footcite{nebel_theoretische_2020}
 \end{Definition}
 \begin{Definition}{Chromsky Hierarchie}{chromsky_hierarchie}
+  \footcite{nebel_theoretische_2020}
 \end{Definition}
 \begin{Definition}{Grammatik}{grammatik}
+  \footcite{nebel_theoretische_2020}
 \end{Definition}
 \begin{Definition}{Reguläre Sprachen}{reguläre_sprachen}
+  \footcite{nebel_theoretische_2020}
 \end{Definition}
 \begin{Definition}{Kontextfreie Sprachen}{kontextfreie_sprachen}
+  \footcite{nebel_theoretische_2020}
 \end{Definition}
 \begin{Definition}{Ableitung}{ableitung}
+  \footcite{nebel_theoretische_2020}
 \end{Definition}
 \begin{Definition}{Links- und Rechtsableitung}{links_und_rechtsableitung}
+  \footcite{nebel_theoretische_2020}
 \end{Definition}
 \begin{Definition}{Linksrekursive Grammatiken}{linksrekursive_grammatiken}
 Eine \colorbold{Grammatik} ist \colorbold{linksrekursiv}, wenn sie ein  \colorbold{Nicht-Terminalsymbol} enthält, dass \colorbold{linksrekursiv} ist.
@@ -178,25 +185,31 @@ Ein \colorbold{Nicht-Terminalsymbol} ist  \colorbold{linksrekursiv}, wenn das \c
 \begin{equation*}
   A \Rightarrow^{*} Aa,
 \end{equation*}
-wobei $a$ eine beliebige Folge von \colorbold{Terminalsymbolen} und \colorbold{Nicht-Terminalsymbolen} ist.
+wobei $a$ eine beliebige Folge von \colorbold{Terminalsymbolen} und \colorbold{Nicht-Terminalsymbolen} ist.\footcite{noauthor_parsing_nodate}
 \end{Definition}
+
 \subsection{Mehrdeutige Grammatiken}
 \begin{Definition}{Ableitungsbaum}{ableitungsbaum}
+  \footcite{nebel_theoretische_2020}
 % TODO: Bild hierfür
 \end{Definition}
 \begin{Definition}{Mehrdeutige Grammatik}{mehrdeutige_grammatik}
+  \footcite{nebel_theoretische_2020}
 % TODO: (Bild hierfür)
 \end{Definition}
 \subsection{Präzidenz und Assoziativität}
 \begin{Definition}{Assoziativität}{assoziativität}
+  \footcite{noauthor_parsing_nodate}
 \end{Definition}
 \begin{Definition}{Präzidenz}{präzidenz}
+  \footcite{noauthor_parsing_nodate}
 \end{Definition}
 \begin{Definition}{Wortproblem}{wortproblem}
+  \footcite{nebel_theoretische_2020}
   % zu Grammatiken schieben
 \end{Definition}
 \begin{Definition}{LL(k)-Grammatik}{llk_grammatik}
-  Eine Grammatik ist \colorbold{LL(k)} für $k\in\mathbb{N}$, falls jeder Ableitungsschritt eindeutig durch die nächsten $k$ \colorbold{Symbole} des \colorbold{Eingabeworts} bzw. in Bezug zu Compilerbau \colorbold{Token} des \colorbold{Inputstrings} zu bestimmen ist\footnote{Das wird auch als \colorbold{Lookahead} von $k$ bezeichnet.}. Dabei steht \colorbold{LL} für \colorbold{l}eft-to-right und \colorbold{l}eftmost-derivation, da das \colorbold{Eingabewort} von \colorbold{links nach rechts} geparsed und immer \colorbold{Linksableitungen} genommen werden müssen\footnote{Wobei sich das mit den \colorbold{Linksableitungen} automatisch ergibt, wenn man das Eingabewort von  \colorbold{links-nach-rechts} parsed und jeder der nächsten $k$ \colorbold{Ableitungsschritte} eindeutig sein soll.}, damit die obige Bedingung mit den \colorbold{nächsten} $k$ Symbolen gilt.
+  Eine Grammatik ist \colorbold{LL(k)} für $k\in\mathbb{N}$, falls jeder Ableitungsschritt eindeutig durch die nächsten $k$ \colorbold{Symbole} des \colorbold{Eingabeworts} bzw. in Bezug zu Compilerbau \colorbold{Token} des \colorbold{Inputstrings} zu bestimmen ist\footnote{Das wird auch als \colorbold{Lookahead} von $k$ bezeichnet.}. Dabei steht \colorbold{LL} für \colorbold{l}eft-to-right und \colorbold{l}eftmost-derivation, da das \colorbold{Eingabewort} von \colorbold{links nach rechts} geparsed und immer \colorbold{Linksableitungen} genommen werden müssen\footnote{Wobei sich das mit den \colorbold{Linksableitungen} automatisch ergibt, wenn man das Eingabewort von  \colorbold{links-nach-rechts} parsed und jeder der nächsten $k$ \colorbold{Ableitungsschritte} eindeutig sein soll.}, damit die obige Bedingung mit den \colorbold{nächsten} $k$ Symbolen gilt.\footcite{nebel_theoretische_2020}
 \end{Definition}
 % \subsection{Linksrekursiv und Rechtrekursiv}
 \section{Lexikalische Analyse}
@@ -208,18 +221,17 @@ Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition~\ref{d
 
 \begin{Definition}{Pattern}{pattern}
   \colorbold{Beschreibung} aller möglichen \colorbold{Lexeme}, die eine Menge $\mathbb{P}_{T}$ bilden und einem bestimmten \colorbold{Token} $T$ zugeordnet werden.
-  Die Menge $\mathbb{P}_{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich mit den Produktionen einer \colorbold{regulären Grammatik} ${G}_{Lex}$ einer \colorbold{regulären Sprache} ${L}_{Lex}$ beschreiben lassen \footnote{Als Beschreibungswerkzeug können aber auch z.B. reguläre Ausdrücke hergenommen werden.}, die für die Beschreibung eines \colorbold{Tokens} $T$ zuständig sind.\footcite{noauthor_what_nodate}
+  Die Menge $\mathbb{P}_{T}$ ist eine möglicherweise unendliche Menge von \colorbold{Wörtern}, die sich mit den Produktionen einer \colorbold{regulären Grammatik} ${G}_{Lex}$ einer \colorbold{regulären Sprache} ${L}_{Lex}$ beschreiben lassen \footnote{Als Beschreibungswerkzeug können aber auch z.B. reguläre Ausdrücke hergenommen werden.}, die für die Beschreibung eines \colorbold{Tokens} $T$ zuständig sind.\footcite{thiemann_compilerbau_2021}
 \end{Definition}
 
 \begin{Definition}{Lexeme}{lexeme}
-  Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} $T$ einer \colorbold{Sprache} ${L}_{Lex}$ matched.
-\footcite{noauthor_what_nodate}
+  Ein \colorbold{Lexeme} ist ein \colorbold{Wort} aus dem Inputstring, welches das \colorbold{Pattern} für eines der \colorbold{Token} $T$ einer \colorbold{Sprache} ${L}_{Lex}$ matched.\footcite{thiemann_compilerbau_2021}
 \end{Definition}
 
 Diese \colorbold{Lexeme} werden vom \colorbold{Lexer} (Definition~\ref{def:lexer}) im \colorbold{Inputstring} identifziert und \colorbold{Tokens} $T$ zugeordnet. Das jeweils nächste \colorbold{Lexeme} fängt dabei genau nach dem letzten Symbol des \colorbold{Lexemes} an, das zuletzt vom \colorbold{Lexer} erkannt wurde. Die \colorbold{Tokens} (Definition~\ref{def:lexer}) sind es, die letztendlich an die \colorbold{Syntaktische Analyse} weitergegeben werden.
 
 \begin{Definition}{Lexer (bzw. Scanner oder auch Tokenizer)}{lexer}
-  Ein \colorbold{Lexer} ist eine \colorbold{partielle} Funktion \hspace{0.2cm}$lex: \Sigma^{*} \rightharpoonup (N \times W)^{*}$, welche ein \colorbold{Wort} bzw. \colorbold{Lexeme} aus $\Sigma^{*}$ auf ein \colorbold{Token} $T$ mit einem \colorbold{Tokennamen} $N$ und einem \colorbold{Tokenwert} $W$ abbildet, falls dieses \colorbold{Wort} sich unter der \colorbold{regulären Grammatik} ${G}_{Lex}$, der \colorbold{regulären Sprache} ${L_{Lex}}$ abbleiten lässt bzw. einem der \colorbold{Pattern} der Sprache $L_{Lex}$ entspricht.\footcite{noauthor_lecture-notes-2021_2022}
+  Ein \colorbold{Lexer} ist eine \colorbold{partielle} Funktion \hspace{0.2cm}$lex: \Sigma^{*} \rightharpoonup (N \times W)^{*}$, welche ein \colorbold{Wort} bzw. \colorbold{Lexeme} aus $\Sigma^{*}$ auf ein \colorbold{Token} $T$ mit einem \colorbold{Tokennamen} $N$ und einem \colorbold{Tokenwert} $W$ abbildet, falls dieses \colorbold{Wort} sich unter der \colorbold{regulären Grammatik} ${G}_{Lex}$, der \colorbold{regulären Sprache} ${L_{Lex}}$ abbleiten lässt bzw. einem der \colorbold{Pattern} der Sprache $L_{Lex}$ entspricht.\footcite{thiemann_compilerbau_2021}
 \end{Definition}
 
 Ein \colorbold{Lexer} ist im Allgemeinen eine \colorbold{partielle Funktion}, da es Zeichenfolgen geben kann, die kein \colorbold{Pattern} eines \colorbold{Tokens} der Sprache $L_{Lex}$ matchen. In Bezug auf eine Implementierung, wird, wenn der Lexer Teil der Implementierung eines Compilers ist, in diesem Fall eine \colorbold{Fehlermeldung} ausgegeben.
@@ -237,7 +249,7 @@ Ein \colorbold{Lexer} ist im Allgemeinen eine \colorbold{partielle Funktion}, da
 \end{Special_Paragraph}
 
 \begin{Definition}{Bezeichner (bzw. Identifier)}{bezeichner}
-  \colorbold{Tokenwert}, der eine Konstante, Variable, Funktion usw. \colorbold{eindeutig} benennt.\footnote{Außer wenn z.B. bei Funktionen die Programmiersprache das \colorbold{Überladen} erlaubt usw. In diesem Fall wird die \colorbold{Signatur} der Funktion als weiteres Unterschiedungsmerkmal hinzugenommen, damit es eindeutig ist.}
+  \colorbold{Tokenwert}, der eine Konstante, Variable, Funktion usw. \colorbold{eindeutig} benennt.\footnote{Außer wenn z.B. bei Funktionen die Programmiersprache das \colorbold{Überladen} erlaubt usw. In diesem Fall wird die \colorbold{Signatur} der Funktion als weiteres Unterschiedungsmerkmal hinzugenommen, damit es eindeutig ist.}\footcite{thiemann_einfuhrung_2018}
 \end{Definition}
 
 Eine weitere Aufgabe der \colorbold{Lekikalischen Analyse} ist es jegliche für die Weiterverarbeitung unwichtigen Symbole, wie Leerzeichen \,\textvisiblespace\,, Newline \verb|\n|\footnote{In Unix Systemen wird für Newline das ASCII Symbol \colorbold{line feed}, in Windows hingegen die ASCII Symbole \colorbold{carriage return} und \colorbold{line feed} nacheinander verwendet. Das wird aber meist durch die verwendete Porgrammiersprache, die man zur Inplementierung des Lexers nutzt wegabstrahiert.} und Tabs \verb|\t| aus dem Inputstring herauszufiltern. Das geschieht mittels des \colorbold{Lexers}, der allen für die \colorbold{Syntaktische Analyse} unwichtige Zeichen das leere Wort $\epsilon$ zuordnet. Das ist auch im Sinne der Definition, denn $\epsilon \in (N\times W)^{*}$ ist immer der Fall beim \colorbold{Kleene Stern Operator} $^{*}$. Nur das, was für die \colorbold{Syntaktische Analyse} wichtig ist, soll weiterverarbeitet werden, alles andere wird herausgefiltert.
@@ -249,7 +261,7 @@ Ein \colorbold{Lexeme} ist damit aber nicht immer das gleiche, wie der \colorbol
 Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ der Sprache $L_{Lex}$ verwendet wird ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein Symbol} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$}, sich nichts merken muss und unabhängig davon, was für Symbole davor aufgetaucht sind läuft. Die Grammatik~\ref{gr:concrete_syntax_lex} liefert den Beweis, dass die Sprache $L_{PicoC\_Lex}$ des \colorbold{PicoC-Compilers} auf jeden Fall \colorbold{regulär} ist, da sie fast die Definition~\ref{def:reguläre_sprachen} erfüllt. Einzig die Produktion \verb|CHAR ::= "'"ASCII_CHAR"'"| sieht problematisch aus, kann allerdings auch als \verb|{CHAR ::= "'"CHAR2, CHAR2 ::= ASCII_CHAR"'"}| \colorbold{regulär} ausgedrückt werden\footnote{Eine derartige Regel würde nur Probleme bereiten, wenn sich aus \smalltt{ASCII\_CHAR} \colorbold{beliebig breite} Wörter ableiten liesen.}. Somit existiert eine \colorbold{reguläre Grammatik}, welche die \colorbold{Sprache} $L_{PicoC\_Lex}$ beschreibt und damit ist die \colorbold{Sprache} $L_{PicoC\_Lex}$ \colorbold{regulär}.
 
 \begin{Definition}{Literal}{literal}
-  Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} (als \colorbold{Zeichenkette}) für ein und denselben \colorbold{Wert} eines \colorbold{Datentyps}.
+  Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} (als \colorbold{Zeichenkette}) für ein und denselben \colorbold{Wert} eines \colorbold{Datentyps}.\footcite{thiemann_einfuhrung_2018}
   \begin{figure}[H]
     \centering
     \includegraphics[width=0.33\linewidth]{./figures/literal.png}
@@ -286,14 +298,12 @@ Die \colorbold{Syntax}, in welcher der \colorbold{Inputstring} aufgeschrieben is
 \begin{Definition}{Derivation Tree (bzw. Parse Tree)}{derivation_tree}
   \colorbold{Compilerinterne Darstellung} eines in \colorbold{Konkretter Syntax} geschriebenen Inputstrings als \colorbold{Baumdatenstruktur}, in der \colorbold{Nichtterminalsymbole} die \colorbold{Inneren Knoten} der Baumdatenstruktur und \colorbold{Terminalsymbole} die \colorbold{Blätter} der Baumdatenstruktur bilden. Jedes zum Ableiten des Inputstrings verwendetete \colorbold{Nicht-Terminalsymbol} einer \colorbold{Produktion} der \colorbold{Grammatik} $G_{Parse}$, die ein Teil der \colorbold{Konkrette Syntax} ist,  bildet einen eigenen \colorbold{Inneren Knoten}.
 
-  Der \colorbold{Derivation Tree} wird optimalerweise immer so konstruiert bzw. die \colorbold{Konkrette Syntax} immer so definiert, dass sich möglichst einfach ein \colorbold{Abstract Syntax Tree} daraus konstruieren lässt.
-
+  Der \colorbold{Derivation Tree} wird optimalerweise immer so konstruiert bzw. die \colorbold{Konkrette Syntax} immer so definiert, dass sich möglichst einfach ein \colorbold{Abstract Syntax Tree} daraus konstruieren lässt.\footcite{noauthor_json_nodate}
 % TODO: vielleicht ein hübsches Bildchen
-
 \end{Definition}
 
 \begin{Definition}{Parser}{parser}
-  Ein \colorbold{Parser} ist ein Programm, dass aus einem Inputstring, der in \colorbold{Konkretter Syntax} geschrieben ist, eine compilerinterne Darstellung, den \colorbold{Derivation Tree} generiert, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die Definition \ref{def:parser} verwendet.}.\footcite{noauthor_compiler_nodate}
+  Ein \colorbold{Parser} ist ein Programm, dass aus einem Inputstring, der in \colorbold{Konkretter Syntax} geschrieben ist, eine compilerinterne Darstellung, den \colorbold{Derivation Tree} generiert, was auch als  \colorbold{Parsen} bezeichnet wird\footnote{Es gibt allerdings auch alternative Definitionen, denen nach ein Parser in Bezug auf Compilerbau ein Programm ist, dass einen Inputstring von \colorbold{Konkretter Syntax} in  \colorbold{Abstrakte Syntax} übersetzt. Im Folgenden wird allerdings die Definition \ref{def:parser} verwendet.}.\footcite{noauthor_json_nodate}
 \end{Definition}
 
 \begin{Special_Paragraph}
@@ -311,7 +321,7 @@ Die vom \colorbold{Lexer} im Inputstring identifizierten \colorbold{Token} werde
 Ein \colorbold{Parser} ist genauergesagt ein erweiterter \colorbold{Recognizer} (Definition~\ref{def:recognizer}), denn ein Parser löst das \colorbold{Wortproblem} (Definition~\ref{def:wortproblem}) für die \colorbold{Sprache}, die durch die \colorbold{Konkrette Syntax} beschrieben wird und konstruiert parallel dazu oder im Nachgang aus den Informationen, die während der Ausführung des Recognition Algorithmus gesichert wurden den \colorbold{Derivation Tree}.
 
 \begin{Definition}{Recognizer (bzw. Erkenner)}{recognizer}
-  Entspricht dem Maschienenmodell eines \colorbold{Automaten}. Im Bezug auf Compilerbau entspricht der \colorbold{Recognizer} einem \colorbold{Kellerautomaten}, in dem \colorbold{Wörter} bestimmter \colorbold{Kontextfreier Sprachen} erkannt werden. Der \colorbold{Recognizer} erkennt, ob ein Inputstring bzw. \colorbold{Wort} sich mit den Produktionen der \colorbold{Konkrette Syntax} ableiten lässt, also ob er bzw. es Teil der Sprache ist, die von der \colorbold{Konkretten Syntax} beschrieben wird oder nicht\footnote{Das vom \colorbold{Recognizer} gelöste Problem ist auch als \colorbold{Wortproblem} bekannt.}.
+  Entspricht dem Maschienenmodell eines \colorbold{Automaten}. Im Bezug auf Compilerbau entspricht der \colorbold{Recognizer} einem \colorbold{Kellerautomaten}, in dem \colorbold{Wörter} bestimmter \colorbold{Kontextfreier Sprachen} erkannt werden. Der \colorbold{Recognizer} erkennt, ob ein Inputstring bzw. \colorbold{Wort} sich mit den Produktionen der \colorbold{Konkrette Syntax} ableiten lässt, also ob er bzw. es Teil der Sprache ist, die von der \colorbold{Konkretten Syntax} beschrieben wird oder nicht\footnote{Das vom \colorbold{Recognizer} gelöste Problem ist auch als \colorbold{Wortproblem} bekannt.}\footcite{thiemann_compilerbau_2021}
 \end{Definition}
 
 \begin{Special_Paragraph}
@@ -345,17 +355,17 @@ Für das \colorbold{Parsen} gibt es grundsätzlich \colorbold{zwei} verschiedene
 Der \colorbold{Abstract Syntax Tree} wird mithilfe von \colorbold{Transformern} (Definition~\ref{def:transformer}) und \colorbold{Visitors} (Definition~\ref{def:visitor}) generiert und ist das Endprodukt der \colorbold{Syntaktischen Analyse}. Wenn man die gesamte \colorbold{Syntaktische Analyse} betrachtet, so übersetzt diese einen Inputstring von der \colorbold{Konkretten Syntax} in die \colorbold{Abstrakte Syntax} (Definition~\ref{def:abstrakte_syntax}).
 
 \begin{Definition}{Transformer}{transformer}
-Ein Programm, dass von \colorbold{unten-nach-oben}, nach dem \colorbold{Breadth First Search} Prinzip alle Knoten des \colorbold{Derivation Tree} besucht und beim Antreffen eines bestimmten Knoten des \colorbold{Derivation Tree} einen entsprechenden Knoten des \colorbold{Abstract Syntax Tree} erzeugt und diesen anstelle des Knotens des \colorbold{Derivation Tree} setzt und so Stück für Stück den \colorbold{Abstract Syntax Tree} konstruiert.
+  Ein Programm, dass von \colorbold{unten-nach-oben}, nach dem \colorbold{Breadth First Search} Prinzip alle Knoten des \colorbold{Derivation Tree} besucht und beim Antreffen eines bestimmten Knoten des \colorbold{Derivation Tree} einen entsprechenden Knoten des \colorbold{Abstract Syntax Tree} erzeugt und diesen anstelle des Knotens des \colorbold{Derivation Tree} setzt und so Stück für Stück den \colorbold{Abstract Syntax Tree} konstruiert.\footcite{noauthor_transformers_nodate}
 \end{Definition}
 
 \begin{Definition}{Visitor}{visitor}
-  Ein Programm, dass von \colorbold{unten-nach-oben}, nach dem \colorbold{Breadth First Search} Prinzip alle Knoten des \colorbold{Derivation Tree} besucht und in Bezug zu Compilerbau, beim Antreffen eines bestimmten \colorbold{Knoten} des Derivation Tree, diesen \colorbold{in-place} mit anderen Knoten \colorbold{tauscht} oder \colorbold{manipuliert}, um den Derivation Tree für die weitere Verarbeitung durch z.B. einen Transformer zu vereinfachen.\footnote{Kann theoretisch auch zur Konstruktion eines \colorbold{Abstract Syntax Tree} verwendet werden, wenn z.B. eine externe Klasse verwendet wird, welches für die Konstruktion des \colorbold{Abstract Syntax Tree} verantwortlich ist. Aber dafür ist ein \colorbold{Transformer} besser geeignet.}
+  Ein Programm, dass von \colorbold{unten-nach-oben}, nach dem \colorbold{Breadth First Search} Prinzip alle Knoten des \colorbold{Derivation Tree} besucht und in Bezug zu Compilerbau, beim Antreffen eines bestimmten \colorbold{Knoten} des Derivation Tree, diesen \colorbold{in-place} mit anderen Knoten \colorbold{tauscht} oder \colorbold{manipuliert}, um den Derivation Tree für die weitere Verarbeitung durch z.B. einen Transformer zu vereinfachen.\footnote{Kann theoretisch auch zur Konstruktion eines \colorbold{Abstract Syntax Tree} verwendet werden, wenn z.B. eine externe Klasse verwendet wird, welches für die Konstruktion des \colorbold{Abstract Syntax Tree} verantwortlich ist. Aber dafür ist ein \colorbold{Transformer} besser geeignet.}\footcite{noauthor_transformers_nodate}
 \end{Definition}
 
 \begin{Definition}{Abstrakte Syntax}{abstrakte_syntax}
-  \colorbold{Syntax}, die beschreibt, was für Arten von \colorbold{Komposition} bei den \colorbold{Knoten} eines \colorbold{Abstract Syntax Trees} möglich sind.\footcite{noauthor_course_2022}
+  \colorbold{Syntax}, die beschreibt, was für Arten von \colorbold{Komposition} bei den \colorbold{Knoten} eines \colorbold{Abstract Syntax Trees} möglich sind.
 
-  Jene Produktionen, die in der \colorbold{Konkretten Syntax} für die Umsetzung von \colorbold{Präzidenz} notwendig waren, sind in der \colorbold{Abstrakten Syntax} abgeflacht.
+  Jene Produktionen, die in der \colorbold{Konkretten Syntax} für die Umsetzung von \colorbold{Präzidenz} notwendig waren, sind in der \colorbold{Abstrakten Syntax} abgeflacht.\footcite{noauthor_course_2022}
 \end{Definition}
 
 \begin{Definition}{Abstract Syntax Tree}{abstrakte_syntax_tree}
@@ -395,8 +405,10 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 \begin{Definition}{Pass}{pass}
 % TODO: Bild semantisch gleiche Bedeutung
 % TODO: auf T-Diagramme zurückkommen
+  \footcite{noauthor_course_2022}
 \end{Definition}
 \begin{Definition}{Monadische Normalform}{monadische_normalform}
+  \footcite{noauthor_course_2022}
 \end{Definition}
 \begin{Special_Paragraph}
   Ein echter Compiler verwendet Graph Coloring ... Register ...
@@ -404,5 +416,6 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 
 \section{Fehlermeldungen}
 \begin{Definition}{Fehlermeldung}{fehlermeldung}
+  \footcite{noauthor_errors_nodate}
 \end{Definition}
 \subsection{Kategorien von Fehlermeldungen}
