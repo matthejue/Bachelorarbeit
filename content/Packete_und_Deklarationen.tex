@@ -6,6 +6,8 @@
 % ./Implementierung2.tex
 % ./Ergebnisse_und_Ausblick.tex
 
+% https://tex.stackexchange.com/questions/83101/option-clash-for-package-xcolor
+% [table]
 \documentclass{report}
 \usepackage[showframe, margin=1.5cm]{geometry}
 \usepackage[ngerman]{babel}
@@ -49,7 +51,8 @@
 \addbibresource{./My Library/My Library.bib}
 \usepackage{pdfpages}
 \usepackage{booktabs} % for table rules
-\usepackage{tabulary}
+% \usepackage{tabulary}
+\usepackage{nicematrix}
 % \usepackage{tabularx}
 \usepackage{array}
 \usepackage{multirow}

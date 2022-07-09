@@ -32,6 +32,8 @@
   \listoftables
   % https://tex.stackexchange.com/questions/538528/tcolorbox-newtcbtheorem-index-with-tcolorbox
   \tcblistof[\chapter*]{theorem_list}{Definitionsverzeichnis}
+  % https://tex.stackexchange.com/questions/49155/how-can-i-list-items-created-with-the-float-package-in-the-toc
+  \listof{floatgrammar}{Grammatikverzeichnis}
 
   \newtcbtheorem[list inside={theorem_list},crefname={definition}{definitions}, number within=chapter]{Definition}{Definition}%
   {enhanced, arc=0mm,top=3mm,bottom=3mm, boxrule=0mm, borderline south={1mm}{0pt}{PrimaryColor}, title style={color=PrimaryColor},
