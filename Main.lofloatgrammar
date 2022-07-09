@@ -1,7 +1,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {floatgrammar}{\numberline {2.2.1}{\ignorespaces Konkrette Syntax des Lexers\relax }}{25}{floatgrammar.caption.19}%
-\contentsline {floatgrammar}{\numberline {2.3.1}{\ignorespaces Konkrette Syntax des Parsers, Teil 1\relax }}{26}{floatgrammar.caption.22}%
-\contentsline {floatgrammar}{\numberline {2.3.2}{\ignorespaces Konkrette Syntax des Parsers, Teil 2\relax }}{27}{floatgrammar.caption.23}%
-\contentsline {floatgrammar}{\numberline {2.2.2}{\ignorespaces \(\lambda \) calculus syntax\relax }}{29}{floatgrammar.caption.20}%
-\contentsline {floatgrammar}{\numberline {2.2.3}{\ignorespaces Advanced capabilities of \texttt {grammar.sty}\relax }}{29}{floatgrammar.caption.21}%
+\addvspace {10\p@ }
+\contentsline {floatgrammar}{\numberline {3.2.1}{\ignorespaces Konkrette Syntax des Lexers\relax }}{30}{floatgrammar.caption.19}%
+\contentsline {floatgrammar}{\numberline {3.3.1}{\ignorespaces Konkrette Syntax des Parsers, Teil 1\relax }}{31}{floatgrammar.caption.22}%
+\contentsline {floatgrammar}{\numberline {3.3.2}{\ignorespaces Konkrette Syntax des Parsers, Teil 2\relax }}{32}{floatgrammar.caption.23}%
+\contentsline {floatgrammar}{\numberline {3.2.2}{\ignorespaces \(\lambda \) calculus syntax\relax }}{34}{floatgrammar.caption.20}%
+\contentsline {floatgrammar}{\numberline {3.2.3}{\ignorespaces Advanced capabilities of \texttt {grammar.sty}\relax }}{34}{floatgrammar.caption.21}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
