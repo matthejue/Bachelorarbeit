@@ -4,6 +4,7 @@ File
     Block 
       Name 'main.0', 
       [
+        // FunDef(VoidType('void'), Name('main'), [], []), 
         Exp 
           Num '4', 
         Exp 
@@ -13,6 +14,7 @@ File
             Num '0', 
           Tmp 
             Num '2', 
+        // Exp(Attr(Name('st'), Name('y'))), 
         Ref 
           GlobalRead 
             Num '0', 
