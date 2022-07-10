@@ -1,0 +1,5 @@
+struct st {int *(*attr)[5][6];};
+
+void main() {
+  struct st *(*var)[3][2];
+}

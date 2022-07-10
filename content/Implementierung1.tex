@@ -86,20 +86,20 @@
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[\(\lambda\) calculus syntax][p][gr:ex1]
-	\firstcase{T}{\nonterm{V}}{Variable}
-	\otherform{(\nonterm{T}\ \nonterm{T})}{Application}
-	\otherform{\lambda \nonterm{V}\cdot\nonterm{T}}{Abstraction}
-	\firstcase{V}{x, y, \dots}{Variables}
-\end{grammar}
-\begin{grammar}[Advanced capabilities of \texttt{grammar.sty}][p][gr:ex2]
-	\firstcase{A}{\nonterm{T} \gralt \nonterm{V}}{Multiple option on a single line}
-	\highlight
-	\otherform{\nonterm{A}}{Highlighted form}
-	\downplay
-	\otherform{\nonterm{B}\gralt \nonterm{C}}{Downplayed form}
-	\otherform{\lochighlight{\nonterm{A}} \gralt \nonterm{B}}{Emphasize part of the line}
-\end{grammar}
+% \begin{grammar}[\(\lambda\) calculus syntax][p][gr:ex1]
+%   \firstcase{T}{\nonterm{V}}{Variable}
+%   \otherform{(\nonterm{T}\ \nonterm{T})}{Application}
+%   \otherform{\lambda \nonterm{V}\cdot\nonterm{T}}{Abstraction}
+%   \firstcase{V}{x, y, \dots}{Variables}
+% \end{grammar}
+% \begin{grammar}[Advanced capabilities of \texttt{grammar.sty}][p][gr:ex2]
+%   \firstcase{A}{\nonterm{T} \gralt \nonterm{V}}{Multiple option on a single line}
+%   \highlight
+%   \otherform{\nonterm{A}}{Highlighted form}
+%   \downplay
+%   \otherform{\nonterm{B}\gralt \nonterm{C}}{Downplayed form}
+%   \otherform{\lochighlight{\nonterm{A}} \gralt \nonterm{B}}{Emphasize part of the line}
+% \end{grammar}
 
 % erwähnen, dass in Lark die Grammatiken L_Lex und L_Parse gemischt sind
 % EBNF erwähnen
@@ -261,6 +261,12 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
 \subsection{Derivation Tree Generierung}
 \subsubsection{Early Parser}
 \subsection{Derivation Tree Vereinfachung}
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_pntr_ref.picoc}
+  \caption{PicoC Code für Pointer Referenzierung}
+  \label{code:picoc_code_für_pointer_referenzierung}
+\end{code}
 % Visitor erwähnen
 \subsection{Abstrakt Syntax Tree Generierung}
 \subsubsection{PicoC Nodes}
@@ -337,6 +343,11 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
 % $L_{X}$ ist nicht notwendig sich zu überlegen, hier so getann als gäbe es diese Sprache
 % Abstrakte Syntax ist für den Programmierer als Orientierungshilfe bei der Implementierung
 
+\section{Code Generierung}
+\subsection{Passes}
+\subsubsection{PicoC-Shrink Pass}
+% dieser Pass wurde wegen
+\subsubsection{PicoC-Blocks Pass}
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule
   \firstcase{decl\_def}{FunDef(\langle datatype\rangle , Name(str),}{L\_Fun}
@@ -348,7 +359,7 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
   \otherform{SingleLineComment(str, str)}{}
   \bottomrule
 \end{grammar}
-
+\subsubsection{PicoC-Mon Pass}
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
   \toprule
   \firstcase{ref\_loc}{Tmp(Num(str)) \gralt StackRead(Num(str))}{L\_Assign\_Alloc}
@@ -372,7 +383,9 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
   \firstcase{size}{Num(str) \gralt Empty()}{}
   \bottomrule
 \end{grammar}
-
+\begin{Definition}{Symboltabelle}{symboltabelle}
+\end{Definition}
+\subsubsection{RETI-Blocks Pass}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
   \toprule
   \firstcase{program}{Program(Name(str), \langle block\rangle *)}{L\_Program}
@@ -384,12 +397,14 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
   \firstcase{instr}{Goto(Name(str))}{}
   \bottomrule
 \end{grammar}
-
+\subsubsection{RETI-Patch Pass}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_patch]
   \toprule
   \firstcase{stmt}{Exit(Num(str))}{}
   \bottomrule
 \end{grammar}
+\subsubsection{RETI Pass}
+% TODO: es braucht noch eine Konkrette Syntax dafür
 
 \begin{grammar}[Abstrakte Syntax für $L_{RETI}$][H][gr:abstract_syntax_l_reti]
   \toprule
@@ -410,3 +425,5 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
   \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
   \bottomrule
 \end{grammar}
+
+% TODO: zusammenfassendes Bild
