@@ -1,0 +1,115 @@
+File 
+  Name './example_faculty_it.picoc_mon', 
+  [
+    Block 
+      Name 'main.5', 
+      [
+        Exp 
+          Num '4', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '1', 
+        Exp 
+          Num '1', 
+        Assign 
+          GlobalWrite 
+            Num '1', 
+          Tmp 
+            Num '1', 
+        Exp 
+          GoTo 
+            Name 'condition_check.4'
+      ], 
+    Block 
+      Name 'condition_check.4', 
+      [
+        Exp 
+          Num '1', 
+        IfElse 
+          Tmp 
+            Num '1', 
+          GoTo 
+            Name 'while_branch.3', 
+          GoTo 
+            Name 'while_after.0'
+      ], 
+    Block 
+      Name 'while_branch.3', 
+      [
+        Exp 
+          GlobalRead 
+            Num '0', 
+        Exp 
+          Num '1', 
+        Exp 
+          Atom 
+            Tmp 
+              Num '2', 
+            Eq '==', 
+            Tmp 
+              Num '1', 
+        IfElse 
+          Tmp 
+            Num '1', 
+          GoTo 
+            Name 'if.2', 
+          GoTo 
+            Name 'if_else_after.1'
+      ], 
+    Block 
+      Name 'if.2', 
+      [
+        Return 
+          Empty
+      ], 
+    Block 
+      Name 'if_else_after.1', 
+      [
+        Exp 
+          GlobalRead 
+            Num '0', 
+        Exp 
+          GlobalRead 
+            Num '1', 
+        Exp 
+          BinOp 
+            Tmp 
+              Num '2', 
+            Mul '*', 
+            Tmp 
+              Num '1', 
+        Assign 
+          GlobalWrite 
+            Num '1', 
+          Tmp 
+            Num '1', 
+        Exp 
+          GlobalRead 
+            Num '0', 
+        Exp 
+          Num '1', 
+        Exp 
+          BinOp 
+            Tmp 
+              Num '2', 
+            Sub '-', 
+            Tmp 
+              Num '1', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '1', 
+        Exp 
+          GoTo 
+            Name 'condition_check.4'
+      ], 
+    Block 
+      Name 'while_after.0', 
+      [
+        Return 
+          Empty
+      ]
+  ]

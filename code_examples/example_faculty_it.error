@@ -1,0 +1,11 @@
+[1m[37mexample_faculty_it.picoc:[35m11:4: [33mUnexpectedToken:[0m Expected e.g. [34m'print'[0m or [34m';'[0m or [34midentifier[0m or [34mMUL_DEREF_PNTR[0m or [34m'input'[0m or [34mcharacter[0m, found [31m'}'[39m
+  while (1) {
+    if (n == 1) {
+      return
+            [31m^[0m
+            [31m[34m'print'[0m or [34m';'[0m or [34midentifier[0m or [34mMUL_DEREF_PNTR[0m or [34m'input'[0m or [34mcharacter[0m[0m
+    }
+    [31m~[0m 
+    res = n * res;
+    n = n - 1;
+  }
