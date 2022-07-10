@@ -37,7 +37,7 @@
 
 \label{sec:lex_analyse_verwendung_von_lark}
 % ./concrete_syntax_picoc.lark
-\begin{grammar}[Konkrette Syntax des Lexers][H][gr:concrete_syntax_lex]
+\begin{grammar}[Konkrette Syntax des Lexers in EBNF][H][gr:concrete_syntax_lex]
   \toprule
   \firstcase{COMMENT}{\dq //\dq\enspace /[{\wedge}\backslash n]{*}/\gralt \dq {/*}\dq\enspace  /(.\mid \setminus n)*?/\enspace \dq {*/}\dq }{L\_Comment}
   \firstcase{RETI\_COMMENT.2}{\dq {//}\dq \dq \text{\textvisiblespace} \dq ? \dq \#\dq /[\wedge\backslash n]{*}/}{}
@@ -51,7 +51,7 @@
   \firstcase{FILENAME}{ASCII\_CHAR+\dq .picoc\dq }{}
   \firstcase{LETTER}{\dq {a}\dq ..\dq {z}\dq \gralt \dq {A}\dq ..\dq {Z}\dq}{}
   \firstcase{NAME}{(LETTER\gralt \dq \_\dq )}{}
-  & & (LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )* & \\
+  & & \qquad(LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )* & \\
   \firstcase{name}{NAME\gralt INT\_NAME\gralt CHAR\_NAME}{}
   \otherform{VOID\_NAME}{}
   \firstcase{NOT}{\dq \sim\dq }{}
@@ -111,7 +111,7 @@
 % https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
 In \ref{gr:concrete_syntax_parser}
 
-\begin{grammar}[Konkrette Syntax des Parsers, Teil 1][H][gr:concrete_syntax_parser]
+\begin{grammar}[Konkrette Syntax des Parsers in EBNF, Teil 1][H][gr:concrete_syntax_parser]
   \toprule
 	\downplay
   \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith +}
@@ -170,7 +170,7 @@ In \ref{gr:concrete_syntax_parser}
   \firstcase{struct\_params}{(alloc\dq ;\dq )+}{}
   \firstcase{struct\_decl}{\dq struct\dq\enspace name\enspace \dq \{\dq struct\_params\dq \}\dq }{}
   \firstcase{struct\_init}{\dq \{\dq \dq .\dq name\dq {=}\dq initializer}{}
-  & & (\dq ,\dq\enspace \dq .\dq name\dq {=}\dq initializer)*\dq \}\dq & \\
+  & & \qquad(\dq ,\dq\enspace \dq .\dq name\dq {=}\dq initializer)*\dq \}\dq & \\
   \firstcase{struct\_attr}{post\_exp\dq .\dq name}{}
   \midrule
 	\downplay
@@ -185,7 +185,7 @@ In \ref{gr:concrete_syntax_parser}
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Konkrette Syntax des Parsers, Teil 2][H]
+\begin{grammar}[Konkrette Syntax des Parsers in EBNF, Teil 2][H]
   \toprule
 	\downplay
   \firstcase{decl\_exp\_stmt}{alloc\dq ;\dq }{L\_Stmt}
@@ -259,14 +259,154 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
 % finalle Grammatik im Appendix
 % Crafting Compilers Quelle benennen
 \subsection{Derivation Tree Generierung}
-\subsection{Early Parser}
+\subsubsection{Early Parser}
 \subsection{Derivation Tree Vereinfachung}
 % Visitor erwähnen
 \subsection{Abstrakt Syntax Tree Generierung}
-\subsubsection{ASTNode}
 \subsubsection{PicoC Nodes}
 % Tabelle aller PicoC Nodes
 % möglichst kurze und leicht verständliche Bezeichner für Nodes
 \subsubsection{RETI Nodes}
 % Tabelle aller RETI Nodes
 % Transformer erwähnen
+\subsubsection{Kompositionen mit besonderer Bedeutung}
+\subsubsection{Abstrakte Syntax}
+
+% ./abstract_syntax.txt
+\newpage
+\begin{grammar}[Abstrakte Syntax für $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
+  \toprule
+  \firstcase{un\_op}{Minus() \gralt Not()}{L\_Arith}
+  \firstcase{bin\_op}{Add() \gralt Sub() \gralt Mul() \gralt Div() \gralt Mod()}{}
+  \otherform{Oplus() \gralt And() \gralt Or()}{}
+  \firstcase{exp}{Name(str) \gralt Num(str) \gralt Char(str)}{}
+  \otherform{BinOp(\langle exp\rangle , \langle bin\_op\rangle , \langle exp\rangle )}{}
+  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), None)}{}
+  \firstcase{exp\_stmts}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
+  \otherform{Call(Name('print'), \langle exp\rangle )}{}
+  \midrule
+  \firstcase{un\_op}{LogicNot()}{L\_Logic}
+  \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+  \firstcase{bin\_op}{LogicAnd() \gralt LogicOr()}{}
+  \firstcase{exp}{Atom(\langle exp\rangle , \langle rel\rangle , \langle exp\rangle )}{}
+  \otherform{ToBool(\langle exp\rangle )}{}
+  \midrule
+  \firstcase{type\_qual}{Const() \gralt Writeable()}{L\_Assign\_Alloc}
+  \firstcase{datatype}{IntType() \gralt CharType() \gralt VoidType()}{}
+  \firstcase{assign\_lhs}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str)) \gralt \langle rel\_loc\rangle }{}
+  \firstcase{exp\_stmts}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
+  \firstcase{stmt}{Assign(\langle assign\_lhs\rangle , \langle exp\rangle )}{}
+  \otherform{Exp(\langle exp\_stmts\rangle )}{}
+  \midrule
+  \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
+  \firstcase{deref\_loc}{Ref(\langle ref\_loc\rangle )\gralt\langle ref\_loc\rangle }{}
+  \firstcase{ref\_loc}{Name(str)}{}
+  \otherform{Deref(\langle deref\_loc\rangle , \langle exp\rangle )}{}
+  \otherform{Subscr(\langle deref\_loc\rangle , \langle exp\rangle )}{}
+  \otherform{Attr(\langle ref\_loc\rangle , Name(str))}{}
+  \firstcase{exp}{Deref(\langle deref\_loc\rangle , \langle exp\rangle )}{}
+  \otherform{Ref(\langle ref\_loc\rangle )}{}
+  \midrule
+  \firstcase{datatype}{ArrayDecl(Num(str)+, \langle datatype\rangle )}{L\_Array}
+  \firstcase{exp}{Subscr(\langle deref\_loc\rangle , \langle exp\rangle ) \gralt Array(\langle exp\rangle +)}{}
+  \midrule
+  \firstcase{datatype}{StructSpec(Name(str))}{L\_Struct}
+  \firstcase{exp}{Attr(\langle ref\_loc\rangle , Name(str))}{}
+  \otherform{Struct(Assign(Name(str), \langle exp\rangle )+)}{}
+  \firstcase{decl\_def}{StructDecl(Name(str),}{}
+  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))+)$ & \\
+  \midrule
+  \firstcase{stmt}{If(\langle exp\rangle , \langle stmt\rangle *)}{L\_If\_Else}
+  \otherform{IfElse(\langle exp\rangle , \langle stmt\rangle *, \langle stmt\rangle *)}{}
+  \midrule
+  \firstcase{stmt}{While(\langle exp\rangle , \langle stmt\rangle *)}{L\_Loop}
+  \otherform{DoWhile(\langle exp\rangle , \langle stmt\rangle *)}{}
+  \midrule
+  \firstcase{exp}{Call(Name(str), \langle exp\rangle *)}{L\_Fun}
+  \firstcase{exp\_stmts}{Call(Name(str), \langle exp\rangle *)}{}
+  \firstcase{stmt}{Return(\langle exp\rangle )}{}
+  \firstcase{decl\_def}{FunDecl(\langle datatype\rangle , Name(str),}{}
+  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*)$ & \\
+  \otherform{FunDef(\langle datatype\rangle , Name(str),}{}
+  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle stmt\rangle *)$ & \\
+  \midrule
+  \firstcase{file}{File(Name(str), \langle decl\_def\rangle *)}{L\_File}
+  \bottomrule
+\end{grammar}
+
+% $L_{X}$ ist nicht notwendig sich zu überlegen, hier so getann als gäbe es diese Sprache
+% Abstrakte Syntax ist für den Programmierer als Orientierungshilfe bei der Implementierung
+
+\begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
+  \toprule
+  \firstcase{decl\_def}{FunDef(\langle datatype\rangle , Name(str),}{L\_Fun}
+  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle block\rangle *)$ & \\
+  \midrule
+  \firstcase{block}{Block(Name(str), \langle stmt\rangle *)}{L\_Blocks}
+  \firstcase{stmt}{Goto(Name(str)) \gralt NewStackframe(Name(), Goto(str))}{}
+  \otherform{RemoveStackframe() \gralt SetScope(Name(str))}{}
+  \otherform{SingleLineComment(str, str)}{}
+  \bottomrule
+\end{grammar}
+
+\begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
+  \toprule
+  \firstcase{ref\_loc}{Tmp(Num(str)) \gralt StackRead(Num(str))}{L\_Assign\_Alloc}
+  \otherform{StackWrite(Num(str)) \gralt GlobalRead(Num(str))}{}
+  \otherform{GlobalWrite(Num(str))}{}
+  \firstcase{error\_data}{\langle exp\rangle  \gralt Pos(Num(str), Num(str))}{}
+  \firstcase{exp}{Stack(Num(str)) \gralt Ref(\langle ref_loc\rangle , \langle datatype\rangle , \langle error_data\rangle )}{}
+  \firstcase{stmt}{Exp(\langle exp\rangle )}{}
+  \otherform{Assign(Alloc(Writeable(), StructSpec(Name(str)), Name(str)), }{}
+  & & \qquad $Struct(Assign(Name(str), \langle exp\rangle )+, \langle datatype\rangle$ )) & \\
+  \otherform{Assign(Alloc(Writeable(), ArrayDecl(Num(str)+, \langle datatype\rangle ),}{}
+  & & \qquad $Name(str)), Array(\langle exp\rangle +, \langle datatype\rangle ))$ & \\
+  \midrule
+  \firstcase{symbol\_table}{SymbolTable(\langle symbol\rangle )}{L\_Symbol\_Table}
+  \firstcase{symbol}{Symbol(\langle type_qual\rangle , \langle datatype\rangle , \langle name\rangle , \langle val\rangle , \langle pos\rangle , \langle size\rangle )}{}
+  \firstcase{type\_qual}{Empty()}{}
+  \firstcase{datatype}{BuiltIn() \gralt SelfDefined()}{}
+  \firstcase{name}{Name(str)}{}
+  \firstcase{val}{Num(str) \gralt Empty()}{}
+  \firstcase{pos}{Pos(Num(str), Num(str)) \gralt Empty()}{}
+  \firstcase{size}{Num(str) \gralt Empty()}{}
+  \bottomrule
+\end{grammar}
+
+\begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
+  \toprule
+  \firstcase{program}{Program(Name(str), \langle block\rangle *)}{L\_Program}
+  \midrule
+  \firstcase{exp\_stmts}{Goto(str)}{L\_Blocks}
+  \firstcase{instrs\_before}{Num(str)}{}
+  \firstcase{num\_instrs}{Num(str)}{}
+  \firstcase{block}{Block(Name(str), \langle instr\rangle *, \langle instrs\_before\rangle , \langle num\_instrs\rangle )}{}
+  \firstcase{instr}{Goto(Name(str))}{}
+  \bottomrule
+\end{grammar}
+
+\begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_patch]
+  \toprule
+  \firstcase{stmt}{Exit(Num(str))}{}
+  \bottomrule
+\end{grammar}
+
+\begin{grammar}[Abstrakte Syntax für $L_{RETI}$][H][gr:abstract_syntax_l_reti]
+  \toprule
+  \firstcase{reg}{ACC() \gralt IN1() \gralt IN2() \gralt PC() \gralt SP() \gralt BAF()}{L\_Program}
+  \otherform{CS() \gralt DS()}{}
+  \firstcase{arg}{Reg(\langle reg\rangle ) \gralt Num(str)}{}
+  \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+  \otherform{Always() \gralt NOp()}{}
+  \firstcase{op}{Add() \gralt Addi() \gralt Sub() \gralt Subi() \gralt Mult()}{}
+  \otherform{Multi() \gralt Div() \gralt Divi()}{}
+  \otherform{Mod() \gralt Modi() \gralt Oplus() \gralt Oplusi() \gralt Or()}{}
+  \otherform{Ori() \gralt And() \gralt Andi()}{}
+  \otherform{Load() \gralt Loadin() \gralt Loadi()}{}
+  \otherform{Store() \gralt Storein() \gralt Move()}{}
+  \firstcase{instr}{Instr(\langle op\rangle , \langle arg\rangle +) \gralt Jump(\langle rel\rangle , Num(str)) \gralt Int(Num(str))}{}
+  \otherform{RTI() \gralt Call(Name('print'), \langle reg\rangle ) \gralt Call(Name('input'), \langle reg\rangle )}{}
+  \otherform{SingleLineComment(str, str)}{}
+  \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
+  \bottomrule
+\end{grammar}
