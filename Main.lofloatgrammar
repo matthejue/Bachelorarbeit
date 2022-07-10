@@ -1,0 +1,16 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {floatgrammar}{\numberline {3.1.1}{\ignorespaces Konkrette Syntax des Lexers in EBNF\relax }}{33}{floatgrammar.caption.7}%
+\contentsline {floatgrammar}{\numberline {3.2.1}{\ignorespaces Konkrette Syntax des Parsers in EBNF, Teil 1\relax }}{34}{floatgrammar.caption.8}%
+\contentsline {floatgrammar}{\numberline {3.2.2}{\ignorespaces Konkrette Syntax des Parsers in EBNF, Teil 2\relax }}{35}{floatgrammar.caption.9}%
+\contentsline {floatgrammar}{\numberline {3.2.3}{\ignorespaces Abstrakte Syntax für $L_{PiocC}$\relax }}{39}{floatgrammar.caption.14}%
+\contentsline {floatgrammar}{\numberline {3.3.1}{\ignorespaces Abstrakte Syntax für $L_{PicoC\_Blocks}$\relax }}{45}{floatgrammar.caption.23}%
+\contentsline {floatgrammar}{\numberline {3.3.2}{\ignorespaces Abstrakte Syntax für $L_{PicoC\_Mon}$\relax }}{47}{floatgrammar.caption.25}%
+\contentsline {floatgrammar}{\numberline {3.3.3}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Blocks}$\relax }}{49}{floatgrammar.caption.27}%
+\contentsline {floatgrammar}{\numberline {3.3.4}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Patch}$\relax }}{52}{floatgrammar.caption.29}%
+\contentsline {floatgrammar}{\numberline {3.3.5}{\ignorespaces Konkrette Syntax für $L_{RETI\_Lex}$\relax }}{55}{floatgrammar.caption.31}%
+\contentsline {floatgrammar}{\numberline {3.3.6}{\ignorespaces Konkrette Syntax für $L_{RETI\_Parse}$\relax }}{55}{floatgrammar.caption.32}%
+\contentsline {floatgrammar}{\numberline {3.3.7}{\ignorespaces Abstrakte Syntax für $L_{RETI}$\relax }}{55}{floatgrammar.caption.33}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }

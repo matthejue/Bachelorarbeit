@@ -207,8 +207,8 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
   \begin{NiceTabular}{X[1,c]X[2,c]X[3,l]X[2,c]}[rules/color=PrimaryColor] % {\linewidth}{|C|C|L|L|}
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-18}{SecondaryColor}{}[cols={1-3}]
-  \rowcolors{2-18}{SecondaryColor}{}[cols={4}, respect-blocks, restart]
+  \rowcolors{2-18}{SecondaryColor}{}[cols={2-3}]
+  \rowcolors{2-18}{SecondaryColor}{}[cols={1,4}, respect-blocks, restart]
   \Body
   \textbf{\textcolor{white}{Präzidenz}} &	\textbf{\textcolor{white}{Operator}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
   1	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
@@ -344,6 +344,9 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 % Abstrakte Syntax ist für den Programmierer als Orientierungshilfe bei der Implementierung
 
 \subsubsection{Transformer}
+% Vielleicht Sache mit ToBool erwähnen aber vielleicht reicht es schon in der entsprechenden Tabelle
+% Sache mit Deref und (), leftmost node
+% Umdrehen von ArrayDecl und PntrDecl
 
 \subsubsection{Codebeispiel}
 Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
@@ -379,8 +382,41 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
   \includegraphics[width=\linewidth]{./figures/passes.png}
   \caption{Architektur mit allen Passes ausgeschrieben}
 \end{figure}
+
 \subsection{Passes}
 \subsubsection{Kompositionen mit besonderer Bedeutung}
+\begin{table}[H]
+  \center
+  % \Block{2}{=}{Links, dann rechts $\rightarrow$} \\
+  \begin{NiceTabular}{X[1,c]X[2,c]X[3,l]X[2,c]}[rules/color=PrimaryColor]
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-18}{SecondaryColor}{}[cols={2-3}]
+  \rowcolors{2-18}{SecondaryColor}{}[cols={1,4}, respect-blocks, restart]
+  \Body
+  \textbf{\textcolor{white}{Präzidenz}} &	\textbf{\textcolor{white}{Operator}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
+  1	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
+    & \verb|a[]|	& Indexzugriff & \\
+    & \verb|a.b| & Attributzugriff & \\
+  2	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
+    & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
+    & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
+  3	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
+  4	& \verb|a+b a-b|	& Addition und Subtraktion & \\
+  5	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
+  6 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
+  7 &	\verb|a&b| & Bitweise UND & \\
+  8 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
+  9 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
+  10	& \verb|a&&b| &	Logiches UND & \\
+  11	& $a{\mid\mid} b$	& Logisches ODER & \\
+  12 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
+  13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
+  \bottomrule
+\end{NiceTabular}
+\caption{Kompsotionenen von PicoC-Nodes mit besonderer Bedeutung}
+\label{tab:reference_table}
+\end{table}
 
 \subsubsection{PicoC-Shrink Pass}
 \label{picoc_shrink_pass}

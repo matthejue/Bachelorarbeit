@@ -10,16 +10,30 @@
 \label{ch:ergebnisse_und_ausblick}
 
 \section{Compiler}
-\section{Showmode}
-% erwähnen, dass das Bonus ist
+\subsection{Überblick über Funktionen}
+% Beschreiben des Shell Mode und der Commandline Options
+%
+\subsection{Vergleich mit GCC}
+% Prinzipien eingehalten
+% ähnliche Fehlermeldungen use. Veriablen auf dem Stack
+\subsection{Showmode}
+% erwähnen, dass das Bonus ist, Interpreter Bonus
+% schönes Bildchen, wo RETI States erklärt wird
+% Startprogram im EPROM
+%
+% (Projekt Open source)
 \section{Qualitätssicherung}
 % GCC + Execution entspricht einem einzigen großen Interpreter und beweist somit den linke Edge in 2.1
 % Testsuite erklären, vielleicht Snippets usw. erwähnen
 % Größe des Datensegments erklären
+% Interpreter verhält sich identisch zu Spezifikation in Vorlesung, nur ohne INT und RTI
+% Finale Anzahl Tests, Alte Tests und neue Tests überscnneiden sich teiweise in der Sache, die sie testen
+% Verwendung der Testsuite inklusive Commandline Tutorial
+% Aufteilung der Tests, Hart zu jedem Großtema ein oder zwei harte Tests
 \label{sec:qualitätssicherung}
 % RETI-Interpreter erwähnen und erwähnen, dass das Bonus ist
 % TODO: zusammenfassendes Bild
-\section{Kommentierter Kompiliervorgang}
+% \section{Kommentierter Kompiliervorgang}
 \section{Erweiterungsideen}
 Wenn eines Tages eine \colorbold{RETI-CPU} auf einem \colorbold{FPGA} implementiert werden sollte, sodass ein \colorbold{provisorisches Betriebssystem} darauf laufen könnte, dann wäre der nächste Schritt einen \colorbold{Self-Compiling Compiler} $C_{RETI\_PicoC}^{PicoC}$ (Defintion~\ref{def:self_compiling_compiler}) zu schreiben. Dadurch kann die \colorbold{Unabhängigkeit} von der Programmiersprache $L_Python$, in der der momentane Compiler $C_{PicoC}$ für $L_{PicoC}$ implementiert ist und die Unabhängigkeit von einer \colorbold{anderen Maschiene}, die bisher immer für das Cross-Compiling notwendig war erreicht werden.
 
@@ -77,3 +91,6 @@ Das bewerkstelligt man, indem man \colorbold{iterativ} auf der Zielmaschine $M_{
 % Garbage Collector
 % Array Länge vorne speichern
 % super einfach ein PicoPython zu machen von der Syntax her durch auswechseln der Grammatik
+% richtigen Compiler mit Graph Coloring machen
+% Debugger Informationen rein machen
+% Linker und weitere Dateien
