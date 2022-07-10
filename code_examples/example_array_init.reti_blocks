@@ -1,0 +1,25 @@
+File 
+  Name './example_array_init.reti_blocks', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        # // Assign(Name('ar'), Array([Array([Num('4')]), Array([Num('2')])])), 
+        # Exp(Num('4')), 
+        SUBI SP 1, 
+        LOADI ACC 4, 
+        STOREIN SP ACC 1, 
+        # Exp(Num('2')), 
+        SUBI SP 1, 
+        LOADI ACC 2, 
+        STOREIN SP ACC 1, 
+        # Assign(GlobalWrite(Num('0')), Tmp(Num('2'))), 
+        LOADIN SP ACC 1, 
+        STOREIN DS ACC 1, 
+        LOADIN SP ACC 2, 
+        STOREIN DS ACC 0, 
+        ADDI SP 2, 
+        # Return(Empty()), 
+        LOADIN BAF PC -1
+      ]
+  ]

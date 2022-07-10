@@ -8,7 +8,7 @@
 
 \subsection{Umsetzung von Pointern}
 \subsubsection{Referenzierung}
-Die Referenzierung \ver|&var| ist
+Die \colorbold{Referenzierung} \verb|&var| wird im Folgenden anhand des Beispiels Code~\ref{code:picoc_code_für_pointer_referenzierung} erklärt.
 
 \begin{code}
   \centering
@@ -17,6 +17,8 @@ Die Referenzierung \ver|&var| ist
   \label{code:picoc_code_für_pointer_referenzierung}
 \end{code}
 
+Der Node \smalltt{Ref(Name('var')))} repräsentiert in der \colorbold{Abstrakten Syntax} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&var|.
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_pntr_ref.ast}
@@ -24,12 +26,7 @@ Die Referenzierung \ver|&var| ist
   \label{code:abstract_syntax_tree_für_pointer_referenzierung}
 \end{code}
 
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_pntr_ref.st}
-  \caption{Symboltabelle für Pointer Referenzierung}
-  \label{code:symboltabelle_für_pointer_referenzierung}
-\end{code}
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzierung} wird der Node \smalltt{Ref(Name('var')))} durch die Nodes \smalltt{Ref(GlobalRead(Num('0')))} und \smalltt{Assign(GlobalWrite(Num('1')), Tmp(Num('1')))} ersetzt. Im Fall, dass in \smalltt{Ref(exp))} das \smalltt{exp} vielleicht nicht direkt ein \smalltt{Name('var')} enthält und \smalltt{exp} vielleicht ein \smalltt{Subscr(Attr(Name('var')))} ist, sind noch weitere Anweisungen zwischen Zeile \smalltt{14} und  \smalltt{15} nötig, die sich in diesem Beispiel um das Übersetzen von \smalltt{Subscr(exp)} und \smalltt{Attr(exp)} kümmern. Die Vorgehen hierfür ist in Subkapitel~\ref{mittelteil_für_die_verschiedenen_derived_datatypes} erklärt.
 
 \begin{code}
   \centering
@@ -37,6 +34,8 @@ Die Referenzierung \ver|&var| ist
   \caption{PicoC Mon Pass für Pointer Referenzierung}
   \label{code:picoc_mon_für_pointer_referenzierung}
 \end{code}
+
+Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:reti_blocks_für_pointer_referenzierung} wird der die Nodes \smalltt{}
 
 \begin{code}
   \centering
@@ -316,6 +315,7 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
 \end{code}
 
 \subsubsection{Mittelteil für die verschiedenen Derived Datatypes}
+\label{mittelteil_für_die_verschiedenen_derived_datatypes}
 
 \begin{code}
   \centering

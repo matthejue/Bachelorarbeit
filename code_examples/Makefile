@@ -32,8 +32,13 @@ compile:
 		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) $(VERBOSE) $$file; \
 	done
 
+compile-example:
+	for file in example*$(TESTNAME_BASE)*.picoc; do \
+		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) -v -e $$file; \
+	done
+
 compile-verbose:
-	for file in *$(TESTNAME_BASE)*.picoc; do \
+	for file in verbose*$(TESTNAME_BASE)*.picoc; do \
 		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) -v $$file; \
 	done
 

@@ -1,0 +1,32 @@
+File 
+  Name './example1.picoc_mon', 
+  [
+    Block 
+      Name 'main.2', 
+      [
+        // If(Num('42'), []), 
+        // IfElse(Num('42'), GoTo(Name('if.1')), GoTo(Name('if_else_after.0'))), 
+        Exp 
+          Num '42', 
+        IfElse 
+          Tmp 
+            Num '1', 
+          GoTo 
+            Name 'if.1', 
+          GoTo 
+            Name 'if_else_after.0'
+      ], 
+    Block 
+      Name 'if.1', 
+      [
+        Exp 
+          GoTo 
+            Name 'if_else_after.0'
+      ], 
+    Block 
+      Name 'if_else_after.0', 
+      [
+        Return 
+          Empty
+      ]
+  ]

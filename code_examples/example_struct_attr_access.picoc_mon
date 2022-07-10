@@ -4,7 +4,7 @@ File
     Block 
       Name 'main.0', 
       [
-        // FunDef(VoidType('void'), Name('main'), [], []), 
+        // Assign(Name('st'), Struct([Assign(Name('x'), Num('4')), Assign(Name('y'), Num('2'))])), 
         Exp 
           Num '4', 
         Exp 
@@ -14,7 +14,6 @@ File
             Num '0', 
           Tmp 
             Num '2', 
-        // Exp(Attr(Name('st'), Name('y'))), 
         Ref 
           GlobalRead 
             Num '0', 

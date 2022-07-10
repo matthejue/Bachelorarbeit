@@ -1,0 +1,37 @@
+File 
+  Name './example_array_access.picoc_mon', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        // Assign(Name('ar'), Array([Num('1'), Num('2')])), 
+        Exp 
+          Num '1', 
+        Exp 
+          Num '2', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '2', 
+        // Exp(Subscr(Name('ar'), Num('2'))), 
+        Ref 
+          GlobalRead 
+            Num '0', 
+        Exp 
+          Num '2', 
+        Ref 
+          Subscr 
+            Tmp 
+              Num '2', 
+            Tmp 
+              Num '1', 
+        Exp 
+          Subscr 
+            Tmp 
+              Num '1', 
+            Num '0', 
+        Return 
+          Empty
+      ]
+  ]

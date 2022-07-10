@@ -1,0 +1,29 @@
+File 
+  Name './example_fun_call_no_return_value.picoc_mon', 
+  [
+    Block 
+      Name 'main.1', 
+      [
+        StackMalloc 
+          Num '2', 
+        Ref 
+          GlobalRead 
+            Num '0', 
+        NewStackframe 
+          Name 'stack_fun', 
+          GoTo 
+            Name 'addr@next_instr', 
+        Exp 
+          GoTo 
+            Name 'stack_fun.0', 
+        RemoveStackframe, 
+        Return 
+          Empty
+      ], 
+    Block 
+      Name 'stack_fun.0', 
+      [
+        Return 
+          Empty
+      ]
+  ]

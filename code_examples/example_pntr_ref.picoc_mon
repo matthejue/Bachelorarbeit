@@ -1,0 +1,27 @@
+File 
+  Name './example_pntr_ref.picoc_mon', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        // Assign(Name('var'), Num('42')), 
+        Exp 
+          Num '42', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '1', 
+        // Assign(Name('pntr'), Ref(Name('var'))), 
+        Ref 
+          GlobalRead 
+            Num '0', 
+        Assign 
+          GlobalWrite 
+            Num '1', 
+          Tmp 
+            Num '1', 
+        Return 
+          Empty
+      ]
+  ]

@@ -1,0 +1,26 @@
+File 
+  Name './example_3_funs_main.picoc_mon', 
+  [
+    Block 
+      Name 'fun1.2', 
+      [
+        Return 
+          Empty
+      ], 
+    Block 
+      Name 'fun2.1', 
+      [
+        // Return(Num('1')), 
+        Exp 
+          Num '1', 
+        Return 
+          Tmp 
+            Num '1'
+      ], 
+    Block 
+      Name 'main.0', 
+      [
+        Return 
+          Empty
+      ]
+  ]

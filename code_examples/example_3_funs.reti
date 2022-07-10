@@ -1,0 +1,13 @@
+# Return(Empty())
+LOADIN BAF PC -1;
+# Return(Empty())
+LOADIN BAF PC -1;
+# // Return(Num('1'))
+# Exp(Num('1'))
+SUBI SP 1;
+LOADI ACC 1;
+STOREIN SP ACC 1;
+# Return(Tmp(Num('1')))
+LOADIN SP ACC 1;
+ADDI SP 1;
+LOADIN BAF PC -1;

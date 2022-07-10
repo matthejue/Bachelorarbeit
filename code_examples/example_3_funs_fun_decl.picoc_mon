@@ -1,0 +1,47 @@
+File 
+  Name './example_3_funs_fun_decl.picoc_mon', 
+  [
+    Block 
+      Name 'fun1.2', 
+      [
+        Return 
+          Empty
+      ], 
+    Block 
+      Name 'main.1', 
+      [
+        // Assign(Name('var'), Call(Name('fun2'), [Num('42')])), 
+        StackMalloc 
+          Num '2', 
+        Exp 
+          Num '42', 
+        NewStackframe 
+          Name 'fun2', 
+          GoTo 
+            Name 'addr@next_instr', 
+        Exp 
+          GoTo 
+            Name 'fun2.0', 
+        RemoveStackframe, 
+        Exp 
+          ACC, 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '1', 
+        Return 
+          Empty
+      ], 
+    Block 
+      Name 'fun2.0', 
+      [
+        // Return(Name('var')), 
+        Exp 
+          StackRead 
+            Num '0', 
+        Return 
+          Tmp 
+            Num '1'
+      ]
+  ]

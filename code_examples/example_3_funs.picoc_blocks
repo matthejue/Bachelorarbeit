@@ -1,0 +1,37 @@
+File 
+  Name './example_3_funs.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.2', 
+          [
+            Return 
+              Empty
+          ]
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'fun1', 
+      [], 
+      [
+        Block 
+          Name 'fun1.1', 
+          []
+      ], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun2', 
+      [], 
+      [
+        Block 
+          Name 'fun2.0', 
+          [
+            Return 
+              Num '1'
+          ]
+      ]
+  ]

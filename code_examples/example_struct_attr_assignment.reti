@@ -1,0 +1,36 @@
+# // Assign(Name('st'), Struct([Assign(Name('x'), Num('4')), Assign(Name('y'), Num('2'))]))
+# Exp(Num('4'))
+SUBI SP 1;
+LOADI ACC 4;
+STOREIN SP ACC 1;
+# Exp(Num('2'))
+SUBI SP 1;
+LOADI ACC 2;
+STOREIN SP ACC 1;
+# Assign(GlobalWrite(Num('0')), Tmp(Num('2')))
+LOADIN SP ACC 1;
+STOREIN DS ACC 1;
+LOADIN SP ACC 2;
+STOREIN DS ACC 0;
+ADDI SP 2;
+# // Assign(Attr(Name('st'), Name('y')), Num('42'))
+# Exp(Num('42'))
+SUBI SP 1;
+LOADI ACC 42;
+STOREIN SP ACC 1;
+# Ref(GlobalRead(Num('0')))
+SUBI SP 1;
+LOADI IN1 0;
+ADD IN1 DS;
+STOREIN SP IN1 1;
+# Ref(Attr(Tmp(Num('1')), Name('y')))
+LOADIN SP IN1 1;
+ADDI IN1 1;
+STOREIN SP IN1 1;
+# Assign(Subscr(Tmp(Num('1')), Num('0')), Tmp(Num('2')))
+LOADIN SP IN1 1;
+LOADIN SP ACC 2;
+ADDI SP 2;
+STOREIN IN1 ACC 0;
+# Return(Empty())
+LOADIN BAF PC -1;

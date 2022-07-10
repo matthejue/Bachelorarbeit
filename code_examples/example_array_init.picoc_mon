@@ -1,0 +1,20 @@
+File 
+  Name './example_array_init.picoc_mon', 
+  [
+    Block 
+      Name 'main.0', 
+      [
+        // Assign(Name('ar'), Array([Array([Num('4')]), Array([Num('2')])])), 
+        Exp 
+          Num '4', 
+        Exp 
+          Num '2', 
+        Assign 
+          GlobalWrite 
+            Num '0', 
+          Tmp 
+            Num '2', 
+        Return 
+          Empty
+      ]
+  ]

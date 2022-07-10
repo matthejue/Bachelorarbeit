@@ -1,0 +1,80 @@
+File 
+  Name './example_faculty_it.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.5', 
+          [
+            Assign 
+              Alloc 
+                Writeable, 
+                IntType 'int', 
+                Name 'n', 
+              Num '4', 
+            Assign 
+              Alloc 
+                Writeable, 
+                IntType 'int', 
+                Name 'res', 
+              Num '1', 
+            // While(Num('1'), []), 
+            GoTo 
+              Name 'condition_check.4'
+          ], 
+        Block 
+          Name 'condition_check.4', 
+          [
+            IfElse 
+              Num '1', 
+              GoTo 
+                Name 'while_branch.3', 
+              GoTo 
+                Name 'while_after.0'
+          ], 
+        Block 
+          Name 'while_branch.3', 
+          [
+            // If(Atom(Name('n'), Eq('=='), Num('1')), []), 
+            IfElse 
+              Atom 
+                Name 'n', 
+                Eq '==', 
+                Num '1', 
+              GoTo 
+                Name 'if.2', 
+              GoTo 
+                Name 'if_else_after.1'
+          ], 
+        Block 
+          Name 'if.2', 
+          [
+            Return 
+              Empty
+          ], 
+        Block 
+          Name 'if_else_after.1', 
+          [
+            Assign 
+              Name 'res', 
+              BinOp 
+                Name 'n', 
+                Mul '*', 
+                Name 'res', 
+            Assign 
+              Name 'n', 
+              BinOp 
+                Name 'n', 
+                Sub '-', 
+                Num '1', 
+            GoTo 
+              Name 'condition_check.4'
+          ], 
+        Block 
+          Name 'while_after.0', 
+          []
+      ]
+  ]
