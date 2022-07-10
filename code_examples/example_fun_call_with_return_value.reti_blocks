@@ -15,6 +15,7 @@ File
       Name 'main.0', 
       [
         SUBI SP 2, 
+        # NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr'))), 
         MOVE BAF ACC, 
         ADDI SP 2, 
         MOVE SP BAF, 

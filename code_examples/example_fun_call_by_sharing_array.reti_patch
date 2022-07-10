@@ -25,6 +25,7 @@ File
         LOADI IN1 6, 
         ADD IN1 DS, 
         STOREIN SP IN1 1, 
+        # NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr'))), 
         MOVE BAF ACC, 
         ADDI SP 4, 
         MOVE SP BAF, 

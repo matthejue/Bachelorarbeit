@@ -8,6 +8,7 @@ LOADIN DS ACC 1;
 STOREIN SP ACC 2;
 LOADIN DS ACC 2;
 STOREIN SP ACC 3;
+# NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr')))
 MOVE BAF ACC;
 ADDI SP 5;
 MOVE SP BAF;

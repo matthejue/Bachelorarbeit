@@ -2,7 +2,7 @@ TESTNAME_BASE = $(shell basename --suffix=.picoc $(TESTNAME))
 FILETYPE ?= reti_states
 PAGES ?= 5
 .PHONY: clean
-all: clean compile
+all: clean compile-verbose
 
 clean:
 	find . -type f -name "*.tokens" -delete
@@ -30,6 +30,11 @@ clean:
 compile:
 	for file in *$(TESTNAME_BASE)*.picoc; do \
 		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) $(VERBOSE) $$file; \
+	done
+
+compile-verbose:
+	for file in *$(TESTNAME_BASE)*.picoc; do \
+		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) -v $$file; \
 	done
 
 interpret:

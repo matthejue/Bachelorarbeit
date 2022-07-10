@@ -1,7 +1,0 @@
-[1m[37mexample_dt_simple_ast_gen_array_decl_and_alloc.picoc:[35m4:22: [33mUnexpectedToken:[0m Expected e.g. [34m'['[0m or [34m';'[0m or [34m'='[0m, found [31m'{'[39m
-
-void main() {
-  struct st *(*var)[3]{2};
-                      [31m^[0m              
-                      [31m[34m'['[0m or [34m';'[0m or [34m'='[0m[0m
-}

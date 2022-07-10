@@ -20,6 +20,7 @@ File
         SUBI SP 1, 
         LOADI ACC 42, 
         STOREIN SP ACC 1, 
+        # NewStackframe(Name('fun2'), GoTo(Name('addr@next_instr'))), 
         MOVE BAF ACC, 
         ADDI SP 3, 
         MOVE SP BAF, 
