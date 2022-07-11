@@ -270,20 +270,137 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 
 % Visitor erwähnen
 \subsection{Abstrakt Syntax Tree Generierung}
-\subsubsection{PicoC Nodes}
-% Tabelle aller PicoC Nodes
-% möglichst kurze und leicht verständliche Bezeichner für Nodes
-\subsubsection{RETI Nodes}
-% Tabelle aller RETI Nodes
+\subsubsection{PicoC-Knoten}
+% Tabelle aller PicoC Knoten
+% möglichst kurze und leicht verständliche Bezeichner für Knoten
+
+\begin{table}[H]
+  \center
+  \begin{NiceTabular}{X[8]X[10]}[rules/color=PrimaryColor]
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-43}{SecondaryColor}{}[cols={1-2}]
+  \Body
+  \textbf{\textcolor{white}{PiocC-Knoten}} &	\textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{Name()} & Steht für einen \colorbold{Identifier}, aber \smalltt{Name()}\\
+  \smalltt{Num()} & \\
+  \smalltt{Char()} & \\
+  \smalltt{Minus()} & \\
+  \smalltt{Not()} & \\
+  \smalltt{Add()} & \\
+  \smalltt{Sub()} & \\
+  \smalltt{Mul()} & \\
+  \smalltt{Div()} & \\
+  \smalltt{Mod()} & \\
+  \smalltt{Oplus()} & \\
+  \smalltt{And()} & \\
+  \smalltt{Or()} & \\
+  \smalltt{DerefOp()} & \\
+  \smalltt{RefOp()} & \\
+  \smalltt{Eq()} & \\
+  \smalltt{NEq()} & \\
+  \smalltt{Lt()} & \\
+  \smalltt{Gt()} & \\
+  \smalltt{LtE()} & \\
+  \smalltt{GtE()} & \\
+  \smalltt{LogicAnd()} & \\
+  \smalltt{LogicOr()} & \\
+  \smalltt{LogicNot()} & \\
+  \smalltt{Const()} & \\
+  \smalltt{Writeable()} & \\
+  \smalltt{IntType()} & \\
+  \smalltt{CharType()} & \\
+  \smalltt{VoidType()} & \\
+  \smalltt{BinOp(exp1, bin\_op, exp2)} & \\
+  \smalltt{UnOp(un\_op, exp)} & \\
+  \smalltt{Exit(num)} & \\
+  \smalltt{Atom(exp1, rel, exp2)} & \\
+  \smalltt{ToBool(exp)} & \\
+  \smalltt{Alloc(type\_qual, datatype, name, \textcolor{gray!90!black}{local\_var\_or\_param})} & \\
+  \smalltt{Assign(lhs, exp)} & \\
+  \smalltt{Exp(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & \\
+  \smalltt{Tmp(num)} & \\
+  \smalltt{StackRead()} & \\
+  \smalltt{StackWrite()} & \\
+  \smalltt{GlobalRead()} & \\
+  \smalltt{GlobalWrite()} & \\
+  \smalltt{StackMalloc()} & \\
+  \bottomrule
+\end{NiceTabular}
+\caption{PicoC-Knoten Teil 1}
+\label{tab:picoc_knoten}
+\end{table}
+
+\begin{table}[H]
+  \center
+  \begin{NiceTabular}{X[8]X[10]}[rules/color=PrimaryColor]
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-27}{SecondaryColor}{}[cols={1-2}]
+  \Body
+  \textbf{\textcolor{white}{PiocC-Knoten}} &	\textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{PntrDecl()} & \\
+  \smalltt{Ref()} & \\
+  \smalltt{Deref()} & \\
+  \smalltt{ArrayDecl()} & \\
+  \smalltt{Array()} & \\
+  \smalltt{Subscr()} & \\
+  \smalltt{StructSpec()} & \\
+  \smalltt{Attr()} & \\
+  \smalltt{Struct()} & \\
+  \smalltt{StructDecl()} & \\
+  \smalltt{If()} & \\
+  \smalltt{IfElse()} & \\
+  \smalltt{While()} & \\
+  \smalltt{DoWhile()} & \\
+  \smalltt{Call()} & \\
+  \smalltt{Return()} & \\
+  \smalltt{FunDecl()} & \\
+  \smalltt{FunDef()} & \\
+  \smalltt{NewStackframe()} & \\
+  \smalltt{RemoveStackframe()} & \\
+  \smalltt{File()} & \\
+  \smalltt{Block()} & \\
+  \smalltt{GoTo()} & \\
+  \smalltt{SingleLineComment()} & \\
+  \smalltt{RETIComment()} & \\
+  \smalltt{Placeholder()} & \\
+  \smalltt{Tmp(Num('addr'))} & Steht für ein \verb|exp|, dessen Wert bereits \colorbold{vorher} berechnet wurde und \smalltt{x} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer} \smalltt{SP} steht. \\
+  \bottomrule
+\end{NiceTabular}
+\caption{PicoC-Knoten Teil 2}
+\label{tab:picoc_knoten}
+\end{table}
+
+\begin{Special_Paragraph}
+  Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \colorbold{versteckte Attribute}, die nicht direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert initialisiert werden, sondern im Verlauf der Kompilierung beim Durchlaufen der verschiedenen Passes ein verstecktes Attribut zugewiesen bekommen, dass im weiteren Kompiliervorgang Informationen transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
+\end{Special_Paragraph}
+
+\subsubsection{RETI-Knoten}
+\begin{table}[H]
+  \center
+  \begin{NiceTabular}{X[8]X[10]}[rules/color=PrimaryColor]
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-2}{SecondaryColor}{}[cols={1-2}]
+  \Body
+  \textbf{\textcolor{white}{RETI-Knoten}} &	\textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{} & asdf \\
+  \bottomrule
+\end{NiceTabular}
+\caption{RETI-Knoten}
+\label{tab:reti_knoten}
+\end{table}
+% Tabelle aller RETI Knoten
 % Transformer erwähnen
 
-\subsubsection{Kompositionen von PicoC-Nodes und RETI-Nodes mit besonderer Bedeutung}
-Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Nodes} und \colorbold{RETI-Nodes} aufgelistet, die eine \colorbold{besondere Bedeutung} haben und nicht bereits in der \colorbold{Abstrakten Syntax}~\ref{gr:concrete_syntax_parser} enthalten sind.
+\subsubsection{Kompositionen von PicoC-Knoten und RETI-Knoten mit besonderer Bedeutung}
+Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \colorbold{RETI-Knoten} aufgelistet, die eine \colorbold{besondere Bedeutung} haben und nicht bereits in der \colorbold{Abstrakten Syntax}~\ref{gr:concrete_syntax_parser} enthalten sind.
 % (generelle Aufgaben von Exp und Reg)
 
 \begin{table}[H]
   \center
-  \begin{NiceTabular}{X[9]X[10]}[rules/color=PrimaryColor]
+  \begin{NiceTabular}{X[16]X[20]}[rules/color=PrimaryColor]
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
   \rowcolors{2-15}{SecondaryColor}{}[cols={1-2}]
@@ -301,21 +418,18 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Nodes} und \co
   \smalltt{Assign(Tmp(Num('addr1')), Tmp(Num('addr2')))} & Speichert \colorbold{Inhalt} der Speicherzelle \smalltt{Tmp(Num('addr2'))}, die \smalltt{Num('addr2')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \smalltt{SP} steht an der \colorbold{Adresse} in der Speicherzelle, die \smalltt{Num('addr1')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \verb|SP| steht. \\
   \smalltt{Assign(GlobalWrite(Num('addr')), Tmp(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Datensegment Register}  \smalltt{DS}. \\
   \smalltt{Assign(StackWrite(Num('addr')), Tmp(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF}. \\
-  \smalltt{Exp(Reg(reg))} & Schreibt den aktuellen Wert des \colorbold{Registers} \smalltt{reg} auf den \colorbold{Stack} \\
-  \smalltt{Instr(Loadi(), [Reg(Acc()), Goto()])} & \\
+  \smalltt{Exp(Reg(reg))} & Schreibt den aktuellen Wert des \colorbold{Registers} \smalltt{reg} auf den \colorbold{Stack}. \\
+  \smalltt{Instr(Loadi(), [Reg(Acc()), Goto(Name('addr@next\_instr'))])} & Lädt in das Register \verb|ACC| die \colorbold{Adresse} der Instruction, die in diesem Kontext direkt nach dem Sprung zum Block einer anderen Funktion steht.\\
   \bottomrule
 \end{NiceTabular}
-\caption{Kompositionen von PicoC-Nodes und RETI-Nodes mit besonderer Bedeutung}
-\label{tab:kompositionen_von_picoc_nodes_und_reti_nodes_mit_besonderer_bedeutung}
+\caption{Kompositionen von PicoC-Knoten und RETI-Knoten mit besonderer Bedeutung}
+\label{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung}
 \end{table}
 
 \begin{Special_Paragraph}
-  Um die obige Tabelle~\ref{tab:kompositionen_von_picoc_nodes_und_reti_nodes_mit_besonderer_bedeutung} nicht mit unnötig viel repetetiven Inhalt zu füllen, wurden die zahlreichen Kompostionen \colorbold{ausgelassen}, bei denen einfach nur \verb|exp| durch $\mathtt{Tmp(Num('x')), x}\in\mathbb{N}$ ersetzt wurde.
+  Um die obige Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} nicht mit unnötig viel repetetiven Inhalt zu füllen, wurden die zahlreichen Kompostionen \colorbold{ausgelassen}, bei denen einfach nur \verb|exp| durch $\mathtt{Tmp(Num('x')), x}\in\mathbb{N}$ ersetzt wurde.
 
   Zudem sind auch jegliche Kombinationen ausgelassen, bei denen einfach nur eine \colorbold{Expression} an ein \smalltt{Exp(exp)} bzw.  \smalltt{Ref(exp)} drangehängt wurde.
-
-  % TODO: in richtige Tabelle machen
-  Ersetzt ein \verb|exp|, dessen Wert bereits \colorbold{vorher} berechnet wurde und \smalltt{x} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer} \smalltt{SP} steht.
 \end{Special_Paragraph}
 
 \subsubsection{Abstrakte Syntax}
