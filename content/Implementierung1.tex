@@ -283,19 +283,18 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Nodes} und \co
 
 \begin{table}[H]
   \center
-  \begin{NiceTabular}{XX}[rules/color=PrimaryColor]
+  \begin{NiceTabular}{X[9]X[10]}[rules/color=PrimaryColor]
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-13}{SecondaryColor}{}[cols={1-2}]
+  \rowcolors{2-15}{SecondaryColor}{}[cols={1-2}]
   \Body
   \textbf{\textcolor{white}{Komposition}} &	\textbf{\textcolor{white}{Beschreibung}} \\
-  \smalltt{Ref(GlobalRead(addr))}	& Liest Speicherzelle aus, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum Anfang der \colorbold{globalen Statischen Daten} liegt. \\
-  \smalltt{Ref(StackRead(addr))} & Liest Speicherzelle aus, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum Anfang des \colorbold{Stack} liegt. \\
-  \smalltt{Ref(Subscr(Tmp(Num("x")), Tmp(Num("y"))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('x'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Tmp(Num('y'))} steht und speichert diese auf den Stack. \\
-  \smalltt{Ref(Attr(Tmp(Num("1")), name))} & doof \\
-  \smalltt{Ref(GlobalRead(num))} & \\
-  \smalltt{Assign(Tmp(Num(str(size))), GlobalRead(num))} & \\
-  \smalltt{Assign(Tmp(Num(str(size))), StackRead(num))} & \\
+  \smalltt{Ref(GlobalRead(Num(addr)))}	& \colorbold{Speichert} Adresse der Speicherzelle, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum \colorbold{Pointer auf das Datensegment} \smalltt{DS} steht auf den \colorbold{Stack}. \\
+  \smalltt{Ref(StackRead(Num(addr)))} & \colorbold{Speichert} Adresse der Speicherzelle, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum \colorbold{Pointer auf die aktive Funktion} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
+  \smalltt{Ref(Subscr(Tmp(Num("x")), Tmp(Num("y"))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('x'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Tmp(Num('y'))} steht und speichert diese auf den \colorbold{Stack}. Die Berechnung ist abhängig davon ob der \colorbold{Datentyp} \smalltt{ArrayDecl(datatype)} oder \smalltt{PntrDecl(datatype)} ist. Der \colorbold{Datentyp} ist ein \colorbold{verstecktes Attribut} von \smalltt{Ref(exp)}. \\
+  \smalltt{Ref(Attr(Tmp(Num("x")), Name('attr')))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('x'))} steht und dem \colorbold{Attributnamen} \smalltt{Name('attr')} und speichert diese auf den \colorbold{Stack}. Zur Berechnung ist der Name des \colorbold{Struct} in \smalltt{StructSpec(Name('st'))} notwendig, dessen \colorbold{Attribut} \smalltt{Name('attr')} ist. \smalltt{StructSpec(Name('st'))} ist ein \colorbold{verstecktes Attribut} von  \smalltt{Ref(exp)}. \\
+  \smalltt{Assign(Tmp(Num('size'))), GlobalRead(Num(addr)))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num(addr))} relativ zum \colorbold{Pointer auf das Datensegment}  \smalltt{DS} stehen, versetzt genauso auf den \colorbold{Stack}. \\
+  \smalltt{Assign(Tmp(Num('size')), StackRead(Num(addr)))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num(addr))} relativ zum \colorbold{Pointer auf die aktive Funktion} \smalltt{BAF} stehen, versetzt genauso auf den \colorbold{Stack}. \\
   \smalltt{Exp(GlobalRead(num))} & \\
   \smalltt{Exp(StackRead(num))} & \\
   \smalltt{Exp(Subscr(Tmp(Num("1")), Num("0")))} & \\
@@ -316,7 +315,7 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Nodes} und \co
   Zudem sind auch jegliche Kombinationen ausgelassen, bei denen einfach nur eine \colorbold{Expression} an ein \smalltt{Exp(exp)} bzw.  \smalltt{Ref(exp)} drangehängt wurde.
 
   % TODO: in richtige Tabelle machen
-  Ersetzt ein \verb|exp|, dessen Wert bereits \colorbold{vorher} berechnet wurde und \smalltt{x} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer}  \smalltt{SP} steht bzw. wenn es sich um die \smalltt{main}-Funktion handelt  \colorbold{relativ} zum \colorbold{Pointer auf das Datensegment} \smalltt{DS}.
+  Ersetzt ein \verb|exp|, dessen Wert bereits \colorbold{vorher} berechnet wurde und \smalltt{x} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer} \smalltt{SP} steht.
 \end{Special_Paragraph}
 
 \subsubsection{Abstrakte Syntax}
