@@ -289,20 +289,20 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Nodes} und \co
   \rowcolors{2-15}{SecondaryColor}{}[cols={1-2}]
   \Body
   \textbf{\textcolor{white}{Komposition}} &	\textbf{\textcolor{white}{Beschreibung}} \\
-  \smalltt{Ref(GlobalRead(Num(addr)))}	& \colorbold{Speichert} Adresse der Speicherzelle, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum \colorbold{Pointer auf das Datensegment} \smalltt{DS} steht auf den \colorbold{Stack}. \\
-  \smalltt{Ref(StackRead(Num(addr)))} & \colorbold{Speichert} Adresse der Speicherzelle, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum \colorbold{Pointer auf die aktive Funktion} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
-  \smalltt{Ref(Subscr(Tmp(Num("x")), Tmp(Num("y"))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('x'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Tmp(Num('y'))} steht und speichert diese auf den \colorbold{Stack}. Die Berechnung ist abhängig davon ob der \colorbold{Datentyp} \smalltt{ArrayDecl(datatype)} oder \smalltt{PntrDecl(datatype)} ist. Der \colorbold{Datentyp} ist ein \colorbold{verstecktes Attribut} von \smalltt{Ref(exp)}. \\
-  \smalltt{Ref(Attr(Tmp(Num("x")), Name('attr')))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('x'))} steht und dem \colorbold{Attributnamen} \smalltt{Name('attr')} und speichert diese auf den \colorbold{Stack}. Zur Berechnung ist der Name des \colorbold{Struct} in \smalltt{StructSpec(Name('st'))} notwendig, dessen \colorbold{Attribut} \smalltt{Name('attr')} ist. \smalltt{StructSpec(Name('st'))} ist ein \colorbold{verstecktes Attribut} von  \smalltt{Ref(exp)}. \\
-  \smalltt{Assign(Tmp(Num('size'))), GlobalRead(Num(addr)))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num(addr))} relativ zum \colorbold{Pointer auf das Datensegment}  \smalltt{DS} stehen, versetzt genauso auf den \colorbold{Stack}. \\
-  \smalltt{Assign(Tmp(Num('size')), StackRead(Num(addr)))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num(addr))} relativ zum \colorbold{Pointer auf die aktive Funktion} \smalltt{BAF} stehen, versetzt genauso auf den \colorbold{Stack}. \\
-  \smalltt{Exp(GlobalRead(num))} & \\
-  \smalltt{Exp(StackRead(num))} & \\
-  \smalltt{Exp(Subscr(Tmp(Num("1")), Num("0")))} & \\
-  \smalltt{Assign(GlobalWrite(addr), Tmp(size))} & \\
-  \smalltt{Assign(StackWrite(addr), Tmp(size))} & \\
-  \smalltt{Assign(Subscr(Tmp(Num("1")), Num("0")), Tmp(Num("2")))} & \\
-  \smalltt{Exp(Reg(reg))} & \\
-  \smalltt{rn.Instr(rn.Loadi(), [rn.Reg(rn.Acc()), Goto()])} & \\
+  \smalltt{Ref(GlobalRead(Num('addr')))}	& Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
+  \smalltt{Ref(StackRead(Num('addr')))} & Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
+  \smalltt{Ref(Subscr(Tmp(Num('addr1')), Tmp(Num('addr2'))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('addr1'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Tmp(Num('addr2'))} steht und speichert diese auf den \colorbold{Stack}. Die Berechnung ist abhängig davon ob der \colorbold{Datentyp} \smalltt{ArrayDecl(datatype)} oder \smalltt{PntrDecl(datatype)} ist. Der \colorbold{Datentyp} ist ein \colorbold{verstecktes Attribut} von \smalltt{Ref(exp)}. \\
+  \smalltt{Ref(Attr(Tmp(Num('addr1')), Name('attr')))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('addr1'))} steht und dem \colorbold{Attributnamen} \smalltt{Name('attr')} und speichert diese auf den \colorbold{Stack}. Zur Berechnung ist der Name des \colorbold{Struct} in \smalltt{StructSpec(Name('st'))} notwendig, dessen \colorbold{Attribut} \smalltt{Name('attr')} ist. \smalltt{StructSpec(Name('st'))} ist ein \colorbold{verstecktes Attribut} von  \smalltt{Ref(exp)}. \\
+  \smalltt{Assign(Tmp(Num('size'))), GlobalRead(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num('addr'))} relativ zum \colorbold{Datensegment Register}  \smalltt{DS} stehen, versetzt genauso auf den \colorbold{Stack}. \\
+  \smalltt{Assign(Tmp(Num('size')), StackRead(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num('addr'))} relativ zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} stehen, versetzt genauso auf den \colorbold{Stack}. \\
+  \smalltt{Exp(GlobalRead(Num('addr'))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
+  \smalltt{Exp(StackRead(Num('addr'))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
+  \smalltt{Exp(Tmp(Num('addr')))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \smalltt{SP} steht auf den \colorbold{Stack}. \\
+  \smalltt{Assign(Tmp(Num('addr1')), Tmp(Num('addr2')))} & Speichert \colorbold{Inhalt} der Speicherzelle \smalltt{Tmp(Num('addr2'))}, die \smalltt{Num('addr2')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \smalltt{SP} steht an der \colorbold{Adresse} in der Speicherzelle, die \smalltt{Num('addr1')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \verb|SP| steht. \\
+  \smalltt{Assign(GlobalWrite(Num('addr')), Tmp(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Datensegment Register}  \smalltt{DS}. \\
+  \smalltt{Assign(StackWrite(Num('addr')), Tmp(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF}. \\
+  \smalltt{Exp(Reg(reg))} & Schreibt den aktuellen Wert des \colorbold{Registers} \smalltt{reg} auf den \colorbold{Stack} \\
+  \smalltt{Instr(Loadi(), [Reg(Acc()), Goto()])} & \\
   \bottomrule
 \end{NiceTabular}
 \caption{Kompositionen von PicoC-Nodes und RETI-Nodes mit besonderer Bedeutung}
