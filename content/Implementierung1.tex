@@ -276,105 +276,98 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 
 \begin{table}[H]
   \center
-  \begin{NiceTabular}{X[8]X[10]}[rules/color=PrimaryColor]
+  \begin{NiceTabular}{X[7]X[10]}[rules/color=PrimaryColor]
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-43}{SecondaryColor}{}[cols={1-2}]
+  \rowcolors{2-10}{SecondaryColor}{}[cols={1-2}]
   \Body
-  \textbf{\textcolor{white}{PiocC-Knoten}} &	\textbf{\textcolor{white}{Beschreibung}} \\
-  \smalltt{Name()} & Steht für einen \colorbold{Identifier}, aber \smalltt{Name()}\\
-  \smalltt{Num()} & \\
-  \smalltt{Char()} & \\
-  \smalltt{Minus()} & \\
-  \smalltt{Not()} & \\
-  \smalltt{Add()} & \\
-  \smalltt{Sub()} & \\
-  \smalltt{Mul()} & \\
-  \smalltt{Div()} & \\
-  \smalltt{Mod()} & \\
-  \smalltt{Oplus()} & \\
-  \smalltt{And()} & \\
-  \smalltt{Or()} & \\
-  \smalltt{DerefOp()} & \\
-  \smalltt{RefOp()} & \\
-  \smalltt{Eq()} & \\
-  \smalltt{NEq()} & \\
-  \smalltt{Lt()} & \\
-  \smalltt{Gt()} & \\
-  \smalltt{LtE()} & \\
-  \smalltt{GtE()} & \\
-  \smalltt{LogicAnd()} & \\
-  \smalltt{LogicOr()} & \\
-  \smalltt{LogicNot()} & \\
-  \smalltt{Const()} & \\
-  \smalltt{Writeable()} & \\
-  \smalltt{IntType()} & \\
-  \smalltt{CharType()} & \\
-  \smalltt{VoidType()} & \\
-  \smalltt{BinOp(exp1, bin\_op, exp2)} & \\
-  \smalltt{UnOp(un\_op, exp)} & \\
-  \smalltt{Exit(num)} & \\
-  \smalltt{Atom(exp1, rel, exp2)} & \\
-  \smalltt{ToBool(exp)} & \\
+  \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{Name()} & Ein \colorbold{Bezeichner}, aber da es keine gute Kurzform für \smalltt{Identifier()} (englisches Wort für Bezeichner) gibt, wurde dieser Knoten \smalltt{Name()} genannt. \\
+  \smalltt{Num()} & Eine \colorbold{Zahl}. \\
+  \smalltt{Char()} & Ein \colorbold{Zeichen} der \colorbold{ASCII-Zeichenkodierung} . \\
+  \smalltt{Minus(), Not(), DerefOp(), RefOp(), LogicNot()} & Die \colorbold{unären Operatoren} \smalltt{un\_op}: \smalltt{-a, {$\thicksim$}a, *a, \&a}. \\
+  \smalltt{Add(), Sub(), Mul(), Div(), Mod(), Oplus(), And(), Or(), LogicAnd(), LogicOr()} & Die \colorbold{binären Operatoren} \smalltt{bin\_op}: \smalltt{a + b, a - b, a * b, a / b, a \% b, a $\wedge$ b, a \& b, a $\mid$ b, a \&\& b, a {$\mid\mid$} b}. \\
+  \smalltt{Eq(), NEq(), Lt(), LtE(), Gt(), GtE()} & Die \colorbold{Relationen} \smalltt{rel}: \smalltt{a == b, a != b, a < b, a <= b, a > b, a >= b}. \\
+  \smalltt{Const(), Writeable()} & Die \colorbold{Type Qualifier} \smalltt{type\_qual}: \smalltt{const}, was für ein \colorbold{nicht beschreibbare} \colorbold{Konstante} steht und das \colorbold{nicht} Angeben von \smalltt{const}, was für einen \colorbold{beschreibbare} Variable steht. \\
+  \smalltt{IntType(), CharType(), VoidType()} & \colorbold{Type Specifier für Primitiven Datentypen}, die in der Abstrakten Syntax, um eine intuitive Bezeichnung zu haben einfach nur unter \colorbold{Datentypen} eingeordnet werden: \smalltt{int},  \smalltt{char},  \smalltt{void}. \\
+  \smalltt{BinOp(exp1, bin\_op, exp2)} & Container für eine \colorbold{binäre Operation}. \\
+  \smalltt{UnOp(un\_op, exp)} & Container für eine \colorbold{unäre Operation}. \\
+  \smalltt{Exit(num)} & \colorbold{Beendigung} des Programmes und ist Container für einen \colorbold{Exit Code}, der vor der Beendigung in das \smalltt{ACC} Register geschrieben wird. \\
+  \smalltt{Atom(exp1, rel, exp2)} & Container für eine \colorbold{binäre Relation} und 2 \colorbold{Expressions}. \\
+  \smalltt{ToBool(exp)} &  \\
   \smalltt{Alloc(type\_qual, datatype, name, \textcolor{gray!90!black}{local\_var\_or\_param})} & \\
   \smalltt{Assign(lhs, exp)} & \\
   \smalltt{Exp(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & \\
   \smalltt{Tmp(num)} & \\
-  \smalltt{StackRead()} & \\
-  \smalltt{StackWrite()} & \\
-  \smalltt{GlobalRead()} & \\
-  \smalltt{GlobalWrite()} & \\
-  \smalltt{StackMalloc()} & \\
+  \smalltt{StackRead(num)} & \\
+  \smalltt{StackWrite(num)} & \\
+  \smalltt{GlobalRead(num)} & \\
+  \smalltt{GlobalWrite(num)} & \\
+  \smalltt{StackMalloc(num)} & \\
   \bottomrule
 \end{NiceTabular}
 \caption{PicoC-Knoten Teil 1}
-\label{tab:picoc_knoten}
+\label{tab:picoc_knoten_teil_1}
 \end{table}
 
 \begin{table}[H]
   \center
-  \begin{NiceTabular}{X[8]X[10]}[rules/color=PrimaryColor]
+  \begin{NiceTabular}{X[7]X[10]}[rules/color=PrimaryColor]
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
   \rowcolors{2-27}{SecondaryColor}{}[cols={1-2}]
   \Body
-  \textbf{\textcolor{white}{PiocC-Knoten}} &	\textbf{\textcolor{white}{Beschreibung}} \\
-  \smalltt{PntrDecl()} & \\
-  \smalltt{Ref()} & \\
-  \smalltt{Deref()} & \\
-  \smalltt{ArrayDecl()} & \\
-  \smalltt{Array()} & \\
-  \smalltt{Subscr()} & \\
-  \smalltt{StructSpec()} & \\
-  \smalltt{Attr()} & \\
-  \smalltt{Struct()} & \\
-  \smalltt{StructDecl()} & \\
-  \smalltt{If()} & \\
-  \smalltt{IfElse()} & \\
-  \smalltt{While()} & \\
-  \smalltt{DoWhile()} & \\
-  \smalltt{Call()} & \\
-  \smalltt{Return()} & \\
-  \smalltt{FunDecl()} & \\
-  \smalltt{FunDef()} & \\
-  \smalltt{NewStackframe()} & \\
+  \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{PntrDecl(num, \textcolor{gray!90!black}{datatype})} & \\
+  \smalltt{Ref(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & \\
+  \smalltt{Deref(lhs, exp)} & \\
+  \smalltt{ArrayDecl(nums, \textcolor{gray!90!black}{datatype})} & \\
+  \smalltt{Array(exps, \textcolor{gray!90!black}{datatype})} & \\
+  \smalltt{Subscr(lhs, exp)} & \\
+  \smalltt{StructSpec(name)} & \\
+  \smalltt{Attr(lhs, name)} & \\
+  \smalltt{Struct(assigns, \textcolor{gray!90!black}{datatype})} & \\
+  \smalltt{StructDecl(name, allocs)} & \\
+  \smalltt{If(exp, stmts\_goto)} & \\
+  \smalltt{IfElse(exp, stmts\_goto1, stmts\_goto2)} & \\
+  \smalltt{While(exp, stmts\_goto)} & \\
+  \smalltt{DoWhile(exp, stmts\_goto)} & \\
+  \smalltt{Call(name, exps)} & \\
+  \smalltt{Return(exp)} & \\
+  \smalltt{FunDecl(datatype, name, allocs)} & \\
+  \smalltt{FunDef(datatype, name, alocs, stmts\_blocks)} & \\
+  \smalltt{NewStackframe(fun\_name, goto\_after\_call)} & \\
   \smalltt{RemoveStackframe()} & \\
-  \smalltt{File()} & \\
-  \smalltt{Block()} & \\
-  \smalltt{GoTo()} & \\
-  \smalltt{SingleLineComment()} & \\
+  \smalltt{File(name, decls\_defs\_blocks)} & \\
+  \smalltt{Block(name, stmts\_instrs, instrs\_before, num\_instrs, signature\_size, local\_vars\_size)} & \\
+  \smalltt{GoTo(name)} & \\
+  \smalltt{SingleLineComment(prefix, content)} & \\
   \smalltt{RETIComment()} & \\
   \smalltt{Placeholder()} & \\
   \smalltt{Tmp(Num('addr'))} & Steht für ein \verb|exp|, dessen Wert bereits \colorbold{vorher} berechnet wurde und \smalltt{x} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer} \smalltt{SP} steht. \\
   \bottomrule
 \end{NiceTabular}
 \caption{PicoC-Knoten Teil 2}
-\label{tab:picoc_knoten}
+\label{tab:picoc_knoten_teil_2}
 \end{table}
 
 \begin{Special_Paragraph}
-  Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \colorbold{versteckte Attribute}, die nicht direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert initialisiert werden, sondern im Verlauf der Kompilierung beim Durchlaufen der verschiedenen Passes ein verstecktes Attribut zugewiesen bekommen, dass im weiteren Kompiliervorgang Informationen transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
+  Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \colorbold{versteckte Attribute}, die \colorbold{nicht} direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert \colorbold{initialisiert} werden, sondern im \colorbold{Verlauf der Kompilierung} beim Durchlaufen der verschiedenen Passes ein verstecktes Attribut zugewiesen bekommen, dass im weiteren Kompiliervorgang \colorbold{Informationen} transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
+
+  Jeder \colorbold{Knoten} hat darüberhinaus auch noch $2$ \colorbold{Attribute} \smalltt{value} und \smalltt{position}, wobei \colorbold{value} bei einem \colorbold{Token-Knoten} (Definition~\ref{def:token_knoten}) dem \colorbold{Tokenwert} des Tokens, welches es ersetzt entspricht und bei \colorbold{Container-Knoten} (Definition~\ref{def:container_knoten}) unbesetzt ist. Das \colorbold{Attribut} \smalltt{position} wird später für Fehlermeldungen gebraucht.
 \end{Special_Paragraph}
+
+\begin{Definition}{Token-Knoten}{token_knoten}
+  Ersetzt ein \colorbold{Token} bei der Generierung des \colorbold{Abstract Syntax Tree}, damit der Zugriff auf Knoten des Abstract Syntax Tree möglichst \colorbold{simpel} ist und keine vermeidbaren Fallunterscheidungen berücksichtigt werden müssen.
+
+  \colorbold{Token-Knoten} entsprechen im Abstract Syntax Tree \colorbold{Blättern}.\footcite{thiemann_compilerbau_2021}
+\end{Definition}
+
+\begin{Definition}{Container-Knoten}{container_knoten}
+  Dient als \colorbold{Container} für andere \colorbold{Container-Knoten} und \colorbold{Token-Knoten}. Die \colorbold{Container Knoten} werden optimalerweise immer so gewählt, dass sie mehrere \colorbold{Produktionen} der \colorbold{Konkretten} Syntax abdecken, die einen ähnlichen Aufbau haben und auch irgendeine Form der \colorbold{Semantischen Verwandschafft} vorliegt\footnote{Wie z.B. die verschiedenen Arithmetischen und Logischen Ausdrücke, die immer eine \colorbold{Operation} in der Mitte haben und $2$ \colorbold{Operanden} auf beiden Seiten.}.
+
+  \colorbold{Container-Knoten} entsprechen im Abstract Syntax Tree \colorbold{Inneren Knoten}.\footcite{thiemann_compilerbau_2021}
+\end{Definition}
 
 \subsubsection{RETI-Knoten}
 \begin{table}[H]
