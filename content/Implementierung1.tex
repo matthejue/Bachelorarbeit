@@ -276,6 +276,49 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 \subsubsection{RETI Nodes}
 % Tabelle aller RETI Nodes
 % Transformer erwähnen
+
+\subsubsection{Kompositionen von PicoC-Nodes und RETI-Nodes mit besonderer Bedeutung}
+Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Nodes} und \colorbold{RETI-Nodes} aufgelistet, die eine \colorbold{besondere Bedeutung} haben und nicht bereits in der \colorbold{Abstrakten Syntax}~\ref{gr:concrete_syntax_parser} enthalten sind.
+% (generelle Aufgaben von Exp und Reg)
+
+\begin{table}[H]
+  \center
+  \begin{NiceTabular}{XX}[rules/color=PrimaryColor]
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-13}{SecondaryColor}{}[cols={1-2}]
+  \Body
+  \textbf{\textcolor{white}{Komposition}} &	\textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{Ref(GlobalRead(addr))}	& Liest Speicherzelle aus, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum Anfang der \colorbold{globalen Statischen Daten} liegt. \\
+  \smalltt{Ref(StackRead(addr))} & Liest Speicherzelle aus, die \smalltt{addr} Speicherzellen \colorbold{relativ} zum Anfang des \colorbold{Stack} liegt. \\
+  \smalltt{Ref(Subscr(Tmp(Num("x")), Tmp(Num("y"))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('x'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Tmp(Num('y'))} steht und speichert diese auf den Stack. \\
+  \smalltt{Ref(Attr(Tmp(Num("1")), name))} & doof \\
+  \smalltt{Ref(GlobalRead(num))} & \\
+  \smalltt{Assign(Tmp(Num(str(size))), GlobalRead(num))} & \\
+  \smalltt{Assign(Tmp(Num(str(size))), StackRead(num))} & \\
+  \smalltt{Exp(GlobalRead(num))} & \\
+  \smalltt{Exp(StackRead(num))} & \\
+  \smalltt{Exp(Subscr(Tmp(Num("1")), Num("0")))} & \\
+  \smalltt{Assign(GlobalWrite(addr), Tmp(size))} & \\
+  \smalltt{Assign(StackWrite(addr), Tmp(size))} & \\
+  \smalltt{Assign(Subscr(Tmp(Num("1")), Num("0")), Tmp(Num("2")))} & \\
+  \smalltt{Exp(Reg(reg))} & \\
+  \smalltt{rn.Instr(rn.Loadi(), [rn.Reg(rn.Acc()), Goto()])} & \\
+  \bottomrule
+\end{NiceTabular}
+\caption{Kompositionen von PicoC-Nodes und RETI-Nodes mit besonderer Bedeutung}
+\label{tab:kompositionen_von_picoc_nodes_und_reti_nodes_mit_besonderer_bedeutung}
+\end{table}
+
+\begin{Special_Paragraph}
+  Um die obige Tabelle~\ref{tab:kompositionen_von_picoc_nodes_und_reti_nodes_mit_besonderer_bedeutung} nicht mit unnötig viel repetetiven Inhalt zu füllen, wurden die zahlreichen Kompostionen \colorbold{ausgelassen}, bei denen einfach nur \verb|exp| durch $\mathtt{Tmp(Num('x')), x}\in\mathbb{N}$ ersetzt wurde.
+
+  Zudem sind auch jegliche Kombinationen ausgelassen, bei denen einfach nur eine \colorbold{Expression} an ein \smalltt{Exp(exp)} bzw.  \smalltt{Ref(exp)} drangehängt wurde.
+
+  % TODO: in richtige Tabelle machen
+  Ersetzt ein \verb|exp|, dessen Wert bereits \colorbold{vorher} berechnet wurde und \smalltt{x} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer}  \smalltt{SP} steht bzw. wenn es sich um die \smalltt{main}-Funktion handelt  \colorbold{relativ} zum \colorbold{Pointer auf das Datensegment} \smalltt{DS}.
+\end{Special_Paragraph}
+
 \subsubsection{Abstrakte Syntax}
 
 % ./abstract_syntax.txt
@@ -384,39 +427,6 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \end{figure}
 
 \subsection{Passes}
-\subsubsection{Kompositionen mit besonderer Bedeutung}
-\begin{table}[H]
-  \center
-  % \Block{2}{=}{Links, dann rechts $\rightarrow$} \\
-  \begin{NiceTabular}{X[1,c]X[2,c]X[3,l]X[2,c]}[rules/color=PrimaryColor]
-  \CodeBefore
-  \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-18}{SecondaryColor}{}[cols={2-3}]
-  \rowcolors{2-18}{SecondaryColor}{}[cols={1,4}, respect-blocks, restart]
-  \Body
-  \textbf{\textcolor{white}{Präzidenz}} &	\textbf{\textcolor{white}{Operator}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
-  1	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
-    & \verb|a[]|	& Indexzugriff & \\
-    & \verb|a.b| & Attributzugriff & \\
-  2	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
-    & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
-    & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
-  3	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
-  4	& \verb|a+b a-b|	& Addition und Subtraktion & \\
-  5	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
-  6 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
-  7 &	\verb|a&b| & Bitweise UND & \\
-  8 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
-  9 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
-  10	& \verb|a&&b| &	Logiches UND & \\
-  11	& $a{\mid\mid} b$	& Logisches ODER & \\
-  12 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
-  13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
-  \bottomrule
-\end{NiceTabular}
-\caption{Kompsotionenen von PicoC-Nodes mit besonderer Bedeutung}
-\label{tab:reference_table}
-\end{table}
 
 \subsubsection{PicoC-Shrink Pass}
 \label{picoc_shrink_pass}
@@ -548,6 +558,8 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 
 \subsubsection{RETI Pass}
 \newlineparagraph{Konkrette und Abstrakte Syntax}
+
+% dieser Pass entspricht Assembler bis auf die Sache mit binärer Repräsentation, was der PicoC-Compiler garnicht macht
 
 \begin{grammar}[Konkrette Syntax für $L_{RETI\_Lex}$][H][gr:konkrette_syntax_l_reti_lexer]
 \toprule
