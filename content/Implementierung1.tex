@@ -296,11 +296,10 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \smalltt{Exit(num)} & Container für einen \colorbold{Exit Code}, der vor der Beendigung in das \smalltt{ACC} Register geschrieben wird und steht für die \colorbold{Beendigung} des laufenden Programmes. \\
   \smalltt{Atom(exp, rel, exp)} & Container für eine \colorbold{binäre Relation} mit $2$ Expressions. \\
   \smalltt{ToBool(exp)} & Container für einen \colorbold{Arithmetischen Ausdruck}, wie z.B. \smalltt{1 + 3} oder einfach nur \smalltt{3}, der nicht nur $1$ oder $0$ als Ergebnis haben kann und daher bei einem Ergebnis $x > 1$ auf $1$ abgebildet wird. \\
-  \smalltt{Alloc(type\_qual, datatype, name, \textcolor{gray!90!black}{local\_var\_or\_param})} & \colorbold{Container} für eine \colorbold{Allokation} mit den notwendigen Knoten \smalltt{type\_qual},  \smalltt{datatype} und  \smalltt{name}, die alle für einen Eintrag in der  \colorbold{Symboltabelle} notwendigen Informationen enthalten. Zudem kann es ein \colorbold{verstecktes Attribut}  \smalltt{local\_var\_or\_param} besitzen, dass die Information trägt, ob es sich bei der \colorbold{Variable} um eine \colorbold{Lokale Variable} oder einen \colorbold{Parameter} handelt. \\
+  \smalltt{Alloc(type\_qual, datatype, name, \textcolor{gray!90!black}{local\_var\_or\_param})} & \colorbold{Container} für eine \colorbold{Allokation} mit den notwendigen Knoten \smalltt{type\_qual},  \smalltt{datatype} und  \smalltt{name}, die alle für einen Eintrag in der  \colorbold{Symboltabelle} notwendigen Informationen enthalten. Zudem besitzt er ein \textcolor{gray!90!black}{verstecktes Attribut}  \smalltt{local\_var\_or\_param}, dass die Information trägt, ob es sich bei der \colorbold{Variable} um eine \colorbold{Lokale Variable} oder einen \colorbold{Parameter} handelt. \\
   \smalltt{Assign(lhs, exp)} & Container für eine \colorbold{Zuweisung}. Wobei \smalltt{lhs} ein  \smalltt{Subscr(exp1, exp2)}, \smalltt{Deref(exp1, exp2)}, \smalltt{Attr(exp, name)} oder  \smalltt{Name('var')} sein kann und  \smalltt{exp} ein beliebiger \colorbold{Logischer Ausdruck} sein kann. \\
-  \smalltt{Exp(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container für einen \colorbold{beliebigen Ausdruck}, dessen Ergebnis auf den \colorbold{Stack} soll. Zudem besitzt er $2$ \colorbold{versteckte Attribute}, wobei \smalltt{datatype} im \colorbold{RETI Blocks Pass} wichtig ist und \smalltt{error\_data} für \colorbold{Fehlermeldungen} wichtig ist. \\
+  \smalltt{Exp(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container für einen \colorbold{beliebigen Ausdruck}, dessen Ergebnis auf den \colorbold{Stack} soll. Zudem besitzt er $2$ \textcolor{gray!90!black}{versteckte Attribute}, wobei \smalltt{datatype} im \colorbold{RETI Blocks Pass} wichtig ist und \smalltt{error\_data} für \colorbold{Fehlermeldungen} wichtig ist. \\
   \smalltt{Stack(num)} & Container, der für das \colorbold{temporäre} Ergebnis einer Berechnung, das \smalltt{num} Speicherzellen relativ zum  \colorbold{Stackpointer Register} \smalltt{SP} steht.\\
-  \smalltt{Stackframe(num)} & Container, der für eine Variable steht, die \smalltt{num} Speicherzellen relativ zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht. \\
   \bottomrule
 \end{NiceTabular}
 \caption{PicoC-Knoten Teil 1}
@@ -312,23 +311,21 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \begin{NiceTabular}{X[7]X[10]}[rules/color=PrimaryColor]
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-12}{SecondaryColor}{}[cols={1-2}]
+  \rowcolors{2-13}{SecondaryColor}{}[cols={1-2}]
   \Body
   \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{Stackframe(num)} & Container, der für eine Variable steht, die \smalltt{num} Speicherzellen relativ zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht. \\
   \smalltt{Global(num)} & Container, der für eine Variable steht, die \smalltt{num} Speicherzellen relativ zum \colorbold{Datensegment Register} \smalltt{DS} steht. \\
   \smalltt{StackMalloc(num)} & Container, der für das \colorbold{Allokieren} von \smalltt{num} Speicherzellen auf dem \colorbold{Stack} steht. \\
 \smalltt{PntrDecl(num, datatype)} & Container, der für den \colorbold{Pointerdatentyp} steht, wobei das \colorbold{Attribut} \smalltt{num} die \colorbold{Anzahl zusammengefasster Pointer} angibt und \smalltt{datatype} der {Datentyp} ist, auf den der oder die \colorbold{Pointer} zeigen. \\
-\smalltt{Ref(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container, der für die Anwendung des \colorbold{Referenz-Operators} steht. Zudem besitzt er $2$ \colorbold{versteckte Attribute}, wobei \smalltt{datatype} im \colorbold{RETI Blocks Pass} wichtig ist und \smalltt{error\_data} für \colorbold{Fehlermeldungen} wichtig ist. \\
+\smalltt{Ref(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container, der für die Anwendung des \colorbold{Referenz-Operators} steht. Zudem besitzt er $2$ \textcolor{gray!90!black}{versteckte Attribute}, wobei \smalltt{datatype} im \colorbold{RETI Blocks Pass} wichtig ist und \smalltt{error\_data} für \colorbold{Fehlermeldungen} wichtig ist. \\
   \smalltt{Deref(lhs, exp)} & Container für den \colorbold{Indexzugriff} auf einen \colorbold{Array-} oder \colorbold{Pointerdatentyp}. Wobei \smalltt{exp1} eine angehängte weitere \smalltt{Subscr(exp1, exp2)}, \smalltt{Deref(exp1, exp2)}, \smalltt{Attr(exp, name)} oder ein \smalltt{Name('var')} sein kann und \smalltt{exp2} der Index ist auf den zugegriffen werden soll. \\
   \smalltt{ArrayDecl(nums, datatype)} & Container, der für den \colorbold{Arraydatentyp} steht, wobei das \colorbold{Attribut} \smalltt{nums} eine Liste von \smalltt{Num('x')} ist, die die \colorbold{Dimensionen} des Arrays angibt und \smalltt{datatype} der {Datentyp} ist, der über das Anwenden von \smalltt{Subscript()} auf das Array zugreifbar ist. \\
-  \smalltt{Array(exps, \textcolor{gray!90!black}{datatype})} & Container für den \colorbold{Initializer} eines \colorbold{Arrays}, dessen Einträge \smalltt{exps} weitere Initializer für eine \colorbold{Array-Dimension} oder ein Initializer für ein \colorbold{Struct} oder ein \colorbold{Logischer Ausdruck} sein können. \\
+  \smalltt{Array(exps, \textcolor{gray!90!black}{datatype})} & Container für den \colorbold{Initializer} eines \colorbold{Arrays}, dessen Einträge \smalltt{exps} weitere Initializer für eine \colorbold{Array-Dimension} oder ein Initializer für ein \colorbold{Struct} oder ein \colorbold{Logischer Ausdruck} sein können. Des Weiteren besitzt er ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{datatype}, welches für den \colorbold{PicoC-Mon Pass} Informationen transportiert, die für \colorbold{Fehlermeldungen} wichtig sind. \\
   \smalltt{Subscr(exp1, exp2)} & Container für den \colorbold{Indexzugriff} auf einen \colorbold{Array-} oder \colorbold{Pointerdatentyp}. Wobei \smalltt{exp1} eine angehängte weitere \smalltt{Subscr(exp1, exp2)}, \smalltt{Deref(exp1, exp2)} oder \smalltt{Attr(exp, name)} Operation sein kann oder ein \smalltt{Name('var')} sein kann und \smalltt{exp2} der Index ist auf den zugegriffen werden soll. \\
-  \smalltt{StructSpec(name)} & Container für den \colorbold{Structdatentyp}. \\
+  \smalltt{StructSpec(name)} & Container für einen selbst definierten \colorbold{Structdatentyp}. Wobei das \colorbold{Attribut} \smalltt{name} festlegt, welchen \colorbold{selbst definierte} Structdatentyp dieser Container-Knoten repräsentiert. \\
   \smalltt{Attr(exp, name)} & Container für den \colorbold{Attributzugriff} auf einen \colorbold{Structdatentyp}. Wobei \smalltt{exp1} eine angehängte weitere \smalltt{Subscr(exp1, exp2)}, \smalltt{Deref(exp1, exp2)} oder \smalltt{Attr(exp, name)} Operation sein kann oder ein \smalltt{Name('var')} sein kann und \smalltt{name} das Attribut ist, auf das zugegriffen werden soll. \\
-  \smalltt{Struct(assigns, \textcolor{gray!90!black}{datatype})} & \\
-  \smalltt{StructDecl(name, allocs)} & \\
-  \smalltt{If(exp, stmts\_goto)} & \\
-  \smalltt{IfElse(exp, stmts\_goto1, stmts\_goto2)} & \\
+  \smalltt{Struct(assigns, \textcolor{gray!90!black}{datatype})} & Container für den \colorbold{Initializer} eines \colorbold{Structs}, dessen Eintrag \smalltt{assigns} eine Liste von \smalltt{Assign(lhs, exp)} ist mit einer Zuordnung eines \colorbold{Attributezeichners}, zu einem weiteren Initializer für eine \colorbold{Array-Dimension} oder zu einem Initializer für ein \colorbold{Struct} oder zu einem \colorbold{Logischen Ausdruck}. Des Weiteren besitzt er ein  \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{datatype}, welches für den \colorbold{PicoC-Mon Pass} Informationen transportiert, die für \colorbold{Fehlermeldungen} wichtig sind. \\
   \bottomrule
 \end{NiceTabular}
 \caption{PicoC-Knoten Teil 2}
@@ -340,30 +337,47 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \begin{NiceTabular}{X[7]X[10]}[rules/color=PrimaryColor]
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-10}{SecondaryColor}{}[cols={1-2}]
+  \rowcolors{2-13}{SecondaryColor}{}[cols={1-2}]
   \Body
   \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
-  \smalltt{While(exp, stmts\_goto)} & \\
-  \smalltt{DoWhile(exp, stmts\_goto)} & \\
-  \smalltt{Call(name, exps)} & \\
-  \smalltt{Return(exp)} & \\
-  \smalltt{FunDecl(datatype, name, allocs)} & \\
-  \smalltt{FunDef(datatype, name, alocs, stmts\_blocks)} & \\
-  \smalltt{NewStackframe(fun\_name, goto\_after\_call)} & \\
-  \smalltt{RemoveStackframe()} & \\
-  \smalltt{File(name, decls\_defs\_blocks)} & \\
-  \smalltt{Block(name, stmts\_instrs, {instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{signature\_size}, \textcolor{gray!90!black}{local\_vars\_size})} & \\
-  \smalltt{GoTo(name)} & \\
-  \smalltt{SingleLineComment(prefix, content)} & \\
-  \smalltt{RETIComment()} & \\
+  \smalltt{StructDecl(name, allocs)} & Container für die Deklaration eines \colorbold{selbstdefinierten Structdatentyps}. Wobei \smalltt{name} der \colorbold{Bezeichner} des Structdatentyps ist und \smalltt{allocs} eine Liste von Bezeichnern der \colorbold{Attribute} des Structdatentyps mit dazugehörigem \colorbold{Datentyp}, wofür sich der \colorbold{Container-Knoten} \smalltt{Alloc(type\_qual, datatype, name)} sehr gut als \colorbold{Container} eignet. \\
+  \smalltt{If(exp, stmts\_goto)} & Container für ein \colorbold{If Statement} inklusive  \colorbold{Condition}  \smalltt{exp} und einem  \colorbold{Branch}  \smalltt{stmts\_goto}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
+  \smalltt{IfElse(exp, stmts\_goto1, stmts\_goto2)} & Container für ein \colorbold{If-Else Statement} inklusive \colorbold{Codition} \smalltt{exp} und $2$ \colorbold{Branches} \smalltt{stmts\_goto1} und \smalltt{stmts\_goto2}, die zwei Alternativen Darstellen in denen jeweils \colorbold{Listen von Statements} oder  \smalltt{GoTo(Name('block.xyz'))}'s stehen können. \\
+  \smalltt{While(exp, stmts\_goto)} & Container für ein \colorbold{While-Statement} inklusive  \colorbold{Condition}  \smalltt{exp} und einem \colorbold{Branch}  \smalltt{stmts\_goto}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
+  \smalltt{DoWhile(exp, stmts\_goto)} & Container für ein \colorbold{Do-While-Statement} inklusive  \colorbold{Condition}  \smalltt{exp} und einem \colorbold{Branch}  \smalltt{stmts\_goto}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
+  \smalltt{Call(name, exps)} & Container für einen \colorbold{Funktionsaufruf}: \smalltt{fun\_name(exps)}. Wobei \smalltt{name} der \colorbold{Bezeichner} der Funktion ist, die aufgerufen werden soll und \smalltt{exps} eine \colorbold{Liste von Argumenten} ist, die an die Funktion übergeben werden soll. \\
+  \smalltt{Return(exp)} & Container für ein \smalltt{Return-Statement}. Wobei das  \colorbold{Attribut}  \smalltt{exp} einen  \colorbold{Logischen Ausdruck} darstellt, dessen Ergebnis vom  \colorbold{Return-Statement} zurückgegeben wird. \\
+  \smalltt{FunDecl(datatype, name, allocs)} & Container für eine \colorbold{Funktionsdeklaration}, wobei \smalltt{datatype} der  \colorbold{Rückgabewert} der Funktion ist,  \smalltt{name} der  \colorbold{Bezeichner} der Funktion ist und \smalltt{allocs} die \colorbold{Parameter} der Funktion sind, wobei der \colorbold{Container-Knoten} \smalltt{Alloc(type\_spec, datatype, name)} als Cotainer für die Parameter dient. \\
+  \smalltt{FunDef(datatype, name, allocs, stmts\_blocks)} & Container für eine \colorbold{Funktionsdefinition}, wobei \smalltt{datatype} der  \colorbold{Rückgabewert} der Funktion ist,  \smalltt{name} der  \colorbold{Bezeichner} der Funktion ist, \smalltt{allocs} die \colorbold{Parameter} der Funktion sind, wobei der \colorbold{Container-Knoten} \smalltt{Alloc(type\_spec, datatype, name)} als Cotainer für die Parameter dient und \smalltt{stmts\_blocks} eine Liste von \colorbold{Statemetns} bzw.  \colorbold{Blöcken} ist, welche diese Funktion beinhaltet. \\
+  \smalltt{NewStackframe(fun\_name, goto\_after\_call)} & Container für die \colorbold{Erstellung} eines neuen \colorbold{Stackframes}, wobei \smalltt{fun\_name} der Bezeichner Funktion ist, für die ein neuer  \colorbold{Stackframe} erstellt werden soll und \smalltt{goto\_after\_call} ein  \smalltt{GoTo(Name('fun\_name'))} ist\\
+  \smalltt{RemoveStackframe()} & Container für das \colorbold{Entfernen} des aktuellen \colorbold{Stackframes}. \\
+  \smalltt{File(name, decls\_defs\_blocks)} & Container für alle \colorbold{Funkionen} oder \colorbold{Blöcke}, welche eine Datei als Ursprung haben. Wobei \smalltt{decls\_defs\_blocks} eine Liste von \colorbold{Funktionen} bzw. \colorbold{Blöcken} ist. \\
   \bottomrule
 \end{NiceTabular}
-\caption{PicoC-Knoten Teil 2}
-\label{tab:picoc_knoten_teil_2}
+\caption{PicoC-Knoten Teil 3}
+\label{tab:picoc_knoten_teil_3}
+\end{table}
+
+\begin{table}[H]
+  \center
+  \begin{NiceTabular}{X[7]X[10]}[rules/color=PrimaryColor]
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-5}{SecondaryColor}{}[cols={1-2}]
+  \Body
+  \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
+  \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})} & Container für \colorbold{Statements}, der auch als \colorbold{Block} bezeichnet wird. Wobei das Attribut \smalltt{name} der Bezeichners des \colorbold{Labels} des Blocks ist und \smalltt{stmts\_instrs} eine \colorbold{Liste von Statements} oder \colorbold{Instructions}. Zudem besitzt er noch $3$ \textcolor{gray!90!black}{versteckte Attribute}, wobei  \smalltt{instrs\_before} die Zahl der \colorbold{Instructions} vor diesem \colorbold{Block} zählt,  \smalltt{num\_instrs} die Zahl der Instructions ohne Kommentare in diesem Block zählt, \smalltt{param\_size} die voraussichtliche Anzahl an Speicherzellen aufaddiert, die für die \colorbold{Parameter} der Funktion belegt werden müssen und \smalltt{local\_vars\_size} die voraussichtliche Anzahl an Speicherzellen aufaddiert, die für die \colorbold{lokalen Variablen} der Funktion belegt werden müssen. \\
+  \smalltt{GoTo(name)} & Container für ein \smalltt{Goto} zu einem anderen \colorbold{Block}. Wobei das Attribut \smalltt{name} der Bezeichner des \colorbold{Labels} des Blocks ist zu dem Gesprungen werden soll. \\
+  \smalltt{SingleLineComment(prefix, content)} & Container für einen \colorbold{Kommentar}, den der Compiler selber während des \colorbold{Kompiliervorangs} erstellt, der im \colorbold{RETI-Interpreter} selbst später \colorbold{nicht} sichtbar sein wird, aber in den \colorbold{Immediate}-Dateien, welche die \colorbold{Abstract Syntax Trees} nach den verschiedenen \colorbold{Passes} enthalten. \\
+  \smalltt{RETIComment(value)} & Container für einen \colorbold{Kommentar} im Code der Form: \smalltt{// \# comment}, der im \colorbold{RETI-Intepreter} später sichtbar sein wird und zur Orientierung genutzt werden kann, allerdings in einer tatsächlichen Implementierung einer \colorbold{RETI-CPU} \colorbold{nicht umsetzbar} ist und auch nicht sinnvoll wäre umzusetzen. Der \colorbold{Kommentar} ist im Attribut \colorbold{value}, welches jeder Knoten besitzt gespeichert. \\
+  \bottomrule
+\end{NiceTabular}
+\caption{PicoC-Knoten Teil 4}
+\label{tab:picoc_knoten_teil_4}
 \end{table}
 
 \begin{Special_Paragraph}
-  Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \colorbold{versteckte Attribute}, die \colorbold{nicht} direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert \colorbold{initialisiert} werden, sondern im \colorbold{Verlauf der Kompilierung} beim Durchlaufen der verschiedenen Passes etwas zugewiesen bekommen, dass im weiteren Kompiliervorgang \colorbold{Informationen} transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
+  Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \textcolor{gray!90!black}{versteckte Attribute}, die \colorbold{nicht} direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert \colorbold{initialisiert} werden, sondern im \colorbold{Verlauf der Kompilierung} beim Durchlaufen der verschiedenen Passes etwas zugewiesen bekommen, dass im weiteren Kompiliervorgang \colorbold{Informationen} transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
 
   Jeder \colorbold{Knoten} hat darüberhinaus auch noch $2$ \colorbold{Attribute} \smalltt{value} und \smalltt{position}, wobei \colorbold{value} bei einem \colorbold{Token-Knoten} (Definition~\ref{def:token_knoten}) dem \colorbold{Tokenwert} des Tokens, welches es ersetzt entspricht und bei \colorbold{Container-Knoten} (Definition~\ref{def:container_knoten}) unbesetzt ist. Das \colorbold{Attribut} \smalltt{position} wird später für Fehlermeldungen gebraucht.
 \end{Special_Paragraph}
@@ -412,8 +426,8 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   \textbf{\textcolor{white}{Komposition}} &	\textbf{\textcolor{white}{Beschreibung}} \\
   \smalltt{Ref(Global(Num('addr')))}	& Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
   \smalltt{Ref(Stackframe(Num('addr')))} & Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
-  \smalltt{Ref(Subscr(Stack(Num('addr1')), Stack(Num('addr2'))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Stack(Num('addr1'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Stack(Num('addr2'))} steht und speichert diese auf den \colorbold{Stack}. Die Berechnung ist abhängig davon ob der \colorbold{Datentyp} \smalltt{ArrayDecl(datatype)} oder \smalltt{PntrDecl(datatype)} ist. Der \colorbold{Datentyp} ist ein \colorbold{verstecktes Attribut} von \smalltt{Ref(exp)}. \\
-  \smalltt{Ref(Attr(Stack(Num('addr1')), Name('attr')))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Stack(Num('addr1'))} steht und dem \colorbold{Attributnamen} \smalltt{Name('attr')} und speichert diese auf den \colorbold{Stack}. Zur Berechnung ist der Name des \colorbold{Struct} in \smalltt{StructSpec(Name('st'))} notwendig, dessen \colorbold{Attribut} \smalltt{Name('attr')} ist. \smalltt{StructSpec(Name('st'))} ist ein \colorbold{verstecktes Attribut} von  \smalltt{Ref(exp)}. \\
+  \smalltt{Ref(Subscr(Stack(Num('addr1')), Stack(Num('addr2'))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Stack(Num('addr1'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Stack(Num('addr2'))} steht und speichert diese auf den \colorbold{Stack}. Die Berechnung ist abhängig davon ob der \colorbold{Datentyp} \smalltt{ArrayDecl(datatype)} oder \smalltt{PntrDecl(datatype)} ist. Der \colorbold{Datentyp} ist ein \textcolor{gray!90!black}{verstecktes Attribut} von \smalltt{Ref(exp)}. \\
+  \smalltt{Ref(Attr(Stack(Num('addr1')), Name('attr')))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Stack(Num('addr1'))} steht und dem \colorbold{Attributnamen} \smalltt{Name('attr')} und speichert diese auf den \colorbold{Stack}. Zur Berechnung ist der Name des \colorbold{Struct} in \smalltt{StructSpec(Name('st'))} notwendig, dessen \colorbold{Attribut} \smalltt{Name('attr')} ist. \smalltt{StructSpec(Name('st'))} ist ein \textcolor{gray!90!black}{verstecktes Attribut} von  \smalltt{Ref(exp)}. \\
   \smalltt{Assign(Stack(Num('size'))), Global(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{Global(Num('addr'))} relativ zum \colorbold{Datensegment Register}  \smalltt{DS} stehen, versetzt genauso auf den \colorbold{Stack}. \\
   \smalltt{Assign(Stack(Num('size')), Stackframe(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{Stackframe(Num('addr'))} relativ zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} stehen, versetzt genauso auf den \colorbold{Stack}. \\
   \smalltt{Exp(Global(Num('addr'))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
@@ -423,7 +437,7 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   \smalltt{Assign(Global(Num('addr')), Stack(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Datensegment Register}  \smalltt{DS}. \\
   \smalltt{Assign(Stackframe(Num('addr')), Stack(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF}. \\
   \smalltt{Exp(Reg(reg))} & Schreibt den aktuellen Wert des \colorbold{Registers} \smalltt{reg} auf den \colorbold{Stack}. \\
-  \smalltt{Instr(Loadi(), [Reg(Acc()), Goto(Name('addr@next\_instr'))])} & Lädt in das Register \verb|ACC| die \colorbold{Adresse} der Instruction, die in diesem Kontext direkt nach dem Sprung zum Block einer anderen Funktion steht.\\
+  \smalltt{Instr(Loadi(), [Reg(Acc()), GoTo(Name('addr@next\_instr'))])} & Lädt in das Register \verb|ACC| die \colorbold{Adresse} der Instruction, die in diesem Kontext direkt nach dem Sprung zum Block einer anderen Funktion steht.\\
   \bottomrule
 \end{NiceTabular}
 \caption{Kompositionen von PicoC-Knoten und RETI-Knoten mit besonderer Bedeutung}
@@ -580,7 +594,7 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
   & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle block\rangle *)$ & \\
   \midrule
   \firstcase{block}{Block(Name(str), \langle stmt\rangle *)}{L\_Blocks}
-  \firstcase{stmt}{Goto(Name(str)) \gralt NewStackframe(Name(), Goto(str))}{}
+  \firstcase{stmt}{GoTo(Name(str)) \gralt NewStackframe(Name(), GoTo(str))}{}
   \otherform{RemoveStackframe() \gralt SetScope(Name(str))}{}
   \otherform{SingleLineComment(str, str)}{}
   \bottomrule
@@ -638,11 +652,11 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
   \toprule
   \firstcase{program}{Program(Name(str), \langle block\rangle *)}{L\_Program}
   \midrule
-  \firstcase{exp\_stmts}{Goto(str)}{L\_Blocks}
+  \firstcase{exp\_stmts}{GoTo(str)}{L\_Blocks}
   \firstcase{instrs\_before}{Num(str)}{}
   \firstcase{num\_instrs}{Num(str)}{}
   \firstcase{block}{Block(Name(str), \langle instr\rangle *, \langle instrs\_before\rangle , \langle num\_instrs\rangle )}{}
-  \firstcase{instr}{Goto(Name(str))}{}
+  \firstcase{instr}{GoTo(Name(str))}{}
   \bottomrule
 \end{grammar}
 
