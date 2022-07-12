@@ -2,12 +2,12 @@
 \contentsline {codecaption}{\numberline {1.1}{\ignorespaces PicoC Code für Derivation Tree Generierung\relax }}{12}{codecaption.caption.11}%
 \contentsline {codecaption}{\numberline {1.2}{\ignorespaces Derivation Tree nach Derivation Tree Generierung\relax }}{13}{codecaption.caption.12}%
 \contentsline {codecaption}{\numberline {1.3}{\ignorespaces Derivation Tree nach Derivation Tree Vereinfachung\relax }}{14}{codecaption.caption.13}%
-\contentsline {codecaption}{\numberline {1.4}{\ignorespaces Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert\relax }}{21}{codecaption.caption.19}%
-\contentsline {codecaption}{\numberline {1.5}{\ignorespaces PicoC Code für Codebespiel\relax }}{23}{codecaption.caption.23}%
-\contentsline {codecaption}{\numberline {1.6}{\ignorespaces Abstract Syntax Tree für Codebespiel\relax }}{24}{codecaption.caption.24}%
-\contentsline {codecaption}{\numberline {1.7}{\ignorespaces PicoC Shrink Pass für Codebespiel\relax }}{25}{codecaption.caption.25}%
-\contentsline {codecaption}{\numberline {1.8}{\ignorespaces PicoC-Blocks Pass für Codebespiel\relax }}{27}{codecaption.caption.27}%
-\contentsline {codecaption}{\numberline {1.9}{\ignorespaces PicoC-Mon Pass für Codebespiel\relax }}{30}{codecaption.caption.29}%
-\contentsline {codecaption}{\numberline {1.10}{\ignorespaces RETI-Blocks Pass für Codebespiel\relax }}{32}{codecaption.caption.31}%
-\contentsline {codecaption}{\numberline {1.11}{\ignorespaces RETI-Patch Pass für Codebespiel\relax }}{35}{codecaption.caption.33}%
-\contentsline {codecaption}{\numberline {1.12}{\ignorespaces RETI Pass für Codebespiel\relax }}{38}{codecaption.caption.37}%
+\contentsline {codecaption}{\numberline {1.4}{\ignorespaces Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert\relax }}{22}{codecaption.caption.20}%
+\contentsline {codecaption}{\numberline {1.5}{\ignorespaces PicoC Code für Codebespiel\relax }}{24}{codecaption.caption.24}%
+\contentsline {codecaption}{\numberline {1.6}{\ignorespaces Abstract Syntax Tree für Codebespiel\relax }}{25}{codecaption.caption.25}%
+\contentsline {codecaption}{\numberline {1.7}{\ignorespaces PicoC Shrink Pass für Codebespiel\relax }}{26}{codecaption.caption.26}%
+\contentsline {codecaption}{\numberline {1.8}{\ignorespaces PicoC-Blocks Pass für Codebespiel\relax }}{28}{codecaption.caption.28}%
+\contentsline {codecaption}{\numberline {1.9}{\ignorespaces PicoC-Mon Pass für Codebespiel\relax }}{31}{codecaption.caption.30}%
+\contentsline {codecaption}{\numberline {1.10}{\ignorespaces RETI-Blocks Pass für Codebespiel\relax }}{33}{codecaption.caption.32}%
+\contentsline {codecaption}{\numberline {1.11}{\ignorespaces RETI-Patch Pass für Codebespiel\relax }}{36}{codecaption.caption.34}%
+\contentsline {codecaption}{\numberline {1.12}{\ignorespaces RETI Pass für Codebespiel\relax }}{39}{codecaption.caption.38}%
