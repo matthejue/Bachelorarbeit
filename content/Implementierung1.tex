@@ -10,12 +10,12 @@
 \label{ch:implementierung}
 
 \section{Lexikalische Analyse}
-\subsection{Konkrette Syntax für Lexer erstellen}
+\subsection{Konkrette Syntax für die Lexikalische Analyse}
 \numberwithin{floatgrammar}{section}
 
 \label{sec:lex_analyse_verwendung_von_lark}
 % ./concrete_syntax_picoc.lark
-\begin{grammar}[Konkrette Syntax des Lexers in EBNF][H][gr:concrete_syntax_lex]
+\begin{grammar}[Konkrette Syntax für die Lexikalische Analyse in EBNF][H][gr:concrete_syntax_lex]
   \toprule
   \firstcase{COMMENT}{\dq //\dq\enspace /[{\wedge}\backslash n]{*}/\gralt \dq {/*}\dq\enspace  /(.\mid \setminus n)*?/\enspace \dq {*/}\dq }{L\_Comment}
   \firstcase{RETI\_COMMENT.2}{\dq {//}\dq \dq \text{\textvisiblespace} \dq ? \dq \#\dq /[\wedge\backslash n]{*}/}{}
@@ -84,12 +84,12 @@
 % (erwähnen, dass finalle Grammatik im Appendix)
 \subsection{Basic Lexer}
 \section{Syntaktische Analyse}
-\subsection{Konkrette Syntax für Parser erstellen}
+\subsection{Konkrette Syntax für die Syntaktische Analyse}
 % ./concrete_syntax_picoc.lark
 % https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
 In \ref{gr:concrete_syntax_parser}
 
-\begin{grammar}[Konkrette Syntax des Parsers in EBNF, Teil 1][H][gr:concrete_syntax_parser]
+\begin{grammar}[Konkrette Syntax Syntaktische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_parser]
   \toprule
 	\downplay
   \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith +}
@@ -163,7 +163,7 @@ In \ref{gr:concrete_syntax_parser}
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Konkrette Syntax des Parsers in EBNF, Teil 2][H]
+\begin{grammar}[Konkrette Syntax für die Syntaktische Analyse in EBNF, Teil 2][H]
   \toprule
 	\downplay
   \firstcase{decl\_exp\_stmt}{alloc\dq ;\dq }{L\_Stmt}
@@ -279,31 +279,29 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \begin{NiceTabular}{X[7]X[10]}[rules/color=PrimaryColor]
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-10}{SecondaryColor}{}[cols={1-2}]
+  \rowcolors{2-21}{SecondaryColor}{}[cols={1-2}]
   \Body
   \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
   \smalltt{Name()} & Ein \colorbold{Bezeichner}, aber da es keine gute Kurzform für \smalltt{Identifier()} (englisches Wort für Bezeichner) gibt, wurde dieser Knoten \smalltt{Name()} genannt. \\
   \smalltt{Num()} & Eine \colorbold{Zahl}. \\
   \smalltt{Char()} & Ein \colorbold{Zeichen} der \colorbold{ASCII-Zeichenkodierung} . \\
-  \smalltt{Minus(), Not(), DerefOp(), RefOp(), LogicNot()} & Die \colorbold{unären Operatoren} \smalltt{un\_op}: \smalltt{-a, {$\thicksim$}a, *a, \&a}. \\
+  \smalltt{Minus(), Not(), DerefOp(), RefOp(), LogicNot()} & Die \colorbold{unären Operatoren} \smalltt{un\_op}: \smalltt{-a, {$\thicksim$}a, *a, \&a !a}. \\
   \smalltt{Add(), Sub(), Mul(), Div(), Mod(), Oplus(), And(), Or(), LogicAnd(), LogicOr()} & Die \colorbold{binären Operatoren} \smalltt{bin\_op}: \smalltt{a + b, a - b, a * b, a / b, a \% b, a $\wedge$ b, a \& b, a $\mid$ b, a \&\& b, a {$\mid\mid$} b}. \\
   \smalltt{Eq(), NEq(), Lt(), LtE(), Gt(), GtE()} & Die \colorbold{Relationen} \smalltt{rel}: \smalltt{a == b, a != b, a < b, a <= b, a > b, a >= b}. \\
   \smalltt{Const(), Writeable()} & Die \colorbold{Type Qualifier} \smalltt{type\_qual}: \smalltt{const}, was für ein \colorbold{nicht beschreibbare} \colorbold{Konstante} steht und das \colorbold{nicht} Angeben von \smalltt{const}, was für einen \colorbold{beschreibbare} Variable steht. \\
-  \smalltt{IntType(), CharType(), VoidType()} & \colorbold{Type Specifier für Primitiven Datentypen}, die in der Abstrakten Syntax, um eine intuitive Bezeichnung zu haben einfach nur unter \colorbold{Datentypen} eingeordnet werden: \smalltt{int},  \smalltt{char},  \smalltt{void}. \\
-  \smalltt{BinOp(exp1, bin\_op, exp2)} & Container für eine \colorbold{binäre Operation}. \\
-  \smalltt{UnOp(un\_op, exp)} & Container für eine \colorbold{unäre Operation}. \\
-  \smalltt{Exit(num)} & \colorbold{Beendigung} des Programmes und ist Container für einen \colorbold{Exit Code}, der vor der Beendigung in das \smalltt{ACC} Register geschrieben wird. \\
-  \smalltt{Atom(exp1, rel, exp2)} & Container für eine \colorbold{binäre Relation} und 2 \colorbold{Expressions}. \\
-  \smalltt{ToBool(exp)} &  \\
-  \smalltt{Alloc(type\_qual, datatype, name, \textcolor{gray!90!black}{local\_var\_or\_param})} & \\
-  \smalltt{Assign(lhs, exp)} & \\
-  \smalltt{Exp(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & \\
-  \smalltt{Tmp(num)} & \\
-  \smalltt{StackRead(num)} & \\
-  \smalltt{StackWrite(num)} & \\
-  \smalltt{GlobalRead(num)} & \\
-  \smalltt{GlobalWrite(num)} & \\
-  \smalltt{StackMalloc(num)} & \\
+\smalltt{IntType(), CharType(), VoidType()} & Die \colorbold{Type Specifier} für \colorbold{Primitiven Datentypen}, die in der Abstrakten Syntax, um eine intuitive Bezeichnung zu haben einfach nur unter \colorbold{Datentypen} eingeordnet werden: \smalltt{int},  \smalltt{char},  \smalltt{void}. \\
+\smalltt{Placeholder()} & \colorbold{Platzhalter} für einen Knoten, der diesen später \colorbold{ersetzt}. \\
+  \smalltt{BinOp(exp, bin\_op, exp)} & Container für eine \colorbold{binäre Operation} mit $2$ Expressions. \\
+  \smalltt{UnOp(un\_op, exp)} & Container für eine \colorbold{unäre Operation} mit  einer Expression. \\
+  \smalltt{Exit(num)} & Container für einen \colorbold{Exit Code}, der vor der Beendigung in das \smalltt{ACC} Register geschrieben wird und steht für die \colorbold{Beendigung} des laufenden Programmes. \\
+  \smalltt{Atom(exp, rel, exp)} & Container für eine \colorbold{binäre Relation} mit $2$ Expressions. \\
+  \smalltt{ToBool(exp)} & Container für einen \colorbold{Arithmetischen Ausdruck}, wie z.B. \smalltt{1 + 3} oder einfach nur \smalltt{3}, der nicht nur $1$ oder $0$ als Ergebnis haben kann und daher bei einem Ergebnis $x > 1$ auf $1$ abgebildet wird. \\
+  \smalltt{Alloc(type\_qual, datatype, name, \textcolor{gray!90!black}{local\_var\_or\_param})} & \colorbold{Container} für eine \colorbold{Allokation} mit den notwendigen Knoten \smalltt{type\_qual},  \smalltt{datatype} und  \smalltt{name}, die alle für einen Eintrag in der  \colorbold{Symboltabelle} notwendigen Informationen enthalten. Zudem kann es ein \colorbold{verstecktes Attribut}  \smalltt{local\_var\_or\_param} besitzen, dass die Information trägt, ob es sich bei der \colorbold{Variable} um eine \colorbold{Lokale Variable} oder einen \colorbold{Parameter} handelt. \\
+  \smalltt{Assign(lhs, exp)} & Container für eine \colorbold{Zuweisung}. \\
+  \smalltt{Exp(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container für einen \colorbold{beliebigen Ausdruck}, dessen Ergebnis auf den \colorbold{Stack} soll. Zudem besitzt er $2$ \colorbold{versteckte Attribute}, wobei \smalltt{datatype} im \colorbold{RETI Blocks Pass} wichtig ist und \smalltt{error\_data} für \colorbold{Fehlermeldungen} wichtig ist. \\
+  \smalltt{Stack(num)} & Container, der für das \colorbold{temporäre} Ergebnis einer Berechnung, das \smalltt{num} Speicherzellen relativ zum  \colorbold{Stackpointer Register} \smalltt{SP} steht.\\
+  \smalltt{Stackframe(num)} & Container, der für eine Variable steht, die \smalltt{num} Speicherzellen relativ zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht. \\
+  \smalltt{Global(num)} & Container, der für eine Variable steht, die \smalltt{num} Speicherzellen relativ zum \colorbold{Datensegment Register} \smalltt{DS} steht. \\
   \bottomrule
 \end{NiceTabular}
 \caption{PicoC-Knoten Teil 1}
@@ -318,10 +316,11 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \rowcolors{2-27}{SecondaryColor}{}[cols={1-2}]
   \Body
   \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
-  \smalltt{PntrDecl(num, \textcolor{gray!90!black}{datatype})} & \\
-  \smalltt{Ref(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & \\
+  \smalltt{StackMalloc(num)} & Container, der für das \colorbold{Allokieren} von \smalltt{num} Speicherzellen auf dem \colorbold{Stack} steht. \\
+\smalltt{PntrDecl(num, datatype)} & Container, der für einen \colorbold{Pointerdatentyp} steht, wobei das \colorbold{Attribut} \smalltt{num} die \colorbold{Anzahl zusammengefasster Pointer} angibt und \smalltt{datatype} der {Datentyp} ist, auf den der oder die \colorbold{Pointer} zeigen. \\
+\smalltt{Ref(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container, der für eine \colorbold{Referenz} steht\\
   \smalltt{Deref(lhs, exp)} & \\
-  \smalltt{ArrayDecl(nums, \textcolor{gray!90!black}{datatype})} & \\
+  \smalltt{ArrayDecl(nums, datatype)} & \\
   \smalltt{Array(exps, \textcolor{gray!90!black}{datatype})} & \\
   \smalltt{Subscr(lhs, exp)} & \\
   \smalltt{StructSpec(name)} & \\
@@ -339,12 +338,10 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \smalltt{NewStackframe(fun\_name, goto\_after\_call)} & \\
   \smalltt{RemoveStackframe()} & \\
   \smalltt{File(name, decls\_defs\_blocks)} & \\
-  \smalltt{Block(name, stmts\_instrs, instrs\_before, num\_instrs, signature\_size, local\_vars\_size)} & \\
+  \smalltt{Block(name, stmts\_instrs, {instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{signature\_size}, \textcolor{gray!90!black}{local\_vars\_size})} & \\
   \smalltt{GoTo(name)} & \\
   \smalltt{SingleLineComment(prefix, content)} & \\
   \smalltt{RETIComment()} & \\
-  \smalltt{Placeholder()} & \\
-  \smalltt{Tmp(Num('addr'))} & Steht für ein \verb|exp|, dessen Wert bereits \colorbold{vorher} berechnet wurde und \smalltt{x} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer} \smalltt{SP} steht. \\
   \bottomrule
 \end{NiceTabular}
 \caption{PicoC-Knoten Teil 2}
@@ -352,19 +349,19 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 \end{table}
 
 \begin{Special_Paragraph}
-  Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \colorbold{versteckte Attribute}, die \colorbold{nicht} direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert \colorbold{initialisiert} werden, sondern im \colorbold{Verlauf der Kompilierung} beim Durchlaufen der verschiedenen Passes ein verstecktes Attribut zugewiesen bekommen, dass im weiteren Kompiliervorgang \colorbold{Informationen} transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
+  Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \colorbold{versteckte Attribute}, die \colorbold{nicht} direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert \colorbold{initialisiert} werden, sondern im \colorbold{Verlauf der Kompilierung} beim Durchlaufen der verschiedenen Passes etwas zugewiesen bekommen, dass im weiteren Kompiliervorgang \colorbold{Informationen} transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
 
   Jeder \colorbold{Knoten} hat darüberhinaus auch noch $2$ \colorbold{Attribute} \smalltt{value} und \smalltt{position}, wobei \colorbold{value} bei einem \colorbold{Token-Knoten} (Definition~\ref{def:token_knoten}) dem \colorbold{Tokenwert} des Tokens, welches es ersetzt entspricht und bei \colorbold{Container-Knoten} (Definition~\ref{def:container_knoten}) unbesetzt ist. Das \colorbold{Attribut} \smalltt{position} wird später für Fehlermeldungen gebraucht.
 \end{Special_Paragraph}
 
 \begin{Definition}{Token-Knoten}{token_knoten}
-  Ersetzt ein \colorbold{Token} bei der Generierung des \colorbold{Abstract Syntax Tree}, damit der Zugriff auf Knoten des Abstract Syntax Tree möglichst \colorbold{simpel} ist und keine vermeidbaren Fallunterscheidungen berücksichtigt werden müssen.
+  Ersetzt ein \colorbold{Token} bei der Generierung des \colorbold{Abstract Syntax Tree}, damit der Zugriff auf Knoten des Abstract Syntax Tree möglichst \colorbold{simpel} ist und keine vermeidbaren Fallunterscheidungen gemacht werden müssen.
 
   \colorbold{Token-Knoten} entsprechen im Abstract Syntax Tree \colorbold{Blättern}.\footcite{thiemann_compilerbau_2021}
 \end{Definition}
 
 \begin{Definition}{Container-Knoten}{container_knoten}
-  Dient als \colorbold{Container} für andere \colorbold{Container-Knoten} und \colorbold{Token-Knoten}. Die \colorbold{Container Knoten} werden optimalerweise immer so gewählt, dass sie mehrere \colorbold{Produktionen} der \colorbold{Konkretten} Syntax abdecken, die einen ähnlichen Aufbau haben und auch irgendeine Form der \colorbold{Semantischen Verwandschafft} vorliegt\footnote{Wie z.B. die verschiedenen Arithmetischen und Logischen Ausdrücke, die immer eine \colorbold{Operation} in der Mitte haben und $2$ \colorbold{Operanden} auf beiden Seiten.}.
+  Dient als \colorbold{Container} für andere \colorbold{Container-Knoten} und \colorbold{Token-Knoten}. Die \colorbold{Container-Knoten} werden optimalerweise immer so gewählt, dass sie \colorbold{mehrere Produktionen} der \colorbold{Konkretten Syntax} abdecken, die einen \colorbold{gleichen Aufbau} haben und sich auch unter einem \colorbold{Überbegriff} zusammenfassen lassen.\footnote{Wie z.B. die verschiedenen \colorbold{Arithmetischen Ausdrücke}, wie z.B. \smalltt{1 {\%} 3} und \colorbold{Logischen Ausdrücke}, wie z.B. \smalltt{1 \&\& 2 < 3}, die einen gleichen Aufbau haben mit immer einer \colorbold{Operation} in der Mitte haben und $2$ \colorbold{Operanden} auf beiden Seiten und sich unter dem Überbegriff \colorbold{Binäre Operationen} zusammenfassen lassen.}
 
   \colorbold{Container-Knoten} entsprechen im Abstract Syntax Tree \colorbold{Inneren Knoten}.\footcite{thiemann_compilerbau_2021}
 \end{Definition}
@@ -399,18 +396,18 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   \rowcolors{2-15}{SecondaryColor}{}[cols={1-2}]
   \Body
   \textbf{\textcolor{white}{Komposition}} &	\textbf{\textcolor{white}{Beschreibung}} \\
-  \smalltt{Ref(GlobalRead(Num('addr')))}	& Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
-  \smalltt{Ref(StackRead(Num('addr')))} & Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
-  \smalltt{Ref(Subscr(Tmp(Num('addr1')), Tmp(Num('addr2'))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('addr1'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Tmp(Num('addr2'))} steht und speichert diese auf den \colorbold{Stack}. Die Berechnung ist abhängig davon ob der \colorbold{Datentyp} \smalltt{ArrayDecl(datatype)} oder \smalltt{PntrDecl(datatype)} ist. Der \colorbold{Datentyp} ist ein \colorbold{verstecktes Attribut} von \smalltt{Ref(exp)}. \\
-  \smalltt{Ref(Attr(Tmp(Num('addr1')), Name('attr')))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Tmp(Num('addr1'))} steht und dem \colorbold{Attributnamen} \smalltt{Name('attr')} und speichert diese auf den \colorbold{Stack}. Zur Berechnung ist der Name des \colorbold{Struct} in \smalltt{StructSpec(Name('st'))} notwendig, dessen \colorbold{Attribut} \smalltt{Name('attr')} ist. \smalltt{StructSpec(Name('st'))} ist ein \colorbold{verstecktes Attribut} von  \smalltt{Ref(exp)}. \\
-  \smalltt{Assign(Tmp(Num('size'))), GlobalRead(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num('addr'))} relativ zum \colorbold{Datensegment Register}  \smalltt{DS} stehen, versetzt genauso auf den \colorbold{Stack}. \\
-  \smalltt{Assign(Tmp(Num('size')), StackRead(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{GlobalRead(Num('addr'))} relativ zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} stehen, versetzt genauso auf den \colorbold{Stack}. \\
-  \smalltt{Exp(GlobalRead(Num('addr'))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
-  \smalltt{Exp(StackRead(Num('addr'))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
-  \smalltt{Exp(Tmp(Num('addr')))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \smalltt{SP} steht auf den \colorbold{Stack}. \\
-  \smalltt{Assign(Tmp(Num('addr1')), Tmp(Num('addr2')))} & Speichert \colorbold{Inhalt} der Speicherzelle \smalltt{Tmp(Num('addr2'))}, die \smalltt{Num('addr2')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \smalltt{SP} steht an der \colorbold{Adresse} in der Speicherzelle, die \smalltt{Num('addr1')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \verb|SP| steht. \\
-  \smalltt{Assign(GlobalWrite(Num('addr')), Tmp(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Datensegment Register}  \smalltt{DS}. \\
-  \smalltt{Assign(StackWrite(Num('addr')), Tmp(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF}. \\
+  \smalltt{Ref(Global(Num('addr')))}	& Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
+  \smalltt{Ref(Stackframe(Num('addr')))} & Speichert \colorbold{Adresse} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
+  \smalltt{Ref(Subscr(Stack(Num('addr1')), Stack(Num('addr2'))))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Stack(Num('addr1'))} steht und dem \colorbold{Subscript Index}, der an Speicherzelle \smalltt{Stack(Num('addr2'))} steht und speichert diese auf den \colorbold{Stack}. Die Berechnung ist abhängig davon ob der \colorbold{Datentyp} \smalltt{ArrayDecl(datatype)} oder \smalltt{PntrDecl(datatype)} ist. Der \colorbold{Datentyp} ist ein \colorbold{verstecktes Attribut} von \smalltt{Ref(exp)}. \\
+  \smalltt{Ref(Attr(Stack(Num('addr1')), Name('attr')))} & Berechnet die nächste \colorbold{Adresse} aus der \colorbold{Adresse}, die an Speicherzelle \smalltt{Stack(Num('addr1'))} steht und dem \colorbold{Attributnamen} \smalltt{Name('attr')} und speichert diese auf den \colorbold{Stack}. Zur Berechnung ist der Name des \colorbold{Struct} in \smalltt{StructSpec(Name('st'))} notwendig, dessen \colorbold{Attribut} \smalltt{Name('attr')} ist. \smalltt{StructSpec(Name('st'))} ist ein \colorbold{verstecktes Attribut} von  \smalltt{Ref(exp)}. \\
+  \smalltt{Assign(Stack(Num('size'))), Global(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{Global(Num('addr'))} relativ zum \colorbold{Datensegment Register}  \smalltt{DS} stehen, versetzt genauso auf den \colorbold{Stack}. \\
+  \smalltt{Assign(Stack(Num('size')), Stackframe(Num('addr')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die ab \smalltt{Stackframe(Num('addr'))} relativ zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} stehen, versetzt genauso auf den \colorbold{Stack}. \\
+  \smalltt{Exp(Global(Num('addr'))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Datensegment Register} \smalltt{DS} steht auf den \colorbold{Stack}. \\
+  \smalltt{Exp(Stackframe(Num('addr'))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF} steht auf den \colorbold{Stack}. \\
+  \smalltt{Exp(Stack(Num('addr')))} & Speichert \colorbold{Inhalt} der Speicherzelle, die \smalltt{Num('addr')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \smalltt{SP} steht auf den \colorbold{Stack}. \\
+  \smalltt{Assign(Stack(Num('addr1')), Stack(Num('addr2')))} & Speichert \colorbold{Inhalt} der Speicherzelle \smalltt{Stack(Num('addr2'))}, die \smalltt{Num('addr2')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \smalltt{SP} steht an der \colorbold{Adresse} in der Speicherzelle, die \smalltt{Num('addr1')} Speicherzellen \colorbold{relativ} zum \colorbold{Stackpointer Register}  \verb|SP| steht. \\
+  \smalltt{Assign(Global(Num('addr')), Stack(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Datensegment Register}  \smalltt{DS}. \\
+  \smalltt{Assign(Stackframe(Num('addr')), Stack(Num('size')))} & Schreibt \smalltt{Num('size')} viele Speicherzellen, die auf dem \colorbold{Stack} stehen, versetzt genauso auf die Speicherzellen ab \smalltt{Num('addr')} \colorbold{relativ} zum \colorbold{Begin-Aktive-Funktion Register} \smalltt{BAF}. \\
   \smalltt{Exp(Reg(reg))} & Schreibt den aktuellen Wert des \colorbold{Registers} \smalltt{reg} auf den \colorbold{Stack}. \\
   \smalltt{Instr(Loadi(), [Reg(Acc()), Goto(Name('addr@next\_instr'))])} & Lädt in das Register \verb|ACC| die \colorbold{Adresse} der Instruction, die in diesem Kontext direkt nach dem Sprung zum Block einer anderen Funktion steht.\\
   \bottomrule
@@ -420,7 +417,7 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 \end{table}
 
 \begin{Special_Paragraph}
-  Um die obige Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} nicht mit unnötig viel repetetiven Inhalt zu füllen, wurden die zahlreichen Kompostionen \colorbold{ausgelassen}, bei denen einfach nur \verb|exp| durch $\mathtt{Tmp(Num('x')), x}\in\mathbb{N}$ ersetzt wurde.
+  Um die obige Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} nicht mit unnötig viel repetetiven Inhalt zu füllen, wurden die zahlreichen Kompostionen \colorbold{ausgelassen}, bei denen einfach nur \verb|exp| durch $\mathtt{Stack(Num('x')), x}\in\mathbb{N}$ ersetzt wurde.
 
   Zudem sind auch jegliche Kombinationen ausgelassen, bei denen einfach nur eine \colorbold{Expression} an ein \smalltt{Exp(exp)} bzw.  \smalltt{Ref(exp)} drangehängt wurde.
 \end{Special_Paragraph}
@@ -448,9 +445,9 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   \midrule
   \firstcase{type\_qual}{Const() \gralt Writeable()}{L\_Assign\_Alloc}
   \firstcase{datatype}{IntType() \gralt CharType() \gralt VoidType()}{}
-  \firstcase{assign\_lhs}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str)) \gralt \langle rel\_loc\rangle }{}
+  \firstcase{lhs}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str)) \gralt \langle rel\_loc\rangle }{}
   \firstcase{exp\_stmts}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
-  \firstcase{stmt}{Assign(\langle assign\_lhs\rangle , \langle exp\rangle )}{}
+  \firstcase{stmt}{Assign(\langle lhs\rangle , \langle exp\rangle )}{}
   \otherform{Exp(\langle exp\_stmts\rangle )}{}
   \midrule
   \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
@@ -588,9 +585,8 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
   \toprule
-  \firstcase{ref\_loc}{Tmp(Num(str)) \gralt StackRead(Num(str))}{L\_Assign\_Alloc}
-  \otherform{StackWrite(Num(str)) \gralt GlobalRead(Num(str))}{}
-  \otherform{GlobalWrite(Num(str))}{}
+  \firstcase{ref\_loc}{Stack(Num(str)) \gralt Global(Num(str))}{L\_Assign\_Alloc}
+  \otherform{Stackframe(Num(str))}{}
   \firstcase{error\_data}{\langle exp\rangle  \gralt Pos(Num(str), Num(str))}{}
   \firstcase{exp}{Stack(Num(str)) \gralt Ref(\langle ref_loc\rangle , \langle datatype\rangle , \langle error_data\rangle )}{}
   \firstcase{stmt}{Exp(\langle exp\rangle )}{}

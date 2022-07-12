@@ -1,7 +1,7 @@
 \addvspace {10\p@ }
-\contentsline {floatgrammar}{\numberline {1.1.1}{\ignorespaces Konkrette Syntax des Lexers in EBNF\relax }}{9}{floatgrammar.caption.7}%
-\contentsline {floatgrammar}{\numberline {1.2.1}{\ignorespaces Konkrette Syntax des Parsers in EBNF, Teil 1\relax }}{10}{floatgrammar.caption.8}%
-\contentsline {floatgrammar}{\numberline {1.2.2}{\ignorespaces Konkrette Syntax des Parsers in EBNF, Teil 2\relax }}{11}{floatgrammar.caption.9}%
+\contentsline {floatgrammar}{\numberline {1.1.1}{\ignorespaces Konkrette Syntax für die Lexikalische Analyse in EBNF\relax }}{9}{floatgrammar.caption.7}%
+\contentsline {floatgrammar}{\numberline {1.2.1}{\ignorespaces Konkrette Syntax Syntaktische Analyse in EBNF, Teil 1\relax }}{10}{floatgrammar.caption.8}%
+\contentsline {floatgrammar}{\numberline {1.2.2}{\ignorespaces Konkrette Syntax für die Syntaktische Analyse in EBNF, Teil 2\relax }}{11}{floatgrammar.caption.9}%
 \contentsline {floatgrammar}{\numberline {1.2.3}{\ignorespaces Abstrakte Syntax für $L_{PiocC}$\relax }}{20}{floatgrammar.caption.18}%
 \contentsline {floatgrammar}{\numberline {1.3.1}{\ignorespaces Abstrakte Syntax für $L_{PicoC\_Blocks}$\relax }}{25}{floatgrammar.caption.26}%
 \contentsline {floatgrammar}{\numberline {1.3.2}{\ignorespaces Abstrakte Syntax für $L_{PicoC\_Mon}$\relax }}{27}{floatgrammar.caption.28}%
