@@ -9,7 +9,7 @@ File
         Exp 
           Num '42', 
         IfElse 
-          Tmp 
+          Stack 
             Num '1', 
           GoTo 
             Name 'if.1', 

@@ -4,7 +4,7 @@ JUMP 7;
 SUBI SP 1;
 LOADI ACC 42;
 STOREIN SP ACC 1;
-# Return(Tmp(Num('1')))
+# Return(Stack(Num('1')))
 LOADIN SP ACC 1;
 ADDI SP 1;
 LOADIN BAF PC -1;
@@ -25,7 +25,7 @@ JUMP -15;
 MOVE BAF IN1;
 LOADIN IN1 BAF 0;
 MOVE IN1 SP;
-# Assign(GlobalWrite(Num('0')), Tmp(Num('1')))
+# Assign(Global(Num('0')), Stack(Num('1')))
 LOADIN SP ACC 1;
 STOREIN DS ACC 0;
 ADDI SP 1;

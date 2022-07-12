@@ -8,18 +8,18 @@ File
         Exp 
           Num '42', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '0', 
-          Tmp 
+          Stack 
             Num '1', 
         // Assign(Name('pntr'), Ref(Name('var'))), 
         Ref 
-          GlobalRead 
+          Global 
             Num '0', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '1', 
-          Tmp 
+          Stack 
             Num '1', 
         Return 
           Empty

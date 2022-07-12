@@ -7,7 +7,7 @@ File
         StackMalloc 
           Num '2', 
         Ref 
-          GlobalRead 
+          Global 
             Num '0', 
         NewStackframe 
           Name 'stack_fun', 

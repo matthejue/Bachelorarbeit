@@ -8,17 +8,17 @@ File
         Exp 
           Num '4', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '0', 
-          Tmp 
+          Stack 
             Num '1', 
         // Assign(Name('res'), Num('1')), 
         Exp 
           Num '1', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '1', 
-          Tmp 
+          Stack 
             Num '1', 
         // While(Num('1'), []), 
         Exp 
@@ -32,7 +32,7 @@ File
         Exp 
           Num '1', 
         IfElse 
-          Tmp 
+          Stack 
             Num '1', 
           GoTo 
             Name 'while_branch.3', 
@@ -45,19 +45,19 @@ File
         // If(Atom(Name('n'), Eq('=='), Num('1')), []), 
         // IfElse(Atom(Name('n'), Eq('=='), Num('1')), GoTo(Name('if.2')), GoTo(Name('if_else_after.1'))), 
         Exp 
-          GlobalRead 
+          Global 
             Num '0', 
         Exp 
           Num '1', 
         Exp 
           Atom 
-            Tmp 
+            Stack 
               Num '2', 
             Eq '==', 
-            Tmp 
+            Stack 
               Num '1', 
         IfElse 
-          Tmp 
+          Stack 
             Num '1', 
           GoTo 
             Name 'if.2', 
@@ -75,40 +75,40 @@ File
       [
         // Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res'))), 
         Exp 
-          GlobalRead 
+          Global 
             Num '0', 
         Exp 
-          GlobalRead 
+          Global 
             Num '1', 
         Exp 
           BinOp 
-            Tmp 
+            Stack 
               Num '2', 
             Mul '*', 
-            Tmp 
+            Stack 
               Num '1', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '1', 
-          Tmp 
+          Stack 
             Num '1', 
         // Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1'))), 
         Exp 
-          GlobalRead 
+          Global 
             Num '0', 
         Exp 
           Num '1', 
         Exp 
           BinOp 
-            Tmp 
+            Stack 
               Num '2', 
             Sub '-', 
-            Tmp 
+            Stack 
               Num '1', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '0', 
-          Tmp 
+          Stack 
             Num '1', 
         Exp 
           GoTo 

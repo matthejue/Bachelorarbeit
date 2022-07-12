@@ -13,9 +13,9 @@ File
         StackMalloc 
           Num '2', 
         Assign 
-          Tmp 
+          Stack 
             Num '3', 
-          GlobalRead 
+          Global 
             Num '0', 
         NewStackframe 
           Name 'stack_fun', 

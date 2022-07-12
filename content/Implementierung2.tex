@@ -8,7 +8,7 @@
 
 \subsection{Umsetzung von Pointern}
 \subsubsection{Referenzierung}
-Die \colorbold{Referenzierung} \verb|&var| wird im Folgenden anhand des Beispiels Code~\ref{code:picoc_code_für_pointer_referenzierung} erklärt.
+Die \colorbold{Referenzierung} \verb|&var| wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_pointer_referenzierung} erklärt.
 
 \begin{code}
   \centering
@@ -21,7 +21,7 @@ Der Node \smalltt{Ref(Name('var')))} repräsentiert in der \colorbold{Abstrakten
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_pntr_ref.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={22-23}}]{./code_examples/example_pntr_ref.ast}
   \caption{Abstract Syntax Tree für Pointer Referenzierung}
   \label{code:abstract_syntax_tree_für_pointer_referenzierung}
 \end{code}
@@ -30,7 +30,7 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzi
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_pntr_ref.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={16-23}}]{./code_examples/example_pntr_ref.picoc_mon}
   \caption{PicoC Mon Pass für Pointer Referenzierung}
   \label{code:picoc_mon_für_pointer_referenzierung}
 \end{code}

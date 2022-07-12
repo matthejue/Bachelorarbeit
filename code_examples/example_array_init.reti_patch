@@ -16,7 +16,7 @@ File
         SUBI SP 1, 
         LOADI ACC 2, 
         STOREIN SP ACC 1, 
-        # Assign(GlobalWrite(Num('0')), Tmp(Num('2'))), 
+        # Assign(Global(Num('0')), Stack(Num('2'))), 
         LOADIN SP ACC 1, 
         STOREIN DS ACC 1, 
         LOADIN SP ACC 2, 

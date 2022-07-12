@@ -3,22 +3,22 @@
 SUBI SP 1;
 LOADI ACC 42;
 STOREIN SP ACC 1;
-# Assign(GlobalWrite(Num('0')), Tmp(Num('1')))
+# Assign(Global(Num('0')), Stack(Num('1')))
 LOADIN SP ACC 1;
 STOREIN DS ACC 0;
 ADDI SP 1;
 # // Assign(Name('pntr'), Ref(Name('var')))
-# Ref(GlobalRead(Num('0')))
+# Ref(Global(Num('0')))
 SUBI SP 1;
 LOADI IN1 0;
 ADD IN1 DS;
 STOREIN SP IN1 1;
-# Assign(GlobalWrite(Num('1')), Tmp(Num('1')))
+# Assign(Global(Num('1')), Stack(Num('1')))
 LOADIN SP ACC 1;
 STOREIN DS ACC 1;
 ADDI SP 1;
 # // Exp(Subscr(Name('pntr'), Num('0')))
-# Ref(GlobalRead(Num('1')))
+# Ref(Global(Num('1')))
 SUBI SP 1;
 LOADI IN1 1;
 ADD IN1 DS;
@@ -27,7 +27,7 @@ STOREIN SP IN1 1;
 SUBI SP 1;
 LOADI ACC 0;
 STOREIN SP ACC 1;
-# Ref(Subscr(Tmp(Num('2')), Tmp(Num('1'))))
+# Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
 LOADIN SP IN2 2;
 LOADIN IN2 IN1 0;
 LOADIN SP IN2 1;
@@ -35,7 +35,6 @@ MULTI IN2 1;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
-# Exp(Subscr(Tmp(Num('1')), Num('0')))
 LOADIN SP IN1 1;
 LOADIN IN1 ACC 0;
 STOREIN SP ACC 1;

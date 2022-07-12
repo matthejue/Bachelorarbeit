@@ -8,49 +8,47 @@ File
         Exp 
           Num '42', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '0', 
-          Tmp 
+          Stack 
             Num '1', 
         // Assign(Name('st_first'), Struct([Assign(Name('ar'), Ref(Name('var')))])), 
         Ref 
-          GlobalRead 
+          Global 
             Num '0', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '1', 
-          Tmp 
+          Stack 
             Num '1', 
         // Exp(Subscr(Subscr(Attr(Name('st_first'), Name('ar')), Num('0')), Num('0'))), 
         Ref 
-          GlobalRead 
+          Global 
             Num '1', 
         Ref 
           Attr 
-            Tmp 
+            Stack 
               Num '1', 
             Name 'ar', 
         Exp 
           Num '0', 
         Ref 
           Subscr 
-            Tmp 
+            Stack 
               Num '2', 
-            Tmp 
+            Stack 
               Num '1', 
         Exp 
           Num '0', 
         Ref 
           Subscr 
-            Tmp 
+            Stack 
               Num '2', 
-            Tmp 
+            Stack 
               Num '1', 
         Exp 
-          Subscr 
-            Tmp 
-              Num '1', 
-            Num '0', 
+          Stack 
+            Num '1', 
         Return 
           Empty
       ]

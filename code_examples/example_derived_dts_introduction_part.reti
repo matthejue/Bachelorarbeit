@@ -1,10 +1,10 @@
-# Exp(GlobalRead(Num('9')))
+# Exp(Global(Num('9')))
 SUBI SP 1;
 LOADIN DS ACC 9;
 STOREIN SP ACC 1;
 # Return(Empty())
 LOADIN BAF PC -1;
-# Exp(StackRead(Num('9')))
+# Exp(Stackframe(Num('9')))
 SUBI SP 1;
 LOADIN BAF ACC -11;
 STOREIN SP ACC 1;

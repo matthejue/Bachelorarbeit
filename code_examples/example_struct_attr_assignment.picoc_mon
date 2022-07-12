@@ -10,27 +10,25 @@ File
         Exp 
           Num '2', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '0', 
-          Tmp 
+          Stack 
             Num '2', 
         // Assign(Attr(Name('st'), Name('y')), Num('42')), 
         Exp 
           Num '42', 
         Ref 
-          GlobalRead 
+          Global 
             Num '0', 
         Ref 
           Attr 
-            Tmp 
+            Stack 
               Num '1', 
             Name 'y', 
         Assign 
-          Subscr 
-            Tmp 
-              Num '1', 
-            Num '0', 
-          Tmp 
+          Stack 
+            Num '1', 
+          Stack 
             Num '2', 
         Return 
           Empty

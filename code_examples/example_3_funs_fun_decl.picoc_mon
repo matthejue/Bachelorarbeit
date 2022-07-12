@@ -26,9 +26,9 @@ File
         Exp 
           ACC, 
         Assign 
-          GlobalWrite 
+          Global 
             Num '0', 
-          Tmp 
+          Stack 
             Num '1', 
         Return 
           Empty
@@ -38,10 +38,10 @@ File
       [
         // Return(Name('var')), 
         Exp 
-          StackRead 
+          Stackframe 
             Num '0', 
         Return 
-          Tmp 
+          Stack 
             Num '1'
       ]
   ]

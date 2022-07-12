@@ -5,7 +5,7 @@ File
       Name 'main.1', 
       [
         Exp 
-          GlobalRead 
+          Global 
             Num '9', 
         Return 
           Empty
@@ -14,7 +14,7 @@ File
       Name 'fun.0', 
       [
         Exp 
-          StackRead 
+          Stackframe 
             Num '9', 
         Return 
           Empty

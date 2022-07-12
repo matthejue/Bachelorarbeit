@@ -10,9 +10,9 @@ File
         Exp 
           Num '2', 
         Assign 
-          GlobalWrite 
+          Global 
             Num '0', 
-          Tmp 
+          Stack 
             Num '2', 
         Return 
           Empty
