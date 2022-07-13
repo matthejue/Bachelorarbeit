@@ -26,7 +26,7 @@ Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstrakt Syn
   \label{code:abstract_syntax_tree_für_pointer_referenzierung}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzierung} wird der Knoten \smalltt{Ref(Name('var')))} durch die Knoten \smalltt{Ref(GlobalRead(Num('0')))} und \smalltt{Assign(GlobalWrite(Num('1')), Tmp(Num('1')))} ersetzt. Im Fall, dass in \smalltt{Ref(exp))} das \smalltt{exp} vielleicht nicht direkt ein \smalltt{Name('var')} enthält und \smalltt{exp} z.B. ein \smalltt{Subscr(Attr(Name('var')))} ist, sind noch weitere Anweisungen zwischen den Zeilen \smalltt{11} und  \smalltt{12} nötig, die sich in diesem Beispiel um das Übersetzen von \smalltt{Subscr(exp)} und \smalltt{Attr(exp)} nach dem Schema in Subkapitel~\ref{mittelteil_für_die_verschiedenen_derived_datatypes} kümmern.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzierung} wird der Knoten \smalltt{Ref(Name('var')))} durch die Knoten \smalltt{Ref(GlobalRead(Num('0')))} und \smalltt{Assign(GlobalWrite(Num('1')), Tmp(Num('1')))} ersetzt. Im Fall, dass in \smalltt{Ref(exp))} das \smalltt{exp} vielleicht nicht direkt ein \smalltt{Name('var')} enthält und \smalltt{exp} z.B. ein \smalltt{Subscr(Attr(Name('var')))} ist, sind noch weitere Anweisungen zwischen den Zeilen \smalltt{11} und  \smalltt{12} nötig, die sich in diesem Beispiel um das Übersetzen von \smalltt{Subscr(exp)} und \smalltt{Attr(exp)} nach dem Schema in Subkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} kümmern.
 
 \begin{code}
   \centering
@@ -96,7 +96,7 @@ Die \colorbold{Initialisierung} eines \colorbold{Arrays} \smalltt{<datatype> <va
 
 Bei der \colorbold{Initialisierung} eines \colorbold{Arrays} wird zuerst \smalltt{Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')))} ausgewertet, da eine Variable zuerst definiert sein muss, bevor man sie verwenden kann\footnote{Das Widerspricht der üblichen Auswertungsreihenfolge beim \colorbold{Zuweisungsoperator} \smalltt{=}, der \colorbold{rechtsassoziativ} ist. Der \colorbold{Zuweisungsoperator} \smalltt{=} tritt allerdings erst später in Aktion.}. Das \colorbold{Definieren} der Variable \smalltt{ar} erfolgt mittels der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_array_initialisierung} dargestellt ist.
 
-Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die Entgegengesetzt Richtung der \colorbold{Globalen Statischen Daten} wächst\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
+Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die Entgegengesetzte Richtung, verglichen mit den \colorbold{Globalen Statischen Daten} wächst\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
 
 \begin{code}
   \centering
@@ -105,7 +105,7 @@ Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwär
   \label{code:symboltabelle_für_array_initialisierung}
 \end{code}
 
-Im \colorbold{PiocC-Mon Pass} in Code~\ref{code:picoc_mon_für_array_initialisierung} werden zuerst die \colorbold{Ausdrücke} im \colorbold{Array-Initializer} \smalltt{Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])])} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet und auf den \colorbold{Stack} geschrieben.
+Im \colorbold{PiocC-Mon Pass} in Code~\ref{code:picoc_mon_für_array_initialisierung} werden zuerst die \colorbold{Ausdrücke} im \colorbold{Array-Initializer} \smalltt{Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])])} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet und auf den \colorbold{Stack} geschrieben\footnote{Da der \colorbold{Zuweisungsoperator} \smalltt{=} \colorbold{rechtsassoziativ} ist und auch rein \colorbold{logisch}, weil man nichts zuweisen kann, was man noch nicht berechnet hat.}.
 
 Im finalen Schritt muss zwischen \colorbold{Globalen Statischen Daten} bei der \smalltt{main}-Funktion und \colorbold{Stackframe} bei der Funktion \smalltt{fun} unterschieden werden. Die auf den Stack ausgewerteten Expressions werden mittels der Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))}, versetzt in der selben Reihenfolge zu den \colorbold{Globalen Statischen Daten} bzw. auf den \colorbold{Stackframe} geschrieben.
 
@@ -150,13 +150,17 @@ Der \colorbold{Zugriff auf einen Arrayindex} \smalltt{ar[0]} wird im  \colorbold
   \label{code:abstract_syntax_tree_für_zugriff_auf_arrayindex}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_zugriff_auf_arrayindex} wird beim \colorbold{Container-Knoten} \smalltt{Subscr(Name('ar'), Num('0'))} zuerst im \colorbold{Einleitungsteil} die \colorbold{Adresse} der Variable \smalltt{Name('ar')} auf den \colorbold{Stack} geschrieben. Bei den \colorbold{Globalen Statischen Daten} der \smalltt{main}-Funktion wird das durch die Komposition \smalltt{Ref(Global(Num('0')))} dargestellt und beim \colorbold{Stackframe} der Funktionm \smalltt{fun} wird das durch die Komposition \smalltt{Ref(Stackframe(Num('2')))} dargestellt.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_zugriff_auf_arrayindex} wird vom \colorbold{Container-Knoten} \smalltt{Subscr(Name('ar'), Num('0'))} zuerst im \colorbold{Anfangsteil}~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe} die \colorbold{Adresse} der Variable \smalltt{Name('ar')} auf den \colorbold{Stack} geschrieben. Bei den \colorbold{Globalen Statischen Daten} der \smalltt{main}-Funktion wird das durch die Komposition \smalltt{Ref(Global(Num('0')))} dargestellt und beim \colorbold{Stackframe} der Funktionm \smalltt{fun} wird das durch die Komposition \smalltt{Ref(Stackframe(Num('2')))} dargestellt.
 
-In nächsten Schritt, dem \colorbold{Mittelteil} wird die Adresse des \colorbold{Index}, des Arrays auf das Zugegriffen werden soll berechnet. Da der \colorbold{Index} auf den Zugegriffen werden soll auch durch das Ergebnis eines \colorbold{komplexeren Ausdrucks}, z.B. \smalltt{<ar>[1 + <var>]} bestimmt sein kann, indem auch \colorbold{Variablen} vorkommen können, kann dieser nicht während des \colorbold{Kompilierens} berechnet werden, sondern muss zur \colorbold{Laufzeit} berechnet werden.
+In nächsten Schritt, dem \colorbold{Mittelteil}~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} wird die Adresse des \colorbold{Index}, des Arrays auf das Zugegriffen werden soll berechnet. Da der \colorbold{Index} auf den Zugegriffen werden soll auch durch das Ergebnis eines \colorbold{komplexeren Ausdrucks}, z.B. \smalltt{<ar>[1 + <var>]} bestimmt sein kann, indem auch \colorbold{Variablen} vorkommen können, kann dieser nicht während des \colorbold{Kompilierens} berechnet werden, sondern muss zur \colorbold{Laufzeit} berechnet werden.
 
 Daher muss zuerst der Wert des \colorbold{Index}, dessen Adresse berechnet werden soll bestimmt werden, z.B. im einfachen Fall durch \smalltt{Exp(Num('0'))} und dann muss die \colorbold{Adresse des Index} berechnet werden, was durch die Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} dargestellt wird. Die Bedeutung der Komposition \smalltt{\smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))}} ist in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} dokumentiert.
 
-Je nachdem, ob mehrere \smalltt{Subscr(exp, exp)} eine Komposition bilden (z.B. \smalltt{Subscr(Subscr(Name('<var>'), Num('<i>')), Num('<i>'))}) ist es notwendig mehrere \colorbold{Adressberechnungsschritte für den Index} \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} einzuleiten und es muss auch möglich sein, z.B. einen \colorbold{Attributzugriff} \smalltt{<var>.<attr>} und eine \colorbold{Zugriff auf einen Arryindex} \smalltt{<var>[<i>]} miteinander zu kombinieren, was in Subkapitel~\ref{mittelteil_für_die_verschiedenen_derived_datatypes} allgemein erklärt ist.
+Je nachdem, ob mehrere \smalltt{Subscr(exp, exp)} eine Komposition bilden (z.B. \smalltt{Subscr(Subscr(Name('<var>'), Num('<i>')), Num('<i>'))}) ist es notwendig mehrere \colorbold{Adressberechnungsschritte für den Index} \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} einzuleiten und es muss auch möglich sein, z.B. einen \colorbold{Attributzugriff} \smalltt{<var>.<attr>} und eine \colorbold{Zugriff auf einen Arryindex} \smalltt{<var>[<i>]} miteinander zu kombinieren, was in Subkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} allgemein erklärt ist.
+
+Im letzten Schritt, dem \colorbold{Schlussteil}~\ref{sec:schlussteil_für_die_verschiedenen_derived_datatypes} wird der \colorbold{Inhalt} des \colorbold{Index}, dessen \colorbold{Adresse} in den vorherigen Schritten berechnet wurde, nun auf den \colorbold{Stack} geschrieben, wobei dieser die \colorbold{Adresse} auf dem Stack ersetzt, die es zum Finden des \colorbold{Index} brauchte. Dies wird durch den Knoten \smalltt{Exp(Stack(Num('1')))} dargestellt. Je nachdem, welchen \colorbold{Datentyp} die Variable \smalltt{ar} hat und auf welchen \colorbold{Subdatentyp}, welcher ein \textcolor{gray!90!black}{verstecktes Attribut} des \smalltt{Exp(Stack(Num('1')))} Knoten ist folglich im \colorbold{Kontext} zuletzt zugegriffen wird, abhängig davon wird der \colorbold{Schlussteil} \smalltt{Exp(Stack(Num('1')))} auf eine andere Weise verarbeitet (siehe Subkapitel~\ref{sec:schlussteil_für_die_verschiedenen_derived_datatypes}).
+
+Der einzige \colorbold{Unterschied}, je nachdem, ob der \colorbold{Zugriff auf einen Arrayindex} \smalltt{<ar>{<i>}} in der  \smalltt{main}-Funktion oder der Funktion \smalltt{fun} erfolgt, ist eigentlich nur beim \colorbold{Anfangsteil}, beim Schreiben der \colorbold{Adresse} der Variable \smalltt{<ar>} auf den \colorbold{Stack} zu finden.
 
 \begin{code}
   \centering
@@ -165,9 +169,7 @@ Je nachdem, ob mehrere \smalltt{Subscr(exp, exp)} eine Komposition bilden (z.B. 
   \label{code:picoc_mon_für_zugriff_auf_arrayindex}
 \end{code}
 
-Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initialisierung} werden die \colorbold{Kompositionen} \smalltt{Ref(Global(Num('0')))}, \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
-
-
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_zugriff_auf_arrayindex} werden die \colorbold{Kompositionen} \smalltt{Ref(Global(Num('0')))}, \smalltt{Ref(Subscr(Stack(Num('2')) und Stack(Num('1'))))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
 \begin{code}
   \centering
@@ -178,30 +180,43 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initial
 
 \subsubsection{Zuweisung an Arrayindex}
 % Formel aus der Vorlesung, wo ist die hier?
+
+Die \colorbold{Zuweisung} eines Wertes an einen \colorbold{Arrayindex} \smalltt{ar[2] = 42;} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_array_assignment} erläutert.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_array_assignment.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={3}}]{./code_examples/example_array_assignment.picoc}
   \caption{PicoC-Code für Zuweisung an Arrayindex}
   \label{code:picoc_code_für_array_assignment}
 \end{code}
 
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_array_assignment} wird eine \colorbold{Zuweisung} an einen \colorbold{Arrayindex} \smalltt{ar[2] = 42;} durch die Komposition \smalltt{Assign(Subscr(Name('ar'), Num('2')), Num('42'))} dargestellt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={10}}]{./code_examples/example_array_assignment.ast}
   \caption{Abstract Syntax Tree für Zuweisung an Arrayindex}
   \label{code:abstract_syntax_tree_für_array_assignment}
 \end{code}
 
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_array_assignment} wird zuerst die \colorbold{rechte} Seite des \colorbold{rechtsassoziativen} Zuweisungsoperators \smalltt{=}, bzw. des \colorbold{Container-Knotens} der diesen darstellt ausgewertet: \smalltt{Exp(Num('42'))}.
+
+Danach ist das Vorgehen, bzw. sind die Kompostionen, die dieses darauffolgende Vorgehen darstellen: \smalltt{Ref(Global(Num('0')))}, \smalltt{Exp(Num('2'))} und \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} identisch zum \colorbold{Anfangsteil} und \colorbold{Mittelteil} aus dem vorherigen Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement}. Es wird die \colorbold{Adresse} des \colorbold{Index}, dem das Ergebnis der Ausdrucks auf der rechten Seite des \colorbold{Zuweisungsoperators} \smalltt{=} zugewiesen wird berechet, wie in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement}.
+
+Zum Schluss stellt die \colorbold{Komposition} \smalltt{Assign(Stack(Num('1')), Stack(Num('2')))}\footnote{Ist in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} genauer beschrieben ist} die Zuweisung \smalltt{=} des Ergebnisses des Ausdrucks auf der \colorbold{rechten} Seite der Zuweisung zum \colorbold{Arrayindex}, dessen \colorbold{Adresse} im Schritt danach berechnet wurde dar.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={9-13}}]{./code_examples/example_array_assignment.picoc_mon}
   \caption{PicoC-Mon Pass für Zuweisung an Arrayindex}
   \label{code:picoc_mon_für_array_assignment}
 \end{code}
 
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_assignment} werden die \colorbold{Kompositionen} \smalltt{Ref(Global(Num('0')))}, \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} und \smalltt{Assign(Stack(Num('1')), Stack(Num('2')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={10-12,14-17,19-21,23-28,30-33}}]{./code_examples/example_array_assignment.reti_blocks}
   \caption{RETI-Blocks Pass für Zuweisung an Arrayindex}
   \label{code:reti_blocks_für_array_assignment}
 \end{code}
@@ -319,13 +334,14 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initial
 \end{code}
 
 \subsection{Umsetzung der Derived Datatypes im Zusammenspiel}
-\subsubsection{Einleitungsteil für Globale Statische Daten und Stackframe}
+\subsubsection{Anfangsteil für Globale Statische Daten und Stackframe}
+\label{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}
 % Stack und Globale Statische Daten, unterschieldihe Berechnung der Adressen
 % unterschiedliche Adressberechnung
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_introduction_part.picoc}
-  \caption{PicoC-Code für den Einleitungsteil}
+  \caption{PicoC-Code für den Anfangsteil}
   \label{code:picoc_code_einleitungsteil}
 \end{code}
 
@@ -334,26 +350,26 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initial
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.ast}
-  \caption{Abstract Syntax Tree für den Einleitungsteil}
+  \caption{Abstract Syntax Tree für den Anfangsteil}
   \label{code:abstract_syntax_tree_einleitungsteil}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.picoc_mon}
-  \caption{PicoC-Mon Pass für den Einleitungsteil}
+  \caption{PicoC-Mon Pass für den Anfangsteil}
   \label{code:picoc_mon_pass_einleitungsteil}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.reti_blocks}
-  \caption{RETI-Blocks Pass für den Einleitungsteil}
+  \caption{RETI-Blocks Pass für den Anfangsteil}
   \label{code:reti_blocks_pass_einleitungsteil}
 \end{code}
 
 \subsubsection{Mittelteil für die verschiedenen Derived Datatypes}
-\label{mittelteil_für_die_verschiedenen_derived_datatypes}
+\label{sec:mittelteil_für_die_verschiedenen_derived_datatypes}
 
 \begin{code}
   \centering
@@ -387,6 +403,7 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initial
 % spezielles Vorgehen bei PntrDecl
 
 \subsubsection{Schlussteil für die verschiedenen Derived Datatypes}
+\label{sec:schlussteil_für_die_verschiedenen_derived_datatypes}
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_final_part.picoc}

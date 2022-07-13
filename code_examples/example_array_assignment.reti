@@ -22,6 +22,7 @@ MULTI IN2 1;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
+# Assign(Stack(Num('1')), Stack(Num('2')))
 LOADIN SP IN1 1;
 LOADIN SP ACC 2;
 ADDI SP 2;
