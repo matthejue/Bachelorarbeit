@@ -6,18 +6,8 @@ File
       Name 'main', 
       [], 
       [
-        Assign 
-          Alloc 
-            Writeable, 
-            IntType 'int', 
-            Name 'n', 
-          Num '4', 
-        Assign 
-          Alloc 
-            Writeable, 
-            IntType 'int', 
-            Name 'res', 
-          Num '1', 
+        Assign(Alloc(Writeable(), IntType('int'), Name('n')), Num('4'))
+        Assign(Alloc(Writeable(), IntType('int'), Name('res')), Num('1')), 
         While 
           Num '1', 
           [
@@ -27,21 +17,10 @@ File
                 Eq '==', 
                 Num '1', 
               [
-                Return 
-                  Empty
-              ], 
-            Assign 
-              Name 'res', 
-              BinOp 
-                Name 'n', 
-                Mul '*', 
-                Name 'res', 
-            Assign 
-              Name 'n', 
-              BinOp 
-                Name 'n', 
-                Sub '-', 
-                Num '1'
+                Return(Empty())
+              ]
+            Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res')))
+            Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1')))
           ]
       ]
   ]

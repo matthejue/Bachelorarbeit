@@ -4,39 +4,17 @@ File
     Block 
       Name 'main.0', 
       [
-        // Assign(Name('var'), Num('42')), 
-        Exp 
-          Num '42', 
-        Assign 
-          Global 
-            Num '0', 
-          Stack 
-            Num '1', 
-        // Assign(Name('pntr'), Ref(Name('var'))), 
-        Ref 
-          Global 
-            Num '0', 
-        Assign 
-          Global 
-            Num '1', 
-          Stack 
-            Num '1', 
-        // Exp(Subscr(Name('pntr'), Num('0'))), 
-        Ref 
-          Global 
-            Num '1', 
-        Exp 
-          Num '0', 
-        Ref 
-          Subscr 
-            Stack 
-              Num '2', 
-            Stack 
-              Num '1', 
-        Exp 
-          Stack 
-            Num '1', 
-        Return 
-          Empty
+        // Assign(Name('var'), Num('42'))
+        Exp(Num('42'))
+        Assign(Global(Num('0')), Stack(Num('1')))
+        // Assign(Name('pntr'), Ref(Name('var')))
+        Ref(Global(Num('0')))
+        Assign(Global(Num('1')), Stack(Num('1')))
+        // Exp(Subscr(Name('pntr'), Num('0')))
+        Ref(Global(Num('1')))
+        Exp(Num('0'))
+        Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
+        Exp(Stack(Num('1')))
+        Return(Empty())
       ]
   ]

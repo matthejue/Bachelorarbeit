@@ -4,19 +4,13 @@ File
     Block 
       Name 'main.1', 
       [
-        Exp 
-          Global 
-            Num '9', 
-        Return 
-          Empty
+        Exp(Global(Num('9')))
+        Return(Empty())
       ], 
     Block 
       Name 'fun.0', 
       [
-        Exp 
-          Stackframe 
-            Num '9', 
-        Return 
-          Empty
+        Exp(Stackframe(Num('9')))
+        Return(Empty())
       ]
   ]

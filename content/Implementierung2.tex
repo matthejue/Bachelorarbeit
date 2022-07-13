@@ -12,56 +12,62 @@ Die \colorbold{Referenzierung} \verb|&var| wird im Folgenden anhand des Beispiel
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_pntr_ref.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={3}}]{./code_examples/example_pntr_ref.picoc}
   \caption{PicoC Code für Pointer Referenzierung}
   \label{code:picoc_code_für_pointer_referenzierung}
 \end{code}
 
-Der Node \smalltt{Ref(Name('var')))} repräsentiert in der \colorbold{Abstrakten Syntax} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&var|.
+Der Knoten \smalltt{Ref(Name('var')))} repräsentiert in der \colorbold{Abstrakten Syntax} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&var|.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={22-23}}]{./code_examples/example_pntr_ref.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={10}}]{./code_examples/example_pntr_ref.ast}
   \caption{Abstract Syntax Tree für Pointer Referenzierung}
   \label{code:abstract_syntax_tree_für_pointer_referenzierung}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzierung} wird der Node \smalltt{Ref(Name('var')))} durch die Nodes \smalltt{Ref(GlobalRead(Num('0')))} und \smalltt{Assign(GlobalWrite(Num('1')), Tmp(Num('1')))} ersetzt. Im Fall, dass in \smalltt{Ref(exp))} das \smalltt{exp} vielleicht nicht direkt ein \smalltt{Name('var')} enthält und \smalltt{exp} vielleicht ein \smalltt{Subscr(Attr(Name('var')))} ist, sind noch weitere Anweisungen zwischen Zeile \smalltt{14} und  \smalltt{15} nötig, die sich in diesem Beispiel um das Übersetzen von \smalltt{Subscr(exp)} und \smalltt{Attr(exp)} kümmern. Die Vorgehen hierfür ist in Subkapitel~\ref{mittelteil_für_die_verschiedenen_derived_datatypes} erklärt.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzierung} wird der Knoten \smalltt{Ref(Name('var')))} durch die Knoten \smalltt{Ref(GlobalRead(Num('0')))} und \smalltt{Assign(GlobalWrite(Num('1')), Tmp(Num('1')))} ersetzt. Im Fall, dass in \smalltt{Ref(exp))} das \smalltt{exp} vielleicht nicht direkt ein \smalltt{Name('var')} enthält und \smalltt{exp} z.B. ein \smalltt{Subscr(Attr(Name('var')))} ist, sind noch weitere Anweisungen zwischen den Zeilen \smalltt{11} und  \smalltt{12} nötig, die sich in diesem Beispiel um das Übersetzen von \smalltt{Subscr(exp)} und \smalltt{Attr(exp)} nach dem Schema in Subkapitel~\ref{mittelteil_für_die_verschiedenen_derived_datatypes} kümmern.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={16-23}}]{./code_examples/example_pntr_ref.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={11-13}}]{./code_examples/example_pntr_ref.picoc_mon}
   \caption{PicoC Mon Pass für Pointer Referenzierung}
   \label{code:picoc_mon_für_pointer_referenzierung}
 \end{code}
 
-Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:reti_blocks_für_pointer_referenzierung} wird der die Nodes \smalltt{}
+Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:reti_blocks_für_pointer_referenzierung} werden die \colorbold{PicoC-Knoten} \smalltt{ Ref(Global(Num('0')))} und \smalltt{Assign(Global(Num('1')), Stack(Num('1')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_pntr_ref.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={18-21,23-25}}]{./code_examples/example_pntr_ref.reti_blocks}
   \caption{RETI Blocks Pass für Pointer Referenzierung}
   \label{code:reti_blocks_für_pointer_referenzierung}
 \end{code}
 % Initialisierung eines Pointers
-\subsubsection{Pointer Dereferenzierung durch Zugriff auf Arrayindex ersetzen}
+\subsubsection{Dereferenzierung durch Zugriff auf Arrayindex ersetzen}
+Die \colorbold{Dereferenzierung} \smalltt{*var} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_pointer_dereferenzierung} erklärt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_pntr_deref.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={4}}]{./code_examples/example_pntr_deref.picoc}
   \caption{PicoC Code für Pointer Dereferenzierung}
   \label{code:picoc_code_für_pointer_dereferenzierung}
 \end{code}
 
+Der Knoten \smalltt{Deref(Name('var')))} repräsentiert in der \colorbold{Abstrakten Syntax} in Code~\ref{code:abstract_syntax_tree_für_pointer_dereferenzierung} eine \colorbold{Dereferenzierung} \smalltt{*var}.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_pntr_deref.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={11}}]{./code_examples/example_pntr_deref.ast}
   \caption{Abstract Syntax Tree für Pointer Dereferenzierung}
   \label{code:abstract_syntax_tree_für_pointer_dereferenzierung}
 \end{code}
 
+Im \colorbold{PicoC-Shrink Pass} in Code~\ref{code:picoc_shrink_für_pointer_dereferenzierung} wird ein Trikc angewandet, bei dem der Knoten \smalltt{Exp(Deref(Name('pntr'), Num('0')))} einfach durch den Knoten \smalltt{Exp(Subscr(Name('pntr'), Num('0')))} ersetzt wird. Der Trick besteht
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_pntr_deref.picoc_shrink}
+  \numberedcodebox[minted language=text, minted options={highlightlines={11}}]{./code_examples/example_pntr_deref.picoc_shrink}
   \caption{PicoC Shrink Pass für Pointer Dereferenzierung}
   \label{code:picoc_shrink_für_pointer_dereferenzierung}
 \end{code}

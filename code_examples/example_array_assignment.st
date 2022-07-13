@@ -1,6 +1,6 @@
 SymbolTable 
   [
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('main'), [])
@@ -9,7 +9,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('5'))
         size:                   Empty()
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('2')], IntType('int'))

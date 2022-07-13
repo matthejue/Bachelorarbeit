@@ -6,21 +6,13 @@ File
       Name 'stack_fun', 
       [], 
       [
-        Return 
-          Num '42'
+        Return(Num('42'))
       ], 
     FunDef 
       VoidType 'void', 
       Name 'main', 
       [], 
       [
-        Assign 
-          Alloc 
-            Writeable, 
-            IntType 'int', 
-            Name 'var', 
-          Call 
-            Name 'stack_fun', 
-            []
+        Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack_fun'), []))
       ]
   ]

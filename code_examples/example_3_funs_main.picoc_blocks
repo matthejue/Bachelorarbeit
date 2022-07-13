@@ -18,8 +18,7 @@ File
         Block 
           Name 'fun2.1', 
           [
-            Return 
-              Num '1'
+            Return(Num('1'))
           ]
       ], 
     FunDef 
@@ -30,8 +29,7 @@ File
         Block 
           Name 'main.0', 
           [
-            Return 
-              Empty
+            Return(Empty())
           ]
       ]
   ]

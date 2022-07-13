@@ -17,17 +17,17 @@ LOADIN SP ACC 1;
 STOREIN DS ACC 1;
 ADDI SP 1;
 # // While(Num('1'), [])
-# // IfElse(Num('1'), GoTo(Name('while_branch.3')), GoTo(Name('while_after.0')))
+# // IfElse(Num('1'), [], [])
 # Exp(Num('1'))
 SUBI SP 1;
 LOADI ACC 1;
 STOREIN SP ACC 1;
-# IfElse(Stack(Num('1')), GoTo(Name('while_branch.3')), GoTo(Name('while_after.0')))
+# IfElse(Stack(Num('1')), [], [])
 LOADIN SP ACC 1;
 ADDI SP 1;
 JUMP== 49;
 # // If(Atom(Name('n'), Eq('=='), Num('1')), [])
-# // IfElse(Atom(Name('n'), Eq('=='), Num('1')), GoTo(Name('if.2')), GoTo(Name('if_else_after.1')))
+# // IfElse(Atom(Name('n'), Eq('=='), Num('1')), [], [])
 # Exp(Global(Num('0')))
 SUBI SP 1;
 LOADIN DS ACC 0;
@@ -45,7 +45,7 @@ JUMP 2;
 LOADI ACC 1;
 STOREIN SP ACC 2;
 ADDI SP 1;
-# IfElse(Stack(Num('1')), GoTo(Name('if.2')), GoTo(Name('if_else_after.1')))
+# IfElse(Stack(Num('1')), [], [])
 LOADIN SP ACC 1;
 ADDI SP 1;
 JUMP== 2;

@@ -7,121 +7,117 @@ File
     Block 
       Name 'main.5', 
       [
-        # // Assign(Name('n'), Num('4')), 
-        # Exp(Num('4')), 
-        SUBI SP 1, 
-        LOADI ACC 4, 
-        STOREIN SP ACC 1, 
-        # Assign(Global(Num('0')), Stack(Num('1'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 0, 
-        ADDI SP 1, 
-        # // Assign(Name('res'), Num('1')), 
-        # Exp(Num('1')), 
-        SUBI SP 1, 
-        LOADI ACC 1, 
-        STOREIN SP ACC 1, 
-        # Assign(Global(Num('1')), Stack(Num('1'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 1, 
-        ADDI SP 1, 
+        # // Assign(Name('n'), Num('4'))
+        # Exp(Num('4'))
+        SUBI SP 1;
+        LOADI ACC 4;
+        STOREIN SP ACC 1;
+        # Assign(Global(Num('0')), Stack(Num('1')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 0;
+        ADDI SP 1;
+        # // Assign(Name('res'), Num('1'))
+        # Exp(Num('1'))
+        SUBI SP 1;
+        LOADI ACC 1;
+        STOREIN SP ACC 1;
+        # Assign(Global(Num('1')), Stack(Num('1')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 1;
+        ADDI SP 1;
         # // While(Num('1'), [])
       ], 
     Block 
       Name 'condition_check.4', 
       [
-        # // IfElse(Num('1'), GoTo(Name('while_branch.3')), GoTo(Name('while_after.0'))), 
-        # Exp(Num('1')), 
-        SUBI SP 1, 
-        LOADI ACC 1, 
-        STOREIN SP ACC 1, 
-        # IfElse(Stack(Num('1')), GoTo(Name('while_branch.3')), GoTo(Name('while_after.0'))), 
-        LOADIN SP ACC 1, 
-        ADDI SP 1, 
-        JUMP== GoTo 
-                 Name 'while_after.0';
+        # // IfElse(Num('1'), [], [])
+        # Exp(Num('1'))
+        SUBI SP 1;
+        LOADI ACC 1;
+        STOREIN SP ACC 1;
+        # IfElse(Stack(Num('1')), [], [])
+        LOADIN SP ACC 1;
+        ADDI SP 1;
+        JUMP== GoTo(Name('while_after.0'));
       ], 
     Block 
       Name 'while_branch.3', 
       [
-        # // If(Atom(Name('n'), Eq('=='), Num('1')), []), 
-        # // IfElse(Atom(Name('n'), Eq('=='), Num('1')), GoTo(Name('if.2')), GoTo(Name('if_else_after.1'))), 
-        # Exp(Global(Num('0'))), 
-        SUBI SP 1, 
-        LOADIN DS ACC 0, 
-        STOREIN SP ACC 1, 
-        # Exp(Num('1')), 
-        SUBI SP 1, 
-        LOADI ACC 1, 
-        STOREIN SP ACC 1, 
-        LOADIN SP ACC 2, 
-        LOADIN SP IN2 1, 
-        SUB ACC IN2, 
-        JUMP== 3;, 
-        LOADI ACC 0, 
-        JUMP 2;, 
-        LOADI ACC 1, 
-        STOREIN SP ACC 2, 
-        ADDI SP 1, 
-        # IfElse(Stack(Num('1')), GoTo(Name('if.2')), GoTo(Name('if_else_after.1'))), 
-        LOADIN SP ACC 1, 
-        ADDI SP 1, 
-        JUMP== GoTo 
-                 Name 'if_else_after.1';
+        # // If(Atom(Name('n'), Eq('=='), Num('1')), [])
+        # // IfElse(Atom(Name('n'), Eq('=='), Num('1')), [], [])
+        # Exp(Global(Num('0')))
+        SUBI SP 1;
+        LOADIN DS ACC 0;
+        STOREIN SP ACC 1;
+        # Exp(Num('1'))
+        SUBI SP 1;
+        LOADI ACC 1;
+        STOREIN SP ACC 1;
+        LOADIN SP ACC 2;
+        LOADIN SP IN2 1;
+        SUB ACC IN2;
+        JUMP== 3;
+        LOADI ACC 0;
+        JUMP 2;
+        LOADI ACC 1;
+        STOREIN SP ACC 2;
+        ADDI SP 1;
+        # IfElse(Stack(Num('1')), [], [])
+        LOADIN SP ACC 1;
+        ADDI SP 1;
+        JUMP== GoTo(Name('if_else_after.1'));
       ], 
     Block 
       Name 'if.2', 
       [
-        # Return(Empty()), 
-        LOADIN BAF PC -1
+        # Return(Empty())
+        LOADIN BAF PC -1;
       ], 
     Block 
       Name 'if_else_after.1', 
       [
-        # // Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res'))), 
-        # Exp(Global(Num('0'))), 
-        SUBI SP 1, 
-        LOADIN DS ACC 0, 
-        STOREIN SP ACC 1, 
-        # Exp(Global(Num('1'))), 
-        SUBI SP 1, 
-        LOADIN DS ACC 1, 
-        STOREIN SP ACC 1, 
-        LOADIN SP ACC 2, 
-        LOADIN SP IN2 1, 
-        MULT ACC IN2, 
-        STOREIN SP ACC 2, 
-        ADDI SP 1, 
-        # Assign(Global(Num('1')), Stack(Num('1'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 1, 
-        ADDI SP 1, 
-        # // Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1'))), 
-        # Exp(Global(Num('0'))), 
-        SUBI SP 1, 
-        LOADIN DS ACC 0, 
-        STOREIN SP ACC 1, 
-        # Exp(Num('1')), 
-        SUBI SP 1, 
-        LOADI ACC 1, 
-        STOREIN SP ACC 1, 
-        LOADIN SP ACC 2, 
-        LOADIN SP IN2 1, 
-        SUB ACC IN2, 
-        STOREIN SP ACC 2, 
-        ADDI SP 1, 
-        # Assign(Global(Num('0')), Stack(Num('1'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 0, 
-        ADDI SP 1, 
-        Exp 
-          GoTo 
-            Name 'condition_check.4'
+        # // Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res')))
+        # Exp(Global(Num('0')))
+        SUBI SP 1;
+        LOADIN DS ACC 0;
+        STOREIN SP ACC 1;
+        # Exp(Global(Num('1')))
+        SUBI SP 1;
+        LOADIN DS ACC 1;
+        STOREIN SP ACC 1;
+        LOADIN SP ACC 2;
+        LOADIN SP IN2 1;
+        MULT ACC IN2;
+        STOREIN SP ACC 2;
+        ADDI SP 1;
+        # Assign(Global(Num('1')), Stack(Num('1')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 1;
+        ADDI SP 1;
+        # // Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1')))
+        # Exp(Global(Num('0')))
+        SUBI SP 1;
+        LOADIN DS ACC 0;
+        STOREIN SP ACC 1;
+        # Exp(Num('1'))
+        SUBI SP 1;
+        LOADI ACC 1;
+        STOREIN SP ACC 1;
+        LOADIN SP ACC 2;
+        LOADIN SP IN2 1;
+        SUB ACC IN2;
+        STOREIN SP ACC 2;
+        ADDI SP 1;
+        # Assign(Global(Num('0')), Stack(Num('1')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 0;
+        ADDI SP 1;
+        Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 
       Name 'while_after.0', 
       [
-        # Return(Empty()), 
-        LOADIN BAF PC -1
+        # Return(Empty())
+        LOADIN BAF PC -1;
       ]
   ]

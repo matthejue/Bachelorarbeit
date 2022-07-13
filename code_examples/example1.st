@@ -1,6 +1,6 @@
 SymbolTable 
   [
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('main'), [])

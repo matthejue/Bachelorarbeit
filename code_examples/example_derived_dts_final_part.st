@@ -1,6 +1,6 @@
 SymbolTable 
   [
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               ArrayDecl([Num('2')], IntType('int'))
@@ -9,7 +9,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('15'))
         size:                   Num('2')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               StructDecl(Name('st'), [Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('attr'))])
@@ -18,7 +18,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('7'))
         size:                   Num('2')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('main'), [])
@@ -27,7 +27,7 @@ SymbolTable
         position:               Pos(Num('3'), Num('5'))
         size:                   Empty()
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('1'), Num('2')], IntType('int'))
@@ -36,7 +36,7 @@ SymbolTable
         position:               Pos(Num('4'), Num('6'))
         size:                   Num('2')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('1')], StructSpec(Name('st')))
@@ -45,7 +45,7 @@ SymbolTable
         position:               Pos(Num('5'), Num('12'))
         size:                   Num('2')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               IntType('int')
@@ -54,7 +54,7 @@ SymbolTable
         position:               Pos(Num('6'), Num('6'))
         size:                   Num('1')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               PntrDecl(Num('1'), IntType('int'))
@@ -63,7 +63,7 @@ SymbolTable
         position:               Pos(Num('7'), Num('7'))
         size:                   Num('1')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               PntrDecl(Num('2'), IntType('int'))

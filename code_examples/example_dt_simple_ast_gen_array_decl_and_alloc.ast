@@ -23,20 +23,6 @@ File
       Name 'main', 
       [], 
       [
-        Exp 
-          Alloc 
-            Writeable, 
-            PntrDecl 
-              Num '1', 
-              ArrayDecl 
-                [
-                  Num '3', 
-                  Num '2'
-                ], 
-                PntrDecl 
-                  Num '1', 
-                  StructSpec 
-                    Name 'st', 
-            Name 'var'
+        Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), StructSpec(Name('st'))))), Name('var')))
       ]
   ]

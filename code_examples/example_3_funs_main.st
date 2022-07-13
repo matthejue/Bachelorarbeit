@@ -1,6 +1,6 @@
 SymbolTable 
   [
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('fun1'), [])
@@ -9,7 +9,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('5'))
         size:                   Empty()
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(IntType('int'), Name('fun2'), [])
@@ -18,7 +18,7 @@ SymbolTable
         position:               Pos(Num('4'), Num('4'))
         size:                   Empty()
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('main'), [])

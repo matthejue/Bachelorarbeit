@@ -29,35 +29,7 @@ File
       Name 'main', 
       [], 
       [
-        Assign 
-          Alloc 
-            Writeable, 
-            IntType 'int', 
-            Name 'var', 
-          Num '42', 
-        Assign 
-          Alloc 
-            Writeable, 
-            StructSpec 
-              Name 'st1', 
-            Name 'st', 
-          Struct 
-            [
-              Assign 
-                Name 'st', 
-                Struct 
-                  [
-                    Assign 
-                      Name 'pntr', 
-                      Array 
-                        [
-                          Array 
-                            [
-                              Ref 
-                                Name 'var'
-                            ]
-                        ]
-                  ]
-            ]
+        Assign(Alloc(Writeable(), IntType('int'), Name('var')), Num('42'))
+        Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct([Assign(Name('st'), Struct([Assign(Name('pntr'), Array([Array([Ref(Name('var'))])]))]))]))
       ]
   ]

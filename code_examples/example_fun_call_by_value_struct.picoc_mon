@@ -4,28 +4,16 @@ File
     Block 
       Name 'stack_fun.1', 
       [
-        Return 
-          Empty
+        Return(Empty())
       ], 
     Block 
       Name 'main.0', 
       [
-        StackMalloc 
-          Num '2', 
-        Assign 
-          Stack 
-            Num '3', 
-          Global 
-            Num '0', 
-        NewStackframe 
-          Name 'stack_fun', 
-          GoTo 
-            Name 'addr@next_instr', 
-        Exp 
-          GoTo 
-            Name 'stack_fun.1', 
-        RemoveStackframe, 
-        Return 
-          Empty
+        StackMalloc(Num('2'))
+        Assign(Stack(Num('3')), Global(Num('0')))
+        NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr')))
+        Exp(GoTo(Name('stack_fun.1')))
+        RemoveStackframe()
+        Return(Empty())
       ]
   ]

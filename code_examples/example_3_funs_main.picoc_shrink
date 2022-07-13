@@ -11,15 +11,13 @@ File
       Name 'fun2', 
       [], 
       [
-        Return 
-          Num '1'
+        Return(Num('1'))
       ], 
     FunDef 
       VoidType 'void', 
       Name 'main', 
       [], 
       [
-        Return 
-          Empty
+        Return(Empty())
       ]
   ]

@@ -1,6 +1,6 @@
 SymbolTable 
   [
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('stack_fun'), [Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('param1')), Alloc(Writeable(), ArrayDecl([Num('3')], IntType('int')), Name('param2'))])
@@ -9,7 +9,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('5'))
         size:                   Empty()
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int')))
@@ -18,7 +18,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('21'))
         size:                   Num('1')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int')))
@@ -27,7 +27,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('37'))
         size:                   Num('1')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('main'), [])
@@ -36,7 +36,7 @@ SymbolTable
         position:               Pos(Num('4'), Num('5'))
         size:                   Empty()
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('2'), Num('3')], IntType('int'))
@@ -45,7 +45,7 @@ SymbolTable
         position:               Pos(Num('5'), Num('6'))
         size:                   Num('6')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('2'), Num('3')], IntType('int'))

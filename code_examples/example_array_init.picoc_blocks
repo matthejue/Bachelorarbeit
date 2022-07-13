@@ -9,27 +9,7 @@ File
         Block 
           Name 'main.0', 
           [
-            Assign 
-              Alloc 
-                Writeable, 
-                ArrayDecl 
-                  [
-                    Num '2', 
-                    Num '1'
-                  ], 
-                  IntType 'int', 
-                Name 'ar', 
-              Array 
-                [
-                  Array 
-                    [
-                      Num '4'
-                    ], 
-                  Array 
-                    [
-                      Num '2'
-                    ]
-                ]
+            Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')), Name('ar')), Array([Array([Num('4')]), Array([Num('2')])]))
           ]
       ]
   ]

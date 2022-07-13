@@ -20,30 +20,16 @@ File
       Name 'main', 
       [], 
       [
-        Assign 
-          Alloc 
-            Writeable, 
-            IntType 'int', 
-            Name 'var', 
-          Call 
-            Name 'fun2', 
-            [
-              Num '42'
-            ], 
-        Return 
-          Empty
+        Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun2'), [Num('42')]))
+        Return(Empty())
       ], 
     FunDef 
       IntType 'int', 
       Name 'fun2', 
       [
-        Alloc 
-          Writeable, 
-          IntType 'int', 
-          Name 'var'
+        Alloc(Writeable(), IntType('int'), Name('var'))
       ], 
       [
-        Return 
-          Name 'var'
+        Return(Name('var'))
       ]
   ]

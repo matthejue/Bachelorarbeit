@@ -21,11 +21,7 @@ File
       VoidType 'void', 
       Name 'stack_fun', 
       [
-        Alloc 
-          Writeable, 
-          StructSpec 
-            Name 'st', 
-          Name 'param'
+        Alloc(Writeable(), StructSpec(Name('st')), Name('param'))
       ], 
       [], 
     FunDef 
@@ -33,17 +29,7 @@ File
       Name 'main', 
       [], 
       [
-        Exp 
-          Alloc 
-            Writeable, 
-            StructSpec 
-              Name 'st', 
-            Name 'local_var', 
-        Exp 
-          Call 
-            Name 'stack_fun', 
-            [
-              Name 'local_var'
-            ]
+        Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('local_var')))
+        Exp(Call(Name('stack_fun'), [Name('local_var')]))
       ]
   ]

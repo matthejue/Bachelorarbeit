@@ -37,46 +37,17 @@ File
       Name 'main', 
       [], 
       [
-        Exp 
-          Alloc 
-            Writeable, 
-            ArrayDecl 
-              [
-                Num '2', 
-                Num '3'
-              ], 
-              StructSpec 
-                Name 'st', 
-            Name 'local_var', 
-        Exp 
-          Call 
-            Name 'stack_fun', 
-            [
-              Name 'local_var'
-            ], 
-        Return 
-          Empty
+        Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], StructSpec(Name('st'))), Name('local_var')))
+        Exp(Call(Name('stack_fun'), [Name('local_var')]))
+        Return(Empty())
       ], 
     FunDef 
       VoidType 'void', 
       Name 'stack_fun', 
       [
-        Alloc 
-          Writeable, 
-          ArrayDecl 
-            [
-              Num '2', 
-              Num '3'
-            ], 
-            StructSpec 
-              Name 'st', 
-          Name 'param'
+        Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], StructSpec(Name('st'))), Name('param'))
       ], 
       [
-        Exp 
-          Alloc 
-            Writeable, 
-            IntType 'int', 
-            Name 'local_var'
+        Exp(Alloc(Writeable(), IntType('int'), Name('local_var')))
       ]
   ]

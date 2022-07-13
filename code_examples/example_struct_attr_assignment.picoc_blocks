@@ -21,26 +21,8 @@ File
         Block 
           Name 'main.0', 
           [
-            Assign 
-              Alloc 
-                Writeable, 
-                StructSpec 
-                  Name 'pos', 
-                Name 'st', 
-              Struct 
-                [
-                  Assign 
-                    Name 'x', 
-                    Num '4', 
-                  Assign 
-                    Name 'y', 
-                    Num '2'
-                ], 
-            Assign 
-              Attr 
-                Name 'st', 
-                Name 'y', 
-              Num '42'
+            Assign(Alloc(Writeable(), StructSpec(Name('pos')), Name('st')), Struct([Assign(Name('x'), Num('4')), Assign(Name('y'), Num('2'))]))
+            Assign(Attr(Name('st'), Name('y')), Num('42'))
           ]
       ]
   ]

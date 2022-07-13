@@ -6,23 +6,7 @@ File
       Name 'main', 
       [], 
       [
-        Assign 
-          Alloc 
-            Writeable, 
-            ArrayDecl 
-              [
-                Num '2'
-              ], 
-              IntType 'int', 
-            Name 'ar', 
-          Array 
-            [
-              Num '1', 
-              Num '2'
-            ], 
-        Exp 
-          Subscr 
-            Name 'ar', 
-            Num '2'
+        Assign(Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar')), Array([Num('1'), Num('2')]))
+        Exp(Subscr(Name('ar'), Num('2')))
       ]
   ]

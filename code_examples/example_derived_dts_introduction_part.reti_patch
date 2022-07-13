@@ -7,21 +7,21 @@ File
     Block 
       Name 'main.1', 
       [
-        # Exp(Global(Num('9'))), 
-        SUBI SP 1, 
-        LOADIN DS ACC 9, 
-        STOREIN SP ACC 1, 
-        # Return(Empty()), 
-        LOADIN BAF PC -1
+        # Exp(Global(Num('9')))
+        SUBI SP 1;
+        LOADIN DS ACC 9;
+        STOREIN SP ACC 1;
+        # Return(Empty())
+        LOADIN BAF PC -1;
       ], 
     Block 
       Name 'fun.0', 
       [
-        # Exp(Stackframe(Num('9'))), 
-        SUBI SP 1, 
-        LOADIN BAF ACC -11, 
-        STOREIN SP ACC 1, 
-        # Return(Empty()), 
-        LOADIN BAF PC -1
+        # Exp(Stackframe(Num('9')))
+        SUBI SP 1;
+        LOADIN BAF ACC -11;
+        STOREIN SP ACC 1;
+        # Return(Empty())
+        LOADIN BAF PC -1;
       ]
   ]

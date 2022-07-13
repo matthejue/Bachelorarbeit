@@ -6,8 +6,7 @@ File
       Name 'main', 
       [], 
       [
-        Return 
-          Empty
+        Return(Empty())
       ], 
     FunDef 
       VoidType 'void', 
@@ -19,7 +18,6 @@ File
       Name 'fun2', 
       [], 
       [
-        Return 
-          Num '1'
+        Return(Num('1'))
       ]
   ]

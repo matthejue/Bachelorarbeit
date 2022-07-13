@@ -4,121 +4,121 @@ File
     Block 
       Name 'main.0', 
       [
-        # // Assign(Name('ar1'), Array([Array([Num('42'), Num('314')])])), 
-        # Exp(Num('42')), 
-        SUBI SP 1, 
-        LOADI ACC 42, 
-        STOREIN SP ACC 1, 
-        # Exp(Num('314')), 
-        SUBI SP 1, 
-        LOADI ACC 314, 
-        STOREIN SP ACC 1, 
-        # Assign(Global(Num('0')), Stack(Num('2'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 1, 
-        LOADIN SP ACC 2, 
-        STOREIN DS ACC 0, 
-        ADDI SP 2, 
-        # // Assign(Name('ar2'), Struct([Assign(Name('attr'), Array([Num('42'), Num('314')]))])), 
-        # Exp(Num('42')), 
-        SUBI SP 1, 
-        LOADI ACC 42, 
-        STOREIN SP ACC 1, 
-        # Exp(Num('314')), 
-        SUBI SP 1, 
-        LOADI ACC 314, 
-        STOREIN SP ACC 1, 
-        # Assign(Global(Num('2')), Stack(Num('2'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 3, 
-        LOADIN SP ACC 2, 
-        STOREIN DS ACC 2, 
-        ADDI SP 2, 
-        # // Assign(Name('var'), Num('42')), 
-        # Exp(Num('42')), 
-        SUBI SP 1, 
-        LOADI ACC 42, 
-        STOREIN SP ACC 1, 
-        # Assign(Global(Num('4')), Stack(Num('1'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 4, 
-        ADDI SP 1, 
-        # // Assign(Name('pntr1'), Ref(Name('var'))), 
-        # Ref(Global(Num('4'))), 
-        SUBI SP 1, 
-        LOADI IN1 4, 
-        ADD IN1 DS, 
-        STOREIN SP IN1 1, 
-        # Assign(Global(Num('5')), Stack(Num('1'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 5, 
-        ADDI SP 1, 
-        # // Assign(Name('pntr2'), Ref(Name('pntr1'))), 
-        # Ref(Global(Num('5'))), 
-        SUBI SP 1, 
-        LOADI IN1 5, 
-        ADD IN1 DS, 
-        STOREIN SP IN1 1, 
-        # Assign(Global(Num('6')), Stack(Num('1'))), 
-        LOADIN SP ACC 1, 
-        STOREIN DS ACC 6, 
-        ADDI SP 1, 
-        # // Exp(Subscr(Name('ar1'), Num('0'))), 
-        # Ref(Global(Num('0'))), 
-        SUBI SP 1, 
-        LOADI IN1 0, 
-        ADD IN1 DS, 
-        STOREIN SP IN1 1, 
-        # Exp(Num('0')), 
-        SUBI SP 1, 
-        LOADI ACC 0, 
-        STOREIN SP ACC 1, 
-        # Ref(Subscr(Stack(Num('2')), Stack(Num('1')))), 
-        LOADIN SP IN1 2, 
-        LOADIN SP IN2 1, 
-        MULTI IN2 2, 
-        ADD IN1 IN2, 
-        ADDI SP 1, 
-        STOREIN SP IN1 1, 
-        # // Exp(Subscr(Name('ar2'), Num('0'))), 
-        # Ref(Global(Num('2'))), 
-        SUBI SP 1, 
-        LOADI IN1 2, 
-        ADD IN1 DS, 
-        STOREIN SP IN1 1, 
-        # Exp(Num('0')), 
-        SUBI SP 1, 
-        LOADI ACC 0, 
-        STOREIN SP ACC 1, 
-        # Ref(Subscr(Stack(Num('2')), Stack(Num('1')))), 
-        LOADIN SP IN1 2, 
-        LOADIN SP IN2 1, 
-        MULTI IN2 2, 
-        ADD IN1 IN2, 
-        ADDI SP 1, 
-        STOREIN SP IN1 1, 
-        LOADIN SP IN1 1, 
-        LOADIN IN1 ACC 0, 
-        STOREIN SP ACC 1, 
-        # // Exp(Subscr(Name('pntr2'), Num('0'))), 
-        # Ref(Global(Num('6'))), 
-        SUBI SP 1, 
-        LOADI IN1 6, 
-        ADD IN1 DS, 
-        STOREIN SP IN1 1, 
-        # Exp(Num('0')), 
-        SUBI SP 1, 
-        LOADI ACC 0, 
-        STOREIN SP ACC 1, 
-        # Ref(Subscr(Stack(Num('2')), Stack(Num('1')))), 
-        LOADIN SP IN2 2, 
-        LOADIN IN2 IN1 0, 
-        LOADIN SP IN2 1, 
-        MULTI IN2 1, 
-        ADD IN1 IN2, 
-        ADDI SP 1, 
-        STOREIN SP IN1 1, 
-        # Return(Empty()), 
-        LOADIN BAF PC -1
+        # // Assign(Name('ar1'), Array([Array([Num('42'), Num('314')])]))
+        # Exp(Num('42'))
+        SUBI SP 1;
+        LOADI ACC 42;
+        STOREIN SP ACC 1;
+        # Exp(Num('314'))
+        SUBI SP 1;
+        LOADI ACC 314;
+        STOREIN SP ACC 1;
+        # Assign(Global(Num('0')), Stack(Num('2')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 1;
+        LOADIN SP ACC 2;
+        STOREIN DS ACC 0;
+        ADDI SP 2;
+        # // Assign(Name('ar2'), Struct([Assign(Name('attr'), Array([Num('42'), Num('314')]))]))
+        # Exp(Num('42'))
+        SUBI SP 1;
+        LOADI ACC 42;
+        STOREIN SP ACC 1;
+        # Exp(Num('314'))
+        SUBI SP 1;
+        LOADI ACC 314;
+        STOREIN SP ACC 1;
+        # Assign(Global(Num('2')), Stack(Num('2')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 3;
+        LOADIN SP ACC 2;
+        STOREIN DS ACC 2;
+        ADDI SP 2;
+        # // Assign(Name('var'), Num('42'))
+        # Exp(Num('42'))
+        SUBI SP 1;
+        LOADI ACC 42;
+        STOREIN SP ACC 1;
+        # Assign(Global(Num('4')), Stack(Num('1')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 4;
+        ADDI SP 1;
+        # // Assign(Name('pntr1'), Ref(Name('var')))
+        # Ref(Global(Num('4')))
+        SUBI SP 1;
+        LOADI IN1 4;
+        ADD IN1 DS;
+        STOREIN SP IN1 1;
+        # Assign(Global(Num('5')), Stack(Num('1')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 5;
+        ADDI SP 1;
+        # // Assign(Name('pntr2'), Ref(Name('pntr1')))
+        # Ref(Global(Num('5')))
+        SUBI SP 1;
+        LOADI IN1 5;
+        ADD IN1 DS;
+        STOREIN SP IN1 1;
+        # Assign(Global(Num('6')), Stack(Num('1')))
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 6;
+        ADDI SP 1;
+        # // Exp(Subscr(Name('ar1'), Num('0')))
+        # Ref(Global(Num('0')))
+        SUBI SP 1;
+        LOADI IN1 0;
+        ADD IN1 DS;
+        STOREIN SP IN1 1;
+        # Exp(Num('0'))
+        SUBI SP 1;
+        LOADI ACC 0;
+        STOREIN SP ACC 1;
+        # Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
+        LOADIN SP IN1 2;
+        LOADIN SP IN2 1;
+        MULTI IN2 2;
+        ADD IN1 IN2;
+        ADDI SP 1;
+        STOREIN SP IN1 1;
+        # // Exp(Subscr(Name('ar2'), Num('0')))
+        # Ref(Global(Num('2')))
+        SUBI SP 1;
+        LOADI IN1 2;
+        ADD IN1 DS;
+        STOREIN SP IN1 1;
+        # Exp(Num('0'))
+        SUBI SP 1;
+        LOADI ACC 0;
+        STOREIN SP ACC 1;
+        # Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
+        LOADIN SP IN1 2;
+        LOADIN SP IN2 1;
+        MULTI IN2 2;
+        ADD IN1 IN2;
+        ADDI SP 1;
+        STOREIN SP IN1 1;
+        LOADIN SP IN1 1;
+        LOADIN IN1 ACC 0;
+        STOREIN SP ACC 1;
+        # // Exp(Subscr(Name('pntr2'), Num('0')))
+        # Ref(Global(Num('6')))
+        SUBI SP 1;
+        LOADI IN1 6;
+        ADD IN1 DS;
+        STOREIN SP IN1 1;
+        # Exp(Num('0'))
+        SUBI SP 1;
+        LOADI ACC 0;
+        STOREIN SP ACC 1;
+        # Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
+        LOADIN SP IN2 2;
+        LOADIN IN2 IN1 0;
+        LOADIN SP IN2 1;
+        MULTI IN2 1;
+        ADD IN1 IN2;
+        ADDI SP 1;
+        STOREIN SP IN1 1;
+        # Return(Empty())
+        LOADIN BAF PC -1;
       ]
   ]

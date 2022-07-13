@@ -1,6 +1,6 @@
 SymbolTable 
   [
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               PntrDecl(Num('1'), ArrayDecl([Num('1')], IntType('int')))
@@ -9,7 +9,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('18'))
         size:                   Num('1')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               StructDecl(Name('st1'), [Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('1')], IntType('int'))), Name('ar'))])
@@ -18,7 +18,7 @@ SymbolTable
         position:               Pos(Num('1'), Num('7'))
         size:                   Num('1')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Empty()
         datatype:               FunDecl(VoidType('void'), Name('main'), [])
@@ -27,7 +27,7 @@ SymbolTable
         position:               Pos(Num('3'), Num('5'))
         size:                   Empty()
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('1')], IntType('int'))
@@ -36,7 +36,7 @@ SymbolTable
         position:               Pos(Num('4'), Num('6'))
         size:                   Num('1')
       }, 
-    Symbol(
+    Symbol 
       {
         type qualifier:         Writeable()
         datatype:               StructSpec(Name('st1'))
