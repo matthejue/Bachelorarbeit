@@ -13,7 +13,7 @@ Die \colorbold{Referenzierung} \verb|&<var>| wird im Folgenden anhand des Beispi
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={3}}]{./code_examples/example_pntr_ref.picoc}
-  \caption{PicoC Code für Pointer Referenzierung}
+  \caption{PicoC-Code für Pointer Referenzierung}
   \label{code:picoc_code_für_pointer_referenzierung}
 \end{code}
 
@@ -31,16 +31,16 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzi
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={11-13}}]{./code_examples/example_pntr_ref.picoc_mon}
-  \caption{PicoC Mon Pass für Pointer Referenzierung}
+  \caption{PicoC-Mon Pass für Pointer Referenzierung}
   \label{code:picoc_mon_für_pointer_referenzierung}
 \end{code}
 
-Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:reti_blocks_für_pointer_referenzierung} werden die \colorbold{PicoC-Knoten} \smalltt{ Ref(Global(Num('0')))} und \smalltt{Assign(Global(Num('1')), Stack(Num('1')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_pointer_referenzierung} werden die \colorbold{PicoC-Knoten} \smalltt{ Ref(Global(Num('0')))} und \smalltt{Assign(Global(Num('1')), Stack(Num('1')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={18-21,23-25}}]{./code_examples/example_pntr_ref.reti_blocks}
-  \caption{RETI Blocks Pass für Pointer Referenzierung}
+  \caption{RETI-Blocks Pass für Pointer Referenzierung}
   \label{code:reti_blocks_für_pointer_referenzierung}
 \end{code}
 % Initialisierung eines Pointers
@@ -50,7 +50,7 @@ Die \colorbold{Dereferenzierung} \smalltt{*<var>} wird im Folgenden anhand des B
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={4}}]{./code_examples/example_pntr_deref.picoc}
-  \caption{PicoC Code für Pointer Dereferenzierung}
+  \caption{PicoC-Code für Pointer Dereferenzierung}
   \label{code:picoc_code_für_pointer_dereferenzierung}
 \end{code}
 
@@ -68,7 +68,7 @@ Im \colorbold{PicoC-Shrink Pass} in Code~\ref{code:picoc_shrink_für_pointer_der
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={11}}]{./code_examples/example_pntr_deref.picoc_shrink}
-  \caption{PicoC Shrink Pass für Pointer Dereferenzierung}
+  \caption{PicoC-Shrink Pass für Pointer Dereferenzierung}
   \label{code:picoc_shrink_für_pointer_dereferenzierung}
 \end{code}
 
@@ -81,7 +81,7 @@ Die \colorbold{Initialisierung} eines \colorbold{Arrays} (\smalltt{<datatype> <v
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={2, 6}}]{./code_examples/example_array_init.picoc}
-  \caption{PicoC Code für Array Initialisierung}
+  \caption{PicoC-Code für Array Initialisierung}
   \label{code:picoc_code_für_array_initialisierung}
 \end{code}
 
@@ -96,7 +96,7 @@ Die \colorbold{Initialisierung} eines \colorbold{Arrays} \smalltt{<datatype> <va
 
 Bei der \colorbold{Initialisierung} eines \colorbold{Arrays} wird zuerst \smalltt{Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')))} ausgewertet, da eine Variable zuerst definiert sein muss, bevor man sie verwenden kann\footnote{Das Widerspricht der üblichen Auswertungsreihenfolge beim \colorbold{Zuweisungsoperator} \smalltt{=}, der \colorbold{rechtsassoziativ} ist. Der \colorbold{Zuweisungsoperator} \smalltt{=} tritt allerdings erst später in Aktion.}. Das \colorbold{Definieren} der Variable \smalltt{ar} erfolgt mittels der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_array_initialisierung} dargestellt ist.
 
-Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf ein Arrayelement} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf ein Arrayelement} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die Entgegengesetzt Richtung der \colorbold{Globalen Statischen Daten} wächst\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
+Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die Entgegengesetzt Richtung der \colorbold{Globalen Statischen Daten} wächst\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
 
 \begin{code}
   \centering
@@ -114,39 +114,39 @@ In die Knoten \smalltt{Global('0')} und  \smalltt{Stackframe('3')} wurde hierbei
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={8-12,19-23}}]{./code_examples/example_array_init.picoc_mon}
-  \caption{PicoC Mon Pass für Array Initialisierung}
+  \caption{PicoC-Mon Pass für Array Initialisierung}
   \label{code:picoc_mon_für_array_initialisierung}
 \end{code}
 
-Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initialisierung} werden die \colorbold{PicoC-Knoten} für die Ausdrücke \smalltt{Exp(exp)} und \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initialisierung} werden die \colorbold{PicoC-Knoten} bzw. \colorbold{Kompositionen} für die Ausdrücke \smalltt{Exp(exp)} und \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={9-11,13-15,17-21,23-25,27-31,40-42,44-46,48-50,52-54,56-64}}]{./code_examples/example_array_init.reti_blocks}
-  \caption{RETI Blocks Pass für Array Initialisierung}
+  \caption{RETI-Blocks Pass für Array Initialisierung}
   \label{code:reti_blocks_für_array_initialisierung}
 \end{code}
 
 
 % kleines Extra
-\subsubsection{Zugriff auf ein Arrayelement}
+\subsubsection{Zugriff auf einen Arrayindex}
 \label{sec:zugriff_auf_ein_arrayelement}
 
-Der \colorbold{Zugriff auf ein Arrayelement} \smalltt{ar[0]} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_zugriff_auf_arrayindex} erklärt.
+Der \colorbold{Zugriff auf einen Arrayindex} \smalltt{ar[0]} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_zugriff_auf_arrayindex} erklärt.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={3,8}}]{./code_examples/example_array_access.picoc}
-  \caption{PicoC-Code für Zugriff auf ein Arrayelement}
+  \caption{PicoC-Code für Zugriff auf einen Arrayindex}
   \label{code:picoc_code_für_zugriff_auf_arrayindex}
 \end{code}
 
-Der \colorbold{Zugriff auf ein Arrayelement} \smalltt{ar[0]} wird im  \colorbold{Abstract Syntx Tree} in Code~\ref{code:abstract_syntax_tree_für_zugriff_auf_arrayindex} mithilfe des \colorbold{Container-Knotens} \smalltt{Subscr(Name('ar'), Num('0'))} dargestellt.
+Der \colorbold{Zugriff auf einen Arrayindex} \smalltt{ar[0]} wird im  \colorbold{Abstract Syntx Tree} in Code~\ref{code:abstract_syntax_tree_für_zugriff_auf_arrayindex} mithilfe des \colorbold{Container-Knotens} \smalltt{Subscr(Name('ar'), Num('0'))} dargestellt.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={10,18}}]{./code_examples/example_array_access.ast}
-  \caption{Abstract Syntax Tree für Zugriff auf ein Arrayelement}
+  \caption{Abstract Syntax Tree für Zugriff auf einen Arrayindex}
   \label{code:abstract_syntax_tree_für_zugriff_auf_arrayindex}
 \end{code}
 
@@ -156,19 +156,23 @@ In nächsten Schritt, dem \colorbold{Mittelteil} wird die Adresse des \colorbold
 
 Daher muss zuerst der Wert des \colorbold{Index}, dessen Adresse berechnet werden soll bestimmt werden, z.B. im einfachen Fall durch \smalltt{Exp(Num('0'))} und dann muss die \colorbold{Adresse des Index} berechnet werden, was durch die Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} dargestellt wird. Die Bedeutung der Komposition \smalltt{\smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))}} ist in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} dokumentiert.
 
-Der Sc
+Je nachdem, ob mehrere \smalltt{Subscr(exp, exp)} eine Komposition bilden (z.B. \smalltt{Subscr(Subscr(Name('<var>'), Num('<i>')), Num('<i>'))}) ist es notwendig mehrere \colorbold{Adressberechnungsschritte für den Index} \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} einzuleiten und es muss auch möglich sein, z.B. einen \colorbold{Attributzugriff} \smalltt{<var>.<attr>} und eine \colorbold{Zugriff auf einen Arryindex} \smalltt{<var>[<i>]} miteinander zu kombinieren, was in Subkapitel~\ref{mittelteil_für_die_verschiedenen_derived_datatypes} allgemein erklärt ist.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={11-14,26}}]{./code_examples/example_array_access.picoc_mon}
-  \caption{PicoC-Mon Pass für Zugriff auf ein Arrayelement}
+  \caption{PicoC-Mon Pass für Zugriff auf einen Arrayindex}
   \label{code:picoc_mon_für_zugriff_auf_arrayindex}
 \end{code}
+
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initialisierung} werden die \colorbold{Kompositionen} \smalltt{Ref(Global(Num('0')))}, \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+
+
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={18-21,23-25,27-32,34-36,66-69}}]{./code_examples/example_array_access.reti_blocks}
-  \caption{RETI-Blocks Pass für Zugriff auf ein Arrayelement}
+  \caption{RETI-Blocks Pass für Zugriff auf einen Arrayindex}
   \label{code:reti_blocks_für_zugriff_auf_arrayindex}
 \end{code}
 
@@ -177,7 +181,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_array_assignment.picoc}
-  \caption{PicoC Code für Zuweisung an Arrayindex}
+  \caption{PicoC-Code für Zuweisung an Arrayindex}
   \label{code:picoc_code_für_array_assignment}
 \end{code}
 
@@ -191,14 +195,14 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.picoc_mon}
-  \caption{PicoC Mon Pass für Zuweisung an Arrayindex}
+  \caption{PicoC-Mon Pass für Zuweisung an Arrayindex}
   \label{code:picoc_mon_für_array_assignment}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_array_assignment.reti_blocks}
-  \caption{RETI Blocks Pass für Zuweisung an Arrayindex}
+  \caption{RETI-Blocks Pass für Zuweisung an Arrayindex}
   \label{code:reti_blocks_für_array_assignment}
 \end{code}
 
@@ -207,7 +211,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_struct_decl.picoc}
-  \caption{PicoC Code für Deklaration von Structs}
+  \caption{PicoC-Code für Deklaration von Structs}
   \label{code:picoc_code_für_deklaration_von_structs}
 \end{code}
 
@@ -222,7 +226,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_struct_init.picoc}
-  \caption{PicoC Code für Initialisierung von Structs}
+  \caption{PicoC-Code für Initialisierung von Structs}
   \label{code:picoc_code_für_initialisierung_von_structs}
 \end{code}
 
@@ -243,14 +247,14 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_init.picoc_mon}
-  \caption{PicoC Mon Pass für Initialisierung von Structs}
+  \caption{PicoC-Mon Pass für Initialisierung von Structs}
   \label{code:picoc_mon_pass_für_initialisierung_von_structs}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_init.reti_blocks}
-  \caption{RETI Blocks Pass für Initialisierung von Structs}
+  \caption{RETI-Blocks Pass für Initialisierung von Structs}
   \label{code:reti_blocks_pass_für_initialisierung_von_structs}
 \end{code}
 
@@ -260,7 +264,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_struct_attr_access.picoc}
-  \caption{PicoC Code für Zugriff auf Structattribut}
+  \caption{PicoC-Code für Zugriff auf Structattribut}
   \label{code:picoc_code_für_zugriff_auf_structattribut}
 \end{code}
 
@@ -274,14 +278,14 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.picoc_mon}
-  \caption{PicoC Mon Pass für Zugriff auf Structattribut}
+  \caption{PicoC-Mon Pass für Zugriff auf Structattribut}
   \label{code:picoc_mon_pass_für_zugriff_auf_structattribut}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.reti_blocks}
-  \caption{RETI Blocks Pass für Zugriff auf Structattribut}
+  \caption{RETI-Blocks Pass für Zugriff auf Structattribut}
   \label{code:reti_blocks_pass_für_zugriff_auf_structattribut}
 \end{code}
 
@@ -289,7 +293,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_struct_attr_assignment.picoc}
-  \caption{PicoC Code für Zuweisung an Structattribut}
+  \caption{PicoC-Code für Zuweisung an Structattribut}
   \label{code:picoc_code_für_zuweisung_an_structattribut}
 \end{code}
 
@@ -303,14 +307,14 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.picoc_mon}
-  \caption{PicoC Mon Pass für Zuweisung an Structattribut}
+  \caption{PicoC-Mon Pass für Zuweisung an Structattribut}
   \label{code:picoc_mon_pass_für_zuweisung_an_structattribut}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.reti_blocks}
-  \caption{RETI Blocks Pass für Zuweisung an Structattribut}
+  \caption{RETI-Blocks Pass für Zuweisung an Structattribut}
   \label{code:reti_blocks_pass_für_zuweisung_an_structattribut}
 \end{code}
 
@@ -321,7 +325,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_introduction_part.picoc}
-  \caption{PicoC Code für den Einleitungsteil}
+  \caption{PicoC-Code für den Einleitungsteil}
   \label{code:picoc_code_einleitungsteil}
 \end{code}
 
@@ -337,14 +341,14 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.picoc_mon}
-  \caption{PicoC Mon Pass für den Einleitungsteil}
+  \caption{PicoC-Mon Pass für den Einleitungsteil}
   \label{code:picoc_mon_pass_einleitungsteil}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.reti_blocks}
-  \caption{RETI Blocks Pass für den Einleitungsteil}
+  \caption{RETI-Blocks Pass für den Einleitungsteil}
   \label{code:reti_blocks_pass_einleitungsteil}
 \end{code}
 
@@ -354,7 +358,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_main_part.picoc}
-  \caption{PicoC Code für den Mittelteil}
+  \caption{PicoC-Code für den Mittelteil}
   \label{code:picoc_code_mittelteil}
 \end{code}
 
@@ -370,14 +374,14 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.picoc_mon}
-  \caption{PicoC Mon Pass für den Mittelteil}
+  \caption{PicoC-Mon Pass für den Mittelteil}
   \label{code:picoc_mon_pass_mittelteil}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.reti_blocks}
-  \caption{RETI Blocks Pass für den Mittelteil}
+  \caption{RETI-Blocks Pass für den Mittelteil}
   \label{code:reti_blocks_pass_mittelteil}
 \end{code}
 % spezielles Vorgehen bei PntrDecl
@@ -386,7 +390,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_final_part.picoc}
-  \caption{PicoC Code für den Schlussteil}
+  \caption{PicoC-Code für den Schlussteil}
   \label{code:picoc_code_schlussteil}
 \end{code}
 
@@ -400,14 +404,14 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.picoc_mon}
-  \caption{PicoC Mon Pass für den Schlussteil}
+  \caption{PicoC-Mon Pass für den Schlussteil}
   \label{code:picoc_mon_pass_schlussteil}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.reti_blocks}
-  \caption{RETI Blocks Pass für den Schlussteil}
+  \caption{RETI-Blocks Pass für den Schlussteil}
   \label{code:reti_blocks_pass_schlussteil}
 \end{code}
 
@@ -418,7 +422,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_3_funs.picoc}
-  \caption{PicoC Code für 3 Funktionen}
+  \caption{PicoC-Code für 3 Funktionen}
   \label{code:picoc_code_für_3_Funktionen}
 \end{code}
 
@@ -432,21 +436,21 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_3_funs.picoc_blocks}
-  \caption{PicoC Blocks Pass für 3 Funktionen}
+  \caption{RETI-Blocks Pass für 3 Funktionen}
   \label{code:picoc_blocks_pass_für_3_Funktionen}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_3_funs.picoc_mon}
-  \caption{PicoC Mon Pass für 3 Funktionen}
+  \caption{PicoC-Mon Pass für 3 Funktionen}
   \label{code:picoc_mon_pass_für_3_Funktionen}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_3_funs.reti_blocks}
-  \caption{RETI Blocks Pass für 3 Funktionen}
+  \caption{RETI-Blocks Pass für 3 Funktionen}
   \label{code:reti_blocks_pass_für_3_Funktionen}
 \end{code}
 
@@ -456,28 +460,28 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_3_funs_main.picoc}
-  \caption{PicoC Code für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \caption{PicoC-Code für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_code_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.picoc_mon}
-  \caption{PicoC Mon Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \caption{PicoC-Mon Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_mon_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.reti_blocks}
-  \caption{PicoC Blocks Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \caption{RETI-Blocks Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_blocks_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.reti_patch}
-  \caption{PicoC Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \caption{PicoC-Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
@@ -485,7 +489,7 @@ Der Sc
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_3_funs_fun_decl.picoc}
-  \caption{PicoC Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
+  \caption{PicoC-Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
 
@@ -512,28 +516,28 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_fun_call_no_return_value.picoc}
-  \caption{PicoC Code für Funktionsaufruf ohne Rückgabewert}
+  \caption{PicoC-Code für Funktionsaufruf ohne Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.picoc_mon}
-  \caption{PicoC Mon Pass für Funktionsaufruf ohne Rückgabewert}
+  \caption{PicoC-Mon Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti_blocks}
-  \caption{RETI Blocks Pass für Funktionsaufruf ohne Rückgabewert}
+  \caption{RETI-Blocks Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti}
-  \caption{RETI Pass für Funktionsaufruf ohne Rückgabewert}
+  \caption{RETI-Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
@@ -542,28 +546,28 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_fun_call_with_return_value.picoc}
-  \caption{PicoC Code für Funktionsaufruf mit Rückgabewert}
+  \caption{PicoC-Code für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
-  \caption{PicoC Mon Pass für Funktionsaufruf mit Rückgabewert}
+  \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti_blocks}
-  \caption{RETI Blocks Pass für Funktionsaufruf mit Rückgabewert}
+  \caption{RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti}
-  \caption{RETI Pass für Funktionsaufruf mit Rückgabewert}
+  \caption{RETI-Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
@@ -572,14 +576,14 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
-  \caption{PicoC Code für Call by Sharing für Arrays}
+  \caption{PicoC-Code für Call by Sharing für Arrays}
   \label{code:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
-  \caption{PicoC Mon Pass für Call by Sharing für Arrays}
+  \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
   \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
 \end{code}
 
@@ -595,7 +599,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
-  \caption{RETI Block Pass für Call by Sharing für Arrays}
+  \caption{RETI-Block Pass für Call by Sharing für Arrays}
   \label{code:reti_blocks_pass_für_call_by_sharing_für_arrays}
 \end{code}
 
@@ -606,7 +610,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/example_fun_call_by_value_struct.picoc}
-  \caption{PicoC Code für Call by Value für Structs}
+  \caption{PicoC-Code für Call by Value für Structs}
   \label{code:picoc_code_für_call_by_value_für_structs}
 \end{code}
 
@@ -615,7 +619,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
-  \caption{PicoC Mon Pass für Call by Value für Structs}
+  \caption{PicoC-Mon Pass für Call by Value für Structs}
   \label{code:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
 
@@ -624,7 +628,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
-  \caption{RETI Block Pass für Call by Value für Structs}
+  \caption{RETI-Block Pass für Call by Value für Structs}
   \label{code:reti_blocks_pass_für_call_by_value_for_structs}
 \end{code}
 
