@@ -150,9 +150,13 @@ Der \colorbold{Zugriff auf ein Arrayelement} \smalltt{ar[0]} wird im  \colorbold
   \label{code:abstract_syntax_tree_für_zugriff_auf_arrayindex}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_zugriff_auf_arrayindex} wird beim \colorbold{Container-Knoten} \smalltt{Subscr(Name('ar'), Num('0'))} zuerst die \colorbold{Adresse} der Variable \smalltt{Name('ar')} auf den \colorbold{Stack} geschrieben. Bei den \colorbold{Globalen Statischen Daten} der \smalltt{main}-Funktion wird das durch die Komposition \smalltt{Ref(Global(Num('0')))} dargestellt und beim \colorbold{Stackframe} der Funktionm \smalltt{fun} wird das durch die Komposition \smalltt{Ref(Stackframe(Num('2')))} dargestellt.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_zugriff_auf_arrayindex} wird beim \colorbold{Container-Knoten} \smalltt{Subscr(Name('ar'), Num('0'))} zuerst im \colorbold{Einleitungsteil} die \colorbold{Adresse} der Variable \smalltt{Name('ar')} auf den \colorbold{Stack} geschrieben. Bei den \colorbold{Globalen Statischen Daten} der \smalltt{main}-Funktion wird das durch die Komposition \smalltt{Ref(Global(Num('0')))} dargestellt und beim \colorbold{Stackframe} der Funktionm \smalltt{fun} wird das durch die Komposition \smalltt{Ref(Stackframe(Num('2')))} dargestellt.
 
-In nächsten Schritt wird die Adresse des \colorbold{Index}, des Arrays auf das Zugegriffen werden soll berechnet. Da der \colorbold{Index} auf den Zugegriffen werden soll auch durch das Ergebnis eines \colorbold{komplexeren Ausdrucks}, z.B. \smalltt{<ar>[1 + <var2>]} bestimmt sein kann, indem auch \colorbold{Variablen} vorkommen können, kann dieser nicht während des \colorbold{Kompilierens} berechnet werden, sondern muss zur \colorbold{Laufzeit} berechnet werden. Daher muss zuerst der Wert des \colorbold{Index} dessen Adresse berechnet werden soll bestimmt werden, z.B. im einfachen Fall durch \smalltt{Exp(Num('0'))} und dann muss der Index berechnet werden, was durch die Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} dargestellt wird.
+In nächsten Schritt, dem \colorbold{Mittelteil} wird die Adresse des \colorbold{Index}, des Arrays auf das Zugegriffen werden soll berechnet. Da der \colorbold{Index} auf den Zugegriffen werden soll auch durch das Ergebnis eines \colorbold{komplexeren Ausdrucks}, z.B. \smalltt{<ar>[1 + <var>]} bestimmt sein kann, indem auch \colorbold{Variablen} vorkommen können, kann dieser nicht während des \colorbold{Kompilierens} berechnet werden, sondern muss zur \colorbold{Laufzeit} berechnet werden.
+
+Daher muss zuerst der Wert des \colorbold{Index}, dessen Adresse berechnet werden soll bestimmt werden, z.B. im einfachen Fall durch \smalltt{Exp(Num('0'))} und dann muss die \colorbold{Adresse des Index} berechnet werden, was durch die Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} dargestellt wird. Die Bedeutung der Komposition \smalltt{\smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))}} ist in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} dokumentiert.
+
+Der Sc
 
 \begin{code}
   \centering
