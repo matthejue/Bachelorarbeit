@@ -3,7 +3,10 @@ File
   [
     Block 
       Name 'start.1', 
-      [], 
+      [
+        # // Exp(GoTo(Name('main.0')))
+        # // patched out Exp(GoTo(Name('main.0')))
+      ], 
     Block 
       Name 'main.0', 
       [
@@ -22,6 +25,7 @@ File
         LOADIN SP ACC 2;
         STOREIN DS ACC 0;
         ADDI SP 2;
+        # // Exp(Attr(Name('st'), Name('y')))
         # Ref(Global(Num('0')))
         SUBI SP 1;
         LOADI IN1 0;
@@ -31,6 +35,7 @@ File
         LOADIN SP IN1 1;
         ADDI IN1 1;
         STOREIN SP IN1 1;
+        # Exp(Stack(Num('1')))
         LOADIN SP IN1 1;
         LOADIN IN1 ACC 0;
         STOREIN SP ACC 1;

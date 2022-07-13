@@ -8,7 +8,7 @@
 
 \subsection{Umsetzung von Pointern}
 \subsubsection{Referenzierung}
-Die \colorbold{Referenzierung} \verb|&var| wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_pointer_referenzierung} erklärt.
+Die \colorbold{Referenzierung} \verb|&<var>| wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_pointer_referenzierung} erklärt.
 
 \begin{code}
   \centering
@@ -17,7 +17,7 @@ Die \colorbold{Referenzierung} \verb|&var| wird im Folgenden anhand des Beispiel
   \label{code:picoc_code_für_pointer_referenzierung}
 \end{code}
 
-Der Knoten \smalltt{Ref(Name('var')))} repräsentiert in der \colorbold{Abstrakten Syntax} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&var|.
+Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstrakt Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&<var>|.
 
 \begin{code}
   \centering
@@ -45,7 +45,7 @@ Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:reti_blocks_für_pointer_refe
 \end{code}
 % Initialisierung eines Pointers
 \subsubsection{Dereferenzierung durch Zugriff auf Arrayindex ersetzen}
-Die \colorbold{Dereferenzierung} \smalltt{*var} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_pointer_dereferenzierung} erklärt.
+Die \colorbold{Dereferenzierung} \smalltt{*<var>} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_pointer_dereferenzierung} erklärt.
 
 \begin{code}
   \centering
@@ -54,7 +54,7 @@ Die \colorbold{Dereferenzierung} \smalltt{*var} wird im Folgenden anhand des Bei
   \label{code:picoc_code_für_pointer_dereferenzierung}
 \end{code}
 
-Der Knoten \smalltt{Deref(Name('var')))} repräsentiert in der \colorbold{Abstrakten Syntax} in Code~\ref{code:abstract_syntax_tree_für_pointer_dereferenzierung} eine \colorbold{Dereferenzierung} \smalltt{*var}.
+Der Knoten \smalltt{Deref(Name('var')))} repräsentiert im \colorbold{Abstrakt Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_dereferenzierung} eine \colorbold{Dereferenzierung} \smalltt{*<var>}.
 
 \begin{code}
   \centering
@@ -63,7 +63,7 @@ Der Knoten \smalltt{Deref(Name('var')))} repräsentiert in der \colorbold{Abstra
   \label{code:abstract_syntax_tree_für_pointer_dereferenzierung}
 \end{code}
 
-Im \colorbold{PicoC-Shrink Pass} in Code~\ref{code:picoc_shrink_für_pointer_dereferenzierung} wird ein Trikc angewandet, bei dem der Knoten \smalltt{Exp(Deref(Name('pntr'), Num('0')))} einfach durch den Knoten \smalltt{Exp(Subscr(Name('pntr'), Num('0')))} ersetzt wird. Der Trick besteht
+Im \colorbold{PicoC-Shrink Pass} in Code~\ref{code:picoc_shrink_für_pointer_dereferenzierung} wird ein Trick angewandet, bei dem jeder Knoten \smalltt{Deref(Name('pntr'), Num('0'))} einfach durch den Knoten \smalltt{Subscr(Name('pntr'), Num('0'))} ersetzt wird. Der Trick besteht darin, dass der \colorbold{Dereferenzoperator} \smalltt{*(<var> + <i>)} sich identisch zum \colorbold{Operator für den Zugriff auf einen Arrayindex} \smalltt{<var>[<i>]} verhält\footnote{In der Sprache $L_{C}$ gibt es einen Unterschied bei der Initialisierung bei z.B. \smalltt{<datatype> *<var> = \dq string\dq} und \smalltt{<datatype> <var>[<i>] = \dq string\dq}, der allerdings nichts mit den beiden Operatoren zu tuen hat, sondern mit der \colorbold{Initialisierung}, bei der die Sprache $L_{C}$ verwirrenderweise die eckigen Klammern \smalltt{[]} genauso, wie beim \colorbold{Operator für den Zugriff auf einen Arrayindex}, vor den Bezeichner schreibt: \smalltt{<var>[<i>]}, obwohl es ein \colorbold{Derived Datatype} ist.}. Damit sparrt man sich viele vermeidbare \colorbold{Fallunterscheidungen} und \colorbold{doppelten Code} und kann die \colorbold{Derefenzierung} \smalltt{*(<var> + <i>)} einfach von den Routinen für einen \colorbold{Zugriff auf einen Arrayindex} \smalltt{<var>[<i>]} übernehmen lassen.
 
 \begin{code}
   \centering
@@ -74,73 +74,97 @@ Im \colorbold{PicoC-Shrink Pass} in Code~\ref{code:picoc_shrink_für_pointer_der
 
 \subsection{Umsetzung von Arrays}
 \subsubsection{Initialisierung von Arrays}
+
+Die \colorbold{Initialisierung} eines \colorbold{Arrays} (\smalltt{<datatype> <var>[2][1] = \{\{3+1\}, \{4\}\}}) wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_array_initialisierung} erklärt.
+
 % Stack und Globale Statische Daten
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_array_init.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={2, 6}}]{./code_examples/example_array_init.picoc}
   \caption{PicoC Code für Array Initialisierung}
   \label{code:picoc_code_für_array_initialisierung}
 \end{code}
 
+Die \colorbold{Initialisierung} eines \colorbold{Arrays} \smalltt{<datatype> <var>[2][1] = \{\{3+1\}, \{4\}\}} wird im \colorbold{Abstrakt Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_array_initialisierung} mithilfe der Komposition \smalltt{Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')), Name('ar')), Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])]))} dargestellt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_init.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={9, 16}}]{./code_examples/example_array_init.ast}
   \caption{Abstract Syntax Tree für Array Initialisierung}
   \label{code:abstract_syntax_tree_für_array_initialisierung}
 \end{code}
 
+Bei der \colorbold{Initialisierung} eines \colorbold{Arrays} wird zuerst \smalltt{Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')))} ausgewertet, da eine Variable zuerst definiert sein muss, bevor man sie verwenden kann\footnote{Das Widerspricht der üblichen Auswertungsreihenfolge beim \colorbold{Zuweisungsoperator} \smalltt{=}, der \colorbold{rechtsassoziativ} ist. Der \colorbold{Zuweisungsoperator} \smalltt{=} tritt allerdings erst später in Aktion.}. Das \colorbold{Definieren} der Variable \smalltt{ar} erfolgt mittels der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_array_initialisierung} dargestellt ist.
+
+Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf ein Arrayelement} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf ein Arrayelement} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die Entgegengesetzt Richtung der \colorbold{Globalen Statischen Daten} wächst\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_init.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={14-19,32-37}}]{./code_examples/example_array_init.st}
   \caption{Symboltabelle für Array Initialisierung}
   \label{code:symboltabelle_für_array_initialisierung}
 \end{code}
 
+Im \colorbold{PiocC-Mon Pass} in Code~\ref{code:picoc_mon_für_array_initialisierung} werden zuerst die \colorbold{Ausdrücke} im \colorbold{Array-Initializer} \smalltt{Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])])} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet und auf den \colorbold{Stack} geschrieben.
+
+Im finalen Schritt muss zwischen \colorbold{Globalen Statischen Daten} bei der \smalltt{main}-Funktion und \colorbold{Stackframe} bei der Funktion \smalltt{fun} unterschieden werden. Die auf den Stack ausgewerteten Expressions werden mittels der Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))}, versetzt in der selben Reihenfolge zu den \colorbold{Globalen Statischen Daten} bzw. auf den \colorbold{Stackframe} geschrieben.
+
+In die Knoten \smalltt{Global('0')} und  \smalltt{Stackframe('3')} wurde hierbei die \colorbold{Startadresse} des jeweiligen Arrays geschrieben, sodass man nach dem \colorbold{PicoC-Mon Pass} nie mehr Variablen in der  \colorbold{Symboltabelle} nachsehen muss und gleich weiß, ob sie bei den \colorbold{Globalen Statischen Daten} oder auf dem \colorbold{Stackframe} liegen.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_init.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={8-12,19-23}}]{./code_examples/example_array_init.picoc_mon}
   \caption{PicoC Mon Pass für Array Initialisierung}
   \label{code:picoc_mon_für_array_initialisierung}
 \end{code}
 
+Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initialisierung} werden die \colorbold{PicoC-Knoten} für die Ausdrücke \smalltt{Exp(exp)} und \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_init.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={9-11,13-15,17-21,23-25,27-31,40-42,44-46,48-50,52-54,56-64}}]{./code_examples/example_array_init.reti_blocks}
   \caption{RETI Blocks Pass für Array Initialisierung}
   \label{code:reti_blocks_für_array_initialisierung}
 \end{code}
 
 
 % kleines Extra
-\subsubsection{Zugriff auf Arrayindex}
+\subsubsection{Zugriff auf ein Arrayelement}
+\label{sec:zugriff_auf_ein_arrayelement}
 
-Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
+Der \colorbold{Zugriff auf ein Arrayelement} \smalltt{ar[0]} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_zugriff_auf_arrayindex} erklärt.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_array_access.picoc}
-  \caption{PicoC Code für Zugriff auf Arrayindex}
+  \numberedcodebox[minted language=c, minted options={highlightlines={3,8}}]{./code_examples/example_array_access.picoc}
+  \caption{PicoC-Code für Zugriff auf ein Arrayelement}
   \label{code:picoc_code_für_zugriff_auf_arrayindex}
 \end{code}
 
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_access.ast}
-  \caption{Abstract Syntax Tree für Zugriff auf Arrayindex}
-  \label{code:abstract_syntax_tree_für_zugriff_auf_arrayindex}
-\end{code}
+Der \colorbold{Zugriff auf ein Arrayelement} \smalltt{ar[0]} wird im  \colorbold{Abstract Syntx Tree} in Code~\ref{code:abstract_syntax_tree_für_zugriff_auf_arrayindex} mithilfe des \colorbold{Container-Knotens} \smalltt{Subscr(Name('ar'), Num('0'))} dargestellt.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_access.picoc_mon}
-  \caption{PicoC Mon Pass für Zugriff auf Arrayindex}
+  \numberedcodebox[minted language=text, minted options={highlightlines={10,18}}]{./code_examples/example_array_access.ast}
+  \caption{Abstract Syntax Tree für Zugriff auf ein Arrayelement}
+  \label{code:abstract_syntax_tree_für_zugriff_auf_arrayindex}
+\end{code}
+
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_zugriff_auf_arrayindex} wird beim \colorbold{Container-Knoten} \smalltt{Subscr(Name('ar'), Num('0'))} zuerst die \colorbold{Adresse} der Variable \smalltt{Name('ar')} auf den \colorbold{Stack} geschrieben. Bei den \colorbold{Globalen Statischen Daten} der \smalltt{main}-Funktion wird das durch die Komposition \smalltt{Ref(Global(Num('0')))} dargestellt und beim \colorbold{Stackframe} der Funktionm \smalltt{fun} wird das durch die Komposition \smalltt{Ref(Stackframe(Num('2')))} dargestellt.
+
+In nächsten Schritt wird die Adresse des \colorbold{Index}, des Arrays auf das Zugegriffen werden soll berechnet. Da der \colorbold{Index} auf den Zugegriffen werden soll auch durch das Ergebnis eines \colorbold{komplexeren Ausdrucks}, z.B. \smalltt{<ar>[1 + <var2>]} bestimmt sein kann, indem auch \colorbold{Variablen} vorkommen können, kann dieser nicht während des \colorbold{Kompilierens} berechnet werden, sondern muss zur \colorbold{Laufzeit} berechnet werden. Daher muss zuerst der Wert des \colorbold{Index} dessen Adresse berechnet werden soll bestimmt werden, z.B. im einfachen Fall durch \smalltt{Exp(Num('0'))} und dann muss der Index berechnet werden, was durch die Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} dargestellt wird.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={11-14,26}}]{./code_examples/example_array_access.picoc_mon}
+  \caption{PicoC-Mon Pass für Zugriff auf ein Arrayelement}
   \label{code:picoc_mon_für_zugriff_auf_arrayindex}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_array_access.reti_blocks}
-  \caption{RETI Blocks Pass für Zugriff auf Arrayindex}
+  \numberedcodebox[minted language=text, minted options={highlightlines={18-21,23-25,27-32,34-36,66-69}}]{./code_examples/example_array_access.reti_blocks}
+  \caption{RETI-Blocks Pass für Zugriff auf ein Arrayelement}
   \label{code:reti_blocks_für_zugriff_auf_arrayindex}
 \end{code}
 
@@ -453,13 +477,15 @@ Der Zugriff auf einen bestimmten  Index eines Arrays ist wie folgt umgesetzt:
   \label{code:picoc_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
-\subsubsection{Funktionsdeklaration und -definition}
+\subsubsection{Funktionsdeklaration und -definition und Umsetzung von Scopes}
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_3_funs_fun_decl.picoc}
   \caption{PicoC Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
+
+Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \colorbold{Funktionen} mittels eines \colorbold{Suffix} \smalltt{\dq <fun\_name>@\dq} umgesetzt, der an den \colorbold{Variablennamen} \smalltt{<var>} drangehängt wird: \smalltt{<var>@<fun\_name>}. Dieser \colorbold{Suffix} wird geändert sobald beim \colorbold{Top-Down}\footnote{D.h. von der Wurzel zu den Blättern eines Baumes} Durchiterieren über den \colorbold{Abstract Syntax Tree} des aktuellen \colorbold{Passes} nach dem \colorbold{Depth-First-Search} Schema über den
 
 \begin{code}
   \centering

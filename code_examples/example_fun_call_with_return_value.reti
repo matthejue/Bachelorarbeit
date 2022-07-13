@@ -1,3 +1,4 @@
+# // Exp(GoTo(Name('main.0')))
 JUMP 7;
 # // Return(Num('42'))
 # Exp(Num('42'))
@@ -20,6 +21,7 @@ STOREIN BAF ACC 0;
 LOADI ACC 17;
 ADD ACC CS;
 STOREIN BAF ACC -1;
+# Exp(GoTo(Name('stack_fun.1')))
 JUMP -15;
 # RemoveStackframe()
 MOVE BAF IN1;

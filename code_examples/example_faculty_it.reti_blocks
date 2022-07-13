@@ -23,6 +23,7 @@ File
         STOREIN DS ACC 1;
         ADDI SP 1;
         # // While(Num('1'), [])
+        # Exp(GoTo(Name('condition_check.4')))
         Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 
@@ -52,6 +53,7 @@ File
         SUBI SP 1;
         LOADI ACC 1;
         STOREIN SP ACC 1;
+        # Exp(Atom(Stack(Num('2')), Eq('=='), Stack(Num('1'))))
         LOADIN SP ACC 2;
         LOADIN SP IN2 1;
         SUB ACC IN2;
@@ -85,6 +87,7 @@ File
         SUBI SP 1;
         LOADIN DS ACC 1;
         STOREIN SP ACC 1;
+        # Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))
         LOADIN SP ACC 2;
         LOADIN SP IN2 1;
         MULT ACC IN2;
@@ -103,6 +106,7 @@ File
         SUBI SP 1;
         LOADI ACC 1;
         STOREIN SP ACC 1;
+        # Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))
         LOADIN SP ACC 2;
         LOADIN SP IN2 1;
         SUB ACC IN2;
@@ -112,6 +116,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 0;
         ADDI SP 1;
+        # Exp(GoTo(Name('condition_check.4')))
         Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 

@@ -2,15 +2,31 @@ File
   Name './example_array_access.picoc_mon', 
   [
     Block 
-      Name 'main.0', 
+      Name 'main.1', 
       [
-        // Assign(Name('ar'), Array([Num('1'), Num('2')]))
+        // Assign(Name('ar'), Array([Num('42')]))
+        Exp(Num('42'))
+        Assign(Global(Num('0')), Stack(Num('1')))
+        // Exp(Subscr(Name('ar'), Num('0')))
+        Ref(Global(Num('0')))
+        Exp(Num('0'))
+        Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
+        Exp(Stack(Num('1')))
+        Return(Empty())
+      ], 
+    Block 
+      Name 'fun.0', 
+      [
+        // Assign(Name('ar'), Array([Num('1'), Num('2'), Num('3')]))
         Exp(Num('1'))
         Exp(Num('2'))
-        Assign(Global(Num('0')), Stack(Num('2')))
-        // Exp(Subscr(Name('ar'), Num('2')))
-        Ref(Global(Num('0')))
-        Exp(Num('2'))
+        Exp(Num('3'))
+        Assign(Stackframe(Num('2')), Stack(Num('3')))
+        // Exp(Subscr(Name('ar'), BinOp(Num('1'), Add('+'), Num('1'))))
+        Ref(Stackframe(Num('2')))
+        Exp(Num('1'))
+        Exp(Num('1'))
+        Exp(BinOp(Stack(Num('2')), Add('+'), Stack(Num('1'))))
         Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
         Exp(Stack(Num('1')))
         Return(Empty())

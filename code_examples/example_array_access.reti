@@ -1,27 +1,23 @@
-# // Assign(Name('ar'), Array([Num('1'), Num('2')]))
-# Exp(Num('1'))
+# // Exp(GoTo(Name('main.1')))
+# // patched out Exp(GoTo(Name('main.1')))
+# // Assign(Name('ar'), Array([Num('42')]))
+# Exp(Num('42'))
 SUBI SP 1;
-LOADI ACC 1;
+LOADI ACC 42;
 STOREIN SP ACC 1;
-# Exp(Num('2'))
-SUBI SP 1;
-LOADI ACC 2;
-STOREIN SP ACC 1;
-# Assign(Global(Num('0')), Stack(Num('2')))
+# Assign(Global(Num('0')), Stack(Num('1')))
 LOADIN SP ACC 1;
-STOREIN DS ACC 1;
-LOADIN SP ACC 2;
 STOREIN DS ACC 0;
-ADDI SP 2;
-# // Exp(Subscr(Name('ar'), Num('2')))
+ADDI SP 1;
+# // Exp(Subscr(Name('ar'), Num('0')))
 # Ref(Global(Num('0')))
 SUBI SP 1;
 LOADI IN1 0;
 ADD IN1 DS;
 STOREIN SP IN1 1;
-# Exp(Num('2'))
+# Exp(Num('0'))
 SUBI SP 1;
-LOADI ACC 2;
+LOADI ACC 0;
 STOREIN SP ACC 1;
 # Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
 LOADIN SP IN1 2;
@@ -30,6 +26,61 @@ MULTI IN2 1;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
+# Exp(Stack(Num('1')))
+LOADIN SP IN1 1;
+LOADIN IN1 ACC 0;
+STOREIN SP ACC 1;
+# Return(Empty())
+LOADIN BAF PC -1;
+# // Assign(Name('ar'), Array([Num('1'), Num('2'), Num('3')]))
+# Exp(Num('1'))
+SUBI SP 1;
+LOADI ACC 1;
+STOREIN SP ACC 1;
+# Exp(Num('2'))
+SUBI SP 1;
+LOADI ACC 2;
+STOREIN SP ACC 1;
+# Exp(Num('3'))
+SUBI SP 1;
+LOADI ACC 3;
+STOREIN SP ACC 1;
+# Assign(Stackframe(Num('2')), Stack(Num('3')))
+LOADIN SP ACC 1;
+STOREIN BAF ACC -2;
+LOADIN SP ACC 2;
+STOREIN BAF ACC -3;
+LOADIN SP ACC 3;
+STOREIN BAF ACC -4;
+ADDI SP 3;
+# // Exp(Subscr(Name('ar'), BinOp(Num('1'), Add('+'), Num('1'))))
+# Ref(Stackframe(Num('2')))
+SUBI SP 1;
+MOVE BAF IN1;
+SUBI IN1 4;
+STOREIN SP IN1 1;
+# Exp(Num('1'))
+SUBI SP 1;
+LOADI ACC 1;
+STOREIN SP ACC 1;
+# Exp(Num('1'))
+SUBI SP 1;
+LOADI ACC 1;
+STOREIN SP ACC 1;
+# Exp(BinOp(Stack(Num('2')), Add('+'), Stack(Num('1'))))
+LOADIN SP ACC 2;
+LOADIN SP IN2 1;
+ADD ACC IN2;
+STOREIN SP ACC 2;
+ADDI SP 1;
+# Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
+LOADIN SP IN1 2;
+LOADIN SP IN2 1;
+MULTI IN2 1;
+ADD IN1 IN2;
+ADDI SP 1;
+STOREIN SP IN1 1;
+# Exp(Stack(Num('1')))
 LOADIN SP IN1 1;
 LOADIN IN1 ACC 0;
 STOREIN SP ACC 1;

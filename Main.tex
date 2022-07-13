@@ -35,6 +35,8 @@
   % https://tex.stackexchange.com/questions/49155/how-can-i-list-items-created-with-the-float-package-in-the-toc
   \listof{floatgrammar}{Grammatikverzeichnis}
 
+  \numberwithin{codecaption}{chapter}
+
   \newtcbtheorem[list inside={theorem_list},crefname={definition}{definitions}, number within=chapter]{Definition}{Definition}%
   {enhanced, arc=0mm,top=3mm,bottom=3mm, boxrule=0mm, borderline south={1mm}{0pt}{PrimaryColor}, title style={color=PrimaryColor},
   interior style={opacity=0.2, fill=PrimaryColor},

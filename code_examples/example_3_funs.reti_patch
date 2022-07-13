@@ -3,7 +3,10 @@ File
   [
     Block 
       Name 'start.3', 
-      [], 
+      [
+        # // Exp(GoTo(Name('main.2')))
+        # // patched out Exp(GoTo(Name('main.2')))
+      ], 
     Block 
       Name 'main.2', 
       [

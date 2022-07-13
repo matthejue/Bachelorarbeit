@@ -1,6 +1,10 @@
+# // Exp(GoTo(Name('main.0')))
 JUMP 2;
+# // Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('param')))
 # Return(Empty())
 LOADIN BAF PC -1;
+# // Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('local_var')))
+# // Exp(Call(Name('stack_fun'), [Name('local_var')]))
 # StackMalloc(Num('2'))
 SUBI SP 2;
 # Assign(Stack(Num('3')), Global(Num('0')))
@@ -20,6 +24,7 @@ STOREIN BAF ACC 0;
 LOADI ACC 19;
 ADD ACC CS;
 STOREIN BAF ACC -1;
+# Exp(GoTo(Name('stack_fun.1')))
 JUMP -17;
 # RemoveStackframe()
 MOVE BAF IN1;

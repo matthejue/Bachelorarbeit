@@ -15,7 +15,7 @@
 
 \label{sec:lex_analyse_verwendung_von_lark}
 % ./concrete_syntax_picoc.lark
-\begin{grammar}[Konkrette Syntax für die Lexikalische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_lex]
+\begin{grammar}[Konkrette Syntax für die Lexikalische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_lex_teil_1]
   \toprule
   \firstcase{COMMENT}{\dq //\dq\enspace /[{\wedge}\backslash n]{*}/\gralt \dq {/*}\dq\enspace  /(.\mid \setminus n)*?/\enspace \dq {*/}\dq }{L\_Comment}
   \firstcase{RETI\_COMMENT.2}{\dq {//}\dq \dq \text{\textvisiblespace} \dq ? \dq \#\dq /[\wedge\backslash n]{*}/}{}
@@ -56,7 +56,7 @@
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Konkrette Syntax für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex]
+\begin{grammar}[Konkrette Syntax für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex_teil_2]
   \toprule
   \firstcase{INT\_DT.2}{\dq int\dq }{L\_Assign\_Alloc}
   \firstcase{INT\_NAME.3}{\dq int\dq\enspace (LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )+}{}

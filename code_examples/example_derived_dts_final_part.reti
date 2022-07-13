@@ -1,3 +1,5 @@
+# // Exp(GoTo(Name('main.0')))
+# // patched out Exp(GoTo(Name('main.0')))
 # // Assign(Name('ar1'), Array([Array([Num('42'), Num('314')])]))
 # Exp(Num('42'))
 SUBI SP 1;
@@ -74,6 +76,7 @@ MULTI IN2 2;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
+# Exp(Stack(Num('1')))
 # // Exp(Subscr(Name('ar2'), Num('0')))
 # Ref(Global(Num('2')))
 SUBI SP 1;
@@ -91,6 +94,7 @@ MULTI IN2 2;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
+# Exp(Stack(Num('1')))
 LOADIN SP IN1 1;
 LOADIN IN1 ACC 0;
 STOREIN SP ACC 1;
@@ -112,5 +116,6 @@ MULTI IN2 1;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
+# Exp(Stack(Num('1')))
 # Return(Empty())
 LOADIN BAF PC -1;

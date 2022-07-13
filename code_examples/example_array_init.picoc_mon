@@ -2,12 +2,25 @@ File
   Name './example_array_init.picoc_mon', 
   [
     Block 
-      Name 'main.0', 
+      Name 'main.1', 
       [
-        // Assign(Name('ar'), Array([Array([Num('4')]), Array([Num('2')])]))
+        // Assign(Name('ar'), Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])]))
+        Exp(Num('3'))
+        Exp(Num('1'))
+        Exp(BinOp(Stack(Num('2')), Add('+'), Stack(Num('1'))))
         Exp(Num('4'))
-        Exp(Num('2'))
         Assign(Global(Num('0')), Stack(Num('2')))
+        Return(Empty())
+      ], 
+    Block 
+      Name 'fun.0', 
+      [
+        // Assign(Name('ar'), Array([Array([Num('3'), Num('4')]), Array([Num('5'), Num('6')])]))
+        Exp(Num('3'))
+        Exp(Num('4'))
+        Exp(Num('5'))
+        Exp(Num('6'))
+        Assign(Stackframe(Num('3')), Stack(Num('4')))
         Return(Empty())
       ]
   ]

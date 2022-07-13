@@ -3,7 +3,10 @@ File
   [
     Block 
       Name 'start.6', 
-      [], 
+      [
+        # // Exp(GoTo(Name('main.5')))
+        # // patched out Exp(GoTo(Name('main.5')))
+      ], 
     Block 
       Name 'main.5', 
       [
@@ -26,6 +29,8 @@ File
         STOREIN DS ACC 1;
         ADDI SP 1;
         # // While(Num('1'), [])
+        # Exp(GoTo(Name('condition_check.4')))
+        # // patched out Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 
       Name 'condition_check.4', 
@@ -39,6 +44,7 @@ File
         LOADIN SP ACC 1;
         ADDI SP 1;
         JUMP== GoTo(Name('while_after.0'));
+        # // patched out Exp(GoTo(Name('while_branch.3')))
       ], 
     Block 
       Name 'while_branch.3', 
@@ -53,6 +59,7 @@ File
         SUBI SP 1;
         LOADI ACC 1;
         STOREIN SP ACC 1;
+        # Exp(Atom(Stack(Num('2')), Eq('=='), Stack(Num('1'))))
         LOADIN SP ACC 2;
         LOADIN SP IN2 1;
         SUB ACC IN2;
@@ -66,6 +73,7 @@ File
         LOADIN SP ACC 1;
         ADDI SP 1;
         JUMP== GoTo(Name('if_else_after.1'));
+        # // patched out Exp(GoTo(Name('if.2')))
       ], 
     Block 
       Name 'if.2', 
@@ -85,6 +93,7 @@ File
         SUBI SP 1;
         LOADIN DS ACC 1;
         STOREIN SP ACC 1;
+        # Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))
         LOADIN SP ACC 2;
         LOADIN SP IN2 1;
         MULT ACC IN2;
@@ -103,6 +112,7 @@ File
         SUBI SP 1;
         LOADI ACC 1;
         STOREIN SP ACC 1;
+        # Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))
         LOADIN SP ACC 2;
         LOADIN SP IN2 1;
         SUB ACC IN2;
@@ -112,6 +122,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 0;
         ADDI SP 1;
+        # Exp(GoTo(Name('condition_check.4')))
         Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 

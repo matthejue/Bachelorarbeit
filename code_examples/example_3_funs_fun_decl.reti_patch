@@ -4,6 +4,7 @@ File
     Block 
       Name 'start.3', 
       [
+        # // Exp(GoTo(Name('main.1')))
         Exp(GoTo(Name('main.1')))
       ], 
     Block 
@@ -31,11 +32,13 @@ File
         LOADI ACC GoTo(Name('addr@next_instr'));
         ADD ACC CS;
         STOREIN BAF ACC -1;
+        # Exp(GoTo(Name('fun2.0')))
         Exp(GoTo(Name('fun2.0')))
         # RemoveStackframe()
         MOVE BAF IN1;
         LOADIN IN1 BAF 0;
         MOVE IN1 SP;
+        # Exp(ACC)
         SUBI SP 1;
         STOREIN SP ACC 1;
         # Assign(Global(Num('0')), Stack(Num('1')))
@@ -48,6 +51,7 @@ File
     Block 
       Name 'fun2.0', 
       [
+        # // Exp(Alloc(Writeable(), IntType('int'), Name('var')))
         # // Return(Name('var'))
         # Exp(Stackframe(Num('0')))
         SUBI SP 1;

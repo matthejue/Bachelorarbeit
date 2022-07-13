@@ -6,6 +6,13 @@ File
       Name 'main', 
       [], 
       [
-        Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')), Name('ar')), Array([Array([Num('4')]), Array([Num('2')])]))
+        Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')), Name('ar')), Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])]))
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'fun', 
+      [], 
+      [
+        Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('2')], IntType('int')), Name('ar')), Array([Array([Num('3'), Num('4')]), Array([Num('5'), Num('6')])]))
       ]
   ]

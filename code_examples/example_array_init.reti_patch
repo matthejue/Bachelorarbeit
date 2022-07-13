@@ -2,19 +2,32 @@ File
   Name './example_array_init.reti_patch', 
   [
     Block 
-      Name 'start.1', 
-      [], 
-    Block 
-      Name 'main.0', 
+      Name 'start.2', 
       [
-        # // Assign(Name('ar'), Array([Array([Num('4')]), Array([Num('2')])]))
+        # // Exp(GoTo(Name('main.1')))
+        # // patched out Exp(GoTo(Name('main.1')))
+      ], 
+    Block 
+      Name 'main.1', 
+      [
+        # // Assign(Name('ar'), Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])]))
+        # Exp(Num('3'))
+        SUBI SP 1;
+        LOADI ACC 3;
+        STOREIN SP ACC 1;
+        # Exp(Num('1'))
+        SUBI SP 1;
+        LOADI ACC 1;
+        STOREIN SP ACC 1;
+        # Exp(BinOp(Stack(Num('2')), Add('+'), Stack(Num('1'))))
+        LOADIN SP ACC 2;
+        LOADIN SP IN2 1;
+        ADD ACC IN2;
+        STOREIN SP ACC 2;
+        ADDI SP 1;
         # Exp(Num('4'))
         SUBI SP 1;
         LOADI ACC 4;
-        STOREIN SP ACC 1;
-        # Exp(Num('2'))
-        SUBI SP 1;
-        LOADI ACC 2;
         STOREIN SP ACC 1;
         # Assign(Global(Num('0')), Stack(Num('2')))
         LOADIN SP ACC 1;
@@ -22,6 +35,39 @@ File
         LOADIN SP ACC 2;
         STOREIN DS ACC 0;
         ADDI SP 2;
+        # Return(Empty())
+        LOADIN BAF PC -1;
+      ], 
+    Block 
+      Name 'fun.0', 
+      [
+        # // Assign(Name('ar'), Array([Array([Num('3'), Num('4')]), Array([Num('5'), Num('6')])]))
+        # Exp(Num('3'))
+        SUBI SP 1;
+        LOADI ACC 3;
+        STOREIN SP ACC 1;
+        # Exp(Num('4'))
+        SUBI SP 1;
+        LOADI ACC 4;
+        STOREIN SP ACC 1;
+        # Exp(Num('5'))
+        SUBI SP 1;
+        LOADI ACC 5;
+        STOREIN SP ACC 1;
+        # Exp(Num('6'))
+        SUBI SP 1;
+        LOADI ACC 6;
+        STOREIN SP ACC 1;
+        # Assign(Stackframe(Num('3')), Stack(Num('4')))
+        LOADIN SP ACC 1;
+        STOREIN BAF ACC -2;
+        LOADIN SP ACC 2;
+        STOREIN BAF ACC -3;
+        LOADIN SP ACC 3;
+        STOREIN BAF ACC -4;
+        LOADIN SP ACC 4;
+        STOREIN BAF ACC -5;
+        ADDI SP 4;
         # Return(Empty())
         LOADIN BAF PC -1;
       ]

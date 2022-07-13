@@ -3,10 +3,15 @@ File
   [
     Block 
       Name 'start.2', 
-      [], 
+      [
+        # // Exp(GoTo(Name('main.1')))
+        # // patched out Exp(GoTo(Name('main.1')))
+      ], 
     Block 
       Name 'main.1', 
       [
+        # // Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], StructSpec(Name('st'))), Name('local_var')))
+        # // Exp(Call(Name('stack_fun'), [Name('local_var')]))
         # StackMalloc(Num('2'))
         SUBI SP 2;
         # Ref(Global(Num('0')))
@@ -23,6 +28,7 @@ File
         LOADI ACC GoTo(Name('addr@next_instr'));
         ADD ACC CS;
         STOREIN BAF ACC -1;
+        # Exp(GoTo(Name('stack_fun.0')))
         Exp(GoTo(Name('stack_fun.0')))
         # RemoveStackframe()
         MOVE BAF IN1;
@@ -34,6 +40,8 @@ File
     Block 
       Name 'stack_fun.0', 
       [
+        # // Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('st'))), Name('param')))
+        # // Exp(Alloc(Writeable(), IntType('int'), Name('local_var')))
         # Return(Empty())
         LOADIN BAF PC -1;
       ]

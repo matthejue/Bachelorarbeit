@@ -1,3 +1,4 @@
+# // Exp(GoTo(Name('main.1')))
 JUMP 2;
 # Return(Empty())
 LOADIN BAF PC -1;
@@ -17,11 +18,13 @@ STOREIN BAF ACC 0;
 LOADI ACC 15;
 ADD ACC CS;
 STOREIN BAF ACC -1;
+# Exp(GoTo(Name('fun2.0')))
 JUMP 10;
 # RemoveStackframe()
 MOVE BAF IN1;
 LOADIN IN1 BAF 0;
 MOVE IN1 SP;
+# Exp(ACC)
 SUBI SP 1;
 STOREIN SP ACC 1;
 # Assign(Global(Num('0')), Stack(Num('1')))
@@ -30,6 +33,7 @@ STOREIN DS ACC 0;
 ADDI SP 1;
 # Return(Empty())
 LOADIN BAF PC -1;
+# // Exp(Alloc(Writeable(), IntType('int'), Name('var')))
 # // Return(Name('var'))
 # Exp(Stackframe(Num('0')))
 SUBI SP 1;

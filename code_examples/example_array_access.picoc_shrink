@@ -6,7 +6,15 @@ File
       Name 'main', 
       [], 
       [
-        Assign(Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar')), Array([Num('1'), Num('2')]))
-        Exp(Subscr(Name('ar'), Num('2')))
+        Assign(Alloc(Writeable(), ArrayDecl([Num('1')], IntType('int')), Name('ar')), Array([Num('42')]))
+        Exp(Subscr(Name('ar'), Num('0')))
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'fun', 
+      [], 
+      [
+        Assign(Alloc(Writeable(), ArrayDecl([Num('3')], IntType('int')), Name('ar')), Array([Num('1'), Num('2'), Num('3')]))
+        Exp(Subscr(Name('ar'), BinOp(Num('1'), Add('+'), Num('1'))))
       ]
   ]

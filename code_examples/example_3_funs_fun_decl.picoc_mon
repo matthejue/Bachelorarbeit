@@ -22,6 +22,7 @@ File
     Block 
       Name 'fun2.0', 
       [
+        // Exp(Alloc(Writeable(), IntType('int'), Name('var')))
         // Return(Name('var'))
         Exp(Stackframe(Num('0')))
         Return(Stack(Num('1')))
