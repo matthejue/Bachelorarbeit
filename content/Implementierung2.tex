@@ -17,7 +17,7 @@ Die \colorbold{Referenzierung} (z.B. \verb|&var|) wird im Folgenden anhand des B
   \label{code:picoc_code_für_pointer_referenzierung}
 \end{code}
 
-Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&var|.
+Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&var| und der Knoten \smalltt{PntrDecl(Num('1'), IntType('int'))} repräsentiert einen Pointer \smalltt{*pntr}.
 
 \begin{code}
   \centering
@@ -26,11 +26,24 @@ Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstract Syn
   \label{code:abstract_syntax_tree_für_pointer_referenzierung}
 \end{code}
 
+Bevor man einem \colorbold{Pointer} eine eine \colorbold{Adresse} (z.B. \smalltt{\&var}) zuweisen kann, muss dieser erstmal \colorbold{definiert} sein. Dafür braucht es einen Eintrag in der \colorbold{Symboltabelle} in Code~\ref{code:symboltabelle_für_pointer_referenzierung}.
+
+\begin{Special_Paragraph}
+Die \colorbold{Größe} eines Pointers (z.B. eines Pointers auf ein Array von \smalltt{int}: \smalltt{pntr = int *pntr[3]}), die ihm \smalltt{size}-Feld der \colorbold{Symboltabelle} eingetragen ist, ist dabei immer: $\mathtt{size(pntr) = 1}$.
+\end{Special_Paragraph}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={23-28}}]{./code_examples/example_pntr_ref.st}
+  \caption{Symboltabelle für Pointer Referenzierung}
+  \label{code:symboltabelle_für_pointer_referenzierung}
+\end{code}
+
 Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_für_pointer_referenzierung} wird der Knoten \smalltt{Ref(Name('var')))} durch die Knoten \smalltt{Ref(GlobalRead(Num('0')))} und \smalltt{Assign(GlobalWrite(Num('1')), Tmp(Num('1')))} ersetzt. Im Fall, dass in \smalltt{Ref(exp))} das \smalltt{exp} vielleicht nicht direkt ein \smalltt{Name('var')} enthält und \smalltt{exp} z.B. ein \smalltt{Subscr(Attr(Name('var')))} ist, sind noch weitere Anweisungen zwischen den Zeilen \smalltt{11} und  \smalltt{12} nötig, die sich in diesem Beispiel um das Übersetzen von \smalltt{Subscr(exp)} und \smalltt{Attr(exp)} nach dem Schema in Subkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} kümmern.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={11-13}}]{./code_examples/example_pntr_ref.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={11-12}}]{./code_examples/example_pntr_ref.picoc_mon}
   \caption{PicoC-Mon Pass für Pointer Referenzierung}
   \label{code:picoc_mon_für_pointer_referenzierung}
 \end{code}
@@ -98,6 +111,10 @@ Bei der \colorbold{Initialisierung} eines \colorbold{Arrays} wird zuerst \smallt
 
 Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die entgegengesetzte Richtung wächst, verglichen mit den \colorbold{Globalen Statischen Daten}\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
 
+\begin{Special_Paragraph}
+Das \colorbold{Größe} des Arrays $\mathtt{datatype \enspace ar[s_1]\ldots[s_k]}$, die ihm \smalltt{size}-Feld der \colorbold{Symboltabelle} eingetragen ist, berechnet sich dabei aus der \colorbold{Mächtigkeit} der einzelnen \colorbold{Dimensionen} des Arrays multipliziert mit der \colorbold{Größe} des \colorbold{grundlegenden Datentyps} der einzelnen Arrayelemente: $\mathtt{size(ar) = (\prod^n_{j=1} s_j)\cdot size(datatype)}$.
+\end{Special_Paragraph}
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={14-19,32-37}}]{./code_examples/example_array_init.st}
@@ -107,7 +124,9 @@ Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwär
 
 Im \colorbold{PiocC-Mon Pass} in Code~\ref{code:picoc_mon_für_array_initialisierung} werden zuerst die \colorbold{Ausdrücke} im \colorbold{Array-Initializer} \smalltt{Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])])} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet und auf den \colorbold{Stack} geschrieben\footnote{Da der \colorbold{Zuweisungsoperator} \smalltt{=} \colorbold{rechtsassoziativ} ist und auch rein \colorbold{logisch}, weil man nichts zuweisen kann, was man noch nicht berechnet hat.}.
 
-Im finalen Schritt muss zwischen \colorbold{Globalen Statischen Daten} bei der \smalltt{main}-Funktion und \colorbold{Stackframe} bei der Funktion \smalltt{fun} unterschieden werden. Die auf den Stack ausgewerteten Expressions werden mittels der Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))}, versetzt in der selben Reihenfolge zu den \colorbold{Globalen Statischen Daten} bzw. auf den \colorbold{Stackframe} geschrieben.
+Im finalen Schritt muss zwischen \colorbold{Globalen Statischen Daten} bei der \smalltt{main}-Funktion und \colorbold{Stackframe} bei der Funktion \smalltt{fun} unterschieden werden. Die auf den Stack ausgewerteten Expressions werden mittels der Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))}, die in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} genauer beschrieben ist, versetzt in der selben Reihenfolge zu den \colorbold{Globalen Statischen Daten} bzw. auf den \colorbold{Stackframe} geschrieben.
+
+Der \colorbold{Trick} ist hier, dass egal wieviele Dimensionen und was für einen Datentyp das \colorbold{Array} hat, man letztendlich immer das gesamte Array erwischt, wenn man einfach die \colorbold{Größe des Arrays} viele \colorbold{Speicherzellen} mit z.B. der \colorbold{Komposition} \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} verschiebt.
 
 In die Knoten \smalltt{Global('0')} und  \smalltt{Stackframe('3')} wurde hierbei die \colorbold{Startadresse} des jeweiligen Arrays geschrieben, sodass man nach dem \colorbold{PicoC-Mon Pass} nie mehr Variablen in der  \colorbold{Symboltabelle} nachsehen muss und gleich weiß, ob sie in Bezug zu den \colorbold{Globalen Statischen Daten} oder dem \colorbold{Stackframe} stehen.
 
@@ -205,6 +224,26 @@ Danach ist das Vorgehen, bzw. sind die Kompostionen, die dieses darauffolgende V
 
 Zum Schluss stellt die \colorbold{Komposition} \smalltt{Assign(Stack(Num('1')), Stack(Num('2')))}\footnote{Ist in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} genauer beschrieben ist} die Zuweisung \smalltt{=} des Ergebnisses des Ausdrucks auf der \colorbold{rechten} Seite der Zuweisung zum \colorbold{Arrayindex}, dessen \colorbold{Adresse} im Schritt danach berechnet wurde dar.
 
+\begin{Special_Paragraph}
+  Die Berechnung der \colorbold{Adresse}, ab der ein \colorbold{Arrayelement} eines Arrays $\mathtt{datatype\enspace ar[s_1]\ldots[s_n]}$ abgespeichert ist, kann mittels der Formel~\ref{eq:adresse_von_arrayelement}:
+
+  \numberwithin{equation}{section}
+
+  \begin{equation}
+  \mathtt{ref(ar[k_1]\ldots[k_n]) = ref(ar) + \left(\sum_{i=1}^{n}\left(\prod_{j=i+1}^{n} s_{j}\right) \cdot k_{i}\right) \cdot \operatorname{size}(datatype)} \\
+    \label{eq:adresse_von_arrayelement}
+  \end{equation}
+  aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte}.
+
+  Die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('2')))} repräsentiert dabei den Summanden $\smalltt{ref(ar)}$ in der Formel.
+
+  Die Komposition \smalltt{Exp(Num('2'))} repräsentiert dabei einen \colorbold{Subindex} (z.B. \smalltt{i} in \smalltt{a[i][j][k]}) beim \colorbold{Zugriff auf ein Arrayelement}, der als Faktor $\mathtt{k_i}$ in der Formel auftaucht.
+
+  Der Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} repräsentiert dabei einen ausmultiplizierten Summanden $\mathtt{\left(\prod_{j=i+1}^{n} s_{j}\right) \cdot k_{i} \cdot size(datatpye)}$ in der Formel.
+
+Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(ar[k_1]\ldots[k_n])\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(ar[k_1]\ldots[k_n])}$.
+\end{Special_Paragraph}
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={9-13}}]{./code_examples/example_array_assignment.picoc_mon}
@@ -235,16 +274,18 @@ Die \colorbold{Deklaration} eines neuen \colorbold{Structtyps} (z.B. \smalltt{st
 
 Bevor irgendwas definiert werden kann, muss erstmal ein \colorbold{Structtyp} deklariert werden. Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} wird die \colorbold{Deklaration eines Structtyps} \smalltt{struct st \{int len; int ar[2];\};} durch die Komposition \smalltt{StructDecl(Name('st'), [Alloc(Writeable(), IntType('int'), Name('len')) Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} dargestellt.
 
+Die \colorbold{Definition} einer Variable mit diesem \colorbold{Structtyp}  \smalltt{struct st st\_var;}  wird durch die Komposition \smalltt{Alloc(Writeable(), StructSpec(Name('st')), Name('st\_var'))} dargestellt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={4-9}}]{./code_examples/example_struct_decl_def.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={4-9,15}}]{./code_examples/example_struct_decl_def.ast}
   \caption{Abstract Syntax Tree für die Deklaration eines Structtyps}
   \label{code:abstract_syntax_tree_für_die_deklaration_eines_structtyps}
 \end{code}
 
 Für den \colorbold{Structtyp} selbst wird in der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} dargestellt ist ein Eintrag mit dem \colorbold{Schlüssel} \smalltt{st} erstellt, der die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{position} und \smalltt{size} wie üblich belegt, allerdings in das \smalltt{value\_address}-Feld seine Attribute \smalltt{[Name('len@st'), Name('ar@st')]} reinschreibt. Die Schlüssel der \colorbold{Attribute} haben einen \colorbold{Suffix} \smalltt{@st} angehängt, der eine Art \colorbold{Scope} innerhalb des \colorbold{Structtyps} für seine Attribut darstellt. Es gilt foglich, dass \colorbold{innerhalb} eines \colorbold{Structtyps} zwei Attribute nicht gleich benannt werden können, aber dafür zwei \colorbold{unterschiedliche} \colorbold{Structtypen} ihre Attribute gleich benennen können.
 
-Jedes der \colorbold{Attribute} \smalltt{[Name('len@st'), Name('ar@st')]} erhält auch einen eigenen Eintrag in der \colorbold{Symboltabelle}, wobei die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{value\_address}, \smalltt{position} und \smalltt{size} wie üblich belegt werden. Das \smalltt{datatype}-Feld wird dabei z.B. bei \smalltt{Name('ar@st')} mithilfe des \smalltt{datatype}-Attributs von \smalltt{Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} belegt.
+Jedes der \colorbold{Attribute} \smalltt{[Name('len@st'), Name('ar@st')]} erhält auch einen eigenen Eintrag in der \colorbold{Symboltabelle}, wobei die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{value\_address}, \smalltt{position} und \smalltt{size} wie üblich belegt werden. Die Felder \smalltt{type\_qualifier}, \smalltt{datatype} und \smalltt{name} werden z.B. bei \smalltt{Name('ar@st')} mithilfe der Attribute von \smalltt{Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} belegt.
 
 \begin{code}
   \centering
