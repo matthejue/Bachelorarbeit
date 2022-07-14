@@ -31,56 +31,57 @@
 \contentsline {codecaption}{\numberline {1.30}{\ignorespaces Abstract Syntax Tree für Zuweisung an Arrayindex\relax }}{54}{codecaption.caption.58}%
 \contentsline {codecaption}{\numberline {1.31}{\ignorespaces PicoC-Mon Pass für Zuweisung an Arrayindex\relax }}{55}{codecaption.caption.59}%
 \contentsline {codecaption}{\numberline {1.32}{\ignorespaces RETI-Blocks Pass für Zuweisung an Arrayindex\relax }}{55}{codecaption.caption.60}%
-\contentsline {codecaption}{\numberline {1.33}{\ignorespaces PicoC-Code für Deklaration von Structs\relax }}{56}{codecaption.caption.61}%
-\contentsline {codecaption}{\numberline {1.34}{\ignorespaces Symboltabelle für Deklaration von Structs\relax }}{57}{codecaption.caption.62}%
-\contentsline {codecaption}{\numberline {1.35}{\ignorespaces PicoC-Code für Initialisierung von Structs\relax }}{57}{codecaption.caption.63}%
-\contentsline {codecaption}{\numberline {1.36}{\ignorespaces Abstract Syntax Tree für Initialisierung von Structs\relax }}{58}{codecaption.caption.64}%
-\contentsline {codecaption}{\numberline {1.37}{\ignorespaces Symboltabelle für Initialisierung von Structs\relax }}{59}{codecaption.caption.65}%
-\contentsline {codecaption}{\numberline {1.38}{\ignorespaces PicoC-Mon Pass für Initialisierung von Structs\relax }}{59}{codecaption.caption.66}%
-\contentsline {codecaption}{\numberline {1.39}{\ignorespaces RETI-Blocks Pass für Initialisierung von Structs\relax }}{60}{codecaption.caption.67}%
-\contentsline {codecaption}{\numberline {1.40}{\ignorespaces PicoC-Code für Zugriff auf Structattribut\relax }}{60}{codecaption.caption.68}%
-\contentsline {codecaption}{\numberline {1.41}{\ignorespaces Abstract Syntax Tree für Zugriff auf Structattribut\relax }}{61}{codecaption.caption.69}%
-\contentsline {codecaption}{\numberline {1.42}{\ignorespaces PicoC-Mon Pass für Zugriff auf Structattribut\relax }}{61}{codecaption.caption.70}%
-\contentsline {codecaption}{\numberline {1.43}{\ignorespaces RETI-Blocks Pass für Zugriff auf Structattribut\relax }}{62}{codecaption.caption.71}%
-\contentsline {codecaption}{\numberline {1.44}{\ignorespaces PicoC-Code für Zuweisung an Structattribut\relax }}{62}{codecaption.caption.72}%
-\contentsline {codecaption}{\numberline {1.45}{\ignorespaces Abstract Syntax Tree für Zuweisung an Structattribut\relax }}{63}{codecaption.caption.73}%
-\contentsline {codecaption}{\numberline {1.46}{\ignorespaces PicoC-Mon Pass für Zuweisung an Structattribut\relax }}{63}{codecaption.caption.74}%
-\contentsline {codecaption}{\numberline {1.47}{\ignorespaces RETI-Blocks Pass für Zuweisung an Structattribut\relax }}{64}{codecaption.caption.75}%
-\contentsline {codecaption}{\numberline {1.48}{\ignorespaces PicoC-Code für den Anfangsteil\relax }}{64}{codecaption.caption.76}%
-\contentsline {codecaption}{\numberline {1.49}{\ignorespaces Abstract Syntax Tree für den Anfangsteil\relax }}{65}{codecaption.caption.77}%
-\contentsline {codecaption}{\numberline {1.50}{\ignorespaces PicoC-Mon Pass für den Anfangsteil\relax }}{66}{codecaption.caption.78}%
-\contentsline {codecaption}{\numberline {1.51}{\ignorespaces RETI-Blocks Pass für den Anfangsteil\relax }}{66}{codecaption.caption.79}%
-\contentsline {codecaption}{\numberline {1.52}{\ignorespaces PicoC-Code für den Mittelteil\relax }}{67}{codecaption.caption.80}%
-\contentsline {codecaption}{\numberline {1.53}{\ignorespaces Abstract Syntax Tree für den Mittelteil\relax }}{67}{codecaption.caption.81}%
-\contentsline {codecaption}{\numberline {1.54}{\ignorespaces PicoC-Mon Pass für den Mittelteil\relax }}{68}{codecaption.caption.82}%
-\contentsline {codecaption}{\numberline {1.55}{\ignorespaces RETI-Blocks Pass für den Mittelteil\relax }}{69}{codecaption.caption.83}%
-\contentsline {codecaption}{\numberline {1.56}{\ignorespaces PicoC-Code für den Schlussteil\relax }}{69}{codecaption.caption.84}%
-\contentsline {codecaption}{\numberline {1.57}{\ignorespaces Abstract Syntax Tree für den Schlussteil\relax }}{70}{codecaption.caption.85}%
-\contentsline {codecaption}{\numberline {1.58}{\ignorespaces PicoC-Mon Pass für den Schlussteil\relax }}{71}{codecaption.caption.86}%
-\contentsline {codecaption}{\numberline {1.59}{\ignorespaces RETI-Blocks Pass für den Schlussteil\relax }}{73}{codecaption.caption.87}%
-\contentsline {codecaption}{\numberline {1.60}{\ignorespaces PicoC-Code für 3 Funktionen\relax }}{74}{codecaption.caption.88}%
-\contentsline {codecaption}{\numberline {1.61}{\ignorespaces Abstract Syntax Tree für 3 Funktionen\relax }}{74}{codecaption.caption.89}%
-\contentsline {codecaption}{\numberline {1.62}{\ignorespaces RETI-Blocks Pass für 3 Funktionen\relax }}{75}{codecaption.caption.90}%
-\contentsline {codecaption}{\numberline {1.63}{\ignorespaces PicoC-Mon Pass für 3 Funktionen\relax }}{75}{codecaption.caption.91}%
-\contentsline {codecaption}{\numberline {1.64}{\ignorespaces RETI-Blocks Pass für 3 Funktionen\relax }}{76}{codecaption.caption.92}%
-\contentsline {codecaption}{\numberline {1.65}{\ignorespaces PicoC-Code für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{76}{codecaption.caption.93}%
-\contentsline {codecaption}{\numberline {1.66}{\ignorespaces PicoC-Mon Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{77}{codecaption.caption.94}%
-\contentsline {codecaption}{\numberline {1.67}{\ignorespaces RETI-Blocks Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{77}{codecaption.caption.95}%
-\contentsline {codecaption}{\numberline {1.68}{\ignorespaces PicoC-Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{78}{codecaption.caption.96}%
-\contentsline {codecaption}{\numberline {1.69}{\ignorespaces PicoC-Code für Funktionen, wobei eine Funktion vorher deklariert werden muss\relax }}{78}{codecaption.caption.97}%
-\contentsline {codecaption}{\numberline {1.70}{\ignorespaces Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss\relax }}{79}{codecaption.caption.98}%
-\contentsline {codecaption}{\numberline {1.71}{\ignorespaces PicoC-Code für Funktionsaufruf ohne Rückgabewert\relax }}{80}{codecaption.caption.99}%
-\contentsline {codecaption}{\numberline {1.72}{\ignorespaces PicoC-Mon Pass für Funktionsaufruf ohne Rückgabewert\relax }}{80}{codecaption.caption.100}%
-\contentsline {codecaption}{\numberline {1.73}{\ignorespaces RETI-Blocks Pass für Funktionsaufruf ohne Rückgabewert\relax }}{81}{codecaption.caption.101}%
-\contentsline {codecaption}{\numberline {1.74}{\ignorespaces RETI-Pass für Funktionsaufruf ohne Rückgabewert\relax }}{82}{codecaption.caption.102}%
-\contentsline {codecaption}{\numberline {1.75}{\ignorespaces PicoC-Code für Funktionsaufruf mit Rückgabewert\relax }}{82}{codecaption.caption.103}%
-\contentsline {codecaption}{\numberline {1.76}{\ignorespaces PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert\relax }}{82}{codecaption.caption.104}%
-\contentsline {codecaption}{\numberline {1.77}{\ignorespaces RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert\relax }}{83}{codecaption.caption.105}%
-\contentsline {codecaption}{\numberline {1.78}{\ignorespaces RETI-Pass für Funktionsaufruf mit Rückgabewert\relax }}{84}{codecaption.caption.106}%
-\contentsline {codecaption}{\numberline {1.79}{\ignorespaces PicoC-Code für Call by Sharing für Arrays\relax }}{84}{codecaption.caption.107}%
-\contentsline {codecaption}{\numberline {1.80}{\ignorespaces PicoC-Mon Pass für Call by Sharing für Arrays\relax }}{85}{codecaption.caption.108}%
-\contentsline {codecaption}{\numberline {1.81}{\ignorespaces Symboltabelle für Call by Sharing für Arrays\relax }}{86}{codecaption.caption.109}%
-\contentsline {codecaption}{\numberline {1.82}{\ignorespaces RETI-Block Pass für Call by Sharing für Arrays\relax }}{87}{codecaption.caption.110}%
-\contentsline {codecaption}{\numberline {1.83}{\ignorespaces PicoC-Code für Call by Value für Structs\relax }}{87}{codecaption.caption.111}%
-\contentsline {codecaption}{\numberline {1.84}{\ignorespaces PicoC-Mon Pass für Call by Value für Structs\relax }}{88}{codecaption.caption.112}%
-\contentsline {codecaption}{\numberline {1.85}{\ignorespaces RETI-Block Pass für Call by Value für Structs\relax }}{89}{codecaption.caption.113}%
+\contentsline {codecaption}{\numberline {1.33}{\ignorespaces PicoC-Code für die Deklaration eines Structtyps\relax }}{56}{codecaption.caption.61}%
+\contentsline {codecaption}{\numberline {1.34}{\ignorespaces Abstract Syntax Tree für die Deklaration eines Structtyps\relax }}{56}{codecaption.caption.62}%
+\contentsline {codecaption}{\numberline {1.35}{\ignorespaces Symboltabelle für die Deklaration eines Structtyps\relax }}{57}{codecaption.caption.63}%
+\contentsline {codecaption}{\numberline {1.36}{\ignorespaces PicoC-Code für Initialisierung von Structs\relax }}{58}{codecaption.caption.64}%
+\contentsline {codecaption}{\numberline {1.37}{\ignorespaces Abstract Syntax Tree für Initialisierung von Structs\relax }}{58}{codecaption.caption.65}%
+\contentsline {codecaption}{\numberline {1.38}{\ignorespaces Symboltabelle für Initialisierung von Structs\relax }}{60}{codecaption.caption.66}%
+\contentsline {codecaption}{\numberline {1.39}{\ignorespaces PicoC-Mon Pass für Initialisierung von Structs\relax }}{60}{codecaption.caption.67}%
+\contentsline {codecaption}{\numberline {1.40}{\ignorespaces RETI-Blocks Pass für Initialisierung von Structs\relax }}{61}{codecaption.caption.68}%
+\contentsline {codecaption}{\numberline {1.41}{\ignorespaces PicoC-Code für Zugriff auf Structattribut\relax }}{61}{codecaption.caption.69}%
+\contentsline {codecaption}{\numberline {1.42}{\ignorespaces Abstract Syntax Tree für Zugriff auf Structattribut\relax }}{61}{codecaption.caption.70}%
+\contentsline {codecaption}{\numberline {1.43}{\ignorespaces PicoC-Mon Pass für Zugriff auf Structattribut\relax }}{62}{codecaption.caption.71}%
+\contentsline {codecaption}{\numberline {1.44}{\ignorespaces RETI-Blocks Pass für Zugriff auf Structattribut\relax }}{63}{codecaption.caption.72}%
+\contentsline {codecaption}{\numberline {1.45}{\ignorespaces PicoC-Code für Zuweisung an Structattribut\relax }}{63}{codecaption.caption.73}%
+\contentsline {codecaption}{\numberline {1.46}{\ignorespaces Abstract Syntax Tree für Zuweisung an Structattribut\relax }}{63}{codecaption.caption.74}%
+\contentsline {codecaption}{\numberline {1.47}{\ignorespaces PicoC-Mon Pass für Zuweisung an Structattribut\relax }}{64}{codecaption.caption.75}%
+\contentsline {codecaption}{\numberline {1.48}{\ignorespaces RETI-Blocks Pass für Zuweisung an Structattribut\relax }}{65}{codecaption.caption.76}%
+\contentsline {codecaption}{\numberline {1.49}{\ignorespaces PicoC-Code für den Anfangsteil\relax }}{65}{codecaption.caption.77}%
+\contentsline {codecaption}{\numberline {1.50}{\ignorespaces Abstract Syntax Tree für den Anfangsteil\relax }}{66}{codecaption.caption.78}%
+\contentsline {codecaption}{\numberline {1.51}{\ignorespaces PicoC-Mon Pass für den Anfangsteil\relax }}{66}{codecaption.caption.79}%
+\contentsline {codecaption}{\numberline {1.52}{\ignorespaces RETI-Blocks Pass für den Anfangsteil\relax }}{67}{codecaption.caption.80}%
+\contentsline {codecaption}{\numberline {1.53}{\ignorespaces PicoC-Code für den Mittelteil\relax }}{67}{codecaption.caption.81}%
+\contentsline {codecaption}{\numberline {1.54}{\ignorespaces Abstract Syntax Tree für den Mittelteil\relax }}{68}{codecaption.caption.82}%
+\contentsline {codecaption}{\numberline {1.55}{\ignorespaces PicoC-Mon Pass für den Mittelteil\relax }}{68}{codecaption.caption.83}%
+\contentsline {codecaption}{\numberline {1.56}{\ignorespaces RETI-Blocks Pass für den Mittelteil\relax }}{70}{codecaption.caption.84}%
+\contentsline {codecaption}{\numberline {1.57}{\ignorespaces PicoC-Code für den Schlussteil\relax }}{70}{codecaption.caption.85}%
+\contentsline {codecaption}{\numberline {1.58}{\ignorespaces Abstract Syntax Tree für den Schlussteil\relax }}{71}{codecaption.caption.86}%
+\contentsline {codecaption}{\numberline {1.59}{\ignorespaces PicoC-Mon Pass für den Schlussteil\relax }}{72}{codecaption.caption.87}%
+\contentsline {codecaption}{\numberline {1.60}{\ignorespaces RETI-Blocks Pass für den Schlussteil\relax }}{74}{codecaption.caption.88}%
+\contentsline {codecaption}{\numberline {1.61}{\ignorespaces PicoC-Code für 3 Funktionen\relax }}{74}{codecaption.caption.89}%
+\contentsline {codecaption}{\numberline {1.62}{\ignorespaces Abstract Syntax Tree für 3 Funktionen\relax }}{75}{codecaption.caption.90}%
+\contentsline {codecaption}{\numberline {1.63}{\ignorespaces RETI-Blocks Pass für 3 Funktionen\relax }}{75}{codecaption.caption.91}%
+\contentsline {codecaption}{\numberline {1.64}{\ignorespaces PicoC-Mon Pass für 3 Funktionen\relax }}{76}{codecaption.caption.92}%
+\contentsline {codecaption}{\numberline {1.65}{\ignorespaces RETI-Blocks Pass für 3 Funktionen\relax }}{76}{codecaption.caption.93}%
+\contentsline {codecaption}{\numberline {1.66}{\ignorespaces PicoC-Code für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{77}{codecaption.caption.94}%
+\contentsline {codecaption}{\numberline {1.67}{\ignorespaces PicoC-Mon Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{77}{codecaption.caption.95}%
+\contentsline {codecaption}{\numberline {1.68}{\ignorespaces RETI-Blocks Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{78}{codecaption.caption.96}%
+\contentsline {codecaption}{\numberline {1.69}{\ignorespaces PicoC-Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist\relax }}{78}{codecaption.caption.97}%
+\contentsline {codecaption}{\numberline {1.70}{\ignorespaces PicoC-Code für Funktionen, wobei eine Funktion vorher deklariert werden muss\relax }}{79}{codecaption.caption.98}%
+\contentsline {codecaption}{\numberline {1.71}{\ignorespaces Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss\relax }}{80}{codecaption.caption.99}%
+\contentsline {codecaption}{\numberline {1.72}{\ignorespaces PicoC-Code für Funktionsaufruf ohne Rückgabewert\relax }}{80}{codecaption.caption.100}%
+\contentsline {codecaption}{\numberline {1.73}{\ignorespaces PicoC-Mon Pass für Funktionsaufruf ohne Rückgabewert\relax }}{81}{codecaption.caption.101}%
+\contentsline {codecaption}{\numberline {1.74}{\ignorespaces RETI-Blocks Pass für Funktionsaufruf ohne Rückgabewert\relax }}{82}{codecaption.caption.102}%
+\contentsline {codecaption}{\numberline {1.75}{\ignorespaces RETI-Pass für Funktionsaufruf ohne Rückgabewert\relax }}{82}{codecaption.caption.103}%
+\contentsline {codecaption}{\numberline {1.76}{\ignorespaces PicoC-Code für Funktionsaufruf mit Rückgabewert\relax }}{82}{codecaption.caption.104}%
+\contentsline {codecaption}{\numberline {1.77}{\ignorespaces PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert\relax }}{83}{codecaption.caption.105}%
+\contentsline {codecaption}{\numberline {1.78}{\ignorespaces RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert\relax }}{84}{codecaption.caption.106}%
+\contentsline {codecaption}{\numberline {1.79}{\ignorespaces RETI-Pass für Funktionsaufruf mit Rückgabewert\relax }}{84}{codecaption.caption.107}%
+\contentsline {codecaption}{\numberline {1.80}{\ignorespaces PicoC-Code für Call by Sharing für Arrays\relax }}{85}{codecaption.caption.108}%
+\contentsline {codecaption}{\numberline {1.81}{\ignorespaces PicoC-Mon Pass für Call by Sharing für Arrays\relax }}{85}{codecaption.caption.109}%
+\contentsline {codecaption}{\numberline {1.82}{\ignorespaces Symboltabelle für Call by Sharing für Arrays\relax }}{86}{codecaption.caption.110}%
+\contentsline {codecaption}{\numberline {1.83}{\ignorespaces RETI-Block Pass für Call by Sharing für Arrays\relax }}{87}{codecaption.caption.111}%
+\contentsline {codecaption}{\numberline {1.84}{\ignorespaces PicoC-Code für Call by Value für Structs\relax }}{88}{codecaption.caption.112}%
+\contentsline {codecaption}{\numberline {1.85}{\ignorespaces PicoC-Mon Pass für Call by Value für Structs\relax }}{88}{codecaption.caption.113}%
+\contentsline {codecaption}{\numberline {1.86}{\ignorespaces RETI-Block Pass für Call by Value für Structs\relax }}{89}{codecaption.caption.114}%

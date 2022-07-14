@@ -1,4 +1,5 @@
 # // Exp(GoTo(Name('main.0')))
 # // patched out Exp(GoTo(Name('main.0')))
+# // Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('st_var')))
 # Return(Empty())
 LOADIN BAF PC -1;

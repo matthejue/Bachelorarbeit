@@ -47,6 +47,16 @@ interpret:
 		picoc_compiler $$(cat ./most_used_interpret_opts.txt) -c $(DEBUG) $(VERBOSE) $$file; \
 	done
 
+interpret-example:
+	for file in *$(TESTNAME_BASE)*.picoc; do \
+		picoc_compiler $$(cat ./most_used_interpret_opts.txt) -c $(DEBUG) -v -e $$file; \
+	done
+
+interpret-verbose:
+	for file in *$(TESTNAME_BASE)*.picoc; do \
+		picoc_compiler $$(cat ./most_used_interpret_opts.txt) -c $(DEBUG) -v $$file; \
+	done
+
 show:
 ifeq ($(PAGES),5)
 	-./export_environment_vars_for_makefile.sh;\

@@ -1,0 +1,5 @@
+struct st {int len; int ar[2];};
+
+void main() {
+  struct st st_var;
+}

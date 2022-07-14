@@ -1,0 +1,17 @@
+File 
+  Name './example_struct_decl_def.ast', 
+  [
+    StructDecl 
+      Name 'st', 
+      [
+        Alloc(Writeable(), IntType('int'), Name('len'))
+        Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('st_var')))
+      ]
+  ]

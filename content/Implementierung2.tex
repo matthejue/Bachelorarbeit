@@ -17,7 +17,7 @@ Die \colorbold{Referenzierung} (z.B. \verb|&var|) wird im Folgenden anhand des B
   \label{code:picoc_code_für_pointer_referenzierung}
 \end{code}
 
-Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstrakt Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} (z.B. \verb|&var|).
+Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_referenzierung} eine \colorbold{Referenzierung} \verb|&var|.
 
 \begin{code}
   \centering
@@ -54,7 +54,7 @@ Die \colorbold{Dereferenzierung} (z.B. \smalltt{*var}) wird im Folgenden anhand 
   \label{code:picoc_code_für_pointer_dereferenzierung}
 \end{code}
 
-Der Knoten \smalltt{Deref(Name('var')))} repräsentiert im \colorbold{Abstrakt Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_dereferenzierung} eine \colorbold{Dereferenzierung} (z.B. \smalltt{*var}).
+Der Knoten \smalltt{Deref(Name('var')))} repräsentiert im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_dereferenzierung} eine \colorbold{Dereferenzierung} \smalltt{*var}.
 
 \begin{code}
   \centering
@@ -85,7 +85,7 @@ Die \colorbold{Initialisierung} eines \colorbold{Arrays} (z.B. \smalltt{int ar[2
   \label{code:picoc_code_für_array_initialisierung}
 \end{code}
 
-Die \colorbold{Initialisierung} eines \colorbold{Arrays} (z.B. \smalltt{int ar[2][1] = \{\{3+1\}, \{4\}\}}) wird im \colorbold{Abstrakt Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_array_initialisierung} mithilfe der Komposition \smalltt{Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')), Name('ar')), Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])]))} dargestellt.
+Die \colorbold{Initialisierung} eines \colorbold{Arrays} \smalltt{int ar[2][1] = \{\{3+1\}, \{4\}\}} wird im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_array_initialisierung} mithilfe der Komposition \smalltt{Assign(Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')), Name('ar')), Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])]))} dargestellt.
 
 \begin{code}
   \centering
@@ -96,7 +96,7 @@ Die \colorbold{Initialisierung} eines \colorbold{Arrays} (z.B. \smalltt{int ar[2
 
 Bei der \colorbold{Initialisierung} eines \colorbold{Arrays} wird zuerst \smalltt{Alloc(Writeable(), ArrayDecl([Num('2'), Num('1')], IntType('int')))} ausgewertet, da eine Variable zuerst definiert sein muss, bevor man sie verwenden kann\footnote{Das Widerspricht der üblichen Auswertungsreihenfolge beim \colorbold{Zuweisungsoperator} \smalltt{=}, der \colorbold{rechtsassoziativ} ist. Der \colorbold{Zuweisungsoperator} \smalltt{=} tritt allerdings erst später in Aktion.}. Das \colorbold{Definieren} der Variable \smalltt{ar} erfolgt mittels der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_array_initialisierung} dargestellt ist.
 
-Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die Entgegengesetzte Richtung, verglichen mit den \colorbold{Globalen Statischen Daten} wächst\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
+Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die entgegengesetzte Richtung wächst, verglichen mit den \colorbold{Globalen Statischen Daten}\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
 
 \begin{code}
   \centering
@@ -141,7 +141,7 @@ Der \colorbold{Zugriff auf einen Arrayindex} (z.B. \smalltt{ar[0]}) wird im Folg
   \label{code:picoc_code_für_zugriff_auf_arrayindex}
 \end{code}
 
-Der \colorbold{Zugriff auf einen Arrayindex} (z.B. \smalltt{ar[0]}) wird im  \colorbold{Abstract Syntx Tree} in Code~\ref{code:abstract_syntax_tree_für_zugriff_auf_arrayindex} mithilfe des \colorbold{Container-Knotens} \smalltt{Subscr(Name('ar'), Num('0'))} dargestellt.
+Der \colorbold{Zugriff auf einen Arrayindex} \smalltt{ar[0]} wird im  \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_zugriff_auf_arrayindex} mithilfe des \colorbold{Container-Knotens} \smalltt{Subscr(Name('ar'), Num('0'))} dargestellt.
 
 \begin{code}
   \centering
@@ -190,7 +190,7 @@ Die \colorbold{Zuweisung} eines Wertes an einen \colorbold{Arrayindex} (z.B. \sm
   \label{code:picoc_code_für_array_assignment}
 \end{code}
 
-Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_array_assignment} wird eine \colorbold{Zuweisung} an einen \colorbold{Arrayindex} (z.B. \smalltt{ar[2] = 42;}) durch die Komposition \smalltt{Assign(Subscr(Name('ar'), Num('2')), Num('42'))} dargestellt.
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_array_assignment} wird eine \colorbold{Zuweisung} an einen \colorbold{Arrayindex} \smalltt{ar[2] = 42;} durch die Komposition \smalltt{Assign(Subscr(Name('ar'), Num('2')), Num('42'))} dargestellt.
 
 \begin{code}
   \centering
@@ -222,23 +222,35 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_assignm
 \end{code}
 
 \subsection{Umsetzung von Structs}
-\subsubsection{Deklaration von Structtypen}
+\subsubsection{Deklaration und Definition von Structtypen}
 
-Die \colorbold{Deklaration} eines neues Structtyps\smalltt{1 struct st1 {int *ar[3];};} wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_deklaration_von_structs} erläutert.
-
+Die \colorbold{Deklaration} eines neuen \colorbold{Structtyps} (z.B. \smalltt{struct st \{int len; int ar[2];\};}) und die \colorbold{Definition} einer Variable mit diesem \colorbold{Structtyp} (z.B. \smalltt{struct st st\_var;}) wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_die_deklaration_eines_structtyps} erläutert.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_struct_decl.picoc}
-  \caption{PicoC-Code für Deklaration von Structs}
-  \label{code:picoc_code_für_deklaration_von_structs}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,4}}]{./code_examples/example_struct_decl_def.picoc}
+  \caption{PicoC-Code für die Deklaration eines Structtyps}
+  \label{code:picoc_code_für_die_deklaration_eines_structtyps}
 \end{code}
 
+Bevor irgendwas definiert werden kann, muss erstmal ein \colorbold{Structtyp} deklariert werden. Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} wird die \colorbold{Deklaration eines Structtyps} \smalltt{struct st \{int len; int ar[2];\};} durch die Komposition \smalltt{StructDecl(Name('st'), [Alloc(Writeable(), IntType('int'), Name('len')) Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} dargestellt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_decl.st}
-  \caption{Symboltabelle für Deklaration von Structs}
-  \label{code:symboltabelle_für_deklaration_von_structs}
+  \numberedcodebox[minted language=text, minted options={highlightlines={4-9}}]{./code_examples/example_struct_decl_def.ast}
+  \caption{Abstract Syntax Tree für die Deklaration eines Structtyps}
+  \label{code:abstract_syntax_tree_für_die_deklaration_eines_structtyps}
+\end{code}
+
+Für den \colorbold{Structtyp} selbst wird in der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} dargestellt ist ein Eintrag mit dem \colorbold{Schlüssel} \smalltt{st} erstellt, der die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{position} und \smalltt{size} wie üblich belegt, allerdings in das \smalltt{value\_address}-Feld seine Attribute \smalltt{[Name('len@st'), Name('ar@st')]} reinschreibt. Die Schlüssel der Attribute haben einen \colorbold{Suffix} \smalltt{@st} angehängt, der eine Art \colorbold{Scope} für das Attribut darstellt festlegt. Dadurch können \colorbold{innerhalb} eines \colorbold{Structtyps} zwei \colorbold{Attribute} nicht gleich benannt werden, aber dafür können zwei \colorbold{unterschiedliche} \colorbold{Structtypen} ihre \colorbold{Attribute} gleich benennen.
+
+Jedes der \colorbold{Attribute} \smalltt{[Name('len@st'), Name('ar@st')]} erhält auch einen eigenen Eintrag in der \colorbold{Symboltabelle}, wobei die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{value\_address}, \smalltt{position} und \smalltt{size} wie üblich belegt werden. Das \smalltt{datatype}-Feld wird dabei z.B. bei \smalltt{Name('ar@st')} mithilfe des \smalltt{datatype}-Attributs von \smalltt{Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} belegt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={5-10,14-19,23-28,41-46}}]{./code_examples/example_struct_decl_def.st}
+  \caption{Symboltabelle für die Deklaration eines Structtyps}
+  \label{code:symboltabelle_für_die_deklaration_eines_structtyps}
 \end{code}
 
 \subsubsection{Initialisierung von Structs}
