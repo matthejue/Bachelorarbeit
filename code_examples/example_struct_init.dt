@@ -72,7 +72,7 @@ file
                 alloc
                   type_spec
                     struct_spec
-                      name	st1
+                      name	st2
                   pntr_decl
                     pntr_deg
                     array_decl

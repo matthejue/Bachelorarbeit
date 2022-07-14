@@ -76,7 +76,7 @@ file
                       array_dims
                       type_spec
                         struct_spec
-                          name	st1
+                          name	st2
                   name	st
                 bug_initializer
                   struct_init

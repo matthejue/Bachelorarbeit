@@ -66,10 +66,10 @@ SymbolTable
     Symbol 
       {
         type qualifier:         Writeable()
-        datatype:               StructSpec(Name('st1'))
+        datatype:               StructSpec(Name('st2'))
         name:                   Name('st@main')
         value or address:       Num('1')
         position:               Pos(Num('7'), Num('13'))
-        size:                   Num('2')
+        size:                   Num('3')
       }
   ]

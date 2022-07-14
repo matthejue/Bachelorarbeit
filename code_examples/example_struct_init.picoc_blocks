@@ -21,7 +21,7 @@ File
           Name 'main.0', 
           [
             Assign(Alloc(Writeable(), IntType('int'), Name('var')), Num('42'))
-            Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))]))
+            Assign(Alloc(Writeable(), StructSpec(Name('st2')), Name('st')), Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))]))
           ]
       ]
   ]

@@ -138,7 +138,7 @@ In die Knoten \smalltt{Global('0')} und  \smalltt{Stackframe('3')} wurde hierbei
   \label{code:picoc_mon_für_array_initialisierung}
 \end{code}
 
-Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initialisierung} werden die \colorbold{PicoC-Knoten} bzw. \colorbold{Kompositionen} für die Ausdrücke \smalltt{Exp(exp)} und \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_für_array_initialisierung} werden die \colorbold{Kompositionen} \smalltt{Exp(exp)} und \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
 \begin{code}
   \centering
@@ -313,7 +313,7 @@ Die \colorbold{Initialisierung eines Structs} wird im Folgenden mithilfe des Bei
   \label{code:picoc_code_für_initialisierung_von_structs}
 \end{code}
 
-Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} wird die \colorbold{Initialisierung eines Structs} \smalltt{struct st1 st = {.st={.pntr={{\&var}}}};} mithilfe der \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct(\ldots))} dargestellt.
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} wird die \colorbold{Initialisierung eines Structs} \smalltt{struct st1 st = \{.attr1=var, .attr2=\{.attr=\{\{\&var, \&var\}\}\}\};} mithilfe der \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct(\ldots))} dargestellt.
 
 \begin{code}
   \centering
@@ -322,9 +322,9 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
   \label{code:abstract_syntax_tree_für_initialisierung_von_structs}
 \end{code}
 
-Im Folgenden ist der Ablauf identisch zur \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays}, daher wird um keine Reptition zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Der einzige Unterschied ist, dass der im \colorbold{Abstract Syntax Tree} am weitesten oben liegende \colorbold{Intializer}-Knoten ein \colorbold{Struct Initializer} sein muss und kein \colorbold{Array Initializer}. Dafür wird in diesem Beispiel in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} eine komplexere, mehrstufige Initialisierung mit \colorbold{verschiedenen} Datentypen erklärt.
+Im Folgenden ist der Ablauf fast identisch zur \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays}, daher wird um keine Wiederholung zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Der einzige Unterschied ist, dass der im \colorbold{Abstract Syntax Tree} am weitesten oben liegende \colorbold{Intializer}-Knoten ein \colorbold{Struct Initializer} sein muss und kein \colorbold{Array Initializer}. Um das ganze interressanter zu gestalten wird in Bezug auf Code~\ref{code:picoc_code_für_initialisierung_von_structs} eine komplexere, mehrstufige Initialisierung mit \colorbold{verschiedenen} Datentypen erklärt.
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} werden die \colorbold{Logischen Ausdrücke} in den Blättern des vom \colorbold{Struct-Initializer} \colorbold{Container-Knoten} ausgehenden Baumes \smalltt{Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))])} genauso, wie der \colorbold{Array Initializer}, wie in Subkapitel~\ref{sec:initialisierung_von_arrays} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet. Im \colorbold{Struct-Initializer} sind weitere \colorbold{Struct- oder Array-Initializer} und \colorbold{Logische Ausdrücke} immer im rechten \colorbold{exp} Eintrag des Arrays Container-Kontens zu finden: \smalltt{Assign(Name('attr1'), Name('var'))}.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} wird der \colorbold{Struct-Initializer} fast genauso ausgewertet, wie der \colorbold{Array-Initializer} in Subkapitel~\ref{sec:initialisierung_von_arrays}. Beim \colorbold{Struct-Initializer} (z.B. \smalltt{Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))])}) muss allerdings beachtet werden, dass weitere \colorbold{Struct- oder Array-Initializer} und \colorbold{Logische Ausdrücke} immer im rechten \smalltt{exp} Knoten des \smalltt{Assign(lhs, exp)}-Knoten (z.B. \smalltt{Assign(Name('attr1'), Name('var'))}) zu finden sind.
 
 \begin{code}
   \centering
@@ -333,9 +333,11 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisier
   \label{code:picoc_mon_pass_für_initialisierung_von_structs}
 \end{code}
 
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_initialisierung_von_structs} werden die \colorbold{Kompositionen} \smalltt{Exp(exp)}, \smalltt{Ref(exp)} und \smalltt{Assign(Global(Num('1')), Stack(Num('3')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={18-20,22-25,27-30,32-36}}]{./code_examples/example_struct_init.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={18-20,22-25,27-30,32-38}}]{./code_examples/example_struct_init.reti_blocks}
   \caption{RETI-Blocks Pass für Initialisierung von Structs}
   \label{code:reti_blocks_pass_für_initialisierung_von_structs}
 \end{code}
@@ -343,30 +345,33 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisier
 % Stack und Globale Statische Daten
 \subsubsection{Zugriff auf Structattribut}
 % Formel aus der Vorlesung, wo ist die hier?
+
+Der \colorbold{Zugriff auf ein Structattribut} wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_initialisierung_von_structs} erklärt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_struct_attr_access.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={5}}]{./code_examples/example_struct_attr_access.picoc}
   \caption{PicoC-Code für Zugriff auf Structattribut}
   \label{code:picoc_code_für_zugriff_auf_structattribut}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={16}}]{./code_examples/example_struct_attr_access.ast}
   \caption{Abstract Syntax Tree für Zugriff auf Structattribut}
   \label{code:abstract_syntax_tree_für_zugriff_auf_structattribut}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={12-14}}]{./code_examples/example_struct_attr_access.picoc_mon}
   \caption{PicoC-Mon Pass für Zugriff auf Structattribut}
   \label{code:picoc_mon_pass_für_zugriff_auf_structattribut}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_access.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={24-27,29-31,33-35}}]{./code_examples/example_struct_attr_access.reti_blocks}
   \caption{RETI-Blocks Pass für Zugriff auf Structattribut}
   \label{code:reti_blocks_pass_für_zugriff_auf_structattribut}
 \end{code}
@@ -374,28 +379,28 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisier
 \subsubsection{Zuweisung an Structattribut}
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_struct_attr_assignment.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={5}}]{./code_examples/example_struct_attr_assignment.picoc}
   \caption{PicoC-Code für Zuweisung an Structattribut}
   \label{code:picoc_code_für_zuweisung_an_structattribut}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={16}}]{./code_examples/example_struct_attr_assignment.ast}
   \caption{Abstract Syntax Tree für Zuweisung an Structattribut}
   \label{code:abstract_syntax_tree_für_zuweisung_an_structattribut}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={12-15}}]{./code_examples/example_struct_attr_assignment.picoc_mon}
   \caption{PicoC-Mon Pass für Zuweisung an Structattribut}
   \label{code:picoc_mon_pass_für_zuweisung_an_structattribut}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_attr_assignment.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={24-26,28-31,33-35,37-40}}]{./code_examples/example_struct_attr_assignment.reti_blocks}
   \caption{RETI-Blocks Pass für Zuweisung an Structattribut}
   \label{code:reti_blocks_pass_für_zuweisung_an_structattribut}
 \end{code}

@@ -11,7 +11,7 @@ File
         Exp(Global(Num('0')))
         Ref(Global(Num('0')))
         Ref(Global(Num('0')))
-        Assign(Global(Num('1')), Stack(Num('2')))
+        Assign(Global(Num('1')), Stack(Num('3')))
         Return(Empty())
       ]
   ]

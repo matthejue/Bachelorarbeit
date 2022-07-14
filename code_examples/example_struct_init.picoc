@@ -4,5 +4,5 @@ struct st2 {int attr1; struct st1 attr2;};
 
 void main() {
   int var = 42;
-  struct st1 st = {.attr1=var, .attr2={.attr={{&var, &var}}}};
+  struct st2 st = {.attr1=var, .attr2={.attr={{&var, &var}}}};
 }
