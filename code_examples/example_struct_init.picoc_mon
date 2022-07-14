@@ -7,9 +7,11 @@ File
         // Assign(Name('var'), Num('42'))
         Exp(Num('42'))
         Assign(Global(Num('0')), Stack(Num('1')))
-        // Assign(Name('st'), Struct([Assign(Name('st'), Struct([Assign(Name('pntr'), Array([Array([Ref(Name('var'))])]))]))]))
+        // Assign(Name('st'), Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))]))
+        Exp(Global(Num('0')))
         Ref(Global(Num('0')))
-        Assign(Global(Num('1')), Stack(Num('1')))
+        Ref(Global(Num('0')))
+        Assign(Global(Num('1')), Stack(Num('2')))
         Return(Empty())
       ]
   ]

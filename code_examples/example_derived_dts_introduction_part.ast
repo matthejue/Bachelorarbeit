@@ -4,18 +4,8 @@ File
     StructDecl 
       Name 'ar_with_len', 
       [
-        Alloc 
-          Writeable, 
-          IntType 'int', 
-          Name 'len', 
-        Alloc 
-          Writeable, 
-          ArrayDecl 
-            [
-              Num '2'
-            ], 
-            IntType 'int', 
-          Name 'ar'
+        Alloc(Writeable(), IntType('int'), Name('len'))
+        Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))
       ], 
     FunDef 
       VoidType 'void', 

@@ -123,7 +123,7 @@ Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwär
   \label{code:symboltabelle_für_array_initialisierung}
 \end{code}
 
-Im \colorbold{PiocC-Mon Pass} in Code~\ref{code:picoc_mon_für_array_initialisierung} werden zuerst die \colorbold{Ausdrücke} im \colorbold{Array-Initializer} \smalltt{Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])])} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet und auf den \colorbold{Stack} geschrieben\footnote{Da der \colorbold{Zuweisungsoperator} \smalltt{=} \colorbold{rechtsassoziativ} ist und auch rein \colorbold{logisch}, weil man nichts zuweisen kann, was man noch nicht berechnet hat.}.
+Im \colorbold{PiocC-Mon Pass} in Code~\ref{code:picoc_mon_für_array_initialisierung} werden zuerst die \colorbold{Logischen Ausdrücke} in den Blättern des vom \colorbold{Array-Initializers} \colorbold{Container-Knoten} ausgehenden Baumes \smalltt{Array([Array([BinOp(Num('3'), Add('+'), Num('1'))]), Array([Num('4')])])} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet und auf den \colorbold{Stack} geschrieben\footnote{Da der \colorbold{Zuweisungsoperator} \smalltt{=} \colorbold{rechtsassoziativ} ist und auch rein \colorbold{logisch}, weil man nichts zuweisen kann, was man noch nicht berechnet hat.}.
 
 Im finalen Schritt muss zwischen \colorbold{Globalen Statischen Daten} bei der \smalltt{main}-Funktion und \colorbold{Stackframe} bei der Funktion \smalltt{fun} unterschieden werden. Die auf den Stack ausgewerteten Expressions werden mittels der Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('2')))} bzw. \smalltt{Assign(Stackframe(Num('3')), Stack(Num('4')))}, die in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} genauer beschrieben ist, versetzt in der selben Reihenfolge zu den \colorbold{Globalen Statischen Daten} bzw. auf den \colorbold{Stackframe} geschrieben.
 
@@ -317,25 +317,25 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={33}}]{./code_examples/example_struct_init.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={21}}]{./code_examples/example_struct_init.ast}
   \caption{Abstract Syntax Tree für Initialisierung von Structs}
   \label{code:abstract_syntax_tree_für_initialisierung_von_structs}
 \end{code}
 
-Im Folgenden ist der Ablauf identisch zur \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays}, daher wird um keine Reptition zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Der einzige Unterschied ist, dass der im \colorbold{Abstract Syntax Tree} am weitesten oben liegende \colorbold{Intializer}-Knoten ein \colorbold{Struct Initializer} sein muss und kein \colorbold{Array Initializer}. Dafür wird in diesem Beispiel in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} eine komplexere, mehrstufige Initialisierung mit verschiedenen \colorbold{Datentypen} erklärt.
+Im Folgenden ist der Ablauf identisch zur \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays}, daher wird um keine Reptition zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Der einzige Unterschied ist, dass der im \colorbold{Abstract Syntax Tree} am weitesten oben liegende \colorbold{Intializer}-Knoten ein \colorbold{Struct Initializer} sein muss und kein \colorbold{Array Initializer}. Dafür wird in diesem Beispiel in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} eine komplexere, mehrstufige Initialisierung mit \colorbold{verschiedenen} Datentypen erklärt.
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} wird der \colorbold{Struct-Initializer}
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} werden die \colorbold{Logischen Ausdrücke} in den Blättern des vom \colorbold{Struct-Initializer} \colorbold{Container-Knoten} ausgehenden Baumes \smalltt{Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))])} genauso, wie der \colorbold{Array Initializer}, wie in Subkapitel~\ref{sec:initialisierung_von_arrays} nach dem \colorbold{Depth-First-Search} Schema, von \colorbold{links-nach-rechts} ausgewertet. Im \colorbold{Struct-Initializer} sind weitere \colorbold{Struct- oder Array-Initializer} und \colorbold{Logische Ausdrücke} immer im rechten \colorbold{exp} Eintrag des Arrays Container-Kontens zu finden: \smalltt{Assign(Name('attr1'), Name('var'))}.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={11-12}}]{./code_examples/example_struct_init.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={11-14}}]{./code_examples/example_struct_init.picoc_mon}
   \caption{PicoC-Mon Pass für Initialisierung von Structs}
   \label{code:picoc_mon_pass_für_initialisierung_von_structs}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_init.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={18-20,22-25,27-30,32-36}}]{./code_examples/example_struct_init.reti_blocks}
   \caption{RETI-Blocks Pass für Initialisierung von Structs}
   \label{code:reti_blocks_pass_für_initialisierung_von_structs}
 \end{code}

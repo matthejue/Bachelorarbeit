@@ -4,25 +4,13 @@ File
     StructDecl 
       Name 'st1', 
       [
-        Alloc 
-          Writeable, 
-          ArrayDecl 
-            [
-              Num '1'
-            ], 
-            PntrDecl 
-              Num '1', 
-              IntType 'int', 
-          Name 'pntr'
+        Alloc(Writeable(), ArrayDecl([Num('2')], PntrDecl(Num('1'), IntType('int'))), Name('attr'))
       ], 
     StructDecl 
       Name 'st2', 
       [
-        Alloc 
-          Writeable, 
-          StructSpec 
-            Name 'st1', 
-          Name 'st'
+        Alloc(Writeable(), IntType('int'), Name('attr1'))
+        Alloc(Writeable(), StructSpec(Name('st1')), Name('attr2'))
       ], 
     FunDef 
       VoidType 'void', 
@@ -30,6 +18,6 @@ File
       [], 
       [
         Assign(Alloc(Writeable(), IntType('int'), Name('var')), Num('42'))
-        Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct([Assign(Name('st'), Struct([Assign(Name('pntr'), Array([Array([Ref(Name('var'))])]))]))]))
+        Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))]))
       ]
   ]

@@ -1,8 +1,8 @@
-struct st1 {int *pntr[1];};
+struct st1 {int *attr[2];};
 
-struct st2 {struct st1 st;};
+struct st2 {int attr1; struct st1 attr2;};
 
 void main() {
   int var = 42;
-  struct st1 st = {.st={.pntr={{&var}}}};
+  struct st1 st = {.attr1=var, .attr2={.attr={{&var, &var}}}};
 }

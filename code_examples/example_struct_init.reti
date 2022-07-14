@@ -9,15 +9,26 @@ STOREIN SP ACC 1;
 LOADIN SP ACC 1;
 STOREIN DS ACC 0;
 ADDI SP 1;
-# // Assign(Name('st'), Struct([Assign(Name('st'), Struct([Assign(Name('pntr'), Array([Array([Ref(Name('var'))])]))]))]))
+# // Assign(Name('st'), Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))]))
+# Exp(Global(Num('0')))
+SUBI SP 1;
+LOADIN DS ACC 0;
+STOREIN SP ACC 1;
 # Ref(Global(Num('0')))
 SUBI SP 1;
 LOADI IN1 0;
 ADD IN1 DS;
 STOREIN SP IN1 1;
-# Assign(Global(Num('1')), Stack(Num('1')))
+# Ref(Global(Num('0')))
+SUBI SP 1;
+LOADI IN1 0;
+ADD IN1 DS;
+STOREIN SP IN1 1;
+# Assign(Global(Num('1')), Stack(Num('2')))
 LOADIN SP ACC 1;
+STOREIN DS ACC 2;
+LOADIN SP ACC 2;
 STOREIN DS ACC 1;
-ADDI SP 1;
+ADDI SP 2;
 # Return(Empty())
 LOADIN BAF PC -1;

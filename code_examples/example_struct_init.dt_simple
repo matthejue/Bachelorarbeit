@@ -9,10 +9,10 @@ file
             pntr_decl
               pntr_deg	*
               array_decl
-                array_dims	1
+                array_dims	2
                 type_spec
                   prim_dt	int
-            name	pntr
+            name	attr
     decl_def
       struct_decl
         name	st2
@@ -23,9 +23,17 @@ file
               array_decl
                 array_dims
                 type_spec
+                  prim_dt	int
+            name	attr1
+          alloc
+            pntr_decl
+              pntr_deg
+              array_decl
+                array_dims
+                type_spec
                   struct_spec
                     name	st1
-            name	st
+            name	attr2
     decl_def
       fun_def
         type_spec
@@ -72,14 +80,45 @@ file
                   name	st
                 bug_initializer
                   struct_init
-                    name	st
+                    name	attr1
+                    bug_initializer
+                      logic_or
+                        logic_and
+                          eq_exp
+                            rel_exp
+                              arith_or
+                                arith_oplus
+                                  arith_and
+                                    arith_prec2
+                                      arith_prec1
+                                        un_exp
+                                          post_exp
+                                            prim_exp
+                                              name	var
+                    name	attr2
                     bug_initializer
                       struct_init
-                        name	pntr
+                        name	attr
                         bug_initializer
                           array_init
                             bug_initializer
                               array_init
+                                bug_initializer
+                                  logic_or
+                                    logic_and
+                                      eq_exp
+                                        rel_exp
+                                          arith_or
+                                            arith_oplus
+                                              arith_and
+                                                arith_prec2
+                                                  arith_prec1
+                                                    un_exp
+                                                      un_op	&
+                                                      un_exp
+                                                        post_exp
+                                                          prim_exp
+                                                            name	var
                                 bug_initializer
                                   logic_or
                                     logic_and

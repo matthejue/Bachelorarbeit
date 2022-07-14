@@ -4,14 +4,8 @@ File
     StructDecl 
       Name 'pos', 
       [
-        Alloc 
-          Writeable, 
-          IntType 'int', 
-          Name 'x', 
-        Alloc 
-          Writeable, 
-          IntType 'int', 
-          Name 'y'
+        Alloc(Writeable(), IntType('int'), Name('x'))
+        Alloc(Writeable(), IntType('int'), Name('y'))
       ], 
     FunDef 
       VoidType 'void', 

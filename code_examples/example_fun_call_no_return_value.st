@@ -21,7 +21,7 @@ SymbolTable
     Symbol 
       {
         type qualifier:         Empty()
-        datatype:               StructDecl(Name('st'), [Alloc(Writeable(), IntType('int'), Name('attr1')), Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('attr2'))])
+        datatype:               StructDecl(Name('st'), [Alloc(Writeable(), IntType('int'), Name('attr1'))Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('attr2'))])
         name:                   Name('st')
         value or address:       [Name('attr1@st'), Name('attr2@st')]
         position:               Pos(Num('1'), Num('7'))

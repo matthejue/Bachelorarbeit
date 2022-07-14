@@ -4,16 +4,7 @@ File
     StructDecl 
       Name 'st1', 
       [
-        Alloc 
-          Writeable, 
-          PntrDecl 
-            Num '1', 
-            ArrayDecl 
-              [
-                Num '1'
-              ], 
-              IntType 'int', 
-          Name 'ar'
+        Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('1')], IntType('int'))), Name('ar'))
       ], 
     FunDef 
       VoidType 'void', 
