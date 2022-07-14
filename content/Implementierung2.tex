@@ -87,6 +87,7 @@ Im \colorbold{PicoC-Shrink Pass} in Code~\ref{code:picoc_shrink_für_pointer_der
 
 \subsection{Umsetzung von Arrays}
 \subsubsection{Initialisierung von Arrays}
+\label{sec:initialisierung_von_arrays}
 
 Die \colorbold{Initialisierung} eines \colorbold{Arrays} (z.B. \smalltt{int ar[2][1] = \{\{3+1\}, \{4\}\}}) wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_array_initialisierung} erklärt.
 
@@ -291,7 +292,7 @@ Für die \colorbold{Definition} einer Variable \smalltt{st\_var@main} mit diesem
 
 % https://tex.stackexchange.com/questions/1959/allowing-line-break-at-in-inline-math-mode
 \begin{Special_Paragraph}
-  Die \colorbold{Größe} einer Variable \smalltt{st\_var}, die mit dem \colorbold{Structtyp} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace}\allowbreak \mathtt{\ldots\enspace datatype_n\enspace attr_n;\};}$\footnote{Hier wird es der Einfachheit halber so dargestellt, als hätte die Programmiersprache $L_{PicoC}$ nicht die Fragwürdige Designentscheidung, die eckigen Klammern \smalltt{[]} auch für die Definition eines Arrays zu \colorbold{vor} die Variable zu schreiben von $\mathtt{L_C}$ übernommen und der komplette \colorbold{Datentyp} würde immer \colorbold{hinter} der Variable stehen: \smalltt{datatype var}.} definiert ist ($\mathtt{struct\enspace st\enspace st\_var;}$), berechnet sich dabei aus der Summe der \colorbold{Größen} der einzelnen \colorbold{Datentypen} $\mathtt{datatype_1\enspace \ldots\enspace datatpye_n}$ der \colorbold{Attribute} $\mathtt{attr_1,\enspace \ldots\enspace attr_n}$ des  \colorbold{Structtyps}: $\mathtt{size(st) = \sum^n_{i=1} size(datatype_i)}$.
+  Die \colorbold{Größe} einer Variable \smalltt{st\_var}, die ihm \smalltt{size}-Feld des \colorbold{Symboltabelleneintrags} eingetragen ist und mit dem \colorbold{Structtyp} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace\ldots\enspace datatype_n\enspace attr_n;\};}$\footnote{Hier wird es der Einfachheit halber so dargestellt, als hätte die Programmiersprache $L_{PicoC}$ nicht die Fragwürdige Designentscheidung, auch die eckigen Klammern \smalltt{[]} für die Definition eines Arrays \colorbold{vor} die Variable zu schreiben von $\mathtt{L_C}$ übernommen. Es wird so getann, als würde der komplette \colorbold{Datentyp} immer \colorbold{hinter} der Variable stehen: \smalltt{datatype var}.} definiert ist ($\mathtt{struct\enspace st\enspace st\_var;}$), berechnet sich dabei aus der Summe der \colorbold{Größen} der einzelnen \colorbold{Datentypen} $\mathtt{datatype_1\enspace \ldots\enspace datatpye_n}$ der \colorbold{Attribute} $\mathtt{attr_1,\enspace \ldots\enspace attr_n}$ des  \colorbold{Structtyps}: $\mathtt{size(st) = \sum^n_{i=1} size(datatype_i)}$.
 \end{Special_Paragraph}
 
 \begin{code}
@@ -302,30 +303,32 @@ Für die \colorbold{Definition} einer Variable \smalltt{st\_var@main} mit diesem
 \end{code}
 
 \subsubsection{Initialisierung von Structs}
+
+Die \colorbold{Initialisierung eines Structs} wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_initialisierung_von_structs} erklärt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_struct_init.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={7}}]{./code_examples/example_struct_init.picoc}
   \caption{PicoC-Code für Initialisierung von Structs}
   \label{code:picoc_code_für_initialisierung_von_structs}
 \end{code}
 
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} wird die \colorbold{Initialisierung eines Structs} \smalltt{struct st1 st = {.st={.pntr={{\&var}}}};} mithilfe der \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct(\ldots))} dargestellt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_init.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={33}}]{./code_examples/example_struct_init.ast}
   \caption{Abstract Syntax Tree für Initialisierung von Structs}
   \label{code:abstract_syntax_tree_für_initialisierung_von_structs}
 \end{code}
 
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_init.st}
-  \caption{Symboltabelle für Initialisierung von Structs}
-  \label{code:symboltabelle_für_initialisierung_von_structs}
-\end{code}
+Im Folgenden ist der Ablauf identisch zur \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays}, daher wird um keine Reptition zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Der einzige Unterschied ist, dass der im \colorbold{Abstract Syntax Tree} am weitesten oben liegende \colorbold{Intializer}-Knoten ein \colorbold{Struct Initializer} sein muss und kein \colorbold{Array Initializer}. Dafür wird in diesem Beispiel in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} eine komplexere, mehrstufige Initialisierung mit verschiedenen \colorbold{Datentypen} erklärt.
+
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} wird der \colorbold{Struct-Initializer}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_struct_init.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={11-12}}]{./code_examples/example_struct_init.picoc_mon}
   \caption{PicoC-Mon Pass für Initialisierung von Structs}
   \label{code:picoc_mon_pass_für_initialisierung_von_structs}
 \end{code}
