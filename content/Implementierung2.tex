@@ -112,7 +112,7 @@ Bei der \colorbold{Initialisierung} eines \colorbold{Arrays} wird zuerst \smallt
 Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_ein_arrayelement} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die entgegengesetzte Richtung wächst, verglichen mit den \colorbold{Globalen Statischen Daten}\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
 
 \begin{Special_Paragraph}
-Das \colorbold{Größe} des Arrays $\mathtt{datatype \enspace ar[s_1]\ldots[s_k]}$, die ihm \smalltt{size}-Feld der \colorbold{Symboltabelle} eingetragen ist, berechnet sich dabei aus der \colorbold{Mächtigkeit} der einzelnen \colorbold{Dimensionen} des Arrays multipliziert mit der \colorbold{Größe} des \colorbold{grundlegenden Datentyps} der einzelnen Arrayelemente: $\mathtt{size(ar) = (\prod^n_{j=1} s_j)\cdot size(datatype)}$.
+  Das \colorbold{Größe} des Arrays $\mathtt{datatype \enspace ar[dim_1]\ldots[dim_k]}$, die ihm \smalltt{size}-Feld des \colorbold{Symboltabelleneintrags} eingetragen ist, berechnet sich dabei aus der \colorbold{Mächtigkeit} der einzelnen \colorbold{Dimensionen} des Arrays multipliziert mit der \colorbold{Größe} des \colorbold{grundlegenden Datentyps} der einzelnen \colorbold{Arrayelemente}: $\mathtt{size(datatype(ar)) = \left(\prod^n_{j=1} dim_j\right)\cdot size(datatype)}$\footnote{Die \colorbold{Funktion}  \smalltt{type} ordnet einer  \colorbold{Variable} ihren \colorbold{Datentyp} zu. Das ist notwendig, weil die \colorbold{Funktion} \smalltt{size} nur bei einem \colorbold{Datentyp} als \colorbold{Funktionsargument} die \colorbold{Größe dieses Datentyps} als \colorbold{Zielwert} liefert}.
 \end{Special_Paragraph}
 
 \begin{code}
@@ -225,23 +225,23 @@ Danach ist das Vorgehen, bzw. sind die Kompostionen, die dieses darauffolgende V
 Zum Schluss stellt die \colorbold{Komposition} \smalltt{Assign(Stack(Num('1')), Stack(Num('2')))}\footnote{Ist in Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} genauer beschrieben ist} die Zuweisung \smalltt{=} des Ergebnisses des Ausdrucks auf der \colorbold{rechten} Seite der Zuweisung zum \colorbold{Arrayindex}, dessen \colorbold{Adresse} im Schritt danach berechnet wurde dar.
 
 \begin{Special_Paragraph}
-  Die Berechnung der \colorbold{Adresse}, ab der ein \colorbold{Arrayelement} eines Arrays $\mathtt{datatype\enspace ar[s_1]\ldots[s_n]}$ abgespeichert ist, kann mittels der Formel~\ref{eq:adresse_von_arrayelement}:
+  Die Berechnung der \colorbold{Adresse}, ab der ein \colorbold{Arrayelement} eines Arrays $\mathtt{datatype\enspace ar[dim_1]\ldots[dim_n]}$ abgespeichert ist, kann mittels der Formel~\ref{eq:adresse_von_arrayelement}:
 
   \numberwithin{equation}{section}
 
   \begin{equation}
-  \mathtt{ref(ar[k_1]\ldots[k_n]) = ref(ar) + \left(\sum_{i=1}^{n}\left(\prod_{j=i+1}^{n} s_{j}\right) \cdot k_{i}\right) \cdot \operatorname{size}(datatype)} \\
+  \mathtt{ref(ar[idx_1]\ldots[idx_n]) = ref(ar) + \left(\sum_{i=1}^{n}\left(\prod_{j=i+1}^{n} dim_{j}\right) \cdot idx_{i}\right) \cdot \operatorname{size}(datatype)} \\
     \label{eq:adresse_von_arrayelement}
   \end{equation}
   aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte}.
 
   Die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('2')))} repräsentiert dabei den Summanden $\smalltt{ref(ar)}$ in der Formel.
 
-  Die Komposition \smalltt{Exp(Num('2'))} repräsentiert dabei einen \colorbold{Subindex} (z.B. \smalltt{i} in \smalltt{a[i][j][k]}) beim \colorbold{Zugriff auf ein Arrayelement}, der als Faktor $\mathtt{k_i}$ in der Formel auftaucht.
+  Die Komposition \smalltt{Exp(Num('2'))} repräsentiert dabei einen \colorbold{Subindex} (z.B. \smalltt{i} in \smalltt{a[i][j][k]}) beim \colorbold{Zugriff auf ein Arrayelement}, der als Faktor $\mathtt{idx_i}$ in der Formel auftaucht.
 
-  Der Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} repräsentiert dabei einen ausmultiplizierten Summanden $\mathtt{\left(\prod_{j=i+1}^{n} s_{j}\right) \cdot k_{i} \cdot size(datatpye)}$ in der Formel.
+  Der Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} repräsentiert dabei einen ausmultiplizierten Summanden $\mathtt{\left(\prod_{j=i+1}^{n} dim_{j}\right) \cdot idx_{i} \cdot size(datatpye)}$ in der Formel.
 
-Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(ar[k_1]\ldots[k_n])\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(ar[k_1]\ldots[k_n])}$.
+Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(ar[idx_1]\ldots[idx_n])\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(ar[idx_1]\ldots[idx_n])}$.
 \end{Special_Paragraph}
 
 \begin{code}
@@ -283,9 +283,16 @@ Die \colorbold{Definition} einer Variable mit diesem \colorbold{Structtyp}  \sma
   \label{code:abstract_syntax_tree_für_die_deklaration_eines_structtyps}
 \end{code}
 
-Für den \colorbold{Structtyp} selbst wird in der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} dargestellt ist ein Eintrag mit dem \colorbold{Schlüssel} \smalltt{st} erstellt, der die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{position} und \smalltt{size} wie üblich belegt, allerdings in das \smalltt{value\_address}-Feld seine Attribute \smalltt{[Name('len@st'), Name('ar@st')]} reinschreibt. Die Schlüssel der \colorbold{Attribute} haben einen \colorbold{Suffix} \smalltt{@st} angehängt, der eine Art \colorbold{Scope} innerhalb des \colorbold{Structtyps} für seine Attribut darstellt. Es gilt foglich, dass \colorbold{innerhalb} eines \colorbold{Structtyps} zwei Attribute nicht gleich benannt werden können, aber dafür zwei \colorbold{unterschiedliche} \colorbold{Structtypen} ihre Attribute gleich benennen können.
+Für den \colorbold{Structtyp} selbst wird in der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} dargestellt ist ein Eintrag mit dem \colorbold{Schlüssel} \smalltt{st} erstellt. Die Felder dieses Eintrags \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{position} und \smalltt{size} sind wie üblich belegt, allerdings sind in dem \smalltt{value\_address}-Feld die Attribute des \colorbold{Structtyps} \smalltt{[Name('len@st'), Name('ar@st')]} aufgelistet, sodass man über den \colorbold{Structtyp} \smalltt{st} die  \colorbold{Attribute} des Structtyps in der  \colorbold{Symboltabelle} nachschlagen kann. Die Schlüssel der \colorbold{Attribute} haben einen \colorbold{Suffix} \smalltt{@st} angehängt, der eine Art \colorbold{Scope} innerhalb des \colorbold{Structtyps} für seine Attribut darstellt. Es gilt foglich, dass \colorbold{innerhalb} eines \colorbold{Structtyps} zwei Attribute nicht gleich benannt werden können, aber dafür zwei \colorbold{unterschiedliche} \colorbold{Structtypen} ihre Attribute gleich benennen können.
 
 Jedes der \colorbold{Attribute} \smalltt{[Name('len@st'), Name('ar@st')]} erhält auch einen eigenen Eintrag in der \colorbold{Symboltabelle}, wobei die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{value\_address}, \smalltt{position} und \smalltt{size} wie üblich belegt werden. Die Felder \smalltt{type\_qualifier}, \smalltt{datatype} und \smalltt{name} werden z.B. bei \smalltt{Name('ar@st')} mithilfe der Attribute von \smalltt{Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} belegt.
+
+Für die \colorbold{Definition} einer Variable \smalltt{st\_var@main} mit diesem \colorbold{Structtyp} \smalltt{st} wird ein Eintrag in der \colorbold{Symboltabelle} angelegt. Das \smalltt{datatyp}-Feld enhält dabei den Namen des \colorbold{Structtyps} als Komposition \smalltt{StructSpec(Name('st'))}, wodurch jederzeit alle wichtigen Informationen zu diesem \colorbold{Structyp} und seinen \colorbold{Attributen} in der  \colorbold{Symboltabelle} nachgeschlagen werden können.
+
+% https://tex.stackexchange.com/questions/1959/allowing-line-break-at-in-inline-math-mode
+\begin{Special_Paragraph}
+  Die \colorbold{Größe} einer Variable \smalltt{st\_var}, die mit dem \colorbold{Structtyp} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace}\allowbreak \mathtt{\ldots\enspace datatype_n\enspace attr_n;\};}$\footnote{Hier wird es der Einfachheit halber so dargestellt, als hätte die Programmiersprache $L_{PicoC}$ nicht die Fragwürdige Designentscheidung, die eckigen Klammern \smalltt{[]} auch für die Definition eines Arrays zu \colorbold{vor} die Variable zu schreiben von $\mathtt{L_C}$ übernommen und der komplette \colorbold{Datentyp} würde immer \colorbold{hinter} der Variable stehen: \smalltt{datatype var}.} definiert ist ($\mathtt{struct\enspace st\enspace st\_var;}$), berechnet sich dabei aus der Summe der \colorbold{Größen} der einzelnen \colorbold{Datentypen} $\mathtt{datatype_1\enspace \ldots\enspace datatpye_n}$ der \colorbold{Attribute} $\mathtt{attr_1,\enspace \ldots\enspace attr_n}$ des  \colorbold{Structtyps}: $\mathtt{size(st) = \sum^n_{i=1} size(datatype_i)}$.
+\end{Special_Paragraph}
 
 \begin{code}
   \centering
