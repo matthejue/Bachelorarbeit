@@ -1,5 +1,5 @@
 # // Exp(GoTo(Name('main.1')))
-# // patched out Exp(GoTo(Name('main.1')))
+# // not included Exp(GoTo(Name('main.1')))
 # // Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('ar_with_len'))), Name('st_ar')))
 # // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], PntrDecl(Num('1'), IntType('int')))), Name('pntr2')))
 # // Exp(Name('pntr2'))

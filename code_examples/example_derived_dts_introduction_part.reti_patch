@@ -5,7 +5,7 @@ File
       Name 'start.2', 
       [
         # // Exp(GoTo(Name('main.1')))
-        # // patched out Exp(GoTo(Name('main.1')))
+        # // not included Exp(GoTo(Name('main.1')))
       ], 
     Block 
       Name 'main.1', 

@@ -1,0 +1,4 @@
+# Exp(Stack(Num('1')))
+LOADIN SP IN1 1;
+LOADIN IN1 ACC 0;
+STOREIN SP ACC 1;

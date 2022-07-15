@@ -1,0 +1,4 @@
+Exp(Stackframe(Num('rel_addr')))
+SUBI SP 1;
+LOADIN BAF ACC -(2 + rel_addr);
+STOREIN SP ACC 1;

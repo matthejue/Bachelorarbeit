@@ -5,7 +5,7 @@ File
       Name 'start.6', 
       [
         # // Exp(GoTo(Name('main.5')))
-        # // patched out Exp(GoTo(Name('main.5')))
+        # // not included Exp(GoTo(Name('main.5')))
       ], 
     Block 
       Name 'main.5', 
@@ -30,7 +30,7 @@ File
         ADDI SP 1;
         # // While(Num('1'), [])
         # Exp(GoTo(Name('condition_check.4')))
-        # // patched out Exp(GoTo(Name('condition_check.4')))
+        # // not included Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 
       Name 'condition_check.4', 
@@ -44,7 +44,7 @@ File
         LOADIN SP ACC 1;
         ADDI SP 1;
         JUMP== GoTo(Name('while_after.0'));
-        # // patched out Exp(GoTo(Name('while_branch.3')))
+        # // not included Exp(GoTo(Name('while_branch.3')))
       ], 
     Block 
       Name 'while_branch.3', 
@@ -73,7 +73,7 @@ File
         LOADIN SP ACC 1;
         ADDI SP 1;
         JUMP== GoTo(Name('if_else_after.1'));
-        # // patched out Exp(GoTo(Name('if.2')))
+        # // not included Exp(GoTo(Name('if.2')))
       ], 
     Block 
       Name 'if.2', 

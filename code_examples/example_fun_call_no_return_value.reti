@@ -1,5 +1,5 @@
 # // Exp(GoTo(Name('main.1')))
-# // patched out Exp(GoTo(Name('main.1')))
+# // not included Exp(GoTo(Name('main.1')))
 # // Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], StructSpec(Name('st'))), Name('local_var')))
 # // Exp(Call(Name('stack_fun'), [Name('local_var')]))
 # StackMalloc(Num('2'))

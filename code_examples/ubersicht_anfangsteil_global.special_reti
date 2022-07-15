@@ -1,0 +1,4 @@
+Exp(Global(Num('rel_addr')))
+SUBI SP 1;
+LOADIN DS ACC rel_addr;
+STOREIN SP ACC 1;

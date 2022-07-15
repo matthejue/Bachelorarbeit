@@ -202,9 +202,41 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_zuweisun
   \label{code:reti_blocks_pass_für_zuweisung_an_structattribut}
 \end{code}
 
-\subsection{Umsetzung der Derived Datatypes im Allgemeinen}
+\subsection{Umsetzung des Zugriffs auf Derived Datatypes im Allgemeinen}
 
 Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbold{Anfangsteil}, \colorbold{Mittelteil} und \colorbold{Schlussteil} bei der Kompilierung von \colorbold{Zugriffen auf Arrayelemente}, \colorbold{Structattribute} und \colorbold{Pointer} bei gemischten Ausdrücken, wie \smalltt{(*st\_first.ar)[0];} einzeln isoliert betrachtet und erläutert.
+
+% Im \colorbold{Unterkapitel}~\ref{sec:zugriff_auf_structattribut} hat man bereits gemerkt, dass das Vorgehen für den \colorbold{Zugriff auf ein Structattribut} sehr ähnlich zum dem Vorgehen zum \colorbold{Zugriff auf einen Arrayindex} in Unterkapitel~\ref{sec:zugriff_auf_arrayindex} ist. Im \colorbold{Unterkapitel}~\ref{sec:zugriff_auf_structattribut} wurde sogar bei der Erklärung sogar auf das Unterkapitel~\ref{Unterkapitel~\ref{sec:zugriff_auf_arrayindex}} verwiesen.
+
+\newpage
+\begin{figure}[H]
+  \begin{Code_Frame}[remember as=anfangsteil]{Anfangsteil}
+    \codebox[title=Inputstring, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_anfangsteil_global.special_reti}
+    \hfill
+    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_anfangsteil_stackframe.special_reti}
+  \end{Code_Frame}
+  \vspace{1cm}
+  \begin{Code_Frame}[remember as=mittelteil]{Mittelteil}
+    \codebox[title=Inputstring, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_mittelteil_pntr.special_reti}
+    \hfill
+    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_mittelteil_array.special_reti}
+    \hfill
+    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_mittelteil_struct.special_reti}
+  \end{Code_Frame}
+  \vspace{1cm}
+  \begin{Code_Frame}[remember as=schlussteil]{Schlussteil}
+    \codebox[title=Inputstring, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_schlussteil_struct_int_char.special_reti}
+    \hfill
+    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_schlussteil_struct_int_char.special_reti}
+  \end{Code_Frame}
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (anfangsteil.south) to node[right] {Adresse} (mittelteil.north);
+  \draw [->] (mittelteil.east)arc(-160:160:0.8) node[right] {Adresse};
+  \draw[->] (mittelteil.south) to node[right] {Adresse} (schlussteil.north);
+  \end{tikzpicture}
+  \caption{Veranschaulichung des Zugriffs auf Derived Datatypes}
+  \label{fig:zugriff_auf_derived_datatypes_veranschaulicht}
+\end{figure}
 
 \subsubsection{Anfangsteil für Globale Statische Daten und Stackframe}
 \label{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}

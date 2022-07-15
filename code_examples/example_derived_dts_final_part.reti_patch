@@ -5,7 +5,7 @@ File
       Name 'start.1', 
       [
         # // Exp(GoTo(Name('main.0')))
-        # // patched out Exp(GoTo(Name('main.0')))
+        # // not included Exp(GoTo(Name('main.0')))
       ], 
     Block 
       Name 'main.0', 
@@ -58,7 +58,7 @@ File
         ADD IN1 IN2;
         ADDI SP 1;
         STOREIN SP IN1 1;
-        # Exp(Stack(Num('1')))
+        # // not included Exp(Stack(Num('1')))
         # // Exp(Subscr(Name('ar2'), Num('0')))
         # Ref(Global(Num('2')))
         SUBI SP 1;
@@ -98,7 +98,7 @@ File
         ADD IN1 IN2;
         ADDI SP 1;
         STOREIN SP IN1 1;
-        # Exp(Stack(Num('1')))
+        # // not included Exp(Stack(Num('1')))
         # Return(Empty())
         LOADIN BAF PC -1;
       ]

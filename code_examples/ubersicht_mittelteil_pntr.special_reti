@@ -1,0 +1,12 @@
+# Exp(Num('idx'))
+SUBI SP 1;
+LOADI ACC idx;
+STOREIN SP ACC 1;
+# Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
+LOADIN SP IN2 2;
+LOADIN IN2 IN1 0;
+LOADIN SP IN2 1;
+MULTI IN2 product_of_remaining_dims_mul_size;
+ADD IN1 IN2;
+ADDI SP 1;
+STOREIN SP IN1 1;

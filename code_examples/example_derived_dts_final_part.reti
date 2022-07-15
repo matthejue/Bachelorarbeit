@@ -1,5 +1,5 @@
 # // Exp(GoTo(Name('main.0')))
-# // patched out Exp(GoTo(Name('main.0')))
+# // not included Exp(GoTo(Name('main.0')))
 # // Exp(Alloc(Writeable(), ArrayDecl([Num('1'), Num('2')], IntType('int')), Name('ar1')))
 # // Exp(Alloc(Writeable(), ArrayDecl([Num('1')], StructSpec(Name('st'))), Name('ar2')))
 # // Assign(Name('var'), Num('42'))
@@ -48,7 +48,7 @@ MULTI IN2 2;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
-# Exp(Stack(Num('1')))
+# // not included Exp(Stack(Num('1')))
 # // Exp(Subscr(Name('ar2'), Num('0')))
 # Ref(Global(Num('2')))
 SUBI SP 1;
@@ -88,6 +88,6 @@ MULTI IN2 1;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;
-# Exp(Stack(Num('1')))
+# // not included Exp(Stack(Num('1')))
 # Return(Empty())
 LOADIN BAF PC -1;

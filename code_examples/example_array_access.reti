@@ -1,5 +1,5 @@
 # // Exp(GoTo(Name('main.1')))
-# // patched out Exp(GoTo(Name('main.1')))
+# // not included Exp(GoTo(Name('main.1')))
 # // Assign(Name('ar'), Array([Num('42')]))
 # Exp(Num('42'))
 SUBI SP 1;

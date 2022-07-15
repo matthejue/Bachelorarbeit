@@ -56,10 +56,11 @@
   % https://tex.stackexchange.com/questions/319355/tcolorbox-breakable-option-not-working
   \newtcbinputlisting{\codebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, minted options={fontsize=\small,breaklines,autogobble}, halign title=center, sharpish corners, drop fuzzy shadow, minted options={linenos=false, numbersep=0mm}
+  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, minted options={fontsize=\small,breaklines,autogobble, breakable}, halign title=center, sharpish corners, drop fuzzy shadow, minted options={linenos=false, numbersep=0mm}
   }
 % drop fuzzy shadow, drop lifted shadow, listing engine=listings
 
+  \newtcolorbox{Code_Frame}[2][]{enhanced, sharpish corners, drop fuzzy shadow, arc=0mm, left=3mm, right=3mm, boxrule=1mm, halign title=center, fonttitle=\bfseries, interior style={fill=white}, frame style={color=PrimaryColor}, title={#2}, #1}
 
   \newtcbinputlisting{\numberedcodebox}[2][]{
   listing file={#2},
