@@ -10,7 +10,7 @@
 # This should work as long as you have all the .tex, .sty and .bib files in
 # the same folder.
 MAINFILE = report
-EXTRA_FILES := $(shell echo "images/*") 
+EXTRA_FILES := $(shell echo "images/*")
 
 ## Inner workings
 OBJECTS = $(shell echo *.tex)
@@ -53,7 +53,21 @@ clean:
 	-rm -f *.bbl
 	-rm -f *.blg
 	-rm -f *.out
+	# my own
+	-rm -f ./content/*.aux
 	-rm -f make/bib
+	-rm -f Main.bcf
+	-rm -f Main.fdb_latexmk
+	-rm -f Main.fls
+	-rm -f Main.locodecaption
+	-rm -f Main.lof
+	-rm -f Main.lofloatgrammar
+	-rm -f Main.lot
+	-rm -f Main.pdf
+	-rm -f Main.run.xml
+	-rm -f Main.synctex.gz
+	-rm -f Main.theorem_list
+	-rm -rf _minted-Main
 
 .PHONY: cleanall
 cleanall: clean

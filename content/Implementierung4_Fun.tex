@@ -1,0 +1,236 @@
+%!Tex Root = ../Main.tex
+% ./Packete_und_Deklarationen.tex
+% ./Titlepage.tex
+% ./Motivation.tex
+% ./Einführung.tex
+% ./Implementierung1_Tables_DT_AST.tex,
+% ./Implementierung2_Pntr_Array.tex,
+% ./Implementierung3_Struct_Derived.tex,
+% ./Ergebnisse_und_Ausblick.tex
+
+\subsection{Umsetzung von Funktionen}
+\subsubsection{Funktionen auflösen zu RETI Code}
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_3_funs.picoc}
+  \caption{PicoC-Code für 3 Funktionen}
+  \label{code:picoc_code_für_3_Funktionen}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.ast}
+  \caption{Abstract Syntax Tree für 3 Funktionen}
+  \label{code:abstract_syntax_tree_für_3_Funktionen}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.picoc_blocks}
+  \caption{RETI-Blocks Pass für 3 Funktionen}
+  \label{code:picoc_blocks_pass_für_3_Funktionen}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.picoc_mon}
+  \caption{PicoC-Mon Pass für 3 Funktionen}
+  \label{code:picoc_mon_pass_für_3_Funktionen}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.reti_blocks}
+  \caption{RETI-Blocks Pass für 3 Funktionen}
+  \label{code:reti_blocks_pass_für_3_Funktionen}
+\end{code}
+
+% einfügen unsichtbarer Returns bei void
+\newlineparagraph{Sprung zur Main Funktion}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_3_funs_main.picoc}
+  \caption{PicoC-Code für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \label{code:picoc_code_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.picoc_mon}
+  \caption{PicoC-Mon Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \label{code:picoc_mon_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.reti_blocks}
+  \caption{RETI-Blocks Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \label{code:picoc_blocks_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.reti_patch}
+  \caption{PicoC-Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \label{code:picoc_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
+\end{code}
+
+\subsubsection{Funktionsdeklaration und -definition und Umsetzung von Scopes}
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_3_funs_fun_decl.picoc}
+  \caption{PicoC-Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
+  \label{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
+\end{code}
+
+Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \colorbold{Funktionen} mittels eines \colorbold{Suffix} \smalltt{\dq <fun\_name>@\dq} umgesetzt, der an den \colorbold{Variablennamen} \smalltt{<var>} drangehängt wird: \smalltt{<var>@<fun\_name>}. Dieser \colorbold{Suffix} wird geändert sobald beim \colorbold{Top-Down}\footnote{D.h. von der Wurzel zu den Blättern eines Baumes} Durchiterieren über den \colorbold{Abstract Syntax Tree} des aktuellen \colorbold{Passes} nach dem \colorbold{Depth-First-Search} Schema über den
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_fun_decl.st}
+  \caption{Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss}
+  \label{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
+\end{code}
+
+% Allocation von Variablen
+% Stack und Globale Statische Daten
+% die Sache mit Assign(Tmp, Global) und Assign(Global, Tmp)
+% erwähnen, das Main Funktion keinen Stackframe hat
+% zählen der Größe der lokalen Daten und Parameter
+% TODO: Signatur zu Parameter umbenennen
+\subsubsection{Funktionsaufruf}
+
+\newlineparagraph{Ohne Rückgabewert}
+
+% Unsichtbares return
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_no_return_value.picoc}
+  \caption{PicoC-Code für Funktionsaufruf ohne Rückgabewert}
+  \label{code:picoc_code_für_funktionsaufruf_ohne_rückgabewert}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.picoc_mon}
+  \caption{PicoC-Mon Pass für Funktionsaufruf ohne Rückgabewert}
+  \label{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti_blocks}
+  \caption{RETI-Blocks Pass für Funktionsaufruf ohne Rückgabewert}
+  \label{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti}
+  \caption{RETI-Pass für Funktionsaufruf ohne Rückgabewert}
+  \label{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
+\end{code}
+
+\newlineparagraph{Mit Rückgabewert}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_with_return_value.picoc}
+  \caption{PicoC-Code für Funktionsaufruf mit Rückgabewert}
+  \label{code:picoc_code_für_funktionsaufruf_mit_rückgabewert}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
+  \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
+  \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti_blocks}
+  \caption{RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert}
+  \label{code:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti}
+  \caption{RETI-Pass für Funktionsaufruf mit Rückgabewert}
+  \label{code:reti_pass_für_funktionsaufruf_mit_rückgabewert}
+\end{code}
+
+\newlineparagraph{Umsetzung von Call by Sharing für Arrays}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
+  \caption{PicoC-Code für Call by Sharing für Arrays}
+  \label{code:picoc_code_für_call_by_sharing_für_arrays}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
+  \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
+  \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
+\end{code}
+
+
+% https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={15,24}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \caption{Symboltabelle für Call by Sharing für Arrays}
+  \label{code:symboltabelle_für_call_by_sharing_für_arrays}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
+  \caption{RETI-Block Pass für Call by Sharing für Arrays}
+  \label{code:reti_blocks_pass_für_call_by_sharing_für_arrays}
+\end{code}
+
+% die Sache mit dem erstetzen von ArryDecl durch PntrDecl
+
+\newlineparagraph{Umsetzung von Call by Value für Structs}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/example_fun_call_by_value_struct.picoc}
+  \caption{PicoC-Code für Call by Value für Structs}
+  \label{code:picoc_code_für_call_by_value_für_structs}
+\end{code}
+
+% argmode für Struct Call by Value
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
+  \caption{PicoC-Mon Pass für Call by Value für Structs}
+  \label{code:picoc_mon_pass_für_call_by_value_for_structs}
+\end{code}
+
+% hier könnte man anmerken, dass die Adressen unterschiedlich berechnet werden für Stack und Globale...
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
+  \caption{RETI-Block Pass für Call by Value für Structs}
+  \label{code:reti_blocks_pass_für_call_by_value_for_structs}
+\end{code}
+
+% Struct wird wirklich kopiert durch speziellen Argmode
+
+\subsection{Umsetzung kleinerer Details}
+% langen Sprüngen, großen Konstanten, Division durch 0
+\section{Fehlermeldungen}
+\subsection{Error Handler}
+\subsection{Arten von Fehlermeldungen}
+\subsubsection{Syntaxfehler}
+\subsubsection{Laufzeitfehler}
+% Fehlermeldung ist, wenn der Lexer (partielle Funktion) oder Parser nicht matcht
+% Token und Nodes enthalten Position, im Transformer wird die Position von den Token auf die Nodes übertragen und auch die Symboltabelle speichert Position

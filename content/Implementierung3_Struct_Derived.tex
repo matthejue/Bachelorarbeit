@@ -1,0 +1,292 @@
+%!Tex Root = ../Main.tex
+% ./Packete_und_Deklarationen.tex
+% ./Titlepage.tex
+% ./Motivation.tex
+% ./Einführung.tex
+% ./Implementierung1_Tables_DT_AST.tex,
+% ./Implementierung2_Pntr_Array.tex,
+% ./Implementierung4_Fun.tex,
+% ./Ergebnisse_und_Ausblick.tex
+
+\subsection{Umsetzung von Structs}
+\subsubsection{Deklaration und Definition von Structtypen}
+
+Die \colorbold{Deklaration} eines neuen \colorbold{Structtyps} (z.B. \smalltt{struct st \{int len; int ar[2];\};}) und die \colorbold{Definition} einer Variable mit diesem \colorbold{Structtyp} (z.B. \smalltt{struct st st\_var;}) wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_die_deklaration_eines_structtyps} erläutert.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,4}}]{./code_examples/example_struct_decl_def.picoc}
+  \caption{PicoC-Code für die Deklaration eines Structtyps}
+  \label{code:picoc_code_für_die_deklaration_eines_structtyps}
+\end{code}
+
+Bevor irgendwas definiert werden kann, muss erstmal ein \colorbold{Structtyp} deklariert werden. Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} wird die \colorbold{Deklaration eines Structtyps} \smalltt{struct st \{int len; int ar[2];\};} durch die Komposition \smalltt{StructDecl(Name('st'), [Alloc(Writeable(), IntType('int'), Name('len')) Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} dargestellt.
+
+Die \colorbold{Definition} einer Variable mit diesem \colorbold{Structtyp}  \smalltt{struct st st\_var;}  wird durch die Komposition \smalltt{Alloc(Writeable(), StructSpec(Name('st')), Name('st\_var'))} dargestellt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={4-9,15}}]{./code_examples/example_struct_decl_def.ast}
+  \caption{Abstract Syntax Tree für die Deklaration eines Structtyps}
+  \label{code:abstract_syntax_tree_für_die_deklaration_eines_structtyps}
+\end{code}
+
+Für den \colorbold{Structtyp} selbst wird in der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_die_deklaration_eines_structtyps} dargestellt ist ein Eintrag mit dem \colorbold{Schlüssel} \smalltt{st} erstellt. Die Felder dieses Eintrags \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{position} und \smalltt{size} sind wie üblich belegt, allerdings sind in dem \smalltt{value\_address}-Feld die Attribute des \colorbold{Structtyps} \smalltt{[Name('len@st'), Name('ar@st')]} aufgelistet, sodass man über den \colorbold{Structtyp} \smalltt{st} die  \colorbold{Attribute} des Structtyps in der  \colorbold{Symboltabelle} nachschlagen kann. Die Schlüssel der \colorbold{Attribute} haben einen \colorbold{Suffix} \smalltt{@st} angehängt, der eine Art \colorbold{Scope} innerhalb des \colorbold{Structtyps} für seine Attribut darstellt. Es gilt foglich, dass \colorbold{innerhalb} eines \colorbold{Structtyps} zwei Attribute nicht gleich benannt werden können, aber dafür zwei \colorbold{unterschiedliche} \colorbold{Structtypen} ihre Attribute gleich benennen können.
+
+Jedes der \colorbold{Attribute} \smalltt{[Name('len@st'), Name('ar@st')]} erhält auch einen eigenen Eintrag in der \colorbold{Symboltabelle}, wobei die Felder \smalltt{type\_qualifier}, \smalltt{datatype},  \smalltt{name}, \smalltt{value\_address}, \smalltt{position} und \smalltt{size} wie üblich belegt werden. Die Felder \smalltt{type\_qualifier}, \smalltt{datatype} und \smalltt{name} werden z.B. bei \smalltt{Name('ar@st')} mithilfe der Attribute von \smalltt{Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])} belegt.
+
+Für die \colorbold{Definition} einer Variable \smalltt{st\_var@main} mit diesem \colorbold{Structtyp} \smalltt{st} wird ein Eintrag in der \colorbold{Symboltabelle} angelegt. Das \smalltt{datatyp}-Feld enthält dabei den Namen des \colorbold{Structtyps} als Komposition \smalltt{StructSpec(Name('st'))}, wodurch jederzeit alle wichtigen Informationen zu diesem \colorbold{Structyp}\footnote{Wie z.B. vor allem die \colorbold{Größe} bzw. \colorbold{Anzahl an Speicherzellen}, die dieser \colorbold{Structtyp} einnimmt.} und seinen \colorbold{Attributen} in der  \colorbold{Symboltabelle} nachgeschlagen werden können.
+
+% https://tex.stackexchange.com/questions/1959/allowing-line-break-at-in-inline-math-mode
+\begin{Special_Paragraph}
+  Die \colorbold{Größe} einer Variable \smalltt{st\_var}, die ihm \smalltt{size}-Feld des \colorbold{Symboltabelleneintrags} eingetragen ist und mit dem \colorbold{Structtyp} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace\ldots\enspace datatype_n\enspace attr_n;\};}$\footnote{Hier wird es der Einfachheit halber so dargestellt, als hätte die Programmiersprache $L_{PicoC}$ nicht die Fragwürdige Designentscheidung, auch die eckigen Klammern \smalltt{[]} für die Definition eines Arrays \colorbold{vor} die Variable zu schreiben von $\mathtt{L_C}$ übernommen. Es wird so getann, als würde der komplette \colorbold{Datentyp} immer \colorbold{hinter} der Variable stehen: \smalltt{datatype var}.} definiert ist ($\mathtt{struct\enspace st\enspace st\_var;}$), berechnet sich dabei aus der Summe der \colorbold{Größen} der einzelnen \colorbold{Datentypen} $\mathtt{datatype_1\enspace \ldots\enspace datatpye_n}$ der \colorbold{Attribute} $\mathtt{attr_1,\enspace \ldots\enspace attr_n}$ des \colorbold{Structtyps}: $\mathtt{size(st) = \sum^n_{i=1} size(datatype_i)}$.
+\end{Special_Paragraph}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={5-10,14-19,23-28,41-46}}]{./code_examples/example_struct_decl_def.st}
+  \caption{Symboltabelle für die Deklaration eines Structtyps}
+  \label{code:symboltabelle_für_die_deklaration_eines_structtyps}
+\end{code}
+
+\subsubsection{Initialisierung von Structs}
+
+Die \colorbold{Initialisierung eines Structs} wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_initialisierung_von_structs} erklärt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines={7}}]{./code_examples/example_struct_init.picoc}
+  \caption{PicoC-Code für Initialisierung von Structs}
+  \label{code:picoc_code_für_initialisierung_von_structs}
+\end{code}
+
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_initialisierung_von_structs} wird die \colorbold{Initialisierung eines Structs} \smalltt{struct st1 st = \{.attr1=var, .attr2=\{.attr=\{\{\&var, \&var\}\}\}\};} mithilfe der \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct(\ldots))} dargestellt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={21}}]{./code_examples/example_struct_init.ast}
+  \caption{Abstract Syntax Tree für Initialisierung von Structs}
+  \label{code:abstract_syntax_tree_für_initialisierung_von_structs}
+\end{code}
+
+
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} wird die \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct(\ldots))} auf fast dieselbe Weise ausgewertet, wie bei der \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays} daher wird um keine Wiederholung zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Um das ganze interressanter zu gestalten wurde das Beispiel in Code~\ref{code:picoc_code_für_initialisierung_von_structs} so gewählt, dass sich daran eine komplexere, mehrstufige Initialisierung mit \colorbold{verschiedenen} Datentypen erklären lässt.
+
+Der \colorbold{Struct-Initializer} Teilbaum \smalltt{Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))])}, der beim \colorbold{Struct-Initializer} \colorbold{Container-Knoten} anfängt, wird auf dieselbe Weise nach dem \colorbold{Depth-First-Search} Prinzip von \colorbold{links-nach-rechts} ausgewertet, wie es bei der \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays} bereits erklärt wurde.
+
+Beim \colorbold{Iterieren} über den \colorbold{Teilbaum}, muss beim \colorbold{Struct-Initializer} nur beachtet werden, dass bei den \smalltt{Assign(lhs, exp)}-Knoten, über welche die \colorbold{Attributzuweisung} dargestellt wird (z.B. \smalltt{Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))}) der Teilbaum beim rechten \smalltt{exp} Attribut weitergeht.
+
+Im Allgemeinen gibt es beim \colorbold{Initialisieren} eines \colorbold{Arrays} oder \colorbold{Structs} im Teilbaum auf der \colorbold{rechten Seite}, der beim jeweiligen obersten \colorbold{Initializer} anfängt immer nur $3$ Fällte, man hat es auf der \colorbold{rechten} Seite entweder mit einem \colorbold{Struct-Initialiser}, einem \colorbold{Array-Initialiser} oder einem \colorbold{Logischen Ausdruck} zu tuen. Bei \colorbold{Array-} und \colorbold{Struct-Initialisier} wird einfach über diese nach dem \colorbold{Depth-First-Search} Schema von \colorbold{links-nach-rechts} iteriert und die Ergebnisse der \colorbold{Logischen Ausdrücken} in den \colorbold{Blättern} auf den \colorbold{Stack} gespeichert. Der Fall, dass ein \colorbold{Logischer Ausdruck} vorliegt erübrigt sich damit.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={11-14}}]{./code_examples/example_struct_init.picoc_mon}
+  \caption{PicoC-Mon Pass für Initialisierung von Structs}
+  \label{code:picoc_mon_pass_für_initialisierung_von_structs}
+\end{code}
+
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_initialisierung_von_structs} werden die \colorbold{Kompositionen} \smalltt{Exp(exp)}, \smalltt{Ref(exp)} und \smalltt{Assign(Global(Num('1')), Stack(Num('3')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={18-20,22-25,27-30,32-38}}]{./code_examples/example_struct_init.reti_blocks}
+  \caption{RETI-Blocks Pass für Initialisierung von Structs}
+  \label{code:reti_blocks_pass_für_initialisierung_von_structs}
+\end{code}
+
+% Stack und Globale Statische Daten
+\subsubsection{Zugriff auf Structattribut}
+% Formel aus der Vorlesung, wo ist die hier?
+
+Der \colorbold{Zugriff auf ein Structattribut} wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_zugriff_auf_structattribut} erklärt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines={5}}]{./code_examples/example_struct_attr_access.picoc}
+  \caption{PicoC-Code für Zugriff auf Structattribut}
+  \label{code:picoc_code_für_zugriff_auf_structattribut}
+\end{code}
+
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_zugriff_auf_structattribut} wird der \colorbold{Zugriff auf ein Structattribut} \smalltt{st.y} mithilfe der \colorbold{Komposition} \smalltt{Exp(Attr(Name('st'), Name('y')))} dargestellt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={16}}]{./code_examples/example_struct_attr_access.ast}
+  \caption{Abstract Syntax Tree für Zugriff auf Structattribut}
+  \label{code:abstract_syntax_tree_für_zugriff_auf_structattribut}
+\end{code}
+
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_zugriff_auf_structattribut} wird die Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} auf ähnliche Weise ausgewertet, wie die Komposition, die einen \colorbold{Zugriff auf ein Arrayelement} \smalltt{Exp(Subscr(Name('ar'), Num('0')))} in Subkapitel~\ref{sec:zugriff_auf_arrayindex} darstellt. Daher wird hier, um Wiederholung zu vermeiden nur in Kürze das Vorgehen umrissen und ansonsnten auf das Subkapitel~\ref{sec:zugriff_auf_arrayindex} verwiesen.
+
+Die Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} wird genauso, wie in Subkapitel~\ref{sec:zugriff_auf_arrayindex} durch Kompositionen ersetzt, die sich in \colorbold{Anfangsteil}~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}, \colorbold{Mittelteil}~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} und \colorbold{Schlussteil}~\ref{sec:schlussteil_für_die_verschiedenen_derived_datatypes} aufteilen lassen. In diesem Fall sind es \smalltt{Ref(Global(Num('0')))} (\colorbold{Anfangsteil}), \smalltt{Ref(Attr(Stack(Num('1')), Name('y')))} (\colorbold{Mittelteil}) und \smalltt{Exp(Stack(Num('1')))} (\colorbold{Schlussteil}). Der \colorbold{Anfangsteil} und \colorbold{Schlussteil} sind genau gleich, wie in Subkapitel~\ref{sec:zugriff_auf_arrayindex}.
+
+Nur für den \colorbold{Mittelteil} wird eine andere Komposition \smalltt{Ref(Attr(Stack(Num('1')), Name('y')))} gebraucht. Diese Komposition \smalltt{Ref(Attr(Stack(Num('1')), Name('y')))} erfüllt die Aufgabe die \colorbold{Adresse}, ab der das \colorbold{Attribut} auf das zugegriffen wird anfängt zu berechnen. Dabei wurde die \colorbold{Anfangsadresse} des \colorbold{Structs} indem dieses Attribut liegt bereits vorher auf den \colorbold{Stack} gelegt.
+
+Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} beim \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_arrayindex}, muss hier vorher nichts anderes als die \colorbold{Anfangsadresse} des \colorbold{Structs} auf dem \colorbold{Stack} liegen. Das \colorbold{Structattribut} auf welches zugegriffen wird steht bereits in der Komposition \smalltt{Ref(Attr(Stack(Num('1')), Name('y')))}, nämlich \smalltt{Name('y')}. Den \colorbold{Structtyp}, dem dieses Attribut gehört, kann man aus dem \textcolor{gray!90!black}{versteckten Attribut} \smalltt{datatype} herauslesen. Das \textcolor{gray!90!black}{versteckte Attribut} wird während des Kompiliervorgangs im \colorbold{PiocC-Mon Pass} dem \colorbold{Container-Knoten} \smalltt{Ref(exp, \textcolor{gray!90!black}{datatype})} angehängt.
+
+  % Die \colorbold{Größe} einer Variable \smalltt{st\_var}, die ihm \smalltt{size}-Feld des \colorbold{Symboltabelleneintrags} eingetragen ist und mit dem \colorbold{Structtyp} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace\ldots\enspace datatype_n\enspace attr_n;\};}$\footnote{Hier wird es der Einfachheit halber so dargestellt, als hätte die Programmiersprache $L_{PicoC}$ nicht die Fragwürdige Designentscheidung, auch die eckigen Klammern \smalltt{[]} für die Definition eines Arrays \colorbold{vor} die Variable zu schreiben von $\mathtt{L_C}$ übernommen. Es wird so getann, als würde der komplette \colorbold{Datentyp} immer \colorbold{hinter} der Variable stehen: \smalltt{datatype var}.} definiert ist ($\mathtt{struct\enspace st\enspace st\_var;}$), berechnet sich dabei aus der Summe der \colorbold{Größen} der einzelnen \colorbold{Datentypen} $\mathtt{datatype_1\enspace \ldots\enspace datatpye_n}$ der \colorbold{Attribute} $\mathtt{attr_1,\enspace \ldots\enspace attr_n}$ des \colorbold{Structtyps}: $\mathtt{size(st) = \sum^n_{i=1} size(datatype_i)}$.
+
+
+\begin{Special_Paragraph}
+  Die Berechnung der \colorbold{Adresse}, ab der ein \colorbold{Structattribut} $\mathtt{attr_i}$ eines \colorbold{Structs} \smalltt{struct st st\_var} des \colorbold{Structtyps} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace\ldots\enspace datatype_n\enspace attr_n;\};}$ abgespeichert ist, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
+
+  \numberwithin{equation}{section}
+
+  \begin{equation}
+  \mathtt{ref(st.attr_i]) = ref(st) + \left(\sum_{i=1}^{n} \cdot idx_{i}\right) \cdot \operatorname{size}(datatype)} \\
+    \label{eq:adresse_von_structattribut}
+  \end{equation}
+  aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte.}.
+
+  Die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('2')))} repräsentiert dabei den Summanden $\smalltt{ref(ar)}$ in der Formel.
+
+  Die Komposition \smalltt{Exp(Num('2'))} repräsentiert dabei einen \colorbold{Subindex} (z.B. \smalltt{i} in \smalltt{a[i][j][k]}) beim \colorbold{Zugriff auf ein Arrayelement}, der als Faktor $\mathtt{idx_i}$ in der Formel auftaucht.
+
+  Der Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} repräsentiert dabei einen ausmultiplizierten Summanden $\mathtt{\left(\prod_{j=i+1}^{n} dim_{j}\right) \cdot idx_{i} \cdot size(datatpye)}$ in der Formel.
+
+Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(ar[idx_1]\ldots[idx_n])\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(ar[idx_1]\ldots[idx_n])}$.
+\end{Special_Paragraph}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={12-14}}]{./code_examples/example_struct_attr_access.picoc_mon}
+  \caption{PicoC-Mon Pass für Zugriff auf Structattribut}
+  \label{code:picoc_mon_pass_für_zugriff_auf_structattribut}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={24-27,29-31,33-35}}]{./code_examples/example_struct_attr_access.reti_blocks}
+  \caption{RETI-Blocks Pass für Zugriff auf Structattribut}
+  \label{code:reti_blocks_pass_für_zugriff_auf_structattribut}
+\end{code}
+
+\subsubsection{Zuweisung an Structattribut}
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c, minted options={highlightlines={5}}]{./code_examples/example_struct_attr_assignment.picoc}
+  \caption{PicoC-Code für Zuweisung an Structattribut}
+  \label{code:picoc_code_für_zuweisung_an_structattribut}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={16}}]{./code_examples/example_struct_attr_assignment.ast}
+  \caption{Abstract Syntax Tree für Zuweisung an Structattribut}
+  \label{code:abstract_syntax_tree_für_zuweisung_an_structattribut}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={12-15}}]{./code_examples/example_struct_attr_assignment.picoc_mon}
+  \caption{PicoC-Mon Pass für Zuweisung an Structattribut}
+  \label{code:picoc_mon_pass_für_zuweisung_an_structattribut}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={24-26,28-31,33-35,37-40}}]{./code_examples/example_struct_attr_assignment.reti_blocks}
+  \caption{RETI-Blocks Pass für Zuweisung an Structattribut}
+  \label{code:reti_blocks_pass_für_zuweisung_an_structattribut}
+\end{code}
+
+\subsection{Umsetzung der Derived Datatypes im Zusammenspiel}
+\subsubsection{Anfangsteil für Globale Statische Daten und Stackframe}
+\label{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}
+% Stack und Globale Statische Daten, unterschieldihe Berechnung der Adressen
+% unterschiedliche Adressberechnung
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_introduction_part.picoc}
+  \caption{PicoC-Code für den Anfangsteil}
+  \label{code:picoc_code_einleitungsteil}
+\end{code}
+
+% spezielles Vorgehen bei PntrDecl
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.ast}
+  \caption{Abstract Syntax Tree für den Anfangsteil}
+  \label{code:abstract_syntax_tree_einleitungsteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.picoc_mon}
+  \caption{PicoC-Mon Pass für den Anfangsteil}
+  \label{code:picoc_mon_pass_einleitungsteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_introduction_part.reti_blocks}
+  \caption{RETI-Blocks Pass für den Anfangsteil}
+  \label{code:reti_blocks_pass_einleitungsteil}
+\end{code}
+
+\subsubsection{Mittelteil für die verschiedenen Derived Datatypes}
+\label{sec:mittelteil_für_die_verschiedenen_derived_datatypes}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_main_part.picoc}
+  \caption{PicoC-Code für den Mittelteil}
+  \label{code:picoc_code_mittelteil}
+\end{code}
+
+% spezielles Vorgehen bei PntrDecl
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.ast}
+  \caption{Abstract Syntax Tree für den Mittelteil}
+  \label{code:abstract_syntax_tree_mittelteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.picoc_mon}
+  \caption{PicoC-Mon Pass für den Mittelteil}
+  \label{code:picoc_mon_pass_mittelteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_main_part.reti_blocks}
+  \caption{RETI-Blocks Pass für den Mittelteil}
+  \label{code:reti_blocks_pass_mittelteil}
+\end{code}
+% spezielles Vorgehen bei PntrDecl
+
+\subsubsection{Schlussteil für die verschiedenen Derived Datatypes}
+\label{sec:schlussteil_für_die_verschiedenen_derived_datatypes}
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/example_derived_dts_final_part.picoc}
+  \caption{PicoC-Code für den Schlussteil}
+  \label{code:picoc_code_schlussteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.ast}
+  \caption{Abstract Syntax Tree für den Schlussteil}
+  \label{code:abstract_syntax_tree_schlussteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.picoc_mon}
+  \caption{PicoC-Mon Pass für den Schlussteil}
+  \label{code:picoc_mon_pass_schlussteil}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_derived_dts_final_part.reti_blocks}
+  \caption{RETI-Blocks Pass für den Schlussteil}
+  \label{code:reti_blocks_pass_schlussteil}
+\end{code}
+
+% Umgang, wenn Datentyp abrubt aufhört am Ende

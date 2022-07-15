@@ -2,8 +2,10 @@
 % ./Packete_und_Deklarationen.tex
 % ./Titlepage.tex
 % ./Motivation.tex
-% ./Implementierung1.tex
-% ./Implementierung2.tex
+% ./Implementierung1_Tables_DT_AST.tex,
+% ./Implementierung2_Pntr_Array.tex,
+% ./Implementierung3_Struct_Derived.tex,
+% ./Implementierung4_Fun.tex,
 % ./Ergebnisse_und_Ausblick.tex
 
 \chapter{Einführung}
@@ -257,7 +259,7 @@ Der Grund warum nicht einfach nur die \colorbold{Lexeme} an die \colorbold{Synta
 
 Ein \colorbold{Lexeme} ist damit aber nicht immer das gleiche, wie der \colorbold{Tokenwert}, denn z.B. im Falle von PicoC kann der Wert $99$ durch zwei verschiedene \colorbold{Literale} (Definition~\ref{def:literal}) dargestellt werden, einmal als ASCII-Zeichen \smalltt{'c'}, dass den entsprechenden Wert in der ASCII-Tabelle hat und des Weiteren auch in Dezimalschreibweise als \smalltt{99}\footnote{Die Programmiersprache \colorbold{Python} erlaubt es z.B. dieser Wert auch mit den Literalen \smalltt{0b1100011} und \smalltt{0x63} darzustellen.}. Der \colorbold{Tokenwert} ist jedoch der letztendlich verwendete Wert an sich, unabhängig von der Darstellungsform.
 
-Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ der Sprache $L_{Lex}$ verwendet wird ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein Symbol} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$}, sich nichts merken muss und unabhängig davon, was für Symbole davor aufgetaucht sind läuft. Die Grammatik~\ref{gr:concrete_syntax_lex} liefert den Beweis, dass die Sprache $L_{PicoC\_Lex}$ des \colorbold{PicoC-Compilers} auf jeden Fall \colorbold{regulär} ist, da sie fast die Definition~\ref{def:reguläre_sprachen} erfüllt. Einzig die Produktion \verb|CHAR ::= "'"ASCII_CHAR"'"| sieht problematisch aus, kann allerdings auch als \verb|{CHAR ::= "'"CHAR2, CHAR2 ::= ASCII_CHAR"'"}| \colorbold{regulär} ausgedrückt werden\footnote{Eine derartige Regel würde nur Probleme bereiten, wenn sich aus \smalltt{ASCII\_CHAR} \colorbold{beliebig breite} Wörter ableiten liesen.}. Somit existiert eine \colorbold{reguläre Grammatik}, welche die \colorbold{Sprache} $L_{PicoC\_Lex}$ beschreibt und damit ist die \colorbold{Sprache} $L_{PicoC\_Lex}$ \colorbold{regulär}.
+Die \colorbold{Grammatik} $G_{Lex}$, die zur Beschreibung der Token $T$ der Sprache $L_{Lex}$ verwendet wird ist üblicherweise \colorbold{regulär}, da ein typischer \colorbold{Lexer} immer nur \colorbold{ein Symbol} vorausschaut\footnote{Man nennt das auch einem \colorbold{Lookahead} von $1$}, sich nichts merken muss und unabhängig davon, was für Symbole davor aufgetaucht sind läuft. Die Grammatik~\ref{gr:concrete_syntax_lex_teil_1} liefert den Beweis, dass die Sprache $L_{PicoC\_Lex}$ des \colorbold{PicoC-Compilers} auf jeden Fall \colorbold{regulär} ist, da sie fast die Definition~\ref{def:reguläre_sprachen} erfüllt. Einzig die Produktion \verb|CHAR ::= "'"ASCII_CHAR"'"| sieht problematisch aus, kann allerdings auch als \verb|{CHAR ::= "'"CHAR2, CHAR2 ::= ASCII_CHAR"'"}| \colorbold{regulär} ausgedrückt werden\footnote{Eine derartige Regel würde nur Probleme bereiten, wenn sich aus \smalltt{ASCII\_CHAR} \colorbold{beliebig breite} Wörter ableiten liesen.}. Somit existiert eine \colorbold{reguläre Grammatik}, welche die \colorbold{Sprache} $L_{PicoC\_Lex}$ beschreibt und damit ist die \colorbold{Sprache} $L_{PicoC\_Lex}$ \colorbold{regulär}.
 
 \begin{Definition}{Literal}{literal}
   Eine von möglicherweise vielen weiteren \colorbold{Darstellungsformen} (als \colorbold{Zeichenkette}) für ein und denselben \colorbold{Wert} eines \colorbold{Datentyps}.\footcite{thiemann_einfuhrung_2018}
