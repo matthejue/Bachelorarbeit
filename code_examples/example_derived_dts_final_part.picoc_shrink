@@ -11,8 +11,8 @@ File
       Name 'main', 
       [], 
       [
-        Assign(Alloc(Writeable(), ArrayDecl([Num('1'), Num('2')], IntType('int')), Name('ar1')), Array([Array([Num('42'), Num('314')])]))
-        Assign(Alloc(Writeable(), ArrayDecl([Num('1')], StructSpec(Name('st'))), Name('ar2')), Struct([Assign(Name('attr'), Array([Num('42'), Num('314')]))]))
+        Exp(Alloc(Writeable(), ArrayDecl([Num('1'), Num('2')], IntType('int')), Name('ar1')))
+        Exp(Alloc(Writeable(), ArrayDecl([Num('1')], StructSpec(Name('st'))), Name('ar2')))
         Assign(Alloc(Writeable(), IntType('int'), Name('var')), Num('42'))
         Assign(Alloc(Writeable(), PntrDecl(Num('1'), IntType('int')), Name('pntr1')), Ref(Name('var')))
         Assign(Alloc(Writeable(), PntrDecl(Num('2'), IntType('int')), Name('pntr2')), Ref(Name('pntr1')))

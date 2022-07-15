@@ -1,7 +1,7 @@
-struct st1 {int (*ar)[1];};
+struct st {int (*ar)[1];};
 
 void main() {
   int var[1] = {42};
-  struct st1 st_first = {.ar=&var};
-  (*st_first.ar)[0];
+  struct st st_var = {.ar=&var};
+  (*st_var.ar)[0];
 }

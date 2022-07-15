@@ -1,0 +1,19 @@
+File 
+  Name './advanced_struct_init_insert_already_definied_array.ast', 
+  [
+    StructDecl 
+      Name 'st', 
+      [
+        Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        # array
+        Assign(Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar')), Array([Num('2'), Num('4')]))
+        # struct
+        Assign(Alloc(Writeable(), StructSpec(Name('st')), Name('st_var')), Struct([Assign(Name('ar'), Name('ar'))]))
+      ]
+  ]

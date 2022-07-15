@@ -2,7 +2,7 @@ File
   Name './example_derived_dts_main_part.ast', 
   [
     StructDecl 
-      Name 'st1', 
+      Name 'st', 
       [
         Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('1')], IntType('int'))), Name('ar'))
       ], 
@@ -12,7 +12,7 @@ File
       [], 
       [
         Assign(Alloc(Writeable(), ArrayDecl([Num('1')], IntType('int')), Name('var')), Array([Num('42')]))
-        Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st_first')), Struct([Assign(Name('ar'), Ref(Name('var')))]))
-        Exp(Subscr(Deref(Attr(Name('st_first'), Name('ar')), Num('0')), Num('0')))
+        Assign(Alloc(Writeable(), StructSpec(Name('st')), Name('st_var')), Struct([Assign(Name('ar'), Ref(Name('var')))]))
+        Exp(Subscr(Deref(Attr(Name('st_var'), Name('ar')), Num('0')), Num('0')))
       ]
   ]

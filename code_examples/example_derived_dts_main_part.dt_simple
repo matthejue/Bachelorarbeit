@@ -3,7 +3,7 @@ file
   decls_defs
     decl_def
       struct_decl
-        name	st1
+        name	st
         struct_params
           alloc
             pntr_decl
@@ -61,8 +61,8 @@ file
                       array_dims
                       type_spec
                         struct_spec
-                          name	st1
-                  name	st_first
+                          name	st
+                  name	st_var
                 bug_initializer
                   struct_init
                     name	ar
@@ -114,7 +114,7 @@ file
                                                                   struct_attr
                                                                     post_exp
                                                                       prim_exp
-                                                                        name	st_first
+                                                                        name	st_var
                                                                     name	ar
                                       logic_or
                                         logic_and

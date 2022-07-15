@@ -3,20 +3,20 @@ SymbolTable
     Symbol 
       {
         type qualifier:         Empty()
-        datatype:               PntrDecl(Num('1'), ArrayDecl([Num('1')], IntType('int')))
+        datatype:               ArrayDecl([Num('2')], IntType('int'))
         name:                   Name('ar@st')
         value or address:       Empty()
-        position:               Pos(Num('1'), Num('17'))
-        size:                   Num('1')
+        position:               Pos(Num('1'), Num('15'))
+        size:                   Num('2')
       }, 
     Symbol 
       {
         type qualifier:         Empty()
-        datatype:               StructDecl(Name('st'), [Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('1')], IntType('int'))), Name('ar'))])
+        datatype:               StructDecl(Name('st'), [Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar'))])
         name:                   Name('st')
         value or address:       [Name('ar@st')]
         position:               Pos(Num('1'), Num('7'))
-        size:                   Num('1')
+        size:                   Num('2')
       }, 
     Symbol 
       {
@@ -30,19 +30,19 @@ SymbolTable
     Symbol 
       {
         type qualifier:         Writeable()
-        datatype:               ArrayDecl([Num('1')], IntType('int'))
-        name:                   Name('var@main')
+        datatype:               ArrayDecl([Num('2')], IntType('int'))
+        name:                   Name('ar@main')
         value or address:       Num('0')
-        position:               Pos(Num('4'), Num('6'))
-        size:                   Num('1')
+        position:               Pos(Num('5'), Num('6'))
+        size:                   Num('2')
       }, 
     Symbol 
       {
         type qualifier:         Writeable()
         datatype:               StructSpec(Name('st'))
         name:                   Name('st_var@main')
-        value or address:       Num('1')
-        position:               Pos(Num('5'), Num('12'))
-        size:                   Num('1')
+        value or address:       Num('2')
+        position:               Pos(Num('7'), Num('12'))
+        size:                   Num('2')
       }
   ]

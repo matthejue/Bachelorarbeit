@@ -4,14 +4,8 @@ File
     Block 
       Name 'main.0', 
       [
-        // Assign(Name('ar1'), Array([Array([Num('42'), Num('314')])]))
-        Exp(Num('42'))
-        Exp(Num('314'))
-        Assign(Global(Num('0')), Stack(Num('2')))
-        // Assign(Name('ar2'), Struct([Assign(Name('attr'), Array([Num('42'), Num('314')]))]))
-        Exp(Num('42'))
-        Exp(Num('314'))
-        Assign(Global(Num('2')), Stack(Num('2')))
+        // Exp(Alloc(Writeable(), ArrayDecl([Num('1'), Num('2')], IntType('int')), Name('ar1')))
+        // Exp(Alloc(Writeable(), ArrayDecl([Num('1')], StructSpec(Name('st'))), Name('ar2')))
         // Assign(Name('var'), Num('42'))
         Exp(Num('42'))
         Assign(Global(Num('4')), Stack(Num('1')))

@@ -1,35 +1,7 @@
 # // Exp(GoTo(Name('main.0')))
 # // patched out Exp(GoTo(Name('main.0')))
-# // Assign(Name('ar1'), Array([Array([Num('42'), Num('314')])]))
-# Exp(Num('42'))
-SUBI SP 1;
-LOADI ACC 42;
-STOREIN SP ACC 1;
-# Exp(Num('314'))
-SUBI SP 1;
-LOADI ACC 314;
-STOREIN SP ACC 1;
-# Assign(Global(Num('0')), Stack(Num('2')))
-LOADIN SP ACC 1;
-STOREIN DS ACC 1;
-LOADIN SP ACC 2;
-STOREIN DS ACC 0;
-ADDI SP 2;
-# // Assign(Name('ar2'), Struct([Assign(Name('attr'), Array([Num('42'), Num('314')]))]))
-# Exp(Num('42'))
-SUBI SP 1;
-LOADI ACC 42;
-STOREIN SP ACC 1;
-# Exp(Num('314'))
-SUBI SP 1;
-LOADI ACC 314;
-STOREIN SP ACC 1;
-# Assign(Global(Num('2')), Stack(Num('2')))
-LOADIN SP ACC 1;
-STOREIN DS ACC 3;
-LOADIN SP ACC 2;
-STOREIN DS ACC 2;
-ADDI SP 2;
+# // Exp(Alloc(Writeable(), ArrayDecl([Num('1'), Num('2')], IntType('int')), Name('ar1')))
+# // Exp(Alloc(Writeable(), ArrayDecl([Num('1')], StructSpec(Name('st'))), Name('ar2')))
 # // Assign(Name('var'), Num('42'))
 # Exp(Num('42'))
 SUBI SP 1;
