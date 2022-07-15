@@ -211,29 +211,40 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
 \newpage
 
 \begin{figure}[H]
+  \centering
+  \begin{File}[remember as=input]
+    \bfseries Input
+  \end{File}
+  \vspace{0.5cm}
   \begin{Code_Frame}[remember as=anfangsteil]{Anfangsteil}
-    \codebox[title=Variable vom Stackframe, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_global.special_reti}
+    \codebox[title=Variable vom Stackframe, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_global.special}
     \hfill
-    \codebox[title=Variable aus Globalen Statischen Daten, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_stackframe.special_reti}
+    \codebox[title=Variable aus Globalen Statischen Daten, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_stackframe.special}
   \end{Code_Frame}
-  \vspace{1cm}
+  \vspace{0.5cm}
   \begin{Code_Frame}[remember as=mittelteil]{Mittelteil}
-    \codebox[title=Arrayindexzugriff auf Array, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_array.special_reti}
+    \codebox[title=Arrayindexzugriff auf Array, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_array.special}
     \hfill
-    \codebox[title=Arrayindexzugriff auf Pointer, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_pntr.special_reti}
+    \codebox[title=Arrayindexzugriff auf Pointer, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_pntr.special}
     \hfill
-    \codebox[title=Structattributzugriff auf Struct, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_struct.special_reti}
+    \codebox[title=Structattributzugriff auf Struct, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_struct.special}
   \end{Code_Frame}
-  \vspace{1cm}
+  \vspace{0.5cm}
   \begin{Code_Frame}[remember as=schlussteil]{Schlussteil}
-    \codebox[title=Letzer Datentyp ist Struct oder Primitiver Datentyp, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_struct_int_char.special_reti}
+    \codebox[title=Letzer Datentyp ist Struct oder Primitiver Datentyp, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_struct_int_char.special}
     \hfill
-    \codebox[title=Letzer Datentyp ist Array oder Pointer, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_array_pntr.special_reti}
+    \codebox[title=Letzer Datentyp ist Array oder Pointer, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_array_pntr.special}
   \end{Code_Frame}
+  \vspace{0.5cm}
+  \begin{File}[remember as=output, hbox]
+    \textcolor{white}{Output}
+  \end{File}
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (input.south) to node[right] {Adresse} (anfangsteil.north);
   \draw[->] (anfangsteil.south) to node[right] {Adresse} (mittelteil.north);
   \draw [->] (mittelteil.east)arc(-160:160:0.8) node[right] {Adresse};
   \draw[->] (mittelteil.south) to node[right] {Adresse} (schlussteil.north);
+  \draw[->] (schlussteil.south) to node[right] {Adresse} (output.north);
   \end{tikzpicture}
   \caption{Veranschaulichung des Zugriffs auf Derived Datatypes}
   \label{fig:zugriff_auf_derived_datatypes_veranschaulicht}
