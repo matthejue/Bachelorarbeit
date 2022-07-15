@@ -128,23 +128,21 @@ Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1')
 
 
 \begin{Special_Paragraph}
-  Die Berechnung der \colorbold{Adresse}, ab der ein \colorbold{Structattribut} $\mathtt{attr_i}$ eines \colorbold{Structs} \smalltt{struct st st\_var} des \colorbold{Structtyps} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace\ldots\enspace datatype_n\enspace attr_n;\};}$ abgespeichert ist, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
+  Die Berechnung der \colorbold{Adresse}, für eine Folge von \colorbold{Zugriffen auf Structattributte} $\mathtt{st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}}$ mehrerer \colorbold{Structs} $\mathtt{struct\enspace st_i\enspace st\_var_i}$ unterschiedlicher \colorbold{Structtypen} $\mathtt{struct\enspace st_i\enspace \{datatype_{i, 1}\enspace attr_{i, 1};\enspace\ldots\enspace datatype_{i, m}\enspace attr_{i, m};\};}$ abgespeichert ist, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
 
   \numberwithin{equation}{section}
 
   \begin{equation}
-  \mathtt{ref(st.attr_1\ldots .attr_n) = ref(st) + \sum_{i=1}^{n}\sum_{j=1}^{i} \operatorname{size}(datatype_j)} \\
+    \mathtt{ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}) = ref(st_1) + \sum_{i=1}^{n}\sum_{k=1}^{j_i\;\mid\; attr_{i,j_i}} \operatorname{size}(datatype_{i, k})} \\
     \label{eq:adresse_von_structattribut}
   \end{equation}
   aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte.}.
 
-  Die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('2')))} repräsentiert dabei den Summanden $\smalltt{ref(ar)}$ in der Formel.
+  Die Kompositionen \smalltt{Ref(Global(Num('0')))} repräsentiert dabei den Summanden $\mathtt{ref(st_1)}$ in der Formel.
 
-  Die Komposition \smalltt{Exp(Num('2'))} repräsentiert dabei einen \colorbold{Subindex} (z.B. \smalltt{i} in \smalltt{a[i][j][k]}) beim \colorbold{Zugriff auf ein Arrayelement}, der als Faktor $\mathtt{idx_i}$ in der Formel auftaucht.
+  Der Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} repräsentiert dabei einen Summanden $\mathtt{\sum_{k=1}^{j_i\;\mid\; attr_{i,j_i}} \operatorname{size}(datatype_{i, k})}$ in der Formel.
 
-  Der Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} repräsentiert dabei einen ausmultiplizierten Summanden $\mathtt{\left(\prod_{j=i+1}^{n} dim_{j}\right) \cdot idx_{i} \cdot size(datatpye)}$ in der Formel.
-
-Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(ar[idx_1]\ldots[idx_n])\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(ar[idx_1]\ldots[idx_n])}$.
+Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})}$.
 \end{Special_Paragraph}
 
 \begin{code}
@@ -153,6 +151,8 @@ Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen de
   \caption{PicoC-Mon Pass für Zugriff auf Structattribut}
   \label{code:picoc_mon_pass_für_zugriff_auf_structattribut}
 \end{code}
+
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_zugriff_auf_structattribut} werden die \colorbold{Kompositionen} \smalltt{Ref(Global(Num('0')))}, \smalltt{Ref(Attr(Stack(Num('1')), Name('y')))} und \smalltt{Exp(Stack(Num('1')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
 \begin{code}
   \centering
