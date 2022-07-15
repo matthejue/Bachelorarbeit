@@ -1,4 +1,4 @@
-Exp(Global(Num('rel_addr')))
+Exp(Global(Num('addr')))
 SUBI SP 1;
-LOADIN DS ACC rel_addr;
+LOADIN DS ACC addr;
 STOREIN SP ACC 1;

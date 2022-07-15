@@ -127,24 +127,24 @@ Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1')
 
   % Die \colorbold{Größe} einer Variable \smalltt{st\_var}, die ihm \smalltt{size}-Feld des \colorbold{Symboltabelleneintrags} eingetragen ist und mit dem \colorbold{Structtyp} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace\ldots\enspace datatype_n\enspace attr_n;\};}$\footnote{Hier wird es der Einfachheit halber so dargestellt, als hätte die Programmiersprache $L_{PicoC}$ nicht die Fragwürdige Designentscheidung, auch die eckigen Klammern \smalltt{[]} für die Definition eines Arrays \colorbold{vor} die Variable zu schreiben von $\mathtt{L_C}$ übernommen. Es wird so getann, als würde der komplette \colorbold{Datentyp} immer \colorbold{hinter} der Variable stehen: \smalltt{datatype var}.} definiert ist ($\mathtt{struct\enspace st\enspace st\_var;}$), berechnet sich dabei aus der Summe der \colorbold{Größen} der einzelnen \colorbold{Datentypen} $\mathtt{datatype_1\enspace \ldots\enspace datatpye_n}$ der \colorbold{Attribute} $\mathtt{attr_1,\enspace \ldots\enspace attr_n}$ des \colorbold{Structtyps}: $\mathtt{size(st) = \sum^n_{i=1} size(datatype_i)}$.
 
-\begin{Special_Paragraph}
-  Die Berechnung der \colorbold{Adresse}, für eine Folge von \colorbold{Zugriffen auf Structattributte} $\mathtt{st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}}$ mehrerer \colorbold{Structs} $\mathtt{struct\enspace st_i\enspace st\_var_i}$ unterschiedlicher \colorbold{Structtypen} $\mathtt{struct\enspace st_i\enspace \{datatype_{i, 1}\enspace attr_{i, 1};\enspace\ldots\enspace datatype_{i, m}\enspace attr_{i, m};\};}$, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
+\numberwithin{equation}{section}
 
-  \numberwithin{equation}{section}
+\begin{Special_Paragraph}
+  Die Berechnung der \colorbold{Adresse}, für eine Folge von \colorbold{Zugriffen auf Structattributte} $\mathtt{st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}}$ mehrerer \colorbold{Structs} $\mathtt{struct\enspace st_i\enspace st\_var_i}$ unterschiedlicher \colorbold{Structtypen} $\mathtt{struct\enspace st_i\enspace \{datatype_{i, 1}\enspace attr_{i, 1};\enspace\ldots\enspace datatype_{i, m}\enspace attr_{i, m};\}}$, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
 
   \begin{equation}
-    \mathtt{ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}) = ref(st_1) + \sum_{i=1}^{n}\sum_{k=1}^{j_i\;\mid\; attr_{i,j_i}} \operatorname{size}(datatype_{i, k})} \\
+    \mathtt{ref(st\_var_1.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}) = ref(st\_var_1) + \sum_{i=1}^{n}\sum_{k=1}^{j_i - 1} \operatorname{size}(datatype_{i, k})} \\
     \label{eq:adresse_von_structattribut}
   \end{equation}
-  aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte.}.
+  aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden.\footnote{\smalltt{ref(exp)} steht dabei für das Schreiben der \colorbold{Adresse} von \smalltt{exp} auf den Stack, wobei \smalltt{exp} z.B. \smalltt{st\_var.attr} sein könnte.}\footnote{Die \colorbold{äußere Schleife} iteriert nacheinander über die \colorbold{Zugriffe auf Structattribute}. Die \colorbold{innere Schleife} iteriert über alle \colorbold{Attribute} des momentan betrachteten \colorbold{Structtyps} $\mathtt{st_i}$, die vor dem Attribut mit der Nummer $\mathtt{j_i}$ liegen.}
 
-  Die Kompositionen \smalltt{Ref(Global(Num('0')))} repräsentiert dabei den Summanden $\mathtt{ref(st_1)}$ in der Formel.
+  Die Kompositionen \smalltt{Ref(Global(Num('0')))} repräsentiert dabei den Summanden $\mathtt{ref(st\_var_1)}$ in der Formel.
 
   Der Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} repräsentiert dabei einen Summanden $\mathtt{\sum_{k=1}^{j_i\;\mid\; attr_{i,j_i}} \operatorname{size}(datatype_{i, k})}$ in der Formel.
 
 Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})}$.
 
-In Unterkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} wird eine allgemeine Formel für \colorbold{Zugriffe} auf \colorbold{Structattribute}, \colorbold{Arrayelemente} und \colorbold{Pointer} erklärt.
+In Unterkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} wird eine allgemeine Formel für \colorbold{Zugriffe} auf \colorbold{Structattribute}, \colorbold{Arrayelemente} und \colorbold{Pointer} erklärt, die auf der obigen Formel~\ref{eq:adresse_von_structattribut} und der Formel~\ref{eq:adresse_von_arrayelement} aufbaut.
 \end{Special_Paragraph}
 
 \begin{code}
@@ -209,25 +209,26 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
 % Im \colorbold{Unterkapitel}~\ref{sec:zugriff_auf_structattribut} hat man bereits gemerkt, dass das Vorgehen für den \colorbold{Zugriff auf ein Structattribut} sehr ähnlich zum dem Vorgehen zum \colorbold{Zugriff auf einen Arrayindex} in Unterkapitel~\ref{sec:zugriff_auf_arrayindex} ist. Im \colorbold{Unterkapitel}~\ref{sec:zugriff_auf_structattribut} wurde sogar bei der Erklärung sogar auf das Unterkapitel~\ref{Unterkapitel~\ref{sec:zugriff_auf_arrayindex}} verwiesen.
 
 \newpage
+
 \begin{figure}[H]
   \begin{Code_Frame}[remember as=anfangsteil]{Anfangsteil}
-    \codebox[title=Inputstring, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_anfangsteil_global.special_reti}
+    \codebox[title=Variable vom Stackframe, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_global.special_reti}
     \hfill
-    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_anfangsteil_stackframe.special_reti}
+    \codebox[title=Variable aus Globalen Statischen Daten, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_stackframe.special_reti}
   \end{Code_Frame}
   \vspace{1cm}
   \begin{Code_Frame}[remember as=mittelteil]{Mittelteil}
-    \codebox[title=Inputstring, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_mittelteil_pntr.special_reti}
+    \codebox[title=Arrayindexzugriff auf Array, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_array.special_reti}
     \hfill
-    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_mittelteil_array.special_reti}
+    \codebox[title=Arrayindexzugriff auf Pointer, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_pntr.special_reti}
     \hfill
-    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_mittelteil_struct.special_reti}
+    \codebox[title=Structattributzugriff auf Struct, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_struct.special_reti}
   \end{Code_Frame}
   \vspace{1cm}
   \begin{Code_Frame}[remember as=schlussteil]{Schlussteil}
-    \codebox[title=Inputstring, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_schlussteil_struct_int_char.special_reti}
+    \codebox[title=Letzer Datentyp ist Struct oder Primitiver Datentyp, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_struct_int_char.special_reti}
     \hfill
-    \codebox[title=Tokenfolge, width=0.3\linewidth, nobeforeafter, minted language=text]{./code_examples/ubersicht_schlussteil_struct_int_char.special_reti}
+    \codebox[title=Letzer Datentyp ist Array oder Pointer, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_array_pntr.special_reti}
   \end{Code_Frame}
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
   \draw[->] (anfangsteil.south) to node[right] {Adresse} (mittelteil.north);

@@ -6,7 +6,7 @@ STOREIN SP ACC 1;
 LOADIN SP IN2 2;
 LOADIN IN2 IN1 0;
 LOADIN SP IN2 1;
-MULTI IN2 product_of_remaining_dims_mul_size;
+MULTI IN2 product_remaining_dims_mul_size;
 ADD IN1 IN2;
 ADDI SP 1;
 STOREIN SP IN1 1;

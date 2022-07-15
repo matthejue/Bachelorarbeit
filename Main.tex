@@ -56,21 +56,16 @@
   % https://tex.stackexchange.com/questions/319355/tcolorbox-breakable-option-not-working
   \newtcbinputlisting{\codebox}[2][]{
   listing file={#2},
-  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, minted options={fontsize=\small,breaklines,breakanywhere,autogobble}, halign title=center, sharpish corners, drop fuzzy shadow, minted options={linenos=false, numbersep=0mm}
+  enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, bottom=1mm, top=1mm, left=1mm, right=1mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, sharpish corners, drop fuzzy shadow, minted options={fontsize=\small,linenos=false,breaklines,breakafter={_}, breakbefore={(}, breakaftersymbolpre={}, breakaftersymbolpost={}, breakbeforesymbolpre={}, breakbeforesymbolpost={}, breaksymbolsepleft=2mm, breaksymbolsepright=0mm, breakindent=0mm, breaksymbolindentleft=5mm, breaksymbolindentright=0mm, numbersep=0mm}
   }
 % drop fuzzy shadow, drop lifted shadow, listing engine=listings
 
-  \newtcolorbox{Code_Frame}[2][]{enhanced, sharpish corners, drop fuzzy shadow, arc=0mm, left=3mm, right=3mm, boxrule=1mm, halign title=center, fonttitle=\bfseries, interior style={fill=white}, frame style={color=PrimaryColor}, title={#2}, #1}
+  \newtcolorbox{Code_Frame}[2][]{enhanced, sharpish corners, drop fuzzy shadow, arc=0mm, bottom=1mm, top=1mm, left=1mm, right=1mm, boxrule=1mm, halign title=center, fonttitle=\bfseries, interior style={fill=white}, frame style={color=PrimaryColor}, title={#2}, #1}
 
   \newtcbinputlisting{\numberedcodebox}[2][]{
   listing file={#2},
   enhanced, breakable, colframe=PrimaryColor,colback=white, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, sharpish corners, drop fuzzy shadow, overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
   }
-
-  % \newtcbinputlisting{\treebox}[2][]{
-  % listing file={#2},
-  % enhanced, colframe=PrimaryColor, colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, #1, listing only, , halign title=center, sharpish corners, drop fuzzy shadow
-  % }
 
   \include{./content/Motivation}                      % ./content/Motivation.tex
   \include{./content/Einführung}                      % ./content/Einführung.tex

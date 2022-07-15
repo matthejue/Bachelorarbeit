@@ -1,4 +1,4 @@
 # Ref(Attr(Stack(Num('1')), Name('ar')))
 LOADIN SP IN1 1;
-ADDI IN1 sum_of_all_previous_attribute_sizes;
+ADDI IN1 sum_previous_attribute_sizes;
 STOREIN SP IN1 1;

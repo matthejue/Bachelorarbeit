@@ -1,4 +1,4 @@
-Exp(Stackframe(Num('rel_addr')))
+Exp(Stackframe(Num('addr')))
 SUBI SP 1;
-LOADIN BAF ACC -(2 + rel_addr);
+LOADIN BAF ACC -(2 + addr);
 STOREIN SP ACC 1;
