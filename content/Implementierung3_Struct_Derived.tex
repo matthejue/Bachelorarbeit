@@ -133,7 +133,7 @@ Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1')
   \numberwithin{equation}{section}
 
   \begin{equation}
-  \mathtt{ref(st.attr_i]) = ref(st) + \left(\sum_{i=1}^{n} \cdot idx_{i}\right) \cdot \operatorname{size}(datatype)} \\
+  \mathtt{ref(st.attr_1\ldots .attr_n) = ref(st) + \sum_{i=1}^{n}\sum_{j=1}^{i} \operatorname{size}(datatype_j)} \\
     \label{eq:adresse_von_structattribut}
   \end{equation}
   aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte.}.
