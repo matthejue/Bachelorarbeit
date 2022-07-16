@@ -29,7 +29,7 @@ file
                 pntr_decl
                   pntr_deg
                   array_decl
-                    name	ar1
+                    name	complex_var1
                     array_dims
                       1
                       2
@@ -42,7 +42,7 @@ file
                 pntr_decl
                   pntr_deg
                   array_decl
-                    name	ar2
+                    name	complex_var2
                     array_dims	1
           decl_part
             decl_direct_stmt
@@ -106,7 +106,7 @@ file
                       *
                       *
                     array_decl
-                      name	pntr2
+                      name	complex_var3
                       array_dims
                 bug_initializer
                   logic_or
@@ -140,7 +140,7 @@ file
                                     array_subscr
                                       post_exp
                                         prim_exp
-                                          name	ar1
+                                          name	complex_var1
                                       logic_or
                                         logic_and
                                           eq_exp
@@ -169,7 +169,7 @@ file
                                     array_subscr
                                       post_exp
                                         prim_exp
-                                          name	ar2
+                                          name	complex_var2
                                       logic_or
                                         logic_and
                                           eq_exp
@@ -198,4 +198,4 @@ file
                                   un_exp
                                     post_exp
                                       prim_exp
-                                        name	pntr2
+                                        name	complex_var3

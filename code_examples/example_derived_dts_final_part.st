@@ -31,7 +31,7 @@ SymbolTable
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('1'), Num('2')], IntType('int'))
-        name:                   Name('ar1@main')
+        name:                   Name('complex_var1@main')
         value or address:       Num('0')
         position:               Pos(Num('4'), Num('6'))
         size:                   Num('2')
@@ -40,7 +40,7 @@ SymbolTable
       {
         type qualifier:         Writeable()
         datatype:               ArrayDecl([Num('1')], StructSpec(Name('st')))
-        name:                   Name('ar2@main')
+        name:                   Name('complex_var2@main')
         value or address:       Num('2')
         position:               Pos(Num('5'), Num('12'))
         size:                   Num('2')
@@ -67,7 +67,7 @@ SymbolTable
       {
         type qualifier:         Writeable()
         datatype:               PntrDecl(Num('2'), IntType('int'))
-        name:                   Name('pntr2@main')
+        name:                   Name('complex_var3@main')
         value or address:       Num('6')
         position:               Pos(Num('8'), Num('8'))
         size:                   Num('1')

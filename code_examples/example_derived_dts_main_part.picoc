@@ -2,6 +2,6 @@ struct st {int (*ar)[1];};
 
 void main() {
   int var[1] = {42};
-  struct st st_var = {.ar=&var};
-  (*st_var.ar)[0];
+  struct st complex_var = {.ar=&var};
+  (*complex_var.ar)[0];
 }

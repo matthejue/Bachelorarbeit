@@ -61,7 +61,7 @@ file
                   pntr_decl
                     pntr_deg
                     array_decl
-                      name	st_var
+                      name	complex_var
                       array_dims
                 bug_initializer
                   struct_init
@@ -114,7 +114,7 @@ file
                                                                   struct_attr
                                                                     post_exp
                                                                       prim_exp
-                                                                        name	st_var
+                                                                        name	complex_var
                                                                     name	ar
                                       logic_or
                                         logic_and

@@ -2,12 +2,12 @@ struct ar_with_len {int len; int ar[2];};
 
 void main() {
   struct ar_with_len st_ar[3];
-  int *(*pntr2)[3];
-  pntr2;
+  int *(*complex_var)[3];
+  complex_var;
 }
 
 void fun() {
   struct ar_with_len st_ar[3];
-  int (*pntr1)[3];
-  pntr1;
+  int (*complex_var)[3];
+  complex_var;
 }

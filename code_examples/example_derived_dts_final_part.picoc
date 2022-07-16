@@ -1,13 +1,13 @@
 struct st {int attr[2];};
 
 void main() {
-  int ar1[1][2];
-  struct st ar2[1];
+  int complex_var1[1][2];
+  struct st complex_var2[1];
   int var = 42;
   int *pntr1 = &var;
-  int **pntr2 = &pntr1;
+  int **complex_var3 = &pntr1;
 
-  ar1[0];
-  ar2[0];
-  *pntr2;
+  complex_var1[0];
+  complex_var2[0];
+  *complex_var3;
 }

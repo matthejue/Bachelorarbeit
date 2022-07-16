@@ -10,8 +10,8 @@ File
     Block 
       Name 'main.0', 
       [
-        # // Exp(Alloc(Writeable(), ArrayDecl([Num('1'), Num('2')], IntType('int')), Name('ar1')))
-        # // Exp(Alloc(Writeable(), ArrayDecl([Num('1')], StructSpec(Name('st'))), Name('ar2')))
+        # // Exp(Alloc(Writeable(), ArrayDecl([Num('1'), Num('2')], IntType('int')), Name('complex_var1')))
+        # // Exp(Alloc(Writeable(), ArrayDecl([Num('1')], StructSpec(Name('st'))), Name('complex_var2')))
         # // Assign(Name('var'), Num('42'))
         # Exp(Num('42'))
         SUBI SP 1;
@@ -31,7 +31,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 5;
         ADDI SP 1;
-        # // Assign(Name('pntr2'), Ref(Name('pntr1')))
+        # // Assign(Name('complex_var3'), Ref(Name('pntr1')))
         # Ref(Global(Num('5')))
         SUBI SP 1;
         LOADI IN1 5;
@@ -41,7 +41,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 6;
         ADDI SP 1;
-        # // Exp(Subscr(Name('ar1'), Num('0')))
+        # // Exp(Subscr(Name('complex_var1'), Num('0')))
         # Ref(Global(Num('0')))
         SUBI SP 1;
         LOADI IN1 0;
@@ -59,7 +59,7 @@ File
         ADDI SP 1;
         STOREIN SP IN1 1;
         # // not included Exp(Stack(Num('1')))
-        # // Exp(Subscr(Name('ar2'), Num('0')))
+        # // Exp(Subscr(Name('complex_var2'), Num('0')))
         # Ref(Global(Num('2')))
         SUBI SP 1;
         LOADI IN1 2;
@@ -80,7 +80,7 @@ File
         LOADIN SP IN1 1;
         LOADIN IN1 ACC 0;
         STOREIN SP ACC 1;
-        # // Exp(Subscr(Name('pntr2'), Num('0')))
+        # // Exp(Subscr(Name('complex_var3'), Num('0')))
         # Ref(Global(Num('6')))
         SUBI SP 1;
         LOADI IN1 6;

@@ -62,7 +62,7 @@ file
                       type_spec
                         struct_spec
                           name	st
-                  name	st_var
+                  name	complex_var
                 bug_initializer
                   struct_init
                     name	ar
@@ -114,7 +114,7 @@ file
                                                                   struct_attr
                                                                     post_exp
                                                                       prim_exp
-                                                                        name	st_var
+                                                                        name	complex_var
                                                                     name	ar
                                       logic_or
                                         logic_and

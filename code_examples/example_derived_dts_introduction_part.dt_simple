@@ -53,7 +53,7 @@ file
                         array_dims
                         type_spec
                           prim_dt	int
-                name	pntr2
+                name	complex_var
           exec_part
             exec_exp_stmt
               logic_or
@@ -68,7 +68,7 @@ file
                                 un_exp
                                   post_exp
                                     prim_exp
-                                      name	pntr2
+                                      name	complex_var
     decl_def
       fun_def
         type_spec
@@ -101,7 +101,7 @@ file
                         array_dims
                         type_spec
                           prim_dt	int
-                name	pntr1
+                name	complex_var
           exec_part
             exec_exp_stmt
               logic_or
@@ -116,4 +116,4 @@ file
                                 un_exp
                                   post_exp
                                     prim_exp
-                                      name	pntr1
+                                      name	complex_var

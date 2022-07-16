@@ -5,8 +5,8 @@ File
       Name 'main.1', 
       [
         // Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('ar_with_len'))), Name('st_ar')))
-        // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], PntrDecl(Num('1'), IntType('int')))), Name('pntr2')))
-        // Exp(Name('pntr2'))
+        // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], PntrDecl(Num('1'), IntType('int')))), Name('complex_var')))
+        // Exp(Name('complex_var'))
         Exp(Global(Num('9')))
         Return(Empty())
       ], 
@@ -14,8 +14,8 @@ File
       Name 'fun.0', 
       [
         // Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('ar_with_len'))), Name('st_ar')))
-        // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('pntr1')))
-        // Exp(Name('pntr1'))
+        // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('complex_var')))
+        // Exp(Name('complex_var'))
         Exp(Stackframe(Num('9')))
         Return(Empty())
       ]

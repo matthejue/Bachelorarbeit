@@ -40,7 +40,7 @@ SymbolTable
       {
         type qualifier:         Writeable()
         datatype:               StructSpec(Name('st'))
-        name:                   Name('st_var@main')
+        name:                   Name('complex_var@main')
         value or address:       Num('1')
         position:               Pos(Num('5'), Num('12'))
         size:                   Num('1')

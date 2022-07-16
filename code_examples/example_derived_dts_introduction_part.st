@@ -49,7 +49,7 @@ SymbolTable
       {
         type qualifier:         Writeable()
         datatype:               PntrDecl(Num('1'), ArrayDecl([Num('3')], PntrDecl(Num('1'), IntType('int'))))
-        name:                   Name('pntr2@main')
+        name:                   Name('complex_var@main')
         value or address:       Num('9')
         position:               Pos(Num('5'), Num('9'))
         size:                   Num('1')
@@ -76,7 +76,7 @@ SymbolTable
       {
         type qualifier:         Writeable()
         datatype:               PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int')))
-        name:                   Name('pntr1@fun')
+        name:                   Name('complex_var@fun')
         value or address:       Num('9')
         position:               Pos(Num('11'), Num('8'))
         size:                   Num('1')

@@ -51,7 +51,7 @@ file
                     pntr_decl
                       pntr_deg	*
                       array_decl
-                        name	pntr2
+                        name	complex_var
                         array_dims
                     array_dims	3
           exec_part
@@ -68,7 +68,7 @@ file
                                 un_exp
                                   post_exp
                                     prim_exp
-                                      name	pntr2
+                                      name	complex_var
     decl_def
       fun_def
         type_spec
@@ -99,7 +99,7 @@ file
                     pntr_decl
                       pntr_deg	*
                       array_decl
-                        name	pntr1
+                        name	complex_var
                         array_dims
                     array_dims	3
           exec_part
@@ -116,4 +116,4 @@ file
                                 un_exp
                                   post_exp
                                     prim_exp
-                                      name	pntr1
+                                      name	complex_var
