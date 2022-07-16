@@ -210,7 +210,7 @@ Dies ist möglich, indem im \colorbold{Mittelteil} je nachdem, ob das \textcolor
 
 Würde man bei einem \smalltt{Subscr(Name('var'), exp2)} den Datentyp der Variable \smalltt{Name('var')} von \smalltt{ArrayDecl(nums, IntType())} zu \smalltt{PointerDecl(num, IntType())} ändern, müsste nur der \colorbold{Mittelteil} ausgetauscht werden. \colorbold{Anfangsteil} und \colorbold{Schlussteil} bleiben unverändert.
 
-Der \colorbold{Anfangsteil} ist mit der Komposition \smalltt{Ref(Name('var'))} dafür zuständig die \colorbold{Startadresse} der Variablen \smalltt{Name('var')} auf den Stack zu schreiben und je nachdem, ob diese Variable in den \colorbold{Globalen Statischen Daten} oder auf dem \colorbold{Stackframe} liegt einen anderen \colorbold{RETI-Code} zu generieren.
+Der \colorbold{Anfangsteil} ist die Komposition \smalltt{Ref(Name('var'))} dafür zuständig die \colorbold{Startadresse} der Variablen \smalltt{Name('var')} auf den Stack zu schreiben und je nachdem, ob diese Variable in den \colorbold{Globalen Statischen Daten} oder auf dem \colorbold{Stackframe} liegt einen anderen \colorbold{RETI-Code} zu generieren.
 
 Im \colorbold{Schlussteil} wird mit der Komposition \smalltt{Exp(Stack(Num('1')))}, wenn das \textcolor{gray!90!black}{versteckte Attribut} \smalltt{datatype} am Ende ein \smalltt{CharType()}, \smalltt{IntType()}, \smalltt{PntrDecl} oder \smalltt{StructType()} ist ein entsprechender \colorbold{RETI-Code} generiert, bei einem \smalltt{ArrayDecl()} wird kein weiterer \colorbold{RETI-Code} generiert. Üblicherweise wollen die m
 
@@ -241,7 +241,7 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
   \end{Code_Frame}
   \vspace{0.8cm}
   \begin{Code_Frame}[remember as=schlussteil]{Schlussteil}
-    \codebox[title=Letzer Datentyp ist Struct, Pointer oder Primitiver Datentyp, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_struct_int_char.special}
+    \codebox[title={Letzer Datentyp ist Struct, Pointer oder Primitiver Datentyp}, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_struct_int_char.special}
     \hfill
     \codebox[title=Letzer Datentyp ist Array, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_array_pntr.special}
   \end{Code_Frame}

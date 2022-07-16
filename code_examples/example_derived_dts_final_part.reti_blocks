@@ -92,7 +92,10 @@ File
         ADD IN1 IN2;
         ADDI SP 1;
         STOREIN SP IN1 1;
-        # // not included Exp(Stack(Num('1')))
+        # Exp(Stack(Num('1')))
+        LOADIN SP IN1 1;
+        LOADIN IN1 ACC 0;
+        STOREIN SP ACC 1;
         # Return(Empty())
         LOADIN BAF PC -1;
       ]
