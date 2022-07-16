@@ -70,7 +70,7 @@ Die \colorbold{Dereferenzierung} (z.B. \smalltt{*var}) wird im Folgenden anhand 
   \label{code:picoc_code_für_pointer_dereferenzierung}
 \end{code}
 
-Der Knoten \smalltt{Deref(Name('var')))} repräsentiert im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_dereferenzierung} eine \colorbold{Dereferenzierung} \smalltt{*var}.
+Der Container-Knoten \smalltt{Deref(Name('var'), Num('0')))} repräsentiert im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_pointer_dereferenzierung} eine \colorbold{Dereferenzierung} \smalltt{*var}. Es gibt herbei \colorbold{zwei} Fälle. Bei der Anwendung von \colorbold{Pointer Arithmetik}, wie z.B. \smalltt{*(var + 2 - 1)} übersetzt sich diese zu \smalltt{Deref(Name('var'), BinOp(Num('2'), Sub(), BinOp(Num('1'))))}. Bei einer normalen \colorbold{Dereferenzierung}, wie z.B. \smalltt{*var}, übersetzt sich diese zu \smalltt{Deref(Name('var'), Num('0'))}.
 
 \begin{code}
   \centering
@@ -194,7 +194,7 @@ Der einzige \colorbold{Unterschied}, je nachdem, ob der \colorbold{Zugriff auf e
   \numberwithin{equation}{section}
 
   \begin{equation}
-  \mathtt{ref(ar[idx_1]\ldots[idx_n]) = ref(ar) + \left(\sum_{i=1}^{n}\left(\prod_{j=i+1}^{n} dim_{j}\right) \cdot idx_{i}\right) \cdot \operatorname{size}(datatype)} \\
+  \mathtt{ref(ar[idx_1]\ldots[idx_n]) = ref(ar) + \left(\sum_{i=1}^{n}\left(\prod_{j=i+1}^{n} dim_{j}\right) \cdot idx_{i}\right) \cdot \operatorname{size}(datatype)}
     \label{eq:adresse_von_arrayelement}
   \end{equation}
   aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte.}.
