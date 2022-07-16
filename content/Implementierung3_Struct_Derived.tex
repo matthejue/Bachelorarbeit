@@ -9,6 +9,7 @@
 % ./Ergebnisse_und_Ausblick.tex
 
 \subsection{Umsetzung von Structs}
+\label{sec:umsetzung_von_structs}
 \subsubsection{Deklaration und Definition von Structtypen}
 
 Die \colorbold{Deklaration} eines neuen \colorbold{Structtyps} (z.B. \smalltt{struct st \{int len; int ar[2];\};}) und die \colorbold{Definition} einer Variable mit diesem \colorbold{Structtyp} (z.B. \smalltt{struct st st\_var;}) wird im Folgenden anhand des Beispiels in Code~\ref{code:picoc_code_für_die_deklaration_eines_structtyps} erläutert.
@@ -127,10 +128,8 @@ Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1')
 
   % Die \colorbold{Größe} einer Variable \smalltt{st\_var}, die ihm \smalltt{size}-Feld des \colorbold{Symboltabelleneintrags} eingetragen ist und mit dem \colorbold{Structtyp} $\mathtt{struct\enspace st\enspace \{datatype_1\enspace attr_1;\enspace\ldots\enspace datatype_n\enspace attr_n;\};}$\footnote{Hier wird es der Einfachheit halber so dargestellt, als hätte die Programmiersprache $L_{PicoC}$ nicht die Fragwürdige Designentscheidung, auch die eckigen Klammern \smalltt{[]} für die Definition eines Arrays \colorbold{vor} die Variable zu schreiben von $\mathtt{L_C}$ übernommen. Es wird so getann, als würde der komplette \colorbold{Datentyp} immer \colorbold{hinter} der Variable stehen: \smalltt{datatype var}.} definiert ist ($\mathtt{struct\enspace st\enspace st\_var;}$), berechnet sich dabei aus der Summe der \colorbold{Größen} der einzelnen \colorbold{Datentypen} $\mathtt{datatype_1\enspace \ldots\enspace datatpye_n}$ der \colorbold{Attribute} $\mathtt{attr_1,\enspace \ldots\enspace attr_n}$ des \colorbold{Structtyps}: $\mathtt{size(st) = \sum^n_{i=1} size(datatype_i)}$.
 
-\numberwithin{equation}{section}
-
 \begin{Special_Paragraph}
-  Die Berechnung der \colorbold{Adresse}, für eine Folge von \colorbold{Zugriffen auf Structattributte} $\mathtt{st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}}$ mehrerer \colorbold{Structs} $\mathtt{struct\enspace st_i\enspace st\_var_i}$ unterschiedlicher \colorbold{Structtypen} $\mathtt{struct\enspace st_i\enspace \{datatype_{i, 1}\enspace attr_{i, 1};\enspace\ldots\enspace datatype_{i, m}\enspace attr_{i, m};\}}$, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
+  Die Berechnung der \colorbold{Adresse}, für eine Aneinanderreihung von \colorbold{Zugriffen auf Structattributte} $\mathtt{st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}}$ mehrerer \colorbold{Structs} $\mathtt{struct\enspace st_i\enspace st\_var_i}$ unterschiedlicher \colorbold{Structtypen} $\mathtt{struct\enspace st_i\enspace \{datatype_{i, 1}\enspace attr_{i, 1};\enspace\ldots\enspace datatype_{i, m}\enspace attr_{i, m};\}}$, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
 
   \begin{equation}
     \mathtt{ref(st\_var_1.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}) = ref(st\_var_1) + \sum_{i=1}^{n}\sum_{k=1}^{j_i - 1} \operatorname{size}(datatype_{i, k})} \\
@@ -203,6 +202,13 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_zuweisun
 \end{code}
 
 \subsection{Umsetzung des Zugriffs auf Derived Datatypes im Allgemeinen}
+In den Unterkapiteln \ref{sec:umsetzung_von_pointern}, \ref{sec:umsetzung_von_arrays} und \ref{sec:umsetzung_von_structs} fällt auf, dass der \colorbold{Zugriff} auf \colorbold{Elemente} / \colorbold{Attribute} der in diesen Kapiteln beschriebenen Datentypen (\colorbold{Pointer}, \colorbold{Array} und \colorbold{Struct}) sehr ähnlich abläuft. Es lässt sich ein allgemeines Vorgehen, bestehend aus einem \colorbold{Anfangsteil}, \colorbold{Mittelteil} und \colorbold{Schlussteil} darin erkennen.
+
+Dieses Vorgehen ist in Abbildung~\ref{fig:zugriff_auf_derived_datatypes_veranschaulicht} veranschaulicht. Dieses Vorgehen erlaubt es auch gemischte Ausdrücke zu schreiben, in denen die verschiedenen \colorbold{Zugriffsarten} für \colorbold{Elemente} / \colorbold{Attribute} der Datenypen \colorbold{Pointer}, \colorbold{Array} und \colorbold{Struct} gemischt sind (z.B. \smalltt{(*st\_var.ar)[0]}).
+
+Dies ist möglich, indem im \colorbold{Mittelteil} je nachdem, ob das \textcolor{gray!90!black}{versteckte Attribut} \smalltt{datatype} des \smalltt{Ref(exp)}-Container-Knotens ein \smalltt{ArrayDecl(nums, datatype)}, ein \smalltt{PntrDecl(num, datatype)} oder \smalltt{StructSpec(name)} beinhaltet, ein anderer \colorbold{RETI-Code} generiert wird.
+
+Im \colorbold{Anfangsteil} wird die Adresse
 
 Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbold{Anfangsteil}, \colorbold{Mittelteil} und \colorbold{Schlussteil} bei der Kompilierung von \colorbold{Zugriffen auf Arrayelemente}, \colorbold{Structattribute} und \colorbold{Pointer} bei gemischten Ausdrücken, wie \smalltt{(*st\_first.ar)[0];} einzeln isoliert betrachtet und erläutert.
 
@@ -213,15 +219,15 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
 \begin{figure}[H]
   \centering
   \begin{File}[remember as=input]
-    \bfseries Input
+    Start
   \end{File}
-  \vspace{0.5cm}
+  \vspace{0.6cm}
   \begin{Code_Frame}[remember as=anfangsteil]{Anfangsteil}
     \codebox[title=Variable vom Stackframe, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_global.special}
     \hfill
     \codebox[title=Variable aus Globalen Statischen Daten, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A]{./code_examples/ubersicht_anfangsteil_stackframe.special}
   \end{Code_Frame}
-  \vspace{0.5cm}
+  \vspace{0.6cm}
   \begin{Code_Frame}[remember as=mittelteil]{Mittelteil}
     \codebox[title=Arrayindexzugriff auf Array, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_array.special}
     \hfill
@@ -229,26 +235,35 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
     \hfill
     \codebox[title=Structattributzugriff auf Struct, width=0.32\linewidth, nobeforeafter, minted language=text, equal height group=M]{./code_examples/ubersicht_mittelteil_struct.special}
   \end{Code_Frame}
-  \vspace{0.5cm}
+  \vspace{0.8cm}
   \begin{Code_Frame}[remember as=schlussteil]{Schlussteil}
     \codebox[title=Letzer Datentyp ist Struct oder Primitiver Datentyp, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_struct_int_char.special}
     \hfill
     \codebox[title=Letzer Datentyp ist Array oder Pointer, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=S]{./code_examples/ubersicht_schlussteil_array_pntr.special}
   \end{Code_Frame}
-  \vspace{0.5cm}
+  \vspace{0.8cm}
   \begin{File}[remember as=output, hbox]
-    \textcolor{white}{Output}
+    Fertig
   \end{File}
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
-  \draw[->] (input.south) to node[right] {Adresse} (anfangsteil.north);
-  \draw[->] (anfangsteil.south) to node[right] {Adresse} (mittelteil.north);
-  \draw [->] (mittelteil.east)arc(-160:160:0.8) node[right] {Adresse};
-  \draw[->] (mittelteil.south) to node[right] {Adresse} (schlussteil.north);
-  \draw[->] (schlussteil.south) to node[right] {Adresse} (output.north);
+  \draw[->] (input.south) to node[right, align=center] {\colorbold{nichts} momentan \colorbold{relevantes} auf dem Stack} (anfangsteil.north);
+  \draw[->] (anfangsteil.south) to node[right, align=center] {\colorbold{Startadresse} der Variable auf dem Stack} (mittelteil.north);
+  \draw [->] (mittelteil.east)arc(-160:160:0.8) node[right, align=center] {siehe \footnotemark};
+  \draw[->] (mittelteil.south) to node[right, align=center] {\colorbold{Startadresse} / \colorbold{Adresse} eines \colorbold{Pointerelements},\\ \colorbold{Arrayelements} oder \colorbold{Structattributes} auf dem Stack} (schlussteil.north);
+  \draw[->] (schlussteil.south) to node[right, align=center] {\colorbold{Inhalt} der Speicherzelle an der berechneten\\ \colorbold{Adresse} oder berechnete \colorbold{Adresse} selbst} (output.north);
   \end{tikzpicture}
-  \caption{Veranschaulichung des Zugriffs auf Derived Datatypes}
+  \caption{Allgemeine Veranschaulichung des Zugriffs auf Derived Datatypes}
   \label{fig:zugriff_auf_derived_datatypes_veranschaulicht}
 \end{figure}
+
+% https://tex.stackexchange.com/questions/107603/create-a-footnote-in-node-in-a-tikzpicture
+\footnotetext{\colorbold{Startadresse} / \colorbold{Adresse} eines \colorbold{Pointerelements}, \colorbold{Arrayelements} oder \colorbold{Structattributes} auf dem Stack.}
+
+Implementieren lässt sich dieses Vorgehen, indem beim Antreffen eines \smalltt{Subscr(exp1, exp2)} oder \smalltt{Attr(exp, name)} Ausdrucks ein \smalltt{Exp(Stack(Num('1')))} an die Spitze der \colorbold{Liste der generierten Ausdrücke} gesetzt wird und der Ausdruck selbst als \smalltt{exp}-Attribut des \smalltt{Ref(exp)}-Knotens gesetzt wird und hinter den \smalltt{Exp(Stack(Num('1')))} Knoten in der Liste eingefügt wird.
+
+Es wird solange dem jeweiligen \smalltt{exp1} des \smalltt{Subscr(exp1, exp2)}-Knoten, dem \smalltt{exp} des \smalltt{Attr(exp, name)} Knoten oder dem \smalltt{exp} des \smalltt{Ref(exp)}-Knotens gefolgt und der jeweiligen \colorbold{Container-Knoten} selbst in ein \smalltt{Ref(exp)} eingesetzt und hinten in die Liste der generierten Ausdrücke eingefügt, bis man bei einem \smalltt{Name(name)} ankommt. Der \smalltt{Name(name)}-Knoten wird zu einem \smalltt{Ref(Global(num))} oder \smalltt{Ref(Stackframe(num))} umgewandelt und ebenfalls ganz hinten in die \colorbold{Liste der generierten Ausdrücke} eingefügt.
+
+Parallel wird eine Liste der \smalltt{Ref(exp)}-Knoten geführt, deren \textcolor{gray!90!black}{versteckte Attribute} \smalltt{datatype} und \smalltt{error\_data} die entsprechenden Informationen zugewiesen bekommen müssen. Sobald man beim \smalltt{Name(name)}-Knoten angekommen ist und mithilfe dieses in der \colorbold{Symboltabelle} den \colorbold{Dantentyp} der Variable nachsehen kann, wird der \colorbold{Datentyp} der Variable nun ebenfalls, wie die Ausdrücke \smalltt{Subscr(exp1, exp2)} und \smalltt{Attr(exp, name)} schrittweise durchiteriert und dem jeweils nächsten \smalltt{datatype}-Attribut gefolgt werden. Das \colorbold{Iterieren} über den \colorbold{Datentyp} wird solange durchgeführt, bis alle \smalltt{Ref(exp)}-Knoten ihren im jeweiligen \colorbold{Kontext} vorliegenden \colorbold{Datenetyp} in ihrem \smalltt{datatype}-Attribut zugewiesen bekommen haben. Alles andere führt zu einer \colorbold{Fehlermeldung}, für die das \textcolor{gray!90!black}{versteckte Attribut} \smalltt{error\_data} genutzt wird.\footnote{Man könnte diese Implementierung gut mit dem \colorbold{Auseinanderrollen} und \colorbold{Wieder-Einrollen} einer \colorbold{Schnecke} vergleichen.}
 
 \subsubsection{Anfangsteil für Globale Statische Daten und Stackframe}
 \label{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}
@@ -306,8 +321,6 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
 
 \begin{Special_Paragraph}
   Die Berechnung der \colorbold{Adresse}, für eine Folge von \colorbold{Zugriffen auf Structattributte} $\mathtt{st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}}$ mehrerer \colorbold{Structs} $\mathtt{struct\enspace st_i\enspace st\_var_i}$ unterschiedlicher \colorbold{Structtypen} $\mathtt{struct\enspace st_i\enspace \{datatype_{i, 1}\enspace attr_{i, 1};\enspace\ldots\enspace datatype_{i, m}\enspace attr_{i, m};\};}$, kann mittels der Formel~\ref{eq:adresse_von_structattribut}:
-
-  \numberwithin{equation}{section}
 
   \begin{equation}
     \mathtt{ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n}) = ref(st_1) + \sum_{i=1}^{n}\sum_{k=1}^{j_i\;\mid\; attr_{i,j_i}} \operatorname{size}(datatype_{i, k})} \\

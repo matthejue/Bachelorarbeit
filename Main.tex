@@ -62,7 +62,8 @@
 
   \newtcolorbox{Code_Frame}[2][]{enhanced, sharpish corners, drop fuzzy shadow, arc=0mm, bottom=1mm, top=1mm, left=1mm, right=1mm, boxrule=1mm, halign title=center, fonttitle=\bfseries, interior style={fill=white}, frame style={color=PrimaryColor}, title={#2}, #1}
 
-  \newtcolorbox{File}[2][]{enhanced, sharpish corners, drop fuzzy shadow, arc=0mm, notitle, interior style={fill=PrimaryColor}, frame empty, #1, halign=center}
+  % https://tex.stackexchange.com/questions/616575/how-to-draw-tcolorbox-without-a-frame
+  \newtcolorbox{File}[1][]{enhanced, hbox, sharpish corners, drop fuzzy shadow, arc=0mm, notitle, interior style={fill=PrimaryColor}, frame empty, halign=center, fontupper=\color{white}\bfseries, #1}
 
   \newtcbinputlisting{\numberedcodebox}[2][]{
   listing file={#2},
