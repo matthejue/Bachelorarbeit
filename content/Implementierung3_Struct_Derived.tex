@@ -335,17 +335,21 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
 \end{code}
 
 \begin{Special_Paragraph}
-  Sei $\mathtt{datatype_{i, idx_i}}$ der \colorbold{Datentyp} eines \colorbold{Elementes} / \colorbold{Attributes} einer \colorbold{komplexen Stuktur} im Hauptspeicher, deren Elemente / Attribute sich in eine \colorbold{Baumstruktur} einordnen lassen\footnote{Damit ist der \colorbold{Abstract Syntax Tree} des \colorbold{Datentyps} der \colorbold{Variable} gemeint.}, die von \colorbold{oben-nach-unten} wächst. Dabei steht \smalltt{i} für eine \colorbold{Ebene} der Baumstuktur, wobei \smalltt{i=1} die \colorbold{oberste} Ebene ist und $\mathtt{idx_i}$ die \colorbold{Nummer} eines beliebigen \colorbold{Elementes / Attributes} des  ist.\footnote{Als Beispiel ist $\mathtt{datatype_{2, 3}}$ folglich der \colorbold{Datentyp} des $3$ten Elements / Attributes in der Ebene $2$}
+  Sei $\mathtt{datatype_{i}}$ ein Knotes eines \colorbold{entarteten Baumes}, dessen Wurzel $\mathtt{datatype_{1}}$ ist. Dabei steht \smalltt{i} für eine \colorbold{Ebene} des entarteten Baumes. Die Knoten des entarteten Baumes lassen sich \colorbold{Startadressen} $\mathtt{ref(datatype_{i})}$ von Speicherbereichen $\mathtt{ref(datatype_{i})\enspace\ldots\enspace ref(datatype_{i}) + size(datatype_{i})}$ im Hauptspeicher zuordnen, wobei gilt, dass $\mathtt{ref(datatype_{i}) \leq ref(datatype_{i+1}) < ref(datatype_{i}) + size(datatype_{i})}$\footnote{Es ist Baum, der nur die Datentypen als Knoten enthält, auf die Zugegriffen wurde}.
 
-  Die Berechnung der \colorbold{Adresse}, für eine beliebige Aneinanderreihung verschiedener \colorbold{Zugriffe} auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} und \colorbold{Structattributte} $\mathtt{complex\_var\enspace zug_{1, idx_1}\enspace\ldots\enspace zug_{n, idx_n}}$ unterschiedlicher Datentypen $\mathtt{datatype_{i, idx_i}}$, kann mittels der Formel~\ref{eq:adresse_von_derived_datatype_allgemein}:
+  Sei $\mathtt{datatype_{i, k}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps \smalltt{datatype_i}. Dabei gilt: $\mathtt{ref(datatype_{i, k}) < ref(datatype_{i, k+1})}$
+
+  Sei $\mathtt{datatype_{i, idx_i}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps \smalltt{datatype_i}, sodass gilt: $\mathtt{datatype_{i, idx_i} = datatype_{i+1}}$.
+
+  Die Berechnung der \colorbold{Adresse} für eine beliebige Folge verschiedener Datentypen $(\mathtt{datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n}})$, die das Resultat einer Aneinandereihung von Zugriffen auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} und \colorbold{Structattributte} unterschiedlicher Datentypen $\mathtt{datatype_{i}}$ ist, kann mittels der Formel~\ref{eq:adresse_von_derived_datatype_allgemein}:
   % https://tex.stackexchange.com/questions/21290/how-to-make-left-right-pairs-of-delimiter-work-over-multiple-lines
   \begin{dmath}
-  \mathtt{ref(complex\_var\enspace zug_{1, idx_1}\enspace\ldots\enspace zug_{n, idx_n})} = \mathtt{ref(complex\_var)} + \sum_{i=1}^{n}\sum_{k=1}^{idx_i - 1} \mathtt{\operatorname{size}(datatype_{i, k})}
+  \mathtt{ref(datatype_{1, idx_1}\enspace\ldots\enspace datatype_{n, idx_n})} = \mathtt{ref(datatype_1)} + \sum_{i=1}^{n-1}\sum_{k=1}^{idx_i - 1} \mathtt{\operatorname{size}(datatype_{i, k})}
   \label{eq:adresse_von_derived_datatype_allgemein}
   \end{dmath}
   berechnet werden.\footnote{\smalltt{ref(exp)} steht dabei für das Schreiben der \colorbold{Adresse} von \smalltt{exp} auf den Stack, wobei \smalltt{exp} z.B. \smalltt{complex\_var.attr} oder \smalltt{complex\_var[2]} sein könnte.}\footnote{Die \colorbold{äußere Schleife} iteriert nacheinander über die \colorbold{Zugriffe} auf \colorbold{Pointerlemente}, \smalltt{Arrayelmente} oder \colorbold{Structattribute}. Die \colorbold{innere Schleife} iteriert über alle \colorbold{Elemente} oder \colorbold{Attribute} des momentan betrachteten \colorbold{Datentyps} $\mathtt{st_i}$, die vor dem \colorbold{Element} / \colorbold{Attribut} mit der Nummer $\mathtt{idx_i}$ liegen.}\footnote{Die Formel~\ref{eq:adresse_von_derived_datatype_allgemein} baut auf den beiden Formeln \ref{eq:adresse_von_arrayelement} und \ref{eq:adresse_von_structattribut} auf.}\footnote{}
 
-Die Komposition \smalltt{Ref(Global(Num('9')))} bzw. \smalltt{Ref(Stackframe(Num('9')))} aus Unterkapitel~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe} repräsentiert dabei den Summanden $\mathtt{ref(complex\_var_1)}$ in der Formel.
+Die Komposition \smalltt{Ref(Global(num))} bzw. \smalltt{Ref(Stackframe(num))} aus Unterkapitel~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe} repräsentiert dabei den Summanden $\mathtt{ref(complex\_var_1)}$ in der Formel.
 
   Der Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} repräsentiert dabei einen Summanden $\mathtt{\sum_{k=1}^{idx_i\;\mid\; attr_{i,idx_i}} \operatorname{size}(datatype_{i, k})}$ in der Formel.
 
