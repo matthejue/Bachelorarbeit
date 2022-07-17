@@ -199,9 +199,9 @@ Der einzige \colorbold{Unterschied}, je nachdem, ob der \colorbold{Zugriff auf e
   \end{equation}
   aus der Betriebssysteme Vorlesung\footcite{scholl_betriebssysteme_2020} berechnet werden\footnote{\smalltt{ref(exp)} steht dabei für die Berechnung der \colorbold{Adresse} von \smalltt{exp}, wobei \smalltt{exp} z.B. \smalltt{ar[3][2]} sein könnte.}.
 
-  Die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('2')))} repräsentiert dabei den Summanden $\smalltt{ref(ar)}$ in der Formel.
+  Die Komposition \smalltt{Ref(Global(num))} bzw. \smalltt{Ref(Stackframe(num))} repräsentiert dabei den Summanden $\smalltt{ref(ar)}$ in der Formel.
 
-  Die Komposition \smalltt{Exp(Num('2'))} repräsentiert dabei einen \colorbold{Subindex} (z.B. \smalltt{i} in \smalltt{a[i][j][k]}) beim \colorbold{Zugriff auf ein Arrayelement}, der als Faktor $\mathtt{idx_i}$ in der Formel auftaucht.
+  Die Komposition \smalltt{Exp(num)} repräsentiert dabei einen \colorbold{Subindex} (z.B. \smalltt{i} in \smalltt{a[i][j][k]}) beim \colorbold{Zugriff auf ein Arrayelement}, der als Faktor $\mathtt{idx_i}$ in der Formel auftaucht.
 
   Der Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} repräsentiert dabei einen ausmultiplizierten Summanden $\mathtt{\left(\prod_{j=i+1}^{n} dim_{j}\right) \cdot idx_{i} \cdot size(datatpye)}$ in der Formel.
 
