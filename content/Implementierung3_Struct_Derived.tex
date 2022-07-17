@@ -246,6 +246,7 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_zuweisun
 
 \subsection{Umsetzung des Zugriffs auf Derived locations im Allgemeinen}
 \subsubsection{Übersicht}
+\label{sec:übersicht}
 \begin{figure}
   \centering
   \begin{File}[remember as=input]
@@ -304,7 +305,7 @@ Das \textcolor{gray!90!black}{versteckte Attribut} \smalltt{datatype} beinhaltet
 
 Der \colorbold{Anfangsteil}, der durch die Komposition \smalltt{Ref(Name('var'))} repräsentiert wird, ist dafür zuständig die \colorbold{Startadresse} der Variablen \smalltt{Name('var')} auf den Stack zu schreiben und je nachdem, ob diese Variable in den \colorbold{Globalen Statischen Daten} oder auf dem \colorbold{Stackframe} liegt einen anderen \colorbold{RETI-Code} zu generieren.
 
-Der \colorbold{Schlussteil} wird durch die Komposition \smalltt{Exp(Stack(Num('1')), \textcolor{gray!90!black}{datatype})} dargestellt. Je nachdem, ob \textcolor{gray!90!black}{versteckte Attribut} \smalltt{datatype} ein \smalltt{CharType()}, \smalltt{IntType()}, \smalltt{PntrDecl(num, datatype)} oder \smalltt{StructType(name)} ist, wird ein entsprechender \colorbold{RETI-Code} generiert, der die \colorbold{Adresse}, die auf dem \colorbold{Stack} liegt dazu nutzt, um den \colorbold{Inhalt} der Speicherzelle an dieser \colorbold{Adresse} auf den \colorbold{Stack} zu schreiben. Dabei wird die Speicherzelle der \colorbold{Adresse} mit dem \colorbold{Inhalt} auf den sie selbst zeigt überschreiben. Bei einem \smalltt{ArrayDecl(nums, datatype)} hingegen wird kein weiterer \colorbold{RETI-Code} generiert, die \colorbold{Adresse}, die auf dem \colorbold{Stack} liegt, stellt bereits das gewünschte Ergebnis dar.
+Der \colorbold{Schlussteil} wird durch die Komposition \smalltt{Exp(Stack(Num('1')), \textcolor{gray!90!black}{datatype})} dargestellt. Je nachdem, ob  das \textcolor{gray!90!black}{versteckte Attribut} \smalltt{datatype} ein \smalltt{CharType()}, \smalltt{IntType()}, \smalltt{PntrDecl(num, datatype)} oder \smalltt{StructType(name)} ist, wird ein entsprechender \colorbold{RETI-Code} generiert, der die \colorbold{Adresse}, die auf dem \colorbold{Stack} liegt dazu nutzt, um den \colorbold{Inhalt} der Speicherzelle an dieser \colorbold{Adresse} auf den \colorbold{Stack} zu schreiben. Dabei wird die Speicherzelle der \colorbold{Adresse} mit dem \colorbold{Inhalt} auf den sie selbst zeigt überschreiben. Bei einem \smalltt{ArrayDecl(nums, datatype)} hingegen wird kein weiterer \colorbold{RETI-Code} generiert, die \colorbold{Adresse}, die auf dem \colorbold{Stack} liegt, stellt bereits das gewünschte Ergebnis dar.
 
 \colorbold{Arrays} haben in der Sprache $L_C$ und somit auch in $L_{PiocC}$ die Eigenheit, dass wenn auf ein gesamtes \colorbold{Array} zugegriffen wird\footnote{Und nicht auf ein \colorbold{Element} des Arrays.}, die \colorbold{Adresse} des ersten Elements ausgegeben wird und nicht der \colorbold{Inhalt} der Speicherzelle des ersten Elements. Bei allen anderen in der Sprache $L_{PicoC}$ implementieren Datentypen wird immer der \colorbold{Inhalt} der Speicherzelle ausgegeben, die an der \colorbold{Adresse} zu finden ist, die auf dem \colorbold{Stack} liegt.
 
@@ -322,7 +323,7 @@ Parallel wird eine Liste der \smalltt{Ref(exp)}-Knoten geführt, deren \textcolo
 
 Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbold{Anfangsteil}~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}, \colorbold{Mittelteil}~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} und \colorbold{Schlussteil}~\ref{sec:schlussteil_für_die_verschiedenen_derived_datatypes} bei der Kompilierung von \colorbold{Zugriffen} auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente}, \colorbold{Structattribute} bei gemischten Ausdrücken, wie \smalltt{(*st\_first.ar)[0];} einzeln isoliert betrachtet und erläutert.
 
-\subsubsection{Anfangsteil für Globale Statische Daten und Stackframe}
+\subsubsection{Anfangsteil}
 \label{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}
 Der \colorbold{Anfangsteil}, bei dem die \colorbold{Adresse} einer Variable auf den \colorbold{Stack} geschrieben wird (z.B. \smalltt{\&st}), wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_einleitungsteil} erklärt.
 
@@ -363,10 +364,10 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_einleitungste
   \label{code:reti_blocks_pass_einleitungsteil}
 \end{code}
 
-\subsubsection{Mittelteil für die verschiedenen Derived Datatypes}
+\subsubsection{Mittelteil}
 \label{sec:mittelteil_für_die_verschiedenen_derived_datatypes}
 
-Der \colorbold{Mittelteil}, bei dem die \colorbold{Startadresse} / \colorbold{Adresse} einer Aneinandereiheung von Zugriffen auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} oder \colorbold{Structattribute} berechnet wird (z.B. \smalltt{(*complex\_var.ar)[0]}), wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_mittelteil} erklärt.
+Der \colorbold{Mittelteil}, bei dem die \colorbold{Startadresse} / \colorbold{Adresse} einer Aneinandereihung von Zugriffen auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} oder \colorbold{Structattribute} berechnet wird (z.B. \smalltt{(*complex\_var.ar)[2-2]}), wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_mittelteil} erklärt.
 
 \begin{code}
   \centering
@@ -375,6 +376,7 @@ Der \colorbold{Mittelteil}, bei dem die \colorbold{Startadresse} / \colorbold{Ad
   \label{code:picoc_code_mittelteil}
 \end{code}
 
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_mittelteil} wird die Aneinandererihung von Zugriffen auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} und \colorbold{Structattribute} \smalltt{(*complex\_var.ar)[2-2]} durch die Komposition \smalltt{Exp(Subscr(Deref(Attr(Name('complex\_var'), Name('ar')), Num('0')), BinOp(Num('2'), Sub('-'), Num('2'))))} dargestellt.
 % spezielles Vorgehen bei PntrDecl
 
 \begin{code}
@@ -384,23 +386,30 @@ Der \colorbold{Mittelteil}, bei dem die \colorbold{Startadresse} / \colorbold{Ad
   \label{code:abstract_syntax_tree_mittelteil}
 \end{code}
 
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_mittelteil} wird die Komposition \smalltt{Exp(Subscr(Deref(Attr(Name('complex\_var'), Name('ar')), Num('0')), BinOp(Num('2'), Sub('-'), Num('2'))))} durch die Kompositionen \smalltt{Ref(Attr(Stack(Num('1')), Name('ar')))}, \smalltt{Exp(Num('2'))}, \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}, \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} und \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} ersetzt. Bei \smalltt{Subscr(exp1, exp2)} wird dieser Container-Knoten einfach dem \smalltt{exp} Attribut des \smalltt{Ref(exp)}-Container Knoten zugewiesen und die \colorbold{Indexberechnung} für \smalltt{exp2} davorgezogen (in diesem Fall dargestellt durch \smalltt{Exp(Num('2'))} und \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}) und über \smalltt{Stack(Num('1'))} auf das Ergebnis der \colorbold{Indexberechnung} auf dem \colorbold{Stack} zugegriffen: \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/example_derived_dts_main_part.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-21}}]{./code_examples/example_derived_dts_main_part.picoc_mon}
   \caption{PicoC-Mon Pass für den Mittelteil}
   \label{code:picoc_mon_pass_mittelteil}
 \end{code}
 
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_mittelteil} werden die Kompositionen \smalltt{Ref(Attr(Stack(Num('1')), Name('ar')))}, \smalltt{Exp(Num('2'))}, \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}, \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} und \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt. Bei der Generierung des \colorbold{RETI-Code} muss auch das \textcolor{gray!90!black}{versteckte Attribut} \smalltt{datatype} im \smalltt{Ref(exp, \textcolor{gray!90!black}{datatpye})}-Container-Knoten berücksichtigt werden, was in Unterkapitel~\ref{sec:übersicht} zusammen mit der Abbildung~\ref{fig:zugriff_auf_derived_datatypes_veranschaulicht} bereits erklärt wurde.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={33-35,37-39,41-47,49-51,53-58}}]{./code_examples/example_derived_dts_main_part.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={33-35,37-39,41-47,49-51,53-55,57-61,63-68}}]{./code_examples/example_derived_dts_main_part.reti_blocks}
   \caption{RETI-Blocks Pass für den Mittelteil}
   \label{code:reti_blocks_pass_mittelteil}
 \end{code}
 % spezielles Vorgehen bei PntrDecl
 
-\subsubsection{Schlussteil für die verschiedenen Derived Datatypes}
+\subsubsection{Schlussteil}
 \label{sec:schlussteil_für_die_verschiedenen_derived_datatypes}
+
+Der \colorbold{Schlussteil}, bei dem der \colorbold{Inhalt} der Speicherzelle an der \colorbold{Adresse}, die im \colorbold{Anfangsteil}~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe} und \colorbold{Mittelteil}~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} auf dem \colorbold{Stack} berechnet wurde, auf den \colorbold{Stack} gespeichert wird\footnote{Und dabei die Speicherzelle der \colorbold{Adresse} selbst überschreibt.}, wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_schlussteil} erklärt.
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={10-12}}]{./code_examples/example_derived_dts_final_part.picoc}
@@ -424,7 +433,7 @@ Der \colorbold{Mittelteil}, bei dem die \colorbold{Startadresse} / \colorbold{Ad
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={55,74-76,95}}]{./code_examples/example_derived_dts_final_part.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={55,74-76,96-98}}]{./code_examples/example_derived_dts_final_part.reti_blocks}
   \caption{RETI-Blocks Pass für den Schlussteil}
   \label{code:reti_blocks_pass_schlussteil}
 \end{code}

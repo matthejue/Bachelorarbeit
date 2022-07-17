@@ -13,6 +13,6 @@ File
       [
         Assign(Alloc(Writeable(), ArrayDecl([Num('1')], IntType('int')), Name('var')), Array([Num('42')]))
         Assign(Alloc(Writeable(), StructSpec(Name('st')), Name('complex_var')), Struct([Assign(Name('ar'), Ref(Name('var')))]))
-        Exp(Subscr(Subscr(Attr(Name('complex_var'), Name('ar')), Num('0')), Num('0')))
+        Exp(Subscr(Subscr(Attr(Name('complex_var'), Name('ar')), Num('0')), BinOp(Num('2'), Sub('-'), Num('2'))))
       ]
   ]

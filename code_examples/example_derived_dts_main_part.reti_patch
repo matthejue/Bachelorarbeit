@@ -29,7 +29,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 1;
         ADDI SP 1;
-        # // Exp(Subscr(Subscr(Attr(Name('complex_var'), Name('ar')), Num('0')), Num('0')))
+        # // Exp(Subscr(Subscr(Attr(Name('complex_var'), Name('ar')), Num('0')), BinOp(Num('2'), Sub('-'), Num('2'))))
         # Ref(Global(Num('1')))
         SUBI SP 1;
         LOADI IN1 1;
@@ -51,10 +51,20 @@ File
         ADD IN1 IN2;
         ADDI SP 1;
         STOREIN SP IN1 1;
-        # Exp(Num('0'))
+        # Exp(Num('2'))
         SUBI SP 1;
-        LOADI ACC 0;
+        LOADI ACC 2;
         STOREIN SP ACC 1;
+        # Exp(Num('2'))
+        SUBI SP 1;
+        LOADI ACC 2;
+        STOREIN SP ACC 1;
+        # Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))
+        LOADIN SP ACC 2;
+        LOADIN SP IN2 1;
+        SUB ACC IN2;
+        STOREIN SP ACC 2;
+        ADDI SP 1;
         # Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))
         LOADIN SP IN1 2;
         LOADIN SP IN2 1;

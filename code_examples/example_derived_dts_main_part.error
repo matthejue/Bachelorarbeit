@@ -1,0 +1,7 @@
+[1m[37mexample_derived_dts_main_part.picoc:[35m6:23: [33mDatatypeMismatch:[0m Error occured at Node [31mSub '-'[39m
+  int var[1] = {42};
+  struct st complex_var = {.ar=&var};
+  (*complex_var.ar + 2 - 2)[0];
+                       [31m^[0m        
+                       [31m[0m         
+}
