@@ -139,9 +139,9 @@ Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1')
 
   Der Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} repräsentiert dabei einen Summanden $\mathtt{\sum_{k=1}^{j_i - 1} \operatorname{size}(datatype_{i, k})}$ in der Formel.
 
-Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})}$.
+  Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(st.attr_{1, j_1}\enspace\ldots\enspace .attr_{n, j_n})}$.
 
-In Unterkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} wird eine allgemeine Formel für \colorbold{Zugriffe} auf \colorbold{Structattribute}, \colorbold{Arrayelemente} und \colorbold{Pointer} erklärt, die auf der obigen Formel~\ref{eq:adresse_von_structattribut} und der Formel~\ref{eq:adresse_von_arrayelement} aufbaut.
+  In Unterkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} wird eine allgemeine Formel für \colorbold{Zugriffe} auf \colorbold{Structattribute}, \colorbold{Arrayelemente} und \colorbold{Pointer} erklärt, die auf der obigen Formel~\ref{eq:adresse_von_structattribut} und der Formel~\ref{eq:adresse_von_arrayelement} aufbaut.
 \end{Special_Paragraph}
 
 
@@ -335,11 +335,11 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
 \end{code}
 
 \begin{Special_Paragraph}
-  Sei $\mathtt{datatype_{i}}$ ein Knotes eines \colorbold{entarteten Baumes} (wie in Abbildung~\ref{eq:datatype_tree}), dessen Wurzel $\mathtt{datatype_{1}}$ ist. Dabei steht \smalltt{i} für eine \colorbold{Ebene} des entarteten Baumes. Die Knoten des entarteten Baumes lassen sich \colorbold{Startadressen} $\mathtt{ref(datatype_{i})}$ von Speicherbereichen $\mathtt{ref(datatype_{i})\enspace\ldots\enspace ref(datatype_{i}) + size(datatype_{i})}$ im Hauptspeicher zuordnen, wobei gilt, dass $\mathtt{ref(datatype_{i}) \leq ref(datatype_{i+1}) < ref(datatype_{i}) + size(datatype_{i})}$\footnote{Es ist Baum, der nur die Datentypen als Knoten enthält, auf die Zugegriffen wurde}.
+  Sei $\mathtt{datatype_{i}}$ ein Knotes eines \colorbold{entarteten Baumes} (siehe Definition~\ref{def:entarteter_baum} und Abbildung~\ref{eq:datatype_tree}), dessen Wurzel $\mathtt{datatype_{1}}$ ist. Dabei steht \smalltt{i} für eine \colorbold{Ebene} des entarteten Baumes. Die Knoten des entarteten Baumes lassen sich \colorbold{Startadressen} $\mathtt{ref(datatype_{i})}$ von Speicherbereichen $\mathtt{ref(datatype_{i})\enspace\ldots\enspace ref(datatype_{i}) + size(datatype_{i})}$ im Hauptspeicher zuordnen, wobei gilt, dass $\mathtt{ref(datatype_{i}) \leq ref(datatype_{i+1}) < ref(datatype_{i}) + size(datatype_{i})}$.\footnote{Es ist Baum, der \colorbold{nur} die \colorbold{Datentypen} als Knoten enthält, auf die \colorbold{zugegriffen} wurde.}\footnote{\smalltt{ref(exp)} steht dabei für das Schreiben der \colorbold{Adresse} von \smalltt{exp} auf den Stack.}
 
-  Sei $\mathtt{datatype_{i, k}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps \smalltt{datatype_i}. Dabei gilt: $\mathtt{ref(datatype_{i, k}) < ref(datatype_{i, k+1})}$.
+  Sei $\mathtt{datatype_{i, k}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps $\mathtt{datatype_i}$. Dabei gilt: $\mathtt{ref(datatype_{i, k}) < ref(datatype_{i, k+1})}$.
 
-  Sei $\mathtt{datatype_{i, idx_i}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps \smalltt{datatype_i}, sodass gilt: $\mathtt{datatype_{i, idx_i} = datatype_{i+1}}$.
+  Sei $\mathtt{datatype_{i, idx_i}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps $\mathtt{datatype_i}$, sodass gilt: $\mathtt{datatype_{i, idx_i} = datatype_{i+1}}$.
 
   \begin{figure}[H]
     \centering
@@ -363,24 +363,32 @@ Im Folgenden werden anhand mehrerer Beispiele die einzelnen Abschnitte \colorbol
     \end{equation}
   \end{figure}
 
-  Die Berechnung der \colorbold{Adresse} für eine beliebige Folge verschiedener Datentypen $(\mathtt{datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n}})$, die das Resultat einer Aneinandereihung von \colorbold{Zugriffen} auf \colorbold{Arrayelemente} und \colorbold{Structattributte} unterschiedlicher Datentypen $\mathtt{datatype_{i}}$ ist (z.B. \smalltt{*complex_var.attr2[3]}), kann mittels der Formel~\ref{eq:adresse_von_derived_datatype_allgemein}:
+  Die Berechnung der \colorbold{Adresse} für eine beliebige Folge verschiedener Datentypen $(\mathtt{datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n}})$, die das Resultat einer Aneinandereihung von \colorbold{Zugriffen} auf \colorbold{Arrayelemente} und \colorbold{Structattributte} unterschiedlicher Datentypen $\mathtt{datatype_{i}}$ ist (z.B. \smalltt{*complex\_var.attr3[2]}), kann mittels der Formel~\ref{eq:adresse_von_derived_datatype_allgemein}:
   % https://tex.stackexchange.com/questions/21290/how-to-make-left-right-pairs-of-delimiter-work-over-multiple-lines
-  \begin{dmath}
+  \begin{equation}
   \mathtt{ref(datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n})} = \mathtt{ref(datatype_1)} + \sum_{i=1}^{n-1}\sum_{k=1}^{idx_i - 1} \mathtt{\operatorname{size}(datatype_{i, k})}
   \label{eq:adresse_von_derived_datatype_allgemein}
-  \end{dmath}
-  berechnet werden.\footnote{\smalltt{ref(exp)} steht dabei für das Schreiben der \colorbold{Adresse} von \smalltt{exp} auf den Stack, wobei \smalltt{exp} z.B. \smalltt{complex\_var.attr} oder \smalltt{complex\_var[2]} sein könnte.}\footnote{Die \colorbold{äußere Schleife} iteriert nacheinander über die \colorbold{Zugriffe} auf \colorbold{Pointerlemente}, \smalltt{Arrayelmente} oder \colorbold{Structattribute}. Die \colorbold{innere Schleife} iteriert über alle \colorbold{Elemente} oder \colorbold{Attribute} des momentan betrachteten \colorbold{Datentyps} $\mathtt{st_i}$, die vor dem \colorbold{Element} / \colorbold{Attribut} mit der Nummer $\mathtt{idx_i}$ liegen.}\footnote{Die Formel~\ref{eq:adresse_von_derived_datatype_allgemein} baut auf den beiden Formeln \ref{eq:adresse_von_arrayelement} und \ref{eq:adresse_von_structattribut} auf.}\footnote{}
+  \end{equation}
+  berechnet werden.\footnote{Die \colorbold{äußere Schleife} iteriert nacheinander über die \colorbold{Zugriffe} auf \colorbold{Pointerlemente}, \smalltt{Arrayelmente} oder \colorbold{Structattribute}. Die \colorbold{innere Schleife} iteriert über alle \colorbold{Elemente} oder \colorbold{Attribute} des momentan betrachteten \colorbold{Datentyps} $\mathtt{st_i}$, die vor dem \colorbold{Element} / \colorbold{Attribut} mit der Nummer $\mathtt{idx_i}$ liegen.}
 
   Dabei darf nur der letzte Knoten $\mathtt{datatype_n}$ den Datentyp \colorbold{Pointer} haben. Ist in einer Folge von  \colorbold{Datentypen} ein Knoten vom Datentyp \colorbold{Pointer}, der nicht der \colorbold{letzte Datentyp} $\mathtt{datatype_n}$ in der Folge ist, so muss die \colorbold{Adressberechnung} in $2$ Adressberechnungen aufgeteilt werden, wobei die \colorbold{erste Adressberechnung} vom ersten Datentyp $\mathtt{datatype_1}$ bis direkt zum Dantentyp Pointer geht $\mathtt{datatype_{pntr}}$ und die \colorbold{zweite Adressberechnung} einen Dantentyp nach dem Datentyp Pointer anfängt $\mathtt{datatpye_{pntr+1}}$ und bis zum letzten Datenyp $\mathtt{datatype_n}$ geht. Bei der \colorbold{zweiten Adressberechnung} muss dabei die \colorbold{Adresse} $\mathtt{ref(datatype_1)}$ des Summanden aus der Formel~\ref{eq:adresse_von_derived_datatype_allgemein} auf den Inhalt der Speicherzelle an der gerade in der \colorbold{zweiten Adressberechnung} berechneten Adresse $\mathtt{M\left[ref{datatype_1\ldots datatype_{pntr}}\right]}$ gesetzt werden.
 
-  Die Formel~\ref{eq:adresse_von_derived_datatype_allgemein} stellt dabei eine \colorbold{Verallgemeinerung} der Formel~\ref{eq:adresse_von_arrayelement} dar, die für alle möglichen Aneinandereihungen von Zugriffen auf \colorbold{Arrayelemente} und \colorbold{Structattribute} funktioniert (Z.B. \smalltt{(*complex_var.attr2)[3]}). Da die Formel allgemein sein muss, lässt sie sich nich so elegant mit einem Produkt $\prod$ schreiben, wie die Formel\ref{eq:adresse_von_arrayelement}, da man nicht davon ausgehen kann, dass alle Elemente den gleichen Datentyp haben\footnote{Structattribute haben unterschiedliche Größen.}.
+  Die Formel~\ref{eq:adresse_von_derived_datatype_allgemein} stellt dabei eine \colorbold{Verallgemeinerung} der Formel~\ref{eq:adresse_von_arrayelement} dar, die für alle möglichen Aneinandereihungen von Zugriffen auf \colorbold{Arrayelemente} und \colorbold{Structattribute} funktioniert (z.B. \smalltt{(*complex\_var.attr2)[3]}). Da die Formel \colorbold{allgemein} sein muss, lässt sie sich nicht so elegant mit einem Produkt $\prod$ schreiben, wie die Formel~\ref{eq:adresse_von_arrayelement}, da man nicht davon ausgehen kann, dass alle Elemente den gleichen Datentyp haben\footnote{Structattribute haben unterschiedliche Größen.}.
 
   Die Komposition \smalltt{Ref(Global(num))} bzw. \smalltt{Ref(Stackframe(num))} aus Unterkapitel~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe} repräsentiert dabei den Summanden $\mathtt{ref(datatype_1)}$ in der Formel.
 
   Die Komposition \smalltt{Exp(Attr(exp, name))} repräsentiert dabei einen Summanden $\sum_{k=1}^{idx_i - 1} \mathtt{\operatorname{size}(datatype_{i, k})}$ in der Formel.
 
-Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(st.attr_{1, idx_1}\enspace\ldots\enspace .attr_{n, idx_n})\right]}$ der Speicherzelle an der finalen \colorbold{Adresse}  $\mathtt{ref(st.attr_{1, idx_1}\enspace\ldots\enspace .attr_{n, idx_n})}$.
+Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen des \colorbold{Inhalts} $\mathtt{M\left[ref(datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n})\right]}$ der Speicherzelle an der finalen \colorbold{Adresse} $\mathtt{ref(datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n})}$.
 \end{Special_Paragraph}
+
+\begin{Definition}{Entarteter Baum}{entarteter_baum}
+  Jeder Knoten des Baumes hat \colorbold{maximal} eine ausgehende Kante, also maximal \colorbold{Außengrad} $1$.
+
+  \textnormal{Oder alternativ:} Jeder Knoten des Baumes hat \colorbold{maximal} eine eingehende Kante, also maximal \colorbold{Innengrad} $1$.
+
+  Der Baum entspricht also einer \colorbold{verketteten Liste}.\footcite{noauthor_baume_nodate}
+\end{Definition}
 
 \begin{code}
   \centering
