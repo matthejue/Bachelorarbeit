@@ -127,11 +127,13 @@ Nur für den \colorbold{Mittelteil} wird eine andere Komposition \smalltt{Ref(At
 Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} beim \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_arrayindex}, muss hier vorher nichts anderes als die \colorbold{Anfangsadresse} des \colorbold{Structs} auf dem \colorbold{Stack} liegen. Das \colorbold{Structattribut} auf welches zugegriffen wird steht bereits in der Komposition \smalltt{Ref(Attr(Stack(Num('1')), Name('y')))}, nämlich \smalltt{Name('y')}. Den \colorbold{Structtyp}, dem dieses Attribut gehört, kann man aus dem \textcolor{gray!90!black}{versteckten Attribut} \smalltt{datatype} herauslesen. Das \textcolor{gray!90!black}{versteckte Attribut} wird während des Kompiliervorgangs im \colorbold{PiocC-Mon Pass} dem \colorbold{Container-Knoten} \smalltt{Ref(exp, \textcolor{gray!90!black}{datatype})} angehängt.
 
 \begin{Special_Paragraph}
-  Sei $\mathtt{location_{i}}$ ein Knotes eines \colorbold{entarteten Baumes} (siehe Definition~\ref{def:entarteter_baum} und Abbildung~\ref{eq:location_tree}), dessen Wurzel $\mathtt{location_{1}}$ ist. Dabei steht \smalltt{i} für eine \colorbold{Ebene} des entarteten Baumes. Die Knoten des entarteten Baumes lassen sich \colorbold{Startadressen} $\mathtt{ref(location_{i})}$ von Speicherbereichen $\mathtt{ref(location_{i})\enspace\ldots\enspace ref(location_{i}) + size(location_{i})}$ im Hauptspeicher zuordnen, wobei gilt, dass $\mathtt{ref(location_{i}) \leq ref(location_{i+1}) < ref(location_{i}) + size(location_{i})}$.\footnote{Es ist ein Baum, der \colorbold{nur} die \colorbold{Datentypen} als Knoten enthält, auf die \colorbold{zugegriffen} wird.}\footnote{\smalltt{ref(location)} steht dabei für das Schreiben der \colorbold{Adresse} von \smalltt{location} auf den Stack.}
+  Sei $\mathtt{location_{i}}$ eine \colorbold{Location} (Definition~\ref{def:location}) und ein \colorbold{Knoten} eines \colorbold{entarteten Baumes} (siehe Definition~\ref{def:entarteter_baum} und Abbildung~\ref{eq:location_tree}), dessen Wurzel $\mathtt{location_{1}}$ ist. Dabei steht \smalltt{i} für eine \colorbold{Ebene} des entarteten Baumes. Die Knoten des entarteten Baumes lassen sich \colorbold{Startadressen} $\mathtt{ref(location_{i})}$ von Speicherbereichen $\mathtt{ref(location_{i})\enspace\ldots\enspace ref(location_{i}) + size(location_{i})}$ im \colorbold{Hauptspeicher} zuordnen, wobei gilt, dass $\mathtt{ref(location_{i}) \leq ref(location_{i+1}) < ref(location_{i}) + size(location_{i})}$.\footnote{Es ist ein Baum, der \colorbold{nur} die \colorbold{Datentypen} als Knoten enthält, auf die \colorbold{zugegriffen} wird.}\footnote{\smalltt{ref(location)} steht dabei für das Schreiben der \colorbold{Adresse} von \smalltt{location} auf den Stack.}
 
-  Sei $\mathtt{location_{i, k}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps $\mathtt{location_i}$. Dabei gilt: $\mathtt{ref(location_{i, k}) < ref(location_{i, k+1})}$.
+  Jeder \colorbold{Location} $\mathtt{location_{i}}$ ist dabei ein \colorbold{Dantentyp} $\mathtt{datatype_i}$ zugeordnet.
 
-  Sei $\mathtt{location_{i, idx_i}}$ ein beliebiges \colorbold{Element / Attribut} des Datentyps $\mathtt{location_i}$, sodass gilt: $\mathtt{location_{i, idx_i} = location_{i+1}}$.
+  Sei $\mathtt{location_{i, k}}$ eine \colorbold{Location} der ein beliebiges \colorbold{Element / Attribut} des \colorbold{Datentyps} $\mathtt{datatype_i}$ der \colorbold{Location} $\mathtt{location_i}$ zugeordnet ist. Dabei gilt: $\mathtt{ref(location_{i, k}) < ref(location_{i, k+1})}$.
+
+  Sei $\mathtt{location_{i, idx_i}}$ die \colorbold{Location} eines beliebigen \colorbold{Elementes / Attributes} des \colorbold{Datentyps} $\mathtt{datatype_i}$ der \colorbold{Location} $\mathtt{location_i}$, sodass gilt: $\mathtt{location_{i, idx_i} = location_{i+1}}$.
 
   \begin{figure}[H]
     \centering
@@ -155,10 +157,10 @@ Im Gegensatz zur Komposition \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1')
     \end{equation}
   \end{figure}
 
-  Die Berechnung der \colorbold{Adresse} für eine beliebige Folge verschiedener Datentypen $(\mathtt{location_{1, idx_1},\enspace\ldots,\enspace location_{n, idx_n}})$, die das Resultat einer Aneinandereihung von \colorbold{Zugriffen} auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} und \colorbold{Structattributte} unterschiedlicher Datentypen $\mathtt{location_{i}}$ ist (z.B. \smalltt{*complex\_var.attr3[2]}), kann mittels der Formel~\ref{eq:adresse_von_derived_location_allgemein}:
+  Die Berechnung der \colorbold{Adresse} für eine beliebige Folge verschiedener Datentypen $(\mathtt{datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n}})$, die das Resultat einer Aneinandereihung von \colorbold{Zugriffen} auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} und \colorbold{Structattributte} unterschiedlicher Datentypen $\mathtt{datatype_{i}}$ ist (z.B. \smalltt{*complex\_var.attr3[2]}), kann mittels der Formel~\ref{eq:adresse_von_derived_location_allgemein}:
   % https://tex.stackexchange.com/questions/21290/how-to-make-left-right-pairs-of-delimiter-work-over-multiple-lines
   \begin{equation}
-  \mathtt{ref(location_{1, idx_1},\enspace\ldots,\enspace location_{n, idx_n})} = \mathtt{ref(location_1)} + \sum_{i=1}^{n-1}\sum_{k=1}^{idx_i - 1} \mathtt{\operatorname{size}(location_{i, k})}
+  \mathtt{ref(datatype_{1, idx_1},\enspace\ldots,\enspace datatype_{n, idx_n})} = \mathtt{ref(location_1)} + \sum_{i=1}^{n-1}\sum_{k=1}^{idx_i - 1} \mathtt{\operatorname{size}(datatype_{i, k})}
   \label{eq:adresse_von_derived_location_allgemein}
   \end{equation}
   berechnet werden.\footnote{Die \colorbold{äußere Schleife} iteriert nacheinander über die Folge von Datentypen, die aus den \colorbold{Zugriffen} auf \colorbold{Pointerelmente}, \colorbold{Arrayelmente} oder \colorbold{Structattribute} resultiert. Die \colorbold{innere Schleife} iteriert über alle \colorbold{Elemente} oder \colorbold{Attribute} des momentan betrachteten \colorbold{Datentyps} $\mathtt{location_i}$, die vor dem \colorbold{Element} / \colorbold{Attribut} $\mathtt{location_{i, idx_i}}$ liegen.}
@@ -417,6 +419,8 @@ Der \colorbold{Schlussteil}, bei dem der \colorbold{Inhalt} der Speicherzelle an
   \label{code:picoc_code_schlussteil}
 \end{code}
 
+Das Generieren des \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_schlussteil} verläuft wie üblich.
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={19-21}}]{./code_examples/example_derived_dts_final_part.ast}
@@ -424,12 +428,16 @@ Der \colorbold{Schlussteil}, bei dem der \colorbold{Inhalt} der Speicherzelle an
   \label{code:abstract_syntax_tree_schlussteil}
 \end{code}
 
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_schlussteil} wird das eben angesprochene auf den \colorbold{Stack} speichern des \colorbold{Inhalts} der berechneten \colorbold{Adresse} mit der Komposition \smalltt{Exp(Stack(Num('1')))} dargestellt.
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={22,27,32}}]{./code_examples/example_derived_dts_final_part.picoc_mon}
   \caption{PicoC-Mon Pass für den Schlussteil}
   \label{code:picoc_mon_pass_schlussteil}
 \end{code}
+
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_schlussteil} wird die Komposition \smalltt{Exp(Stack(Num('1')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt, wenn das \textcolor{gray!90!black}{versteckte Attribut} \smalltt{datatype} im \smalltt{Exp(exp,\textcolor{gray!90!black}{datatpye})}-Container-Knoten kein \colorbold{Array} \smalltt{ArrayDecl(nums, datatype)} enthält, ansonsten ist bei einem \colorbold{Array} die \colorbold{Adresse} auf dem \colorbold{Stack} bereits das gewünschte Ergebnis. Genaueres wurde in Unterkapitel~\ref{sec:übersicht} zusammen mit der Abbildung~\ref{fig:zugriff_auf_derived_datatypes_veranschaulicht} bereits erklärt.
 
 \begin{code}
   \centering
