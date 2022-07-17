@@ -17,7 +17,7 @@ File
           [
             Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('ar_with_len'))), Name('st_ar')))
             Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], PntrDecl(Num('1'), IntType('int')))), Name('complex_var')))
-            Exp(Name('complex_var'))
+            Exp(Ref(Name('complex_var')))
           ]
       ], 
     FunDef 
@@ -30,7 +30,7 @@ File
           [
             Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('ar_with_len'))), Name('st_ar')))
             Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('complex_var')))
-            Exp(Name('complex_var'))
+            Exp(Ref(Name('complex_var')))
           ]
       ]
   ]

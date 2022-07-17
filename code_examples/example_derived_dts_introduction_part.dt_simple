@@ -66,9 +66,11 @@ file
                             arith_prec2
                               arith_prec1
                                 un_exp
-                                  post_exp
-                                    prim_exp
-                                      name	complex_var
+                                  un_op	&
+                                  un_exp
+                                    post_exp
+                                      prim_exp
+                                        name	complex_var
     decl_def
       fun_def
         type_spec
@@ -114,6 +116,8 @@ file
                             arith_prec2
                               arith_prec1
                                 un_exp
-                                  post_exp
-                                    prim_exp
-                                      name	complex_var
+                                  un_op	&
+                                  un_exp
+                                    post_exp
+                                      prim_exp
+                                        name	complex_var
