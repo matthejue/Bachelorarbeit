@@ -9,13 +9,15 @@
 % ./Ergebnisse_und_Ausblick.tex
 
 \subsection{Umsetzung von Funktionen}
-\subsubsection{Funktionen auflösen zu RETI Code}
+\subsubsection{Grundsätzliche Umsetzung}
+
+Die Umsetzung von Pro mittels Funktionen wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_3_funktionen} erklärt.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_3_funs.picoc}
   \caption{PicoC-Code für 3 Funktionen}
-  \label{code:picoc_code_für_3_Funktionen}
+  \label{code:picoc_code_für_3_funktionen}
 \end{code}
 
 \begin{code}
@@ -103,6 +105,8 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \subsubsection{Funktionsaufruf}
 
 \newlineparagraph{Ohne Rückgabewert}
+
+% TODO: Betriebssysteme Vorlesung erwähnen auch in anderen Kapiteln
 
 % Unsichtbares return
 \begin{code}
@@ -226,7 +230,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 % Struct wird wirklich kopiert durch speziellen Argmode
 
-\subsection{Umsetzung kleinerer Details}
+% \subsection{Umsetzung kleinerer Details}
 % langen Sprüngen, großen Konstanten, Division durch 0
 \section{Fehlermeldungen}
 \subsection{Error Handler}

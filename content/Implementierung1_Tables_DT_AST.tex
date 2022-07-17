@@ -324,7 +324,7 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \smalltt{Global(num)} & Container, der für eine Variable steht, die \smalltt{num} Speicherzellen relativ zum \colorbold{Datensegment Register} \smalltt{DS} steht. \\
   \smalltt{StackMalloc(num)} & Container, der für das \colorbold{Allokieren} von \smalltt{num} Speicherzellen auf dem \colorbold{Stack} steht. \\
 \smalltt{PntrDecl(num, datatype)} & Container, der für den \colorbold{Pointerdatentyp} steht: \smalltt{<prim\_dt> *<var>}, wobei das \colorbold{Attribut} \smalltt{num} die \colorbold{Anzahl zusammengefasster Pointer} angibt und \smalltt{datatype} der {Datentyp} ist, auf den der oder die \colorbold{Pointer} zeigen. \\
-\smalltt{Ref(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container, der für die Anwendung des \colorbold{Referenz-Operators} \smalltt{\&<var>} steht und die \colorbold{Adresse} einer \colorbold{Location} auf den Stack schreiben soll, die über \smalltt{exp} eingegrenzt wird. Zudem besitzt er $2$ \textcolor{gray!90!black}{versteckte Attribute}, wobei \smalltt{datatype} im \colorbold{RETI Blocks Pass} wichtig ist und \smalltt{error\_data} für \colorbold{Fehlermeldungen} wichtig ist. \\
+\smalltt{Ref(exp, \textcolor{gray!90!black}{datatype}, \textcolor{gray!90!black}{error\_data})} & Container, der für die Anwendung des \colorbold{Referenz-Operators} \smalltt{\&<var>} steht und die \colorbold{Adresse} einer \colorbold{Location} (Definition~\ref{def:location}) auf den Stack schreiben soll, die über \smalltt{exp} eingegrenzt wird. Zudem besitzt er $2$ \textcolor{gray!90!black}{versteckte Attribute}, wobei \smalltt{datatype} im \colorbold{RETI Blocks Pass} wichtig ist und \smalltt{error\_data} für \colorbold{Fehlermeldungen} wichtig ist. \\
 \smalltt{Deref(lhs, exp)} & Container für den \colorbold{Indexzugriff} auf einen \colorbold{Array-} oder \colorbold{Pointerdatentyp}: \smalltt{<var>[<i>]}, wobei \smalltt{exp1} eine angehängte weitere \smalltt{Subscr(exp1, exp2)}, \smalltt{Deref(exp1, exp2)}, \smalltt{Attr(exp, name)} oder ein \smalltt{Name('var')} sein kann und \smalltt{exp2} der Index ist auf den zugegriffen werden soll. \\
 \smalltt{ArrayDecl(nums, datatype)} & Container, der für den \colorbold{Arraydatentyp} steht: \smalltt{<prim\_dt> <var>[<i>]}, wobei das \colorbold{Attribut} \smalltt{nums} eine Liste von \smalltt{Num('x')} ist, die die \colorbold{Dimensionen} des Arrays angibt und \smalltt{datatype} der {Datentyp} ist, der über das Anwenden von \smalltt{Subscript()} auf das Array zugreifbar ist. \\
 \smalltt{Array(exps, \textcolor{gray!90!black}{datatype})} & Container für den \colorbold{Initializer} eines \colorbold{Arrays}, dessen Einträge \smalltt{exps} weitere Initializer für eine \colorbold{Array-Dimension} oder ein Initializer für ein \colorbold{Struct} oder ein \colorbold{Logischer Ausdruck} sein können, z.B. \smalltt{\{\{1, 2\}, \{3, 4\}\}}. Des Weiteren besitzt er ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{datatype}, welches für den \colorbold{PicoC-Mon Pass} Informationen transportiert, die für \colorbold{Fehlermeldungen} wichtig sind. \\
@@ -336,6 +336,12 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 \caption{PicoC-Knoten Teil 2}
 \label{tab:picoc_knoten_teil_2}
 \end{table}
+
+\begin{Definition}{Location}{location}
+  Kollektiver Begriff für \colorbold{Variablen}, \colorbold{Attribute} bzw. \colorbold{Elemente} von Variablen bestimmter Datentypen, \colorbold{Speicherbereiche auf dem Stack}, die \colorbold{temporäre Zwischenergebnisse} speichern und \colorbold{Register}.
+
+  Im Grunde genommen alles, was mit einem \colorbold{Programm zu tuen} hat und irgendwo \colorbold{gespeichert} ist.\footcite{g_siek_course_2022}
+\end{Definition}
 
 \begin{table}[H]
   \center
