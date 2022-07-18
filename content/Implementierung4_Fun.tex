@@ -128,12 +128,20 @@ In dem Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_fun
   \label{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
 
-Die \colorbold{Deklaration} einer \colorbold{Funktion} erfolgt mithilfe der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} für das Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} dargestellt ist, wo die Attribute des \colorbold{Symbols} wie üblich gesetzt werden.
+Die \colorbold{Deklaration} einer \colorbold{Funktion} erfolgt mithilfe der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} für das Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} dargestellt ist. Die \colorbold{Attribute} des \colorbold{Symbols} \smalltt{Symbols(type\_qual, datatype, name, val\_addr, pos, size)} werden wie üblich gesetzt. Dem \smalltt{datatype}-Attribut wird dabei einfach die komplette Komposition der \colorbold{Funktionsdeklaration} \smalltt{FunDecl(IntType('int'), Name('fun2'), [Alloc(Writeable(), IntType('int'), Name('var'))])} zugewiesen.
 
-Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \colorbold{Funktionen} mittels eines \colorbold{Suffix} \smalltt{\dq <fun\_name>@\dq} umgesetzt, der an den \colorbold{Variablennamen} \smalltt{<var>} drangehängt wird: \smalltt{<var>@<fun\_name>}. Dieser \colorbold{Suffix} wird geändert sobald beim \colorbold{Top-Down}\footnote{D.h. von der Wurzel zu den Blättern eines Baumes} Durchiterieren über den \colorbold{Abstract Syntax Tree} des aktuellen \colorbold{Passes} nach dem \colorbold{Depth-First-Search} Schema über den
+Die Locations (Definition~\ref{def:location}) \smalltt{var@main} und \smalltt{var@fun2} der \smalltt{main}-Funktion und der Funktion \smalltt{fun2} haben unterschiedliche \colorbold{Scopes} (Definition~\ref{def:scope}). Die eindeutig gemachten Bezeichner dieser beiden \colorbold{Locations} sind in der \colorbold{Symboltabelle} in Code~\ref{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} \colorbold{markiert}.
+
+\begin{Special_Paragraph}
+  Es könnte eine Verwirrung auftreten, ob der \colorbold{Bezeichner} einer Variablen immer den \colorbold{Scope} in dem er definiert ist angehängt haben muss. Das ist nicht so, weil in der Definiton eines Bezeichners~\ref{def:bezeichner} explizit davon gesprochen wird, dass ein Bezeichner in dem \colorbold{Scope}, in dem er definiert ist \colorbold{eindeutig} sein muss.
+\end{Special_Paragraph}
+
+Die Location \smalltt{var@main}, bei der es sich um eine \colorbold{Lokale Variable} der \smalltt{main}-Funktion handelt ist dabei nur innerhalb des \colorbold{Codeblocks} \smalltt{\{\}} der \smalltt{main}-Funktion \colorbold{sichtbar}. Die Location \smalltt{var@fun2} bei der es sich im einen \colorbold{Parameter} handelt, ist nur innerhalb des \colorbold{Codeblocks} \smalltt{\{\}} der Funktion \smalltt{fun2} \colorbold{sichtbar}. Beide \colorbold{Locations} sind in \smalltt{text}
+
+Die \colorbold{Scopes} der unterschiedlichen \colorbold{Funktionen} mittels eines \colorbold{Suffix} \smalltt{\dq <fun\_name>@\dq} umgesetzt, der an den \colorbold{Variablennamen} \smalltt{<var>} drangehängt wird: \smalltt{<var>@<fun\_name>}. Dieser \colorbold{Suffix} wird geändert sobald beim \colorbold{Top-Down}\footnote{D.h. von der Wurzel zu den Blättern eines Baumes} Durchiterieren über den \colorbold{Abstract Syntax Tree} des aktuellen \colorbold{Passes} nach dem \colorbold{Depth-First-Search} Schema über den
 
 \begin{Definition}{Scope (bzw. Sichtbarkeitsbereich)}{scope}
-  \colorbold{Bereich} in einem Programm, in dem eine Variable \colorbold{sichtbar} ist und \colorbold{verwendet} werden kann.
+  \colorbold{Bereich} in einem Programm, in dem eine Variable \colorbold{sichtbar} ist und \colorbold{verwendet} werden kann.\footcite{thiemann_einfuhrung_2018}
 \end{Definition}
 
 \begin{code}
