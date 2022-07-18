@@ -38,33 +38,9 @@ File
         Block 
           Name 'main.0', 
           [
-            Exp 
-              Alloc 
-                Writeable, 
-                ArrayDecl 
-                  [
-                    Num '2', 
-                    Num '3'
-                  ], 
-                  IntType 'int', 
-                Name 'local_var1', 
-            Exp 
-              Alloc 
-                Writeable, 
-                ArrayDecl 
-                  [
-                    Num '2', 
-                    Num '3'
-                  ], 
-                  IntType 'int', 
-                Name 'local_var2', 
-            Exp 
-              Call 
-                Name 'stack_fun', 
-                [
-                  Name 'local_var1', 
-                  Name 'local_var2'
-                ]
+            Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var1')))
+            Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var2')))
+            Exp(Call(Name('stack_fun'), [Name('local_var1'), Name('local_var2')]))
           ]
       ]
   ]

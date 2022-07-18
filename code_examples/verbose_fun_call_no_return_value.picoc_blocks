@@ -40,25 +40,9 @@ File
         Block 
           Name 'main.1', 
           [
-            Exp 
-              Alloc 
-                Writeable, 
-                ArrayDecl 
-                  [
-                    Num '2', 
-                    Num '3'
-                  ], 
-                  StructSpec 
-                    Name 'st', 
-                Name 'local_var', 
-            Exp 
-              Call 
-                Name 'stack_fun', 
-                [
-                  Name 'local_var'
-                ], 
-            Return 
-              Empty
+            Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], StructSpec(Name('st'))), Name('local_var')))
+            Exp(Call(Name('stack_fun'), [Name('local_var')]))
+            Return(Empty())
           ]
       ], 
     FunDef 
@@ -80,11 +64,7 @@ File
         Block 
           Name 'stack_fun.0', 
           [
-            Exp 
-              Alloc 
-                Writeable, 
-                IntType 'int', 
-                Name 'local_var'
+            Exp(Alloc(Writeable(), IntType('int'), Name('local_var')))
           ]
       ]
   ]

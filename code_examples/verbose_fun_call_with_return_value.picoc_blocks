@@ -9,8 +9,7 @@ File
         Block 
           Name 'stack_fun.1', 
           [
-            Return 
-              Num '42'
+            Return(Num('42'))
           ]
       ], 
     FunDef 
@@ -21,14 +20,7 @@ File
         Block 
           Name 'main.0', 
           [
-            Assign 
-              Alloc 
-                Writeable, 
-                IntType 'int', 
-                Name 'var', 
-              Call 
-                Name 'stack_fun', 
-                []
+            Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack_fun'), []))
           ]
       ]
   ]

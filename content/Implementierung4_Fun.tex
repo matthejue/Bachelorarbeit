@@ -51,7 +51,7 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_3_Funktionen
   \label{code:picoc_mon_pass_für_3_Funktionen}
 \end{code}
 
-Nach dem \colorbold{RETI Pass} in Code~\ref{code:reti_pass_für_3_Funktionen} gibt es nur noch \colorbold{RETI-Instructions}. Glücklicherweise enthalten die \colorbold{Kommentare} die \colorbold{Labelbezeichner} \smalltt{<name>.<nummer>} der Blöcke, die in diesem Beispiel immer zugleich bis auf die Nummer, dem \colorbold{Namen} der jeweiligen \colorbold{Funktion} entsprechen, deren kompilierte Instructions als nächtes folgen. Ohne diese Kommentare könnte man die \colorbold{Funktionen} nicht mehr direkt ausmachen.
+Nach dem \colorbold{RETI Pass} in Code~\ref{code:reti_pass_für_3_Funktionen} gibt es nur noch \colorbold{RETI-Instructions}, die Blöcke wurden entfernt und die \colorbold{RETI-Instructions} in diesen Blöcken wurden genauso zusammengefügt, wie die Blöcke angeordnet waren. Ohne die \colorbold{Kommentare} könnte man die Funktionen nicht mehr direkt ausmachen, denn die \colorbold{Kommentare} enthalten die \colorbold{Labelbezeichner} \smalltt{<name>.<nummer>} der Blöcke, die in diesem Beispiel immer zugleich bis auf die Nummer, dem \colorbold{Namen} der jeweiligen \colorbold{Funktion} entsprechen.
 
 Da es in der \smalltt{main}-Funktion keinen \colorbold{Funktionsaufruf} gab, wird der Code, der nach der \colorbold{Instruction} in der \colorbold{markierten Zeile} kommt nicht mehr betreten. Funktionen sind im \colorbold{RETI-Code} nur dadurch existent, dass im RETI-Code \colorbold{Sprünge} (z.B. \smalltt{JUMP<rel> <im>}) zu den jeweils richtigen Positionen gemacht werden, nämlich dorthin, wo die \colorbold{RETI-Instructions}, die aus den \colorbold{Statemtens} einer \colorbold{Funktion} kompiliert wurden anfangen.
 
@@ -71,43 +71,55 @@ Im Beispiel in Code~\ref{code:picoc_code_für_funktionen_wobei_die_main_funktion
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/verbose_3_funs_main.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={8-10}}]{./code_examples/verbose_3_funs_main.picoc}
   \caption{PicoC-Code für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_code_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_main.picoc_mon}
-  \caption{PicoC-Mon Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
-  \label{code:picoc_mon_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
-\end{code}
-
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist} sind die \colorbold{Funktionen} nur noch durch \colorbold{Blöcke} umgesetzt.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_main.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={23-28}}]{./code_examples/verbose_3_funs_main.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
-  \label{code:picoc_blocks_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
+  \label{code:reti_blocks_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
 \colorbold{Eine simple Möglichkeit} ist es, die \smalltt{main-Funktion} einfach nach \colorbold{vorne} zu schieben, damit diese als \colorbold{erstes} ausgeführt wird. Im \smalltt{File(name, decls\_defs)}-Container-Knoten muss dazu im \smalltt{decls\_defs}-Attribut, welches eine \colorbold{Liste von Funktionen} ist, die \smalltt{main}-Funktion an Index $0$ geschoben werden.
 
-\colorbold{Eine andere Möglichkeit} und die Möglichkeit für die sich in der \colorbold{Implementierung} des \colorbold{PicoC-Compilers} entschieden wurde, ist es, wenn die \smalltt{main}-Funktion nicht die erste auftauchende Funktion ist, einen \smalltt{start.0}-Block als ersten Block einzufügen, der ein GoTo()
+\colorbold{Eine andere Möglichkeit} und die Möglichkeit für die sich in der \colorbold{Implementierung} des \colorbold{PicoC-Compilers} entschieden wurde, ist es, wenn die \smalltt{main}-Funktion nicht die erste auftauchende Funktion ist, einen \smalltt{start.<nummer>}-Block als ersten Block einzufügen, der einen \smalltt{GoTo(Name('main.<nummer>'))}-Container-Knoten enthält, der im \colorbold{RETI Pass}~\ref{code:reti_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist} in einen Sprung zur \smalltt{main}-Funktion übersetzt wird.
 
-In der Implementierung des \colorbold{PicoC-Compilers} wurde sich für diese Möglichkeit entschieden, da
+In der Implementierung des \colorbold{PicoC-Compilers} wurde sich für diese Möglichkeit entschieden, da es für \colorbold{Studenten}, welche die Verwender des \colorbold{PiocC-Compilers} sein werden vermutlich am \colorbold{intuitivsten} ist,  wenn der \colorbold{RETI-Code} für die Funktionen an denselben Stellen relativ zueinander verortet ist, wie die Funktionsdefinitionen im \colorbold{PicoC-Code}.
+
+Das \colorbold{Einsetzen} des \smalltt{start.<nummer>}-Blockes erfolgt im \colorbold{RETI-Patch Pass} in Code~\ref{code:reti_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}, da der \colorbold{RETI-Patch}-Pass der Pass ist, der für das \colorbold{Ausbessern} (engl. to patch) zuständig ist, wenn z.B. in manchen Fällen die \smalltt{main}-Funktion nicht die erste Funktion ist.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_main.reti_patch}
-  \caption{PicoC-Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
-  \label{code:picoc_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
+  \numberedcodebox[minted language=text, minted options={highlightlines={4-9,29-34}}]{./code_examples/verbose_3_funs_main.reti_patch}
+  \caption{RETI-Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \label{code:reti_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
+\end{code}
+
+Im \colorbold{RETI Pass} in Code~\ref{code:reti_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist} wird das \smalltt{GoTo(Name('main.<nummer>'))} durch den entsprechenden \smalltt{Sprung} \smalltt{JUMP <distanz\_zur\_main\_funktion>} ersetzt und die Blöcke entfernt.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={3,19}}]{./code_examples/verbose_3_funs_main.reti}
+  \caption{RETI Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
+  \label{code:reti_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
 \subsubsection{Funktionsdeklaration und -definition und Umsetzung von Scopes}
+
+In der Programmiersprache $L_C$ und somit auch $L_{PicoC}$ ist es notwendig, dass eine Funktion \colorbold{deklariert} ist, bevor man einen \colorbold{Funktionsaufruf} dieser Funktion machen kann. Das ist notwendig, damit Fehlermeldungen ausgegeben können, wenn
+
+\begin{Definition}{Funktionsprototyp}{funktionsprototyp}
+  \colorbold{Deklaration} einer Funktion, welche den \colorbold{Funktionsbezeichner}, die \colorbold{Datentypen} der einzelnen \colorbold{Parameter}, die \colorbold{Parametereihenfolge} und den \colorbold{Rückgabewert} einer Funktion spezifiziert.\footnote{Der \colorbold{Funktionsprototyp} ist von der \colorbold{Funktionsignatur} zu unterschieden, die in Programmiersprache wie \smalltt{C++} und \smalltt{Java} für die \colorbold{Auflösung} von \colorbold{überladenen Methoden} verwendet wird und sich üblicherweise nicht für den \colorbold{Rückgabewert} interessiert.}\footcite{noauthor_what_nodate-4}.
+\end{Definition}
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/verbose_3_funs_fun_decl.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1}}]{./code_examples/verbose_3_funs_fun_decl.picoc}
   \caption{PicoC-Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
@@ -116,7 +128,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_fun_decl.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={3-11, 34, 43}}]{./code_examples/verbose_3_funs_fun_decl.st}
   \caption{Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}

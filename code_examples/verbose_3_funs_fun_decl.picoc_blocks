@@ -27,18 +27,8 @@ File
         Block 
           Name 'main.1', 
           [
-            Assign 
-              Alloc 
-                Writeable, 
-                IntType 'int', 
-                Name 'var', 
-              Call 
-                Name 'fun2', 
-                [
-                  Num '42'
-                ], 
-            Return 
-              Empty
+            Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun2'), [Num('42')]))
+            Return(Empty())
           ]
       ], 
     FunDef 
@@ -54,8 +44,7 @@ File
         Block 
           Name 'fun2.0', 
           [
-            Return 
-              Name 'var'
+            Return(Name('var'))
           ]
       ]
   ]

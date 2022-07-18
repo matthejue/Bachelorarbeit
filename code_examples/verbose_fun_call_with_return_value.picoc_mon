@@ -4,35 +4,21 @@ File
     Block 
       Name 'stack_fun.1', 
       [
-        // Return(Num('42')), 
-        Exp 
-          Num '42', 
-        Return 
-          Stack 
-            Num '1'
+        // Return(Num('42'))
+        Exp(Num('42'))
+        Return(Stack(Num('1')))
       ], 
     Block 
       Name 'main.0', 
       [
-        // Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack_fun'), [])), 
-        // Assign(Name('var'), Call(Name('stack_fun'), [])), 
-        // // Call(Name('stack_fun'), []), 
-        StackMalloc 
-          Num '2', 
-        NewStackframe 
-          Name 'stack_fun', 
-          GoTo 
-            Name 'addr@next_instr', 
-        Exp 
-          GoTo 
-            Name 'stack_fun.1', 
-        RemoveStackframe, 
-        Assign 
-          Global 
-            Num '0', 
-          Stack 
-            Num '1', 
-        Return 
-          Empty
+        // Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack_fun'), []))
+        // Assign(Name('var'), Call(Name('stack_fun'), []))
+        // // Call(Name('stack_fun'), [])
+        StackMalloc(Num('2'))
+        NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr')))
+        Exp(GoTo(Name('stack_fun.1')))
+        RemoveStackframe()
+        Assign(Global(Num('0')), Stack(Num('1')))
+        Return(Empty())
       ]
   ]
