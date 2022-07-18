@@ -111,24 +111,34 @@ Im \colorbold{RETI Pass} in Code~\ref{code:reti_pass_für_funktionen_wobei_die_m
 
 \subsubsection{Funktionsdeklaration und -definition und Umsetzung von Scopes}
 
-In der Programmiersprache $L_C$ und somit auch $L_{PicoC}$ ist es notwendig, dass eine Funktion \colorbold{deklariert} ist, bevor man einen \colorbold{Funktionsaufruf} dieser Funktion machen kann. Das ist notwendig, damit Fehlermeldungen ausgegeben können, wenn
+In der Programmiersprache $L_C$ und somit auch $L_{PicoC}$ ist es notwendig, dass eine Funktion \colorbold{deklariert} ist, bevor man einen \colorbold{Funktionsaufruf} zu dieser Funktion machen kann. Das ist notwendig, damit \colorbold{Fehlermeldungen} ausgegeben werden können, wenn der \colorbold{Prototyp} (Definition~\ref{def:funktionsprototyp}) der Funktion nicht mit den \colorbold{Datentypen} der \colorbold{Argumente} oder der \colorbold{Anzahl} \colorbold{Argumente} übereinstimmt, die beim \colorbold{Funktionsaufruf} an die Funktion in einer \colorbold{festen} Reihenfolge übergeben werden.
+
+Die Dekleration einer Funktion kann explizit erfolgen (z.B. \smalltt{int fun2(int var);}), wie in der im Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} \colorbold{markierten Zeile} \smalltt{1} oder zusammen mit der \colorbold{Funktionsdefinition} (z.B. \smalltt{void fun1()\{\}}), wie in den \colorbold{markierten Zeilen} \smalltt{3-4}.
+
+In dem Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} erfolgt ein \colorbold{Funktionsaufruf} zur Funktion \smalltt{fun2}, die allerdings erst nach der \smalltt{main}-Funktion definiert ist. Daher ist eine \colorbold{Funktionsdekleration}, wie in der \colorbold{markierten Zeile} \smalltt{1} notwendig. Beim \colorbold{Funktionsaufruf} zur Funktion \smalltt{fun1} ist das \colorbold{nicht} notwendig, da die Funktion vorher \colorbold{definiert} wurde, wie in den \colorbold{markierten Zeilen} \smalltt{3-4} zu sehen ist.
 
 \begin{Definition}{Funktionsprototyp}{funktionsprototyp}
-  \colorbold{Deklaration} einer Funktion, welche den \colorbold{Funktionsbezeichner}, die \colorbold{Datentypen} der einzelnen \colorbold{Parameter}, die \colorbold{Parametereihenfolge} und den \colorbold{Rückgabewert} einer Funktion spezifiziert.\footnote{Der \colorbold{Funktionsprototyp} ist von der \colorbold{Funktionsignatur} zu unterschieden, die in Programmiersprache wie \smalltt{C++} und \smalltt{Java} für die \colorbold{Auflösung} von \colorbold{überladenen Methoden} verwendet wird und sich üblicherweise nicht für den \colorbold{Rückgabewert} interessiert.}\footcite{noauthor_what_nodate-4}.
+  \colorbold{Deklaration} einer Funktion, welche den \colorbold{Funktionsbezeichner}, die \colorbold{Datentypen} der einzelnen \colorbold{Funktionsparameter}, die \colorbold{Parametereihenfolge} und den \colorbold{Rückgabewert} einer Funktion spezifiziert. Es ist \colorbold{nicht} möglich zwei Funktiondeklarationen mit dem \colorbold{gleichen} Funktionsbezeichner zu haben.\footnote{Der \colorbold{Funktionsprototyp} ist von der \colorbold{Funktionsignatur} zu unterschieden, die in Programmiersprache wie \smalltt{C++} und \smalltt{Java} für die \colorbold{Auflösung} von \colorbold{Überladung} bei z.B. \colorbold{Methoden} verwendet wird und sich in manchen Sprachen für den \colorbold{Rückgabewert} interessiert und in manchen nicht, je nach Umsetzung. In solchen Sprachen ist es möglich mehrere \colorbold{Methoden} oder \colorbold{Funktionen} mit dem \colorbold{gleichen} Bezeichner zu haben, solange sie sich durch die \colorbold{Datentpyen} von \colorbold{Parametern}, die \colorbold{Parameterreihenfolge}, manchmal auch \colorbold{Scopes} und \colorbold{Klassentpyen} usw. unterschieden.}\footcite{noauthor_what_nodate-4}
 \end{Definition}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={1}}]{./code_examples/verbose_3_funs_fun_decl.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,3-4}}]{./code_examples/verbose_3_funs_fun_decl.picoc}
   \caption{PicoC-Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
 
+Die \colorbold{Deklaration} einer \colorbold{Funktion} erfolgt mithilfe der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} für das Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} dargestellt ist, wo die Attribute des \colorbold{Symbols} wie üblich gesetzt werden.
+
 Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \colorbold{Funktionen} mittels eines \colorbold{Suffix} \smalltt{\dq <fun\_name>@\dq} umgesetzt, der an den \colorbold{Variablennamen} \smalltt{<var>} drangehängt wird: \smalltt{<var>@<fun\_name>}. Dieser \colorbold{Suffix} wird geändert sobald beim \colorbold{Top-Down}\footnote{D.h. von der Wurzel zu den Blättern eines Baumes} Durchiterieren über den \colorbold{Abstract Syntax Tree} des aktuellen \colorbold{Passes} nach dem \colorbold{Depth-First-Search} Schema über den
+
+\begin{Definition}{Scope (bzw. Sichtbarkeitsbereich)}{scope}
+  \colorbold{Bereich} in einem Programm, in dem eine Variable \colorbold{sichtbar} ist und \colorbold{verwendet} werden kann.
+\end{Definition}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={3-11, 34, 43}}]{./code_examples/verbose_3_funs_fun_decl.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={34, 43}}]{./code_examples/verbose_3_funs_fun_decl.st}
   \caption{Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
@@ -175,6 +185,8 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 \end{code}
 
 \newlineparagraph{Mit Rückgabewert}
+
+% todo: unsichtbare return statements
 
 \begin{code}
   \centering

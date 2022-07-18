@@ -32,7 +32,7 @@ Der Knoten \smalltt{Ref(Name('var')))} repräsentiert im \colorbold{Abstract Syn
 Bevor man einem \colorbold{Pointer} eine eine \colorbold{Adresse} (z.B. \smalltt{\&var}) zuweisen kann, muss dieser erstmal \colorbold{definiert} sein. Dafür braucht es einen Eintrag in der \colorbold{Symboltabelle} in Code~\ref{code:symboltabelle_für_pointer_referenzierung}.
 
 \begin{Special_Paragraph}
-Die \colorbold{Größe} eines Pointers (z.B. eines Pointers auf ein Array von \smalltt{int}: \smalltt{pntr = int *pntr[3]}), die ihm \smalltt{size}-Feld der \colorbold{Symboltabelle} eingetragen ist, ist dabei immer: $\mathtt{size(pntr) = 1}$.
+Die \colorbold{Größe} eines Pointers (z.B. eines Pointers auf ein Array von \smalltt{int}: \smalltt{pntr = int *pntr[3]}), die ihm \smalltt{size}-Attribut der \colorbold{Symboltabelle} eingetragen ist, ist dabei immer: $\mathtt{size(pntr) = 1}$.
 \end{Special_Paragraph}
 
 \begin{code}
@@ -117,7 +117,7 @@ Bei der \colorbold{Initialisierung} eines \colorbold{Arrays} wird zuerst \smallt
 Bei Variablen auf dem \colorbold{Stackframe} wird ein Array \colorbold{rückwärts} auf das Stackframe geschrieben und auch die \colorbold{Adresse des ersten Elements} als Adresse des Arrays genommen. Dies macht den \colorbold{Zugriff auf einen Arrayindex} in Subkapitel~\ref{sec:zugriff_auf_arrayindex} deutlich unkomplizierter, da man so nicht mehr zwischen \colorbold{Stackframe} und \colorbold{Globalen Statischen Daten} beim \colorbold{Zugriff auf einen Arrayindex} unterscheiden muss, da es Probleme macht, dass ein \colorbold{Stackframe} in die entgegengesetzte Richtung wächst, verglichen mit den \colorbold{Globalen Statischen Daten}\footnote{Wenn man beim \colorbold{GCC}~\cite{noauthor_gcc_nodate} einen Stackframe mittels des \colorbold{GDB}~\cite{noauthor_gcc_nodate} beobachtet, sieht man, dass dieser es genauso macht.}.
 
 \begin{Special_Paragraph}
-  Das \colorbold{Größe} des Arrays $\mathtt{datatype \enspace ar[dim_1]\ldots[dim_k]}$, die ihm \smalltt{size}-Feld des \colorbold{Symboltabelleneintrags} eingetragen ist, berechnet sich dabei aus der \colorbold{Mächtigkeit} der einzelnen \colorbold{Dimensionen} des Arrays multipliziert mit der \colorbold{Größe} des \colorbold{grundlegenden Datentyps} der einzelnen \colorbold{Arrayelemente}: $\mathtt{size(datatype(ar)) = \left(\prod^n_{j=1} dim_j\right)\cdot size(datatype)}$\footnote{Die \colorbold{Funktion}  \smalltt{type} ordnet einer  \colorbold{Variable} ihren \colorbold{Datentyp} zu. Das ist notwendig, weil die \colorbold{Funktion} \smalltt{size} nur bei einem \colorbold{Datentyp} als \colorbold{Funktionsargument} die \colorbold{Größe dieses Datentyps} als \colorbold{Zielwert} liefert}.
+  Das \colorbold{Größe} des Arrays $\mathtt{datatype \enspace ar[dim_1]\ldots[dim_k]}$, die ihm \smalltt{size}-Attribut des \colorbold{Symboltabelleneintrags} eingetragen ist, berechnet sich dabei aus der \colorbold{Mächtigkeit} der einzelnen \colorbold{Dimensionen} des Arrays multipliziert mit der \colorbold{Größe} des \colorbold{grundlegenden Datentyps} der einzelnen \colorbold{Arrayelemente}: $\mathtt{size(datatype(ar)) = \left(\prod^n_{j=1} dim_j\right)\cdot size(datatype)}$\footnote{Die \colorbold{Funktion}  \smalltt{type} ordnet einer  \colorbold{Variable} ihren \colorbold{Datentyp} zu. Das ist notwendig, weil die \colorbold{Funktion} \smalltt{size} nur bei einem \colorbold{Datentyp} als \colorbold{Funktionsargument} die \colorbold{Größe dieses Datentyps} als \colorbold{Zielwert} liefert}.
 \end{Special_Paragraph}
 
 \begin{code}
