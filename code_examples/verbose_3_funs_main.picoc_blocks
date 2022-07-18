@@ -1,0 +1,37 @@
+File 
+  Name './verbose_3_funs_main.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'fun1', 
+      [], 
+      [
+        Block 
+          Name 'fun1.2', 
+          []
+      ], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun2', 
+      [], 
+      [
+        Block 
+          Name 'fun2.1', 
+          [
+            Return 
+              Num '1'
+          ]
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            Return 
+              Empty
+          ]
+      ]
+  ]

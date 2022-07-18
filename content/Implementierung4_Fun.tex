@@ -9,72 +9,97 @@
 % ./Ergebnisse_und_Ausblick.tex
 
 \subsection{Umsetzung von Funktionen}
-\subsubsection{Grundsätzliche Umsetzung}
+\subsubsection{Mehrere Funktionen}
 
-Die Umsetzung von Pro mittels Funktionen wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_3_funktionen} erklärt.
+Die Umsetzung \colorbold{mehrerer Funktionen} wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_3_funktionen} erklärt. Dieses Beispiel soll nur zeigen, wie Funktionen in verschiedenen, für die Kompilierung von Funktionen relevanten \colorbold{Passes} kompiliert werden. Das Beispiel ist so gewählt, dass es möglichst \colorbold{isoliert} von weiterem möglicherweise störendem Code ist.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_3_funs.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/verbose_3_funs.picoc}
   \caption{PicoC-Code für 3 Funktionen}
   \label{code:picoc_code_für_3_funktionen}
 \end{code}
 
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_3_Funktionen} wird eine \colorbold{Funktion}, wie z.B. \smalltt{void fun(int param;)\{\enspace return param;\enspace \}} mit der Komposition \smalltt{FunDef(IntType(), Name('fun'), [Alloc(Writeable(), IntType(), Name('fun'))], [Return(Exp(Name('param')))])} dargestellt. Die einzelnen \colorbold{Attribute} dieses Container-Knoten sind in Tabelle~\ref{tab:picoc_knoten_teil_4} erklärt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.ast}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs.ast}
   \caption{Abstract Syntax Tree für 3 Funktionen}
   \label{code:abstract_syntax_tree_für_3_Funktionen}
 \end{code}
 
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.picoc_blocks}
-  \caption{RETI-Blocks Pass für 3 Funktionen}
-  \label{code:picoc_blocks_pass_für_3_Funktionen}
-\end{code}
+Im \colorbold{PicoC-Blocks Pass} in Code~\ref{code:picoc_blocks_pass_für_3_Funktionen} werden die \colorbold{Statements} der Funktion in \colorbold{Blöcke} \smalltt{Block(name, stmts\_instrs)} aufgeteilt. Dabei bekommt ein Block \smalltt{Block(name, stmts\_instrs)}, der die Statements der Funktion vom \colorbold{Anfang} bis zum \colorbold{Ende} oder bis zum Auftauchen eines \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} oder \smalltt{DoWhile(exp, stmts)}\footnote{Eine Erklärung dazu ist in Unterkapitel~\ref{sec:picoc_blocks_pass_zweck} zu finden.} beinhaltet den \colorbold{Bezeichner} bzw. den \smalltt{Name(str)}-Token-Knoten der Funktion an sein \colorbold{Label} bzw. an sein \smalltt{name}-Attribut zugewiesen. Dem \colorbold{Bezeichner} wird vor der Zuweisung allerdings noch eine \colorbold{Nummer} angehängt \smalltt{<name>.<nummer>}\footnote{Der \colorbold{Grund} dafür kann im Unterkapitel~\ref{sec:picoc_blocks_pass_zweck} nachgelesen werden.}.
+
+Es werden parallel dazu neue Zuordnungen im \colorbold{Dictionary} \smalltt{fun\_name\_to\_block\_name} hinzugefügt. Das \colorbold{Dicionary} ordnet einem \colorbold{Funktionsnamen} den \colorbold{Blocknamen} des Blockes, der das erste \colorbold{Statement} der Funktion enthält und dessen \colorbold{Bezeichner} \smalltt{<name>.<nummer>} bis auf die angehängte \colorbold{Nummer} identisch zu dem der Funktion ist zu\footnote{Das ist der \colorbold{Block}, über den im \colorbold{obigen letzten Paragraph} gesprochen wurde.}. Diese Zuordnung ist nötig, da \colorbold{Blöcke} noch eine \colorbold{Nummer} an ihren Bezeichner \smalltt{<name>.<nummer>} angehängt haben.
+
+% Dieser Pass hat allerdings keine direkte wichtige Bedeutung bei der Kompilierung von \colorbold{Funktionen}. Die Erwähnung dieses \colorbold{Pass} ist nur wichtig, weil nach diesem Pass die \colorbold{Statements} in \colorbold{Blöcke} aufgeteilt sind.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.picoc_mon}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs.picoc_blocks}
+  \caption{PicoC-Blocks Pass für 3 Funktionen}
+  \label{code:picoc_blocks_pass_für_3_Funktionen}
+\end{code}
+
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_3_Funktionen} werden die \smalltt{FunDef(datatype, name, allocs, stmts)}-Container-Knoten komplett aufgelöst, sodass sich im \smalltt{File(name, decls\_defs\_blocks)}-Container-Knoten nur noch Blöcke befinden.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs.picoc_mon}
   \caption{PicoC-Mon Pass für 3 Funktionen}
   \label{code:picoc_mon_pass_für_3_Funktionen}
 \end{code}
 
+Nach dem \colorbold{RETI Pass} in Code~\ref{code:reti_pass_für_3_Funktionen} gibt es nur noch \colorbold{RETI-Instructions}. Glücklicherweise enthalten die \colorbold{Kommentare} die \colorbold{Labelbezeichner} \smalltt{<name>.<nummer>} der Blöcke, die in diesem Beispiel immer zugleich bis auf die Nummer, dem \colorbold{Namen} der jeweiligen \colorbold{Funktion} entsprechen, deren kompilierte Instructions als nächtes folgen. Ohne diese Kommentare könnte man die \colorbold{Funktionen} nicht mehr direkt ausmachen.
+
+Da es in der \smalltt{main}-Funktion keinen \colorbold{Funktionsaufruf} gab, wird der Code, der nach der \colorbold{Instruction} in der \colorbold{markierten Zeile} kommt nicht mehr betreten. Funktionen sind im \colorbold{RETI-Code} nur dadurch existent, dass im RETI-Code \colorbold{Sprünge} (z.B. \smalltt{JUMP<rel> <im>}) zu den jeweils richtigen Positionen gemacht werden, nämlich dorthin, wo die \colorbold{RETI-Instructions}, die aus den \colorbold{Statemtens} einer \colorbold{Funktion} kompiliert wurden anfangen.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={6}}]{./code_examples/verbose_3_funs.reti}
   \caption{RETI-Blocks Pass für 3 Funktionen}
-  \label{code:reti_blocks_pass_für_3_Funktionen}
+  \label{code:reti_pass_für_3_Funktionen}
 \end{code}
 
 % einfügen unsichtbarer Returns bei void
 \newlineparagraph{Sprung zur Main Funktion}
 
+Im vorherigen Beispiel in Code~\ref{code:picoc_code_für_3_funktionen} war die \smalltt{main}-Funktion die \colorbold{erste} Funktion, die im Code vorkam. Dadurch konnte die \smalltt{main}-Funktion direkt betreten werden, da die \colorbold{Ausführung} des Programmes immer ganz vorne im \colorbold{RETI-Code} beginnt. Man musste sich daher keine Gedanken darum machen, wie man die \colorbold{Ausführung}, die von der \smalltt{main}-Funktion ausgeht überhaupt startet.
+
+Im Beispiel in Code~\ref{code:picoc_code_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist} ist die \smalltt{main}-Funktion allerdings \colorbold{nicht} die \colorbold{erste} Funktion. Daher muss dafür gesorgt werden, dass die \smalltt{main}-Funktion die erste Funktion ist, die ausgeführt wird.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_3_funs_main.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/verbose_3_funs_main.picoc}
   \caption{PicoC-Code für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_code_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.picoc_mon}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_main.picoc_mon}
   \caption{PicoC-Mon Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_mon_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.reti_blocks}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_main.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_blocks_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
 
+\colorbold{Eine simple Möglichkeit} ist es, die \smalltt{main-Funktion} einfach nach \colorbold{vorne} zu schieben, damit diese als \colorbold{erstes} ausgeführt wird. Im \smalltt{File(name, decls\_defs)}-Container-Knoten muss dazu im \smalltt{decls\_defs}-Attribut, welches eine \colorbold{Liste von Funktionen} ist, die \smalltt{main}-Funktion an Index $0$ geschoben werden.
+
+\colorbold{Eine andere Möglichkeit} und die Möglichkeit für die sich in der \colorbold{Implementierung} des \colorbold{PicoC-Compilers} entschieden wurde, ist es, wenn die \smalltt{main}-Funktion nicht die erste auftauchende Funktion ist, einen \smalltt{start.0}-Block als ersten Block einzufügen, der ein GoTo()
+
+In der Implementierung des \colorbold{PicoC-Compilers} wurde sich für diese Möglichkeit entschieden, da
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_main.reti_patch}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_main.reti_patch}
   \caption{PicoC-Patch Pass für Funktionen, wobei die main Funktion nicht die erste Funktion ist}
   \label{code:picoc_patch_pass_für_funktionen_wobei_die_main_funktion_nicht_die_erste_Funktion_ist}
 \end{code}
@@ -82,7 +107,7 @@ Die Umsetzung von Pro mittels Funktionen wird im Folgenden mithilfe des Beispiel
 \subsubsection{Funktionsdeklaration und -definition und Umsetzung von Scopes}
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_3_funs_fun_decl.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/verbose_3_funs_fun_decl.picoc}
   \caption{PicoC-Code für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
@@ -91,7 +116,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_3_funs_fun_decl.st}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs_fun_decl.st}
   \caption{Symboltabelle für Funktionen, wobei eine Funktion vorher deklariert werden muss}
   \label{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss}
 \end{code}
@@ -111,28 +136,28 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 % Unsichtbares return
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_no_return_value.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/verbose_fun_call_no_return_value.picoc}
   \caption{PicoC-Code für Funktionsaufruf ohne Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.picoc_mon}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_no_return_value.picoc_mon}
   \caption{PicoC-Mon Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti_blocks}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_no_return_value.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_no_return_value.reti}
   \caption{RETI-Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
@@ -141,28 +166,28 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_with_return_value.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/verbose_fun_call_with_return_value.picoc}
   \caption{PicoC-Code für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_with_return_value.picoc_mon}
   \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti_blocks}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_with_return_value.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti}
+  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_with_return_value.reti}
   \caption{RETI-Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
@@ -171,14 +196,14 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/verbose_fun_call_by_sharing_array.picoc}
   \caption{PicoC-Code für Call by Sharing für Arrays}
   \label{code:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/verbose_fun_call_by_sharing_array.picoc_mon}
   \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
   \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
 \end{code}
@@ -187,14 +212,14 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 % https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15,24}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15,24}}]{./code_examples/verbose_fun_call_by_sharing_array.st}
   \caption{Symboltabelle für Call by Sharing für Arrays}
   \label{code:symboltabelle_für_call_by_sharing_für_arrays}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/verbose_fun_call_by_sharing_array.reti_blocks}
   \caption{RETI-Block Pass für Call by Sharing für Arrays}
   \label{code:reti_blocks_pass_für_call_by_sharing_für_arrays}
 \end{code}
@@ -205,7 +230,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/example_fun_call_by_value_struct.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/verbose_fun_call_by_value_struct.picoc}
   \caption{PicoC-Code für Call by Value für Structs}
   \label{code:picoc_code_für_call_by_value_für_structs}
 \end{code}
@@ -214,7 +239,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/verbose_fun_call_by_value_struct.picoc_mon}
   \caption{PicoC-Mon Pass für Call by Value für Structs}
   \label{code:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
@@ -223,7 +248,7 @@ Bei mehreren Funktionen werden die \colorbold{Scopes} der unterschiedlichen \col
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/verbose_fun_call_by_value_struct.reti_blocks}
   \caption{RETI-Block Pass für Call by Value für Structs}
   \label{code:reti_blocks_pass_für_call_by_value_for_structs}
 \end{code}

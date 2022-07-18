@@ -1,0 +1,50 @@
+File 
+  Name './verbose_fun_call_with_return_value.reti_blocks', 
+  [
+    Block 
+      Name 'stack_fun.1', 
+      [
+        # // Return(Num('42')), 
+        # Exp(Num('42')), 
+        SUBI SP 1, 
+        LOADI ACC 42, 
+        STOREIN SP ACC 1, 
+        # Return(Stack(Num('1'))), 
+        LOADIN SP ACC 1, 
+        ADDI SP 1, 
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'main.0', 
+      [
+        # // Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack_fun'), [])), 
+        # // Assign(Name('var'), Call(Name('stack_fun'), [])), 
+        # // // Call(Name('stack_fun'), []), 
+        # StackMalloc(Num('2')), 
+        SUBI SP 2, 
+        # NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr'))), 
+        MOVE BAF ACC, 
+        ADDI SP 2, 
+        MOVE SP BAF, 
+        SUBI SP 2, 
+        STOREIN BAF ACC 0, 
+        LOADI ACC GoTo 
+                    Name 'addr@next_instr', 
+        ADD ACC CS, 
+        STOREIN BAF ACC -1, 
+        # Exp(GoTo(Name('stack_fun.1'))), 
+        Exp 
+          GoTo 
+            Name 'stack_fun.1', 
+        # RemoveStackframe(), 
+        MOVE BAF IN1, 
+        LOADIN IN1 BAF 0, 
+        MOVE IN1 SP, 
+        # Assign(Global(Num('0')), Stack(Num('1'))), 
+        LOADIN SP ACC 1, 
+        STOREIN DS ACC 0, 
+        ADDI SP 1, 
+        # Return(Empty()), 
+        LOADIN BAF PC -1
+      ]
+  ]

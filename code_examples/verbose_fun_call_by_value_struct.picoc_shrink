@@ -1,0 +1,49 @@
+File 
+  Name './verbose_fun_call_by_value_struct.picoc_shrink', 
+  [
+    StructDecl 
+      Name 'st', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'attr1', 
+        Alloc 
+          Writeable, 
+          ArrayDecl 
+            [
+              Num '2'
+            ], 
+            IntType 'int', 
+          Name 'attr2'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'stack_fun', 
+      [
+        Alloc 
+          Writeable, 
+          StructSpec 
+            Name 'st', 
+          Name 'param'
+      ], 
+      [], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp 
+          Alloc 
+            Writeable, 
+            StructSpec 
+              Name 'st', 
+            Name 'local_var', 
+        Exp 
+          Call 
+            Name 'stack_fun', 
+            [
+              Name 'local_var'
+            ]
+      ]
+  ]

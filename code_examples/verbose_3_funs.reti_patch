@@ -1,0 +1,35 @@
+File 
+  Name './verbose_3_funs.reti_patch', 
+  [
+    Block 
+      Name 'start.3', 
+      [
+        # // Exp(GoTo(Name('main.2'))), 
+        # // not included Exp(GoTo(Name('main.2')))
+      ], 
+    Block 
+      Name 'main.2', 
+      [
+        # Return(Empty()), 
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'fun1.1', 
+      [
+        # Return(Empty()), 
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'fun2.0', 
+      [
+        # // Return(Num('1')), 
+        # Exp(Num('1')), 
+        SUBI SP 1, 
+        LOADI ACC 1, 
+        STOREIN SP ACC 1, 
+        # Return(Stack(Num('1'))), 
+        LOADIN SP ACC 1, 
+        ADDI SP 1, 
+        LOADIN BAF PC -1
+      ]
+  ]

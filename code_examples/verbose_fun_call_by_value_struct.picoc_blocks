@@ -1,0 +1,57 @@
+File 
+  Name './verbose_fun_call_by_value_struct.picoc_blocks', 
+  [
+    StructDecl 
+      Name 'st', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'attr1', 
+        Alloc 
+          Writeable, 
+          ArrayDecl 
+            [
+              Num '2'
+            ], 
+            IntType 'int', 
+          Name 'attr2'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'stack_fun', 
+      [
+        Alloc 
+          Writeable, 
+          StructSpec 
+            Name 'st', 
+          Name 'param'
+      ], 
+      [
+        Block 
+          Name 'stack_fun.1', 
+          []
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            Exp 
+              Alloc 
+                Writeable, 
+                StructSpec 
+                  Name 'st', 
+                Name 'local_var', 
+            Exp 
+              Call 
+                Name 'stack_fun', 
+                [
+                  Name 'local_var'
+                ]
+          ]
+      ]
+  ]

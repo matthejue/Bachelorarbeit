@@ -42,20 +42,24 @@ compile-verbose:
 		picoc_compiler $$(cat ./most_used_compile_opts.txt) -c $(DEBUG) -v $$file; \
 	done
 
+compile-all: compile-verbose compile-example
+
 interpret:
 	for file in *$(TESTNAME_BASE)*.picoc; do \
 		picoc_compiler $$(cat ./most_used_interpret_opts.txt) -c $(DEBUG) $(VERBOSE) $$file; \
 	done
 
 interpret-example:
-	for file in *$(TESTNAME_BASE)*.picoc; do \
+	for file in example*$(TESTNAME_BASE)*.picoc; do \
 		picoc_compiler $$(cat ./most_used_interpret_opts.txt) -c $(DEBUG) -v -e $$file; \
 	done
 
 interpret-verbose:
-	for file in *$(TESTNAME_BASE)*.picoc; do \
+	for file in verbose*$(TESTNAME_BASE)*.picoc; do \
 		picoc_compiler $$(cat ./most_used_interpret_opts.txt) -c $(DEBUG) -v $$file; \
 	done
+
+interpret-all: interpret-verbose interpret-example
 
 show:
 ifeq ($(PAGES),5)

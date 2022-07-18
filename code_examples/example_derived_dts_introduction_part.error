@@ -1,9 +1,0 @@
-[1m[37mexample_derived_dts_introduction_part.picoc:[35m6:2: [33mDatatypeMismatch:[0m Error occured at Node [31mRef Name 'complex_var'[39m
-  struct ar_with_len st_ar[3];
-  int *(*complex_var)[3];
-  &complex_var;
-  [31m^[0m             
-  [31m[0m              
-}
-
-void fun() {

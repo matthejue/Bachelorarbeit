@@ -1,0 +1,52 @@
+File 
+  Name './verbose_fun_call_by_sharing_array.reti_blocks', 
+  [
+    Block 
+      Name 'stack_fun.1', 
+      [
+        # // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('param1'))), 
+        # // Exp(Alloc(Writeable(), ArrayDecl([Num('3')], IntType('int')), Name('param2'))), 
+        # Return(Empty()), 
+        LOADIN BAF PC -1
+      ], 
+    Block 
+      Name 'main.0', 
+      [
+        # // Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var1'))), 
+        # // Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var2'))), 
+        # // Exp(Call(Name('stack_fun'), [Name('local_var1'), Name('local_var2')])), 
+        # // // Call(Name('stack_fun'), [Name('local_var1'), Name('local_var2')]), 
+        # StackMalloc(Num('2')), 
+        SUBI SP 2, 
+        # Ref(Global(Num('0'))), 
+        SUBI SP 1, 
+        LOADI IN1 0, 
+        ADD IN1 DS, 
+        STOREIN SP IN1 1, 
+        # Ref(Global(Num('6'))), 
+        SUBI SP 1, 
+        LOADI IN1 6, 
+        ADD IN1 DS, 
+        STOREIN SP IN1 1, 
+        # NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr'))), 
+        MOVE BAF ACC, 
+        ADDI SP 4, 
+        MOVE SP BAF, 
+        SUBI SP 4, 
+        STOREIN BAF ACC 0, 
+        LOADI ACC GoTo 
+                    Name 'addr@next_instr', 
+        ADD ACC CS, 
+        STOREIN BAF ACC -1, 
+        # Exp(GoTo(Name('stack_fun.1'))), 
+        Exp 
+          GoTo 
+            Name 'stack_fun.1', 
+        # RemoveStackframe(), 
+        MOVE BAF IN1, 
+        LOADIN IN1 BAF 0, 
+        MOVE IN1 SP, 
+        # Return(Empty()), 
+        LOADIN BAF PC -1
+      ]
+  ]

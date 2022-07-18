@@ -337,12 +337,6 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 \label{tab:picoc_knoten_teil_2}
 \end{table}
 
-\begin{Definition}{Location}{location}
-  Kollektiver Begriff für \colorbold{Variablen}, \colorbold{Attribute} bzw. \colorbold{Elemente} von Variablen bestimmter Datentypen, \colorbold{Speicherbereiche auf dem Stack}, die \colorbold{temporäre Zwischenergebnisse} speichern und \colorbold{Register}.
-
-  Im Grunde genommen alles, was mit einem \colorbold{Programm zu tuen} hat und irgendwo \colorbold{gespeichert} ist.\footcite{g_siek_course_2022}
-\end{Definition}
-
 \begin{table}[H]
   \center
   \begin{NiceTabular}{X[7]X[10]}[rules/color=PrimaryColor]
@@ -353,10 +347,10 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \textbf{\textcolor{white}{PiocC-Knoten}} & \textbf{\textcolor{white}{Beschreibung}} \\
   \smalltt{Struct(assigns, \textcolor{gray!90!black}{datatype})} & Container für den \colorbold{Initializer} eines \colorbold{Structs}, z.B \smalltt{\{.<attr1>=\{1, 2\}, .<attr2>=\{3, 4\}\}}, dessen Eintrag \smalltt{assigns} eine Liste von \smalltt{Assign(lhs, exp)} ist mit einer Zuordnung eines \colorbold{Attributezeichners}, zu einem weiteren Initializer für eine \colorbold{Array-Dimension} oder zu einem Initializer für ein \colorbold{Struct} oder zu einem \colorbold{Logischen Ausdruck}. Des Weiteren besitzt er ein  \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{datatype}, welches für den \colorbold{PicoC-Mon Pass} Informationen transportiert, die für \colorbold{Fehlermeldungen} wichtig sind. \\
   \smalltt{StructDecl(name, allocs)} & Container für die Deklaration eines \colorbold{selbstdefinierten Structdatentyps}, z.B. \smalltt{struct <var> \{<datatype> <attr1>; <datatype> <attr2>;\};}, wobei \smalltt{name} der \colorbold{Bezeichner} des Structdatentyps ist und \smalltt{allocs} eine Liste von Bezeichnern der \colorbold{Attribute} des Structdatentyps mit dazugehörigem \colorbold{Datentyp}, wofür sich der \colorbold{Container-Knoten} \smalltt{Alloc(type\_qual, datatype, name)} sehr gut als \colorbold{Container} eignet. \\
-  \smalltt{If(exp, stmts\_goto)} & Container für ein \colorbold{If Statement} \smalltt{if(<exp>) \{ <stmts> \}} inklusive  \colorbold{Condition}  \smalltt{exp} und einem  \colorbold{Branch}  \smalltt{stmts\_goto}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
-  \smalltt{IfElse(exp, stmts\_goto1, stmts\_goto2)} & Container für ein \colorbold{If-Else Statement} \smalltt{if(<exp>) \{ <stmts2> \} else \{ <stmts2> \}} inklusive \colorbold{Codition} \smalltt{exp} und $2$ \colorbold{Branches} \smalltt{stmts\_goto1} und \smalltt{stmts\_goto2}, die zwei Alternativen Darstellen in denen jeweils \colorbold{Listen von Statements} oder  \smalltt{GoTo(Name('block.xyz'))}'s stehen können. \\
-  \smalltt{While(exp, stmts\_goto)} & Container für ein \colorbold{While-Statement} \smalltt{while(<exp>) \{ <stmts> \}} inklusive  \colorbold{Condition}  \smalltt{exp} und einem \colorbold{Branch}  \smalltt{stmts\_goto}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
-  \smalltt{DoWhile(exp, stmts\_goto)} & Container für ein \colorbold{Do-While-Statement} \smalltt{do \{ <stmts> \} while(<exp>);} inklusive  \colorbold{Condition}  \smalltt{exp} und einem \colorbold{Branch}  \smalltt{stmts\_goto}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
+  \smalltt{If(exp, stmts)} & Container für ein \colorbold{If Statement} \smalltt{if(<exp>) \{ <stmts> \}} inklusive  \colorbold{Condition}  \smalltt{exp} und einem  \colorbold{Branch}  \smalltt{stmts}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
+  \smalltt{IfElse(exp, stmts1, stmts2)} & Container für ein \colorbold{If-Else Statement} \smalltt{if(<exp>) \{ <stmts2> \} else \{ <stmts2> \}} inklusive \colorbold{Codition} \smalltt{exp} und $2$ \colorbold{Branches} \smalltt{stmts1} und \smalltt{stmts2}, die zwei Alternativen Darstellen in denen jeweils \colorbold{Listen von Statements} oder  \smalltt{GoTo(Name('block.xyz'))}'s stehen können. \\
+  \smalltt{While(exp, stmts)} & Container für ein \colorbold{While-Statement} \smalltt{while(<exp>) \{ <stmts> \}} inklusive  \colorbold{Condition}  \smalltt{exp} und einem \colorbold{Branch}  \smalltt{stmts}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
+  \smalltt{DoWhile(exp, stmts)} & Container für ein \colorbold{Do-While-Statement} \smalltt{do \{ <stmts> \} while(<exp>);} inklusive  \colorbold{Condition}  \smalltt{exp} und einem \colorbold{Branch}  \smalltt{stmts}, indem eine \colorbold{Liste von Statements} stehen kann oder ein einzelnes \smalltt{GoTo(Name('block.xyz'))}. \\
   \smalltt{Call(name, exps)} & Container für einen \colorbold{Funktionsaufruf}: \smalltt{fun\_name(exps)}, wobei \smalltt{name} der \colorbold{Bezeichner} der Funktion ist, die aufgerufen werden soll und \smalltt{exps} eine \colorbold{Liste von Argumenten} ist, die an die Funktion übergeben werden soll. \\
   \smalltt{Return(exp)} & Container für ein \smalltt{Return-Statement}: \smalltt{return <exp>}, wobei das  \colorbold{Attribut}  \smalltt{exp} einen  \colorbold{Logischen Ausdruck} darstellt, dessen Ergebnis vom  \colorbold{Return-Statement} zurückgegeben wird. \\
   \smalltt{FunDecl(datatype, name, allocs)} & Container für eine \colorbold{Funktionsdeklaration}, z.B. \smalltt{<datatype> <fun\_name>(<datatype> <param1>, <datatype> <param2>)}, wobei \smalltt{datatype} der  \colorbold{Rückgabewert} der Funktion ist,  \smalltt{name} der  \colorbold{Bezeichner} der Funktion ist und \smalltt{allocs} die \colorbold{Parameter} der Funktion sind, wobei der \colorbold{Container-Knoten} \smalltt{Alloc(type\_spec, datatype, name)} als Cotainer für die Parameter dient. \\
@@ -378,7 +372,7 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
   \smalltt{NewStackframe(fun\_name, goto\_after\_call)} & Container für die \colorbold{Erstellung} eines neuen \colorbold{Stackframes}, wobei \smalltt{fun\_name} der Bezeichner der Funktion ist, für die ein neuer \colorbold{Stackframe} erstellt werden soll und später dazu dient den \colorbold{Block} dieser Funktion zu finden, weil dieser für den weiteren Kompiliervorang wichtige Information in seinen \textcolor{gray!90!black}{versteckte Attribute} angehängt hat und \smalltt{goto\_after\_call} ein \smalltt{GoTo(Name('addr@next\_instr'))} ist, welches später durch die \colorbold{Adresse} der Instruction, die direkt auf die \colorbold{Jump Instruction} folgt, ersetzt wird. \\
   \smalltt{RemoveStackframe()} & Container für das \colorbold{Entfernen} des aktuellen \colorbold{Stackframes}. \\
   \smalltt{File(name, decls\_defs\_blocks)} & Container für alle \colorbold{Funkionen} oder \colorbold{Blöcke}, welche eine Datei als Ursprung haben, wobei \smalltt{name} der \colorbold{Dateiname} der Datei ist, die erstellt wird und \smalltt{decls\_defs\_blocks} eine Liste von \colorbold{Funktionen} bzw. \colorbold{Blöcken} ist. \\
-  \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})} & Container für \colorbold{Statements}, der auch als \colorbold{Block} bezeichnet wird, wobei das Attribut \smalltt{name} der Bezeichners des \colorbold{Labels} des Blocks ist und \smalltt{stmts\_instrs} eine \colorbold{Liste von Statements} oder \colorbold{Instructions}. Zudem besitzt er noch $3$ \textcolor{gray!90!black}{versteckte Attribute}, wobei  \smalltt{instrs\_before} die Zahl der \colorbold{Instructions} vor diesem \colorbold{Block} zählt,  \smalltt{num\_instrs} die Zahl der Instructions ohne Kommentare in diesem Block zählt, \smalltt{param\_size} die voraussichtliche Anzahl an Speicherzellen aufaddiert, die für die \colorbold{Parameter} der Funktion belegt werden müssen und \smalltt{local\_vars\_size} die voraussichtliche Anzahl an Speicherzellen aufaddiert, die für die \colorbold{lokalen Variablen} der Funktion belegt werden müssen. \\
+  \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})} & Container für \colorbold{Statements}, der auch als \colorbold{Block} bezeichnet wird, wobei das Attribut \smalltt{name} der Bezeichners des \colorbold{Labels} (Definition~\ref{def:label}) des Blocks ist und \smalltt{stmts\_instrs} eine \colorbold{Liste von Statements} oder \colorbold{Instructions}. Zudem besitzt er noch $3$ \textcolor{gray!90!black}{versteckte Attribute}, wobei  \smalltt{instrs\_before} die Zahl der \colorbold{Instructions} vor diesem \colorbold{Block} zählt,  \smalltt{num\_instrs} die Zahl der Instructions ohne Kommentare in diesem Block zählt, \smalltt{param\_size} die voraussichtliche Anzahl an Speicherzellen aufaddiert, die für die \colorbold{Parameter} der Funktion belegt werden müssen und \smalltt{local\_vars\_size} die voraussichtliche Anzahl an Speicherzellen aufaddiert, die für die \colorbold{lokalen Variablen} der Funktion belegt werden müssen. \\
   \smalltt{GoTo(name)} & Container für ein \smalltt{Goto} zu einem anderen \colorbold{Block}, wobei das Attribut \smalltt{name} der Bezeichner des \colorbold{Labels} des Blocks ist zu dem Gesprungen werden soll. \\
   \smalltt{SingleLineComment(prefix, content)} & Container für einen \colorbold{Kommentar}, den der Compiler selber während des \colorbold{Kompiliervorangs} erstellt, der im \colorbold{RETI-Interpreter} selbst später \colorbold{nicht} sichtbar sein wird, aber in den \colorbold{Immediate}-Dateien, welche die \colorbold{Abstract Syntax Trees} nach den verschiedenen \colorbold{Passes} enthalten. \\
   \smalltt{RETIComment(value)} & Container für einen \colorbold{Kommentar} im Code der Form: \smalltt{// \# comment}, der im \colorbold{RETI-Intepreter} später sichtbar sein wird und zur Orientierung genutzt werden kann, allerdings in einer tatsächlichen Implementierung einer \colorbold{RETI-CPU} \colorbold{nicht umsetzbar} ist und auch nicht sinnvoll wäre umzusetzen. Der \colorbold{Kommentar} ist im Attribut \colorbold{value}, welches jeder Knoten besitzt gespeichert. \\
@@ -387,6 +381,18 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 \caption{PicoC-Knoten Teil 4}
 \label{tab:picoc_knoten_teil_4}
 \end{table}
+
+
+\begin{Definition}{Label}{label}
+  Durch einen \colorbold{Bezeichner} \colorbold{eindeutig} zuordenbares \colorbold{Sprungziel} im Programmcode.\footcite{tab:picoc_knoten_teil_4}
+\end{Definition}
+
+\begin{Definition}{Location}{location}
+  Kollektiver Begriff für \colorbold{Variablen}, \colorbold{Attribute} bzw. \colorbold{Elemente} von Variablen bestimmter Datentypen, \colorbold{Speicherbereiche auf dem Stack}, die \colorbold{temporäre Zwischenergebnisse} speichern und \colorbold{Register}.
+
+  Im Grunde genommen alles, was mit einem \colorbold{Programm zu tuen} hat und irgendwo \colorbold{gespeichert} ist.\footcite{g_siek_course_2022}
+\end{Definition}
+
 \begin{Special_Paragraph}
   Die \textcolor{gray!90!black}{ausgegrauten} Attribute der PicoC-Nodes sind \textcolor{gray!90!black}{versteckte Attribute}, die \colorbold{nicht} direkt bei der Erstellung der  \colorbold{PicoC-Nodes} mit einem Wert \colorbold{initialisiert} werden, sondern im \colorbold{Verlauf der Kompilierung} beim Durchlaufen der verschiedenen Passes etwas zugewiesen bekommen, dass im weiteren Kompiliervorgang \colorbold{Informationen} transportiert, die später im Kompiliervorgang nicht mehr so leicht zugänglich wären.
 
@@ -585,7 +591,8 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \subsection{Passes}
 
 \subsubsection{PicoC-Shrink Pass}
-\label{picoc_shrink_pass}
+\newlineparagraph{Zweck}
+\label{sec:picoc_shrink_pass_zweck}
 % dieser Pass existiert nur wegen der Erweiterungen
 
 \newlineparagraph{Codebeispiel}
@@ -612,6 +619,10 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \end{code}
 
 \subsubsection{PicoC-Blocks Pass}
+\newlineparagraph{Zweck}
+\label{sec:picoc_blocks_pass_zweck}
+Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} mithilfe von Blöcken, \smalltt{GoTo(lable)}-Statements und nur noch \smalltt{IF-Else}-Container-Knoten für die \colorbold{Condition} umzusetzen.
+
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule
@@ -635,6 +646,8 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \end{code}
 
 \subsubsection{PicoC-Mon Pass}
+\newlineparagraph{Zweck}
+\label{sec:picoc_mon_pass_zweck}
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
   \toprule
@@ -672,6 +685,8 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \end{code}
 
 \subsubsection{RETI-Blocks Pass}
+\newlineparagraph{Zweck}
+\label{sec:reti_blocks_pass_zweck}
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
   \toprule
@@ -695,6 +710,8 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \end{code}
 
 \subsubsection{RETI-Patch Pass}
+\newlineparagraph{Zweck}
+\label{sec:reti_patch_pass_zweck}
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_patch]
   \toprule
@@ -712,6 +729,8 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \end{code}
 
 \subsubsection{RETI Pass}
+\newlineparagraph{Zweck}
+\label{sec:reti_pass_zweck}
 \newlineparagraph{Konkrette und Abstrakte Syntax}
 
 % dieser Pass entspricht Assembler bis auf die Sache mit binärer Repräsentation, was der PicoC-Compiler garnicht macht
@@ -744,7 +763,7 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 \otherform{\dq LOADI\dq\enspace reg\enspace num}{}
 \otherform{\dq STORE\dq\enspace reg\enspace num\gralt \dq STOREIN\dq\enspace arg\enspace arg num}{}
 \otherform{\dq MOVE\dq\enspace reg\enspace reg}{}
-\otherform{\dq JUMP\dq\enspace rel\enspace num\gralt INT\enspace num\gralt RTI}{}
+\otherform{\dq JUMP\dq rel\enspace num\gralt INT\enspace num\gralt RTI}{}
 \otherform{\dq CALL\dq\enspace \dq INPUT\dq\enspace  reg\gralt \dq CALL\dq\enspace \dq PRINT\dq\enspace reg}{}
 \firstcase{program}{name\enspace (instr\dq ;\dq )*}{}
 \bottomrule
