@@ -1,4 +1,4 @@
-// Author: Christoph Scholl, from the Operating Systems Lecture
+// based on a example program from Christoph Scholl's Operating Systems lecture
 
 void main() {
   int n = 4;

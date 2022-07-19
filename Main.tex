@@ -70,6 +70,13 @@
   enhanced, breakable, colframe=PrimaryColor,colback=white, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, sharpish corners, drop fuzzy shadow, overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
   }
 
+  \DeclareTotalTCBox{\inlinebox}{ s v }
+  {verbatim,colback=SecondaryColor,colframe=PrimaryColor}
+  {\IfBooleanTF{#1}%
+  {\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}\lstinline[keywordstyle=\color{blue!35!white}\bfseries]^#2^}%
+  {\lstinline[keywordstyle=\color{blue!35!white}\bfseries]^#2^}}
+  % {verbatim,IfBooleanTF={#1}{colback=white, colframe=PrimaryColor, colupper=PrimaryColor}{colback=SecondaryColor,colframe=PrimaryColor}}
+
   \include{./content/Motivation}                      % ./content/Motivation.tex
   \include{./content/Einführung}                      % ./content/Einführung.tex
   \include{./content/Implementierung1_Tables_DT_AST}  % ./content/Implementierung1_Tables_DT_AST.tex

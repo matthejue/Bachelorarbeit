@@ -566,20 +566,11 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 
 \section{Code Generierung}
 \subsection{Übersicht}
-
 Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse}, wird in diesem Kapitel aus den verschiedenen \colorbold{Kompositionen} von \colorbold{Container-Knoten} und \colorbold{Token-Knoten} im Abstract Syntax Tree das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
 
-Im Unterkapitel~\ref{sec:passes} werden die unterschiedlichen \colorbold{Passes} der PicoC-Compilers erklärt, die aus dem \colorbold{Abstract Syntax Tree}, der in der \colorbold{Syntaktischen Analyse} generiert wurde neue \colorbold{Abstract Syntax Trees} erzeugen, die mit jedem \colorbold{Pass} der Syntax des \colorbold{RETI-Code's} immer ähnlicher werden. Jeder Pass sollte dabei möglichst eine Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck es \colorbold{Dervivation Tree} in der Syntaktischen Analyse war eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
-
-In den darauffolgenden Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} werden einzelne \colorbold{Aspekte}, die Thema dieser \colorbold{Bachelorarbeit} sind \colorbold{genauer betrachtet} und erklärt, die im Unterkapitel~\ref{sec:passes} nicht ausreichend vertieft wurden. Viele der verwendenten \colorbold{Ansätze} zur Lösung dieser Probleme basieren auf der Vorlesung~\cite{scholl_betriebssysteme_2020} und wurden in dieser Bachelorarbeit weiter ausgearbeitet, wo es nötig war, sodass diese mit dem \colorbold{PicoC-Compiler} auch in der \colorbold{Praxis} implementiert werden konnten.
-
-Um die verschiedenen Aspekte besser erklären zu können, wurden \colorbold{Codebeispiele} verwendet, in welchen ein kleines repräsentatives \colorbold{PicoC-Programm} für einen spezifischen Aspekt in wichtigen \colorbold{Zwischenstadien der Kompilierung} gezeigt wird\footnote{Also die verschiedenen in den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees}, sofern der \colorbold{Pass} für den gezeigten Aspekt relevant ist}. Dazu wurde die Codebeispiele mithilfe der der beiliegenden \smalltt{Makefile} und dem Befehl \mintinline{bash}{make compiple-all} kompiliert, welche
-
-% nicht verändet
-
-% Dateie eingelesen
-
 % Unterscheid zur Architektur aus dem Bachelorprojekt
+
+Beim \colorbold{PicoC-Compiler} handelt es sich um einen \colorbold{Cross-Compiler} (Definiton~\ref{def:cross_compiler}). Damit \colorbold{RETI-Code} erzeugt werden kann, der auf der \colorbold{RETI-Architektur} läuft, muss erst, wie im \colorbold{T-Diagram} (siehe Unterkapitel~\ref{sec:t_diagram}) in Abbildung~\ref{fig:cross_compiler_kompiliervorgang_ausgeschrieben} zu sehen ist, der \colorbold{Python-Code} des \colorbold{PicoC-Compilers} mittels eines Compilers, der z.B. auf einer $\mathtt{X_{86\_64}}$-Architektur laufen könnte zu \colorbold{Bytecode} kompiliert werden. Dieser \colorbold{Bytecode} wird dann von der \colorbold{Python-Virtual-Machine} (PVM) interpretiert, welche wiederum auf einer $\mathtt{X_{86\_64}}$-Architektur laufen könnte. Und selbst dieses \colorbold{T-Diagram} könnte noch ausführlicher ausgedrückt werden, indem nachgeforscht wird, in welcher Sprache eigentlich die \colorbold{Python-Virtual-Machine} geschrieben war, bevor sie zu $\mathtt{X_{86\_64}}$ kompiliert wurde usw.
 
 % Cross Compiler
 % https://tex.stackexchange.com/questions/8625/force-figure-placement-in-text
@@ -587,19 +578,34 @@ Um die verschiedenen Aspekte besser erklären zu können, wurden \colorbold{Code
   \centering
   \includegraphics[width=0.5\linewidth]{./figures/summarized_cross_compiler.png}
   \caption{Cross-Compiler Kompiliervorgang ausgeschrieben}
+  \label{fig:cross_compiler_kompiliervorgang_ausgeschrieben}
 \end{figure}
+
+Dieses längliche \colorbold{T-Diagram} in Abbildung~\ref{fig:cross_compiler_kompiliervorgang_ausgeschrieben} lässt sich zusammenfassen, sodass man das \colorbold{T-Diagram} in Abbildung~\ref{fig:cross_compiler_kompiliervorgang_kurzform} erhält, in welcher direkt angegeben ist, dass der \colorbold{PicoC-Compiler} in $\mathtt{X_{86\_64}}$-Maschienensprache geschrieben ist.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.33\linewidth]{./figures/compiliervorang_mit_machiene.png}
   \caption{Cross-Compiler Kompiliervorgang Kurzform}
+  \label{fig:cross_compiler_kompiliervorgang_kurzform}
 \end{figure}
+
+Nachdem der Kompilierprozess des \colorbold{PicoC-Compiler} im \colorbold{vertikalen} nun genauer angesehen wurde, wird der Kompilierprozess im Folgenden im \colorbold{horinzontalen}, auf der Ebene der verschiedenen \colorbold{Passes} genauer betrachtet. Die Abbildung~\ref{fig:architektur_mit_allen_passes_ausgeschrieben} gibt einen guten Überblick über alle \colorbold{Passes} und wie diese in der \colorbold{Pipe-Architektur} des \colorbold{PicoC-Compilers} aufeinanderfolgen. In der \colorbold{Pipe-Architektur} nutzt der jeweils nächste \colorbold{Pass} den generierten \colorbold{Abstract Syntax Tree} des vorherigen Passes oder der Syntaktischen Analyse, um einen eigenen \colorbold{Abstract Syntax Tree} in seiner eigenen \colorbold{Sprache} zu generieren.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{./figures/passes.png}
   \caption{Architektur mit allen Passes ausgeschrieben}
+  \label{fig:architektur_mit_allen_passes_ausgeschrieben}
 \end{figure}
+
+Im Unterkapitel~\ref{sec:passes} werden die unterschiedlichen \colorbold{Passes} des PicoC-Compilers erklärt. Die von den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees} werden dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} des \colorbold{RETI-Code's} immer ähnlicher werden. Jeder Pass sollte dabei möglichst eine Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck des \colorbold{Dervivation Tree} in der Syntaktischen Analyse war, eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
+
+In den darauffolgenden Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} werden einzelne \colorbold{Aspekte}, die Thema dieser \colorbold{Bachelorarbeit} sind \colorbold{genauer betrachtet} und erklärt, die im Unterkapitel~\ref{sec:passes} nicht ausreichend vertieft wurden. Viele der verwendenten \colorbold{Ansätze} zur Lösung dieser Probleme basieren auf der Vorlesung~\cite{scholl_betriebssysteme_2020} und wurden in dieser Bachelorarbeit weiter ausgearbeitet, wo es nötig war, sodass diese mit dem \colorbold{PicoC-Compiler} auch in der \colorbold{Praxis} implementiert werden konnten.
+
+% https://tex.stackexchange.com/questions/167380/how-to-refer-to-a-footnote
+Um die verschiedenen Aspekte besser erklären zu können, werden \colorbold{Codebeispiele} verwendet, in welchen ein kleines repräsentatives \colorbold{PicoC-Programm} für einen spezifischen Aspekt in wichtigen \colorbold{Zwischenstadien der Kompilierung} gezeigt wird\footnote{Also die verschiedenen in den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees}, sofern der \colorbold{Pass} für den gezeigten Aspekt relevant ist.}. Die \colorbold{Codebeispiele} wurden alle mit dem \colorbold{PicoC-Compiler} kompiliert und danach \colorbold{nicht} mehr \colorbold{verändert}, also genauso, wie der \colorbold{PicoC-Compiler} sie kompiliert aus den Dateien in dieses Dokument eingelesen. Alle hier zur Repräsentation verwendeten \colorbold{PicoC-Programme} lassen sich unter dem \footnoteurl{https://github.com/matthejue/Bachelorarbeit/tree/master/code_examples} finden und mithilfe der im Ordner \inlinebox{/code_examples} beiliegenden \inlinebox{Makefile} und dem Befehl \inlinebox*{make compile-all} genauso \colorbold{kompilieren}, wie sie hier dargestellt sind\footnote{Es wurden zu diesem Zweck spezielle neue \colorbold{Command-line Optionen} erstellt, die bestimmte Kommentare \colorbold{herausfiltern} und manche Container-Knoten \colorbold{einzeilig} machen, damit die generierten \colorbold{Abstract Syntax Trees} in den verscchiedenen Zwischenstufen der Kompilierung \colorbold{nicht} zu langgestreckt und \colorbold{überfüllt} mit Kommentaren sind.}.
+
 
 \subsection{Passes}
 \label{sec:passes}
@@ -635,6 +641,7 @@ Um die verschiedenen Aspekte besser erklären zu können, wurden \colorbold{Code
 \subsubsection{PicoC-Blocks Pass}
 \newlineparagraph{Zweck}
 \label{sec:picoc_blocks_pass_zweck}
+
 Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} mithilfe von Blöcken, \smalltt{GoTo(lable)}-Statements und nur noch \smalltt{IF-Else}-Container-Knoten für die \colorbold{Condition} umzusetzen.
 
 \newlineparagraph{Abstrakte Syntax}
