@@ -1,3 +1,5 @@
+# // Exp(GoTo(Name('main.1')))
+# // not included Exp(GoTo(Name('main.1')))
 # StackMalloc(Num('2'))
 SUBI SP 2;
 # Ref(Global(Num('0')))
@@ -14,6 +16,7 @@ STOREIN BAF ACC 0;
 LOADI ACC 14;
 ADD ACC CS;
 STOREIN BAF ACC -1;
+# Exp(GoTo(Name('stack_fun.0')))
 JUMP 5;
 # RemoveStackframe()
 MOVE BAF IN1;

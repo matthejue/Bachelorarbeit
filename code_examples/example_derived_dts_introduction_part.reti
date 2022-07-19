@@ -1,3 +1,6 @@
+# // Exp(GoTo(Name('main.1')))
+# // not included Exp(GoTo(Name('main.1')))
+# // Exp(Ref(Name('complex_var')))
 # Ref(Global(Num('9')))
 SUBI SP 1;
 LOADI IN1 9;
@@ -5,6 +8,7 @@ ADD IN1 DS;
 STOREIN SP IN1 1;
 # Return(Empty())
 LOADIN BAF PC -1;
+# // Exp(Ref(Name('complex_var')))
 # Ref(Stackframe(Num('9')))
 SUBI SP 1;
 MOVE BAF IN1;

@@ -1,3 +1,5 @@
+# // Exp(GoTo(Name('main.2')))
+# // not included Exp(GoTo(Name('main.2')))
 # // If(Num('42'), [])
 # // IfElse(Num('42'), [], [])
 # Exp(Num('42'))
@@ -8,5 +10,8 @@ STOREIN SP ACC 1;
 LOADIN SP ACC 1;
 ADDI SP 1;
 JUMP== 1;
+# // not included Exp(GoTo(Name('if.1')))
+# Exp(GoTo(Name('if_else_after.0')))
+# // not included Exp(GoTo(Name('if_else_after.0')))
 # Return(Empty())
 LOADIN BAF PC -1;

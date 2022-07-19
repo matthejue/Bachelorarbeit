@@ -3,7 +3,10 @@ File
   [
     Block 
       Name 'start.2', 
-      [], 
+      [
+        # // Exp(GoTo(Name('main.1')))
+        # // not included Exp(GoTo(Name('main.1')))
+      ], 
     Block 
       Name 'main.1', 
       [
@@ -23,6 +26,7 @@ File
         LOADI ACC GoTo(Name('addr@next_instr'));
         ADD ACC CS;
         STOREIN BAF ACC -1;
+        # Exp(GoTo(Name('stack_fun.0')))
         Exp(GoTo(Name('stack_fun.0')))
         # RemoveStackframe()
         MOVE BAF IN1;

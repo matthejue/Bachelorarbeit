@@ -23,6 +23,7 @@ File
         STOREIN DS ACC 1;
         ADDI SP 1;
         # // While(Num('1'), [])
+        # Exp(GoTo(Name('condition_check.4')))
         Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 
@@ -44,6 +45,7 @@ File
       [
         # // If(Atom(Name('n'), Eq('=='), Num('1')), [])
         # // IfElse(Atom(Name('n'), Eq('=='), Num('1')), [], [])
+        # Exp(Global(Num('0')))
         SUBI SP 1;
         LOADIN DS ACC 0;
         STOREIN SP ACC 1;
@@ -76,9 +78,11 @@ File
       Name 'if_else_after.1', 
       [
         # // Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res')))
+        # Exp(Global(Num('0')))
         SUBI SP 1;
         LOADIN DS ACC 0;
         STOREIN SP ACC 1;
+        # Exp(Global(Num('1')))
         SUBI SP 1;
         LOADIN DS ACC 1;
         STOREIN SP ACC 1;
@@ -93,6 +97,7 @@ File
         STOREIN DS ACC 1;
         ADDI SP 1;
         # // Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1')))
+        # Exp(Global(Num('0')))
         SUBI SP 1;
         LOADIN DS ACC 0;
         STOREIN SP ACC 1;
@@ -110,6 +115,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 0;
         ADDI SP 1;
+        # Exp(GoTo(Name('condition_check.4')))
         Exp(GoTo(Name('condition_check.4')))
       ], 
     Block 

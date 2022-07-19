@@ -1,3 +1,5 @@
+# // Exp(GoTo(Name('main.5')))
+# // not included Exp(GoTo(Name('main.5')))
 # // Assign(Name('n'), Num('4'))
 # Exp(Num('4'))
 SUBI SP 1;
@@ -17,6 +19,8 @@ LOADIN SP ACC 1;
 STOREIN DS ACC 1;
 ADDI SP 1;
 # // While(Num('1'), [])
+# Exp(GoTo(Name('condition_check.4')))
+# // not included Exp(GoTo(Name('condition_check.4')))
 # // IfElse(Num('1'), [], [])
 # Exp(Num('1'))
 SUBI SP 1;
@@ -26,8 +30,10 @@ STOREIN SP ACC 1;
 LOADIN SP ACC 1;
 ADDI SP 1;
 JUMP== 49;
+# // not included Exp(GoTo(Name('while_branch.3')))
 # // If(Atom(Name('n'), Eq('=='), Num('1')), [])
 # // IfElse(Atom(Name('n'), Eq('=='), Num('1')), [], [])
+# Exp(Global(Num('0')))
 SUBI SP 1;
 LOADIN DS ACC 0;
 STOREIN SP ACC 1;
@@ -48,12 +54,15 @@ ADDI SP 1;
 LOADIN SP ACC 1;
 ADDI SP 1;
 JUMP== 2;
+# // not included Exp(GoTo(Name('if.2')))
 # Return(Empty())
 LOADIN BAF PC -1;
 # // Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res')))
+# Exp(Global(Num('0')))
 SUBI SP 1;
 LOADIN DS ACC 0;
 STOREIN SP ACC 1;
+# Exp(Global(Num('1')))
 SUBI SP 1;
 LOADIN DS ACC 1;
 STOREIN SP ACC 1;
@@ -68,6 +77,7 @@ LOADIN SP ACC 1;
 STOREIN DS ACC 1;
 ADDI SP 1;
 # // Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1')))
+# Exp(Global(Num('0')))
 SUBI SP 1;
 LOADIN DS ACC 0;
 STOREIN SP ACC 1;
@@ -85,6 +95,7 @@ ADDI SP 1;
 LOADIN SP ACC 1;
 STOREIN DS ACC 0;
 ADDI SP 1;
+# Exp(GoTo(Name('condition_check.4')))
 JUMP -53;
 # Return(Empty())
 LOADIN BAF PC -1;

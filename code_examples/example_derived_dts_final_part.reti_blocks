@@ -33,6 +33,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 6;
         ADDI SP 1;
+        # // Exp(Subscr(Name('complex_var1'), Num('0')))
         # Ref(Global(Num('0')))
         SUBI SP 1;
         LOADI IN1 0;
@@ -50,6 +51,7 @@ File
         ADDI SP 1;
         STOREIN SP IN1 1;
         # // not included Exp(Stack(Num('1')))
+        # // Exp(Subscr(Name('complex_var2'), Num('0')))
         # Ref(Global(Num('2')))
         SUBI SP 1;
         LOADI IN1 2;
@@ -70,6 +72,7 @@ File
         LOADIN SP IN1 1;
         LOADIN IN1 ACC 0;
         STOREIN SP ACC 1;
+        # // Exp(Subscr(Name('complex_var3'), Num('0')))
         # Ref(Global(Num('6')))
         SUBI SP 1;
         LOADI IN1 6;

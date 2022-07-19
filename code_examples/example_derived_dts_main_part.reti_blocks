@@ -23,6 +23,7 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 1;
         ADDI SP 1;
+        # // Exp(Subscr(Subscr(Attr(Name('complex_var'), Name('ar')), Num('0')), BinOp(Num('2'), Sub('-'), Num('2'))))
         # Ref(Global(Num('1')))
         SUBI SP 1;
         LOADI IN1 1;

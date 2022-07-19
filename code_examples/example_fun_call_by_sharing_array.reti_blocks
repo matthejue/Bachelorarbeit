@@ -31,6 +31,7 @@ File
         LOADI ACC GoTo(Name('addr@next_instr'));
         ADD ACC CS;
         STOREIN BAF ACC -1;
+        # Exp(GoTo(Name('stack_fun.1')))
         Exp(GoTo(Name('stack_fun.1')))
         # RemoveStackframe()
         MOVE BAF IN1;

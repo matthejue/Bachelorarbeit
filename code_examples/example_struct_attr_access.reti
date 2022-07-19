@@ -1,3 +1,5 @@
+# // Exp(GoTo(Name('main.0')))
+# // not included Exp(GoTo(Name('main.0')))
 # // Assign(Name('st'), Struct([Assign(Name('x'), Num('4')), Assign(Name('y'), Num('2'))]))
 # Exp(Num('4'))
 SUBI SP 1;
@@ -13,6 +15,7 @@ STOREIN DS ACC 1;
 LOADIN SP ACC 2;
 STOREIN DS ACC 0;
 ADDI SP 2;
+# // Exp(Attr(Name('st'), Name('y')))
 # Ref(Global(Num('0')))
 SUBI SP 1;
 LOADI IN1 0;

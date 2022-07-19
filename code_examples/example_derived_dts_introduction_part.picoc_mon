@@ -4,12 +4,14 @@ File
     Block 
       Name 'main.1', 
       [
+        // Exp(Ref(Name('complex_var')))
         Ref(Global(Num('9')))
         Return(Empty())
       ], 
     Block 
       Name 'fun.0', 
       [
+        // Exp(Ref(Name('complex_var')))
         Ref(Stackframe(Num('9')))
         Return(Empty())
       ]
