@@ -42,7 +42,7 @@ SymbolTable
         datatype:               IntType('int')
         name:                   Name('var@fun2')
         value or address:       Num('0')
-        position:               Pos(Num('11'), Num('13'))
+        position:               Pos(Num('12'), Num('13'))
         size:                   Num('1')
       }
   ]

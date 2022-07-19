@@ -132,7 +132,7 @@ In dem Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_fun
 
 Die \colorbold{Deklaration} einer \colorbold{Funktion} erfolgt mithilfe der \colorbold{Symboltabelle}, die in Code~\ref{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} für das Beispiel in Code~\ref{code:picoc_code_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} dargestellt ist. Die \colorbold{Attribute} des \colorbold{Symbols} \smalltt{Symbols(type\_qual, datatype, name, val\_addr, pos, size)} werden wie üblich gesetzt. Dem \smalltt{datatype}-Attribut wird dabei einfach die komplette Komposition der \colorbold{Funktionsdeklaration} \smalltt{FunDecl(IntType('int'), Name('fun2'), [Alloc(Writeable(), IntType('int'), Name('var'))])} zugewiesen.
 
-Die Varaiblen \smalltt{var@main} und \smalltt{var@fun2} der \smalltt{main}-Funktion und der Funktion \smalltt{fun2} haben unterschiedliche \colorbold{Scopes} (Definition~\ref{def:scope}). Die \colorbold{Scopes} der \colorbold{Funktionen} werden mittels eines \colorbold{Suffix} \smalltt{\dq @<fun\_name>\dq} umgesetzt, der an den \colorbold{Bezeichner} \smalltt{var} drangehängt wird: \smalltt{var@<fun\_name>}. Dieser \colorbold{Suffix} wird geändert sobald beim \colorbold{Top-Down}\footnote{D.h. von der \colorbold{Wurzel} zu den \colorbold{Blättern} eines Baumes} Durchiterieren über den \colorbold{Abstract Syntax Tree} des aktuellen \colorbold{Passes} ein \colorbold{Funktionswechsel} eintritt und über die Statements der nächsten Funktion iteriert wird, für die der \colorbold{Suffix} der neuen Funktion \smalltt{FunDef(name, datatype, params, stmts)} angehängt wird, der aus dem \smalltt{name}-Attribut entnommen wird.
+Die Varaiblen \smalltt{var@main} und \smalltt{var@fun2} der \smalltt{main}-Funktion und der Funktion \smalltt{fun2} haben unterschiedliche \colorbold{Scopes} (Definition~\ref{def:scope}). Die \colorbold{Scopes} der \colorbold{Funktionen} werden mittels eines \colorbold{Suffix} \smalltt{\dq @<fun\_name>\dq} umgesetzt, der an den \colorbold{Bezeichner} \smalltt{var} drangehängt wird: \smalltt{var@<fun\_name>}. Dieser \colorbold{Suffix} wird geändert sobald beim \colorbold{Top-Down}\footnote{D.h. von der \colorbold{Wurzel} zu den \colorbold{Blättern} eines Baumes.} Durchiterieren über den \colorbold{Abstract Syntax Tree} des aktuellen \colorbold{Passes} ein \colorbold{Funktionswechsel} eintritt und über die Statements der nächsten Funktion iteriert wird, für die der \colorbold{Suffix} der neuen Funktion \smalltt{FunDef(name, datatype, params, stmts)} angehängt wird, der aus dem \smalltt{name}-Attribut entnommen wird.
 
 Ein Grund, warum \colorbold{Scopes} über das Anhängen eines \colorbold{Suffix} an den \colorbold{Bezeichner} gelöst sind, ist, dass auf diese Weise die \colorbold{Schlüssel}, die aus dem \colorbold{Bezeichner} einer Variable und einem angehängten \colorbold{Suffix} bestehen, in der als \colorbold{Dictionary} umgesetzten \colorbold{Symboltabelle} eindeutig sind. Damit man einer Variable direkt den \colorbold{Scope} ablesen kann in dem sie definiert wurde, ist der \colorbold{Suffix} ebenfalls im \smalltt{Name(str)}-Token-Knoten des \smalltt{name}-Attribubtes eines \colorbold{Symbols} der Symboltabelle angehängt. Zur beseren Vorstellung ist dies ist in Code~\ref{code:symboltabelle_für_funktionen_picoc_code_für_funktionen_wobei_eine_funktion_vorher_deklariert_werden_muss} \colorbold{markiert}.
 
@@ -161,65 +161,69 @@ Das Zeichen \smalltt{'@'} wurde aus einem bestimmten Grund als \colorbold{Trennz
 
 \newlineparagraph{Ohne Rückgabewert}
 
+Ein \colorbold{Funktionsaufruf} (z.B. \smalltt{stack\_fun(local\_var)}), wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_ohne_rückgabewert} erklärt. Das Beispiel ist so gewählt, dass alleinig der \colorbold{Funktionsaufruf} im Vordergrund steht und z.B. noch kein \colorbold{Rückgabewert} zurückgegeben wird\footnote{Was allerdings im nächsten Unterkapitel~\ref{sec:rückgabewert} erklärt wird.}.
+
 % TODO: Betriebssysteme Vorlesung erwähnen auch in anderen Kapiteln
+% Automatisches einfügen eines Return-Statements
 
 % Unsichtbares return
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/verbose_fun_call_no_return_value.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={7}}]{./code_examples/example_fun_call_no_return_value.picoc}
   \caption{PicoC-Code für Funktionsaufruf ohne Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_no_return_value.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={10-14}}]{./code_examples/example_fun_call_no_return_value.picoc_mon}
   \caption{PicoC-Mon Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_no_return_value.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={11,13-16,18-25,27,29-31}}]{./code_examples/example_fun_call_no_return_value.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_no_return_value.reti}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_no_return_value.reti}
   \caption{RETI-Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
 \newlineparagraph{Mit Rückgabewert}
+\label{sec:rückgabewert}
 
 % todo: unsichtbare return statements
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/verbose_fun_call_with_return_value.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_with_return_value.picoc}
   \caption{PicoC-Code für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_with_return_value.picoc_mon}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
   \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_with_return_value.reti_blocks}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/verbose_fun_call_with_return_value.reti}
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti}
   \caption{RETI-Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
@@ -228,14 +232,14 @@ Das Zeichen \smalltt{'@'} wurde aus einem bestimmten Grund als \colorbold{Trennz
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/verbose_fun_call_by_sharing_array.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
   \caption{PicoC-Code für Call by Sharing für Arrays}
   \label{code:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/verbose_fun_call_by_sharing_array.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
   \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
   \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
 \end{code}
@@ -244,14 +248,14 @@ Das Zeichen \smalltt{'@'} wurde aus einem bestimmten Grund als \colorbold{Trennz
 % https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15,24}}]{./code_examples/verbose_fun_call_by_sharing_array.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15,24}}]{./code_examples/example_fun_call_by_sharing_array.st}
   \caption{Symboltabelle für Call by Sharing für Arrays}
   \label{code:symboltabelle_für_call_by_sharing_für_arrays}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/verbose_fun_call_by_sharing_array.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
   \caption{RETI-Block Pass für Call by Sharing für Arrays}
   \label{code:reti_blocks_pass_für_call_by_sharing_für_arrays}
 \end{code}
@@ -262,7 +266,7 @@ Das Zeichen \smalltt{'@'} wurde aus einem bestimmten Grund als \colorbold{Trennz
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/verbose_fun_call_by_value_struct.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/example_fun_call_by_value_struct.picoc}
   \caption{PicoC-Code für Call by Value für Structs}
   \label{code:picoc_code_für_call_by_value_für_structs}
 \end{code}
@@ -271,7 +275,7 @@ Das Zeichen \smalltt{'@'} wurde aus einem bestimmten Grund als \colorbold{Trennz
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/verbose_fun_call_by_value_struct.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
   \caption{PicoC-Mon Pass für Call by Value für Structs}
   \label{code:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
@@ -280,7 +284,7 @@ Das Zeichen \smalltt{'@'} wurde aus einem bestimmten Grund als \colorbold{Trennz
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/verbose_fun_call_by_value_struct.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
   \caption{RETI-Block Pass für Call by Value für Structs}
   \label{code:reti_blocks_pass_für_call_by_value_for_structs}
 \end{code}

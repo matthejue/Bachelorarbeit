@@ -12,7 +12,7 @@ File
       [
         # // Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun2'), [Num('42')]))
         # // Assign(Name('var'), Call(Name('fun2'), [Num('42')]))
-        # // // Call(Name('fun2'), [Num('42')])
+        # // Call(Name('fun2'), [Num('42')])
         # StackMalloc(Num('2'))
         SUBI SP 2;
         # Exp(Num('42'))
@@ -41,6 +41,25 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 0;
         ADDI SP 1;
+        # // Exp(Call(Name('fun1'), []))
+        # // Call(Name('fun1'), [])
+        # StackMalloc(Num('2'))
+        SUBI SP 2;
+        # NewStackframe(Name('fun1'), GoTo(Name('addr@next_instr')))
+        MOVE BAF ACC;
+        ADDI SP 2;
+        MOVE SP BAF;
+        SUBI SP 2;
+        STOREIN BAF ACC 0;
+        LOADI ACC GoTo(Name('addr@next_instr'));
+        ADD ACC CS;
+        STOREIN BAF ACC -1;
+        # Exp(GoTo(Name('fun1.2')))
+        Exp(GoTo(Name('fun1.2')))
+        # RemoveStackframe()
+        MOVE BAF IN1;
+        LOADIN IN1 BAF 0;
+        MOVE IN1 SP;
         # Return(Empty())
         LOADIN BAF PC -1;
       ], 

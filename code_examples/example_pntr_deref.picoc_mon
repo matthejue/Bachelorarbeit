@@ -10,7 +10,6 @@ File
         // Assign(Name('pntr'), Ref(Name('var')))
         Ref(Global(Num('0')))
         Assign(Global(Num('1')), Stack(Num('1')))
-        // Exp(Subscr(Name('pntr'), Num('0')))
         Ref(Global(Num('1')))
         Exp(Num('0'))
         Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))

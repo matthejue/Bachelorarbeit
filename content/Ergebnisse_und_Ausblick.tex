@@ -37,19 +37,18 @@
   \numberwithin{equation}{\tcbcounter}
   \begin{equation}
     \begin{tikzpicture}[auto, baseline=(current  bounding  box.center)]
-      \node (reti) at (135:3) {$M_{1}$};
-      \node (x_86) at (45:3) {$M_{2}$};
-      \node (picoc) [above=of reti] {$T_1$};
-      \node (c) [above=of x_86] {$T_2$};
+      \node (reti) [align=center] at (135:3) {$L_{RETI}$-\\Maschinencode};
+      \node (x_86) [align=center] at (45:3) {$L_{X_{86\_64}}$-\\Maschinencode};
+      \node (picoc) [above=of reti] {Test in $L_{PicoC}$};
+      \node (c) [above=of x_86] {Test in $L_C$};
       \node (output)  at (270:0) {$Output$};
 
       % https://tex.stackexchange.com/questions/24372/how-to-add-newline-within-node-using-tikz
       \draw[->] (picoc) to node[above] {convert\_to\_c} (c);
-      \draw[->] (picoc) to node[above] {convert\_to\_c} (reti);
-      \draw[->] (picoc) to node[above] {convert\_to\_c} (c);
-      \draw[->] (c) to node[above] {convert\_to\_c} (x_86);
-      \draw[->] (reti) to[bend right] node[left, align=center] {interpretiere $P_{1}$\\ als $L_{1}$ Program} (output);
-      \draw[->] (x_86) to[bend left] node[right, align=center] {interpretiere $P_{2}$\\ als $L_{2}$ Program} (output);
+      \draw[->] (picoc) to node[left] {PicoC-Compiler} (reti);
+      \draw[->] (c) to node[right] {GCC} (x_86);
+      \draw[->] (reti) to[bend right] node[left] {RETI-Interpreter} (output);
+      \draw[->] (x_86) to[bend left] node[right] {$X_{86\_64}$-CPU} (output);
     \end{tikzpicture}
     \label{eq:compiler_beziehungen}
   \end{equation}

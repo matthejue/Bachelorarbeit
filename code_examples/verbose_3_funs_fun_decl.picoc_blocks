@@ -28,6 +28,7 @@ File
           Name 'main.1', 
           [
             Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun2'), [Num('42')]))
+            Exp(Call(Name('fun1'), []))
             Return(Empty())
           ]
       ], 

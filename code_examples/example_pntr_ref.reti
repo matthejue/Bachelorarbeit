@@ -1,5 +1,3 @@
-# // Exp(GoTo(Name('main.0')))
-# // not included Exp(GoTo(Name('main.0')))
 # // Assign(Name('var'), Num('42'))
 # Exp(Num('42'))
 SUBI SP 1;

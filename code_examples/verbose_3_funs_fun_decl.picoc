@@ -4,8 +4,8 @@ void fun1() {
 }
 
 void main() {
-  fun1();
   int var = fun2(42);
+  fun1();
   return;
 }
 

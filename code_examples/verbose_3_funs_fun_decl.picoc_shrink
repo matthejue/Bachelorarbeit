@@ -30,6 +30,10 @@ File
             [
               Num '42'
             ], 
+        Exp 
+          Call 
+            Name 'fun1', 
+            [], 
         Return 
           Empty
       ], 

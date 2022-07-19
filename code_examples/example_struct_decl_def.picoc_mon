@@ -4,7 +4,6 @@ File
     Block 
       Name 'main.0', 
       [
-        // Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('st_var')))
         Return(Empty())
       ]
   ]

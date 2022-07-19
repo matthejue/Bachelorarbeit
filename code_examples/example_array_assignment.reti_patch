@@ -3,14 +3,10 @@ File
   [
     Block 
       Name 'start.1', 
-      [
-        # // Exp(GoTo(Name('main.0')))
-        # // not included Exp(GoTo(Name('main.0')))
-      ], 
+      [], 
     Block 
       Name 'main.0', 
       [
-        # // Exp(Alloc(Writeable(), ArrayDecl([Num('2')], IntType('int')), Name('ar')))
         # // Assign(Subscr(Name('ar'), Num('2')), Num('42'))
         # Exp(Num('42'))
         SUBI SP 1;

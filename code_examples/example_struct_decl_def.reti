@@ -1,5 +1,2 @@
-# // Exp(GoTo(Name('main.0')))
-# // not included Exp(GoTo(Name('main.0')))
-# // Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('st_var')))
 # Return(Empty())
 LOADIN BAF PC -1;

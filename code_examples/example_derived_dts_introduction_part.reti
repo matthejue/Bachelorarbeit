@@ -1,8 +1,3 @@
-# // Exp(GoTo(Name('main.1')))
-# // not included Exp(GoTo(Name('main.1')))
-# // Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('ar_with_len'))), Name('st_ar')))
-# // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], PntrDecl(Num('1'), IntType('int')))), Name('complex_var')))
-# // Exp(Ref(Name('complex_var')))
 # Ref(Global(Num('9')))
 SUBI SP 1;
 LOADI IN1 9;
@@ -10,9 +5,6 @@ ADD IN1 DS;
 STOREIN SP IN1 1;
 # Return(Empty())
 LOADIN BAF PC -1;
-# // Exp(Alloc(Writeable(), ArrayDecl([Num('3')], StructSpec(Name('ar_with_len'))), Name('st_ar')))
-# // Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('complex_var')))
-# // Exp(Ref(Name('complex_var')))
 # Ref(Stackframe(Num('9')))
 SUBI SP 1;
 MOVE BAF IN1;

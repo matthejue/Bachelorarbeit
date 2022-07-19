@@ -3,10 +3,7 @@ File
   [
     Block 
       Name 'start.1', 
-      [
-        # // Exp(GoTo(Name('main.0')))
-        # // not included Exp(GoTo(Name('main.0')))
-      ], 
+      [], 
     Block 
       Name 'main.0', 
       [
@@ -25,7 +22,6 @@ File
         LOADIN SP ACC 2;
         STOREIN DS ACC 0;
         ADDI SP 2;
-        # // Exp(Attr(Name('st'), Name('y')))
         # Ref(Global(Num('0')))
         SUBI SP 1;
         LOADI IN1 0;

@@ -13,7 +13,6 @@ File
         LOADIN SP ACC 1;
         STOREIN DS ACC 0;
         ADDI SP 1;
-        # // Exp(Subscr(Name('ar'), Num('0')))
         # Ref(Global(Num('0')))
         SUBI SP 1;
         LOADI IN1 0;
@@ -61,7 +60,6 @@ File
         LOADIN SP ACC 3;
         STOREIN BAF ACC -4;
         ADDI SP 3;
-        # // Exp(Subscr(Name('ar'), BinOp(Num('1'), Add('+'), Num('1'))))
         # Ref(Stackframe(Num('2')))
         SUBI SP 1;
         MOVE BAF IN1;
