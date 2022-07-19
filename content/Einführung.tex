@@ -36,7 +36,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
       \node (output)  at (270:0) {$Output$};
 
       % https://tex.stackexchange.com/questions/24372/how-to-add-newline-within-node-using-tikz
-      \draw[->] (program1) to node[above] {$kompiliere$} (program2);
+      \draw[->] (program1) to node[above] {kompiliere} (program2);
       \draw[->] (program1) to[bend right] node[left, align=center] {interpretiere $P_{1}$\\ als $L_{1}$ Program} (output);
       \draw[->] (program2) to[bend left] node[right, align=center] {interpretiere $P_{2}$\\ als $L_{2}$ Program} (output);
     \end{tikzpicture}
@@ -217,7 +217,20 @@ wobei $a$ eine beliebige Folge von \colorbold{Terminalsymbolen} und \colorbold{N
 \section{Lexikalische Analyse}
 \label{sec:lexikalische_analyse}
 
-Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb der \colorbold{Pipe Architektur} bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist vereinfacht gesagt, in einem Inputstring, z.B. dem Inhalt einer Datei, welche in \colorbold{UTF-8} codiert ist, Folgen endlicher Symbole (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} (Definition~\ref{def:pattern}) matchen, die durch eine \colorbold{reguläre Grammatik} spezifiziert sind.
+Die \colorbold{Lexikalische Analyse} bildet üblicherweise die erste Ebene innerhalb des \colorbold{Pipe-Filter Architekturpatterns} (Definition~\ref{def:pipe_architektur}) bei der Implementierung von Compilern. Die Aufgabe der lexikalischen Analyse ist vereinfacht gesagt, in einem Inputstring, z.B. dem Inhalt einer Datei, welche in \colorbold{UTF-8} codiert ist, Folgen endlicher Symbole (auch \colorbold{Wörter} genannt) zu finden, die bestimmte \colorbold{Pattern} (Definition~\ref{def:pattern}) matchen, die durch eine \colorbold{reguläre Grammatik} spezifiziert sind.
+
+\begin{Definition}{Pipe-Filter Architekturpattern}{pipe_architektur}
+  Ist ein \colorbold{Archikteturpattern}, welches aus \colorbold{Pipes} und \colorbold{Filtern} besteht, wobei der \colorbold{Ausgang} eines \colorbold{Filters} der \colorbold{Eingang} des durch eine \colorbold{Pipe} verbundenen adjazenten nächsten \colorbold{Filters} ist, falls es einen gibt.
+
+  Ein \colorbold{Filter} stellt einen Schritt dar, indem eine Eingabe \colorbold{weiterverarbeitet} wird und \colorbold{weitergereicht} wird. Bei der \colorbold{Weiterverarbeitung} können Teile der Eingabe \colorbold{entfernt}, \colorbold{hinzugefügt} oder \colorbold{vollständig ersetzt} werden.
+
+  Eine \colorbold{Pipe} stellt ein \colorbold{Bindeglied} zwischen zwei \colorbold{Filtern} dar.\footnote{Das ein \colorbold{Bindeglied} eine eigene Bezeichnung erhält, bedeutet allerdings nicht, dass es eine eigene wichtige \colorbold{Aufgabe} erfüllt. Wie bei vielen \colorbold{Pattern}, soll mit dem Namen des \colorbold{Pattern}, in diesem Fall durch das \colorbold{Pipe} die Anlehung an z.B. die \colorbold{Pipes aus Unix}, z.B. \smalltt{cat /proc/bus/input/devices | less} zum Ausdruck gebracht werden. Und so banal es klingt, sollen manche Bezeichnungen von Pattern auch einfach nur gut klingen.}\footcite{westphal_softwaretechnik_2021}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.66\linewidth]{./figures/pipe_architecture.png}
+  \end{figure}
+\end{Definition}
 
 Diese Folgen endlicher Symoble werden auch \colorbold{Lexeme} (Definition~\ref{def:lexeme}) genannt.
 
@@ -404,9 +417,6 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 
 \section{Code Generierung}
 \label{sec:code_generierung}
-\begin{Definition}{Pipe-Architektur}{pipe-architektur}
-
-\end{Definition}
 
 \begin{Definition}{Pass}{pass}
 % TODO: Bild semantisch gleiche Bedeutung

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="pipe_and_other.svg"
+   inkscape:export-filename="pipe_and_other.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.5981902"
+     inkscape:cx="401.39152"
+     inkscape:cy="177.701"
+     inkscape:window-width="1904"
+     inkscape:window-height="1019"
+     inkscape:window-x="6"
+     inkscape:window-y="53"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2303" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       id="rect186"
+       width="41.065647"
+       height="22.357269"
+       x="67.324547"
+       y="26.899105"
+       inkscape:export-filename="pipe_architecture.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1469"
+       width="43.321289"
+       height="23.357269"
+       x="126.79928"
+       y="25.899105" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1469-6"
+       width="43.321289"
+       height="23.357269"
+       x="5.5196695"
+       y="25.899105" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1469-6-7"
+       width="43.321289"
+       height="23.357269"
+       x="22.583443"
+       y="181.81693" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:none;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       x="87.786743"
+       y="40.491032"
+       id="text2251"><tspan
+         sodipodi:role="line"
+         id="tspan2249"
+         style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.222;stroke-dasharray:none"
+         x="87.786743"
+         y="40.491032">Filter</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       x="44.264759"
+       y="195.90884"
+       id="text2251-0"><tspan
+         sodipodi:role="line"
+         id="tspan2249-9"
+         style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+         x="44.264759"
+         y="195.90884">Testprogram in L_C</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+         x="44.264759"
+         y="204.72829"
+         id="tspan5111">als Input</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1469-6-7-0"
+       width="43.321289"
+       height="23.357269"
+       x="121.81522"
+       y="182.37309" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       x="143.49654"
+       y="196.46501"
+       id="text2251-0-6"><tspan
+         sodipodi:role="line"
+         id="tspan2249-9-2"
+         style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+         x="143.49654"
+         y="196.46501">Testprogram in L_PicoC</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+         x="143.49654"
+         y="205.28445"
+         id="tspan5111-6">als Input</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       x="58.29335"
+       y="148.54721"
+       id="text2251-0-3"><tspan
+         sodipodi:role="line"
+         id="tspan2249-9-6"
+         style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+         x="58.29335"
+         y="148.54721">GCC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:none;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       x="148.3893"
+       y="39.991032"
+       id="text2251-3"><tspan
+         sodipodi:role="line"
+         id="tspan2249-6"
+         style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.222;stroke-dasharray:none"
+         x="148.3893"
+         y="39.991032">Filter</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3031"
+       width="18.509995"
+       height="7.682827"
+       x="108.31846"
+       y="33.8461" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3031-5"
+       width="18.509995"
+       height="7.682827"
+       x="170.09138"
+       y="33.736328" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       x="117.59412"
+       y="39.272259"
+       id="text4487"><tspan
+         sodipodi:role="line"
+         id="tspan4485"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.222;stroke-dasharray:none"
+         x="117.59412"
+         y="39.272259">Pipe</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3031-7"
+       width="18.509995"
+       height="7.682827"
+       x="48.847649"
+       y="34.023888" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       x="58.288841"
+       y="39.450047"
+       id="text4487-5"><tspan
+         sodipodi:role="line"
+         id="tspan4485-3"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.222;stroke-dasharray:none"
+         x="58.288841"
+         y="39.450047">Pipe</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       x="179.34639"
+       y="37.894691"
+       id="text4760"><tspan
+         sodipodi:role="line"
+         id="tspan4758"
+         style="stroke-width:0.222;stroke-dasharray:none"
+         x="179.34639"
+         y="37.894691">...</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       x="178.96153"
+       y="37.731667"
+       id="text4760-2"><tspan
+         sodipodi:role="line"
+         id="tspan4758-9"
+         style="stroke-width:0.222;stroke-dasharray:none"
+         x="178.96153"
+         y="37.731667">...</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.222;stroke-dasharray:none;stroke-opacity:1"
+       x="27.180313"
+       y="37.894688"
+       id="text4760-1"><tspan
+         sodipodi:role="line"
+         id="tspan4758-2"
+         style="stroke-width:0.222;stroke-dasharray:none"
+         x="27.180313"
+         y="37.894688">...</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       x="130.82541"
+       y="72.831329"
+       id="text5109"><tspan
+         sodipodi:role="line"
+         id="tspan5107"
+         style="stroke-width:1"
+         x="130.82541"
+         y="72.831329">Output</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       x="163.5056"
+       y="155.67566"
+       id="text5184"><tspan
+         sodipodi:role="line"
+         id="tspan5182"
+         style="stroke-width:1"
+         x="163.5056"
+         y="155.67566">PicoC-Compiler</tspan></text>
+  </g>
+</svg>

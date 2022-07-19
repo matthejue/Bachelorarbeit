@@ -590,7 +590,7 @@ Dieses längliche \colorbold{T-Diagram} in Abbildung~\ref{fig:cross_compiler_kom
   \label{fig:cross_compiler_kompiliervorgang_kurzform}
 \end{figure}
 
-Nachdem der Kompilierprozess des \colorbold{PicoC-Compiler} im \colorbold{vertikalen} nun genauer angesehen wurde, wird der Kompilierprozess im Folgenden im \colorbold{horinzontalen}, auf der Ebene der verschiedenen \colorbold{Passes} genauer betrachtet. Die Abbildung~\ref{fig:architektur_mit_allen_passes_ausgeschrieben} gibt einen guten Überblick über alle \colorbold{Passes} und wie diese in der \colorbold{Pipe-Architektur} des \colorbold{PicoC-Compilers} aufeinanderfolgen. In der \colorbold{Pipe-Architektur} nutzt der jeweils nächste \colorbold{Pass} den generierten \colorbold{Abstract Syntax Tree} des vorherigen Passes oder der Syntaktischen Analyse, um einen eigenen \colorbold{Abstract Syntax Tree} in seiner eigenen \colorbold{Sprache} zu generieren.
+Nachdem der Kompilierprozess des \colorbold{PicoC-Compiler} im \colorbold{vertikalen} nun genauer angesehen wurde, wird der Kompilierprozess im Folgenden im \colorbold{horinzontalen}, auf der Ebene der verschiedenen \colorbold{Passes} genauer betrachtet. Die Abbildung~\ref{fig:architektur_mit_allen_passes_ausgeschrieben} gibt einen guten Überblick über alle \colorbold{Passes} und wie diese in der \colorbold{Pipe-Architektur} (Definition~\ref{def:pipe_architektur}) des \colorbold{PicoC-Compilers} aufeinanderfolgen. In der \colorbold{Pipe-Architektur} nutzt der jeweils nächste \colorbold{Pass} den generierten \colorbold{Abstract Syntax Tree} des vorherigen Passes oder der Syntaktischen Analyse, um einen eigenen \colorbold{Abstract Syntax Tree} in seiner eigenen \colorbold{Sprache} zu generieren.
 
 \begin{figure}[H]
   \centering

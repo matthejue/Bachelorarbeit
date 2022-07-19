@@ -26,6 +26,7 @@
 %
 % (Projekt Open source)
 \section{Qualitätssicherung}
+\label{sec:qualitätssicherung}
 % GCC + Execution entspricht einem einzigen großen Interpreter und beweist somit den linke Edge in 2.1
 % Testsuite erklären, vielleicht Snippets usw. erwähnen
 % Größe des Datensegments erklären
@@ -33,7 +34,25 @@
 % Finale Anzahl Tests, Alte Tests und neue Tests überscnneiden sich teiweise in der Sache, die sie testen
 % Verwendung der Testsuite inklusive Commandline Tutorial
 % Aufteilung der Tests, Hart zu jedem Großtema ein oder zwei harte Tests
-\label{sec:qualitätssicherung}
+  \numberwithin{equation}{\tcbcounter}
+  \begin{equation}
+    \begin{tikzpicture}[auto, baseline=(current  bounding  box.center)]
+      \node (reti) at (135:3) {$M_{1}$};
+      \node (x_86) at (45:3) {$M_{2}$};
+      \node (picoc) [above=of reti] {$T_1$};
+      \node (c) [above=of x_86] {$T_2$};
+      \node (output)  at (270:0) {$Output$};
+
+      % https://tex.stackexchange.com/questions/24372/how-to-add-newline-within-node-using-tikz
+      \draw[->] (picoc) to node[above] {convert\_to\_c} (c);
+      \draw[->] (picoc) to node[above] {convert\_to\_c} (reti);
+      \draw[->] (picoc) to node[above] {convert\_to\_c} (c);
+      \draw[->] (c) to node[above] {convert\_to\_c} (x_86);
+      \draw[->] (reti) to[bend right] node[left, align=center] {interpretiere $P_{1}$\\ als $L_{1}$ Program} (output);
+      \draw[->] (x_86) to[bend left] node[right, align=center] {interpretiere $P_{2}$\\ als $L_{2}$ Program} (output);
+    \end{tikzpicture}
+    \label{eq:compiler_beziehungen}
+  \end{equation}
 % RETI-Interpreter erwähnen und erwähnen, dass das Bonus ist
 % TODO: zusammenfassendes Bild
 % \section{Kommentierter Kompiliervorgang}
