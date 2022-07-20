@@ -1,5 +1,5 @@
 void stack_fun() {
-  return 42;
+  return 21 * 2;
 }
 
 void main() {

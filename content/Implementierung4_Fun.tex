@@ -159,9 +159,7 @@ Das Zeichen \smalltt{'@'} wurde aus einem bestimmten Grund als \colorbold{Trennz
 % TODO: Signatur zu Parameter umbenennen
 \subsubsection{Funktionsaufruf}
 
-\newlineparagraph{Ohne Rückgabewert}
-
-Ein \colorbold{Funktionsaufruf} (z.B. \smalltt{stack\_fun(local\_var)}), wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_ohne_rückgabewert} erklärt. Das Beispiel ist so gewählt, dass alleinig der \colorbold{Funktionsaufruf} im \colorbold{Vordergrund} steht und dieses Kapitel nicht auch noch mit z.B. Aspekten wie der Umsetzung eines \colorbold{Rückgabewertes} überladen ist. Der Aspekt der Umsetzung eines \colorbold{Rückgabewertes} wird erst im nächsten Unterkapitel~\ref{sec:rückgabewert} erklärt.
+Ein \colorbold{Funktionsaufruf} (z.B. \smalltt{stack\_fun(local\_var)}) wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_ohne_rückgabewert} erklärt. Das Beispiel ist so gewählt, dass alleinig der \colorbold{Funktionsaufruf} im \colorbold{Vordergrund} steht und dieses Kapitel nicht auch noch mit z.B. Aspekten wie der Umsetzung eines \colorbold{Rückgabewertes} überladen ist. Der Aspekt der Umsetzung eines \colorbold{Rückgabewertes} wird erst im nächsten Unterkapitel~\ref{sec:rückgabewert} erklärt.
 
 % TODO: Betriebssysteme Vorlesung erwähnen auch in anderen Kapiteln
 % Automatisches einfügen eines Return-Statements
@@ -241,78 +239,73 @@ Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf
   \label{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
-\newlineparagraph{Mit Rückgabewert}
+\newlineparagraph{Rückgabewert}
 \label{sec:rückgabewert}
 
-Ein \colorbold{Funktionsaufruf} mit \colorbold{Rückgabewert} (z.B. \smalltt{stack\_fun(local\_var)}), wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_mit_rückgabewert} erklärt.
+Ein \colorbold{Funktionsaufruf inklusive Zuweisung eines Rückgabewertes} (z.B. \smalltt{int var = stack\_fun()}) wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_mit_rückgabewert} erklärt.
 % todo: unsichtbare return statements
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_fun_call_with_return_value.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={2, 6}}]{./code_examples/example_fun_call_with_return_value.picoc}
   \caption{PicoC-Code für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
-Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_} wird
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_funktionsaufruf_mit_rückgabewert} wird ein \colorbold{Return-Statement} \smalltt{return 21 * 2} mit der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} dargestellt und ein \colorbold{Funktionsaufruf} inklusive \colorbold{Zuweisung des Rückgabewertes} \smalltt{int var = stack\_fun()} durch die Komposition \smalltt{Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack\_fun'), []))}.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={9, 16}}]{./code_examples/example_fun_call_with_return_value.ast}
+  \caption{Abstract Syntax Tree für Funktionsaufruf mit Rückgabewert}
+  \label{code:abstract_syntax_tree_für_funktionsaufruf_mit_rückgabewert}
+\end{code}
+
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert} wird bei der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} erst die \colorbold{Expression} \smalltt{BinOp(Num('21'), Mul('*'), Num('2'))} zu \smalltt{Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))} ausgewertet.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={8-11, 21-22}}]{./code_examples/example_fun_call_with_return_value.picoc_mon}
   \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks} werden
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
-  \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
-  \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
-\end{code}
-
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={9-11,13-15,17-21,23-25,49-51,53}}]{./code_examples/example_fun_call_with_return_value.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
-\end{code}
-
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.reti}
-  \caption{RETI-Pass für Funktionsaufruf mit Rückgabewert}
-  \label{code:reti_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 \newlineparagraph{Umsetzung von Call by Sharing für Arrays}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={1,7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
   \caption{PicoC-Code für Call by Sharing für Arrays}
   \label{code:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
 
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15-20}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
-  \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
-  \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
-\end{code}
-
-
 % https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15,24}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={19,28,46,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
   \caption{Symboltabelle für Call by Sharing für Arrays}
   \label{code:symboltabelle_für_call_by_sharing_für_arrays}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13-20}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={13-14}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
+  \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
+  \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={16-19,21-24}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
   \caption{RETI-Block Pass für Call by Sharing für Arrays}
   \label{code:reti_blocks_pass_für_call_by_sharing_für_arrays}
 \end{code}
@@ -332,7 +325,14 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_} wir
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15-19}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={19,28,46,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \caption{Symboltabelle für Call by Sharing für Arrays}
+  \label{code:symboltabelle_für_call_by_sharing_für_arrays}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text, minted options={highlightlines={13}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
   \caption{PicoC-Mon Pass für Call by Value für Structs}
   \label{code:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
@@ -341,7 +341,7 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_} wir
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13-19}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={16-22}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
   \caption{RETI-Block Pass für Call by Value für Structs}
   \label{code:reti_blocks_pass_für_call_by_value_for_structs}
 \end{code}

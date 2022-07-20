@@ -21,9 +21,14 @@ file
                             arith_and
                               arith_prec2
                                 arith_prec1
+                                  arith_prec1
+                                    un_exp
+                                      post_exp
+                                        prim_exp	21
+                                  prec1_op	*
                                   un_exp
                                     post_exp
-                                      prim_exp	42
+                                      prim_exp	2
     decl_def
       fun_def
         type_spec

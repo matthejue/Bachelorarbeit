@@ -4,8 +4,10 @@ File
     Block 
       Name 'stack_fun.1', 
       [
-        // Return(Num('42'))
-        Exp(Num('42'))
+        // Return(BinOp(Num('21'), Mul('*'), Num('2')))
+        Exp(Num('21'))
+        Exp(Num('2'))
+        Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))
         Return(Stack(Num('1')))
       ], 
     Block 

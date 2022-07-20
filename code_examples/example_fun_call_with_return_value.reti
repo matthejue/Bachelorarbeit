@@ -1,10 +1,20 @@
 # // Exp(GoTo(Name('main.0')))
-JUMP 7;
-# // Return(Num('42'))
-# Exp(Num('42'))
+JUMP 15;
+# // Return(BinOp(Num('21'), Mul('*'), Num('2')))
+# Exp(Num('21'))
 SUBI SP 1;
-LOADI ACC 42;
+LOADI ACC 21;
 STOREIN SP ACC 1;
+# Exp(Num('2'))
+SUBI SP 1;
+LOADI ACC 2;
+STOREIN SP ACC 1;
+# Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))
+LOADIN SP ACC 2;
+LOADIN SP IN2 1;
+MULT ACC IN2;
+STOREIN SP ACC 2;
+ADDI SP 1;
 # Return(Stack(Num('1')))
 LOADIN SP ACC 1;
 ADDI SP 1;
@@ -18,11 +28,11 @@ ADDI SP 2;
 MOVE SP BAF;
 SUBI SP 2;
 STOREIN BAF ACC 0;
-LOADI ACC 17;
+LOADI ACC 25;
 ADD ACC CS;
 STOREIN BAF ACC -1;
 # Exp(GoTo(Name('stack_fun.1')))
-JUMP -15;
+JUMP -23;
 # RemoveStackframe()
 MOVE BAF IN1;
 LOADIN IN1 BAF 0;

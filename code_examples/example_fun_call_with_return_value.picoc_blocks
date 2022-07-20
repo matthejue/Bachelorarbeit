@@ -9,7 +9,7 @@ File
         Block 
           Name 'stack_fun.1', 
           [
-            Return(Num('42'))
+            Return(BinOp(Num('21'), Mul('*'), Num('2')))
           ]
       ], 
     FunDef 

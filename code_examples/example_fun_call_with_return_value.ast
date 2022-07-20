@@ -6,7 +6,7 @@ File
       Name 'stack_fun', 
       [], 
       [
-        Return(Num('42'))
+        Return(BinOp(Num('21'), Mul('*'), Num('2')))
       ], 
     FunDef 
       VoidType 'void', 
