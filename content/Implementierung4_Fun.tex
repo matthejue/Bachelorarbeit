@@ -207,9 +207,10 @@ Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf
 
 \begin{Special_Paragraph}
   Die Berechnung der \colorbold{Adresse} \smalltt{'<addr@next\_instr>'} bzw. in der Formel $adr_{danach}$ des Befehls nach dem \colorbold{Sprung} \smalltt{JUMP <distanz>} für den Befehl \smalltt{LOADI ACC <addr@next\_instr>} erfolgt dabei mithilfe der folgenden Formel:
-  \begin{equation}
-    adr_{danach} = \#Bef_{vor\,akt.\,Bl.} + idx + 4
-  \end{equation}
+\begin{equation}
+  adr_{danach} = \#Bef_{vor\,akt.\,Bl.} + idx + 4
+  \label{eq:addr_next_instr}
+\end{equation}
   wobei:
   \begin{itemize}
     \item $\#Bef_{vor\,akt.\,Bl.} \hat=$ \colorbold{Anzahl} Befehle vor dem momentanen Block. Es handelt sich hierbei um ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{instrs\_before} eines jeden \colorbold{Blockes} \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})}, welches im \colorbold{RETI-Patch}-Pass gesetzt wird. Der Grund dafür, dass das Zuweisen dieses \textcolor{gray!90!black}{versteckten Attributes} \smalltt{instrs\_before} im \colorbold{RETI-Patch} Pass erfolgt ist, weil erst im \colorbold{RETI-Patch} Pass die \colorbold{finale Anzahl} an Befehlen in einem Block feststeht, da im \colorbold{RETI-Patch} Pass \smalltt{GoTo()}'s entfernt werden, deren Sprung nur \colorbold{eine} Adresse weiterspringen würde. Die \colorbold{finale Anzahl} an Befehlen kann sich in diesem \colorbold{Pass} also noch ändern und steht erst nach diesem \colorbold{Pass} fest.
@@ -219,17 +220,17 @@ Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf
 
   Die Berechnug der \colorbold{Distanz} \smalltt{<distanz>} für den Sprung \smalltt{JUMP <distanz>} zum \colorbold{ersten} Befehl eines im \colorbold{Pass} zuvor \colorbold{existenten Blockes} erfolgt dabei nach der folgenden Formel:
   % https://stackoverflow.com/questions/57820567/how-to-fit-very-long-line-in-case-bracket-equations-in-latex-with-double-column
-  \[
+  \begin{equation}
     distanz = \begin{dcases}
       -\#Bef_{vor\, akt.\, Bl.} + \#Bef_{vor\, Zielbl.} - idx & \#Bef_{vor\, Zielbl.} < \#Bef_{vor\, akt.\, Bl.} \\
       -idx & \#Bef_{vor\, Zielbl.} = \#Bef_{vor\, akt.\, Bl.} \\
       \#Bef_{vor\, Zielbl.} - \#Bef_{vor\, akt.\, Bl.} - idx & \#Bef_{vor\, Zielbl.} > \#Bef_{vor\, akt.\, Bl.}
     \end{dcases}
-  \]
+  \end{equation}
   wobei:
   \begin{itemize}
     \item $\#Bef_{vor\, Zielbl.} \hat=$ \colorbold{Anzahl} Befehle vor dem \colorbold{Zielblock}, der den \colorbold{ersten} Befehl einer Funktion enthält und zu dem gesprungen werden soll. Es handelt sich hierbei um ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{instrs\_before} eines jeden \colorbold{Blockes} \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})}.
-    \item $\#Bef_{vor\,akt.\,Bl.}$ und $idx$ haben die \colorbold{gleiche Bedeutung} wie oben.
+    \item $\#Bef_{vor\,akt.\,Bl.}$ und $idx$ haben die \colorbold{gleiche Bedeutung} wie in der Formel~\ref{eq:addr_next_instr}.
   \end{itemize}
 \end{Special_Paragraph}
 
@@ -243,6 +244,7 @@ Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf
 \newlineparagraph{Mit Rückgabewert}
 \label{sec:rückgabewert}
 
+Ein \colorbold{Funktionsaufruf} mit \colorbold{Rückgabewert} (z.B. \smalltt{stack\_fun(local\_var)}), wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_mit_rückgabewert} erklärt.
 % todo: unsichtbare return statements
 
 \begin{code}
@@ -251,6 +253,16 @@ Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf
   \caption{PicoC-Code für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
+
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_} wird
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_fun_call_with_return_value.picoc_mon}
+  \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
+  \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
+\end{code}
+
 
 \begin{code}
   \centering
