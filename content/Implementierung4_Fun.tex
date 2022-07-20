@@ -12,6 +12,7 @@
 \label{sec:umsetzung_von_funktionen}
 
 \subsubsection{Mehrere Funktionen}
+\label{sec:mehrere_funktionen}
 
 Die Umsetzung \colorbold{mehrerer Funktionen} wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_3_funktionen} erklärt. Dieses Beispiel soll nur zeigen, wie Funktionen in verschiedenen, für die Kompilierung von Funktionen relevanten \colorbold{Passes} kompiliert werden. Das Beispiel ist so gewählt, dass es möglichst \colorbold{isoliert} von weiterem möglicherweise störendem Code ist.
 
@@ -22,7 +23,7 @@ Die Umsetzung \colorbold{mehrerer Funktionen} wird im Folgenden mithilfe des Bei
   \label{code:picoc_code_für_3_funktionen}
 \end{code}
 
-Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_3_Funktionen} wird eine \colorbold{Funktion}, wie z.B. \smalltt{void fun(int param;)\{\enspace return param;\enspace \}} mit der Komposition \smalltt{FunDef(IntType(), Name('fun'), [Alloc(Writeable(), IntType(), Name('fun'))], [Return(Exp(Name('param')))])} dargestellt. Die einzelnen \colorbold{Attribute} dieses Container-Knoten sind in Tabelle~\ref{tab:picoc_knoten_teil_4} erklärt.
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_3_Funktionen} wird eine \colorbold{Funktion}, wie z.B. \seqtt{void fun(int param;)\{\enspace return param;\enspace \}} mit der Komposition \smalltt{FunDef(IntType(), Name('fun'), [Alloc(Writeable(), IntType(), Name('fun'))], [Return(Exp(Name('param')))])} dargestellt. Die einzelnen \colorbold{Attribute} dieses Container-Knoten sind in Tabelle~\ref{tab:picoc_knoten_teil_4} erklärt.
 
 \begin{code}
   \centering
@@ -190,9 +191,12 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsauf
   \label{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
-Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert} werden die Kompositionen \smalltt{Exp(Call(Name('stack\_fun'), [Name('local\_var')]))} durch die Kompositionen \smalltt{StackMalloc(Num('2'))}, \smalltt{Ref(Global(Num('0')))}, \smalltt{NewStackframe(Name('stack\_fun'), GoTo(Name('addr@next\_instr')))}, \smalltt{Exp(GoTo(Name('stack\_fun.0')))} und \smalltt{RemoveStackframe()} dann durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert} werden die Kompositionen \seqtt{StackMalloc(Num('2'))}, \seqtt{Ref(Global(Num('0')))}, \seqtt{NewStackframe(Name('stack\_fun')}, \seqtt{GoTo(Name('addr@next\_instr')))}, \seqtt{Exp(GoTo(Name('stack\_fun.0')))} und \seqtt{RemoveStackframe()} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
-Die \colorbold{Kompostionen} \smalltt{LOADI ACC GoTo(Name('addr@next\_instr'))} und \smalltt{Exp(GoTo(Name('stack\_fun.0')))} entsprechen noch keine fertigen \colorbold{RETI-Instructions} und werden später in dem für sie vorgesehenen \colorbold{RETI-Pass} passend ergänzt bzw. ersetzt.
+Unter den \colorbold{RETI-Knoten} entsprechen die \colorbold{Kompostionen} \smalltt{LOADI ACC GoTo(Name('addr@next\_instr'))} und \smalltt{Exp(GoTo(Name('stack\_fun.0')))} noch keine fertigen \colorbold{RETI-Instructions} und werden später in dem für sie vorgesehenen \colorbold{RETI-Pass} passend ergänzt bzw. ersetzt.
+
+% https://tex.stackexchange.com/questions/219445/line-break-in-texttt
+Für den \colorbold{Bezeichner des Blocks} \smalltt{stack\_fun.0}  in der Komposition \smalltt{Exp(GoTo(Name('stack\_fun.0')))} wird im \colorbold{Dictionary} \smalltt{fun\_name\_to\_block\_name}\footnote{Dieses Dictionary wurde in Unterkapitel~\ref{sec:mehrere_funktionen} eingeführt.} mit dem Schlüssel \smalltt{stack\_fun}, dem \colorbold{Bezeichner der Funktion}, der im Container-Knoten \smalltt{NewStackframe(Name('stack\_fun'))} gespeichert ist nachgeschlagen.
 
 \begin{code}
   \centering
@@ -201,16 +205,22 @@ Die \colorbold{Kompostionen} \smalltt{LOADI ACC GoTo(Name('addr@next\_instr'))} 
   \label{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
-Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert} wird nun der finale \colorbold{RETI-Code} erstellt. Eine Änderung, die direkt auffällt ist, dass die \colorbold{RETI-Befehle} aus den \colorbold{Blöcken} nun zusammengefügt sind und es keine \colorbold{Blöcke} mehr gibt. Des Weiteren wird das \smalltt{GoTo(Name('addr@next\_instr'))} in der Komposition \smalltt{\smalltt{LOADI ACC GoTo(Name('addr@next\_instr'))}} nun durch die \colorbold{Adresse} des nächsten Befehls nach dem \colorbold{Sprung zur gewünschten Funktion}, der bisher durch die Komposition \smalltt{Exp(GoTo(Name('stack\_fun.0')))} dargestellt wurde ersetzt: \smalltt{LOADI ACC 14;}. Dieser Sprung \smalltt{Exp(GoTo(Name('stack\_fun.0')))} wird mithilfe des \colorbold{Container-Knoten}  \smalltt{JUMP 5} ersetzt.
+Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert} wird nun der finale \colorbold{RETI-Code} erstellt. Eine Änderung, die direkt auffällt, ist, dass die \colorbold{RETI-Befehle} aus den \colorbold{Blöcken} nun zusammengefügt sind und es keine \colorbold{Blöcke} mehr gibt. Des Weiteren wird das \smalltt{GoTo(Name('addr@next\_instr'))} in der Komposition \smalltt{\smalltt{LOADI ACC GoTo(Name('addr@next\_instr'))}} nun durch die \colorbold{Adresse} des nächsten Befehls direkt nach dem dem Befehl \smalltt{JUMP 5}, der für den \colorbold{Sprung zur gewünschten Funktion} verantwortlich ist\footnote{Also der Befehl, der bisher durch die Komposition \smalltt{Exp(GoTo(Name('stack\_fun.0'))) dargestellt wurde.}} ersetzt: \smalltt{LOADI ACC 14}. Und auch der \colorbold{Container-Knoten}, der den Sprung \smalltt{Exp(GoTo(Name('stack\_fun.0')))} darstellt wird durch den \colorbold{Container-Knoten} \smalltt{JUMP 5} ersetzt.
 
+Die \colorbold{Distanz} \smalltt{5} im \colorbold{RETI-Knoten} \smalltt{JUMP 5} wird mithilfe des \smalltt{instrs\_before}-Attribute des \colorbold{Zielblocks}, der den ersten Befehl der gewünschten Funktion enthält und des \colorbold{aktuellen Blocks}, in dem der \colorbold{RETI-Knoten} \smalltt{JUMP 5} enthalten ist berechnet.
+
+Die \colorbold{relative Adresse} \smalltt{14} direkt nach dem Befehl \smalltt{JUMP 5} wird ebenfalls mithilfe des \smalltt{instrs\_before}-Attributs des \colorbold{aktuellen Blocks} berechnet. Es handelt sich bei bei \seqsplit{14} um eine \colorbold{relative Adresse}, die \colorbold{relativ} zum \smalltt{CS}-Register berechnet wird, welches im \colorbold{RETI-Interpreter} von einem \colorbold{Startprogramm} im \colorbold{EPROM} immer so gesetzt wird, dass es die \colorbold{Adresse} enthält, an der das \colorbold{Codesegment} anfängt.
+
+% relativ zu CS
 \begin{Special_Paragraph}
-  Die Berechnung der \colorbold{Adresse} \smalltt{'<addr@next\_instr>'} bzw. in der Formel $adr_{danach}$ des Befehls nach dem \colorbold{Sprung} \smalltt{JUMP <distanz>} für den Befehl \smalltt{LOADI ACC <addr@next\_instr>} erfolgt dabei mithilfe der folgenden Formel:
+  Die Berechnung der \colorbold{Adresse} \smalltt{'<addr@next\_instr>'} (bzw. in der Formel $adr_{danach}$) des Befehls nach dem \colorbold{Sprung} \smalltt{JUMP <distanz>} für den Befehl \smalltt{LOADI ACC <addr@next\_instr>} erfolgt dabei mithilfe der folgenden Formel:
 \begin{equation}
   adr_{danach} = \#Bef_{vor\,akt.\,Bl.} + idx + 4
   \label{eq:addr_next_instr}
 \end{equation}
   wobei:
   \begin{itemize}
+    \item es sich bei bei $adr_{danach}$ um eine \colorbold{relative Adresse} handelt, die \colorbold{relativ} zum \smalltt{CS}-Register berechnet wird.
     \item $\#Bef_{vor\,akt.\,Bl.} \hat=$ \colorbold{Anzahl} Befehle vor dem momentanen Block. Es handelt sich hierbei um ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{instrs\_before} eines jeden \colorbold{Blockes} \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})}, welches im \colorbold{RETI-Patch}-Pass gesetzt wird. Der Grund dafür, dass das Zuweisen dieses \textcolor{gray!90!black}{versteckten Attributes} \smalltt{instrs\_before} im \colorbold{RETI-Patch} Pass erfolgt ist, weil erst im \colorbold{RETI-Patch} Pass die \colorbold{finale Anzahl} an Befehlen in einem Block feststeht, da im \colorbold{RETI-Patch} Pass \smalltt{GoTo()}'s entfernt werden, deren Sprung nur \colorbold{eine} Adresse weiterspringen würde. Die \colorbold{finale Anzahl} an Befehlen kann sich in diesem \colorbold{Pass} also noch ändern und steht erst nach diesem \colorbold{Pass} fest.
     \item $idx\; \hat=$ relativer Index des Befehls \smalltt{LOADI ACC <addr@next\_instr>} selbst im Block.
     \item $4\; \hat=$ \colorbold{Distanz}, die zwischen den in Code~\ref{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert} markierten Befehlen \smalltt{LOADI ACC <im>} und \smalltt{JUMP <im>} liegt und noch \colorbold{eins} mehr, weil man ja zum nächsten Befehl will.
@@ -261,7 +271,11 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
   \label{code:abstract_syntax_tree_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert} wird bei der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} erst die \colorbold{Expression} \smalltt{BinOp(Num('21'), Mul('*'), Num('2'))} zu \smalltt{Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))} ausgewertet.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert} wird bei der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} erst die \colorbold{Expression} \smalltt{BinOp(Num('21'), Mul('*'), Num('2'))} ausgewertet. Die hierführ erstellten Kompositionen \smalltt{Exp(Num('21'))}, \smalltt{Exp(Num('2'))} und \smalltt{Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))} berechnen das Ergebnis des Ausdrucks \smalltt{21*2} auf dem \colorbold{Stack}. Dieses Ergebnis wird dann von der \colorbold{Komposition} \smalltt{Return(Stack(Num('1')))} vom \colorbold{Stack} gelesen und in das \colorbold{Register} \smalltt{ACC} geschrieben.
+
+Die \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack\_fun'), []))} wird nach dem allokieren der Variable \smalltt{Name('var')}, durch die Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('1')))} ersetzt, welche den \colorbold{Rückgabewert} der Funktion \smalltt{Name('stack\_fun')} aus dem  \smalltt{ACC}-Register rausholt und in der Variable \smalltt{Name('var')} speichert, indem er die \colorbold{Adresse} der Variable \smalltt{Name('var')} in der \colorbold{Symboltabelle} nachschlägt.
+
+Des Weiteren ist zu beobachten, dass wenn bei einer Funktion mit dem \colorbold{Rückgabedatentyp} \smalltt{void} kein \smalltt{return}-Statement explizit ans Ende geschrieben wird, im \colorbold{PicoC-Mon Pass} eines hinzufügt wird in Form der \smalltt{Komposition} \smalltt{Return(Empty())}. Beim Nicht-Angeben im Falle eines Dantentyps, der \colorbold{nicht} \smalltt{void} ist, wird allerdings eine \smalltt{MissingReturn}-\colorbold{Fehlermeldung} ausgelöst.
 
 \begin{code}
   \centering
@@ -270,7 +284,7 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsauf
   \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
-Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks} werden
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert} werden die Kompositionen \seqtt{Exp(Num('21'))}, \seqtt{Exp(Num('2'))}, \seqtt{Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))}, \seqtt{Return(Stack(Num('1')))} und \seqtt{Assign(Global(Num('0')), Stack(Num('1')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 
 \begin{code}
   \centering

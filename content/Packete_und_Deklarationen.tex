@@ -78,6 +78,9 @@
 \definecolor{PrimaryColor}{HTML}{4D2875}
 \definecolor{SecondaryColor}{HTML}{DBD3E3}
 
+% https://tex.stackexchange.com/questions/219445/line-break-in-texttt
+\usepackage{seqsplit}
+\newcommand{\seqtt}[1]{{\small\texttt{\seqsplit{#1}}}}
 
 \newcommand{\smalltt}[1]{{\small\texttt{#1}}}
 
