@@ -2,7 +2,7 @@ File
   Name './example_fun_call_with_return_value.reti_blocks', 
   [
     Block 
-      Name 'stack_fun.1', 
+      Name 'fun_with_return_value.2', 
       [
         # // Return(BinOp(Num('21'), Mul('*'), Num('2')))
         # Exp(Num('21'))
@@ -25,12 +25,18 @@ File
         LOADIN BAF PC -1;
       ], 
     Block 
+      Name 'fun_no_return_value.1', 
+      [
+        # Return(Empty())
+        LOADIN BAF PC -1;
+      ], 
+    Block 
       Name 'main.0', 
       [
-        # // Assign(Name('var'), Call(Name('stack_fun'), []))
+        # // Assign(Name('var'), Call(Name('fun_with_return_value'), []))
         # StackMalloc(Num('2'))
         SUBI SP 2;
-        # NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr')))
+        # NewStackframe(Name('fun_with_return_value'), GoTo(Name('addr@next_instr')))
         MOVE BAF ACC;
         ADDI SP 2;
         MOVE SP BAF;
@@ -39,16 +45,35 @@ File
         LOADI ACC GoTo(Name('addr@next_instr'));
         ADD ACC CS;
         STOREIN BAF ACC -1;
-        # Exp(GoTo(Name('stack_fun.1')))
-        Exp(GoTo(Name('stack_fun.1')))
+        # Exp(GoTo(Name('fun_with_return_value.2')))
+        Exp(GoTo(Name('fun_with_return_value.2')))
         # RemoveStackframe()
         MOVE BAF IN1;
         LOADIN IN1 BAF 0;
         MOVE IN1 SP;
+        SUBI SP 1;
+        STOREIN SP ACC 1;
         # Assign(Global(Num('0')), Stack(Num('1')))
         LOADIN SP ACC 1;
         STOREIN DS ACC 0;
         ADDI SP 1;
+        # StackMalloc(Num('2'))
+        SUBI SP 2;
+        # NewStackframe(Name('fun_no_return_value'), GoTo(Name('addr@next_instr')))
+        MOVE BAF ACC;
+        ADDI SP 2;
+        MOVE SP BAF;
+        SUBI SP 2;
+        STOREIN BAF ACC 0;
+        LOADI ACC GoTo(Name('addr@next_instr'));
+        ADD ACC CS;
+        STOREIN BAF ACC -1;
+        # Exp(GoTo(Name('fun_no_return_value.1')))
+        Exp(GoTo(Name('fun_no_return_value.1')))
+        # RemoveStackframe()
+        MOVE BAF IN1;
+        LOADIN IN1 BAF 0;
+        MOVE IN1 SP;
         # Return(Empty())
         LOADIN BAF PC -1;
       ]

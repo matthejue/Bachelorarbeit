@@ -2,17 +2,25 @@ File
   Name './example_fun_call_with_return_value.ast', 
   [
     FunDef 
-      VoidType 'void', 
-      Name 'stack_fun', 
+      IntType 'int', 
+      Name 'fun_with_return_value', 
       [], 
       [
         Return(BinOp(Num('21'), Mul('*'), Num('2')))
       ], 
     FunDef 
       VoidType 'void', 
+      Name 'fun_no_return_value', 
+      [], 
+      [
+        Return(Empty())
+      ], 
+    FunDef 
+      VoidType 'void', 
       Name 'main', 
       [], 
       [
-        Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack_fun'), []))
+        Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun_with_return_value'), []))
+        Exp(Call(Name('fun_no_return_value'), []))
       ]
   ]

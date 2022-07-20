@@ -1,7 +1,12 @@
-void stack_fun() {
+int fun_with_return_value() {
   return 21 * 2;
 }
 
+void fun_no_return_value() {
+  return;
+}
+
 void main() {
-  int var = stack_fun();
+  int var = fun_with_return_value();
+  fun_no_return_value();
 }

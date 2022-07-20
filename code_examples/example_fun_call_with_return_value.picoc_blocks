@@ -2,14 +2,25 @@ File
   Name './example_fun_call_with_return_value.picoc_blocks', 
   [
     FunDef 
-      VoidType 'void', 
-      Name 'stack_fun', 
+      IntType 'int', 
+      Name 'fun_with_return_value', 
       [], 
       [
         Block 
-          Name 'stack_fun.1', 
+          Name 'fun_with_return_value.2', 
           [
             Return(BinOp(Num('21'), Mul('*'), Num('2')))
+          ]
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'fun_no_return_value', 
+      [], 
+      [
+        Block 
+          Name 'fun_no_return_value.1', 
+          [
+            Return(Empty())
           ]
       ], 
     FunDef 
@@ -20,7 +31,8 @@ File
         Block 
           Name 'main.0', 
           [
-            Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack_fun'), []))
+            Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun_with_return_value'), []))
+            Exp(Call(Name('fun_no_return_value'), []))
           ]
       ]
   ]

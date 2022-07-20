@@ -252,34 +252,37 @@ Die \colorbold{relative Adresse} \smalltt{14} direkt nach dem Befehl \smalltt{JU
 \newlineparagraph{Rückgabewert}
 \label{sec:rückgabewert}
 
-Ein \colorbold{Funktionsaufruf inklusive Zuweisung eines Rückgabewertes} (z.B. \smalltt{int var = stack\_fun()}) wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_mit_rückgabewert} erklärt.
+Ein \colorbold{Funktionsaufruf inklusive Zuweisung eines Rückgabewertes} (z.B. \seqtt{int\; var\; =\; fun\_with\_return\_value()}) wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_funktionsaufruf_mit_rückgabewert} erklärt.
 % todo: unsichtbare return statements
+
+Um den Unterschied zwischen einem \smalltt{return} ohne \colorbold{Rückgabewert} und einem \smalltt{return 21 * 2} mit \colorbold{Rückgabewert} hervorzuheben, wurde ist auch eine Funktion \smalltt{fun\_no\_return\_value}, die \colorbold{keinen} Rückgabewert hat in das Beispiel integriert.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={2, 6}}]{./code_examples/example_fun_call_with_return_value.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={2, 6, 10, 11}}]{./code_examples/example_fun_call_with_return_value.picoc}
   \caption{PicoC-Code für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_code_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
-Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_funktionsaufruf_mit_rückgabewert} wird ein \colorbold{Return-Statement} \smalltt{return 21 * 2} mit der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} dargestellt und ein \colorbold{Funktionsaufruf} inklusive \colorbold{Zuweisung des Rückgabewertes} \smalltt{int var = stack\_fun()} durch die Komposition \smalltt{Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack\_fun'), []))}.
+Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_funktionsaufruf_mit_rückgabewert} wird ein \colorbold{Return-Statement} \smalltt{return 21 * 2} mit der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} dargestellt und ein \colorbold{Funktionsaufruf} inklusive \colorbold{Zuweisung des Rückgabewertes} \smalltt{int var = fun\_with\_return\_value()} durch die Komposition \smalltt{Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun\_with\_return\_value'), []))}.
+
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={9, 16}}]{./code_examples/example_fun_call_with_return_value.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={9, 16, 23, 24}}]{./code_examples/example_fun_call_with_return_value.ast}
   \caption{Abstract Syntax Tree für Funktionsaufruf mit Rückgabewert}
   \label{code:abstract_syntax_tree_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
 Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert} wird bei der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} erst die \colorbold{Expression} \smalltt{BinOp(Num('21'), Mul('*'), Num('2'))} ausgewertet. Die hierführ erstellten Kompositionen \smalltt{Exp(Num('21'))}, \smalltt{Exp(Num('2'))} und \smalltt{Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))} berechnen das Ergebnis des Ausdrucks \smalltt{21*2} auf dem \colorbold{Stack}. Dieses Ergebnis wird dann von der \colorbold{Komposition} \smalltt{Return(Stack(Num('1')))} vom \colorbold{Stack} gelesen und in das \colorbold{Register} \smalltt{ACC} geschrieben.
 
-Die \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('stack\_fun'), []))} wird nach dem allokieren der Variable \smalltt{Name('var')}, durch die Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('1')))} ersetzt, welche den \colorbold{Rückgabewert} der Funktion \smalltt{Name('stack\_fun')} aus dem  \smalltt{ACC}-Register rausholt und in der Variable \smalltt{Name('var')} speichert, indem er die \colorbold{Adresse} der Variable \smalltt{Name('var')} in der \colorbold{Symboltabelle} nachschlägt.
+Die \colorbold{Komposition} \seqtt{Assign(Alloc(Writeable(), IntType('int'), Name('var')), Call(Name('fun\_with\_return\_value'), []))} wird nach dem allokieren der Variable \smalltt{Name('var')}, durch die Komposition \smalltt{Assign(Global(Num('0')), Stack(Num('1')))} ersetzt, welche den \colorbold{Rückgabewert} der Funktion \smalltt{Name('fun\_with\_return\_value')} aus dem  \smalltt{ACC}-Register rausholt und in der Variable \smalltt{Name('var')} speichert, indem er die \colorbold{Adresse} der Variable \smalltt{Name('var')} in der \colorbold{Symboltabelle} nachschlägt.
 
 Des Weiteren ist zu beobachten, dass wenn bei einer Funktion mit dem \colorbold{Rückgabedatentyp} \smalltt{void} kein \smalltt{return}-Statement explizit ans Ende geschrieben wird, im \colorbold{PicoC-Mon Pass} eines hinzufügt wird in Form der \smalltt{Komposition} \smalltt{Return(Empty())}. Beim Nicht-Angeben im Falle eines Dantentyps, der \colorbold{nicht} \smalltt{void} ist, wird allerdings eine \smalltt{MissingReturn}-\colorbold{Fehlermeldung} ausgelöst.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={8-11, 21-22}}]{./code_examples/example_fun_call_with_return_value.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={8-11, 16, 31-32}}]{./code_examples/example_fun_call_with_return_value.picoc_mon}
   \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
@@ -288,7 +291,7 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktion
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={9-11,13-15,17-21,23-25,49-51,53}}]{./code_examples/example_fun_call_with_return_value.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={9-11,13-15,17-21,23-25,31,78}}]{./code_examples/example_fun_call_with_return_value.reti_blocks}
   \caption{RETI-Blocks Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:reti_blocks_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
