@@ -6,7 +6,7 @@ file
         type_spec
           prim_dt	void
         pntr_deg
-        name	stack_fun
+        name	fun_array_from_stackframe
         fun_params
           alloc
             type_spec
@@ -17,20 +17,57 @@ file
                 pntr_decl
                   pntr_deg	*
                   array_decl
-                    name	param1
+                    name	param
                     array_dims
                 array_dims	3
+        decl_exec_stmts
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	fun_array_from_global_data
+        fun_params
           alloc
             type_spec
               prim_dt	int
             pntr_decl
               pntr_deg
               array_decl
-                name	param2
+                name	param
                 array_dims
                   2
                   3
         decl_exec_stmts
+          exec_part
+            exec_exp_stmt
+              logic_or
+                logic_and
+                  eq_exp
+                    rel_exp
+                      arith_or
+                        arith_oplus
+                          arith_and
+                            arith_prec2
+                              arith_prec1
+                                un_exp
+                                  post_exp
+                                    fun_call
+                                      name	fun_array_from_stackframe
+                                      fun_args
+                                        logic_or
+                                          logic_and
+                                            eq_exp
+                                              rel_exp
+                                                arith_or
+                                                  arith_oplus
+                                                    arith_and
+                                                      arith_prec2
+                                                        arith_prec1
+                                                          un_exp
+                                                            post_exp
+                                                              prim_exp
+                                                                name	param
     decl_def
       fun_def
         type_spec
@@ -47,19 +84,7 @@ file
                 pntr_decl
                   pntr_deg
                   array_decl
-                    name	local_var1
-                    array_dims
-                      2
-                      3
-          decl_part
-            decl_exp_stmt
-              alloc
-                type_spec
-                  prim_dt	int
-                pntr_decl
-                  pntr_deg
-                  array_decl
-                    name	local_var2
+                    name	local_var
                     array_dims
                       2
                       3
@@ -77,7 +102,7 @@ file
                                 un_exp
                                   post_exp
                                     fun_call
-                                      name	stack_fun
+                                      name	fun_array_from_global_data
                                       fun_args
                                         logic_or
                                           logic_and
@@ -91,17 +116,4 @@ file
                                                           un_exp
                                                             post_exp
                                                               prim_exp
-                                                                name	local_var1
-                                        logic_or
-                                          logic_and
-                                            eq_exp
-                                              rel_exp
-                                                arith_or
-                                                  arith_oplus
-                                                    arith_and
-                                                      arith_prec2
-                                                        arith_prec1
-                                                          un_exp
-                                                            post_exp
-                                                              prim_exp
-                                                                name	local_var2
+                                                                name	local_var

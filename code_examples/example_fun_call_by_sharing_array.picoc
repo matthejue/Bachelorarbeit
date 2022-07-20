@@ -1,8 +1,11 @@
-void stack_fun(int (*param1)[3], int param2[2][3]) {
+void fun_array_from_stackframe(int param[2][3]) {
+}
+
+void fun_array_from_global_data(int (*param)[3]) {
+  fun_array_from_stackframe(param);
 }
 
 void main() {
-  int local_var1[2][3];
-  int local_var2[2][3];
-  stack_fun(local_var1, local_var2);
+  int local_var[2][3];
+  fun_array_from_global_data(local_var);
 }

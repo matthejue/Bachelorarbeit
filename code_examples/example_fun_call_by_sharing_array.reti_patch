@@ -2,14 +2,41 @@ File
   Name './example_fun_call_by_sharing_array.reti_patch', 
   [
     Block 
-      Name 'start.2', 
+      Name 'start.3', 
       [
         # // Exp(GoTo(Name('main.0')))
         Exp(GoTo(Name('main.0')))
       ], 
     Block 
-      Name 'stack_fun.1', 
+      Name 'fun_array_from_stackframe.2', 
       [
+        # Return(Empty())
+        LOADIN BAF PC -1;
+      ], 
+    Block 
+      Name 'fun_array_from_global_data.1', 
+      [
+        # StackMalloc(Num('2'))
+        SUBI SP 2;
+        # Exp(Stackframe(Num('0')))
+        SUBI SP 1;
+        LOADIN BAF ACC -2;
+        STOREIN SP ACC 1;
+        # NewStackframe(Name('fun_array_from_stackframe'), GoTo(Name('addr@next_instr')))
+        MOVE BAF ACC;
+        ADDI SP 3;
+        MOVE SP BAF;
+        SUBI SP 3;
+        STOREIN BAF ACC 0;
+        LOADI ACC GoTo(Name('addr@next_instr'));
+        ADD ACC CS;
+        STOREIN BAF ACC -1;
+        # Exp(GoTo(Name('fun_array_from_stackframe.2')))
+        Exp(GoTo(Name('fun_array_from_stackframe.2')))
+        # RemoveStackframe()
+        MOVE BAF IN1;
+        LOADIN IN1 BAF 0;
+        MOVE IN1 SP;
         # Return(Empty())
         LOADIN BAF PC -1;
       ], 
@@ -23,22 +50,17 @@ File
         LOADI IN1 0;
         ADD IN1 DS;
         STOREIN SP IN1 1;
-        # Ref(Global(Num('6')))
-        SUBI SP 1;
-        LOADI IN1 6;
-        ADD IN1 DS;
-        STOREIN SP IN1 1;
-        # NewStackframe(Name('stack_fun'), GoTo(Name('addr@next_instr')))
+        # NewStackframe(Name('fun_array_from_global_data'), GoTo(Name('addr@next_instr')))
         MOVE BAF ACC;
-        ADDI SP 4;
+        ADDI SP 3;
         MOVE SP BAF;
-        SUBI SP 4;
+        SUBI SP 3;
         STOREIN BAF ACC 0;
         LOADI ACC GoTo(Name('addr@next_instr'));
         ADD ACC CS;
         STOREIN BAF ACC -1;
-        # Exp(GoTo(Name('stack_fun.1')))
-        Exp(GoTo(Name('stack_fun.1')))
+        # Exp(GoTo(Name('fun_array_from_global_data.1')))
+        Exp(GoTo(Name('fun_array_from_global_data.1')))
         # RemoveStackframe()
         MOVE BAF IN1;
         LOADIN IN1 BAF 0;

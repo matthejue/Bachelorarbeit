@@ -26,7 +26,7 @@ file
         type_spec
           prim_dt	void
         pntr_deg
-        name	stack_fun
+        name	fun_struct_from_stackframe
         fun_params
           alloc
             type_spec
@@ -38,6 +38,52 @@ file
                 name	param
                 array_dims
         decl_exec_stmts
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	fun_struct_from_global_data
+        fun_params
+          alloc
+            type_spec
+              struct_spec
+                name	st
+            pntr_decl
+              pntr_deg
+              array_decl
+                name	param
+                array_dims
+        decl_exec_stmts
+          exec_part
+            exec_exp_stmt
+              logic_or
+                logic_and
+                  eq_exp
+                    rel_exp
+                      arith_or
+                        arith_oplus
+                          arith_and
+                            arith_prec2
+                              arith_prec1
+                                un_exp
+                                  post_exp
+                                    fun_call
+                                      name	fun_struct_from_stackframe
+                                      fun_args
+                                        logic_or
+                                          logic_and
+                                            eq_exp
+                                              rel_exp
+                                                arith_or
+                                                  arith_oplus
+                                                    arith_and
+                                                      arith_prec2
+                                                        arith_prec1
+                                                          un_exp
+                                                            post_exp
+                                                              prim_exp
+                                                                name	param
     decl_def
       fun_def
         type_spec
@@ -71,7 +117,7 @@ file
                                 un_exp
                                   post_exp
                                     fun_call
-                                      name	stack_fun
+                                      name	fun_struct_from_global_data
                                       fun_args
                                         logic_or
                                           logic_and

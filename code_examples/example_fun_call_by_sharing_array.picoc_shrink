@@ -3,19 +3,26 @@ File
   [
     FunDef 
       VoidType 'void', 
-      Name 'stack_fun', 
+      Name 'fun_array_from_stackframe', 
       [
-        Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('param1'))
-        Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('param2'))
+        Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int'))), Name('param'))
       ], 
       [], 
+    FunDef 
+      VoidType 'void', 
+      Name 'fun_array_from_global_data', 
+      [
+        Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('param'))
+      ], 
+      [
+        Exp(Call(Name('fun_array_from_stackframe'), [Name('param')]))
+      ], 
     FunDef 
       VoidType 'void', 
       Name 'main', 
       [], 
       [
-        Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var1')))
-        Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var2')))
-        Exp(Call(Name('stack_fun'), [Name('local_var1'), Name('local_var2')]))
+        Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var')))
+        Exp(Call(Name('fun_array_from_global_data'), [Name('local_var')]))
       ]
   ]

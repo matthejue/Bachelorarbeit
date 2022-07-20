@@ -1,9 +1,15 @@
 struct st {int attr1; int attr2[2];};
 
-void stack_fun(struct st param) {
+
+void fun_struct_from_stackframe(struct st param) {
 }
+
+void fun_struct_from_global_data(struct st param) {
+  fun_struct_from_stackframe(param);
+}
+
 
 void main() {
   struct st local_var;
-  stack_fun(local_var);
+  fun_struct_from_global_data(local_var);
 }

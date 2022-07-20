@@ -9,17 +9,26 @@ File
       ], 
     FunDef 
       VoidType 'void', 
-      Name 'stack_fun', 
+      Name 'fun_struct_from_stackframe', 
       [
         Alloc(Writeable(), StructSpec(Name('st')), Name('param'))
       ], 
       [], 
     FunDef 
       VoidType 'void', 
+      Name 'fun_struct_from_global_data', 
+      [
+        Alloc(Writeable(), StructSpec(Name('st')), Name('param'))
+      ], 
+      [
+        Exp(Call(Name('fun_struct_from_stackframe'), [Name('param')]))
+      ], 
+    FunDef 
+      VoidType 'void', 
       Name 'main', 
       [], 
       [
         Exp(Alloc(Writeable(), StructSpec(Name('st')), Name('local_var')))
-        Exp(Call(Name('stack_fun'), [Name('local_var')]))
+        Exp(Call(Name('fun_struct_from_global_data'), [Name('local_var')]))
       ]
   ]

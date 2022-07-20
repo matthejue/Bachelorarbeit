@@ -303,31 +303,37 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktion
 
 \newlineparagraph{Umsetzung von Call by Sharing für Arrays}
 
+Die \colorbold{Call by Reference} (Definition~\ref{def:call_by_reference}) Übergabe eines Arrays an eine andere Funktion, wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_call_by_sharing_für_arrays} erklärt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={7}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={1,4,5,10}}]{./code_examples/example_fun_call_by_sharing_array.picoc}
   \caption{PicoC-Code für Call by Sharing für Arrays}
   \label{code:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
 
+Im \colorbold{PicoC-Mon Pass} wird im Fall dessen, dass der \colorbold{oberste Container-Knoten} im Teilbaum, der den Datentyp darstellt und an die Funktion übergeben wird ein \colorbold{Array} \smalltt{ArrayDecl(nums, datatype)} ist, dieser zu einem \colorbold{Pointer} \smalltt{PntrDecl(num, datatype)} umgewandelt und der Rest des Teilbaumes, der am \smalltt{datatype}-Attribut hängt, an das \smalltt{datatype}-Attribut des \colorbold{Pointers} \smalltt{PntrDecl(num, datatype)} drangehängt. Diese \colorbold{Umwandlung} des \colorbold{Datentyps} kann in der \colorbold{Symboltabelle} in Code~\ref{code:symboltabelle_für_call_by_sharing_für_arrays} beobachtet werden. Die \colorbold{lokalen Variablen} \smalltt{local\_var1@main} und \smalltt{local\_var2@main} sind beide vom Datentyp \smalltt{ArrayDecl([Num('2'), Num('3')], IntType('int'))} und bei der Übergabe änder sich der Datentyp beider Variablen zu \smalltt{PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int')))}.
+
 % https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={19,28,46,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15,19,33,37,51,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
   \caption{Symboltabelle für Call by Sharing für Arrays}
   \label{code:symboltabelle_für_call_by_sharing_für_arrays}
 \end{code}
 
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_sharing_für_arrays} ist zu sehen, dass zur Übergabe der beiden Arrays die \colorbold{Adresse} der Arrays auf den \colorbold{Stack} geschrieben wird. Die \colorbold{Adresse} der beiden Arrays auf den \colorbold{Stack} zu schreiben wird durch die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Global(Num('6')))} repräsentiert. Dabei stellen die Zahlen in den \colorbold{Container-Knoten} \smalltt{Global(num)} die \colorbold{relative Adressen} relativ zum \smalltt{DS}-Register dar, die aus der \colorbold{Symboltabelle} entnommen sind.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13-14}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={13,23}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
   \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
   \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={16-19,21-24}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={16-18,43-46}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
   \caption{RETI-Block Pass für Call by Sharing für Arrays}
   \label{code:reti_blocks_pass_für_call_by_sharing_für_arrays}
 \end{code}
@@ -338,7 +344,7 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktion
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c, minted options={highlightlines={8}}]{./code_examples/example_fun_call_by_value_struct.picoc}
+  \numberedcodebox[minted language=c, minted options={highlightlines={4,7,8,14}}]{./code_examples/example_fun_call_by_value_struct.picoc}
   \caption{PicoC-Code für Call by Value für Structs}
   \label{code:picoc_code_für_call_by_value_für_structs}
 \end{code}
@@ -347,14 +353,14 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktion
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={19,28,46,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15,19,33,37,51,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
   \caption{Symboltabelle für Call by Sharing für Arrays}
-  \label{code:symboltabelle_für_call_by_sharing_für_arrays}
+  \label{code:symboltabelle_für_call_by_sharing_für_structs}
 \end{code}
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={13}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
+  \numberedcodebox[minted language=text, minted options={highlightlines={13,23}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
   \caption{PicoC-Mon Pass für Call by Value für Structs}
   \label{code:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
@@ -363,7 +369,7 @@ Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_funktion
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={16-22}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={16-22,47-53}}]{./code_examples/example_fun_call_by_value_struct.reti_blocks}
   \caption{RETI-Block Pass für Call by Value für Structs}
   \label{code:reti_blocks_pass_für_call_by_value_for_structs}
 \end{code}
