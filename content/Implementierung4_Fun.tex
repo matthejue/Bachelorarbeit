@@ -206,27 +206,31 @@ Die \colorbold{Kompostionen} \smalltt{LOADI ACC GoTo(Name('addr@next\_instr'))} 
 Im \colorbold{RETI Pass} in Code~\ref{code:reti_blocks_pass_für_funktionsaufruf_ohne_rückgabewert} wird nun der finale \colorbold{RETI-Code} erstellt. Eine Änderung, die direkt auffällt ist, dass die \colorbold{RETI-Befehle} aus den \colorbold{Blöcken} nun zusammengefügt sind und es keine \colorbold{Blöcke} mehr gibt. Des Weiteren wird das \smalltt{GoTo(Name('addr@next\_instr'))} in der Komposition \smalltt{\smalltt{LOADI ACC GoTo(Name('addr@next\_instr'))}} nun durch die \colorbold{Adresse} des nächsten Befehls nach dem \colorbold{Sprung zur gewünschten Funktion}, der bisher durch die Komposition \smalltt{Exp(GoTo(Name('stack\_fun.0')))} dargestellt wurde ersetzt: \smalltt{LOADI ACC 14;}. Dieser Sprung \smalltt{Exp(GoTo(Name('stack\_fun.0')))} wird mithilfe des \colorbold{Container-Knoten}  \smalltt{JUMP 5} ersetzt.
 
 \begin{Special_Paragraph}
-  Die Berechnung der \colorbold{Adresse} \smalltt{GoTo(Name('addr@next\_instr'))} des Befehls nach dem \colorbold{Sprung} \smalltt{Jump <distanz>} erfolgt dabei mithilfe der folgenden Formel:
+  Die Berechnung der \colorbold{Adresse} \smalltt{'<addr@next\_instr>'} bzw. in der Formel $adr_{danach}$ des Befehls nach dem \colorbold{Sprung} \smalltt{JUMP <distanz>} für den Befehl \smalltt{LOADI ACC <addr@next\_instr>} erfolgt dabei mithilfe der folgenden Formel:
   \begin{equation}
-    adr_{danach} = \#Befehle_{vor\,akt.\,Block} + idx + 4
+    adr_{danach} = \#Bef_{vor\,akt.\,Bl.} + idx + 4
   \end{equation}
   wobei:
   \begin{itemize}
-    \item $adr_{danach}\; \hat=$ Adresse des Befehls nach dem Sprung.
-    \item $\#Befehle_{vor\,akt.\,Block} \hat=$ Befehle vor dem momentanen Block. Es handelt sich hierbei um ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{instrs\_before} eines jeden \colorbold{Blockes} \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})}, welches im \colorbold{RETI-Patch}-Pass gesetzt wird. Der Grund dafür, dass das Zuweisen dieses \textcolor{gray!90!black}{versteckten Attributes} \smalltt{instrs\_before} im \colorbold{RETI-Patch} Pass erfolgt ist, weil erst im \colorbold{RETI-Patch} Pass die \colorbold{finale Anzahl} an Befehlen in einem Block feststeht, da im \colorbold{RETI-Patch} Pass \smalltt{GoTo()}'s entfernt werden, deren Sprung nur \colorbold{eine} Adresse weiterspringen würde. Die \colorbold{finale Anzahl} an Befehlen kann sich in diesem \colorbold{Pass} also noch ändern und steht erst nach diesem \colorbold{Pass} fest.
-    \item $idx\; \hat=$ relativer Index des Befehls \smalltt{LOADI <reg> <im>} selbst im Block.
-    \item $4\; \hat=$ \colorbold{Distanz}, die zwischen den in Code~\ref{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert} markierten Befehlen \smalltt{LOADI ACC <im>} und \smalltt{Jump <im>} liegt und noch \colorbold{eins} mehr, weil man ja zum nächsten Befehl will.
+    \item $\#Bef_{vor\,akt.\,Bl.} \hat=$ \colorbold{Anzahl} Befehle vor dem momentanen Block. Es handelt sich hierbei um ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{instrs\_before} eines jeden \colorbold{Blockes} \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})}, welches im \colorbold{RETI-Patch}-Pass gesetzt wird. Der Grund dafür, dass das Zuweisen dieses \textcolor{gray!90!black}{versteckten Attributes} \smalltt{instrs\_before} im \colorbold{RETI-Patch} Pass erfolgt ist, weil erst im \colorbold{RETI-Patch} Pass die \colorbold{finale Anzahl} an Befehlen in einem Block feststeht, da im \colorbold{RETI-Patch} Pass \smalltt{GoTo()}'s entfernt werden, deren Sprung nur \colorbold{eine} Adresse weiterspringen würde. Die \colorbold{finale Anzahl} an Befehlen kann sich in diesem \colorbold{Pass} also noch ändern und steht erst nach diesem \colorbold{Pass} fest.
+    \item $idx\; \hat=$ relativer Index des Befehls \smalltt{LOADI ACC <addr@next\_instr>} selbst im Block.
+    \item $4\; \hat=$ \colorbold{Distanz}, die zwischen den in Code~\ref{code:reti_pass_für_funktionsaufruf_ohne_rückgabewert} markierten Befehlen \smalltt{LOADI ACC <im>} und \smalltt{JUMP <im>} liegt und noch \colorbold{eins} mehr, weil man ja zum nächsten Befehl will.
   \end{itemize}
 
-  Die Berechnug der \colorbold{Distanz} für den Sprung zum \colorbold{ersten} Befehl eines im \colorbold{Pass} zuvor \colorbold{existenten Blockes} erfolgt dabei nach der folgenden Formel:
+  Die Berechnug der \colorbold{Distanz} \smalltt{<distanz>} für den Sprung \smalltt{JUMP <distanz>} zum \colorbold{ersten} Befehl eines im \colorbold{Pass} zuvor \colorbold{existenten Blockes} erfolgt dabei nach der folgenden Formel:
   % https://stackoverflow.com/questions/57820567/how-to-fit-very-long-line-in-case-bracket-equations-in-latex-with-double-column
   \[
     distanz = \begin{dcases}
-      \parbox[t]{6cm}{$\#Befehle_{vor\, akt.\, Block} - \#Befehle_{vor\, Zielblock} + idx$} & \#Befehle_{vor\, Zielblock} < \#Befehle_{vor\, akt.\, Block} \\
-     -idx & \#Befehle_{vor\, Zielblock} = \#Befehle_{vor\, akt.\, Block} \\
-     \parbox[t]{6cm}{$\#Befehle_{vor\, Zielblock} - (\#Befehle_{vor\, akt.\, Block} - \#Befehle_{vor\, Zielblock}) + (\#Befehle_{vor\, akt.\, Block} - idx)$} & \#Befehle_{vor\, Zielblock} > \#Befehle_{vor\, akt.\, Block}
+      -\#Bef_{vor\, akt.\, Bl.} + \#Bef_{vor\, Zielbl.} - idx & \#Bef_{vor\, Zielbl.} < \#Bef_{vor\, akt.\, Bl.} \\
+      -idx & \#Bef_{vor\, Zielbl.} = \#Bef_{vor\, akt.\, Bl.} \\
+      \#Bef_{vor\, Zielbl.} - \#Bef_{vor\, akt.\, Bl.} - idx & \#Bef_{vor\, Zielbl.} > \#Bef_{vor\, akt.\, Bl.}
     \end{dcases}
   \]
+  wobei:
+  \begin{itemize}
+    \item $\#Bef_{vor\, Zielbl.} \hat=$ \colorbold{Anzahl} Befehle vor dem \colorbold{Zielblock}, der den \colorbold{ersten} Befehl einer Funktion enthält und zu dem gesprungen werden soll. Es handelt sich hierbei um ein \textcolor{gray!90!black}{verstecktes Attribut} \smalltt{instrs\_before} eines jeden \colorbold{Blockes} \smalltt{Block(name, stmts\_instrs, \textcolor{gray!90!black}{instrs\_before}, \textcolor{gray!90!black}{num\_instrs}, \textcolor{gray!90!black}{param\_size}, \textcolor{gray!90!black}{local\_vars\_size})}.
+    \item $\#Bef_{vor\,akt.\,Bl.}$ und $idx$ haben die \colorbold{gleiche Bedeutung} wie oben.
+  \end{itemize}
 \end{Special_Paragraph}
 
 \begin{code}
