@@ -90,6 +90,8 @@
 % (erwähnen, dass finalle Grammatik im Appendix)
 \subsection{Basic Lexer}
 \section{Syntaktische Analyse}
+\label{sec:syntaktische_analyse}
+
 \subsection{Konkrette Syntax für die Syntaktische Analyse}
 % ./concrete_syntax_picoc.lark
 % https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
@@ -545,6 +547,8 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   \bottomrule
 \end{grammar}
 
+Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird in Python über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine Textrepräsentation seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{,} und \colorbold{Semikolons} \smalltt{;} zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene Textrepräsentation passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgebeben}.
+
 % $L_{X}$ ist nicht notwendig sich zu überlegen, hier so getann als gäbe es diese Sprache
 % Abstrakte Syntax ist für den Programmierer als Orientierungshilfe bei der Implementierung
 
@@ -566,7 +570,7 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 
 \section{Code Generierung}
 \subsection{Übersicht}
-Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse}, wird in diesem Kapitel aus den verschiedenen \colorbold{Kompositionen} von \colorbold{Container-Knoten} und \colorbold{Token-Knoten} im Abstract Syntax Tree das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
+Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse} in Unterkapitel~\ref{sec:syntaktische_analyse}, wird in diesem Kapitel aus den verschiedenen \colorbold{Kompositionen} von \colorbold{Container-Knoten} und \colorbold{Token-Knoten} im Abstract Syntax Tree das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
 
 % Unterscheid zur Architektur aus dem Bachelorprojekt
 
@@ -599,9 +603,7 @@ Nachdem der Kompilierprozess des \colorbold{PicoC-Compiler} im \colorbold{vertik
   \label{fig:architektur_mit_allen_passes_ausgeschrieben}
 \end{figure}
 
-Im Unterkapitel~\ref{sec:passes} werden die unterschiedlichen \colorbold{Passes} des PicoC-Compilers erklärt. Die von den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees} werden dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} des \colorbold{RETI-Code's} immer ähnlicher werden. Jeder Pass sollte dabei möglichst eine Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck des \colorbold{Dervivation Tree} in der Syntaktischen Analyse war, eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
-
-In den darauffolgenden Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} werden einzelne \colorbold{Aspekte}, die Thema dieser \colorbold{Bachelorarbeit} sind \colorbold{genauer betrachtet} und erklärt, die im Unterkapitel~\ref{sec:passes} nicht ausreichend vertieft wurden. Viele der verwendenten \colorbold{Ansätze} zur Lösung dieser Probleme basieren auf der Vorlesung~\cite{scholl_betriebssysteme_2020} und wurden in dieser Bachelorarbeit weiter ausgearbeitet, wo es nötig war, sodass diese mit dem \colorbold{PicoC-Compiler} auch in der \colorbold{Praxis} implementiert werden konnten.
+Im Unterkapitel~\ref{sec:passes} werden die unterschiedlichen \colorbold{Passes} des PicoC-Compilers erklärt. In den darauffolgenden Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} zu \colorbold{Pointern},  \colorbold{Arrays}, \colorbold{Structs} und \colorbold{Funktionen} werden einzelne \colorbold{Aspekte}, die Thema dieser \colorbold{Bachelorarbeit} sind \colorbold{genauer betrachtet} und erklärt, die im Unterkapitel~\ref{sec:passes} nicht ausreichend vertieft wurden. Viele der verwendenten \colorbold{Ansätze} zur Lösung dieser Probleme basieren auf der Vorlesung~\cite{scholl_betriebssysteme_2020} und wurden in dieser Bachelorarbeit weiter ausgearbeitet, wo es nötig war, sodass diese mit dem \colorbold{PicoC-Compiler} auch in der \colorbold{Praxis} implementiert werden konnten.
 
 % https://tex.stackexchange.com/questions/167380/how-to-refer-to-a-footnote
 Um die verschiedenen Aspekte besser erklären zu können, werden \colorbold{Codebeispiele} verwendet, in welchen ein kleines repräsentatives \colorbold{PicoC-Programm} für einen spezifischen Aspekt in wichtigen \colorbold{Zwischenstadien der Kompilierung} gezeigt wird\footnote{Also die verschiedenen in den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees}, sofern der \colorbold{Pass} für den gezeigten Aspekt relevant ist.}. Die \colorbold{Codebeispiele} wurden alle mit dem \colorbold{PicoC-Compiler} kompiliert und danach \colorbold{nicht} mehr \colorbold{verändert}, also genauso, wie der \colorbold{PicoC-Compiler} sie kompiliert aus den Dateien in dieses Dokument eingelesen. Alle hier zur Repräsentation verwendeten \colorbold{PicoC-Programme} lassen sich unter dem \footnoteurl{https://github.com/matthejue/Bachelorarbeit/tree/master/code_examples} finden und mithilfe der im Ordner \inlinebox{/code_examples} beiliegenden \inlinebox{Makefile} und dem Befehl \inlinebox*{make compile-all} genauso \colorbold{kompilieren}, wie sie hier dargestellt sind\footnote{Es wurden zu diesem Zweck spezielle neue \colorbold{Command-line Optionen} erstellt, die bestimmte Kommentare \colorbold{herausfiltern} und manche Container-Knoten \colorbold{einzeilig} machen, damit die generierten \colorbold{Abstract Syntax Trees} in den verscchiedenen Zwischenstufen der Kompilierung \colorbold{nicht} zu langgestreckt und \colorbold{überfüllt} mit Kommentaren sind.}.
@@ -610,10 +612,19 @@ Um die verschiedenen Aspekte besser erklären zu können, werden \colorbold{Code
 \subsection{Passes}
 \label{sec:passes}
 
+Im Folgenden werden die verschiedenen \colorbold{Passes} des \colorbold{PicoC-Compilers} für die Generierung von \colorbold{RETI-Code} besprochen. Viele dieser \colorbold{Passes} haben \colorbold{Aufgaben}, die eher unter die Themenbereiche des \colorbold{Bachelorprojekts} fallen. Allerdings ist das Verständnis der \colorbold{Passes} auch für das Verständnis der veschiedenen Aspekte\footnote{In kurz: \colorbold{Pointer}, \colorbold{Arrays}, \colorbold{Strcuts} und \colorbold{Funktionen}.} der \colorbold{Bachelorarbeit} wichtig.
+
+Die von den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees} werden dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} des \colorbold{RETI-Code's} immer ähnlicher werden. Jeder Pass sollte dabei möglichst \colorbold{eine} Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck des \colorbold{Dervivation Tree} in der Syntaktischen Analyse war, eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
+
+Auf jedes Detail der einzelnen \colorbold{Passes} wird in diesem Unterkapitel allerdings nicht eingegangen, da diese einerseits in den Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} zu \colorbold{Pointern},  \colorbold{Arrays}, \colorbold{Structs} und \colorbold{Funktionen} im Detail erklärt sind und andererseits viele Aufgaben dieser \colorbold{Passes} eher dem \colorbold{Bachelorprojekt} zuzurechnen sind.
+
 \subsubsection{PicoC-Shrink Pass}
-\newlineparagraph{Zweck}
+\label{picoc_shrink_pass}
+\newlineparagraph{Aufgabe}
 \label{sec:picoc_shrink_pass_zweck}
 % dieser Pass existiert nur wegen der Erweiterungen
+
+Der Aufgabe des \colorbold{PicoC-Shrink Pass} ist in Unterkapitel~\ref{dereferenzierung_durch_zugriff_auf_arrayindex_ersetzen} ausführlich an einem Beispiel erklärt. Kurzgefasst hat der \colorbold{PicoC-Shrink Pass} die Aufgabe, die Eigenheit auszunutzen, dass der \colorbold{Dereferenzierungoperator} \smalltt{*pntr} und die damit einhergehende \colorbold{Pointer Arithmetik} \smalltt{*(pntr + i)} sich in der Untermenge der Sprache $L_{C}$, welche die Sprache $L_{PicoC}$ darstellt genau gleich verhält, wie der \colorbold{Operator} für den \colorbold{Zugriff} auf den \colorbold{Index} eines \colorbold{Arrays} \smalltt{ar[i]}. Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold{Dereferenzierungsoperators} \smalltt{*(pntr + i)} in Verwendungen des \colorbold{Operators} zum \colorbold{Zugriff} auf einen \colorbold{Arrayindex} \smalltt{ar[i]} um, sodass sich viele
 
 \newlineparagraph{Codebeispiel}
 
@@ -639,7 +650,8 @@ Um die verschiedenen Aspekte besser erklären zu können, werden \colorbold{Code
 \end{code}
 
 \subsubsection{PicoC-Blocks Pass}
-\newlineparagraph{Zweck}
+\label{picoc_blocks_pass}
+\newlineparagraph{Aufgaben}
 \label{sec:picoc_blocks_pass_zweck}
 
 Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} mithilfe von Blöcken, \smalltt{GoTo(lable)}-Statements und nur noch \smalltt{IF-Else}-Container-Knoten für die \colorbold{Condition} umzusetzen.
@@ -667,7 +679,8 @@ Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp
 \end{code}
 
 \subsubsection{PicoC-Mon Pass}
-\newlineparagraph{Zweck}
+\label{picoc_mon_pass}
+\newlineparagraph{Aufgaben}
 \label{sec:picoc_mon_pass_zweck}
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
@@ -706,7 +719,8 @@ Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp
 \end{code}
 
 \subsubsection{RETI-Blocks Pass}
-\newlineparagraph{Zweck}
+\label{reti_blocks_pass}
+\newlineparagraph{Aufgaben}
 \label{sec:reti_blocks_pass_zweck}
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
@@ -731,7 +745,8 @@ Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp
 \end{code}
 
 \subsubsection{RETI-Patch Pass}
-\newlineparagraph{Zweck}
+\label{reti_patch_pass}
+\newlineparagraph{Aufgaben}
 \label{sec:reti_patch_pass_zweck}
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_patch]
@@ -750,7 +765,8 @@ Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp
 \end{code}
 
 \subsubsection{RETI Pass}
-\newlineparagraph{Zweck}
+\label{reti_pass}
+\newlineparagraph{Aufgaben}
 \label{sec:reti_pass_zweck}
 \newlineparagraph{Konkrette und Abstrakte Syntax}
 
