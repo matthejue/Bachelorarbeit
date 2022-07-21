@@ -39,6 +39,18 @@ file
                   2
                   3
         decl_exec_stmts
+          decl_part
+            decl_exp_stmt
+              alloc
+                type_spec
+                  prim_dt	int
+                pntr_decl
+                  pntr_deg
+                  array_decl
+                    name	local_var
+                    array_dims
+                      2
+                      3
           exec_part
             exec_exp_stmt
               logic_or
@@ -67,7 +79,7 @@ file
                                                           un_exp
                                                             post_exp
                                                               prim_exp
-                                                                name	param
+                                                                name	local_var
     decl_def
       fun_def
         type_spec

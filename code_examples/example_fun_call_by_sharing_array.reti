@@ -1,24 +1,25 @@
 # // Exp(GoTo(Name('main.0')))
-JUMP 19;
+JUMP 20;
 # Return(Empty())
 LOADIN BAF PC -1;
 # StackMalloc(Num('2'))
 SUBI SP 2;
-# Exp(Stackframe(Num('0')))
+# Ref(Stackframe(Num('6')))
 SUBI SP 1;
-LOADIN BAF ACC -2;
-STOREIN SP ACC 1;
+MOVE BAF IN1;
+SUBI IN1 8;
+STOREIN SP IN1 1;
 # NewStackframe(Name('fun_array_from_stackframe'), GoTo(Name('addr@next_instr')))
 MOVE BAF ACC;
 ADDI SP 3;
 MOVE SP BAF;
 SUBI SP 3;
 STOREIN BAF ACC 0;
-LOADI ACC 15;
+LOADI ACC 16;
 ADD ACC CS;
 STOREIN BAF ACC -1;
 # Exp(GoTo(Name('fun_array_from_stackframe.2')))
-JUMP -13;
+JUMP -14;
 # RemoveStackframe()
 MOVE BAF IN1;
 LOADIN IN1 BAF 0;
@@ -36,13 +37,13 @@ STOREIN SP IN1 1;
 MOVE BAF ACC;
 ADDI SP 3;
 MOVE SP BAF;
-SUBI SP 3;
+SUBI SP 9;
 STOREIN BAF ACC 0;
-LOADI ACC 33;
+LOADI ACC 34;
 ADD ACC CS;
 STOREIN BAF ACC -1;
 # Exp(GoTo(Name('fun_array_from_global_data.1')))
-JUMP -30;
+JUMP -31;
 # RemoveStackframe()
 MOVE BAF IN1;
 LOADIN IN1 BAF 0;

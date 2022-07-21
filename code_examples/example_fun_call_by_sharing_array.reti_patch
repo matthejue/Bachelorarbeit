@@ -18,10 +18,11 @@ File
       [
         # StackMalloc(Num('2'))
         SUBI SP 2;
-        # Exp(Stackframe(Num('0')))
+        # Ref(Stackframe(Num('6')))
         SUBI SP 1;
-        LOADIN BAF ACC -2;
-        STOREIN SP ACC 1;
+        MOVE BAF IN1;
+        SUBI IN1 8;
+        STOREIN SP IN1 1;
         # NewStackframe(Name('fun_array_from_stackframe'), GoTo(Name('addr@next_instr')))
         MOVE BAF ACC;
         ADDI SP 3;
@@ -54,7 +55,7 @@ File
         MOVE BAF ACC;
         ADDI SP 3;
         MOVE SP BAF;
-        SUBI SP 3;
+        SUBI SP 9;
         STOREIN BAF ACC 0;
         LOADI ACC GoTo(Name('addr@next_instr'));
         ADD ACC CS;

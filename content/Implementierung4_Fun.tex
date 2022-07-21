@@ -182,7 +182,9 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
   \label{code:abstract_syntax_tree_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert} wird die Komposition und Container-Knoten \smalltt{Exp(Call(Name('stack\_fun'), [Name('local\_var')]))} durch die Kompositionen \smalltt{StackMalloc(Num('2'))}, \smalltt{Ref(Global(Num('0')))}, \smalltt{NewStackframe(Name('stack\_fun'), GoTo(Name('addr@next\_instr')))}, \smalltt{Exp(GoTo(Name('stack\_fun.0')))} und \smalltt{RemoveStackframe()} ersetzt, welche in den Tabellen~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} und \ref{tab:picoc_knoten_teil_1} genauer erklärt sind.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert} wird die Komposition \seqtt{Exp(Call(Name('stack\_fun'), [Name('local\_var')]))} durch die Kompositionen \seqtt{StackMalloc(Num('2'))}, \seqtt{Ref(Global(Num('0')))}, \seqtt{NewStackframe(Name('stack\_fun'), GoTo(Name('addr@next\_instr')))}, \seqtt{Exp(GoTo(Name('stack\_fun.0')))} und \seqtt{RemoveStackframe()} ersetzt, welche in den Tabellen~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} und \ref{tab:picoc_knoten_teil_1} genauer erklärt sind.
+
+Der Container-Knoten \smalltt{StackMalloc(Num('2'))} ist notwendig, weil auf dem \colorbold{Stackframe} für den Wert des \smalltt{BAF}-Registers der \colorbold{aufrufenden Funktion} und die \colorbold{Rücksprungadresse} $2$ Speicherzellen Platz am \colorbold{Anfang} des \colorbold{Stackframes} gelassen werden muss. Das wird durch den Container-Knoten \smalltt{StackMalloc(Num('2'))} umgesetzt, indem das \smalltt{SP}-Register einfach um zwei Speicherzellen \colorbold{dekrementiert} wird und somit Speicher auf dem \colorbold{Stack} belegt wird\footnote{Wobei hier \dq \colorbold{reserviert}\dq besser passen würde.}.
 
 \begin{code}
   \centering
@@ -312,17 +314,21 @@ Die \colorbold{Call by Reference} (Definition~\ref{def:call_by_reference}) Über
   \label{code:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} wird im Fall dessen, dass der \colorbold{oberste Container-Knoten} im Teilbaum, der den Datentyp darstellt und an die Funktion übergeben wird ein \colorbold{Array} \smalltt{ArrayDecl(nums, datatype)} ist, dieser zu einem \colorbold{Pointer} \smalltt{PntrDecl(num, datatype)} umgewandelt und der Rest des Teilbaumes, der am \smalltt{datatype}-Attribut hängt, an das \smalltt{datatype}-Attribut des \colorbold{Pointers} \smalltt{PntrDecl(num, datatype)} drangehängt. Diese \colorbold{Umwandlung} des \colorbold{Datentyps} kann in der \colorbold{Symboltabelle} in Code~\ref{code:symboltabelle_für_call_by_sharing_für_arrays} beobachtet werden. Die \colorbold{lokalen Variablen} \smalltt{local\_var1@main} und \smalltt{local\_var2@main} sind beide vom Datentyp \smalltt{ArrayDecl([Num('2'), Num('3')], IntType('int'))} und bei der Übergabe änder sich der Datentyp beider Variablen zu \smalltt{PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int')))}.
+Im \colorbold{PicoC-Mon Pass} wird im Fall dessen, dass der \colorbold{oberste Container-Knoten} im Teilbaum, der den Datentyp darstellt und an die Funktion übergeben wird ein \colorbold{Array} \smalltt{ArrayDecl(nums, datatype)} ist, dieser zu einem \colorbold{Pointer} \smalltt{PntrDecl(num, datatype)} umgewandelt und der Rest des Teilbaumes, der am \smalltt{datatype}-Attribut hängt, an das \smalltt{datatype}-Attribut des \colorbold{Pointers} \smalltt{PntrDecl(num, datatype)} drangehängt.
+
+Diese \colorbold{Umwandlung} des \colorbold{Datentyps} kann in der \colorbold{Symboltabelle} in Code~\ref{code:symboltabelle_für_call_by_sharing_für_arrays} beobachtet werden. Die \colorbold{lokalen Variablen} \smalltt{local\_var@main} und \smalltt{local\_var@fun\_array\_from\_global\_data} sind beide vom Datentyp \smalltt{ArrayDecl([Num('2'), Num('3')], IntType('int'))} und bei der Übergabe ändert sich der Datentyp beider Variablen zu \smalltt{PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int')))}. Die \colorbold{Größe} dieser Variablen ändert sich damit zu \smalltt{Num('1')}, da ein  \colorbold{Pointer} nur eine \colorbold{Speicherzelle} braucht.
 
 % https://tex.stackexchange.com/questions/298383/how-to-highlight-color-draw-attention-to-a-particular-snippet-in-minted/498614#498614
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15,19,33,37,51,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
+  \numberedcodebox[minted language=text, minted options={highlightlines={15,19,33,37,42,46,60,64}}]{./code_examples/example_fun_call_by_sharing_array.st}
   \caption{Symboltabelle für Call by Sharing für Arrays}
   \label{code:symboltabelle_für_call_by_sharing_für_arrays}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_sharing_für_arrays} ist zu sehen, dass zur Übergabe der beiden Arrays die \colorbold{Adresse} der Arrays auf den \colorbold{Stack} geschrieben wird. Die \colorbold{Adresse} der beiden Arrays auf den \colorbold{Stack} zu schreiben wird durch die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Global(Num('6')))} repräsentiert. Dabei stellen die Zahlen in den \colorbold{Container-Knoten} \smalltt{Global(num)} die \colorbold{relative Adressen} relativ zum \smalltt{DS}-Register dar, die aus der \colorbold{Symboltabelle} entnommen sind.
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_sharing_für_arrays} ist zu sehen, dass zur Übergabe der beiden Arrays die \colorbold{Adresse} der Arrays auf den \colorbold{Stack} geschrieben wird. Die \colorbold{Adresse} der beiden Arrays auf den \colorbold{Stack} zu schreiben wird durch die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('6')))} repräsentiert.
+
+Die Komposition \smalltt{Ref(Global(Num('0')))} ist für Variablen in den \colorbold{Globalen Statischen Daten} und die Komposition \smalltt{Ref(Stackframe(Num('6')))} ist für Variablen aus dem \colorbold{Stackframe}. Dabei stellen die Zahlen in den \colorbold{Container-Knoten} \smalltt{Global(num)} bzw. \smalltt{Stackframe(num)} die \colorbold{relative Adressen} relativ zum \smalltt{DS}-Register bzw. \smalltt{SP}-Register dar, die aus der \colorbold{Symboltabelle} entnommen sind.
 
 \begin{code}
   \centering
@@ -331,9 +337,11 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_shar
   \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
 \end{code}
 
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_call_by_sharing_für_arrays} werden Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('6')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
+
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={16-18,43-46}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
+  \numberedcodebox[minted language=text, minted options={highlightlines={16-19,44-47}}]{./code_examples/example_fun_call_by_sharing_array.reti_blocks}
   \caption{RETI-Block Pass für Call by Sharing für Arrays}
   \label{code:reti_blocks_pass_für_call_by_sharing_für_arrays}
 \end{code}
@@ -342,6 +350,8 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_shar
 
 \newlineparagraph{Umsetzung von Call by Value für Structs}
 
+Die \colorbold{Call by Value} (Definition~\ref{def:call_by_value}) Übergabe eines \colorbold{Structs} wird im Folgenden mithilfe des Beispiels in Code~\ref{code:picoc_code_für_call_by_value_für_structs} erklärt.
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=c, minted options={highlightlines={4,7,8,14}}]{./code_examples/example_fun_call_by_value_struct.picoc}
@@ -349,14 +359,15 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_shar
   \label{code:picoc_code_für_call_by_value_für_structs}
 \end{code}
 
-% argmode für Struct Call by Value
+Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_value_for_structs} wird zur \colorbold{Übergabe eines Struct}, das komplette Struct auf den \colorbold{Stack} kopiert. Das wird mittels der Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} bzw. der Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} dargestellt.
 
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={15,19,33,37,51,55}}]{./code_examples/example_fun_call_by_sharing_array.st}
-  \caption{Symboltabelle für Call by Sharing für Arrays}
-  \label{code:symboltabelle_für_call_by_sharing_für_structs}
-\end{code}
+Bei der \colorbold{Übergabe} an eine \colorbold{Funktion} wird der Zugriff auf ein gesamtes \colorbold{Struct} anders gehandhabt als sonst. Normalerweise wird beim Zugriff auf ein Struct die \colorbold{Adresse} des \colorbold{ersten Attributs} dieses Strcuts auf den \colorbold{Stack} geschrieben. Bei der \colorbold{Übergabe an eine Funktion} wird dagegen das gesamte \colorbold{Strcut} auf den \colorbold{Stack} kopiert.
+
+Das wird durch eine Variable \smalltt{argmode\_on} implementiert, die auf \smalltt{true} gesetzt wird, solange der \colorbold{Funktionsaufruf} im \colorbold{Picoc-Mon Pass} verarbeitet wird und wieder auf \smalltt{false} gesetzt, wenn die Verarbeitung des \colorbold{Funktionaufrufs} abgeschlossen ist. Solange die Variable \smalltt{argmode\_on} auf \smalltt{true} gesetzt ist, wird immer die Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} bzw. der Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} für die Ersetzung verwendet. Ist die Varaible \smalltt{argmode\_on} auf \smalltt{false} wird die Komposition \smalltt{Ref(Globalnum())} bzw. \smalltt{Ref(Stackframe(num))} für die Ersetzung verwendet.
+
+Die Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} wird im Falle dessen, dass die Structvariable in den \colorbold{Globalen Statischen Daten} liegt verwendet und die Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} wird im Falle, dessen, dass die Structvariable im \colorbold{Stackframe} liegt verwendet.
+
+% argmode für Struct Call by Value
 
 \begin{code}
   \centering
@@ -365,6 +376,7 @@ Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_shar
   \label{code:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
 
+Im \colorbold{RETI-Blocks Pass} in Code~\ref{code:reti_blocks_pass_für_call_by_value_for_structs} werden die Kompositionen \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} und \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} durch ihre entsprechenden \colorbold{RETI-Knoten} ersetzt.
 % hier könnte man anmerken, dass die Adressen unterschiedlich berechnet werden für Stack und Globale...
 
 \begin{code}

@@ -10,7 +10,7 @@ File
       Name 'fun_array_from_global_data.1', 
       [
         StackMalloc(Num('2'))
-        Exp(Stackframe(Num('0')))
+        Ref(Stackframe(Num('6')))
         NewStackframe(Name('fun_array_from_stackframe'), GoTo(Name('addr@next_instr')))
         Exp(GoTo(Name('fun_array_from_stackframe.2')))
         RemoveStackframe()

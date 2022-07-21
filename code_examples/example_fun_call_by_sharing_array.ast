@@ -15,7 +15,8 @@ File
         Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('param'))
       ], 
       [
-        Exp(Call(Name('fun_array_from_stackframe'), [Name('param')]))
+        Exp(Alloc(Writeable(), ArrayDecl([Num('2'), Num('3')], IntType('int')), Name('local_var')))
+        Exp(Call(Name('fun_array_from_stackframe'), [Name('local_var')]))
       ], 
     FunDef 
       VoidType 'void', 
