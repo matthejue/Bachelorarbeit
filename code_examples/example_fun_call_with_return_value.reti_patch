@@ -57,6 +57,7 @@ File
         MOVE BAF IN1;
         LOADIN IN1 BAF 0;
         MOVE IN1 SP;
+        # Exp(ACC)
         SUBI SP 1;
         STOREIN SP ACC 1;
         # Assign(Global(Num('0')), Stack(Num('1')))
