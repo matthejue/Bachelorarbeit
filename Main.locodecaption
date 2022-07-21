@@ -5,35 +5,35 @@
 \contentsline {codecaption}{\numberline {3.2}{\ignorespaces Derivation Tree nach Derivation Tree Generierung\relax }}{37}{codecaption.caption.13}%
 \contentsline {codecaption}{\numberline {3.3}{\ignorespaces Derivation Tree nach Derivation Tree Vereinfachung\relax }}{38}{codecaption.caption.14}%
 \contentsline {codecaption}{\numberline {3.4}{\ignorespaces Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert\relax }}{49}{codecaption.caption.22}%
-\contentsline {codecaption}{\numberline {3.5}{\ignorespaces PicoC Code für Codebespiel\relax }}{52}{codecaption.caption.26}%
+\contentsline {codecaption}{\numberline {3.5}{\ignorespaces PicoC Code für Codebespiel\relax }}{53}{codecaption.caption.26}%
 \contentsline {codecaption}{\numberline {3.6}{\ignorespaces Abstract Syntax Tree für Codebespiel\relax }}{53}{codecaption.caption.27}%
-\contentsline {codecaption}{\numberline {3.7}{\ignorespaces PicoC Shrink Pass für Codebespiel\relax }}{53}{codecaption.caption.28}%
-\contentsline {codecaption}{\numberline {3.8}{\ignorespaces PicoC-Blocks Pass für Codebespiel\relax }}{55}{codecaption.caption.30}%
-\contentsline {codecaption}{\numberline {3.9}{\ignorespaces PicoC-Mon Pass für Codebespiel\relax }}{57}{codecaption.caption.32}%
-\contentsline {codecaption}{\numberline {3.10}{\ignorespaces RETI-Blocks Pass für Codebespiel\relax }}{60}{codecaption.caption.34}%
-\contentsline {codecaption}{\numberline {3.11}{\ignorespaces RETI-Patch Pass für Codebespiel\relax }}{62}{codecaption.caption.36}%
-\contentsline {codecaption}{\numberline {3.12}{\ignorespaces RETI Pass für Codebespiel\relax }}{65}{codecaption.caption.40}%
-\contentsline {codecaption}{\numberline {3.13}{\ignorespaces PicoC-Code für Pointer Referenzierung\relax }}{66}{codecaption.caption.41}%
-\contentsline {codecaption}{\numberline {3.14}{\ignorespaces Abstract Syntax Tree für Pointer Referenzierung\relax }}{66}{codecaption.caption.42}%
-\contentsline {codecaption}{\numberline {3.15}{\ignorespaces Symboltabelle für Pointer Referenzierung\relax }}{67}{codecaption.caption.43}%
-\contentsline {codecaption}{\numberline {3.16}{\ignorespaces PicoC-Mon Pass für Pointer Referenzierung\relax }}{67}{codecaption.caption.44}%
-\contentsline {codecaption}{\numberline {3.17}{\ignorespaces RETI-Blocks Pass für Pointer Referenzierung\relax }}{68}{codecaption.caption.45}%
-\contentsline {codecaption}{\numberline {3.18}{\ignorespaces PicoC-Code für Pointer Dereferenzierung\relax }}{68}{codecaption.caption.46}%
-\contentsline {codecaption}{\numberline {3.19}{\ignorespaces Abstract Syntax Tree für Pointer Dereferenzierung\relax }}{69}{codecaption.caption.47}%
-\contentsline {codecaption}{\numberline {3.20}{\ignorespaces PicoC-Shrink Pass für Pointer Dereferenzierung\relax }}{69}{codecaption.caption.48}%
-\contentsline {codecaption}{\numberline {3.21}{\ignorespaces PicoC-Code für Array Initialisierung\relax }}{69}{codecaption.caption.49}%
-\contentsline {codecaption}{\numberline {3.22}{\ignorespaces Abstract Syntax Tree für Array Initialisierung\relax }}{70}{codecaption.caption.50}%
-\contentsline {codecaption}{\numberline {3.23}{\ignorespaces Symboltabelle für Array Initialisierung\relax }}{71}{codecaption.caption.51}%
-\contentsline {codecaption}{\numberline {3.24}{\ignorespaces PicoC-Mon Pass für Array Initialisierung\relax }}{72}{codecaption.caption.52}%
-\contentsline {codecaption}{\numberline {3.25}{\ignorespaces RETI-Blocks Pass für Array Initialisierung\relax }}{73}{codecaption.caption.53}%
-\contentsline {codecaption}{\numberline {3.26}{\ignorespaces PicoC-Code für Zugriff auf einen Arrayindex\relax }}{74}{codecaption.caption.54}%
-\contentsline {codecaption}{\numberline {3.27}{\ignorespaces Abstract Syntax Tree für Zugriff auf einen Arrayindex\relax }}{74}{codecaption.caption.55}%
-\contentsline {codecaption}{\numberline {3.28}{\ignorespaces PicoC-Mon Pass für Zugriff auf einen Arrayindex\relax }}{76}{codecaption.caption.56}%
-\contentsline {codecaption}{\numberline {3.29}{\ignorespaces RETI-Blocks Pass für Zugriff auf einen Arrayindex\relax }}{78}{codecaption.caption.57}%
-\contentsline {codecaption}{\numberline {3.30}{\ignorespaces PicoC-Code für Zuweisung an Arrayindex\relax }}{78}{codecaption.caption.58}%
-\contentsline {codecaption}{\numberline {3.31}{\ignorespaces Abstract Syntax Tree für Zuweisung an Arrayindex\relax }}{79}{codecaption.caption.59}%
-\contentsline {codecaption}{\numberline {3.32}{\ignorespaces PicoC-Mon Pass für Zuweisung an Arrayindex\relax }}{79}{codecaption.caption.60}%
-\contentsline {codecaption}{\numberline {3.33}{\ignorespaces RETI-Blocks Pass für Zuweisung an Arrayindex\relax }}{80}{codecaption.caption.61}%
+\contentsline {codecaption}{\numberline {3.7}{\ignorespaces PicoC Shrink Pass für Codebespiel\relax }}{54}{codecaption.caption.28}%
+\contentsline {codecaption}{\numberline {3.8}{\ignorespaces PicoC-Blocks Pass für Codebespiel\relax }}{56}{codecaption.caption.30}%
+\contentsline {codecaption}{\numberline {3.9}{\ignorespaces PicoC-Mon Pass für Codebespiel\relax }}{58}{codecaption.caption.32}%
+\contentsline {codecaption}{\numberline {3.10}{\ignorespaces RETI-Blocks Pass für Codebespiel\relax }}{61}{codecaption.caption.34}%
+\contentsline {codecaption}{\numberline {3.11}{\ignorespaces RETI-Patch Pass für Codebespiel\relax }}{64}{codecaption.caption.36}%
+\contentsline {codecaption}{\numberline {3.12}{\ignorespaces RETI Pass für Codebespiel\relax }}{68}{codecaption.caption.40}%
+\contentsline {codecaption}{\numberline {3.13}{\ignorespaces PicoC-Code für Pointer Referenzierung\relax }}{69}{codecaption.caption.41}%
+\contentsline {codecaption}{\numberline {3.14}{\ignorespaces Abstract Syntax Tree für Pointer Referenzierung\relax }}{69}{codecaption.caption.42}%
+\contentsline {codecaption}{\numberline {3.15}{\ignorespaces Symboltabelle für Pointer Referenzierung\relax }}{70}{codecaption.caption.43}%
+\contentsline {codecaption}{\numberline {3.16}{\ignorespaces PicoC-Mon Pass für Pointer Referenzierung\relax }}{70}{codecaption.caption.44}%
+\contentsline {codecaption}{\numberline {3.17}{\ignorespaces RETI-Blocks Pass für Pointer Referenzierung\relax }}{71}{codecaption.caption.45}%
+\contentsline {codecaption}{\numberline {3.18}{\ignorespaces PicoC-Code für Pointer Dereferenzierung\relax }}{71}{codecaption.caption.46}%
+\contentsline {codecaption}{\numberline {3.19}{\ignorespaces Abstract Syntax Tree für Pointer Dereferenzierung\relax }}{72}{codecaption.caption.47}%
+\contentsline {codecaption}{\numberline {3.20}{\ignorespaces PicoC-Shrink Pass für Pointer Dereferenzierung\relax }}{72}{codecaption.caption.48}%
+\contentsline {codecaption}{\numberline {3.21}{\ignorespaces PicoC-Code für Array Initialisierung\relax }}{72}{codecaption.caption.49}%
+\contentsline {codecaption}{\numberline {3.22}{\ignorespaces Abstract Syntax Tree für Array Initialisierung\relax }}{73}{codecaption.caption.50}%
+\contentsline {codecaption}{\numberline {3.23}{\ignorespaces Symboltabelle für Array Initialisierung\relax }}{74}{codecaption.caption.51}%
+\contentsline {codecaption}{\numberline {3.24}{\ignorespaces PicoC-Mon Pass für Array Initialisierung\relax }}{75}{codecaption.caption.52}%
+\contentsline {codecaption}{\numberline {3.25}{\ignorespaces RETI-Blocks Pass für Array Initialisierung\relax }}{76}{codecaption.caption.53}%
+\contentsline {codecaption}{\numberline {3.26}{\ignorespaces PicoC-Code für Zugriff auf einen Arrayindex\relax }}{77}{codecaption.caption.54}%
+\contentsline {codecaption}{\numberline {3.27}{\ignorespaces Abstract Syntax Tree für Zugriff auf einen Arrayindex\relax }}{77}{codecaption.caption.55}%
+\contentsline {codecaption}{\numberline {3.28}{\ignorespaces PicoC-Mon Pass für Zugriff auf einen Arrayindex\relax }}{79}{codecaption.caption.56}%
+\contentsline {codecaption}{\numberline {3.29}{\ignorespaces RETI-Blocks Pass für Zugriff auf einen Arrayindex\relax }}{81}{codecaption.caption.57}%
+\contentsline {codecaption}{\numberline {3.30}{\ignorespaces PicoC-Code für Zuweisung an Arrayindex\relax }}{81}{codecaption.caption.58}%
+\contentsline {codecaption}{\numberline {3.31}{\ignorespaces Abstract Syntax Tree für Zuweisung an Arrayindex\relax }}{82}{codecaption.caption.59}%
+\contentsline {codecaption}{\numberline {3.32}{\ignorespaces PicoC-Mon Pass für Zuweisung an Arrayindex\relax }}{82}{codecaption.caption.60}%
+\contentsline {codecaption}{\numberline {3.33}{\ignorespaces RETI-Blocks Pass für Zuweisung an Arrayindex\relax }}{83}{codecaption.caption.61}%
 \contentsline {codecaption}{\numberline {3.34}{\ignorespaces PicoC-Code für die Deklaration eines Structtyps\relax }}{81}{codecaption.caption.72}%
 \contentsline {codecaption}{\numberline {3.35}{\ignorespaces Abstract Syntax Tree für die Deklaration eines Structtyps\relax }}{81}{codecaption.caption.73}%
 \contentsline {codecaption}{\numberline {3.36}{\ignorespaces Symboltabelle für die Deklaration eines Structtyps\relax }}{83}{codecaption.caption.74}%

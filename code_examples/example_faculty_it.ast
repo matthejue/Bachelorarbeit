@@ -2,11 +2,12 @@ File
   Name './example_faculty_it.ast', 
   [
     FunDef 
-      VoidType 'void', 
-      Name 'main', 
-      [], 
+      IntType 'int', 
+      Name 'faculty', 
       [
-        Assign(Alloc(Writeable(), IntType('int'), Name('n')), Num('4'))
+        Alloc(Writeable(), IntType('int'), Name('n'))
+      ], 
+      [
         Assign(Alloc(Writeable(), IntType('int'), Name('res')), Num('1')), 
         While 
           Num '1', 
@@ -17,10 +18,17 @@ File
                 Eq '==', 
                 Num '1', 
               [
-                Return(Empty())
+                Return(Name('res'))
               ]
             Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res')))
             Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1')))
           ]
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp(Call(Name('print'), [Call(Name('faculty'), [Num('4')])]))
       ]
   ]

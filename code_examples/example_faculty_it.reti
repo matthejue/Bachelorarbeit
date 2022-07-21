@@ -1,26 +1,17 @@
-# // Exp(GoTo(Name('main.5')))
-# // not included Exp(GoTo(Name('main.5')))
-# // Assign(Name('n'), Num('4'))
-# Exp(Num('4'))
-SUBI SP 1;
-LOADI ACC 4;
-STOREIN SP ACC 1;
-# Assign(Global(Num('0')), Stack(Num('1')))
-LOADIN SP ACC 1;
-STOREIN DS ACC 0;
-ADDI SP 1;
+# // Exp(GoTo(Name('main.0')))
+JUMP 67;
 # // Assign(Name('res'), Num('1'))
 # Exp(Num('1'))
 SUBI SP 1;
 LOADI ACC 1;
 STOREIN SP ACC 1;
-# Assign(Global(Num('1')), Stack(Num('1')))
+# Assign(Stackframe(Num('1')), Stack(Num('1')))
 LOADIN SP ACC 1;
-STOREIN DS ACC 1;
+STOREIN BAF ACC -3;
 ADDI SP 1;
 # // While(Num('1'), [])
-# Exp(GoTo(Name('condition_check.4')))
-# // not included Exp(GoTo(Name('condition_check.4')))
+# Exp(GoTo(Name('condition_check.5')))
+# // not included Exp(GoTo(Name('condition_check.5')))
 # // IfElse(Num('1'), [], [])
 # Exp(Num('1'))
 SUBI SP 1;
@@ -29,13 +20,13 @@ STOREIN SP ACC 1;
 # IfElse(Stack(Num('1')), [], [])
 LOADIN SP ACC 1;
 ADDI SP 1;
-JUMP== 49;
-# // not included Exp(GoTo(Name('while_branch.3')))
+JUMP== 54;
+# // not included Exp(GoTo(Name('while_branch.4')))
 # // If(Atom(Name('n'), Eq('=='), Num('1')), [])
 # // IfElse(Atom(Name('n'), Eq('=='), Num('1')), [], [])
-# Exp(Global(Num('0')))
+# Exp(Stackframe(Num('0')))
 SUBI SP 1;
-LOADIN DS ACC 0;
+LOADIN BAF ACC -2;
 STOREIN SP ACC 1;
 # Exp(Num('1'))
 SUBI SP 1;
@@ -53,18 +44,25 @@ ADDI SP 1;
 # IfElse(Stack(Num('1')), [], [])
 LOADIN SP ACC 1;
 ADDI SP 1;
-JUMP== 2;
-# // not included Exp(GoTo(Name('if.2')))
-# Return(Empty())
+JUMP== 7;
+# // not included Exp(GoTo(Name('if.3')))
+# // Return(Name('res'))
+# Exp(Stackframe(Num('1')))
+SUBI SP 1;
+LOADIN BAF ACC -3;
+STOREIN SP ACC 1;
+# Return(Stack(Num('1')))
+LOADIN SP ACC 1;
+ADDI SP 1;
 LOADIN BAF PC -1;
 # // Assign(Name('res'), BinOp(Name('n'), Mul('*'), Name('res')))
-# Exp(Global(Num('0')))
+# Exp(Stackframe(Num('0')))
 SUBI SP 1;
-LOADIN DS ACC 0;
+LOADIN BAF ACC -2;
 STOREIN SP ACC 1;
-# Exp(Global(Num('1')))
+# Exp(Stackframe(Num('1')))
 SUBI SP 1;
-LOADIN DS ACC 1;
+LOADIN BAF ACC -3;
 STOREIN SP ACC 1;
 # Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))
 LOADIN SP ACC 2;
@@ -72,14 +70,14 @@ LOADIN SP IN2 1;
 MULT ACC IN2;
 STOREIN SP ACC 2;
 ADDI SP 1;
-# Assign(Global(Num('1')), Stack(Num('1')))
+# Assign(Stackframe(Num('1')), Stack(Num('1')))
 LOADIN SP ACC 1;
-STOREIN DS ACC 1;
+STOREIN BAF ACC -3;
 ADDI SP 1;
 # // Assign(Name('n'), BinOp(Name('n'), Sub('-'), Num('1')))
-# Exp(Global(Num('0')))
+# Exp(Stackframe(Num('0')))
 SUBI SP 1;
-LOADIN DS ACC 0;
+LOADIN BAF ACC -2;
 STOREIN SP ACC 1;
 # Exp(Num('1'))
 SUBI SP 1;
@@ -91,11 +89,40 @@ LOADIN SP IN2 1;
 SUB ACC IN2;
 STOREIN SP ACC 2;
 ADDI SP 1;
-# Assign(Global(Num('0')), Stack(Num('1')))
+# Assign(Stackframe(Num('0')), Stack(Num('1')))
 LOADIN SP ACC 1;
-STOREIN DS ACC 0;
+STOREIN BAF ACC -2;
 ADDI SP 1;
-# Exp(GoTo(Name('condition_check.4')))
-JUMP -53;
+# Exp(GoTo(Name('condition_check.5')))
+JUMP -58;
+# Return(Empty())
+LOADIN BAF PC -1;
+# StackMalloc(Num('2'))
+SUBI SP 2;
+# Exp(Num('4'))
+SUBI SP 1;
+LOADI ACC 4;
+STOREIN SP ACC 1;
+# NewStackframe(Name('faculty'), GoTo(Name('addr@next_instr')))
+MOVE BAF ACC;
+ADDI SP 3;
+MOVE SP BAF;
+SUBI SP 4;
+STOREIN BAF ACC 0;
+LOADI ACC 80;
+ADD ACC CS;
+STOREIN BAF ACC -1;
+# Exp(GoTo(Name('faculty.6')))
+JUMP -78;
+# RemoveStackframe()
+MOVE BAF IN1;
+LOADIN IN1 BAF 0;
+MOVE IN1 SP;
+# Exp(ACC)
+SUBI SP 1;
+STOREIN SP ACC 1;
+LOADIN SP ACC 1;
+ADDI SP 1;
+CALL PRINT ACC;
 # Return(Empty())
 LOADIN BAF PC -1;

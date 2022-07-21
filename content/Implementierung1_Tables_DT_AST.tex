@@ -624,9 +624,18 @@ Auf jedes Detail der einzelnen \colorbold{Passes} wird in diesem Unterkapitel al
 \label{sec:picoc_shrink_pass_zweck}
 % dieser Pass existiert nur wegen der Erweiterungen
 
-Der Aufgabe des \colorbold{PicoC-Shrink Pass} ist in Unterkapitel~\ref{dereferenzierung_durch_zugriff_auf_arrayindex_ersetzen} ausführlich an einem Beispiel erklärt. Kurzgefasst hat der \colorbold{PicoC-Shrink Pass} die Aufgabe, die Eigenheit auszunutzen, dass der \colorbold{Dereferenzierungoperator} \smalltt{*pntr} und die damit einhergehende \colorbold{Pointer Arithmetik} \smalltt{*(pntr + i)} sich in der Untermenge der Sprache $L_{C}$, welche die Sprache $L_{PicoC}$ darstellt genau gleich verhält, wie der \colorbold{Operator} für den \colorbold{Zugriff} auf den \colorbold{Index} eines \colorbold{Arrays} \smalltt{ar[i]}. Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold{Dereferenzierungsoperators} \smalltt{*(pntr + i)} in Verwendungen des \colorbold{Operators} zum \colorbold{Zugriff} auf einen \colorbold{Arrayindex} \smalltt{ar[i]} um, sodass sich viele
+Der Aufgabe des \colorbold{PicoC-Shrink Pass} ist in Unterkapitel~\ref{dereferenzierung_durch_zugriff_auf_arrayindex_ersetzen} ausführlich an einem Beispiel erklärt. Kurzgefasst hat der \colorbold{PicoC-Shrink Pass} die Aufgabe, die Eigenheit auszunutzen, dass der \colorbold{Dereferenzierungoperator} \smalltt{*pntr} und die damit einhergehende \colorbold{Pointer Arithmetik} \smalltt{*(pntr + i)} sich in der Untermenge der Sprache $L_{C}$, welche die Sprache $L_{PicoC}$ darstellt genau gleich verhält, wie der \colorbold{Operator} für den \colorbold{Zugriff} auf den \colorbold{Index} eines \colorbold{Arrays} \smalltt{ar[i]}.
+
+Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold{Container-Knoten} \smalltt{Deref(exp, i)} im jeweiligen \colorbold{Abstract Syntax Tree} in \colorbold{Container-Knoten} \smalltt{Subscr(exp, i)} um, sodass sich dadurch viele vermeidbare \colorbold{Fallunterscheidungen} und \colorbold{doppelter Code} bei der Implementierung sparren lassen, denn man kann die \colorbold{Derefenzierung} \smalltt{*(var + i)} einfach von den Routinen für einen \colorbold{Zugriff auf einen Arrayindex} \smalltt{var[i]} übernehmen lassen.
 
 \newlineparagraph{Codebeispiel}
+
+In den nächsten Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_codebeispiel} zur \colorbold{Anschauung} der verschiedenen \colorbold{Passes} verwendet. Im Code~\ref{code:picoc_code_für_codebeispiel} ist in der Funktion \smalltt{faculty} ein \colorbold{iterativer} Algorithmus implementiert, der die \colorbold{Fakultät} eines übergebenen \colorbold{Arguments} berechnet. Der Algorithmus basiert auf einem \colorbold{Beispielprogramm} aus der Vorlesung~\cite{scholl_betriebssysteme_2020}, der in der Vorlesung allerdings \colorbold{rekursiv} implementiert war.
+
+Dieser \colorbold{rekursive} Algoirthmus ist allerdings \colorbold{kein} gutes \colorbold{Anschaungsbeispiel}, dass viele der Aufgaben der verschiedenen \colorbold{Passes} bei der Kompilierung veranschaulicht hätte. Viele Aufgaben der \colorbold{Passses}, wie z.B. bei der Kompilierung von \smalltt{if}-, \smalltt{if-else}-, \smalltt{while}- und \smalltt{do-while}-Statements wären im Beispiel aus der Vorlesung \colorbold{nicht} enthalten gewesen. Daher wurde das Beispiel aus der Vorlesung zu einem \colorbold{iterativen} Algorithmus umgeschrieben, um \smalltt{if}- und \smalltt{while}-Statemtens zu enthalten.
+
+% orignaler Algorithmsu enthält leider kein if und while
+% natürlich beide Beispiele als Tests verfügbar
 
 \begin{code}
   \centering
@@ -635,12 +644,16 @@ Der Aufgabe des \colorbold{PicoC-Shrink Pass} ist in Unterkapitel~\ref{dereferen
   \label{code:picoc_code_für_codebeispiel}
 \end{code}
 
+In Code~\ref{code:abstract_syntax_tree_für_codebeispiel} sieht man den \colorbold{Abstract Syntax Tree}, der in der \colorbold{Syntaktischen Analyse} generiert wurde.
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/example_faculty_it.ast}
   \caption{Abstract Syntax Tree für Codebespiel}
   \label{code:abstract_syntax_tree_für_codebeispiel}
 \end{code}
+
+In Code~\ref{code:picoc_shrink_pass_für_codebeispiel} sieht man den \colorbold{Abstract Syntax Tree}, des \colorbold{PicoC-Shrink-Passes}.
 
 \begin{code}
   \centering
