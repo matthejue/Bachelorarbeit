@@ -68,6 +68,10 @@ clean:
 	-rm -f Main.synctex.gz
 	-rm -f Main.theorem_list
 	-rm -rf _minted-Main
+	-rm -r Main.locodecaption
+	-rm -r Main.synctex(busy)
+	-rm -r *.fls
+
 
 .PHONY: cleanall
 cleanall: clean
