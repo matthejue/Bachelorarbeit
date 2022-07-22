@@ -12,12 +12,12 @@
 \label{ch:implementierung}
 
 \section{Lexikalische Analyse}
-\subsection{Konkrette Syntax für die Lexikalische Analyse}
+\subsection{Teil der Konkretten Syntax für die Lexikalische Analyse}
 \numberwithin{floatgrammar}{section}
 
 \label{sec:lex_analyse_verwendung_von_lark}
 % ./concrete_syntax_picoc.lark
-\begin{grammar}[Konkrette Syntax für die Lexikalische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_lex_teil_1]
+\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_lex_teil_1]
   \toprule
   \firstcase{COMMENT}{\dq //\dq\enspace /[{\wedge}\backslash n]{*}/\gralt \dq {/*}\dq\enspace  /(.\mid \setminus n)*?/\enspace \dq {*/}\dq }{L\_Comment}
   \firstcase{RETI\_COMMENT.2}{\dq {//}\dq \dq \text{\textvisiblespace} \dq ? \dq \#\dq /[\wedge\backslash n]{*}/}{}
@@ -58,7 +58,7 @@
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Konkrette Syntax für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex_teil_2]
+\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex_teil_2]
   \toprule
   \firstcase{INT\_DT.2}{\dq int\dq }{L\_Assign\_Alloc}
   \firstcase{INT\_NAME.3}{\dq int\dq\enspace (LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )+}{}
@@ -92,12 +92,12 @@
 \section{Syntaktische Analyse}
 \label{sec:syntaktische_analyse}
 
-\subsection{Konkrette Syntax für die Syntaktische Analyse}
+\subsection{Teil der Konkretten Syntax für die Syntaktische Analyse}
 % ./concrete_syntax_picoc.lark
 % https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
 In \ref{gr:concrete_syntax_parser}
 
-\begin{grammar}[Konkrette Syntax Syntaktische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_parser]
+\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_parser]
   \toprule
 	\downplay
   \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith +}
@@ -171,7 +171,7 @@ In \ref{gr:concrete_syntax_parser}
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Konkrette Syntax für die Syntaktische Analyse in EBNF, Teil 2][H]
+\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2][H]
   \toprule
 	\downplay
   \firstcase{decl\_exp\_stmt}{alloc\dq ;\dq }{L\_Stmt}
@@ -386,7 +386,7 @@ Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
 
 
 \begin{Definition}{Label}{label}
-  Durch einen \colorbold{Bezeichner} \colorbold{eindeutig} zuordenbares \colorbold{Sprungziel} im Programmcode.\footcite{tab:picoc_knoten_teil_4}
+  Durch einen \colorbold{Bezeichner} \colorbold{eindeutig} zuordenbares \colorbold{Sprungziel} im Programmcode.\footcite{thiemann_compilerbau_2021}
 \end{Definition}
 
 \begin{Definition}{Location}{location}
@@ -487,7 +487,7 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 
 % ./abstract_syntax.txt
 \newpage
-\begin{grammar}[Abstrakte Syntax für $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
   \toprule
   \firstcase{stmt}{RETIComment()}{L\_Comment}
   \midrule
@@ -548,6 +548,10 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   \firstcase{file}{File(Name(str), \langle decl\_def\rangle *)}{L\_File}
   \bottomrule
 \end{grammar}
+
+\begin{Special_Paragraph}
+  Man spricht hier von der \colorbold{\dq Abstrakten Syntax der Sprache $L_{PicoC}$\dq}, aber man hat bei der \colorbold{Konkretten Syntax}~\ref{gr:concrete_syntax_lex_teil_1} auch schon von der \colorbold{\dq Konkretten Syntax der Sprache $L_{PicoC}$\dq} gesprochen. Hierbei handelt es sich um eine Redeart, die vielleicht verwirrend sein kann, da die \colorbold{Konkrette Syntax} und die \colorbold{Abstrakte Syntax} zwei \colorbold{verschiedene Grammatiken} sind, die für sich genommen zwei \colorbold{unterschiedliche} Sprachen beschreiben. Die Sprache $L_{PicoC}$ wird von ihrer \colorbold{Konkretten Syntax} komplett beschrieben. Allerdings will man mit der ersteren Redeart ausdrücken, dass die \colorbold{Abstrakte Syntax} die zur Sprache $L_{PicoC}$ passend definierte Grammatik ist, die beschreibt, was für \colorbold{Kompositionen} mit den \colorbold{PicoC-Knoten} möglich sind, die für die Kompilierung dieser Sprache $L_{PicoC}$ definiert wurden. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakten Syntax} beschrieben wird, interessiert man sich nicht explizit.
+\end{Special_Paragraph}
 
 Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird in Python über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine Textrepräsentation seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{,} und \colorbold{Semikolons} \smalltt{;} zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene Textrepräsentation passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgebeben}.
 
@@ -668,7 +672,7 @@ Die Aufgabe des \colorbold{PicoC-Blocks Passes} ist die Knoten \smalltt{If(exp, 
 
 \newlineparagraph{Abstrakte Syntax}
 
-Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Des Weiteren wird für die \colorbold{Kommentare}, die in vielen Codebeispielen zur leichteren Verständlichkeit eingefügt wurden ein \smalltt{SingleLineComment(prefix, content)}-Knoten benötigt.
+Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Des Weiteren wird für die \colorbold{Kommentare}, die in vielen Codebeispielen zur leichteren Verständlichkeit eingefügt wurden ein \smalltt{SingleLineComment(prefix, content)}-Knoten benötigt. Die \colorbold{Funktionsdefinition} \smalltt{FunDef(⟨datatype⟩, Name(str), L Fun Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} ist nun ein Container für \colorbold{Blöcke} \smalltt{Block(Name(str), ⟨stmt⟩*)} und keine Statements \smalltt{stmt} mehr.
 
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule

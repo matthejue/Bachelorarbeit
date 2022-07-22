@@ -24,7 +24,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 \begin{Definition}{Compiler}{compiler}
   \colorbold{Kompiliert} ein Program $P_1$, welches in einer Sprache $L_1$ geschrieben ist, in ein Program $P_2$, welches in einer Sprache $L_2$ geschrieben ist.
 
-  Wobei \colorbold{Kompilieren} meint, dass das Program $P_1$ in das Program $P_2$ so übersetzt wird, dass bei beiden Programmen, wenn sie von \colorbold{Interpretern} ihrer jeweiligen Sprachen $L_1$ und $L_2$ \colorbold{interpretiert} werden, der gleiche \colorbold{Output} rauskommt. Also beide Programme $P_1$ und $P_2$ die gleiche \colorbold{Semantik} haben und sich nur \colorbold{syntaktisch} durch die Sprachen $L_1$ und $L_2$, in denen sie geschrieben stehen unterscheiden.\footcite{g_siek_course_2022}
+  Wobei \colorbold{Kompilieren} meint, dass das Program $P_1$ so in das Program $P_2$ übersetzt wird, dass bei beiden Programmen, wenn sie von \colorbold{Interpretern} ihrer jeweiligen Sprachen $L_1$ und $L_2$ \colorbold{interpretiert} werden, der gleiche \colorbold{Output} rauskommt. Also beide Programme $P_1$ und $P_2$ die gleiche \colorbold{Semantik} haben und sich nur \colorbold{syntaktisch} durch die Sprachen $L_1$ und $L_2$, in denen sie geschrieben stehen unterscheiden.\footcite{g_siek_course_2022}
 
   % https://tex.stackexchange.com/questions/233615/change-equation-number-latex
   % https://tex.stackexchange.com/questions/245979/numberwithinequationsubsection-fails-for-subsections-0
@@ -383,7 +383,7 @@ Der \colorbold{Abstract Syntax Tree} wird mithilfe von \colorbold{Transformern} 
   Jene Produktionen, die in der \colorbold{Konkretten Syntax} für die Umsetzung von \colorbold{Präzidenz} notwendig waren, sind in der \colorbold{Abstrakten Syntax} abgeflacht.\footcite{g_siek_course_2022}
 \end{Definition}
 
-\begin{Definition}{Abstract Syntax Tree}{abstrakte_syntax_tree}
+\begin{Definition}{Abstract Syntax Tree (AST)}{abstrakte_syntax_tree}
   \colorbold{Compilerinterne Darstellung} eines Programs, in welcher sich anhand der Knoten auf dem \colorbold{Pfad} von der \colorbold{Wurzel} zu einem \colorbold{Blatt} nicht mehr direkt nachvollziehen lässt, durch welche \colorbold{Produktionen} dieses Blatt abgeleitet wurde.
 
 Der \colorbold{Abstract Syntax Tree} hat einmal den Zweck, dass die \colorbold{Kompositionen}, die die Knoten bilden können \colorbold{semantisch} näher an den \colorbold{Instructions eines Assemblers} dran sind und, dass man mit einem \colorbold{Abstract Syntax Tree} bei der Betrachtung eines \colorbold{Knoten}, der für einen Teil des Programms steht, möglichst schnell die Fragen beantworten kann, welche \colorbold{Funktionalität} der Sprache dieser umsetzt, welche \colorbold{Bestandteile} er hat und welche \colorbold{Funktionalität} der Sprache diese Bestandteile umsetzen usw.\footcite{g_siek_course_2022}
@@ -418,13 +418,31 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 \section{Code Generierung}
 \label{sec:code_generierung}
 
-In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} einer Sprache $L_1$ in den \colorbold{Abstract Syntax Tree} einer Sprache $L_2$ umformen zu müssen. Dieses Problem lässt sich vereinfachen, indem man das Problem in mehrere Schritte unterteilt, die man \colorbold{Passes} nennt. Jeder \colorbold{Pass} übernimmt dabei meist eine Teilaufgabe.
+In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} einer Sprache $L_1$ in den \colorbold{Abstract Syntax Tree} einer Sprache $L_2$ umformen zu müssen. Dieses Problem lässt sich vereinfachen, indem man das Problem in mehrere Schritte unterteilt, die man \colorbold{Passes} (Definition~\ref{def:pass}) nennt.
 
 \begin{Definition}{Pass}{pass}
+  \colorbold{Einzelner Übersetzungsschritt} in einem \colorbold{Kompiliervorgang} von einem \colorbold{Abstract Syntax Tree} $A_i$ einer Sprache $L_i$ zu einem \colorbold{Abstract Syntax Tree} $A_{i+1}$ einer Sprache $L_{i+1}$, der meist \colorbold{eine} bestimmte \colorbold{Teilaufgabe} übernimmt, die sich mit keiner \colorbold{Teilaufgabe} eines anderen \colorbold{Passes} überschneidet und möglichst wenig \colorbold{Ähnlichkeit} mit den \colorbold{Teilaufgaben} anderer \colorbold{Passes} haben sollte.\footcite{g_siek_course_2022}\footnote{}
 
+  Für jeden \colorbold{Pass} gilt genauso, wie für einen \colorbold{kompletten Compiler} in \ref{eq:compiler_beziehungen}, dass:
   % TODO: Bild semantisch gleiche Bedeutung
   % TODO: auf T-Diagramme zurückkommen
-  \footcite{g_siek_course_2022}
+  % Transpiler
+
+  \begin{equation}
+    \begin{tikzpicture}[auto, baseline=(current  bounding  box.center)]
+      \node (program1) at (135:3) {$A_{i}$};
+      \node (program2) at (45:3) {$A_{i+1}$};
+      \node (output)  at (270:0) {$Output$};
+
+      % https://tex.stackexchange.com/questions/24372/how-to-add-newline-within-node-using-tikz
+      \draw[->] (program1) to node[above] {übersetze} (program2);
+      \draw[->] (program1) to[bend right] node[left, align=center] {interpretiere $A_{i}$\\ als Abstract Syntax Tree\\ der Sprache $L_{i}$} (output);
+      \draw[->] (program2) to[bend left] node[right, align=center] {interpretiere $A_{i+1}$\\ als Abstract Syntax Tree\\ der Sprache $L_{i+1}$} (output);
+    \end{tikzpicture}
+    \label{eq:compiler_beziehungen}
+  \end{equation}
+wobei man hier so tut, als gäbe es diese zwei Interpreter, welche die beiden Abstract Syntax Trees interpretieren können.
+
 \end{Definition}
 
 Sobald das der Fall ist, kann aus dem finalen \colorbold{Abstract Syntax Tree} sehr einfach die \colorbold{Konkrette Syntax} generiert werden.

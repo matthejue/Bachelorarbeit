@@ -1,0 +1,17 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {floatgrammar}{\numberline {3.1.1}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1\relax }}{33}{floatgrammar.caption.17}%
+\contentsline {floatgrammar}{\numberline {3.1.2}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2\relax }}{34}{floatgrammar.caption.18}%
+\contentsline {floatgrammar}{\numberline {3.2.1}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{35}{floatgrammar.caption.19}%
+\contentsline {floatgrammar}{\numberline {3.2.2}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{36}{floatgrammar.caption.20}%
+\contentsline {floatgrammar}{\numberline {3.2.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{49}{floatgrammar.caption.31}%
+\contentsline {floatgrammar}{\numberline {3.3.1}{\ignorespaces Abstrakte Syntax für $L_{PicoC\_Blocks}$\relax }}{56}{floatgrammar.caption.38}%
+\contentsline {floatgrammar}{\numberline {3.3.2}{\ignorespaces Abstrakte Syntax für $L_{PicoC\_Mon}$\relax }}{58}{floatgrammar.caption.40}%
+\contentsline {floatgrammar}{\numberline {3.3.3}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Blocks}$\relax }}{60}{floatgrammar.caption.42}%
+\contentsline {floatgrammar}{\numberline {3.3.4}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Patch}$\relax }}{63}{floatgrammar.caption.44}%
+\contentsline {floatgrammar}{\numberline {3.3.5}{\ignorespaces Konkrette Syntax für $L_{RETI\_Lex}$\relax }}{67}{floatgrammar.caption.46}%
+\contentsline {floatgrammar}{\numberline {3.3.6}{\ignorespaces Konkrette Syntax für $L_{RETI\_Parse}$\relax }}{67}{floatgrammar.caption.47}%
+\contentsline {floatgrammar}{\numberline {3.3.7}{\ignorespaces Abstrakte Syntax für $L_{RETI}$\relax }}{67}{floatgrammar.caption.48}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
