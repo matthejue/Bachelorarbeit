@@ -420,10 +420,16 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 
 In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} einer Sprache $L_1$ in den \colorbold{Abstract Syntax Tree} einer Sprache $L_2$ umformen zu müssen. Dieses Problem lässt sich vereinfachen, indem man das Problem in mehrere Schritte unterteilt, die man \colorbold{Passes} (Definition~\ref{def:pass}) nennt.
 
-\begin{Definition}{Pass}{pass}
-  \colorbold{Einzelner Übersetzungsschritt} in einem \colorbold{Kompiliervorgang} von einem \colorbold{Abstract Syntax Tree} $A_i$ einer Sprache $L_i$ zu einem \colorbold{Abstract Syntax Tree} $A_{i+1}$ einer Sprache $L_{i+1}$, der meist \colorbold{eine} bestimmte \colorbold{Teilaufgabe} übernimmt, die sich mit keiner \colorbold{Teilaufgabe} eines anderen \colorbold{Passes} überschneidet und möglichst wenig \colorbold{Ähnlichkeit} mit den \colorbold{Teilaufgaben} anderer \colorbold{Passes} haben sollte.\footcite{g_siek_course_2022}\footnote{}
+\begin{Special_Paragraph}
+  Man spricht hier von dem \colorbold{\dq Abstrakt Syntax Tree einer Sprache $L_{1}$ (bzw. $L_{2}$)\dq} und meint damit eine \colorbold{Sprache}, die durch eine \colorbold{Konkrette Syntax} beschrieben wird und nicht durch die \colorbold{Abstrakte Syntax}, nach welcher der \colorbold{Abstract Syntax Tree} abgeleitet ist. Hierbei handelt es sich um eine im Compilerbau geläufige \colorbold{Redeart}, die vielleicht verwirrend sein kann. Man will mit der \colorbold{ersteren Redeart} ausdrücken, dass der \colorbold{Abstrakt Syntax Tree} der zur Sprache $L_{1}$ (bzw. $L_2$) passend kontruierte \colorbold{Abstract Syntax Tree} ist. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakten Syntax} beschrieben wird, interessiert man sich nicht explizit.
+\end{Special_Paragraph}
 
-  Für jeden \colorbold{Pass} gilt genauso, wie für einen \colorbold{kompletten Compiler} in \ref{eq:compiler_beziehungen}, dass:
+\begin{Definition}{Pass}{pass}
+  \colorbold{Einzelner Übersetzungsschritt} in einem \colorbold{Kompiliervorgang} von einem \colorbold{Abstract Syntax Tree} $A_i$ einer Sprache $L_i$ zu einem \colorbold{Abstract Syntax Tree} $A_{i+1}$ einer Sprache $L_{i+1}$, der meist \colorbold{eine} bestimmte \colorbold{Teilaufgabe} übernimmt, die sich mit keiner \colorbold{Teilaufgabe} eines anderen \colorbold{Passes} überschneidet und möglichst wenig \colorbold{Ähnlichkeit} mit den \colorbold{Teilaufgaben} anderer \colorbold{Passes} haben sollte.\footnote{$L_i$ bzw. $L_{i+1}$ sind hierbei keine \colorbold{Sprachen}, die durch eine \colorbold{Abstrakte Syntax} beschrieben werden, sondern Sprachen, die durch eine \colorbold{Konkrette Syntax} beschrieben werden.}\footnote{Ein \colorbold{Pass} kann mit einem \colorbold{Transpiler}~\ref{def:transpiler} (Definition~\ref{def:transpiler}) verglichen werden, da sich die zwei Sprachen $L_i$ und  $L_{i+1}$ aufgrund der \colorbold{Kleinschrittigkeit} meist auf einem ähnlichen \colorbold{Abstraktionslevel} befinden. Der Unterschied ist allerdings, dass ein \colorbold{Transpiler} zwei Programme, die in $L_i$ bzw.  $L_{i+1}$ geschrieben sind kompiliert. Ein \colorbold{Pass} ist dagegen immer \colorbold{kleinschrittig} und operiert auf \colorbold{Abstract Syntax Trees}.}
+
+  % man tut so als gäbe es
+
+  Für jeden \colorbold{Pass} gilt ähnlich wie beim \colorbold{kompletten Compiler} in \ref{eq:compiler_beziehungen}, dass:
   % TODO: Bild semantisch gleiche Bedeutung
   % TODO: auf T-Diagramme zurückkommen
   % Transpiler
@@ -436,12 +442,12 @@ In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \
 
       % https://tex.stackexchange.com/questions/24372/how-to-add-newline-within-node-using-tikz
       \draw[->] (program1) to node[above] {übersetze} (program2);
-      \draw[->] (program1) to[bend right] node[left, align=center] {interpretiere $A_{i}$\\ als Abstract Syntax Tree\\ der Sprache $L_{i}$} (output);
-      \draw[->] (program2) to[bend left] node[right, align=center] {interpretiere $A_{i+1}$\\ als Abstract Syntax Tree\\ der Sprache $L_{i+1}$} (output);
+      \draw[->] (program1) to[bend right] node[left, align=center] {interpretiere $A_{i}$ fertig\\ als Abstract Syntax Tree\\ der Sprache $L_{i}$} (output);
+      \draw[->] (program2) to[bend left] node[right, align=center] {interpretiere $A_{i+1}$ fertig\\ als Abstract Syntax Tree\\ der Sprache $L_{i+1}$} (output);
     \end{tikzpicture}
     \label{eq:compiler_beziehungen}
   \end{equation}
-wobei man hier so tut, als gäbe es diese zwei Interpreter, welche die beiden Abstract Syntax Trees interpretieren können.
+  wobei man hier so tut, als gäbe es zwei \colorbold{Interpreter} für die zwei Sprachen $L_i$ und  $L_{i+1}$, welche ihren jeweiligen den \colorbold{Abstract Syntax Tree} $A_i$ bzw.  $A_{i+1}$ fertig interpretieren.\footnote{\colorbold{Interpretieren} geht immer von einem Programm in \colorbold{Konkretter Syntax} aus, wobei der \colorbold{Abstract Syntax Tree} ein \colorbold{Zwischenschritt} bei der \colorbold{Interpretierung} ist.}\footcite{g_siek_course_2022}
 
 \end{Definition}
 
