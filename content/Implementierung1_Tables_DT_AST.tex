@@ -632,9 +632,8 @@ Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold
 
 In den nächsten Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_codebeispiel} zur \colorbold{Anschauung} der verschiedenen \colorbold{Passes} verwendet. Im Code~\ref{code:picoc_code_für_codebeispiel} ist in der Funktion \smalltt{faculty} ein \colorbold{iterativer} Algorithmus implementiert, der die \colorbold{Fakultät} eines übergebenen \colorbold{Arguments} berechnet. Der Algorithmus basiert auf einem \colorbold{Beispielprogramm} aus der Vorlesung~\cite{scholl_betriebssysteme_2020}, der in der Vorlesung allerdings \colorbold{rekursiv} implementiert war.
 
-Dieser \colorbold{rekursive} Algoirthmus ist allerdings \colorbold{kein} gutes \colorbold{Anschaungsbeispiel}, dass viele der Aufgaben der verschiedenen \colorbold{Passes} bei der Kompilierung veranschaulicht hätte. Viele Aufgaben der \colorbold{Passses}, wie z.B. bei der Kompilierung von \smalltt{if}-, \smalltt{if-else}-, \smalltt{while}- und \smalltt{do-while}-Statements wären im Beispiel aus der Vorlesung \colorbold{nicht} enthalten gewesen. Daher wurde das Beispiel aus der Vorlesung zu einem \colorbold{iterativen} Algorithmus umgeschrieben, um \smalltt{if}- und \smalltt{while}-Statemtens zu enthalten.
+Dieser \colorbold{rekursive} Algoirthmus ist allerdings \colorbold{kein} gutes \colorbold{Anschaungsbeispiel}, dass viele der Aufgaben der verschiedenen \colorbold{Passes} bei der Kompilierung veranschaulicht hätte. Viele Aufgaben der \colorbold{Passses}, wie z.B. bei der Kompilierung von \smalltt{if}-, \smalltt{if-else}-, \smalltt{while}- und \smalltt{do-while}-Statements wären im Beispiel aus der Vorlesung \colorbold{nicht} enthalten gewesen. Daher wurde das Beispiel aus der Vorlesung zu einem \colorbold{iterativen} Algorithmus~\ref{code:picoc_code_für_codebeispiel} umgeschrieben, um \smalltt{if}- und \smalltt{while}-Statemtens zu enthalten.
 
-% orignaler Algorithmsu enthält leider kein if und while
 % natürlich beide Beispiele als Tests verfügbar
 
 \begin{code}
