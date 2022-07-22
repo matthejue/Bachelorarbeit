@@ -1,0 +1,16 @@
+File 
+  Name './example_remove_complex_operands.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.0', 
+          [
+            Assign(Alloc(Writeable(), IntType('int'), Name('x')), BinOp(Num('5'), Mod('%'), Num('4')))
+            Exp(Call(Name('print'), [BinOp(Name('x'), Add('+'), Num('41'))]))
+          ]
+      ]
+  ]

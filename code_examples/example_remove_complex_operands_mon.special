@@ -1,0 +1,11 @@
+void main() {
+  int x;
+  5;
+  4;
+  stack(2) % stack(1);
+  x = stack(1);
+  x;
+  41;
+  stack(2) + stack(1);
+  print(stack(1));
+}

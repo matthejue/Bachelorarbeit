@@ -1,0 +1,40 @@
+# // Exp(GoTo(Name('main.0')))
+# // not included Exp(GoTo(Name('main.0')))
+# // Assign(Name('x'), BinOp(Num('5'), Mod('%'), Num('4')))
+# Exp(Num('5'))
+SUBI SP 1;
+LOADI ACC 5;
+STOREIN SP ACC 1;
+# Exp(Num('4'))
+SUBI SP 1;
+LOADI ACC 4;
+STOREIN SP ACC 1;
+# Exp(BinOp(Stack(Num('2')), Mod('%'), Stack(Num('1'))))
+LOADIN SP ACC 2;
+LOADIN SP IN2 1;
+MOD ACC IN2;
+STOREIN SP ACC 2;
+ADDI SP 1;
+# Assign(Global(Num('0')), Stack(Num('1')))
+LOADIN SP ACC 1;
+STOREIN DS ACC 0;
+ADDI SP 1;
+# Exp(Global(Num('0')))
+SUBI SP 1;
+LOADIN DS ACC 0;
+STOREIN SP ACC 1;
+# Exp(Num('41'))
+SUBI SP 1;
+LOADI ACC 41;
+STOREIN SP ACC 1;
+# Exp(BinOp(Stack(Num('2')), Add('+'), Stack(Num('1'))))
+LOADIN SP ACC 2;
+LOADIN SP IN2 1;
+ADD ACC IN2;
+STOREIN SP ACC 2;
+ADDI SP 1;
+LOADIN SP ACC 1;
+ADDI SP 1;
+CALL PRINT ACC;
+# Return(Empty())
+LOADIN BAF PC -1;
