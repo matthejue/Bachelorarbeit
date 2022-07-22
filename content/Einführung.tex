@@ -421,7 +421,7 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} einer Sprache $L_1$ in den \colorbold{Abstract Syntax Tree} einer Sprache $L_2$ umformen zu müssen. Dieses Problem lässt sich vereinfachen, indem man das Problem in mehrere Schritte unterteilt, die man \colorbold{Passes} (Definition~\ref{def:pass}) nennt.
 
 \begin{Special_Paragraph}
-  Man spricht hier von dem \colorbold{\dq Abstrakt Syntax Tree einer Sprache $L_{1}$ (bzw. $L_{2}$)\dq} und meint damit eine \colorbold{Sprache}, die durch eine \colorbold{Konkrette Syntax} beschrieben wird und nicht durch die \colorbold{Abstrakte Syntax}, nach welcher der \colorbold{Abstract Syntax Tree} abgeleitet ist. Hierbei handelt es sich um eine im Compilerbau geläufige \colorbold{Redeart}, die vielleicht verwirrend sein kann. Man will mit der \colorbold{ersteren Redeart} ausdrücken, dass der \colorbold{Abstrakt Syntax Tree} der zur Sprache $L_{1}$ (bzw. $L_2$) passend kontruierte \colorbold{Abstract Syntax Tree} ist. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakten Syntax} beschrieben wird, interessiert man sich nicht explizit.
+  Man spricht hier von dem \colorbold{\dq Abstrakt Syntax Tree einer Sprache $L_{1}$ (bzw. $L_{2}$)\dq} und meint damit eine \colorbold{Sprache}, die durch eine \colorbold{Konkrette Syntax} beschrieben wird und nicht durch die \colorbold{Abstrakte Syntax}, nach welcher der \colorbold{Abstract Syntax Tree} abgeleitet ist. Hierbei handelt es sich um eine im Compilerbau geläufige \colorbold{Redeart}, die vielleicht verwirrend sein kann. Man will mit der \colorbold{ersteren Redeart} ausdrücken, dass der \colorbold{Abstrakt Syntax Tree} der zur Sprache $L_{1}$ (bzw. $L_2$) passend kontruierte \colorbold{Abstract Syntax Tree} ist. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakt Syntax} beschrieben wird, interessiert man sich nicht explizit. Diese \colorbold{Redeart} wurde aus der \colorbold{Quelle} \cite{g_siek_course_2022} übernommen.
 \end{Special_Paragraph}
 
 \begin{Definition}{Pass}{pass}
@@ -429,7 +429,7 @@ In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \
 
   % man tut so als gäbe es
 
-  Für jeden \colorbold{Pass} gilt ähnlich wie beim \colorbold{kompletten Compiler} in \ref{eq:compiler_beziehungen}, dass:
+  Für jeden \colorbold{Pass} gilt ähnlich, wie beim \colorbold{kompletten Compiler} in \ref{eq:compiler_beziehungen}, dass:
   % TODO: Bild semantisch gleiche Bedeutung
   % TODO: auf T-Diagramme zurückkommen
   % Transpiler
@@ -447,14 +447,12 @@ In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \
     \end{tikzpicture}
     \label{eq:compiler_beziehungen}
   \end{equation}
-  wobei man hier so tut, als gäbe es zwei \colorbold{Interpreter} für die zwei Sprachen $L_i$ und  $L_{i+1}$, welche ihren jeweiligen den \colorbold{Abstract Syntax Tree} $A_i$ bzw.  $A_{i+1}$ fertig interpretieren.\footnote{\colorbold{Interpretieren} geht immer von einem Programm in \colorbold{Konkretter Syntax} aus, wobei der \colorbold{Abstract Syntax Tree} ein \colorbold{Zwischenschritt} bei der \colorbold{Interpretierung} ist.}\footcite{g_siek_course_2022}
-
+  wobei man hier so tut, als gäbe es zwei \colorbold{Interpreter} für die zwei Sprachen $L_i$ und  $L_{i+1}$, welche den jeweiligen den \colorbold{Abstract Syntax Tree} $A_i$ bzw.  $A_{i+1}$ fertig interpretieren.\footnote{\colorbold{Interpretieren} geht immer von einem Programm in \colorbold{Konkretter Syntax} aus, wobei der \colorbold{Abstract Syntax Tree} ein \colorbold{Zwischenschritt} bei der \colorbold{Interpretierung} ist.}\footcite{g_siek_course_2022}
 \end{Definition}
 
-Sobald das der Fall ist, kann aus dem finalen \colorbold{Abstract Syntax Tree} sehr einfach die \colorbold{Konkrette Syntax} generiert werden.
+Die von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} sollten dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} von \colorbold{RETI-Code} immer ähnlicher werden.
 
-
-Die von den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees} werden dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} des \colorbold{RETI-Code's} immer ähnlicher werden. Jeder Pass sollte dabei möglichst \colorbold{eine} Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck des \colorbold{Dervivation Tree} in der Syntaktischen Analyse war, eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
+Jeder Pass sollte dabei möglichst \colorbold{eine} Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck des \colorbold{Dervivation Tree} in der Syntaktischen Analyse war, eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
 
 \begin{Definition}{Monadische Normalform}{monadische_normalform}
   Eine Sprache bei der
