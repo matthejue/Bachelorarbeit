@@ -13,10 +13,7 @@ File
           Num '1', 
           [
             If 
-              Atom 
-                Name 'n', 
-                Eq '==', 
-                Num '1', 
+              Atom(Name('n'), Eq('=='), Num('1')), 
               [
                 Return(Name('res'))
               ]

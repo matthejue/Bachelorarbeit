@@ -489,6 +489,8 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 \newpage
 \begin{grammar}[Abstrakte Syntax für $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
   \toprule
+  \firstcase{stmt}{RETIComment()}{L\_Comment}
+  \midrule
   \firstcase{un\_op}{Minus() \gralt Not()}{L\_Arith}
   \firstcase{bin\_op}{Add() \gralt Sub() \gralt Mul() \gralt Div() \gralt Mod()}{}
   \otherform{Oplus() \gralt And() \gralt Or()}{}
@@ -570,7 +572,9 @@ Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen 
 
 \section{Code Generierung}
 \subsection{Übersicht}
-Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse} in Unterkapitel~\ref{sec:syntaktische_analyse}, wird in diesem Kapitel aus den verschiedenen \colorbold{Kompositionen} von \colorbold{Container-Knoten} und \colorbold{Token-Knoten} im Abstract Syntax Tree das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
+Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse} in Unterkapitel~\ref{sec:syntaktische_analyse}, wird in diesem Kapitel mit den verschiedenen \colorbold{Kompositionen} von \colorbold{Container-Knoten} und \colorbold{Token-Knoten} im \colorbold{Abstract Syntax Tree} als Basis das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
+
+Man steht nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC}$, der durch die \colorbold{Abstrakte Syntax} in Grammatik~\ref{gr:abstract_syntax_l_picoc} spezifiziert ist in einen entsprechenden \colorbold{Abstract Syntax Tree} der Sprache $L_{RETI}$ umzuformen. Das ganze lässt sich, wie in Unterkapitel~\ref{sec:code_generierung} bereits beschrieben vereinfachen, indem man dieses Problem in mehrere \colorbold{Passes} (Definition~\ref{def:pass}) herunterbricht.
 
 % Unterscheid zur Architektur aus dem Bachelorprojekt
 
@@ -614,8 +618,6 @@ Um die verschiedenen Aspekte besser erklären zu können, werden \colorbold{Code
 
 Im Folgenden werden die verschiedenen \colorbold{Passes} des \colorbold{PicoC-Compilers} für die Generierung von \colorbold{RETI-Code} besprochen. Viele dieser \colorbold{Passes} haben \colorbold{Aufgaben}, die eher unter die Themenbereiche des \colorbold{Bachelorprojekts} fallen. Allerdings ist das Verständnis der \colorbold{Passes} auch für das Verständnis der veschiedenen Aspekte\footnote{In kurz: \colorbold{Pointer}, \colorbold{Arrays}, \colorbold{Strcuts} und \colorbold{Funktionen}.} der \colorbold{Bachelorarbeit} wichtig.
 
-Die von den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees} werden dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} des \colorbold{RETI-Code's} immer ähnlicher werden. Jeder Pass sollte dabei möglichst \colorbold{eine} Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck des \colorbold{Dervivation Tree} in der Syntaktischen Analyse war, eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
-
 Auf jedes Detail der einzelnen \colorbold{Passes} wird in diesem Unterkapitel allerdings nicht eingegangen, da diese einerseits in den Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} zu \colorbold{Pointern},  \colorbold{Arrays}, \colorbold{Structs} und \colorbold{Funktionen} im Detail erklärt sind und andererseits viele Aufgaben dieser \colorbold{Passes} eher dem \colorbold{Bachelorprojekt} zuzurechnen sind.
 
 \subsubsection{PicoC-Shrink Pass}
@@ -626,15 +628,18 @@ Auf jedes Detail der einzelnen \colorbold{Passes} wird in diesem Unterkapitel al
 
 Der Aufgabe des \colorbold{PicoC-Shrink Pass} ist in Unterkapitel~\ref{dereferenzierung_durch_zugriff_auf_arrayindex_ersetzen} ausführlich an einem Beispiel erklärt. Kurzgefasst hat der \colorbold{PicoC-Shrink Pass} die Aufgabe, die Eigenheit auszunutzen, dass der \colorbold{Dereferenzierungoperator} \smalltt{*pntr} und die damit einhergehende \colorbold{Pointer Arithmetik} \smalltt{*(pntr + i)} sich in der Untermenge der Sprache $L_{C}$, welche die Sprache $L_{PicoC}$ darstellt genau gleich verhält, wie der \colorbold{Operator} für den \colorbold{Zugriff} auf den \colorbold{Index} eines \colorbold{Arrays} \smalltt{ar[i]}.
 
-Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold{Container-Knoten} \smalltt{Deref(exp, i)} im jeweiligen \colorbold{Abstract Syntax Tree} in \colorbold{Container-Knoten} \smalltt{Subscr(exp, i)} um, sodass sich dadurch viele vermeidbare \colorbold{Fallunterscheidungen} und \colorbold{doppelter Code} bei der Implementierung sparren lassen, denn man kann die \colorbold{Derefenzierung} \smalltt{*(var + i)} einfach von den Routinen für einen \colorbold{Zugriff auf einen Arrayindex} \smalltt{var[i]} übernehmen lassen.
+Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold{Knoten} \smalltt{Deref(exp, i)} im jeweiligen \colorbold{Abstract Syntax Tree} in \colorbold{Knoten} \smalltt{Subscr(exp, i)} um, sodass sich dadurch viele vermeidbare \colorbold{Fallunterscheidungen} und \colorbold{doppelter Code} bei der Implementierung sparren lassen, denn man kann die \colorbold{Derefenzierung} \smalltt{*(var + i)} einfach von den Routinen für einen \colorbold{Zugriff auf einen Arrayindex} \smalltt{var[i]} übernehmen lassen.
 
 \newlineparagraph{Codebeispiel}
 
 In den nächsten Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_codebeispiel} zur \colorbold{Anschauung} der verschiedenen \colorbold{Passes} verwendet. Im Code~\ref{code:picoc_code_für_codebeispiel} ist in der Funktion \smalltt{faculty} ein \colorbold{iterativer} Algorithmus implementiert, der die \colorbold{Fakultät} eines übergebenen \colorbold{Arguments} berechnet. Der Algorithmus basiert auf einem \colorbold{Beispielprogramm} aus der Vorlesung~\cite{scholl_betriebssysteme_2020}, der in der Vorlesung allerdings \colorbold{rekursiv} implementiert war.
-
-Dieser \colorbold{rekursive} Algoirthmus ist allerdings \colorbold{kein} gutes \colorbold{Anschaungsbeispiel}, dass viele der Aufgaben der verschiedenen \colorbold{Passes} bei der Kompilierung veranschaulicht hätte. Viele Aufgaben der \colorbold{Passses}, wie z.B. bei der Kompilierung von \smalltt{if}-, \smalltt{if-else}-, \smalltt{while}- und \smalltt{do-while}-Statements wären im Beispiel aus der Vorlesung \colorbold{nicht} enthalten gewesen. Daher wurde das Beispiel aus der Vorlesung zu einem \colorbold{iterativen} Algorithmus~\ref{code:picoc_code_für_codebeispiel} umgeschrieben, um \smalltt{if}- und \smalltt{while}-Statemtens zu enthalten.
-
 % natürlich beide Beispiele als Tests verfügbar
+
+Dieser \colorbold{rekursive} Algoirthmus ist allerdings \colorbold{kein} gutes \colorbold{Anschaungsbeispiel}, dass viele der Aufgaben der verschiedenen \colorbold{Passes} bei der Kompilierung veranschaulicht hätte. Viele Aufgaben der \colorbold{Passes}, wie z.B. bei der Kompilierung von \smalltt{if}-, \smalltt{if-else}-, \smalltt{while}- und \smalltt{do-while}-Statements wären im Beispiel aus der Vorlesung \colorbold{nicht} enthalten gewesen. Daher wurde das Beispiel aus der Vorlesung zu einem \colorbold{iterativen} Algorithmus~\ref{code:picoc_code_für_codebeispiel} umgeschrieben, um \smalltt{if}- und \smalltt{while}-Statemtens zu enthalten.
+
+Beide Varianten des Algorithmus wurden zum Testen des \colorbold{PicoC-Compilers} verwendet und sind als Tests im Ordner \inlinebox{/tests} unter \footnoteurl{https://github.com/matthejue/PicoC-Compiler/tree/new_architecture/tests} unter den Testbezeichnungen \inlinebox{example_faculty_rec.picoc} und \inlinebox{example_faculty_it.picoc} zu finden.
+
+Die Codebeispiele in diesem und den folgenden Unterkapiteln dienen allerdings nur als \colorbold{Anschauung} des jeweiligen \colorbold{Passes}, der in diesem Unterkapitel beschrieben wird und werden nicht im Detail erläutert, da viele Details der Passes später in den Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} zu \colorbold{Pointern},  \colorbold{Arrays}, \colorbold{Structs} und \colorbold{Funktionen} mit eigenen \colorbold{Codebeispielen} erklärt werden und alle sonstigen Details dem \colorbold{Bachelorprojekt} zuzurechnen sind.
 
 \begin{code}
   \centering
@@ -652,36 +657,32 @@ In Code~\ref{code:abstract_syntax_tree_für_codebeispiel} sieht man den \colorbo
   \label{code:abstract_syntax_tree_für_codebeispiel}
 \end{code}
 
-In Code~\ref{code:picoc_shrink_pass_für_codebeispiel} sieht man den \colorbold{Abstract Syntax Tree}, des \colorbold{PicoC-Shrink-Passes}.
-
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_faculty_it.picoc_shrink}
-  \caption{PicoC Shrink Pass für Codebespiel}
-  \label{code:picoc_shrink_pass_für_codebeispiel}
-\end{code}
+Im \colorbold{PicoC-Shrink-Pass} ändert sich nichts im Vergleich zum \colorbold{Abstract Syntax Tre} in Code~\ref{code:abstract_syntax_tree_für_codebeispiel}, da das Codebeispiel keine \colorbold{Dereferenzierung} enthält.
 
 \subsubsection{PicoC-Blocks Pass}
 \label{picoc_blocks_pass}
-\newlineparagraph{Aufgaben}
+\newlineparagraph{Aufgabe}
 \label{sec:picoc_blocks_pass_zweck}
 
-Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} mithilfe von Blöcken, \smalltt{GoTo(lable)}-Statements und nur noch \smalltt{IF-Else}-Container-Knoten für die \colorbold{Condition} umzusetzen.
+Die Aufgabe des \colorbold{PicoC-Blocks Passes} ist die Knoten \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} mithilfe von \smalltt{Block(name, stmts\_instrs}-, \smalltt{GoTo(lable)}- und \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten umzusetzen. Der \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten wird zur Umsetzung der \colorbold{Bedingung} verwendet und es wird, je nachdem, ob die Bedingung \colorbold{wahr} oder \colorbold{falsch} ist mithilfe der \smalltt{GoTo(label)}-Knoten in einen von zwei \colorbold{alternativen Branches} gesprungen oder ein \colorbold{Branch} erneut aufgerufen usw.
 
 \newlineparagraph{Abstrakte Syntax}
+
+Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Des Weiteren wird für die \colorbold{Kommentare}, die in vielen Codebeispielen zur leichteren Verständlichkeit eingefügt wurden ein \smalltt{SingleLineComment(prefix, content)}-Knoten benötigt.
+
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule
   \firstcase{decl\_def}{FunDef(\langle datatype\rangle , Name(str),}{L\_Fun}
   & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle block\rangle *)$ & \\
   \midrule
   \firstcase{block}{Block(Name(str), \langle stmt\rangle *)}{L\_Blocks}
-  \firstcase{stmt}{GoTo(Name(str)) \gralt NewStackframe(Name(), GoTo(str))}{}
-  \otherform{RemoveStackframe() \gralt SetScope(Name(str))}{}
-  \otherform{SingleLineComment(str, str)}{}
+  \firstcase{stmt}{GoTo(Name(str)) \gralt SingleLineComment(str, str)}{}
   \bottomrule
 \end{grammar}
 
 \newlineparagraph{Codebeispiel}
+
+In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-Blocks Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem nun eigene \colorbold{Blöcke} für die Funktion \smalltt{faculty} und die \smalltt{main}-Funktion erstellt werden, in denen die \colorbold{ersten} Statements der jeweiligen Funktionen bis zu \colorbold{letzten} Statement oder bis zum ersten \colorbold{Auftauchen} eines \smalltt{If(exp, stmts)}-, \smalltt{IfElse(exp, stmts1, stmts2)}-, \smalltt{While(exp, stmts)}- oder \smalltt{DoWhile(exp, stmts)}-Knoten stehen. Je nachdem, ob ein \smalltt{If(exp, stmts)}-, \smalltt{IfElse(exp, stmts1, stmts2)}-, \smalltt{While(exp, stmts)}- oder \smalltt{DoWhile(exp, stmts)}-Knoten auftaucht, werden für die \colorbold{Bedingung} und mögliche \colorbold{Branches} eigene \colorbold{Blöcke} erstellt.
 
 \begin{code}
   \centering
@@ -692,8 +693,11 @@ Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp
 
 \subsubsection{PicoC-Mon Pass}
 \label{picoc_mon_pass}
-\newlineparagraph{Aufgaben}
+\newlineparagraph{Aufgabe}
 \label{sec:picoc_mon_pass_zweck}
+
+Die Aufgabe des \colorbold{PicoC-Mon Pass} ist es den \colorbold{Abstract Syntax Tree} \dq in eine \colorbold{eingeschränkte Form} zu bringen, in der die \colorbold{Argumente} von \colorbold{Operationen} \colorbold{Atomare Audrücke} sind\dq\footcite{g_siek_course_2022}
+
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
   \toprule
@@ -706,6 +710,8 @@ Der Zweck dieses \colorbold{Passes} ist die die Container-Knoten \smalltt{If(exp
   & & \qquad $Struct(Assign(Name(str), \langle exp\rangle )+, \langle datatype\rangle$ )) & \\
   \otherform{Assign(Alloc(Writeable(), ArrayDecl(Num(str)+, \langle datatype\rangle ),}{}
   & & \qquad $Name(str)), Array(\langle exp\rangle +, \langle datatype\rangle ))$ & \\
+  \otherform{NewStackframe(Name(), GoTo(str))}{}
+  \otherform{RemoveStackframe()}{}
   \midrule
   \firstcase{symbol\_table}{SymbolTable(\langle symbol\rangle )}{L\_Symbol\_Table}
   \firstcase{symbol}{Symbol(\langle type_qual\rangle , \langle datatype\rangle , \langle name\rangle , \langle val\rangle , \langle pos\rangle , \langle size\rangle )}{}

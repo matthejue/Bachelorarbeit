@@ -32,10 +32,7 @@ File
           [
             // If(Atom(Name('n'), Eq('=='), Num('1')), []), 
             IfElse 
-              Atom 
-                Name 'n', 
-                Eq '==', 
-                Num '1', 
+              Atom(Name('n'), Eq('=='), Num('1')), 
               [
                 GoTo(Name('if.3'))
               ], 
