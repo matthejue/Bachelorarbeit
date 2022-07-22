@@ -418,21 +418,17 @@ Um eine Gesamtübersicht über die \colorbold{Syntaktische Analyse} zu geben, is
 \section{Code Generierung}
 \label{sec:code_generierung}
 
-In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} einer Sprache $L_1$ in den \colorbold{Abstract Syntax Tree} einer Sprache $L_2$ umformen zu müssen. Dieses Problem lässt sich vereinfachen, indem man das Problem in mehrere Schritte unterteilt, die man \colorbold{Passes} (Definition~\ref{def:pass}) nennt.
+In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} einer Sprache $L_1$ in den \colorbold{Abstract Syntax Tree} einer Sprache $L_2$ umformen zu müssen. Dieses Problem lässt sich vereinfachen, indem man das Problem in mehrere Schritte unterteilt, die man \colorbold{Passes} (Definition~\ref{def:pass}) nennt. So wie es auch schon mit dem \colorbold{Dervivation Tree} in der Syntaktischen Analyse gemacht wurde, den man als Zwischenstufe zum \colorbold{Abstract Syntax Tree} kontstruiert hatte. Aus dem Derivation konnte, dann unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generiert werden.
 
 \begin{Special_Paragraph}
-  Man spricht hier von dem \colorbold{\dq Abstrakt Syntax Tree einer Sprache $L_{1}$ (bzw. $L_{2}$)\dq} und meint damit eine \colorbold{Sprache}, die durch eine \colorbold{Konkrette Syntax} beschrieben wird und nicht durch die \colorbold{Abstrakte Syntax}, nach welcher der \colorbold{Abstract Syntax Tree} abgeleitet ist. Hierbei handelt es sich um eine im Compilerbau geläufige \colorbold{Redeart}, die vielleicht verwirrend sein kann. Man will mit der \colorbold{ersteren Redeart} ausdrücken, dass der \colorbold{Abstrakt Syntax Tree} der zur Sprache $L_{1}$ (bzw. $L_2$) passend kontruierte \colorbold{Abstract Syntax Tree} ist. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakt Syntax} beschrieben wird, interessiert man sich nicht explizit. Diese \colorbold{Redeart} wurde aus der \colorbold{Quelle} \cite{g_siek_course_2022} übernommen.
+  Man spricht hier von dem \colorbold{\dq Abstrakt Syntax Tree einer Sprache $L_{1}$ (bzw. $L_{2}$)\dq} und meint hier mit der Sprache $L_1$ (bzw. $L_2$) \colorbold{nicht} die Sprache, welche durch die \colorbold{Abstrakte Syntax}, nach welcher der \colorbold{Abstract Syntax Tree} abgeleitet ist beschrieben wird. Es ist damit \colorbold{immer} die Sprache gemeint, die \colorbold{kompiliert} werden soll und zu deren Zweck der \colorbold{Abstrakt Syntax Tree} überhaupt konstruiert wird. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakt Syntax} beschrieben wird, interessiert man sich nie wirklich explizit. Diese \colorbold{Redeart} wurde aus der \colorbold{Quelle} \cite{g_siek_course_2022} übernommen.
 \end{Special_Paragraph}
 
 \begin{Definition}{Pass}{pass}
-  \colorbold{Einzelner Übersetzungsschritt} in einem \colorbold{Kompiliervorgang} von einem \colorbold{Abstract Syntax Tree} $A_i$ einer Sprache $L_i$ zu einem \colorbold{Abstract Syntax Tree} $A_{i+1}$ einer Sprache $L_{i+1}$, der meist \colorbold{eine} bestimmte \colorbold{Teilaufgabe} übernimmt, die sich mit keiner \colorbold{Teilaufgabe} eines anderen \colorbold{Passes} überschneidet und möglichst wenig \colorbold{Ähnlichkeit} mit den \colorbold{Teilaufgaben} anderer \colorbold{Passes} haben sollte.\footnote{$L_i$ bzw. $L_{i+1}$ sind hierbei keine \colorbold{Sprachen}, die durch eine \colorbold{Abstrakte Syntax} beschrieben werden, sondern Sprachen, die durch eine \colorbold{Konkrette Syntax} beschrieben werden.}\footnote{Ein \colorbold{Pass} kann mit einem \colorbold{Transpiler}~\ref{def:transpiler} (Definition~\ref{def:transpiler}) verglichen werden, da sich die zwei Sprachen $L_i$ und  $L_{i+1}$ aufgrund der \colorbold{Kleinschrittigkeit} meist auf einem ähnlichen \colorbold{Abstraktionslevel} befinden. Der Unterschied ist allerdings, dass ein \colorbold{Transpiler} zwei Programme, die in $L_i$ bzw.  $L_{i+1}$ geschrieben sind kompiliert. Ein \colorbold{Pass} ist dagegen immer \colorbold{kleinschrittig} und operiert auf \colorbold{Abstract Syntax Trees}.}
+  \colorbold{Einzelner Übersetzungsschritt} in einem \colorbold{Kompiliervorgang} von einem \colorbold{Abstract Syntax Tree} $A_i$ einer Sprache $L_i$ zu einem \colorbold{Abstract Syntax Tree} $A_{i+1}$ einer Sprache $L_{i+1}$, der meist \colorbold{eine} bestimmte \colorbold{Teilaufgabe} übernimmt, die sich mit keiner \colorbold{Teilaufgabe} eines anderen \colorbold{Passes} überschneidet und möglichst wenig \colorbold{Ähnlichkeit} mit den \colorbold{Teilaufgaben} anderer \colorbold{Passes} haben sollte.\footnote{Ein \colorbold{Pass} kann mit einem \colorbold{Transpiler}~\ref{def:transpiler} (Definition~\ref{def:transpiler}) verglichen werden, da sich die zwei Sprachen $L_i$ und  $L_{i+1}$ aufgrund der \colorbold{Kleinschrittigkeit} meist auf einem ähnlichen \colorbold{Abstraktionslevel} befinden. Der Unterschied ist allerdings, dass ein \colorbold{Transpiler} zwei Programme, die in $L_i$ bzw.  $L_{i+1}$ geschrieben sind kompiliert. Ein \colorbold{Pass} ist dagegen immer \colorbold{kleinschrittig} und operiert auschließlich auf \colorbold{Abstract Syntax Trees}, ohne Parsing usw.}\footnote{Der Begriff kommt aus dem \colorbold{Englischen} von \dq passing over\dq, da der gesamte \colorbold{Abstract Syntax Tree} in einem \colorbold{Pass} durchlaufen wird.}
 
-  % man tut so als gäbe es
-
-  Für jeden \colorbold{Pass} gilt ähnlich, wie beim \colorbold{kompletten Compiler} in \ref{eq:compiler_beziehungen}, dass:
-  % TODO: Bild semantisch gleiche Bedeutung
+  Für jeden \colorbold{Pass} gilt ähnlich, wie bei einem \colorbold{vollständigen Compiler} in \ref{eq:compiler_beziehungen}, dass:
   % TODO: auf T-Diagramme zurückkommen
-  % Transpiler
 
   \begin{equation}
     \begin{tikzpicture}[auto, baseline=(current  bounding  box.center)]
@@ -450,9 +446,26 @@ In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \
   wobei man hier so tut, als gäbe es zwei \colorbold{Interpreter} für die zwei Sprachen $L_i$ und  $L_{i+1}$, welche den jeweiligen den \colorbold{Abstract Syntax Tree} $A_i$ bzw.  $A_{i+1}$ fertig interpretieren.\footnote{\colorbold{Interpretieren} geht immer von einem Programm in \colorbold{Konkretter Syntax} aus, wobei der \colorbold{Abstract Syntax Tree} ein \colorbold{Zwischenschritt} bei der \colorbold{Interpretierung} ist.}\footcite{g_siek_course_2022}
 \end{Definition}
 
-Die von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} sollten dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} von \colorbold{RETI-Code} immer ähnlicher werden.
+Die von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} sollten dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} von \colorbold{Maschienenbefehlen} immer ähnlicher werden, bis es schließlich nur noch Maschienenbefehle sind.
 
-Jeder Pass sollte dabei möglichst \colorbold{eine} Aufgabe übernehmen, da der Sinn von \colorbold{Passes} ist, die Kompilierung in mehrere kleinschrittige Aufgaben runterzuberechen. Wie es auch schon der Zweck des \colorbold{Dervivation Tree} in der Syntaktischen Analyse war, eine Zwischenstufe zum \colorbold{Abstract Syntax Tree} darzustellen, aus der sich unkompliziert und einfach mit \colorbold{Transformern} und \colorbold{Visitors} ein \colorbold{Abstract Syntax Tree} generieren lies.
+Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbold{höhere Programmiersprache} und bei $L_2$ um \colorbold{Maschienensprache} handelt, ist es fast unerlässlich einen \colorbold{Pass} einzuführen, der \colorbold{komplexe Ausdrücke} (Definition~\ref{def:komplexer_ausdruck}) aus \colorbold{Operationen}\footnote{Hierunter fallen u.a. auch Zuweisungen.} und je nach Programmiersprache aus \colorbold{weiteren Statements} \colorbold{entfernt}, sodass am Ende alle Statements \colorbold{Atomare Ausdrücke} (Definiton~\ref{def:atomarer_ausdruck}) als Argumente haben.
+
+Dieser \colorbold{Pass} hat vor allem die Aufgabe sich der \colorbold{Syntax} von \colorbold{Maschienenbefehlen} besonders dadurch anzunähren, dass mit Ausnahme einiger spezieller Statements, die in späteren Passes umgwandelt werden müssen, so weit wie möglich immer nur eine Operation pro Statement ausgeführt wird. Dadurch lassen sich viele Statements bereits direkt zu Maschienenbefehlen übersetzen, da Machienenbefehle üblicherweise immer nur für eine Operation ausführen können\footnote{Z.B. kann eine \colorbold{RETI-CPU} in einem \colorbold{Fetch- und Execute-Zyklus} nur eine Operation mit der \colorbold{Arithmetisch Logischen Einheit} (engl. ALU) ausführen.}.
+
+% den \colorbold{Bedingungen} \smalltt{<condition>} von \smalltt{if(<condition>){<stmts>}else{<stmts>}}-Statements entfernt
+
+
+wie in dem Beispiel in Abbildung~\ref{} zu sehen ist.
+
+% ähnlicher zu Maschieneninstrucitns, die nur eine Operation auf einmal
+
+\begin{Definition}{Atomarer Ausdruck}{atomarer_ausdruck}
+  Ein \colorbold{Atomarer Ausdruck} ist ein Ausdruck, der \colorbold{atomar} ist, also \colorbold{nicht} mehr weiter \colorbold{zerkleinert} werden kann. Also entweder eine \colorbold{Variable} \smalltt{var}, eine \colorbold{Zahl} \smalltt{12} oder ein \colorbold{ASCII-Zeichen} \smalltt{'c'} ist.\footcite{g_siek_course_2022}
+\end{Definition}
+
+\begin{Definition}{Komplexer Ausdruck}{komplexer_ausdruck}
+  Ein \colorbold{komplexer Ausdruck} ist ein \colorbold{Ausdruck}, der \colorbold{nicht atomar} ist, wie z.B. \smalltt{5 \% 4}, \smalltt{-1} oder \smalltt{fun(12)}.\footcite{g_siek_course_2022}
+\end{Definition}
 
 \begin{Definition}{Monadische Normalform}{monadische_normalform}
   Eine Sprache bei der
