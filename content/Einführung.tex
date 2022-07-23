@@ -448,7 +448,12 @@ In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \
 
 Die von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} sollten dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} von \colorbold{Maschienenbefehlen} immer ähnlicher werden, bis es schließlich nur noch Maschienenbefehle sind.
 
-Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbold{höhere Programmiersprache} und bei $L_2$ um \colorbold{Maschienensprache} handelt, ist es fast unerlässlich einen \colorbold{Pass} einzuführen, der \colorbold{komplexe Ausdrücke} (Definition~\ref{def:komplexer_ausdruck}) aus \colorbold{Operationen}\footnote{Hierunter fallen u.a. auch \colorbold{Zuweisungen}.} und je nach Programmiersprache aus \colorbold{weiteren Statements} \colorbold{entfernt}, sodass am Ende möglichst viele Statements \colorbold{Atomare Ausdrücke} (Definiton~\ref{def:atomarer_ausdruck}) als Argumente haben.
+Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbold{höhere Programmiersprache} und bei $L_2$ um \colorbold{Maschienensprache} handelt, ist es fast unerlässlich einen \colorbold{Pass} einzuführen, der \colorbold{komplexe Ausdrücke} (Definition~\ref{def:komplexer_ausdruck}) aus \colorbold{Statements} entfernt.
+
+
+aus \colorbold{Operationen}\footnote{\colorbold{Statement} oder \colorbold{Ausdruck} der einem \colorbold{Maschienenbefehl} entspricht und z.B. auf der \colorbold{RETI-CPU} in einem \colorbold{Fetch- und Execute-Zyklus} ausgeführt werden kann.}\footnote{Hierunter fallen u.a. \colorbold{Zuweisungen} \smalltt{var = 12} und \colorbold{Ausdrücke}, wie \smalltt{12 \% 5}.} und je nach Programmiersprache aus den \colorbold{Teilausdrücken} weiterer \colorbold{Statements} und \colorbold{Ausdrücke} entfernt, die nicht direkt einer \colorbold{Operation} entsprechen\footnote{Z.B das \colorbold{Statement} \smalltt{if(<condition>)\,\{<stmts>\}\, else\,\{<stmts>\}}.} und in \colorbold{späteren Passes} erst zu einer \colorbold{Folge} von \colorbold{Maschienenbefehlen} umgewandelt werden.
+
+Auf diese Weise haben am Ende alle \colorbold{Statements} nur \colorbold{Atomare Ausdrücke} (Definiton~\ref{def:atomarer_ausdruck}) als Teilausdrücke.
 
 % den \colorbold{Bedingungen} \smalltt{<condition>} von \smalltt{if(<condition>){<stmts>}else{<stmts>}}-Statements entfernt
 
@@ -460,24 +465,25 @@ Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbo
   Ein \colorbold{komplexer Ausdruck} ist ein \colorbold{Ausdruck}, der \colorbold{nicht atomar} ist, wie z.B. \smalltt{5 \% 4}, \smalltt{-1} oder \smalltt{fun(12)}.\footcite{g_siek_course_2022}
 \end{Definition}
 
+% die Sache mit Variablen
+
 % Die Sache Monadischer Normalform
 
-\begin{Definition}{Monadische Normalform}{monadische_normalform}
+\begin{Definition}{A-Normal Form}{a_normal_form}
   Eine Sprache bei der
-  \footcite{g_siek_course_2022}
+  \footcite{noauthor_-normalization_nodate}
+  \footcite{bolingbroke_types_2009}
 \end{Definition}
-
-% die Sache mit Variblen
 
 Ein \colorbold{Beispiel} für dieses Vorgehen ist in Abbildung~\ref{fig:example_remove_complex_operands} zu sehen, wo der Einfachheit halber auf die Darstellung als Abstract Syntax Tree \colorbold{verzichtet} wurde und die Codebeispiele in \colorbold{Konkretter Syntax} aufgeschrieben wurden wurden.
 
 \begin{figure}[H]
   \codebox[title=Code , remember as=code, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_remove_complex_operands_code.special}
   \hfill
-  \codebox[title=Code in Monadischer Normalform, remember as=mon, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_remove_complex_operands_mon.special}
+  \codebox[title=Code in A-Normalform, remember as=mon, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_remove_complex_operands_mon.special}
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
-  \draw[->] (code.east) to[bend right] node[below, align=center] {entferne \colorbold{Komplexe Audrücke}\\ aus \colorbol{Statements}} (mon.west);
+  \draw[->] (code.east) to[bend right] node[below, align=center] {entferne \colorbold{Komplexe Audrücke}\\ aus \colorbold{Statements}.} (mon.west);
   \end{tikzpicture}
   \caption{Codebeispiel für das Entfernen Komplexer Ausdrücke aus Operationen}
   \label{fig:example_remove_complex_operands}
