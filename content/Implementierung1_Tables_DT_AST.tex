@@ -631,7 +631,7 @@ Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold
 
 \newlineparagraph{Abstrakte Syntax}
 
-Die \colorbold{Abstrakte Syntax} des \colorbold{PicoC-Shrink Passes} ist \colorbold{identisch} mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PiocC}$ aus Unterkapitel~\ref{gr:abstract_syntax_l_picoc}, nach welcher der erste \colorbold{Abstract Syntax Tree} in der \colorbold{Syntaktischen Analyse} generiert wurde.
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Shrink}$ ist \colorbold{identisch} mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PiocC}$ aus Tabelle~\ref{gr:abstract_syntax_l_picoc}, nach welcher der \colorbold{erste} Abstract Syntax Tree in der \colorbold{Syntaktischen Analyse} generiert wurde. Das liegt daran, dass dieser Pass nur alle \colorbold{Vorkommnisse} eines Knoten \smalltt{Deref(exp, i)} durch den Knoten \smalltt{Subscr(exp, i)} auswechselt, der ebenfalls bereits in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC}$ definiert ist.
 
 \newlineparagraph{Codebeispiel}
 
@@ -660,7 +660,7 @@ In Code~\ref{code:abstract_syntax_tree_für_codebeispiel} sieht man den \colorbo
   \label{code:abstract_syntax_tree_für_codebeispiel}
 \end{code}
 
-Im \colorbold{PicoC-Shrink-Pass} ändert sich nichts im Vergleich zum \colorbold{Abstract Syntax Tre} in Code~\ref{code:abstract_syntax_tree_für_codebeispiel}, da das Codebeispiel keine \colorbold{Dereferenzierung} enthält.
+Im \colorbold{PicoC-Shrink-Pass} ändert sich nichts im Vergleich zum \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_codebeispiel}, da das Codebeispiel keine \colorbold{Dereferenzierung} enthält.
 
 % TODO: nichts hinzugefügt zu Syntax
 
@@ -686,7 +686,13 @@ Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\r
 \end{grammar}
 
 \begin{Special_Paragraph}
-  Die \colorbold{Abstrakte Syntax} in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} ist als Erweiterung bzw.
+  Die \colorbold{Abstrakte Syntax} der Sprache $L_{Picoc\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} ist als \colorbold{Patch}\footnote{Das ist ein \colorbold{Deutsches Wort}, wie Quelle~\cite{noauthor_duden_nodate} zeigt. Es gibt \colorbold{kein} anderes Wort, welches \colorbold{genau} das ausdrückt, was dieses Wort ausdrückt.} anzusehen. Ein \colorbold{Patch} ist es insofern, dass
+  \begin{itemize}
+    \item es neue Knoten \colorbold{hinzufügt}, die zur Umsetzung dieses Passes notwendig sind, wie z.B. den \smalltt{GoTo(Name(str))}-Knoten
+    \item es bestehende Knoten \colorbold{abändert}, weil , wie z.B. den \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)}-Knoten
+  \end{itemize}
+
+  % vor allem für Programmierer muss nicht syntaktisch genau sein, wenn es Programmierer damit versteht, was er tuen soll, dann ist es gut so, deswegen nicht nötig anzugeben, was für Knoten nicht mehr existieren.
 
   Theoretisch gibt es
 \end{Special_Paragraph}
@@ -705,6 +711,7 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 
 \subsubsection{PicoC-ANF Pass}
 \label{picoc_mon_pass}
+
 \newlineparagraph{Aufgabe}
 \label{sec:picoc_mon_pass_zweck}
 
@@ -764,6 +771,10 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
   \firstcase{instr}{GoTo(Name(str))}{}
   \bottomrule
 \end{grammar}
+
+\begin{Special_Paragraph}
+  % die Sache mit Konkretter Syntax statt Abstrakter Syntax da so simpel und so....
+\end{Special_Paragraph}
 
 \newlineparagraph{Codebeispiel}
 
