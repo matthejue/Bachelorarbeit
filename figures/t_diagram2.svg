@@ -23,13 +23,13 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.0046863"
-     inkscape:cx="614.61971"
-     inkscape:cy="177.16973"
+     inkscape:zoom="1.420841"
+     inkscape:cx="-31.319479"
+     inkscape:cy="776.65271"
      inkscape:window-width="1904"
-     inkscape:window-height="1037"
+     inkscape:window-height="1046"
      inkscape:window-x="6"
-     inkscape:window-y="33"
+     inkscape:window-y="26"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:object-paths="true"
@@ -480,7 +480,7 @@
          y="261.11133"
          id="tspan244060-5">PicoC<tspan
    style="font-size:65%;baseline-shift:sub"
-   id="tspan869">Mon</tspan></tspan></text>
+   id="tspan869">ANF</tspan></tspan></text>
     <path
        id="rect89624-3-5-1-9"
        style="fill:none;stroke:#000000;stroke-width:0.221684"
@@ -926,7 +926,7 @@
    style="font-size:65%;text-align:center;baseline-shift:sub;text-anchor:middle"
    id="tspan645">Blocks</tspan> → PicoC<tspan
    style="font-size:65%;text-align:center;baseline-shift:sub;text-anchor:middle"
-   id="tspan647">Mon</tspan></tspan></text>
+   id="tspan647">ANF</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:3.88056px;line-height:1.25;font-family:'Liberation Serif';stroke-width:0.264583"
@@ -968,7 +968,7 @@
          y="326.21893"
          id="tspan244060-5-2">PicoC<tspan
    style="font-size:65%;baseline-shift:sub"
-   id="tspan869-0">Mon</tspan></tspan></text>
+   id="tspan869-0">ANF</tspan></tspan></text>
     <path
        id="rect89624-3-5-1-4-3-3-5-6"
        style="fill:none;stroke:#000000;stroke-width:0.221684"
@@ -1043,7 +1043,7 @@
          x="-5.6232696"
          y="325.87418">PicoC<tspan
    style="font-size:65%;baseline-shift:sub"
-   id="tspan649-7">Mon</tspan> → RETI<tspan
+   id="tspan649-7">ANF</tspan> → RETI<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan651-2">Blocks</tspan></tspan></text>
     <text

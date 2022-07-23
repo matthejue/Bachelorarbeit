@@ -45,12 +45,12 @@ Es werden parallel dazu neue Zuordnungen im \colorbold{Dictionary} \smalltt{fun\
   \label{code:picoc_blocks_pass_für_3_Funktionen}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_3_Funktionen} werden die \smalltt{FunDef(datatype, name, allocs, stmts)}-Container-Knoten komplett aufgelöst, sodass sich im \smalltt{File(name, decls\_defs\_blocks)}-Container-Knoten nur noch Blöcke befinden.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_3_Funktionen} werden die \smalltt{FunDef(datatype, name, allocs, stmts)}-Container-Knoten komplett aufgelöst, sodass sich im \smalltt{File(name, decls\_defs\_blocks)}-Container-Knoten nur noch Blöcke befinden.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text]{./code_examples/verbose_3_funs.picoc_mon}
-  \caption{PicoC-Mon Pass für 3 Funktionen}
+  \caption{PicoC-ANF Pass für 3 Funktionen}
   \label{code:picoc_mon_pass_für_3_Funktionen}
 \end{code}
 
@@ -182,14 +182,14 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
   \label{code:abstract_syntax_tree_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert} wird die Komposition \seqtt{Exp(Call(Name('stack\_fun'), [Name('local\_var')]))} durch die Kompositionen \seqtt{StackMalloc(Num('2'))}, \seqtt{Ref(Global(Num('0')))}, \seqtt{NewStackframe(Name('stack\_fun'), GoTo(Name('addr@next\_instr')))}, \seqtt{Exp(GoTo(Name('stack\_fun.0')))} und \seqtt{RemoveStackframe()} ersetzt, welche in den Tabellen~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} und \ref{tab:picoc_knoten_teil_1} genauer erklärt sind.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert} wird die Komposition \seqtt{Exp(Call(Name('stack\_fun'), [Name('local\_var')]))} durch die Kompositionen \seqtt{StackMalloc(Num('2'))}, \seqtt{Ref(Global(Num('0')))}, \seqtt{NewStackframe(Name('stack\_fun'), GoTo(Name('addr@next\_instr')))}, \seqtt{Exp(GoTo(Name('stack\_fun.0')))} und \seqtt{RemoveStackframe()} ersetzt, welche in den Tabellen~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} und \ref{tab:picoc_knoten_teil_1} genauer erklärt sind.
 
 Der Container-Knoten \smalltt{StackMalloc(Num('2'))} ist notwendig, weil auf dem \colorbold{Stackframe} für den Wert des \smalltt{BAF}-Registers der \colorbold{aufrufenden Funktion} und die \colorbold{Rücksprungadresse} $2$ Speicherzellen Platz am \colorbold{Anfang} des \colorbold{Stackframes} gelassen werden muss. Das wird durch den Container-Knoten \smalltt{StackMalloc(Num('2'))} umgesetzt, indem das \smalltt{SP}-Register einfach um zwei Speicherzellen \colorbold{dekrementiert} wird und somit Speicher auf dem \colorbold{Stack} belegt wird\footnote{Wobei hier \dq \colorbold{reserviert}\dq besser passen würde.}.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={7-11}}]{./code_examples/example_fun_call_no_return_value.picoc_mon}
-  \caption{PicoC-Mon Pass für Funktionsaufruf ohne Rückgabewert}
+  \caption{PicoC-ANF Pass für Funktionsaufruf ohne Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_ohne_rückgabewert}
 \end{code}
 
@@ -275,7 +275,7 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
   \label{code:abstract_syntax_tree_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert} wird bei der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} erst die \colorbold{Expression} \smalltt{BinOp(Num('21'), Mul('*'), Num('2'))} ausgewertet. Die hierführ erstellten Kompositionen \smalltt{Exp(Num('21'))}, \smalltt{Exp(Num('2'))} und \smalltt{Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))} berechnen das Ergebnis des Ausdrucks \smalltt{21*2} auf dem \colorbold{Stack}. Dieses Ergebnis wird dann von der \colorbold{Komposition} \smalltt{Return(Stack(Num('1')))} vom \colorbold{Stack} gelesen und in das \colorbold{Register} \smalltt{ACC} geschrieben und als letztes wird die \colorbold{Rücksprungadresse} in  das \smalltt{PC}-Register geladen, die durch den \smalltt{NewStackframe()}-Token-Knoten eine Speicherzelle nach dem Wert des \smalltt{BAF}-Registers der aufrufenden Funktion im \colorbold{Stackframe} gespeichert ist.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert} wird bei der \colorbold{Komposition} \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} erst die \colorbold{Expression} \smalltt{BinOp(Num('21'), Mul('*'), Num('2'))} ausgewertet. Die hierführ erstellten Kompositionen \smalltt{Exp(Num('21'))}, \smalltt{Exp(Num('2'))} und \smalltt{Exp(BinOp(Stack(Num('2')), Mul('*'), Stack(Num('1'))))} berechnen das Ergebnis des Ausdrucks \smalltt{21*2} auf dem \colorbold{Stack}. Dieses Ergebnis wird dann von der \colorbold{Komposition} \smalltt{Return(Stack(Num('1')))} vom \colorbold{Stack} gelesen und in das \colorbold{Register} \smalltt{ACC} geschrieben und als letztes wird die \colorbold{Rücksprungadresse} in  das \smalltt{PC}-Register geladen, die durch den \smalltt{NewStackframe()}-Token-Knoten eine Speicherzelle nach dem Wert des \smalltt{BAF}-Registers der aufrufenden Funktion im \colorbold{Stackframe} gespeichert ist.
 
 Ein wichtiges Detail bei der \colorbold{Funktion} \smalltt{fun\_with\_return\_value} ist, dass der \colorbold{Funktionsaufruf} \smalltt{Call(Name('fun\_with\_return\_value'), []))} anders übersetzt wird, da die \colorbold{Funktion} einen Rückgabewert vom \colorbold{Datentyp} \smalltt{IntType()} und nicht \smalltt{VoidType()} hat. Um den \colorbold{Rückgabewert}, der durch die Komposition \smalltt{Return(BinOp(Num('21'), Mul('*'), Num('2')))} in das \smalltt{ACC}-Register geschrieben wurde für die aufrufende Funktion, deren Stackframe nun wieder das aktuelle ist auf den \colorbold{Stack} zu schreiben, muss ein neue \colorbold{Komposition} \smalltt{Exp(ACC)} definiert werden. In Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} ist die \colorbold{Komposition} \smalltt{Exp(ACC)} genauer erklärt.
 
@@ -285,12 +285,12 @@ Die \colorbold{Komposition} \seqtt{Assign(Alloc(Writeable(), IntType('int'), Nam
 
 Die \colorbold{Komposition} \smalltt{Return(Empty())} für ein  \smalltt{return} \colorbold{ohne Rückgabewert} bleibt unverändert und stellt nur das Laden der \colorbold{Rücksprungsadresse} in das \smalltt{PC}-Register dar.
 
-Des Weiteren ist zu beobachten, dass wenn bei einer Funktion mit dem \colorbold{Rückgabedatentyp} \smalltt{void} kein \smalltt{return}-Statement explizit ans Ende geschrieben wird, im \colorbold{PicoC-Mon Pass} eines hinzufügt wird in Form der \smalltt{Komposition} \smalltt{Return(Empty())}. Beim Nicht-Angeben im Falle eines Dantentyps, der \colorbold{nicht} \smalltt{void} ist, wird allerdings eine \smalltt{MissingReturn}-\colorbold{Fehlermeldung} ausgelöst.
+Des Weiteren ist zu beobachten, dass wenn bei einer Funktion mit dem \colorbold{Rückgabedatentyp} \smalltt{void} kein \smalltt{return}-Statement explizit ans Ende geschrieben wird, im \colorbold{PicoC-ANF Pass} eines hinzufügt wird in Form der \smalltt{Komposition} \smalltt{Return(Empty())}. Beim Nicht-Angeben im Falle eines Dantentyps, der \colorbold{nicht} \smalltt{void} ist, wird allerdings eine \smalltt{MissingReturn}-\colorbold{Fehlermeldung} ausgelöst.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={8-11, 16, 26, 31-32}}]{./code_examples/example_fun_call_with_return_value.picoc_mon}
-  \caption{PicoC-Mon Pass für Funktionsaufruf mit Rückgabewert}
+  \caption{PicoC-ANF Pass für Funktionsaufruf mit Rückgabewert}
   \label{code:picoc_mon_pass_für_funktionsaufruf_mit_rückgabewert}
 \end{code}
 
@@ -314,7 +314,7 @@ Die \colorbold{Call by Reference} (Definition~\ref{def:call_by_reference}) Über
   \label{code:picoc_code_für_call_by_sharing_für_arrays}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} wird im Fall dessen, dass der \colorbold{oberste Container-Knoten} im Teilbaum, der den Datentyp darstellt und an die Funktion übergeben wird ein \colorbold{Array} \smalltt{ArrayDecl(nums, datatype)} ist, dieser zu einem \colorbold{Pointer} \smalltt{PntrDecl(num, datatype)} umgewandelt und der Rest des Teilbaumes, der am \smalltt{datatype}-Attribut hängt, an das \smalltt{datatype}-Attribut des \colorbold{Pointers} \smalltt{PntrDecl(num, datatype)} drangehängt.
+Im \colorbold{PicoC-ANF Pass} wird im Fall dessen, dass der \colorbold{oberste Container-Knoten} im Teilbaum, der den Datentyp darstellt und an die Funktion übergeben wird ein \colorbold{Array} \smalltt{ArrayDecl(nums, datatype)} ist, dieser zu einem \colorbold{Pointer} \smalltt{PntrDecl(num, datatype)} umgewandelt und der Rest des Teilbaumes, der am \smalltt{datatype}-Attribut hängt, an das \smalltt{datatype}-Attribut des \colorbold{Pointers} \smalltt{PntrDecl(num, datatype)} drangehängt.
 
 Diese \colorbold{Umwandlung} des \colorbold{Datentyps} kann in der \colorbold{Symboltabelle} in Code~\ref{code:symboltabelle_für_call_by_sharing_für_arrays} beobachtet werden. Die \colorbold{lokalen Variablen} \smalltt{local\_var@main} und \smalltt{local\_var@fun\_array\_from\_global\_data} sind beide vom Datentyp \smalltt{ArrayDecl([Num('2'), Num('3')], IntType('int'))} und bei der Übergabe ändert sich der Datentyp beider Variablen zu \smalltt{PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType('int')))}. Die \colorbold{Größe} dieser Variablen ändert sich damit zu \smalltt{Num('1')}, da ein  \colorbold{Pointer} nur eine \colorbold{Speicherzelle} braucht.
 
@@ -326,14 +326,14 @@ Diese \colorbold{Umwandlung} des \colorbold{Datentyps} kann in der \colorbold{Sy
   \label{code:symboltabelle_für_call_by_sharing_für_arrays}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_sharing_für_arrays} ist zu sehen, dass zur Übergabe der beiden Arrays die \colorbold{Adresse} der Arrays auf den \colorbold{Stack} geschrieben wird. Die \colorbold{Adresse} der beiden Arrays auf den \colorbold{Stack} zu schreiben wird durch die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('6')))} repräsentiert.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_sharing_für_arrays} ist zu sehen, dass zur Übergabe der beiden Arrays die \colorbold{Adresse} der Arrays auf den \colorbold{Stack} geschrieben wird. Die \colorbold{Adresse} der beiden Arrays auf den \colorbold{Stack} zu schreiben wird durch die Kompositionen \smalltt{Ref(Global(Num('0')))} und \smalltt{Ref(Stackframe(Num('6')))} repräsentiert.
 
 Die Komposition \smalltt{Ref(Global(Num('0')))} ist für Variablen in den \colorbold{Globalen Statischen Daten} und die Komposition \smalltt{Ref(Stackframe(Num('6')))} ist für Variablen aus dem \colorbold{Stackframe}. Dabei stellen die Zahlen in den \colorbold{Container-Knoten} \smalltt{Global(num)} bzw. \smalltt{Stackframe(num)} die \colorbold{relative Adressen} relativ zum \smalltt{DS}-Register bzw. \smalltt{SP}-Register dar, die aus der \colorbold{Symboltabelle} entnommen sind.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={13,23}}]{./code_examples/example_fun_call_by_sharing_array.picoc_mon}
-  \caption{PicoC-Mon Pass für Call by Sharing für Arrays}
+  \caption{PicoC-ANF Pass für Call by Sharing für Arrays}
   \label{code:picoc_mon_pass_für_call_by_sharing_für_arrays}
 \end{code}
 
@@ -359,11 +359,11 @@ Die \colorbold{Call by Value} (Definition~\ref{def:call_by_value}) Übergabe ein
   \label{code:picoc_code_für_call_by_value_für_structs}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_value_for_structs} wird zur \colorbold{Übergabe eines Struct}, das komplette Struct auf den \colorbold{Stack} kopiert. Das wird mittels der Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} bzw. der Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} dargestellt.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_call_by_value_for_structs} wird zur \colorbold{Übergabe eines Struct}, das komplette Struct auf den \colorbold{Stack} kopiert. Das wird mittels der Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} bzw. der Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} dargestellt.
 
 Bei der \colorbold{Übergabe} an eine \colorbold{Funktion} wird der Zugriff auf ein gesamtes \colorbold{Struct} anders gehandhabt als sonst. Normalerweise wird beim Zugriff auf ein Struct die \colorbold{Adresse} des \colorbold{ersten Attributs} dieses Strcuts auf den \colorbold{Stack} geschrieben. Bei der \colorbold{Übergabe an eine Funktion} wird dagegen das gesamte \colorbold{Strcut} auf den \colorbold{Stack} kopiert.
 
-Das wird durch eine Variable \smalltt{argmode\_on} implementiert, die auf \smalltt{true} gesetzt wird, solange der \colorbold{Funktionsaufruf} im \colorbold{Picoc-Mon Pass} verarbeitet wird und wieder auf \smalltt{false} gesetzt, wenn die Verarbeitung des \colorbold{Funktionaufrufs} abgeschlossen ist. Solange die Variable \smalltt{argmode\_on} auf \smalltt{true} gesetzt ist, wird immer die Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} bzw. der Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} für die Ersetzung verwendet. Ist die Varaible \smalltt{argmode\_on} auf \smalltt{false} wird die Komposition \smalltt{Ref(Globalnum())} bzw. \smalltt{Ref(Stackframe(num))} für die Ersetzung verwendet.
+Das wird durch eine Variable \smalltt{argmode\_on} implementiert, die auf \smalltt{true} gesetzt wird, solange der \colorbold{Funktionsaufruf} im \colorbold{Picoc-ANF Pass} verarbeitet wird und wieder auf \smalltt{false} gesetzt, wenn die Verarbeitung des \colorbold{Funktionaufrufs} abgeschlossen ist. Solange die Variable \smalltt{argmode\_on} auf \smalltt{true} gesetzt ist, wird immer die Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} bzw. der Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} für die Ersetzung verwendet. Ist die Varaible \smalltt{argmode\_on} auf \smalltt{false} wird die Komposition \smalltt{Ref(Globalnum())} bzw. \smalltt{Ref(Stackframe(num))} für die Ersetzung verwendet.
 
 Die Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} wird im Falle dessen, dass die Structvariable in den \colorbold{Globalen Statischen Daten} liegt verwendet und die Komposition \smalltt{Assign(Stack(Num('3')), Global(Num('0')))} wird im Falle, dessen, dass die Structvariable im \colorbold{Stackframe} liegt verwendet.
 
@@ -372,7 +372,7 @@ Die Komposition \smalltt{Assign(Stack(Num('3')), Stackframe(Num('2')))} wird im 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={13,23}}]{./code_examples/example_fun_call_by_value_struct.picoc_mon}
-  \caption{PicoC-Mon Pass für Call by Value für Structs}
+  \caption{PicoC-ANF Pass für Call by Value für Structs}
   \label{code:picoc_mon_pass_für_call_by_value_for_structs}
 \end{code}
 

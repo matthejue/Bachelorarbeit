@@ -1,9 +1,9 @@
 void main() {
-  int x;
+  int x;  // allocate at address 0 relative to the DS Register
   5;
   4;
   stack(2) % stack(1);
-  x = stack(1);
+  global(0) = stack(1);
   x;
   41;
   stack(2) + stack(1);

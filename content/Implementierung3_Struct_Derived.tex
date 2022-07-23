@@ -71,7 +71,7 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
 \end{code}
 
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} wird die \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct(\ldots))} auf fast dieselbe Weise ausgewertet, wie bei der \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays} daher wird um keine Wiederholung zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Um das ganze interressanter zu gestalten wurde das Beispiel in Code~\ref{code:picoc_code_für_initialisierung_von_structs} so gewählt, dass sich daran eine komplexere, mehrstufige Initialisierung mit \colorbold{verschiedenen} Datentypen erklären lässt.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_initialisierung_von_structs} wird die \colorbold{Komposition} \smalltt{Assign(Alloc(Writeable(), StructSpec(Name('st1')), Name('st')), Struct(\ldots))} auf fast dieselbe Weise ausgewertet, wie bei der \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays} daher wird um keine Wiederholung zu betreiben auf Subkapitel~\ref{sec:initialisierung_von_arrays} verwiesen. Um das ganze interressanter zu gestalten wurde das Beispiel in Code~\ref{code:picoc_code_für_initialisierung_von_structs} so gewählt, dass sich daran eine komplexere, mehrstufige Initialisierung mit \colorbold{verschiedenen} Datentypen erklären lässt.
 
 Der \colorbold{Struct-Initializer} Teilbaum \smalltt{Struct([Assign(Name('attr1'), Name('var')), Assign(Name('attr2'), Struct([Assign(Name('attr'), Array([Array([Ref(Name('var')), Ref(Name('var'))])]))]))])}, der beim \colorbold{Struct-Initializer} \colorbold{Container-Knoten} anfängt, wird auf dieselbe Weise nach dem \colorbold{Depth-First-Search} Prinzip von \colorbold{links-nach-rechts} ausgewertet, wie es bei der \colorbold{Initialisierung eines Arrays} in Subkapitel~\ref{sec:initialisierung_von_arrays} bereits erklärt wurde.
 
@@ -82,7 +82,7 @@ Im Allgemeinen gibt es beim \colorbold{Initialisieren} eines \colorbold{Arrays} 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={11-14}}]{./code_examples/example_struct_init.picoc_mon}
-  \caption{PicoC-Mon Pass für Initialisierung von Structs}
+  \caption{PicoC-ANF Pass für Initialisierung von Structs}
   \label{code:picoc_mon_pass_für_initialisierung_von_structs}
 \end{code}
 
@@ -118,7 +118,7 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_für_
   \label{code:abstract_syntax_tree_für_zugriff_auf_structattribut}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_zugriff_auf_structattribut} wird die Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} auf ähnliche Weise ausgewertet, wie die Komposition, die einen \colorbold{Zugriff auf ein Arrayelement} \smalltt{Exp(Subscr(Name('ar'), Num('0')))} in Subkapitel~\ref{sec:zugriff_auf_arrayindex} darstellt. Daher wird hier, um Wiederholung zu vermeiden nur auf wichtige Aspekte hingewiesen und ansonsnten auf das Subkapitel~\ref{sec:zugriff_auf_arrayindex} verwiesen.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_zugriff_auf_structattribut} wird die Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} auf ähnliche Weise ausgewertet, wie die Komposition, die einen \colorbold{Zugriff auf ein Arrayelement} \smalltt{Exp(Subscr(Name('ar'), Num('0')))} in Subkapitel~\ref{sec:zugriff_auf_arrayindex} darstellt. Daher wird hier, um Wiederholung zu vermeiden nur auf wichtige Aspekte hingewiesen und ansonsnten auf das Subkapitel~\ref{sec:zugriff_auf_arrayindex} verwiesen.
 
 Die Komposition \smalltt{Exp(Attr(Name('st'), Name('y')))} wird genauso, wie in Subkapitel~\ref{sec:zugriff_auf_arrayindex} durch Kompositionen ersetzt, die sich in \colorbold{Anfangsteil}~\ref{sec:einleitungsteil_für_globale_statische_daten_und_stackframe}, \colorbold{Mittelteil}~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} und \colorbold{Schlussteil}~\ref{sec:schlussteil_für_die_verschiedenen_derived_datatypes} aufteilen lassen. In diesem Fall sind es \smalltt{Ref(Global(Num('0')))} (\colorbold{Anfangsteil}), \smalltt{Ref(Attr(Stack(Num('1')), Name('y')))} (\colorbold{Mittelteil}) und \smalltt{Exp(Stack(Num('1')))} (\colorbold{Schlussteil}). Der \colorbold{Anfangsteil} und \colorbold{Schlussteil} sind genau gleich, wie in Subkapitel~\ref{sec:zugriff_auf_arrayindex}.
 
@@ -186,7 +186,7 @@ Die Komposition \smalltt{Exp(Stack(Num('1')))} repräsentiert dabei das Lesen de
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={12-14}}]{./code_examples/example_struct_attr_access.picoc_mon}
-  \caption{PicoC-Mon Pass für Zugriff auf Structattribut}
+  \caption{PicoC-ANF Pass für Zugriff auf Structattribut}
   \label{code:picoc_mon_pass_für_zugriff_auf_structattribut}
 \end{code}
 
@@ -218,14 +218,14 @@ Im \colorbold{Abstact Syntax Tree} wird eine  \colorbold{Zuweisung an ein Struct
   \label{code:abstract_syntax_tree_für_zuweisung_an_structattribut}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_für_zuweisung_an_structattribut} wird die Komposition \smalltt{Assign(Attr(Name('st'), Name('y')), Num('42'))} auf ähnliche Weise ausgewertet, wie die Komposition, die einen \colorbold{Zugriff auf ein Arrayelement} \smalltt{ Assign(Subscr(Name('ar'), Num('2')), Num('42'))} in Subkapitel~\ref{sec:zuweisung_an_arrayindex} darstellt. Daher wird hier, um Wiederholung zu vermeiden nur auf wichtige Aspekte hingewiesen und ansonsnten auf das Unterkapitel~\ref{sec:zuweisung_an_arrayindex} verwiesen.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_für_zuweisung_an_structattribut} wird die Komposition \smalltt{Assign(Attr(Name('st'), Name('y')), Num('42'))} auf ähnliche Weise ausgewertet, wie die Komposition, die einen \colorbold{Zugriff auf ein Arrayelement} \smalltt{ Assign(Subscr(Name('ar'), Num('2')), Num('42'))} in Subkapitel~\ref{sec:zuweisung_an_arrayindex} darstellt. Daher wird hier, um Wiederholung zu vermeiden nur auf wichtige Aspekte hingewiesen und ansonsnten auf das Unterkapitel~\ref{sec:zuweisung_an_arrayindex} verwiesen.
 
 Im Gegensatz zum Vorgehen in Unterkapitel~\ref{sec:zuweisung_an_arrayindex} muss hier für das Auswerten des \colorbold{linken} Container-Knoten \smalltt{Attr(Name('st'), Name('y'))} von \smalltt{\smalltt{Assign(Attr(Name('st'), Name('y')), Num('42'))}} wie in Subkapitel~\ref{sec:zugriff_auf_structattribut} vorgegangen werden.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={12-15}}]{./code_examples/example_struct_attr_assignment.picoc_mon}
-  \caption{PicoC-Mon Pass für Zuweisung an Structattribut}
+  \caption{PicoC-ANF Pass für Zuweisung an Structattribut}
   \label{code:picoc_mon_pass_für_zuweisung_an_structattribut}
 \end{code}
 
@@ -340,12 +340,12 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_einle
   \label{code:abstract_syntax_tree_einleitungsteil}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_einleitungsteil} wird die Komposition \smalltt{Exp(Ref(Name('complex\_var')))} durch die Komposition \smalltt{Ref(Global(Num('9')))} bzw. \smalltt{Ref(Stackframe(Num('9')))} ersetzt, je nachdem, ob die Variable \smalltt{Name('complex\_var')} in den \colorbold{Globalen Statischen Daten} oder auf dem \colorbold{Stack} liegt.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_einleitungsteil} wird die Komposition \smalltt{Exp(Ref(Name('complex\_var')))} durch die Komposition \smalltt{Ref(Global(Num('9')))} bzw. \smalltt{Ref(Stackframe(Num('9')))} ersetzt, je nachdem, ob die Variable \smalltt{Name('complex\_var')} in den \colorbold{Globalen Statischen Daten} oder auf dem \colorbold{Stack} liegt.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={8,15}}]{./code_examples/example_derived_dts_introduction_part.picoc_mon}
-  \caption{PicoC-Mon Pass für den Anfangsteil}
+  \caption{PicoC-ANF Pass für den Anfangsteil}
   \label{code:picoc_mon_pass_einleitungsteil}
 \end{code}
 
@@ -380,12 +380,12 @@ Im \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_syntax_tree_mitte
   \label{code:abstract_syntax_tree_mittelteil}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_mittelteil} wird die Komposition \smalltt{Exp(Subscr(Deref(Attr(Name('complex\_var'), Name('ar')), Num('0')), BinOp(Num('2'), Sub('-'), Num('2'))))} durch die Kompositionen \smalltt{Ref(Attr(Stack(Num('1')), Name('ar')))}, \smalltt{Exp(Num('2'))}, \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}, \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} und \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} ersetzt. Bei \smalltt{Subscr(exp1, exp2)} wird dieser Container-Knoten einfach dem \smalltt{exp} Attribut des \smalltt{Ref(exp)}-Container Knoten zugewiesen und die \colorbold{Indexberechnung} für \smalltt{exp2} davorgezogen (in diesem Fall dargestellt durch \smalltt{Exp(Num('2'))} und \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}) und über \smalltt{Stack(Num('1'))} auf das Ergebnis der \colorbold{Indexberechnung} auf dem \colorbold{Stack} zugegriffen: \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_mittelteil} wird die Komposition \smalltt{Exp(Subscr(Deref(Attr(Name('complex\_var'), Name('ar')), Num('0')), BinOp(Num('2'), Sub('-'), Num('2'))))} durch die Kompositionen \smalltt{Ref(Attr(Stack(Num('1')), Name('ar')))}, \smalltt{Exp(Num('2'))}, \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}, \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} und \smalltt{Ref(Subscr(Stack(Num('2')), Stack(Num('1'))))} ersetzt. Bei \smalltt{Subscr(exp1, exp2)} wird dieser Container-Knoten einfach dem \smalltt{exp} Attribut des \smalltt{Ref(exp)}-Container Knoten zugewiesen und die \colorbold{Indexberechnung} für \smalltt{exp2} davorgezogen (in diesem Fall dargestellt durch \smalltt{Exp(Num('2'))} und \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}) und über \smalltt{Stack(Num('1'))} auf das Ergebnis der \colorbold{Indexberechnung} auf dem \colorbold{Stack} zugegriffen: \smalltt{Exp(BinOp(Stack(Num('2')), Sub('-'), Stack(Num('1'))))}.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={15-21}}]{./code_examples/example_derived_dts_main_part.picoc_mon}
-  \caption{PicoC-Mon Pass für den Mittelteil}
+  \caption{PicoC-ANF Pass für den Mittelteil}
   \label{code:picoc_mon_pass_mittelteil}
 \end{code}
 
@@ -420,12 +420,12 @@ Das Generieren des \colorbold{Abstract Syntax Tree} in Code~\ref{code:abstract_s
   \label{code:abstract_syntax_tree_schlussteil}
 \end{code}
 
-Im \colorbold{PicoC-Mon Pass} in Code~\ref{code:picoc_mon_pass_schlussteil} wird das eben angesprochene auf den \colorbold{Stack} speichern des \colorbold{Inhalts} der berechneten \colorbold{Adresse} mit der Komposition \smalltt{Exp(Stack(Num('1')))} dargestellt.
+Im \colorbold{PicoC-ANF Pass} in Code~\ref{code:picoc_mon_pass_schlussteil} wird das eben angesprochene auf den \colorbold{Stack} speichern des \colorbold{Inhalts} der berechneten \colorbold{Adresse} mit der Komposition \smalltt{Exp(Stack(Num('1')))} dargestellt.
 
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={20,25,30}}]{./code_examples/example_derived_dts_final_part.picoc_mon}
-  \caption{PicoC-Mon Pass für den Schlussteil}
+  \caption{PicoC-ANF Pass für den Schlussteil}
   \label{code:picoc_mon_pass_schlussteil}
 \end{code}
 

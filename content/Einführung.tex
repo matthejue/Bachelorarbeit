@@ -505,12 +505,9 @@ Die Statements \smalltt{4}, \smalltt{x}, usw. für sich sind in diesem Fall \col
 
 % Beschreibung was in Beispiel zu sehen ist
 
-Ein solcher \colorbold{Pass} hat vor allem die Aufgabe sich der \colorbold{Syntax} von \colorbold{Maschinenbefehlen} besonders dadurch anzunähren, dass
+Ein solcher \colorbold{Pass} hat vor allem in erster Linie die Aufgabe den \colorbold{Abstrakt Syntax Tree} der \colorbold{Syntax} von \colorbold{Maschinenbefehlen} besonders dadurch anzunähren, dass er auf der Ebene der Konkretten Syntax die Statements \colorbold{weniger komplex} macht und diese dadurch den ziemlich \colorbold{simplen Maschinenbefehlen} syntaktisch ähnlicher sind. Des Weiteren \colorbold{vereinfacht} dieser Pass die \colorbold{Implementierung} der nachfolgenden Passes enorm, da Statements z.B. nur noch die Form \smalltt{global(rel\_addr) = stack(1)} haben, die viel \colorbold{einfacher verarbeitet} werden kann.
 
-
-dass mit \colorbold{Ausnahme} einiger \colorbold{spezieller Statements}, die in späteren Passes umgwandelt werden müssen, so weit wie möglich immer nur \colorbold{eine} Operation pro \colorbold{Statement} ausgeführt wird. Dadurch lassen sich viele Statements bereits direkt zu \colorbold{Maschinenbefehlen} übersetzen, da Machienenbefehle üblicherweise immer nur \colorbold{eine} Operation ausführen können\footnote{Z.B. kann eine \colorbold{RETI-CPU} in einem \colorbold{Fetch- und Execute-Zyklus} nur eine Operation mit der \colorbold{Arithmetisch Logischen Einheit} (engl. ALU) ausführen.}.
-
-Alle weiteren denkbaren \colorbold{Passes} sind zu \colorbold{spezifisch} für bestimmte \colorbold{Statements} und \colorbold{Ausdrücke}, als das sich zu diesen allgemein etwas mit einer \colorbold{Theorie} dahinter sagen lässt. Alle \colorbold{Passes}, die zur Implementierung des \colorbold{PicoC-Compilers} geplant und ausgedacht wurden sind im Unterkapitel~\label{sec:passes} definiert.
+Alle weiteren denkbaren \colorbold{Passes} sind zu \colorbold{spezifisch} auf bestimmte \colorbold{Statements} und \colorbold{Ausdrücke} ausgelegt, als das sich zu diesen allgemein etwas mit einer \colorbold{Theorie} dahinter sagen lässt. Alle \colorbold{Passes}, die zur Implementierung des \colorbold{PicoC-Compilers} geplant und ausgedacht wurden sind im Unterkapitel~\ref{sec:passes} definiert.
 
 \section{Fehlermeldungen}
 \begin{Definition}{Fehlermeldung}{fehlermeldung}
