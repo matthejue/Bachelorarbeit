@@ -485,52 +485,27 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
   \toprule
-  \firstcase{stmt}{RETIComment()}{L\_Comment}
+  \commentsecond
   \midrule
   \arith
   \midrule
   \logic
   \midrule
-  \firstcase{type\_qual}{Const() \gralt Writeable()}{L\_Assign\_Alloc}
-  \firstcase{datatype}{IntType() \gralt CharType() \gralt VoidType()}{}
-  \firstcase{lhs}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str)) \gralt \langle rel\_loc\rangle }{}
-  \firstcase{exp\_stmts}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
-  \firstcase{stmt}{Assign(\langle lhs\rangle , \langle exp\rangle )}{}
-  \otherform{Exp(\langle exp\_stmts\rangle )}{}
+  \assign
   \midrule
-  \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
-  \firstcase{deref\_loc}{Ref(\langle ref\_loc\rangle )\gralt\langle ref\_loc\rangle }{}
-  \firstcase{ref\_loc}{Name(str)}{}
-  \otherform{Deref(\langle deref\_loc\rangle , \langle exp\rangle )}{}
-  \otherform{Subscr(\langle deref\_loc\rangle , \langle exp\rangle )}{}
-  \otherform{Attr(\langle ref\_loc\rangle , Name(str))}{}
-  \firstcase{exp}{Deref(\langle deref\_loc\rangle , \langle exp\rangle )}{}
-  \otherform{Ref(\langle ref\_loc\rangle )}{}
+  \pntr
   \midrule
-  \firstcase{datatype}{ArrayDecl(Num(str)+, \langle datatype\rangle )}{L\_Array}
-  \firstcase{exp}{Subscr(\langle deref\_loc\rangle , \langle exp\rangle ) \gralt Array(\langle exp\rangle +)}{}
+  \arraysecond
   \midrule
-  \firstcase{datatype}{StructSpec(Name(str))}{L\_Struct}
-  \firstcase{exp}{Attr(\langle ref\_loc\rangle , Name(str))}{}
-  \otherform{Struct(Assign(Name(str), \langle exp\rangle )+)}{}
-  \firstcase{decl\_def}{StructDecl(Name(str),}{}
-  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))+)$ & \\
+  \struct
   \midrule
-  \firstcase{stmt}{If(\langle exp\rangle , \langle stmt\rangle *)}{L\_If\_Else}
-  \otherform{IfElse(\langle exp\rangle , \langle stmt\rangle *, \langle stmt\rangle *)}{}
+  \ifelse
   \midrule
-  \firstcase{stmt}{While(\langle exp\rangle , \langle stmt\rangle *)}{L\_Loop}
-  \otherform{DoWhile(\langle exp\rangle , \langle stmt\rangle *)}{}
+  \loopsecond
   \midrule
-  \firstcase{exp}{Call(Name(str), \langle exp\rangle *)}{L\_Fun}
-  \firstcase{exp\_stmts}{Call(Name(str), \langle exp\rangle *)}{}
-  \firstcase{stmt}{Return(\langle exp\rangle )}{}
-  \firstcase{decl\_def}{FunDecl(\langle datatype\rangle , Name(str),}{}
-  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*)$ & \\
-  \otherform{FunDef(\langle datatype\rangle , Name(str),}{}
-  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle stmt\rangle *)$ & \\
+  \fun
   \midrule
-  \firstcase{file}{File(Name(str), \langle decl\_def\rangle *)}{L\_File}
+  \file
   \bottomrule
 \end{grammar}
 
@@ -621,6 +596,33 @@ Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold
 
 \newlineparagraph{Abstrakte Syntax}
 
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
+  \toprule
+  \commentsecond*
+  \midrule
+  \arith*
+  \midrule
+  \logic*
+  \midrule
+  \assign*
+  \midrule
+  \pntrshrink*
+  \midrule
+  \arraysecond*
+  \midrule
+  \struct*
+  \midrule
+  \ifelse*
+  \midrule
+  \loopsecond*
+  \midrule
+  \fun*
+  \midrule
+  \file*
+  \bottomrule
+\end{grammar}
+
+
 Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Shrink}$ ist \colorbold{identisch} mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PiocC}$ aus Tabelle~\ref{gr:abstract_syntax_l_picoc}, nach welcher der \colorbold{erste} Abstract Syntax Tree in der \colorbold{Syntaktischen Analyse} generiert wurde. Das liegt daran, dass dieser Pass nur alle \colorbold{Vorkommnisse} eines Knoten \smalltt{Deref(exp, i)} durch den Knoten \smalltt{Subscr(exp, i)} auswechselt, der ebenfalls bereits in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC}$ definiert ist.
 
 \newlineparagraph{Codebeispiel}
@@ -630,7 +632,7 @@ In den nächsten Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_f�
 
 Dieser \colorbold{rekursive} Algoirthmus ist allerdings \colorbold{kein} gutes \colorbold{Anschaungsbeispiel}, dass viele der Aufgaben der verschiedenen \colorbold{Passes} bei der Kompilierung veranschaulicht hätte. Viele Aufgaben der \colorbold{Passes}, wie z.B. bei der Kompilierung von \smalltt{if}-, \smalltt{if-else}-, \smalltt{while}- und \smalltt{do-while}-Statements wären im Beispiel aus der Vorlesung \colorbold{nicht} enthalten gewesen. Daher wurde das Beispiel aus der Vorlesung zu einem \colorbold{iterativen} Algorithmus~\ref{code:picoc_code_für_codebeispiel} umgeschrieben, um \smalltt{if}- und \smalltt{while}-Statemtens zu enthalten.
 
-Beide Varianten des Algorithmus wurden zum Testen des \colorbold{PicoC-Compilers} verwendet und sind als Tests im Ordner \inlinebox{/tests} unter \footnoteurl{https://github.com/matthejue/PicoC-Compiler/tree/new_architecture/tests} unter den Testbezeichnungen \inlinebox{example_faculty_rec.picoc} und \inlinebox{example_faculty_it.picoc} zu finden.
+Beide Varianten des \colorbold{Algorithmus} wurden zum \colorbold{Testen} des PicoC-Compilers verwendet und sind als Tests im Ordner \inlinebox{/tests} unter \footnoteurl{https://github.com/matthejue/PicoC-Compiler/tree/new_architecture/tests}, unter den Testbezeichnungen \inlinebox{example_faculty_rec.picoc} und \inlinebox{example_faculty_it.picoc} zu finden.
 
 Die Codebeispiele in diesem und den folgenden Unterkapiteln dienen allerdings nur als \colorbold{Anschauung} des jeweiligen \colorbold{Passes}, der in diesem Unterkapitel beschrieben wird und werden nicht im Detail erläutert, da viele Details der Passes später in den Unterkapiteln~\ref{sec:umsetzung_von_pointern},~\ref{sec:umsetzung_von_arrays},~\ref{sec:umsetzung_von_structs}~und~\ref{sec:umsetzung_von_funktionen} zu \colorbold{Pointern},  \colorbold{Arrays}, \colorbold{Structs} und \colorbold{Funktionen} mit eigenen \colorbold{Codebeispielen} erklärt werden und alle sonstigen Details dem \colorbold{Bachelorprojekt} zuzurechnen sind.
 
@@ -665,13 +667,31 @@ Die Aufgabe des \colorbold{PicoC-Blocks Passes} ist die Knoten \smalltt{If(exp, 
 
 Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Des Weiteren wird für die \colorbold{Kommentare}, die in vielen Codebeispielen zur leichteren Verständlichkeit eingefügt wurden ein \smalltt{SingleLineComment(prefix, content)}-Knoten benötigt. Die \colorbold{Funktionsdefinition} \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} ist nun ein Container für \colorbold{Blöcke} \smalltt{Block(Name(str), ⟨stmt⟩*)} und keine Statements \smalltt{stmt} mehr.
 
-\begin{grammar}[Abstrakte Syntax der Sprache $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule
-  \firstcase{decl\_def}{FunDef(\langle datatype\rangle , Name(str),}{L\_Fun}
-  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle block\rangle *)$ & \\
+  \commentsecond*
   \midrule
-  \firstcase{block}{Block(Name(str), \langle stmt\rangle *)}{L\_Blocks}
-  \firstcase{stmt}{GoTo(Name(str)) \gralt SingleLineComment(str, str)}{}
+  \arith*
+  \midrule
+  \logic*
+  \midrule
+  \assign*
+  \midrule
+  \pntrshrinkafter*
+  \midrule
+  \arraysecond*
+  \midrule
+  \struct*
+  \midrule
+  \ifelseblocks*
+  \midrule
+  \loopblocks*
+  \midrule
+  \funafter*
+  \midrule
+  \block
+  \midrule
+  \file*
   \bottomrule
 \end{grammar}
 
@@ -708,6 +728,33 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 % den \colorbold{Bedingungen} \smalltt{<condition>} von \smalltt{if(<condition>){<stmts>}else{<stmts>}}-Statements entfernt
 
 \newlineparagraph{Abstrakte Syntax}
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$][H][gr:abstract_syntax_l_picoc_anf]
+  \toprule
+  \commentsecond*
+  \midrule
+  \arith*
+  \midrule
+  \logic*
+  \midrule
+  \assign*
+  \midrule
+  \pntrshrinkafter*
+  \midrule
+  \arraysecond*
+  \midrule
+  \struct*
+  \midrule
+  \ifelseafter*
+  \midrule
+  \funafter*
+  \midrule
+  \block
+  \midrule
+  \file*
+  \bottomrule
+\end{grammar}
+
+
 \begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
   \toprule
   \firstcase{ref\_loc}{Stack(Num(str)) \gralt Global(Num(str))}{L\_Assign\_Alloc}
