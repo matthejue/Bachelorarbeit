@@ -1,0 +1,51 @@
+\NewDocumentCommand{\arith}{s}{%
+  \IfBooleanTF{#1}{%
+    \downplay
+    \firstcase{un\_op}{Minus() \gralt Not()}{L\_Arith}
+    \downplay
+    \firstcase{bin\_op}{Add() \gralt Sub() \gralt Mul() \gralt Div() \gralt Mod()}{}
+    \downplay
+    \otherform{Oplus() \gralt And() \gralt Or()}{}
+    \downplay
+    \firstcase{exp}{Name(str) \gralt Num(str) \gralt Char(str)}{}
+    \downplay
+    \otherform{BinOp(\langle exp\rangle , \langle bin\_op\rangle , \langle exp\rangle )}{}
+    \downplay
+    \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), None)}{}
+    \downplay
+    \firstcase{exp\_stmts}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
+    \downplay
+    \otherform{Call(Name('print'), \langle exp\rangle )}{}
+  }{%
+    \firstcase{un\_op}{Minus() \gralt Not()}{L\_Arith}
+    \firstcase{bin\_op}{Add() \gralt Sub() \gralt Mul() \gralt Div() \gralt Mod()}{}
+    \otherform{Oplus() \gralt And() \gralt Or()}{}
+    \firstcase{exp}{Name(str) \gralt Num(str) \gralt Char(str)}{}
+    \otherform{BinOp(\langle exp\rangle , \langle bin\_op\rangle , \langle exp\rangle )}{}
+    \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), None)}{}
+    \firstcase{exp\_stmts}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
+    \otherform{Call(Name('print'), \langle exp\rangle )}{}
+  }
+}
+
+
+\NewDocumentCommand{\logic}{s}{%
+  \IfBooleanTF{#1}{%
+    \downplay
+    \firstcase{un\_op}{LogicNot()}{L\_Logic}
+    \downplay
+    \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+    \downplay
+    \firstcase{bin\_op}{LogicAnd() \gralt LogicOr()}{}
+    \downplay
+    \firstcase{exp}{Atom(\langle exp\rangle , \langle rel\rangle , \langle exp\rangle )}{}
+    \downplay
+    \otherform{ToBool(\langle exp\rangle )}{}
+  }{%
+    \firstcase{un\_op}{LogicNot()}{L\_Logic}
+    \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+    \firstcase{bin\_op}{LogicAnd() \gralt LogicOr()}{}
+    \firstcase{exp}{Atom(\langle exp\rangle , \langle rel\rangle , \langle exp\rangle )}{}
+    \otherform{ToBool(\langle exp\rangle )}{}
+  }
+}

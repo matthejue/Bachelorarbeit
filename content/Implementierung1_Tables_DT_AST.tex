@@ -482,24 +482,14 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 
 % ./abstract_syntax.txt
 \newpage
+
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
   \toprule
   \firstcase{stmt}{RETIComment()}{L\_Comment}
   \midrule
-  \firstcase{un\_op}{Minus() \gralt Not()}{L\_Arith}
-  \firstcase{bin\_op}{Add() \gralt Sub() \gralt Mul() \gralt Div() \gralt Mod()}{}
-  \otherform{Oplus() \gralt And() \gralt Or()}{}
-  \firstcase{exp}{Name(str) \gralt Num(str) \gralt Char(str)}{}
-  \otherform{BinOp(\langle exp\rangle , \langle bin\_op\rangle , \langle exp\rangle )}{}
-  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), None)}{}
-  \firstcase{exp\_stmts}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
-  \otherform{Call(Name('print'), \langle exp\rangle )}{}
+  \arith
   \midrule
-  \firstcase{un\_op}{LogicNot()}{L\_Logic}
-  \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
-  \firstcase{bin\_op}{LogicAnd() \gralt LogicOr()}{}
-  \firstcase{exp}{Atom(\langle exp\rangle , \langle rel\rangle , \langle exp\rangle )}{}
-  \otherform{ToBool(\langle exp\rangle )}{}
+  \logic
   \midrule
   \firstcase{type\_qual}{Const() \gralt Writeable()}{L\_Assign\_Alloc}
   \firstcase{datatype}{IntType() \gralt CharType() \gralt VoidType()}{}
@@ -545,7 +535,7 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 \end{grammar}
 
 \begin{Special_Paragraph}
-  Man spricht hier von der \colorbold{\dq Abstrakten Syntax der Sprache $L_{PicoC}$} und meint hier mit der Sprache $L_{PicoC}$ \colorbold{nicht} die Sprache, welche durch die \colorbold{Abstrakte Syntax} beschrieben wird. Es ist damit \colorbold{immer} die Sprache gemeint, die \colorbold{kompiliert} werden soll und zu deren Zweck die \colorbold{Abstrakt Syntax} überhaupt definiert wird. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakt Syntax} beschrieben wird, interessiert man sich nie wirklich explizit. Diese \colorbold{Redeart} wurde aus der \colorbold{Quelle} \cite{g_siek_course_2022} übernommen.
+  Man spricht hier von der \colorbold{\enquote{Abstrakten Syntax der Sprache $L_{PicoC}$}} und meint hier mit der Sprache $L_{PicoC}$ \colorbold{nicht} die Sprache, welche durch die \colorbold{Abstrakte Syntax} beschrieben wird. Es ist damit \colorbold{immer} die Sprache gemeint, die \colorbold{kompiliert} werden soll und zu deren Zweck die \colorbold{Abstrakt Syntax} überhaupt definiert wird. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakt Syntax} beschrieben wird, interessiert man sich nie wirklich explizit. Diese \colorbold{Redeart} wurde aus der \colorbold{Quelle} \cite{g_siek_course_2022} übernommen.
 \end{Special_Paragraph}
 
 Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird in Python über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine Textrepräsentation seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{,} und \colorbold{Semikolons} \smalltt{;} zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene Textrepräsentation passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgebeben}.
@@ -675,7 +665,7 @@ Die Aufgabe des \colorbold{PicoC-Blocks Passes} ist die Knoten \smalltt{If(exp, 
 
 Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Des Weiteren wird für die \colorbold{Kommentare}, die in vielen Codebeispielen zur leichteren Verständlichkeit eingefügt wurden ein \smalltt{SingleLineComment(prefix, content)}-Knoten benötigt. Die \colorbold{Funktionsdefinition} \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} ist nun ein Container für \colorbold{Blöcke} \smalltt{Block(Name(str), ⟨stmt⟩*)} und keine Statements \smalltt{stmt} mehr.
 
-\begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{PicoC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule
   \firstcase{decl\_def}{FunDef(\langle datatype\rangle , Name(str),}{L\_Fun}
   & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle block\rangle *)$ & \\
@@ -686,13 +676,15 @@ Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\r
 \end{grammar}
 
 \begin{Special_Paragraph}
-  Die \colorbold{Abstrakte Syntax} der Sprache $L_{Picoc\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} ist als \colorbold{Erweiterung} anzusehen. Ein \colorbold{Erweiterung} ist es insofern, dass es neue Knoten \colorbold{hinzufügt}, die zur Umsetzung dieses Passes notwendig sind, wie z.B. den \smalltt{GoTo(Name(str))}-Knoten. Den Knoten \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} könnte man als Änderung des bestehenden Knoten \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨stmt⟩*)} ansehen. Aber da die Abstrakte Syntax vor allem für den Programmierer relevant ist, anders als die Konkrette Syntax, die von einem Parser Generator ausgewertet wird und daher perfekt definiert sein muss
+  Die Abstrakte Syntax ist im Gegensatz zur Konkretten Syntax nur vom Programmierer verstanden werden, wenn man nicht darauf abzielt
 
-\smalltt{If(⟨exp⟩, ⟨stmt⟩*)}, \smalltt{IfElse(⟨exp⟩, ⟨stmt⟩*, ⟨stmt⟩*)}, \smalltt{While(⟨exp⟩, ⟨stmt⟩*)} und \smalltt{DoWhile(⟨exp⟩, ⟨stmt⟩*)}
+  % Die \colorbold{Abstrakte Syntax} der Sprache $L_{Picoc\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} ist als \colorbold{Erweiterung} anzusehen. Ein \colorbold{Erweiterung} ist es insofern, dass es neue Knoten \colorbold{hinzufügt}, die zur Umsetzung dieses Passes notwendig sind, wie z.B. den \smalltt{GoTo(Name(str))}-Knoten. Den Knoten \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} könnte man als Änderung des bestehenden Knoten \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨stmt⟩*)} ansehen. Aber da die Abstrakte Syntax vor allem für den Programmierer relevant ist, anders als die Konkrette Syntax, die von einem Parser Generator ausgewertet wird und daher perfekt definiert sein muss
+
+% \smalltt{If(⟨exp⟩, ⟨stmt⟩*)}, \smalltt{IfElse(⟨exp⟩, ⟨stmt⟩*, ⟨stmt⟩*)}, \smalltt{While(⟨exp⟩, ⟨stmt⟩*)} und \smalltt{DoWhile(⟨exp⟩, ⟨stmt⟩*)}
 
   % vor allem für Programmierer muss nicht syntaktisch genau sein, wenn es Programmierer damit versteht, was er tuen soll, dann ist es gut so, deswegen nicht nötig anzugeben, was für Knoten nicht mehr existieren.
 
-  Theoretisch gibt es
+  Man bezeichnet hier die Abstrakte Syntax als \enquote{Abstrakte Syntax der Sprache $L_{Picoc\_Blocks}$}. Diese Sprache $L_{Picoc\_Blocks}$ besitzt eine \colorbold{Konkrette Syntax} und
 \end{Special_Paragraph}
 % TODO: man tut so als gäbe es Konkrette Syntax
 
