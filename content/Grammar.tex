@@ -43,7 +43,12 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), Empty())}{}
+  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'\,\mid\, 'print'), Empty())}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Exp(Call(Name('input'), Empty()))}{}
+  \otherform{Exp(Call(Name('print'), Empty()))}{}
 }
 
 \NewDocumentCommand{\arithanf}{s}{%
@@ -70,6 +75,10 @@
     \downplay
   }
   \otherform{UnOp(\langle un\_op\rangle, Stack(Num(str))) \gralt Call(Name('input'), Empty())}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Exp(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\logic}{s}{%
@@ -127,7 +136,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{Assign(\langle exp\rangle, \langle exp\rangle) \gralt Exp(\langle exp\rangle)}{}
+  \firstcase{stmt}{Assign(\langle exp\rangle, \langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\assignanf}{s}{%
@@ -141,7 +150,10 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{Assign(\langle exp\rangle, \langle exp\rangle) \gralt Exp(\langle exp\rangle)}{}
+  \firstcase{stmt}{Assign(Global(Num(str)), Stack(Num(str))) }{}
+  \otherform{Assign(Stackframe(Num(str)), Stack(Num(str)))}{}
+  \otherform{Assign(Stack(Num(str)), Global(Num(str))) }{}
+  \otherform{Assign(Stack(Num(str)), Stackframe(Num(str)))}{}
 }
 
 \NewDocumentCommand{\pntr}{s}{%
@@ -184,10 +196,9 @@
     \downplay
   }
   \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \otherform{Ref(\langle exp\rangle)}{}
+  \otherform{Ref(\langle Name(str)\rangle)}{}
+  \otherform{Ref(\langle Subscr(\langle exp\rangle, Num(str))\rangle)}{}
+  \otherform{Ref(\langle Attr(\langle exp\rangle, Name(str))\rangle)}{}
 }
 
 \NewDocumentCommand{\arraysecond}{s}{%
@@ -299,7 +310,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{IfElse(Stack(Num(str)), \langle stmt\rangle *, \langle stmt\rangle *)}{L\_If\_Else}
+  \firstcase{stmt}{IfElse(Stack(Num(str)), \langle stmt\rangle *, \langle stmt\rangle*)}{L\_If\_Else}
 }
 
 \NewDocumentCommand{\loopsecond}{s}{%
@@ -392,8 +403,7 @@
   % & & \qquad $Struct(Assign(Name(str), \langle exp\rangle )+, \langle datatype\rangle$ )) & \\
   % \otherform{Assign(Alloc(Writeable(), ArrayDecl(Num(str)+, \langle datatype\rangle ),}{}
   % & & \qquad $Name(str)), Array(\langle exp\rangle +, \langle datatype\rangle ))$ & \\
-  \firstcase{stmt}{StackMalloc(Num(str)) \gralt Ref(Global(Num(str)))}{L\_Fun}
-  \otherform{NewStackframe(Name(str), GoTo(str))}{}
+  \firstcase{stmt}{StackMalloc(Num(str)) \gralt NewStackframe(Name(str), GoTo(str))}{L\_Fun}
   \otherform{Exp(GoTo(Name(str))) \gralt RemoveStackframe()}{}
   \otherform{Return(Empty()) \gralt Return(\langle exp\rangle)}{}
 }
