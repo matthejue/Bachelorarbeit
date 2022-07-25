@@ -431,13 +431,13 @@
   \firstcase{stmt}{GoTo(Name(str))}{}
 }
 
-\NewDocumentCommand{\picocleftover}{s}{%
+\NewDocumentCommand{\picocblocksleftover}{s}{%
   \ignorespaces
   \IfBooleanTF{#1}{%
-    \firstcase{instr}{\textcolor{gray!90!black}{Exp(GoTo(str)) \gralt GoTo(Name(str))} \gralt Exit(Num(str))}{L\_PicoC}
+    \firstcase{instr}{\textcolor{gray!90!black}{Exp(GoTo(str))} \gralt Exit(Num(str))}{L\_PicoC}
   }{
     \downplay
-    \firstcase{instr}{Exp(GoTo(str)) \gralt GoTo(Name(str))}{L\_PicoC}
+    \firstcase{instr}{Exp(GoTo(str))}{L\_PicoC}
   }
   \IfBooleanTF{#1}{%
     \downplay
@@ -446,13 +446,20 @@
     \downplay
     \firstcase{block}{Block(Name(str), \lochighlight{\langle instr\rangle} *)}{}
   }
-  \IfBooleanTF{#1}{%
-    \removed
-    \firstcase{file}{File(Name(str), \langle block\rangle *)}{}
-  }{%
-    \downplay
-    \firstcase{file}{File(Name(str), \langle block\rangle *)}{}
-  }
+  \downplay
+  \firstcase{file}{File(Name(str), \langle block\rangle *)}{}
+}
+
+\NewDocumentCommand{\picocremovedleftover}{s}{%
+  \ignorespaces
+  \removed
+  \firstcase{instr}{Exp(GoTo(str)) \gralt Exit(Num(str))}{L\_PicoC}
+  \removed
+  \firstcase{block}{Block(Name(str), \langle instr\rangle *)}{}
+  \removed
+  \firstcase{block}{Block(Name(str), \lochighlight{\langle instr\rangle} *)}{}
+  \removed
+  \firstcase{file}{File(Name(str), \langle block\rangle *)}{}
 }
 
 \NewDocumentCommand{\file}{s}{%
@@ -530,13 +537,12 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{SingleLineComment(str, str) \gralt Instr(Loadi(), [Reg(Acc()), GoTo(Name(str))])}{}
-  \otherform{Jump(Always(), Im(str(distance)))}{}
+  \otherform{SingleLineComment(str, str)}{}
   \IfBooleanT{#1}{%
-    \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
+    \downplay
   }
+  \otherform{Instr(Loadi(), [Reg(Acc()), GoTo(Name(str))]) \gralt Jump(Eq(), GoTo(Name(str)))}{}
 }
-
 
 \NewDocumentCommand{\reti}{s}{%
   \ignorespaces
@@ -563,6 +569,9 @@
   \downplay
   \otherform{RTI() \gralt Call(Name('print'), \langle reg\rangle ) \gralt Call(Name('input'), \langle reg\rangle )}{}
   \downplay
-  \otherform{SingleLineComment(str, str) \gralt Instr(Loadi(), [Reg(Acc()), Im("1")])}{}
+  \otherform{SingleLineComment(str, str)}{}
+  \removed
+  \otherform{Instr(Loadi(), [Reg(Acc()), GoTo(Name(str))]) \gralt Jump(Eq(), GoTo(Name(str)))}{}
+  \downplay
   \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
 }
