@@ -9,8 +9,8 @@
   % ./content/Implementierung3_Struct_Derived,
   % ./content/Implementierung4_Fun,
   % ./content/Ergebnisse_und_Ausblick,
-  % ./content/Appendix
-  % ./content/Danksagungen
+  ./content/Appendix
+  ./content/Danksagungen
 }
 
 
@@ -117,10 +117,12 @@
   \include{./content/Ergebnisse_und_Ausblick}         % ./content/Ergebnisse_und_Ausblick.tex
 
   \appendix
+  \pagenumbering
   \include{./content/Appendix}                % ./content/Appendix.tex
   \include{./content/Danksagungen}            % ./content/Danksagungen.tex
 
-  \printbibheading
+
+  \printbibheading[heading=bibintoc]
   % \printbibliography[type=book,heading=subbibliography,title={Bücher}]
   % \printbibliography[type=article,heading=subbibliography,title={Artikel}]
   \printbibliography[type=online,heading=subbibliography,title={Online}]
