@@ -36,8 +36,9 @@
   \thispagestyle{empty}
 
   % https://www.overleaf.com/learn/latex/Page_numbering
+  \clearpage
   \pagenumbering{Roman}
-  \setcounter{page}{0}
+  % \setcounter{page}{0}
 
   \fancypagestyle{plain}{%
       \fancyhf{}%
@@ -50,10 +51,14 @@
   \listofcodecaptions
   \listoftables
 
+
   % https://tex.stackexchange.com/questions/538528/tcolorbox-newtcbtheorem-index-with-tcolorbox
+
   \tcblistof[\chapter*]{theorem_list}{Definitionsverzeichnis}
+  \addcontentsline{toc}{chapter}{Definitionsverzeichnis}
   % https://tex.stackexchange.com/questions/49155/how-can-i-list-items-created-with-the-float-package-in-the-toc
   \listof{floatgrammar}{Grammatikverzeichnis}
+  \addcontentsline{toc}{chapter}{Grammatikverzeichnis}
 
   \numberwithin{codecaption}{chapter}
 
