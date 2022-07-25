@@ -9,7 +9,7 @@
   % ./content/Implementierung3_Struct_Derived,
   % ./content/Implementierung4_Fun,
   % ./content/Ergebnisse_und_Ausblick,
-  ./content/Appendix
+  ./content/Appendix,
   ./content/Danksagungen
 }
 
@@ -116,12 +116,14 @@
   \include{./content/Implementierung4_Fun}            % ./content/Implementierung4_Fun.tex
   \include{./content/Ergebnisse_und_Ausblick}         % ./content/Ergebnisse_und_Ausblick.tex
 
-  \appendix
-  \pagenumbering
+  % \appendix
+  \clearpage
+  \pagenumbering{Alph}
+  % https://tex.stackexchange.com/questions/395856/switching-tocdepth-in-the-middle-of-a-document
   \include{./content/Appendix}                % ./content/Appendix.tex
   \include{./content/Danksagungen}            % ./content/Danksagungen.tex
 
-
+  % https://tex.stackexchange.com/questions/439798/how-to-include-bibliography-in-toc
   \printbibheading[heading=bibintoc]
   % \printbibliography[type=book,heading=subbibliography,title={Bücher}]
   % \printbibliography[type=article,heading=subbibliography,title={Artikel}]
