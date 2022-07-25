@@ -1,15 +1,14 @@
 \addvspace {10\p@ }
-\contentsline {floatgrammar}{\numberline {1.1.1}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1\relax }}{9}{floatgrammar.caption.7}%
-\contentsline {floatgrammar}{\numberline {1.1.2}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2\relax }}{10}{floatgrammar.caption.8}%
-\contentsline {floatgrammar}{\numberline {1.2.1}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{11}{floatgrammar.caption.9}%
-\contentsline {floatgrammar}{\numberline {1.2.2}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{12}{floatgrammar.caption.10}%
-\contentsline {floatgrammar}{\numberline {1.2.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{25}{floatgrammar.caption.21}%
-\contentsline {floatgrammar}{\numberline {1.3.1}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{30}{floatgrammar.caption.26}%
-\contentsline {floatgrammar}{\numberline {1.3.2}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$\relax }}{33}{floatgrammar.caption.29}%
-\contentsline {floatgrammar}{\numberline {1.3.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$\relax }}{36}{floatgrammar.caption.31}%
-\contentsline {floatgrammar}{\numberline {1.3.4}{\ignorespaces Abstrakte Syntax für $L_{PicoC\_Mon}$\relax }}{37}{floatgrammar.caption.32}%
-\contentsline {floatgrammar}{\numberline {1.3.5}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Blocks}$\relax }}{39}{floatgrammar.caption.34}%
-\contentsline {floatgrammar}{\numberline {1.3.6}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Patch}$\relax }}{42}{floatgrammar.caption.36}%
-\contentsline {floatgrammar}{\numberline {1.3.7}{\ignorespaces Konkrette Syntax für $L_{RETI\_Lex}$\relax }}{45}{floatgrammar.caption.38}%
-\contentsline {floatgrammar}{\numberline {1.3.8}{\ignorespaces Konkrette Syntax für $L_{RETI\_Parse}$\relax }}{46}{floatgrammar.caption.39}%
-\contentsline {floatgrammar}{\numberline {1.3.9}{\ignorespaces Abstrakte Syntax für $L_{RETI}$\relax }}{46}{floatgrammar.caption.40}%
+\contentsline {floatgrammar}{\numberline {1.1.1}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1\relax }}{1}{floatgrammar.caption.7}%
+\contentsline {floatgrammar}{\numberline {1.1.2}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2\relax }}{2}{floatgrammar.caption.8}%
+\contentsline {floatgrammar}{\numberline {1.2.1}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{3}{floatgrammar.caption.9}%
+\contentsline {floatgrammar}{\numberline {1.2.2}{\ignorespaces Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{4}{floatgrammar.caption.10}%
+\contentsline {floatgrammar}{\numberline {1.2.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{17}{floatgrammar.caption.21}%
+\contentsline {floatgrammar}{\numberline {1.3.1}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$\relax }}{22}{floatgrammar.caption.26}%
+\contentsline {floatgrammar}{\numberline {1.3.2}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$\relax }}{25}{floatgrammar.caption.29}%
+\contentsline {floatgrammar}{\numberline {1.3.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$\relax }}{28}{floatgrammar.caption.31}%
+\contentsline {floatgrammar}{\numberline {1.3.4}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Blocks}$\relax }}{30}{floatgrammar.caption.33}%
+\contentsline {floatgrammar}{\numberline {1.3.5}{\ignorespaces Abstrakte Syntax für $L_{RETI\_Patch}$\relax }}{33}{floatgrammar.caption.35}%
+\contentsline {floatgrammar}{\numberline {1.3.6}{\ignorespaces Konkrette Syntax für $L_{RETI\_Lex}$\relax }}{37}{floatgrammar.caption.37}%
+\contentsline {floatgrammar}{\numberline {1.3.7}{\ignorespaces Konkrette Syntax für $L_{RETI\_Parse}$\relax }}{37}{floatgrammar.caption.38}%
+\contentsline {floatgrammar}{\numberline {1.3.8}{\ignorespaces Abstrakte Syntax für $L_{RETI}$\relax }}{38}{floatgrammar.caption.39}%

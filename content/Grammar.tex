@@ -43,7 +43,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), [])}{}
+  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), Empty())}{}
 }
 
 \NewDocumentCommand{\arithanf}{s}{%
@@ -57,7 +57,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{exp}{\textcolor{gray!90!black}{Name(str) \gralt Num(str) \gralt Char(str)} \gralt Global(Num(str))}{}
+  \firstcase{exp}{\textcolor{red}{Name(str)} \gralt \textcolor{gray!90!black}{Num(str) \gralt Char(str)} \gralt Global(Num(str))}{}
   \IfBooleanT{#1}{%
     \downplay
   }
@@ -69,7 +69,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{UnOp(\langle un\_op\rangle, Stack(Num(str))) \gralt Call(Name('input'), [])}{}
+  \otherform{UnOp(\langle un\_op\rangle, Stack(Num(str))) \gralt Call(Name('input'), Empty())}{}
 }
 
 \NewDocumentCommand{\logic}{s}{%
@@ -89,11 +89,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{exp}{Atom(\langle exp\rangle , \langle rel\rangle , \langle exp\rangle )}{}
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \otherform{ToBool(\langle exp\rangle )}{}
+  \firstcase{exp}{Atom(\langle exp\rangle, \langle rel\rangle, \langle exp\rangle) \gralt ToBool(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\logicanf}{s}{%
@@ -127,31 +123,25 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{exp}{Alloc(\langle type\_qual\rangle , \langle dataype\rangle , Name(str))}{}
+  \firstcase{exp}{Alloc(\langle type\_qual\rangle , \langle datatype\rangle , Name(str))}{}
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{Assign(\langle exp\rangle, \langle exp\rangle)}{}
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \otherform{Exp(\langle exp\rangle )}{}
+  \firstcase{stmt}{Assign(\langle exp\rangle, \langle exp\rangle) \gralt Exp(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\assignanf}{s}{%
   \ignorespaces
   \removed
   \firstcase{type\_qual}{Const() \gralt Writeable()}{L\_Assign\_Alloc}
-  \downplay
+  \removed
   \firstcase{datatype}{IntType() \gralt CharType() \gralt VoidType()}{}
   \removed
-  \firstcase{exp}{Alloc(\langle type\_qual\rangle, \langle dataype\rangle, Name(str))}{}
+  \firstcase{exp}{Alloc(\langle type\_qual\rangle, \langle datatype\rangle, Name(str))}{}
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{Assign(Stack(Num(str)), Stack(Num(str)))}{}
-  \downplay
-  \otherform{Exp(\langle exp\rangle)}{}
+  \firstcase{stmt}{Assign(\langle exp\rangle, \langle exp\rangle) \gralt Exp(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\pntr}{s}{%
@@ -163,11 +153,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{exp}{Deref(\langle exp\rangle , \langle exp\rangle )}{}
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \otherform{Ref(\langle exp\rangle )}{}
+  \firstcase{exp}{Deref(\langle exp\rangle , \langle exp\rangle) \gralt Ref(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\pntrshrink}{s}{%
@@ -176,14 +162,8 @@
     \downplay
   }
   \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \firstcase{exp}{\lochighlight{Deref(\langle exp\rangle , \langle exp\rangle )}}{}
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \otherform{Ref(\langle exp\rangle )}{}
+  \downplay
+  \firstcase{exp}{\lochighlight{Deref(\langle exp\rangle , \langle exp\rangle )} \gralt Ref(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\pntrshrinkafter}{s}{%
@@ -231,7 +211,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{exp}{Subscr(Stack(Num(str)), Stack(Num(str))) \gralt Array(\langle exp\rangle +)}{}
+  \firstcase{exp}{Subscr(\langle exp\rangle, Stack(Num(str))) \gralt Array(\langle exp\rangle +)}{}
 }
 
 \NewDocumentCommand{\struct}{s}{%
@@ -319,7 +299,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{IfElse(\langle Stack(Num(str))\rangle , \langle stmt\rangle *, \langle stmt\rangle *)}{L\_If\_Else}
+  \firstcase{stmt}{IfElse(Stack(Num(str)), \langle stmt\rangle *, \langle stmt\rangle *)}{L\_If\_Else}
 }
 
 \NewDocumentCommand{\loopsecond}{s}{%

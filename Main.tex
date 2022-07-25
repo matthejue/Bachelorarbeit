@@ -29,11 +29,27 @@
   \newgeometry{margin=2.5cm}
   \setlength{\footskip}{30pt}                 % move pagenumber up and down
   \includepdf[pages=-]{./ErklrungfrdieAbschlussarbeit_unterschrieben.pdf}
+  \thispagestyle{empty}
 
+  \pagestyle{empty}
   \tableofcontents
+  \thispagestyle{empty}
+
+  % https://www.overleaf.com/learn/latex/Page_numbering
+  \pagenumbering{Roman}
+  \setcounter{page}{0}
+
+  \fancypagestyle{plain}{%
+      \fancyhf{}%
+      \fancyfootoffset{1cm}
+      \renewcommand{\headrulewidth}{0mm}%
+      \fancyfoot[R]{\thepage}
+  }
+
   \listoffigures
   \listofcodecaptions
   \listoftables
+
   % https://tex.stackexchange.com/questions/538528/tcolorbox-newtcbtheorem-index-with-tcolorbox
   \tcblistof[\chapter*]{theorem_list}{Definitionsverzeichnis}
   % https://tex.stackexchange.com/questions/49155/how-can-i-list-items-created-with-the-float-package-in-the-toc
@@ -81,6 +97,11 @@
 
 % maybe useful, add to toc: https://tex.stackexchange.com/questions/220059/list-of-figures-and-tables-not-in-contents
 % maybe useful, no numbering: https://tex.stackexchange.com/questions/28333/continuous-v-per-chapter-section-numbering-of-figures-tables-and-other-docume
+
+  \clearpage
+
+  \pagestyle{default}
+  \pagenumbering{arabic}
 
   \include{./content/Motivation}                      % ./content/Motivation.tex
   \include{./content/Einführung}                      % ./content/Einführung.tex

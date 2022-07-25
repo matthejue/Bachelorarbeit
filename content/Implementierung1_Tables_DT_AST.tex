@@ -576,7 +576,6 @@ Im Unterkapitel~\ref{sec:passes} werden die unterschiedlichen \colorbold{Passes}
 % https://tex.stackexchange.com/questions/167380/how-to-refer-to-a-footnote
 Um die verschiedenen Aspekte besser erklären zu können, werden \colorbold{Codebeispiele} verwendet, in welchen ein kleines repräsentatives \colorbold{PicoC-Programm} für einen spezifischen Aspekt in wichtigen \colorbold{Zwischenstadien der Kompilierung} gezeigt wird\footnote{Also die verschiedenen in den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees}, sofern der \colorbold{Pass} für den gezeigten Aspekt relevant ist.}. Die \colorbold{Codebeispiele} wurden alle mit dem \colorbold{PicoC-Compiler} kompiliert und danach \colorbold{nicht} mehr \colorbold{verändert}, also genauso, wie der \colorbold{PicoC-Compiler} sie kompiliert aus den Dateien in dieses Dokument eingelesen. Alle hier zur Repräsentation verwendeten \colorbold{PicoC-Programme} lassen sich unter dem \footnoteurl{https://github.com/matthejue/Bachelorarbeit/tree/master/code_examples} finden und mithilfe der im Ordner \inlinebox{/code_examples} beiliegenden \inlinebox{Makefile} und dem Befehl \inlinebox*{make compile-all} genauso \colorbold{kompilieren}, wie sie hier dargestellt sind\footnote{Es wurden zu diesem Zweck spezielle neue \colorbold{Command-line Optionen} erstellt, die bestimmte Kommentare \colorbold{herausfiltern} und manche Container-Knoten \colorbold{einzeilig} machen, damit die generierten \colorbold{Abstract Syntax Trees} in den verscchiedenen Zwischenstufen der Kompilierung \colorbold{nicht} zu langgestreckt und \colorbold{überfüllt} mit Kommentaren sind.}.
 
-
 \subsection{Passes}
 \label{sec:passes}
 
@@ -596,7 +595,7 @@ Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold
 
 \newlineparagraph{Abstrakte Syntax}
 
-\begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$][H][gr:abstract_syntax_l_picoc_shrink]
   \toprule
   \commentsecond*
   \midrule
@@ -740,11 +739,11 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
   \midrule
   \pntranf*
   \midrule
-  \arraysecond*
+  \arrayanf*
   \midrule
   \struct*
   \midrule
-  \ifelseafter*
+  \ifelseanf*
   \midrule
   \funanf*
   \midrule
@@ -753,32 +752,6 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
   \file*
   \midrule
   \symbolsecond
-  \bottomrule
-\end{grammar}
-
-
-\begin{grammar}[Abstrakte Syntax für $L_{PicoC\_Mon}$][H][gr:abstract_syntax_l_picoc_mon]
-  \toprule
-  \firstcase{ref\_loc}{Stack(Num(str)) \gralt Global(Num(str))}{L\_Assign\_Alloc}
-  \otherform{Stackframe(Num(str))}{}
-  \firstcase{error\_data}{\langle exp\rangle  \gralt Pos(Num(str), Num(str))}{}
-  \firstcase{exp}{Stack(Num(str)) \gralt Ref(\langle ref_loc\rangle , \langle datatype\rangle , \langle error_data\rangle )}{}
-  \firstcase{stmt}{Exp(\langle exp\rangle )}{}
-  \otherform{Assign(Alloc(Writeable(), StructSpec(Name(str)), Name(str)), }{}
-  & & \qquad $Struct(Assign(Name(str), \langle exp\rangle )+, \langle datatype\rangle$ )) & \\
-  \otherform{Assign(Alloc(Writeable(), ArrayDecl(Num(str)+, \langle datatype\rangle ),}{}
-  & & \qquad $Name(str)), Array(\langle exp\rangle +, \langle datatype\rangle ))$ & \\
-  \otherform{NewStackframe(Name(), GoTo(str))}{}
-  \otherform{RemoveStackframe()}{}
-  \midrule
-  \firstcase{symbol\_table}{SymbolTable(\langle symbol\rangle )}{L\_Symbol\_Table}
-  \firstcase{symbol}{Symbol(\langle type_qual\rangle, \langle datatype\rangle, \langle name\rangle, \langle val\rangle, \langle pos\rangle, \langle size\rangle)}{}
-  \firstcase{type\_qual}{Empty()}{}
-  \firstcase{datatype}{BuiltIn() \gralt SelfDefined()}{}
-  \firstcase{name}{Name(str)}{}
-  \firstcase{val}{Num(str) \gralt Empty()}{}
-  \firstcase{pos}{Pos(Num(str), Num(str)) \gralt Empty()}{}
-  \firstcase{size}{Num(str) \gralt Empty()}{}
   \bottomrule
 \end{grammar}
 

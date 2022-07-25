@@ -22,6 +22,9 @@
 \usepackage[colorlinks=true, allcolors=PrimaryColor]{hyperref} %hidelinks
 % \usepackage{listings}
 
+% https://tex.stackexchange.com/questions/48509/insert-list-of-figures-in-the-table-of-contents
+\usepackage[nottoc]{tocbibind}
+
 % https://tex.stackexchange.com/questions/531/what-is-the-best-way-to-use-quotation-mark-glyphs
 \usepackage{csquotes}
 
@@ -93,22 +96,21 @@
 % https://tex.stackexchange.com/questions/153167/how-to-set-page-number-at-right-footer
 % footer
 \usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfootoffset{1cm}
-\rfoot[]{\thepage}
-
-\fancypagestyle{plain}{%
-  % on first chapter pages no rule
-    \renewcommand{\headrulewidth}{0mm}%
-    \fancyhf{}%
-    \rfoot[]{\thepage}
-}
-
-% header
-\fancyheadoffset{1cm}
-\lhead{\nouppercase{\leftmark}}
-\rhead{\nouppercase{\rightmark}}
+% \fancyhf{}
+% \fancyfootoffset{1cm}
+% \rfoot[]{\thepage}
+%
+% \fancypagestyle{plain}{%
+%   % on first chapter pages no rule
+%     \renewcommand{\headrulewidth}{0mm}%
+%     \fancyhf{}%
+%     \rfoot[]{\thepage}
+% }
+%
+% % header
+% \fancyheadoffset{1cm}
+% \lhead{\nouppercase{\leftmark}}
+% \rhead{\nouppercase{\rightmark}}
 
 % https://tex.stackexchange.com/questions/108684/spacing-before-and-after-section-titles
 % spacing after section
@@ -229,3 +231,19 @@
 % https://tex.stackexchange.com/questions/479632/newcommand-combine-optional-star-and-optional-parameter
 % \usepackage{xparse}
 \tcbuselibrary{xparse}
+
+\fancypagestyle{default}{%
+  \fancyhf{}%
+  \fancyfootoffset{1cm}
+  \fancyheadoffset{1cm}
+  \fancyhead[R]{\nouppercase{\rightmark}}
+  \fancyhead[L]{\nouppercase{\leftmark}}
+  \fancyfoot[R]{\thepage}
+}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfootoffset{1cm}
+    \renewcommand{\headrulewidth}{0mm}
+    \fancyfoot[R]{}
+}
