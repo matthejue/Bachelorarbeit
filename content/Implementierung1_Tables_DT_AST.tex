@@ -747,9 +747,9 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
   \midrule
   \funanf*
   \midrule
-  \block
+  \block*
   \midrule
-  \file*
+  \fileanf*
   \midrule
   \symbolsecond
   \bottomrule
@@ -774,13 +774,9 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
   \toprule
-  \firstcase{program}{Program(Name(str), \langle block\rangle *)}{L\_Program}
+  \reti
   \midrule
-  \firstcase{exp\_stmts}{GoTo(str)}{L\_Blocks}
-  \firstcase{instrs\_before}{Num(str)}{}
-  \firstcase{num\_instrs}{Num(str)}{}
-  \firstcase{block}{Block(Name(str), \langle instr\rangle *, \langle instrs\_before\rangle , \langle num\_instrs\rangle )}{}
-  \firstcase{instr}{GoTo(Name(str))}{}
+  \blockblocks
   \bottomrule
 \end{grammar}
 
@@ -826,19 +822,19 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 % dieser Pass entspricht Assembler bis auf die Sache mit binärer Repräsentation, was der PicoC-Compiler garnicht macht
 
 \begin{grammar}[Konkrette Syntax für $L_{RETI\_Lex}$][H][gr:konkrette_syntax_l_reti_lexer]
-\toprule
-\firstcase{dig\_no\_0}{ \dq 1\dq \gralt \dq 2\dq \gralt \dq 3\dq \gralt \dq 4\dq \gralt \dq 5\dq \gralt \dq 6\dq}{L\_Program}
-\otherform{\dq 7\dq \gralt \dq 8\dq \gralt \dq 9\dq}{}
-\firstcase{dig\_with\_0}{ \dq 0\dq \gralt dig\_no\_0}{}
-\firstcase{num}{ \dq 0\dq \gralt dig\_no\_0dig\_with\_0*\gralt \dq {-}\dq dig\_with\_0*}{}
-\firstcase{letter}{ \dq a\dq ... \dq Z\dq }{}
-\firstcase{name}{ letter(letter \mid  dig\_with\_0 \mid  \_)*}{}
-\firstcase{reg}{ \dq ACC\dq \gralt \dq IN1\dq \gralt \dq IN2\dq \gralt \dq PC\dq \gralt \dq SP\dq}{}
-\otherform{\dq BAF\dq \gralt \dq CS\dq \gralt \dq DS\dq}{}
-\firstcase{arg}{ reg \gralt  num}{}
-\firstcase{rel}{ \dq {==}\dq \gralt \dq {!=}\dq \gralt \dq {<}\dq \gralt \dq {<=}\dq\gralt \dq {>}\dq}{}
-\otherform{\dq {>=}\dq \gralt \dq \_NOP\dq}{}
-\bottomrule
+  \toprule
+  \firstcase{dig\_no\_0}{ \dq 1\dq \gralt \dq 2\dq \gralt \dq 3\dq \gralt \dq 4\dq \gralt \dq 5\dq \gralt \dq 6\dq}{L\_Program}
+  \otherform{\dq 7\dq \gralt \dq 8\dq \gralt \dq 9\dq}{}
+  \firstcase{dig\_with\_0}{ \dq 0\dq \gralt dig\_no\_0}{}
+  \firstcase{num}{ \dq 0\dq \gralt dig\_no\_0 \enspace dig\_with\_0*\gralt \dq {-}\dq dig\_no\_0*}{}
+  \firstcase{letter}{ \dq a\dq ... \dq Z\dq }{}
+  \firstcase{name}{ letter(letter \mid  dig\_with\_0 \mid  \_)*}{}
+  \firstcase{reg}{ \dq ACC\dq \gralt \dq IN1\dq \gralt \dq IN2\dq \gralt \dq PC\dq \gralt \dq SP\dq}{}
+  \otherform{\dq BAF\dq \gralt \dq CS\dq \gralt \dq DS\dq}{}
+  \firstcase{arg}{ reg \gralt  num}{}
+  \firstcase{rel}{ \dq {==}\dq \gralt \dq {!=}\dq \gralt \dq {<}\dq \gralt \dq {<=}\dq\gralt \dq {>}\dq}{}
+  \otherform{\dq {>=}\dq \gralt \dq \_NOP\dq}{}
+  \bottomrule
 \end{grammar}
 
 \begin{grammar}[Konkrette Syntax für $L_{RETI\_Parse}$][H][gr:konkrette_syntax_l_reti_parser]
@@ -862,21 +858,7 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 % TODO: es braucht noch eine Konkrette Syntax dafür
 \begin{grammar}[Abstrakte Syntax für $L_{RETI}$][H][gr:abstract_syntax_l_reti]
   \toprule
-  \firstcase{reg}{ACC() \gralt IN1() \gralt IN2() \gralt PC() \gralt SP() \gralt BAF()}{L\_Program}
-  \otherform{CS() \gralt DS()}{}
-  \firstcase{arg}{Reg(\langle reg\rangle ) \gralt Num(str)}{}
-  \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
-  \otherform{Always() \gralt NOp()}{}
-  \firstcase{op}{Add() \gralt Addi() \gralt Sub() \gralt Subi() \gralt Mult()}{}
-  \otherform{Multi() \gralt Div() \gralt Divi()}{}
-  \otherform{Mod() \gralt Modi() \gralt Oplus() \gralt Oplusi() \gralt Or()}{}
-  \otherform{Ori() \gralt And() \gralt Andi()}{}
-  \otherform{Load() \gralt Loadin() \gralt Loadi()}{}
-  \otherform{Store() \gralt Storein() \gralt Move()}{}
-  \firstcase{instr}{Instr(\langle op\rangle , \langle arg\rangle +) \gralt Jump(\langle rel\rangle , Num(str)) \gralt Int(Num(str))}{}
-  \otherform{RTI() \gralt Call(Name('print'), \langle reg\rangle ) \gralt Call(Name('input'), \langle reg\rangle )}{}
-  \otherform{SingleLineComment(str, str)}{}
-  \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
+  \reti*
   \bottomrule
 \end{grammar}
 

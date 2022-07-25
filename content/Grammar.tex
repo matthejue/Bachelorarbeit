@@ -15,7 +15,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{RETIComment()}{L\_Comment}
+  \firstcase{stmt}{SingleLineComment(str, str)\gralt RETIComment()}{L\_Comment}
 }
 
 \NewDocumentCommand{\arith}{s}{%
@@ -43,12 +43,15 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'\,\mid\, 'print'), Empty())}{}
+  \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), Empty())}{}
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{Exp(Call(Name('input'), Empty()))}{}
-  \otherform{Exp(Call(Name('print'), Empty()))}{}
+  \otherform{Call(Name('print'), \langle exp\rangle)}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{stmt}{Exp(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\arithanf}{s}{%
@@ -75,6 +78,13 @@
     \downplay
   }
   \otherform{UnOp(\langle un\_op\rangle, Stack(Num(str))) \gralt Call(Name('input'), Empty())}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Call(Name('print'), \langle exp\rangle)}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
   \IfBooleanT{#1}{%
     \downplay
   }
@@ -175,7 +185,7 @@
   }
   \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
   \downplay
-  \firstcase{exp}{\lochighlight{Deref(\langle exp\rangle , \langle exp\rangle )} \gralt Ref(\langle exp\rangle)}{}
+  \firstcase{exp}{\lochighlight{Deref(\langle exp\rangle , \langle exp\rangle)} \gralt Ref(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\pntrshrinkafter}{s}{%
@@ -196,9 +206,8 @@
     \downplay
   }
   \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
-  \otherform{Ref(\langle Name(str)\rangle)}{}
-  \otherform{Ref(\langle Subscr(\langle exp\rangle, Num(str))\rangle)}{}
-  \otherform{Ref(\langle Attr(\langle exp\rangle, Name(str))\rangle)}{}
+  \otherform{Ref(Global(str)) \gralt Ref(Stackframe(str))}{}
+  \otherform{Ref(Subscr(\langle exp\rangle, Num(str)) \gralt Ref(Attr(\langle exp\rangle, Name(str))))}{}
 }
 
 \NewDocumentCommand{\arraysecond}{s}{%
@@ -394,18 +403,20 @@
 }
 
 \NewDocumentCommand{\funanf}{s}{%
-  % \firstcase{ref\_loc}{Stack(Num(str)) \gralt Global(Num(str))}{L\_Assign\_Alloc}
-  % \otherform{Stackframe(Num(str))}{}
-  % \firstcase{error\_data}{\langle exp\rangle  \gralt Pos(Num(str), Num(str))}{}
-  % \firstcase{exp}{Stack(Num(str)) \gralt Ref(\langle ref_loc\rangle , \langle datatype\rangle , \langle error_data\rangle )}{}
-  % \firstcase{stmt}{Exp(\langle exp\rangle )}{}
-  % \otherform{Assign(Alloc(Writeable(), StructSpec(Name(str)), Name(str)), }{}
-  % & & \qquad $Struct(Assign(Name(str), \langle exp\rangle )+, \langle datatype\rangle$ )) & \\
-  % \otherform{Assign(Alloc(Writeable(), ArrayDecl(Num(str)+, \langle datatype\rangle ),}{}
-  % & & \qquad $Name(str)), Array(\langle exp\rangle +, \langle datatype\rangle ))$ & \\
+  \ignorespaces
+  \removed
+  \firstcase{exp}{Call(Name(str), \langle exp\rangle *)}{L\_Fun}
   \firstcase{stmt}{StackMalloc(Num(str)) \gralt NewStackframe(Name(str), GoTo(str))}{L\_Fun}
   \otherform{Exp(GoTo(Name(str))) \gralt RemoveStackframe()}{}
-  \otherform{Return(Empty()) \gralt Return(\langle exp\rangle)}{}
+  \otherform{Return(Empty()) \gralt \textcolor{gray!90!black}{Return(\langle exp\rangle)}}{}
+  \removed
+  \firstcase{decl\_def}{FunDecl(\langle datatype\rangle , Name(str)}{}
+  \removed
+  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*)$ & \\
+  \removed
+  \otherform{FunDef(\langle datatype\rangle , Name(str),}{}
+  \removed
+  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \langle block\rangle *)$ & \\
 }
 
 \NewDocumentCommand{\block}{s}{%
@@ -417,7 +428,23 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{GoTo(Name(str)) \gralt SingleLineComment(str, str)}{}
+  \firstcase{stmt}{GoTo(Name(str))}{}
+}
+
+\NewDocumentCommand{\blockblocks}{s}{%
+  \ignorespaces
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{instr}{Exp(GoTo(str))}{L\_Blocks}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{block}{Block(Name(str), \lochighlight{\langle instr\rangle} *)}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{stmt}{GoTo(Name(str)) }{}
 }
 
 \NewDocumentCommand{\file}{s}{%
@@ -426,6 +453,12 @@
     \downplay
   }
   \firstcase{file}{File(Name(str), \langle decl\_def\rangle *)}{L\_File}
+}
+
+\NewDocumentCommand{\fileanf}{s}{%
+  \ignorespaces
+  \downplay
+  \firstcase{file}{File(Name(str), \lochighlight{\langle block\rangle} *)}{L\_File}
 }
 
 \NewDocumentCommand{\symbolsecond}{s}{%
@@ -438,4 +471,27 @@
   \firstcase{val}{Num(str) \gralt Empty()}{}
   \firstcase{pos}{Pos(Num(str), Num(str)) \gralt Empty()}{}
   \firstcase{size}{Num(str) \gralt Empty()}{}
+}
+
+\NewDocumentCommand{\reti}{s}{%
+  \ignorespaces
+  \firstcase{reg}{ACC() \gralt IN1() \gralt IN2() \gralt PC() \gralt SP() \gralt BAF()}{L\_Program}
+  \otherform{CS() \gralt DS()}{}
+  \firstcase{arg}{Reg(\langle reg\rangle ) \gralt Num(str)}{}
+  \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+  \otherform{Always() \gralt NOp()}{}
+  \firstcase{op}{Add() \gralt Addi() \gralt Sub() \gralt Subi() \gralt Mult()}{}
+  \otherform{Multi() \gralt Div() \gralt Divi()}{}
+  \otherform{Mod() \gralt Modi() \gralt Oplus() \gralt Oplusi() \gralt Or()}{}
+  \otherform{Ori() \gralt And() \gralt Andi()}{}
+  \otherform{Load() \gralt Loadin() \gralt Loadi()}{}
+  \otherform{Store() \gralt Storein() \gralt Move()}{}
+  \firstcase{instr}{Instr(\langle op\rangle , \langle arg\rangle +) \gralt Jump(\langle rel\rangle , Num(str)) \gralt Int(Num(str))}{}
+  \otherform{RTI() \gralt Call(Name('print'), \langle reg\rangle ) \gralt Call(Name('input'), \langle reg\rangle )}{}
+  \otherform{SingleLineComment(str, str)}{}
+  \IfBooleanTF{#1}{%
+    \firstcase{file}{File(Name(str), \langle block\rangle *)}{L\_File}
+  }{%
+    \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
+  }
 }
