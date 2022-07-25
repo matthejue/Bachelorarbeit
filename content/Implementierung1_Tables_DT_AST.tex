@@ -732,13 +732,13 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
   \toprule
   \commentsecond*
   \midrule
-  \arith*
+  \arithanf
   \midrule
-  \logic*
+  \logicanf
   \midrule
-  \assign*
+  \assignanf
   \midrule
-  \pntrshrinkafter*
+  \pntranf*
   \midrule
   \arraysecond*
   \midrule
@@ -746,11 +746,13 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
   \midrule
   \ifelseafter*
   \midrule
-  \funafter*
+  \funanf*
   \midrule
   \block
   \midrule
   \file*
+  \midrule
+  \symbolsecond
   \bottomrule
 \end{grammar}
 
@@ -770,7 +772,7 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
   \otherform{RemoveStackframe()}{}
   \midrule
   \firstcase{symbol\_table}{SymbolTable(\langle symbol\rangle )}{L\_Symbol\_Table}
-  \firstcase{symbol}{Symbol(\langle type_qual\rangle , \langle datatype\rangle , \langle name\rangle , \langle val\rangle , \langle pos\rangle , \langle size\rangle )}{}
+  \firstcase{symbol}{Symbol(\langle type_qual\rangle, \langle datatype\rangle, \langle name\rangle, \langle val\rangle, \langle pos\rangle, \langle size\rangle)}{}
   \firstcase{type\_qual}{Empty()}{}
   \firstcase{datatype}{BuiltIn() \gralt SelfDefined()}{}
   \firstcase{name}{Name(str)}{}

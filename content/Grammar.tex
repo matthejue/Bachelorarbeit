@@ -46,6 +46,32 @@
   \otherform{UnOp(\langle un\_op\rangle , \langle exp\rangle ) \gralt Call(Name('input'), [])}{}
 }
 
+\NewDocumentCommand{\arithanf}{s}{%
+  \ignorespaces
+  \downplay
+  \firstcase{un\_op}{Minus() \gralt Not()}{L\_Arith}
+  \downplay
+  \firstcase{bin\_op}{Add() \gralt Sub() \gralt Mul() \gralt Div() \gralt Mod()}{}
+  \downplay
+  \otherform{Oplus() \gralt And() \gralt Or()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{exp}{\textcolor{gray!90!black}{Name(str) \gralt Num(str) \gralt Char(str)} \gralt Global(Num(str))}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Stackframe(Num(str)) \gralt Stack(Num(str))}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{BinOp(Stack(Num(str)), \langle bin\_op\rangle, Stack(Num(str)))}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{UnOp(\langle un\_op\rangle, Stack(Num(str))) \gralt Call(Name('input'), [])}{}
+}
+
 \NewDocumentCommand{\logic}{s}{%
   \ignorespaces
   \IfBooleanT{#1}{%
@@ -70,6 +96,24 @@
   \otherform{ToBool(\langle exp\rangle )}{}
 }
 
+\NewDocumentCommand{\logicanf}{s}{%
+  \ignorespaces
+  \downplay
+  \firstcase{un\_op}{LogicNot()}{L\_Logic}
+  \downplay
+  \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+  \downplay
+  \firstcase{bin\_op}{LogicAnd() \gralt LogicOr()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{exp}{Atom(Stack(Num(str)), \langle rel\rangle, Stack(Num(str)))}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{ToBool(Stack(Num(str)))}{}
+}
+
 \NewDocumentCommand{\assign}{s}{%
   \ignorespaces
   \IfBooleanT{#1}{%
@@ -87,11 +131,27 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{Assign(\langle exp\rangle , \langle exp\rangle )}{}
+  \firstcase{stmt}{Assign(\langle exp\rangle, \langle exp\rangle)}{}
   \IfBooleanT{#1}{%
     \downplay
   }
   \otherform{Exp(\langle exp\rangle )}{}
+}
+
+\NewDocumentCommand{\assignanf}{s}{%
+  \ignorespaces
+  \removed
+  \firstcase{type\_qual}{Const() \gralt Writeable()}{L\_Assign\_Alloc}
+  \downplay
+  \firstcase{datatype}{IntType() \gralt CharType() \gralt VoidType()}{}
+  \removed
+  \firstcase{exp}{Alloc(\langle type\_qual\rangle, \langle dataype\rangle, Name(str))}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{stmt}{Assign(Stack(Num(str)), Stack(Num(str)))}{}
+  \downplay
+  \otherform{Exp(\langle exp\rangle)}{}
 }
 
 \NewDocumentCommand{\pntr}{s}{%
@@ -138,6 +198,18 @@
   \firstcase{exp}{Ref(\langle exp\rangle )}{}
 }
 
+\NewDocumentCommand{\pntranf}{s}{%
+  \ignorespaces
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Ref(\langle exp\rangle)}{}
+}
+
 \NewDocumentCommand{\arraysecond}{s}{%
   \ignorespaces
   \IfBooleanT{#1}{%
@@ -150,7 +222,43 @@
   \firstcase{exp}{Subscr(\langle exp\rangle , \langle exp\rangle ) \gralt Array(\langle exp\rangle +)}{}
 }
 
+\NewDocumentCommand{\arrayanf}{s}{%
+  \ignorespaces
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{datatype}{ArrayDecl(Num(str)+, \langle datatype\rangle )}{L\_Array}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{exp}{Subscr(Stack(Num(str)), Stack(Num(str))) \gralt Array(\langle exp\rangle +)}{}
+}
+
 \NewDocumentCommand{\struct}{s}{%
+  \ignorespaces
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{datatype}{StructSpec(Name(str))}{L\_Struct}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{exp}{Attr(\langle exp\rangle , Name(str))}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Struct(Assign(Name(str), \langle exp\rangle )+)}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{decl\_def}{StructDecl(Name(str),}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))+)$ & \\
+}
+
+\NewDocumentCommand{\structanf}{s}{%
   \ignorespaces
   \IfBooleanT{#1}{%
     \downplay
@@ -206,6 +314,13 @@
   \firstcase{stmt}{IfElse(\langle exp\rangle , \langle stmt\rangle *, \langle stmt\rangle *)}{L\_If\_Else}
 }
 
+\NewDocumentCommand{\ifelseanf}{s}{%
+  \ignorespaces
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{stmt}{IfElse(\langle Stack(Num(str))\rangle , \langle stmt\rangle *, \langle stmt\rangle *)}{L\_If\_Else}
+}
 
 \NewDocumentCommand{\loopsecond}{s}{%
   \ignorespaces
@@ -240,7 +355,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{Return(\langle exp\rangle )}{}
+  \firstcase{stmt}{Return(\langle exp\rangle)}{}
   \IfBooleanT{#1}{%
     \downplay
   }
@@ -287,6 +402,22 @@
   & & \qquad $Alloc(Writeable(), \langle datatype\rangle , Name(str))*, \lochighlight{\langle block\rangle} *)$ & \\
 }
 
+\NewDocumentCommand{\funanf}{s}{%
+  % \firstcase{ref\_loc}{Stack(Num(str)) \gralt Global(Num(str))}{L\_Assign\_Alloc}
+  % \otherform{Stackframe(Num(str))}{}
+  % \firstcase{error\_data}{\langle exp\rangle  \gralt Pos(Num(str), Num(str))}{}
+  % \firstcase{exp}{Stack(Num(str)) \gralt Ref(\langle ref_loc\rangle , \langle datatype\rangle , \langle error_data\rangle )}{}
+  % \firstcase{stmt}{Exp(\langle exp\rangle )}{}
+  % \otherform{Assign(Alloc(Writeable(), StructSpec(Name(str)), Name(str)), }{}
+  % & & \qquad $Struct(Assign(Name(str), \langle exp\rangle )+, \langle datatype\rangle$ )) & \\
+  % \otherform{Assign(Alloc(Writeable(), ArrayDecl(Num(str)+, \langle datatype\rangle ),}{}
+  % & & \qquad $Name(str)), Array(\langle exp\rangle +, \langle datatype\rangle ))$ & \\
+  \firstcase{stmt}{StackMalloc(Num(str)) \gralt Ref(Global(Num(str)))}{L\_Fun}
+  \otherform{NewStackframe(Name(str), GoTo(str))}{}
+  \otherform{Exp(GoTo(Name(str))) \gralt RemoveStackframe()}{}
+  \otherform{Return(Empty()) \gralt Return(\langle exp\rangle)}{}
+}
+
 \NewDocumentCommand{\block}{s}{%
   \ignorespaces
   \IfBooleanT{#1}{%
@@ -307,18 +438,14 @@
   \firstcase{file}{File(Name(str), \langle decl\_def\rangle *)}{L\_File}
 }
 
-\NewDocumentCommand{\symbol}{s}{%
+\NewDocumentCommand{\symbolsecond}{s}{%
   \ignorespaces
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \firstcase{symbol\_table}{SymbolTable(\langle symbol\rangle )}{L\_Symbol\_Table}
-  \firstcase{symbol}{Symbol(\langle type_qual\rangle , \langle datatype\rangle , \langle name\rangle , \langle val\rangle , \langle pos\rangle , \langle size\rangle )}{}
+  \firstcase{symbol\_table}{SymbolTable(\langle symbol\rangle *)}{L\_Symbol\_Table}
+  \firstcase{symbol}{Symbol(\langle type\_qual\rangle, \langle datatype\rangle, \langle name\rangle, \langle val\rangle, \langle pos\rangle, \langle size\rangle)}{}
   \firstcase{type\_qual}{Empty()}{}
   \firstcase{datatype}{BuiltIn() \gralt SelfDefined()}{}
   \firstcase{name}{Name(str)}{}
   \firstcase{val}{Num(str) \gralt Empty()}{}
   \firstcase{pos}{Pos(Num(str), Num(str)) \gralt Empty()}{}
   \firstcase{size}{Num(str) \gralt Empty()}{}
-
 }
