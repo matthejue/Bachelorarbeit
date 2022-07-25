@@ -774,9 +774,9 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
   \toprule
-  \reti
+  \retiblocks
   \midrule
-  \blockblocks
+  \picocleftover
   \bottomrule
 \end{grammar}
 
@@ -798,9 +798,12 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 \newlineparagraph{Aufgaben}
 \label{sec:reti_patch_pass_zweck}
 \newlineparagraph{Abstrakte Syntax}
-\begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_patch]
+
+\begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_blocks]
   \toprule
-  \firstcase{stmt}{Exit(Num(str))}{}
+  \retiblocks*
+  \midrule
+  \picocleftover*
   \bottomrule
 \end{grammar}
 
@@ -858,7 +861,7 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 % TODO: es braucht noch eine Konkrette Syntax dafür
 \begin{grammar}[Abstrakte Syntax für $L_{RETI}$][H][gr:abstract_syntax_l_reti]
   \toprule
-  \reti*
+  \retiblocks*
   \bottomrule
 \end{grammar}
 

@@ -406,7 +406,7 @@
   \ignorespaces
   \removed
   \firstcase{exp}{Call(Name(str), \langle exp\rangle *)}{L\_Fun}
-  \firstcase{stmt}{StackMalloc(Num(str)) \gralt NewStackframe(Name(str), GoTo(str))}{L\_Fun}
+  \firstcase{stmt}{StackMalloc(Num(str)) \gralt NewStackframe(Name(str), GoTo(str))}{}
   \otherform{Exp(GoTo(Name(str))) \gralt RemoveStackframe()}{}
   \otherform{Return(Empty()) \gralt \textcolor{gray!90!black}{Return(\langle exp\rangle)}}{}
   \removed
@@ -431,20 +431,28 @@
   \firstcase{stmt}{GoTo(Name(str))}{}
 }
 
-\NewDocumentCommand{\blockblocks}{s}{%
+\NewDocumentCommand{\picocleftover}{s}{%
   \ignorespaces
-  \IfBooleanT{#1}{%
+  \IfBooleanTF{#1}{%
+    \firstcase{instr}{\textcolor{gray!90!black}{Exp(GoTo(str)) \gralt GoTo(Name(str))} \gralt Exit(Num(str))}{L\_PicoC}
+  }{
     \downplay
+    \firstcase{instr}{Exp(GoTo(str)) \gralt GoTo(Name(str))}{L\_PicoC}
   }
-  \firstcase{instr}{Exp(GoTo(str))}{L\_Blocks}
-  \IfBooleanT{#1}{%
+  \IfBooleanTF{#1}{%
     \downplay
-  }
-  \firstcase{block}{Block(Name(str), \lochighlight{\langle instr\rangle} *)}{}
-  \IfBooleanT{#1}{%
+    \firstcase{block}{Block(Name(str), \langle instr\rangle *)}{}
+  }{
     \downplay
+    \firstcase{block}{Block(Name(str), \lochighlight{\langle instr\rangle} *)}{}
   }
-  \firstcase{stmt}{GoTo(Name(str)) }{}
+  \IfBooleanTF{#1}{%
+    \removed
+    \firstcase{file}{File(Name(str), \langle block\rangle *)}{}
+  }{%
+    \downplay
+    \firstcase{file}{File(Name(str), \langle block\rangle *)}{}
+  }
 }
 
 \NewDocumentCommand{\file}{s}{%
@@ -473,25 +481,88 @@
   \firstcase{size}{Num(str) \gralt Empty()}{}
 }
 
-\NewDocumentCommand{\reti}{s}{%
+\NewDocumentCommand{\retiblocks}{s}{%
   \ignorespaces
-  \firstcase{reg}{ACC() \gralt IN1() \gralt IN2() \gralt PC() \gralt SP() \gralt BAF()}{L\_Program}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{reg}{ACC() \gralt IN1() \gralt IN2() \gralt PC() \gralt SP() \gralt BAF()}{L\_RETI}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
   \otherform{CS() \gralt DS()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
   \firstcase{arg}{Reg(\langle reg\rangle ) \gralt Num(str)}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
   \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
   \otherform{Always() \gralt NOp()}{}
-  \firstcase{op}{Add() \gralt Addi() \gralt Sub() \gralt Subi() \gralt Mult()}{}
-  \otherform{Multi() \gralt Div() \gralt Divi()}{}
-  \otherform{Mod() \gralt Modi() \gralt Oplus() \gralt Oplusi() \gralt Or()}{}
-  \otherform{Ori() \gralt And() \gralt Andi()}{}
-  \otherform{Load() \gralt Loadin() \gralt Loadi()}{}
-  \otherform{Store() \gralt Storein() \gralt Move()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \firstcase{op}{Add() \gralt Addi() \gralt Sub() \gralt Subi() \gralt Mult() \gralt Multi()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Div() \gralt Divi() \gralt Mod() \gralt Modi() \gralt Oplus() \gralt Oplusi()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Or() \gralt Ori() \gralt And() \gralt Andi()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{Load() \gralt Loadin() \gralt Loadi() \gralt Store() \gralt Storein() \gralt Move()}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
   \firstcase{instr}{Instr(\langle op\rangle , \langle arg\rangle +) \gralt Jump(\langle rel\rangle , Num(str)) \gralt Int(Num(str))}{}
+  \IfBooleanT{#1}{%
+    \downplay
+  }
   \otherform{RTI() \gralt Call(Name('print'), \langle reg\rangle ) \gralt Call(Name('input'), \langle reg\rangle )}{}
-  \otherform{SingleLineComment(str, str)}{}
-  \IfBooleanTF{#1}{%
-    \firstcase{file}{File(Name(str), \langle block\rangle *)}{L\_File}
-  }{%
+  \IfBooleanT{#1}{%
+    \downplay
+  }
+  \otherform{SingleLineComment(str, str) \gralt Instr(Loadi(), [Reg(Acc()), GoTo(Name(str))])}{}
+  \otherform{Jump(Always(), Im(str(distance)))}{}
+  \IfBooleanT{#1}{%
     \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
   }
+}
+
+
+\NewDocumentCommand{\reti}{s}{%
+  \ignorespaces
+  \downplay
+  \firstcase{reg}{ACC() \gralt IN1() \gralt IN2() \gralt PC() \gralt SP() \gralt BAF()}{L\_RETI}
+  \downplay
+  \otherform{CS() \gralt DS()}{}
+  \downplay
+  \firstcase{arg}{Reg(\langle reg\rangle ) \gralt Num(str)}{}
+  \downplay
+  \firstcase{rel}{Eq() \gralt NEq() \gralt Lt() \gralt LtE() \gralt Gt() \gralt GtE()}{}
+  \downplay
+  \otherform{Always() \gralt NOp()}{}
+  \downplay
+  \firstcase{op}{Add() \gralt Addi() \gralt Sub() \gralt Subi() \gralt Mult() \gralt Multi()}{}
+  \downplay
+  \otherform{Div() \gralt Divi() \gralt Mod() \gralt Modi() \gralt Oplus() \gralt Oplusi()}{}
+  \downplay
+  \otherform{Or() \gralt Ori() \gralt And() \gralt Andi()}{}
+  \downplay
+  \otherform{Load() \gralt Loadin() \gralt Loadi() \gralt Store() \gralt Storein() \gralt Move()}{}
+  \downplay
+  \firstcase{instr}{Instr(\langle op\rangle , \langle arg\rangle +) \gralt Jump(\langle rel\rangle , Num(str)) \gralt Int(Num(str))}{}
+  \downplay
+  \otherform{RTI() \gralt Call(Name('print'), \langle reg\rangle ) \gralt Call(Name('input'), \langle reg\rangle )}{}
+  \downplay
+  \otherform{SingleLineComment(str, str) \gralt Instr(Loadi(), [Reg(Acc()), Im("1")])}{}
+  \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
 }
