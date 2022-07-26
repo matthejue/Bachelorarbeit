@@ -727,11 +727,19 @@ Die Aufgabe des \colorbold{PicoC-ANF Passes} ist es den \colorbold{Abstract Synt
 
 \newlineparagraph{Abstrakte Syntax}
 
-Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} in die \colorbold{A-Normalform} zu bringen. Darunter fällt es, dafür zu sorgen, dass \colorbold{Komplexe Knoten}, wie z.B. \smalltt{BinOp(exp, bin\_op, exp)} nur \colorbold{Atomare Knoten}, wie z.B. \smalltt{Stack(Num(str))} haben können. Des Weiteren werden auch \colorbold{Funktionen} und \colorbold{Funktionsaufrufen} aufgelöst, sodass u.a. die Blöcke \smalltt{Block(Name(str), stmt*)} nun direkt im \smalltt{File(Name(str), block*)}-Knoten liegen usw., was in Unterkapitel~\ref{sec:umsetzung_von_funktionen} genauer erklärt wird.
+Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} in die \colorbold{A-Normalform} zu bringen. Darunter fällt es auch, dafür zu sorgen, dass \colorbold{Komplexe Knoten}, wie z.B. \smalltt{BinOp(exp, bin\_op, exp)} nur \colorbold{Atomare Knoten}, wie z.B. \smalltt{Stack(Num(str))} enthalten können. Des Weiteren werden auch \colorbold{Funktionen} und \colorbold{Funktionsaufrufe} aufgelöst, sodass u.a. die \colorbold{Blöcke} \smalltt{Block(Name(str), stmt*)} nun direkt im \smalltt{File(Name(str), block*)}-Knoten liegen usw., was in Unterkapitel~\ref{sec:umsetzung_von_funktionen} genauer erklärt wird. Zudem wird eine \colorbold{Symboltabelle} (Definition~\ref{def:symboltabelle}) eingeführt, welche mit Knoten aus der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf} umgesetzt ist.
 
-Zudem wird eine \colorbold{Symboltabelle} (Definition~\ref{def:symboltabelle}) eingeführt, welche dazu da Informationen, wie Adresse und Datentyp von Variablen zu speichern.
+In der \colorbold{Symboltabelle} wird beim Anlegen eines \colorbold{neuen Eintrags} für eine Variable zunächst eine \colorbold{Adresse} zugewiesen, die dem Wert einer von zwei \colorbold{Countern}  \smalltt{rel\_global\_addr} und  \smalltt{rel\_stack\_addr} entspricht. Der Counter \smalltt{rel\_global\_addr} ist für Variablen in den \colorbold{Globalen Statischen Daten} und der \colorbold{Counter}  \smalltt{rel\_stack\_addr} ist für Variablen auf dem \colorbold{Stackframe}. Einer der beiden \colorbold{Counter} wird entsprechend der \colorbold{Größe} der angelegten Variable \colorbold{hochgezählt}.
 
-Das resultiert in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_anf}.
+Kommt im \colorbold{Programmcode} an einer späteren Stelle diese Variable \smalltt{Name('symbol')} vor, so wird mit dem \colorbold{Symbol}\footnote{Bzw. der \colorbold{Bezeichner}} als Schlüssel in der \colorbold{Symboltabelle} nachgeschlagen und anstelle des \smalltt{Name(str)}-Knotens die in der \colorbold{Symboltabelle} nachgeschlagene Adresse in einem \smalltt{Global(Num('addr'))}- bzw. \smalltt{Stackframe(Num('addr'))}-Knoten eingesetzt eingefügt. Ob der \smalltt{Global(Num('addr'))}- oder  der \smalltt{Stackframe(Num('addr'))}-Knoten zum Einsatz kommt, entscheidet sich anhand des \colorbold{Scopes} (z.B. \smalltt{@scope}), der in der \colorbold{Symboltabelle} an den \colorbold{Bezeichner} drangehängt ist (z.B.\smalltt{identifier@scope}).\footnote{Die Umsetzung von \colorbold{Scopes} wird in Unterkapitel~\ref{sec:funktionsdeklaration_und_definition_und_umsetzung_von_scopes} genauer beschrieben.}
+
+\begin{Definition}{Symboltabelle}{symboltabelle}
+  Eine über ein \colorbold{Assoziatives Feld} umgesetzte \colorbold{Datenstruktur}, die notwendig ist, um das Konzept einer \colorbold{Variablen} in einer Sprache umzusetzen. Diese Datenstruktur ordnet jedem \colorbold{Symbol}\footnote{In einer \colorbold{Symboltabelle} werden \colorbold{Bezeichner} als \colorbold{Symbole} bezeichnet.} einer \colorbold{Variablen}, \colorbold{Konstanten} oder \colorbold{Funktion} aus einem \colorbold{Programm}, Informationen, wie die \colorbold{Adresse}, die \colorbold{Position} im Programmcode oder den \colorbold{Datentyp} zu.
+
+  Die \colorbold{Symboltabelle} muss nur während des \colorbold{Kompiliervorgangs} im \colorbold{Speicher} existieren, da die Einträge in der \colorbold{Symboltabelle} beeinflussen, was für \colorbold{Maschinencode} generiert wird und dadurch im \colorbold{Maschinencode} bereits die richtigen \colorbold{Adressen} usw. angesprochen werden und es die Symboltabelle selbst \colorbold{nicht} mehr braucht.
+\end{Definition}
+
+Das ganze resultiert in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf}.
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$][H][gr:abstract_syntax_l_picoc_anf]
   \toprule
@@ -760,19 +768,6 @@ Das resultiert in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$
   \symbolsecond
   \bottomrule
 \end{grammar}
-
-\begin{Definition}{Symboltabelle}{symboltabelle}
-Eine über ein \colorbold{Assoziatives Feld} umgesetzte \colorbold{Datenstruktur}, die jedem \colorbold{Bezeichner} in der \colorbold{Symboltabelle}
-
-
-zu \colorbold{Variablen}, \colorbold{Konstanten} und \colorbold{Funktionen}, deren \colorbold{Bezeichner} in der Symboltabelle als \colorbold{Symbole} bezeichnet werden, Informationen, wie die \colorbold{Adresse} oder den \colorbold{Datentyp} abspeichert.
-
-
-
-die in einem Programm deklariert oder definiert sind, Informationen, wie die Adresse oder den Datentyp
-
-  Die Symboltabelle muss nur während des \colorbold{Kompiliervorgangs} im \colorbold{Speicher} existieren
-\end{Definition}
 
 \newlineparagraph{Codebeispiel}
 
