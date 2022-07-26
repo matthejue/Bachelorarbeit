@@ -591,9 +591,11 @@ Auf jedes Detail der einzelnen \colorbold{Passes} wird in diesem Unterkapitel al
 
 Der Aufgabe des \colorbold{PicoC-Shrink Pass} ist in Unterkapitel~\ref{dereferenzierung_durch_zugriff_auf_arrayindex_ersetzen} ausführlich an einem Beispiel erklärt. Kurzgefasst hat der \colorbold{PicoC-Shrink Pass} die Aufgabe, die Eigenheit auszunutzen, dass der \colorbold{Dereferenzierungoperator} \smalltt{*pntr} und die damit einhergehende \colorbold{Pointer Arithmetik} \smalltt{*(pntr + i)} sich in der Untermenge der Sprache $L_{C}$, welche die Sprache $L_{PicoC}$ darstellt genau gleich verhält, wie der \colorbold{Operator} für den \colorbold{Zugriff} auf den \colorbold{Index} eines \colorbold{Arrays} \smalltt{ar[i]}.
 
-Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold{Knoten} \smalltt{Deref(exp, i)} im jeweiligen \colorbold{Abstract Syntax Tree} in \colorbold{Knoten} \smalltt{Subscr(exp, i)} um, sodass sich dadurch viele vermeidbare \colorbold{Fallunterscheidungen} und \colorbold{doppelter Code} bei der Implementierung vermeiden lassen, denn man kann die \colorbold{Derefenzierung} \smalltt{*(var + i)} einfach von den Routinen für einen \colorbold{Zugriff auf einen Arrayindex} \smalltt{var[i]} übernehmen lassen.
+Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold{Knoten} \smalltt{Deref(exp, i)} im jeweiligen \colorbold{Abstract Syntax Tree} in \colorbold{Knoten} \smalltt{Subscr(exp, i)} um, sodass sich dadurch viele vermeidbare \colorbold{Fallunterscheidungen} und \colorbold{doppelter Code} bei der Implementierung vermeiden lassen. Man lässt die  \colorbold{Derefenzierung} \smalltt{*(var + i)} einfach von den Routinen für einen \colorbold{Zugriff auf einen Arrayindex} \smalltt{var[i]} übernehmen.
 
 \newlineparagraph{Abstrakte Syntax}
+
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Shrink}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_shrink} ist fast \colorbold{identisch} mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PiocC}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc}, nach welcher der \colorbold{erste} Abstract Syntax Tree in der \colorbold{Syntaktischen Analyse} generiert wurde. Der einzige \colorbold{Unterschied} liegt darin, dass es den Knoten $\mathtt{Deref(\langle exp\rangle, \langle exp\rangle)}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_shrink} \colorbold{nicht} mehr gibt. Das liegt daran, dass dieser Pass alle \colorbold{Vorkommnisse} des Knoten $\mathtt{Deref(\langle exp\rangle, \langle exp\rangle)}$ durch den Knoten $\mathtt{Subscr(\langle exp\rangle, \langle exp\rangle)}$ auswechselt, der ebenfalls bereits in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC}$ definiert ist.
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$][H][gr:abstract_syntax_l_picoc_shrink]
   \toprule
@@ -621,12 +623,13 @@ Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold
   \bottomrule
 \end{grammar}
 
-
-Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Shrink}$ ist \colorbold{identisch} mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PiocC}$ aus Tabelle~\ref{gr:abstract_syntax_l_picoc}, nach welcher der \colorbold{erste} Abstract Syntax Tree in der \colorbold{Syntaktischen Analyse} generiert wurde. Das liegt daran, dass dieser Pass nur alle \colorbold{Vorkommnisse} eines Knoten \smalltt{Deref(exp, i)} durch den Knoten \smalltt{Subscr(exp, i)} auswechselt, der ebenfalls bereits in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC}$ definiert ist.
+\begin{Special_Paragraph}
+  Der \textcolor{red}{rot} markierte Knoten bedeutet, dass dieser im Vergleich zur voherigen \colorbold{Abstrakten Syntax} nicht mehr da ist.
+\end{Special_Paragraph}
 
 \newlineparagraph{Codebeispiel}
 
-In den nächsten Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_codebeispiel} zur \colorbold{Anschauung} der verschiedenen \colorbold{Passes} verwendet. Im Code~\ref{code:picoc_code_für_codebeispiel} ist in der Funktion \smalltt{faculty} ein \colorbold{iterativer} Algorithmus implementiert, der die \colorbold{Fakultät} eines übergebenen \colorbold{Arguments} berechnet. Der Algorithmus basiert auf einem \colorbold{Beispielprogramm} aus der Vorlesung~\cite{scholl_betriebssysteme_2020}, der in der Vorlesung allerdings \colorbold{rekursiv} implementiert war.
+In den nächsten Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_codebeispiel} zur \colorbold{Anschauung} der verschiedenen \colorbold{Passes} verwendet. Im Code~\ref{code:picoc_code_für_codebeispiel} ist in der Funktion \smalltt{faculty} ein \colorbold{iterativer} Algorithmus implementiert, der die \colorbold{Fakultät} eines übergebenen \colorbold{Arguments} berechnet. Der Algorithmus basiert auf einem \colorbold{Beispielprogramm} aus der Vorlesung~\cite{scholl_betriebssysteme_2020}, welcher in der Vorlesung allerdings \colorbold{rekursiv} implementiert ist.
 % natürlich beide Beispiele als Tests verfügbar
 
 Dieser \colorbold{rekursive} Algoirthmus ist allerdings \colorbold{kein} gutes \colorbold{Anschaungsbeispiel}, dass viele der Aufgaben der verschiedenen \colorbold{Passes} bei der Kompilierung veranschaulicht hätte. Viele Aufgaben der \colorbold{Passes}, wie z.B. bei der Kompilierung von \smalltt{if}-, \smalltt{if-else}-, \smalltt{while}- und \smalltt{do-while}-Statements wären im Beispiel aus der Vorlesung \colorbold{nicht} enthalten gewesen. Daher wurde das Beispiel aus der Vorlesung zu einem \colorbold{iterativen} Algorithmus~\ref{code:picoc_code_für_codebeispiel} umgeschrieben, um \smalltt{if}- und \smalltt{while}-Statemtens zu enthalten.
@@ -660,11 +663,11 @@ Im \colorbold{PicoC-Shrink-Pass} ändert sich nichts im Vergleich zum \colorbold
 \newlineparagraph{Aufgabe}
 \label{sec:picoc_blocks_pass_zweck}
 
-Die Aufgabe des \colorbold{PicoC-Blocks Passes} ist die Knoten \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} mithilfe von \smalltt{Block(name, stmts\_instrs}-, \smalltt{GoTo(lable)}- und \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten umzusetzen. Der \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten wird zur Umsetzung der \colorbold{Bedingung} verwendet und es wird, je nachdem, ob die Bedingung \colorbold{wahr} oder \colorbold{falsch} ist mithilfe der \smalltt{GoTo(label)}-Knoten in einen von zwei \colorbold{alternativen Branches} gesprungen oder ein \colorbold{Branch} erneut aufgerufen usw.
+Die Aufgabe des \colorbold{PicoC-Blocks Passes} ist es die Knoten \smalltt{If(exp, stmts)}, \smalltt{IfElse(exp, stmts1, stmts2)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} mithilfe von \smalltt{Block(name, stmts\_instrs}-, \smalltt{GoTo(lable)}- und \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten umzusetzen. Der \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten wird zur Umsetzung der \colorbold{Bedingung} verwendet und es wird, je nachdem, ob die Bedingung \colorbold{wahr} oder \colorbold{falsch} ist mithilfe der \smalltt{GoTo(label)}-Knoten in einen von zwei \colorbold{alternativen Branches} gesprungen oder ein \colorbold{Branch} erneut aufgerufen usw.
 
 \newlineparagraph{Abstrakte Syntax}
 
-Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Des Weiteren wird für die \colorbold{Kommentare}, die in vielen Codebeispielen zur leichteren Verständlichkeit eingefügt wurden ein \smalltt{SingleLineComment(prefix, content)}-Knoten benötigt. Die \colorbold{Funktionsdefinition} \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} ist nun ein Container für \colorbold{Blöcke} \smalltt{Block(Name(str), ⟨stmt⟩*)} und keine Statements \smalltt{stmt} mehr.
+Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Die Knoten \smalltt{If(exp, stmts)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} gibt es nicht mehr, da sie durch \smalltt{Block(name, stmts\_instrs}-, \smalltt{GoTo(lable)}- und \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten ersetzt wurden. Die \colorbold{Funktionsdefinition} \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} ist nun ein Container für \colorbold{Blöcke} \smalltt{Block(Name(str), ⟨stmt⟩*)} und keine Statements \smalltt{stmt} mehr.
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule
@@ -695,15 +698,11 @@ Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\r
 \end{grammar}
 
 \begin{Special_Paragraph}
-  Die Abstrakte Syntax ist im Gegensatz zur Konkretten Syntax nur vom Programmierer verstanden werden, wenn man nicht darauf abzielt
+  Alles \textcolor{red}{rot} markierte bedeutet, es wurde \colorbold{entfernt} oder \colorbold{abgeändert}. Alles \textcolor{gray!90!black}{ausgegraute} bedeutet, es hat sich im Vergleich zur letzten Abstrakten Syntax \colorbold{nichts} geändert. Alle normal in \smalltt{schwarz} geschriebenen Knoten wurden \colorbold{neu} hinzugefügt.
 
-  % Die \colorbold{Abstrakte Syntax} der Sprache $L_{Picoc\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} ist als \colorbold{Erweiterung} anzusehen. Ein \colorbold{Erweiterung} ist es insofern, dass es neue Knoten \colorbold{hinzufügt}, die zur Umsetzung dieses Passes notwendig sind, wie z.B. den \smalltt{GoTo(Name(str))}-Knoten. Den Knoten \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} könnte man als Änderung des bestehenden Knoten \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨stmt⟩*)} ansehen. Aber da die Abstrakte Syntax vor allem für den Programmierer relevant ist, anders als die Konkrette Syntax, die von einem Parser Generator ausgewertet wird und daher perfekt definiert sein muss
+  Die \colorbold{Abstrakte Syntax} soll im Gegensatz zur \colorbold{Konkretten Syntax} meist nur vom \colorbold{Programmierer} verstanden werden und sollte daher vor allem \colorbold{einfach verständlich} sein und stellt daher eine \colorbold{Obermenge} aller tatsächlich möglichen \colorbold{Kompositionen} von \colorbold{Knoten} dar\footnote{D.h. auch wenn dort \smalltt{exp} als \colorbold{Attribut} steht, kann dort \colorbold{nicht} jeder Knoten, der sich aus der \colorbold{Produktion} \smalltt{exp} ergibt auch wirklich eingesetzt werden.}.
 
-% \smalltt{If(⟨exp⟩, ⟨stmt⟩*)}, \smalltt{IfElse(⟨exp⟩, ⟨stmt⟩*, ⟨stmt⟩*)}, \smalltt{While(⟨exp⟩, ⟨stmt⟩*)} und \smalltt{DoWhile(⟨exp⟩, ⟨stmt⟩*)}
-
-  % vor allem für Programmierer muss nicht syntaktisch genau sein, wenn es Programmierer damit versteht, was er tuen soll, dann ist es gut so, deswegen nicht nötig anzugeben, was für Knoten nicht mehr existieren.
-
-  Man bezeichnet hier die Abstrakte Syntax als \enquote{Abstrakte Syntax der Sprache $L_{Picoc\_Blocks}$}. Diese Sprache $L_{Picoc\_Blocks}$ besitzt eine \colorbold{Konkrette Syntax} und
+  Man bezeichnet hier die \colorbold{Abstrakte Syntax} als \colorbold{\enquote{Abstrakte Syntax der Sprache $L_{Picoc\_Blocks}$}}. Diese Sprache $L_{Picoc\_Blocks}$ wird durch eine \colorbold{Konkrette Syntax} beschrieben, die allerdings nicht weiter relevant ist, da in den \colorbold{Passes} nur \colorbold{Abstract Syntax Trees} umgeformt werden. Es ist hierbei nur wichtig zu wissen, dass die \colorbold{Abstrakte Syntax} theoretisch zur Kompilierung der Sprache $L_{Picoc\_Blocks}$ definiert ist, also die Sprache $L_{PicoC\_Blocks}$ nicht die Sprache ist, die von der \colorbold{Abstrakten Syntax} beschrieben ist.
 \end{Special_Paragraph}
 % TODO: man tut so als gäbe es Konkrette Syntax
 
@@ -724,9 +723,15 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 \newlineparagraph{Aufgabe}
 \label{sec:picoc_mon_pass_zweck}
 
-% den \colorbold{Bedingungen} \smalltt{<condition>} von \smalltt{if(<condition>){<stmts>}else{<stmts>}}-Statements entfernt
+Die Aufgabe des \colorbold{PicoC-ANF Passes} ist es den \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC\_Blocks}$ in die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_ANF}$ umzuformen, welche in \colorbold{A-Normalform} (Definition~\ref{def:a_normal_form}) ist. Um Wiederholung zu vermeiden wird zur Erklärung der \colorbold{A-Normalform} auf Unterkapitel~\ref{sec:a_normalform} verwiesen.
+
+Darunter zählt es auch jegliche
+
+% Nebeneffekte
 
 \newlineparagraph{Abstrakte Syntax}
+
+
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$][H][gr:abstract_syntax_l_picoc_anf]
   \toprule
   \commentsecond*
@@ -759,6 +764,8 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 \end{Definition}
 
 \newlineparagraph{Codebeispiel}
+
+In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-ANF Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem
 
 \begin{code}
   \centering

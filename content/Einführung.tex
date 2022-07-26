@@ -448,6 +448,21 @@ In der \colorbold{Code Generierung} steht man nun dem Problem gegenüber einen \
 
 Die von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} sollten dabei mit jedem \colorbold{Pass} der \colorbold{Syntax} von \colorbold{Maschienenbefehlen} immer ähnlicher werden, bis es schließlich nur noch Maschienenbefehle sind.
 
+
+\subsection{Monadische Normalform}
+
+\begin{Definition}{Reiner Ausdruck (bzw. pure expression)}{pure_expression}
+  Ein \colorbold{Reiner Ausdruck} ist rein, wenn er keine \colorbold{Nebeneffekte} erzeugt.
+  \footcite{g_siek_course_2022}
+\end{Definition}
+
+\begin{Definition}{Monadische Normalform}{monadische_normalform}
+  Eine \colorbold{Konkrette Syntax} ist in \colorbold{Monadischer Normalform}, wenn sie \colorbold{reine} Ausdrücke und Ausdrücke, die \colorbold{nicht rein} sind
+\end{Definition}
+
+\subsection{A-Normalform}
+\label{sec:a_normalform}
+
 Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbold{höhere Programmiersprache} und bei $L_2$ um \colorbold{Maschienensprache} handelt, ist es fast unerlässlich einen \colorbold{Pass} einzuführen, der \colorbold{komplexe Ausdrücke} (Definition~\ref{def:komplexer_ausdruck}) aus \colorbold{Statements} und \colorbold{Ausdrücken} entfernt. Das wird erreicht, indem man aus den komplexen Ausdrücken \colorbold{vorangestellte} Statements macht, in denen die \colorbold{komplexen Ausdrücke} \colorbold{temporären Locations} zugewiesen werden (Definiton~\ref{def:location}) und dann anstelle des \colorbold{komplexen Ausdrucks} auf die jeweilige \colorbold{temporäre Location} zugegriffen wird.
 
 Sollte in dem \colorbold{Statemtent}, indem der \colorbold{komplexe Ausdruck} einer \colorbold{temporären Location} zugewiesen wird, der komplexe Ausdruck \colorbold{Teilausdrücke} enthalten, die \colorbold{komplex} sind, muss die gleiche Prozedur erneut für die \colorbold{Teilausdrücke} angewandt werden, bis \colorbold{komplexe Ausdrücke} nur noch in Statements zur Zuweisung an Locations auftauchen, aber die komplexen Ausdrücke nur \colorbold{Atomare Ausdrücke} (Definiton~\ref{def:atomarer_ausdruck}) enthalten.
@@ -464,6 +479,8 @@ Auf diese Weise sind alle \colorbold{Statements} und \colorbold{Ausdrücke} in \
 
 \begin{Definition}{Atomarer Ausdruck}{atomarer_ausdruck}
   Ein \colorbold{Atomarer Ausdruck} ist ein Ausdruck, der \colorbold{atomar} ist, also \colorbold{nicht} mehr weiter \colorbold{zerkleinert} werden kann. Also entweder eine \colorbold{Variable} \smalltt{var}, eine \colorbold{Zahl} \smalltt{12}, ein \colorbold{ASCII-Zeichen} \smalltt{'c'} oder ein \colorbold{Zugriff auf eine Location}, wie z.B. \smalltt{stack(1)} ist.\footcite{g_siek_course_2022}
+
+  Präziser ist ein \colorbold{Ausdruck} ist \colorbold{atomar}, wenn er
 \end{Definition}
 
 \begin{Definition}{Komplexer Ausdruck}{komplexer_ausdruck}
@@ -473,7 +490,7 @@ Auf diese Weise sind alle \colorbold{Statements} und \colorbold{Ausdrücke} in \
 \begin{Definition}{A-Normalform (ANF)}{a_normal_form}
   Ein \colorbold{Statement} oder \colorbold{Ausdruck} ist in \colorbold{A-Normalform}, wenn er nach einer \colorbold{Konkretten Syntax} in \colorbold{A-Normalform} abgeleitet wurde.
 
-  Eine \colorbold{Konkrette Syntax} ist in \colorbold{A-Normalform}, wenn alle \colorbold{Komplexen Ausdrücke} nur \colorbold{Atomare Ausdrücke} enthalten und einer \colorbold{Location} zugewiesen sein müssen.
+  Eine \colorbold{Konkrette Syntax} ist in \colorbold{A-Normalform}, wenn alle \colorbold{Komplexen Ausdrücke} nur \colorbold{Atomare Ausdrücke} enthalten und einer \colorbold{Location} zugewiesen sind.
 
   Eine \colorbold{Abstrakte Syntax} ist in \colorbold{A-Normalform}, wenn die \colorbold{Konkrette Syntax} für welche sie definiert wurde in \colorbold{A-Normalform} ist.
   \footcite{noauthor_-normalization_nodate}
