@@ -595,7 +595,7 @@ Daher wandelt der \colorbold{PicoC-Shrink Pass} alle Verwendungen des \colorbold
 
 \newlineparagraph{Abstrakte Syntax}
 
-Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Shrink}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_shrink} ist fast \colorbold{identisch} mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PiocC}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc}, nach welcher der \colorbold{erste} Abstract Syntax Tree in der \colorbold{Syntaktischen Analyse} generiert wurde. Der einzige \colorbold{Unterschied} liegt darin, dass es den Knoten $\mathtt{Deref(\langle exp\rangle, \langle exp\rangle)}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_shrink} \colorbold{nicht} mehr gibt. Das liegt daran, dass dieser Pass alle \colorbold{Vorkommnisse} des Knoten $\mathtt{Deref(\langle exp\rangle, \langle exp\rangle)}$ durch den Knoten $\mathtt{Subscr(\langle exp\rangle, \langle exp\rangle)}$ auswechselt, der ebenfalls bereits in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC}$ definiert ist.
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Shrink}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_shrink} ist fast \colorbold{identisch} mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PiocC}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc}, nach welcher der \colorbold{erste} Abstract Syntax Tree in der \colorbold{Syntaktischen Analyse} generiert wurde. Der einzige \colorbold{Unterschied} liegt darin, dass es den Knoten \smalltt{Deref(exp, exp)} in Tabelle~\ref{gr:abstract_syntax_l_picoc_shrink} \colorbold{nicht} mehr gibt. Das liegt daran, dass dieser Pass alle \colorbold{Vorkommnisse} des Knoten \smalltt{Deref(exp, exp)} durch den Knoten \smalltt{Subscr(exp, exp)} auswechselt, der ebenfalls bereits in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC}$ definiert ist.
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$][H][gr:abstract_syntax_l_picoc_shrink]
   \toprule
@@ -667,7 +667,7 @@ Die Aufgabe des \colorbold{PicoC-Blocks Passes} ist es die Knoten \smalltt{If(ex
 
 \newlineparagraph{Abstrakte Syntax}
 
-Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax}~\ref{gr:abstract_syntax_l_picoc} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Die Knoten \smalltt{If(exp, stmts)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} gibt es nicht mehr, da sie durch \smalltt{Block(name, stmts\_instrs}-, \smalltt{GoTo(lable)}- und \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten ersetzt wurden. Die \colorbold{Funktionsdefinition} \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} ist nun ein Container für \colorbold{Blöcke} \smalltt{Block(Name(str), ⟨stmt⟩*)} und keine Statements \smalltt{stmt} mehr.
+Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Shrink}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_shrink} um die Knoten zu erweitern, die im Unterkapitel \ref{sec:picoc_blocks_pass_zweck} erwähnt wurden. Die Knoten \smalltt{If(exp, stmts)}, \smalltt{While(exp, stmts)} und \smalltt{DoWhile(exp, stmts)} gibt es nicht mehr, da sie durch \smalltt{Block(name, stmts\_instrs}-, \smalltt{GoTo(lable)}- und \smalltt{IfElse(exp, stmts1, stmts2)}-Knoten ersetzt wurden. Die \colorbold{Funktionsdefinition} \smalltt{FunDef(⟨datatype⟩, Name(str), Alloc(Writeable(), ⟨datatype⟩, Name(str))*, ⟨block⟩*)} ist nun ein Container für \colorbold{Blöcke} \smalltt{Block(Name(str), ⟨stmt⟩*)} und keine Statements \smalltt{stmt} mehr. Das resultiert in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks}.
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$][H][gr:abstract_syntax_l_picoc_blocks]
   \toprule
@@ -723,14 +723,15 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 \newlineparagraph{Aufgabe}
 \label{sec:picoc_mon_pass_zweck}
 
-Die Aufgabe des \colorbold{PicoC-ANF Passes} ist es den \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC\_Blocks}$ in die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_ANF}$ umzuformen, welche in \colorbold{A-Normalform} (Definition~\ref{def:a_normal_form}) ist. Um Wiederholung zu vermeiden wird zur Erklärung der \colorbold{A-Normalform} auf Unterkapitel~\ref{sec:a_normalform} verwiesen.
-
-Darunter zählt es auch jegliche
-
-% Nebeneffekte
+Die Aufgabe des \colorbold{PicoC-ANF Passes} ist es den \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC\_Blocks}$ in die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_ANF}$ umzuformen, welche in \colorbold{A-Normalform} (Definition~\ref{def:a_normal_form}) und damit auch in \colorbold{Monadischer Normalform} (Definition~\ref{def:monadische_normalform}) ist. Um Wiederholung zu vermeiden wird zur Erklärung der \colorbold{A-Normalform} auf Unterkapitel~\ref{sec:a_normalform} verwiesen.
 
 \newlineparagraph{Abstrakte Syntax}
 
+Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} in die \colorbold{A-Normalform} zu bringen. Darunter fällt es, dafür zu sorgen, dass \colorbold{Komplexe Knoten}, wie z.B. \smalltt{BinOp(exp, bin\_op, exp)} nur \colorbold{Atomare Knoten}, wie z.B. \smalltt{Stack(Num(str))} haben können. Des Weiteren werden auch \colorbold{Funktionen} und \colorbold{Funktionsaufrufen} aufgelöst, sodass u.a. die Blöcke \smalltt{Block(Name(str), stmt*)} nun direkt im \smalltt{File(Name(str), block*)}-Knoten liegen usw., was in Unterkapitel~\ref{sec:umsetzung_von_funktionen} genauer erklärt wird.
+
+Zudem wird eine \colorbold{Symboltabelle} (Definition~\ref{def:symboltabelle}) eingeführt, welche dazu da Informationen, wie Adresse und Datentyp von Variablen zu speichern.
+
+Das resultiert in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_anf}.
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$][H][gr:abstract_syntax_l_picoc_anf]
   \toprule
@@ -761,6 +762,16 @@ Darunter zählt es auch jegliche
 \end{grammar}
 
 \begin{Definition}{Symboltabelle}{symboltabelle}
+Eine über ein \colorbold{Assoziatives Feld} umgesetzte \colorbold{Datenstruktur}, die jedem \colorbold{Bezeichner} in der \colorbold{Symboltabelle}
+
+
+zu \colorbold{Variablen}, \colorbold{Konstanten} und \colorbold{Funktionen}, deren \colorbold{Bezeichner} in der Symboltabelle als \colorbold{Symbole} bezeichnet werden, Informationen, wie die \colorbold{Adresse} oder den \colorbold{Datentyp} abspeichert.
+
+
+
+die in einem Programm deklariert oder definiert sind, Informationen, wie die Adresse oder den Datentyp
+
+  Die Symboltabelle muss nur während des \colorbold{Kompiliervorgangs} im \colorbold{Speicher} existieren
 \end{Definition}
 
 \newlineparagraph{Codebeispiel}
@@ -825,8 +836,10 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
 
 \subsubsection{RETI Pass}
 \label{reti_pass}
+
 \newlineparagraph{Aufgaben}
 \label{sec:reti_pass_zweck}
+
 \newlineparagraph{Konkrette und Abstrakte Syntax}
 
 % dieser Pass entspricht Assembler bis auf die Sache mit binärer Repräsentation, was der PicoC-Compiler garnicht macht

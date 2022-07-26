@@ -207,7 +207,7 @@
   }
   \firstcase{datatype}{PntrDecl(Num(str), \langle datatype\rangle )}{L\_Pntr}
   \otherform{Ref(Global(str)) \gralt Ref(Stackframe(str))}{}
-  \otherform{Ref(Subscr(\langle exp\rangle, Num(str)) \gralt Ref(Attr(\langle exp\rangle, Name(str))))}{}
+  \otherform{Ref(Subscr(\langle exp\rangle, \langle exp\rangle\gralt Ref(Attr(\langle exp\rangle, Name(str))))}{}
 }
 
 \NewDocumentCommand{\arraysecond}{s}{%
@@ -228,10 +228,7 @@
     \downplay
   }
   \firstcase{datatype}{ArrayDecl(Num(str)+, \langle datatype\rangle )}{L\_Array}
-  \IfBooleanT{#1}{%
-    \downplay
-  }
-  \firstcase{exp}{Subscr(\langle exp\rangle, Stack(Num(str))) \gralt Array(\langle exp\rangle +)}{}
+  \firstcase{exp}{Subscr(\langle exp\rangle, Stack(Num(str))) \gralt \textcolor{gray!90!black}{Array(\langle exp\rangle +)}}{}
 }
 
 \NewDocumentCommand{\struct}{s}{%
