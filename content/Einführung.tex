@@ -51,7 +51,7 @@ Der wohl wichtigsten zu klärenden Begriffe, sind die eines \colorbold{Compilers
 Üblicherweise kompiliert ein \colorbold{Compiler} ein \colorbold{Program}, dass in einer \colorbold{Programmiersprache} geschrieben ist zu \colorbold{Maschienenncode}, der in \colorbold{Maschienensprache} (Definition~\ref{def:maschienensprache}) geschrieben ist, aber es gibt z.B. auch \colorbold{Transpiler} (Definition~\ref{def:transpiler}) oder \colorbold{Cross-Compiler} (Definition~\ref{def:cross_compiler}). Des Weiteren sind \colorbold{Maschienensprache} und \colorbold{Assemblersprache} (Definition~\ref{def:assemblersprache}) voneinander zu unterscheiden.
 
 \begin{Definition}{Maschienensprache}{maschienensprache}
-  Programmiersprache, deren mögliche Programme die \colorbold{hardwarenaheste Repräsentation} eines möglicherweise zuvor hierzu kompilierten bzw. assemblierten Programmes darstellen. Jeder Maschienenbefehl entspricht einer bestimmten \colorbold{Aufgabe}, die die CPU im \colorbold{vereinfachten Fall} in einem \colorbold{Zyklus} der \colorbold{Fetch-} und \colorbold{Execute-Phase}, genauergesagt in der \colorbold{Execute-Phase} übernehmen kann oder allgemein in einer \colorbold{geringen konstanten} Anzahl von Fetch- und Execute Phasen im \colorbold{komplexeren Fall}. Die Maschienenbefehle sind meist so designed, dass sie sich innerhalb bestimmter \colorbold{Wortbreiten}, die $2$er Potenzen sind codieren lassen. Im einfachsten Fall innerhalb einer \colorbold{Speicherzelle} des \colorbold{Hauptspeichers}.\footnote{Viele Prozessorarchitekturen erlauben es allerdings auch z.B. \colorbold{zwei} Maschienenbefehle in \colorbold{eine} Speicherzelle des Hauptspeichers zu komprimieren, wenn diese zwei Maschienenbefehle keine Operanden mit zu großen \colorbold{Immediates} (Definition~\ref{def:immediate}) haben.}\footcite{scholl_betriebssysteme_2020}
+  Programmiersprache, deren mögliche Programme die \colorbold{hardwarenaheste Repräsentation} eines möglicherweise zuvor hierzu kompilierten bzw. assemblierten Programmes darstellen. Jeder Maschienenbefehl entspricht einer bestimmten \colorbold{Aufgabe}, die die CPU im \colorbold{vereinfachten Fall} in einem \colorbold{Zyklus} der \colorbold{Fetch-} und \colorbold{Execute-Phase}, genauergesagt in der \colorbold{Execute-Phase} übernehmen kann oder allgemein in einer \colorbold{geringen konstanten} Anzahl von Fetch- und Execute Phasen im \colorbold{Komplexeren Fall}. Die Maschienenbefehle sind meist so designed, dass sie sich innerhalb bestimmter \colorbold{Wortbreiten}, die $2$er Potenzen sind codieren lassen. Im einfachsten Fall innerhalb einer \colorbold{Speicherzelle} des \colorbold{Hauptspeichers}.\footnote{Viele Prozessorarchitekturen erlauben es allerdings auch z.B. \colorbold{zwei} Maschienenbefehle in \colorbold{eine} Speicherzelle des Hauptspeichers zu komprimieren, wenn diese zwei Maschienenbefehle keine Operanden mit zu großen \colorbold{Immediates} (Definition~\ref{def:immediate}) haben.}\footcite{scholl_betriebssysteme_2020}
 \end{Definition}
 
 \begin{Definition}{Assemblersprache (bzw. engl. Assembly Language)}{assemblersprache}
@@ -66,7 +66,7 @@ Ein \colorbold{Assembler} (Definition~\ref{def:assembler}) ist in üblichen Comp
 \end{Definition}
 
 \begin{Definition}{Objectcode}{objectcode}
-  Bei komplexeren Compilern, die es erlauben den Programmcode in \colorbold{mehrere Dateien} aufzuteilen wird häufig \colorbold{Objectcode} erzeugt, der neben der Folge von Maschienenbefehlen in \colorbold{binärer Repräsentation} auch noch Informationen für den \colorbold{Linker} enthält, die im späteren \colorbold{Maschiendencode} nicht mehr enthalten sind, sobald der \colorbold{Linker} die Objektdateien zum Maschienencode zusammengesetzt hat.\footcite{scholl_einfuhrung_2021}
+  Bei Komplexeren Compilern, die es erlauben den Programmcode in \colorbold{mehrere Dateien} aufzuteilen wird häufig \colorbold{Objectcode} erzeugt, der neben der Folge von Maschienenbefehlen in \colorbold{binärer Repräsentation} auch noch Informationen für den \colorbold{Linker} enthält, die im späteren \colorbold{Maschiendencode} nicht mehr enthalten sind, sobald der \colorbold{Linker} die Objektdateien zum Maschienencode zusammengesetzt hat.\footcite{scholl_einfuhrung_2021}
 \end{Definition}
 
 \begin{Definition}{Linker}{linker}
@@ -451,21 +451,39 @@ Die von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} sol
 
 \subsection{Monadische Normalform}
 
+Hat man es mit einer Sprache zu tuen, welche \colorbold{Unreine Ausdrücke} (Definition~\ref{def:unreiner_ausdruck}) besitzt, so ist es sinnvoll einen \colorbold{Pass} einzuführen, der \colorbold{reine} und \colorbold{unreine Ausdrücke} voneinander trennt. Das wird erreicht, indem man aus den \colorbold{Unreinen Ausdrücken} vorangestellte Statements macht, in denen die \colorbold{Komplexen Ausdrücke} \colorbold{temporären Locations} zugewiesen werden (Definiton~\ref{def:location}) und dann anstelle des \colorbold{Komplexen Ausdrucks} auf die jeweilige \colorbold{temporäre Location} zugegriffen wird.
+
+
 \begin{Definition}{Reiner Ausdruck (bzw. pure expression)}{pure_expression}
-  Ein \colorbold{Reiner Ausdruck} ist rein, wenn er keine \colorbold{Nebeneffekte} erzeugt.
-  \footcite{g_siek_course_2022}
+  Ein \colorbold{Reiner Ausdruck} ist ein Ausdruck, der \colorbold{rein} ist. Das bedeutet, dass dieser Ausdruck \colorbold{keine Nebeneffekte} erzeugt. Ein \colorbold{Nebeneffekt} ist eine \colorbold{Bedeutung} eines Ausdrucks, die sich nicht mit \colorbold{RETI-Code} darstellen lässt.\footnote{Sondern z.B. \colorbold{intern} etwas am \colorbold{Kompilierprozess} ändert.}\footcite{g_siek_course_2022}
+\end{Definition}
+
+\begin{Definition}{Unreiner Ausdruck}{unreiner_ausdruck}
+  Ein \colorbold{Unreiner Ausdruck} ist ein Ausdruck, der \colorbold{nicht rein} ist.
 \end{Definition}
 
 \begin{Definition}{Monadische Normalform}{monadische_normalform}
-  Eine \colorbold{Konkrette Syntax} ist in \colorbold{Monadischer Normalform}, wenn sie \colorbold{reine} Ausdrücke und Ausdrücke, die \colorbold{nicht rein} sind
+  Eine \colorbold{Konkrette Syntax} ist in \colorbold{Monadischer Normalform}, wenn sie \colorbold{reine Ausdrücke} und \colorbold{unreine Ausdrücke} \colorbold{nicht} miteinander \colorbold{mischt}, sondern voneinander \colorbold{trennt}.\footnote{Z.B. ist bei \smalltt{int var = 12} der Ausdruck mit dem \colorbold{Nebeneffekt} eine Variable zu \colorbold{allokieren:} \smalltt{int var}, mit dem Ausdruck für eine \colorbold{Zuweisung} $\mathtt{\langle exp\rangle = 12}$ gemischt.}\footcite{g_siek_course_2022}
 \end{Definition}
+
+\begin{figure}[H]
+  \codebox[title=Code, remember as=code, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_monadic_normal_form_code.special}
+  \hfill
+  \codebox[title=Code in Monadischer Normalform, remember as=mon, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_monadic_normal_form_mon.special}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (code.east) to[bend right] node[below, align=center] {trenne Ausdrücke \colorbold{mit}\\ und \colorbold{ohne Nebeneffekte}} (mon.west);
+  \end{tikzpicture}
+  \caption{Codebeispiel für das Trennen von Ausdrücken mit und ohne Nebeneffekten}
+  \label{fig:example_remove_complex_operands}
+\end{figure}
 
 \subsection{A-Normalform}
 \label{sec:a_normalform}
 
-Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbold{höhere Programmiersprache} und bei $L_2$ um \colorbold{Maschienensprache} handelt, ist es fast unerlässlich einen \colorbold{Pass} einzuführen, der \colorbold{komplexe Ausdrücke} (Definition~\ref{def:komplexer_ausdruck}) aus \colorbold{Statements} und \colorbold{Ausdrücken} entfernt. Das wird erreicht, indem man aus den komplexen Ausdrücken \colorbold{vorangestellte} Statements macht, in denen die \colorbold{komplexen Ausdrücke} \colorbold{temporären Locations} zugewiesen werden (Definiton~\ref{def:location}) und dann anstelle des \colorbold{komplexen Ausdrucks} auf die jeweilige \colorbold{temporäre Location} zugegriffen wird.
+Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbold{höhere Programmiersprache} und bei $L_2$ um \colorbold{Maschienensprache} handelt, ist es fast unerlässlich einen \colorbold{Pass} einzuführen, der \colorbold{Komplexe Ausdrücke} (Definition~\ref{def:komplexer_ausdruck}) aus \colorbold{Statements} und \colorbold{Ausdrücken} entfernt. Das wird erreicht, indem man aus den Komplexen Ausdrücken \colorbold{vorangestellte} Statements macht, in denen die \colorbold{Komplexen Ausdrücke} \colorbold{temporären Locations} zugewiesen werden (Definiton~\ref{def:location}) und dann anstelle des \colorbold{Komplexen Ausdrucks} auf die jeweilige \colorbold{temporäre Location} zugegriffen wird.
 
-Sollte in dem \colorbold{Statemtent}, indem der \colorbold{komplexe Ausdruck} einer \colorbold{temporären Location} zugewiesen wird, der komplexe Ausdruck \colorbold{Teilausdrücke} enthalten, die \colorbold{komplex} sind, muss die gleiche Prozedur erneut für die \colorbold{Teilausdrücke} angewandt werden, bis \colorbold{komplexe Ausdrücke} nur noch in Statements zur Zuweisung an Locations auftauchen, aber die komplexen Ausdrücke nur \colorbold{Atomare Ausdrücke} (Definiton~\ref{def:atomarer_ausdruck}) enthalten.
+Sollte in dem \colorbold{Statemtent}, indem der \colorbold{Komplexe Ausdruck} einer \colorbold{temporären Location} zugewiesen wird, der Komplexe Ausdruck \colorbold{Teilausdrücke} enthalten, die \colorbold{komplex} sind, muss die gleiche Prozedur erneut für die \colorbold{Teilausdrücke} angewandt werden, bis \colorbold{Komplexe Ausdrücke} nur noch in Statements zur Zuweisung an Locations auftauchen, aber die Komplexen Ausdrücke nur \colorbold{Atomare Ausdrücke} (Definiton~\ref{def:atomarer_ausdruck}) enthalten.
 
 \begin{Definition}{Location}{location}
   Kollektiver Begriff für \colorbold{Variablen}, \colorbold{Attribute} bzw. \colorbold{Elemente} von Variablen bestimmter Datentypen, \colorbold{Speicherbereiche auf dem Stack}, die \colorbold{temporäre Zwischenergebnisse} speichern und \colorbold{Register}.
@@ -484,7 +502,7 @@ Auf diese Weise sind alle \colorbold{Statements} und \colorbold{Ausdrücke} in \
 \end{Definition}
 
 \begin{Definition}{Komplexer Ausdruck}{komplexer_ausdruck}
-  Ein \colorbold{komplexer Ausdruck} ist ein \colorbold{Ausdruck}, der \colorbold{nicht atomar} ist, wie z.B. \smalltt{5 \% 4}, \smalltt{-1} oder \smalltt{fun(12)}.\footcite{g_siek_course_2022}
+  Ein \colorbold{Komplexer Ausdruck} ist ein \colorbold{Ausdruck}, der \colorbold{nicht atomar} ist, wie z.B. \smalltt{5 \% 4}, \smalltt{-1} oder \smalltt{fun(12)}.\footcite{g_siek_course_2022}
 \end{Definition}
 
 \begin{Definition}{A-Normalform (ANF)}{a_normal_form}
@@ -504,14 +522,14 @@ Der \colorbold{PicoC-Compiler} nutzt, anders als es geläufig ist keine \colorbo
 
 Aus diesem Grund verwendet das Beispiel in Abbildung~\ref{fig:example_remove_complex_operands} eine andere Definition für \colorbold{Komplexe} und \colorbold{Atomare Ausdrücke}, da dieses Beispiel, um später keine Verwirrung zu erzeugen der Art nachempfunden ist, wie im \colorbold{PicoC-ANF Pass} der \colorbold{Abstract Syntax Tree} umgeformt wird. Weil beim PicoC-Compiler \colorbold{temporäre Zwischenergebnisse} auf den \colorbold{Stack} gespeichert werden, wird nur noch ein \colorbold{Zugriffen auf den Stack}, wie z.B. \smalltt{stack('1')} als \colorbold{Atomarer Ausdrück} angesehen. Dementsprechend werden \colorbold{Ausdrücke} für \colorbold{Zahl} $4$, \colorbold{Variable} $var$ und \colorbold{ASCII-Zeichen} $'c'$ nun ebenfalls zu den \colorbold{Komplexen Ausdrücken} gezählt.
 
-Im Fall, dass \colorbold{Register} für z.B. \colorbold{temporäre Zwischenergebnisse} genutzt werden und der \colorbold{Maschienenbefehlssatz} es erlaubt \colorbold{zwei Register} miteinander zu verechnen\footnote{Z.B. \colorbold{Addieren} oder \colorbold{Subtraktion} von zwei \colorbold{Registerinhalten}.}, ist es möglich \colorbold{Ausdrücke} für \colorbold{Zahl} $4$, \colorbold{Variable} $var$ und \colorbold{ASCII-Zeichen} $'c'$ als \colorbold{atomar} zu definieren, da sie mit einem \colorbold{Maschinenbefehl} verarbeitet werden können\footnote{Mit dem \colorbold{RETI-Befehlssatz} wäre das durchaus möglich, durch z.B. \smalltt{MULT ACC IN2}.}. Werden allerdings keine \colorbold{Register} für \colorbold{Zwischenergebnisse} genutzt werden, braucht man \colorbold{mehrere Maschinenbefehle}, um die Zwischenergebnisse vom \colorbold{Stack} zu holen, zu \colorbold{verrechnen} und das Ergebnis wiederum auf den \colorbold{Stack} zu \colorbold{speichern} und das \smalltt{SP}-Register \colorbold{anzupassen}. Daher werden die \colorbold{Ausdrücke} für \colorbold{Zahl} $4$, \colorbold{Variable} $var$ und \colorbold{ASCII-Zeichen} $'c'$ als \colorbold{komplexe Ausdrücke} gewertet, da sie niemals in einem \colorbold{Maschinenbefehl} miteinander verechnet werden können.
+Im Fall, dass \colorbold{Register} für z.B. \colorbold{temporäre Zwischenergebnisse} genutzt werden und der \colorbold{Maschienenbefehlssatz} es erlaubt \colorbold{zwei Register} miteinander zu verechnen\footnote{Z.B. \colorbold{Addieren} oder \colorbold{Subtraktion} von zwei \colorbold{Registerinhalten}.}, ist es möglich \colorbold{Ausdrücke} für \colorbold{Zahl} $4$, \colorbold{Variable} $var$ und \colorbold{ASCII-Zeichen} $'c'$ als \colorbold{atomar} zu definieren, da sie mit einem \colorbold{Maschinenbefehl} verarbeitet werden können\footnote{Mit dem \colorbold{RETI-Befehlssatz} wäre das durchaus möglich, durch z.B. \smalltt{MULT ACC IN2}.}. Werden allerdings keine \colorbold{Register} für \colorbold{Zwischenergebnisse} genutzt werden, braucht man \colorbold{mehrere Maschinenbefehle}, um die Zwischenergebnisse vom \colorbold{Stack} zu holen, zu \colorbold{verrechnen} und das Ergebnis wiederum auf den \colorbold{Stack} zu \colorbold{speichern} und das \smalltt{SP}-Register \colorbold{anzupassen}. Daher werden die \colorbold{Ausdrücke} für \colorbold{Zahl} $4$, \colorbold{Variable} $var$ und \colorbold{ASCII-Zeichen} $'c'$ als \colorbold{Komplexe Ausdrücke} gewertet, da sie niemals in einem \colorbold{Maschinenbefehl} miteinander verechnet werden können.
 
 Die Statements \smalltt{4}, \smalltt{x}, usw. für sich sind in diesem Fall \colorbold{Statements}, bei denen ein \colorbold{Komplexer Ausdruck} einer \colorbold{Location}, in diesem Fall einer \colorbold{Speicherzelle des Stack} zugewiesen wird, da \smalltt{4}, \smalltt{x} usw. in diesem Fall auch als  \colorbold{Komplexe Ausdrücke} zählen. Auf das Ergebnis dieser \colorbold{Komplexen Ausdrücke} wird mittels \smalltt{stack(2)} und \smalltt{stack(1)} zugegriffen, um diese im \colorbold{Komplexen Ausdruck} \smalltt{stack(2) \% stack(1)} miteinander zu verrechnen und wiederum einer Speicherzelle des Stack zuzuweisen.
 
 \begin{figure}[H]
-  \codebox[title=Code , remember as=code, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_remove_complex_operands_code.special}
+  \codebox[title=Code , remember as=code, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_a_normalform_code.special}
   \hfill
-  \codebox[title=Code in A-Normalform, remember as=mon, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_remove_complex_operands_mon.special}
+  \codebox[title=Code in A-Normalform, remember as=mon, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_a_normalform_anf.special}
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
   \draw[->] (code.east) to[bend right] node[below, align=center] {entferne \colorbold{Komplexe Ausdrücke}\\ aus \colorbold{Statements} und \colorbold{Ausdrücken}} (mon.west);

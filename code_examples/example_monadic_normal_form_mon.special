@@ -1,0 +1,4 @@
+void main() {
+  int x;  // allocate at address 0 relative to the DS Register
+  x = 5 % 4;
+}
