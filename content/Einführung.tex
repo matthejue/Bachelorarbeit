@@ -451,20 +451,30 @@ Die von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} sol
 
 \subsection{Monadische Normalform}
 
-Hat man es mit einer Sprache zu tuen, welche \colorbold{Unreine Ausdrücke} (Definition~\ref{def:unreiner_ausdruck}) besitzt, so ist es sinnvoll einen \colorbold{Pass} einzuführen, der \colorbold{reine} und \colorbold{unreine Ausdrücke} voneinander trennt. Das wird erreicht, indem man aus den \colorbold{Unreinen Ausdrücken} vorangestellte Statements macht, in denen die \colorbold{Komplexen Ausdrücke} \colorbold{temporären Locations} zugewiesen werden (Definiton~\ref{def:location}) und dann anstelle des \colorbold{Komplexen Ausdrucks} auf die jeweilige \colorbold{temporäre Location} zugegriffen wird.
+Hat man es mit einer Sprache zu tuen, welche \colorbold{Unreine Ausdrücke} (Definition~\ref{def:unreiner_ausdruck}) besitzt, so ist es sinnvoll einen \colorbold{Pass} einzuführen, der \colorbold{Reine} (Definition~\ref{def:pure_expression}) und \colorbold{Unreine Ausdrücke} voneinander \colorbold{trennt}. Das wird erreicht, indem man aus den Unreinen Ausdrücken \colorbold{vorangestellte Statements} macht, die man \colorbold{vor} den jeweiligen reinen Ausdruck, mit dem sie \colorbold{gemischt} waren stellt. Der Unreine Ausdruck muss als \colorbold{erstes} ausgeführt werden, für den Fall, dass der \colorbold{Effekt}, denn ein \colorbold{Unreiner Ausdruck} hatte den \colorbold{Reinen Ausdruck}, mit dem er gemischt war in irgendeinerweise beeinflussen könnte.
 
 
-\begin{Definition}{Reiner Ausdruck (bzw. pure expression)}{pure_expression}
-  Ein \colorbold{Reiner Ausdruck} ist ein Ausdruck, der \colorbold{rein} ist. Das bedeutet, dass dieser Ausdruck \colorbold{keine Nebeneffekte} erzeugt. Ein \colorbold{Nebeneffekt} ist eine \colorbold{Bedeutung} eines Ausdrucks, die sich nicht mit \colorbold{RETI-Code} darstellen lässt.\footnote{Sondern z.B. \colorbold{intern} etwas am \colorbold{Kompilierprozess} ändert.}\footcite{g_siek_course_2022}
+\begin{Definition}{Reiner Ausdruck (bzw. engl. pure expression)}{pure_expression}
+  Ein \colorbold{Reiner Ausdruck} ist ein Ausdruck, der \colorbold{rein} ist. Das bedeutet, dass dieser Ausdruck \colorbold{keine Nebeneffekte} erzeugt. Ein \colorbold{Nebeneffekt} ist eine \colorbold{Bedeutung}, die ein Ausdruck hat, die sich nicht mit \colorbold{RETI-Code} darstellen lässt.\footnote{Sondern z.B. \colorbold{intern} etwas am \colorbold{Kompilierprozess} ändert.}\footcite{g_siek_course_2022}
 \end{Definition}
 
 \begin{Definition}{Unreiner Ausdruck}{unreiner_ausdruck}
-  Ein \colorbold{Unreiner Ausdruck} ist ein Ausdruck, der \colorbold{nicht rein} ist.
+  Ein \colorbold{Unreiner Ausdruck} ist ein Ausdruck, der \colorbold{kein Reiner Ausdruck} ist.
 \end{Definition}
 
-\begin{Definition}{Monadische Normalform}{monadische_normalform}
-  Eine \colorbold{Konkrette Syntax} ist in \colorbold{Monadischer Normalform}, wenn sie \colorbold{reine Ausdrücke} und \colorbold{unreine Ausdrücke} \colorbold{nicht} miteinander \colorbold{mischt}, sondern voneinander \colorbold{trennt}.\footnote{Z.B. ist bei \smalltt{int var = 12} der Ausdruck mit dem \colorbold{Nebeneffekt} eine Variable zu \colorbold{allokieren:} \smalltt{int var}, mit dem Ausdruck für eine \colorbold{Zuweisung} $\mathtt{\langle exp\rangle = 12}$ gemischt.}\footcite{g_siek_course_2022}
+Auf diese Weise sind alle \colorbold{Statements} und \colorbold{Ausdrücke} in \colorbold{Monadischer Normalform} (Definiton~\ref{def:monadische_normalform}).
+
+\begin{Definition}{Monadische Normalform (bzw. engl. monadic normal form)}{monadische_normalform}
+  Ein \colorbold{Statement} oder \colorbold{Ausdruck} ist in \colorbold{Monadischer Normalform}, wenn er nach einer \colorbold{Konkretten Syntax} in \colorbold{Monadischer Normalform} abgeleitet wurde.
+
+  Eine \colorbold{Konkrette Syntax} ist in \colorbold{Monadischer Normalform}, wenn sie \colorbold{reine Ausdrücke} und \colorbold{unreine Ausdrücke} \colorbold{nicht} miteinander \colorbold{mischt}, sondern voneinander \colorbold{trennt}.\footcite{g_siek_course_2022}
+
+  Eine \colorbold{Abstrakte Syntax} ist in \colorbold{Monadischer Normalform}, wenn die \colorbold{Konkrette Syntax} für welche sie definiert wurde in \colorbold{Monadischer Normalform} ist.
 \end{Definition}
+
+Ein \colorbold{Beispiel} für dieses Vorgehen ist in Abbildung~\ref{fig:example_monadic_normal_form} zu sehen, wo der Einfachheit halber auf die Darstellung in \colorbold{Abstrakter Syntax} verzichtet wurde und die Codebeispiele in der entsprechenden \colorbold{Konkretten Syntax}\footnote{Für deren Kompilierung die \colorbold{Abstrakte Syntax} überhaupt definiert wurde.} aufgeschrieben wurden.
+
+In der Abbildung~\ref{fig:example_monadic_normal_form} ist der Ausdruck mit dem \colorbold{Nebeneffekt} eine Variable zu \colorbold{allokieren:} \smalltt{int var}, mit dem Ausdruck für eine \colorbold{Zuweisung} \smalltt{exp = 5 \% 4} gemischt, daher muss der \colorbold{Unreine} Ausdruck als eigenständiges Statement \colorbold{vorangestellt} werden.
 
 \begin{figure}[H]
   \codebox[title=Code, remember as=code, width=0.3\textwidth, nobeforeafter, minted language=c]{./code_examples/example_monadic_normal_form_code.special}
@@ -475,8 +485,10 @@ Hat man es mit einer Sprache zu tuen, welche \colorbold{Unreine Ausdrücke} (Def
   \draw[->] (code.east) to[bend right] node[below, align=center] {trenne Ausdrücke \colorbold{mit}\\ und \colorbold{ohne Nebeneffekte}} (mon.west);
   \end{tikzpicture}
   \caption{Codebeispiel für das Trennen von Ausdrücken mit und ohne Nebeneffekten}
-  \label{fig:example_remove_complex_operands}
+  \label{fig:example_monadic_normal_form}
 \end{figure}
+
+Die Aufgabe eines solchen \colorbold{Passes} ist es, den \colorbold{Abstract Syntax Tree} der \colorbold{Syntax} von \colorbold{Maschienenbefehlen} anzunähren, indem Subbäume vorangestellt werden, die keine Entsprechung in \colorbold{RETI-Knoten} haben. Somit wird eine \colorbold{Seperation} von Subbäumen, die keine Entsprechung in \colorbold{RETI-Knoten} haben und denen, die eine haben bewerkstelligt wird. Ein \colorbold{Reiner Ausdruck} ist \colorbold{Maschienenbefehlen} ähnlicher als ein Ausdruck, indem ein \colorbold{Reiner} und  \colorbold{Unreiner Ausdruck} gemischt sind. Somit sparrt man sich in der Implementierung \colorbold{Fallunterscheidungen}, indem die \colorbold{Reinen Ausdrücke} direkt in \colorbold{RETI-Code} übersetzt werden können und \colorbold{nicht} unterschieden werden muss, ob darin \colorbold{Unreine Ausdrücke} vorkommen.
 
 \subsection{A-Normalform}
 \label{sec:a_normalform}
@@ -485,24 +497,30 @@ Im Falle dessen, dass es sich bei der \colorbold{Sprache} $L_1$ um eine \colorbo
 
 Sollte in dem \colorbold{Statemtent}, indem der \colorbold{Komplexe Ausdruck} einer \colorbold{temporären Location} zugewiesen wird, der Komplexe Ausdruck \colorbold{Teilausdrücke} enthalten, die \colorbold{komplex} sind, muss die gleiche Prozedur erneut für die \colorbold{Teilausdrücke} angewandt werden, bis \colorbold{Komplexe Ausdrücke} nur noch in Statements zur Zuweisung an Locations auftauchen, aber die Komplexen Ausdrücke nur \colorbold{Atomare Ausdrücke} (Definiton~\ref{def:atomarer_ausdruck}) enthalten.
 
+Sollte es sich bei dem \colorbold{Komplexen Ausdruck} um einen \colorbold{Unreinen Ausdruck} handeln, welcher nur einen \colorbold{Nebeneffekt} ausführt und sich nichts in RETI-Befehle übersetzen lässt.
+
+% A-Normalform ist Monadischer Normalform, nur das Reinheit zu Atotarität erweitert, Jede automare Ausdruck ist rein
+
+% vorziehen, was mit -> a = b
+
 \begin{Definition}{Location}{location}
   Kollektiver Begriff für \colorbold{Variablen}, \colorbold{Attribute} bzw. \colorbold{Elemente} von Variablen bestimmter Datentypen, \colorbold{Speicherbereiche auf dem Stack}, die \colorbold{temporäre Zwischenergebnisse} speichern und \colorbold{Register}.
 
   Im Grunde genommen alles, was mit einem \colorbold{Programm zu tuen} hat und irgendwo \colorbold{gespeichert} ist oder als \colorbold{Speicherort} dient.\footcite{g_siek_course_2022}
 \end{Definition}
 
-Auf diese Weise sind alle \colorbold{Statements} und \colorbold{Ausdrücke} in \colorbold{A-Normalform} (Definition~\ref{def:atomarer_ausdruck}).
+Auf diese Weise sind alle \colorbold{Statements} und \colorbold{Ausdrücke} in \colorbold{A-Normalform} (Definition~\ref{def:a_normal_form}).
 
 % den \colorbold{Bedingungen} \smalltt{<condition>} von \smalltt{if(<condition>){<stmts>}else{<stmts>}}-Statements entfernt
 
 \begin{Definition}{Atomarer Ausdruck}{atomarer_ausdruck}
-  Ein \colorbold{Atomarer Ausdruck} ist ein Ausdruck, der \colorbold{atomar} ist, also \colorbold{nicht} mehr weiter \colorbold{zerkleinert} werden kann. Also entweder eine \colorbold{Variable} \smalltt{var}, eine \colorbold{Zahl} \smalltt{12}, ein \colorbold{ASCII-Zeichen} \smalltt{'c'} oder ein \colorbold{Zugriff auf eine Location}, wie z.B. \smalltt{stack(1)} ist.\footcite{g_siek_course_2022}
+  Ein \colorbold{Atomarer Ausdruck} ist ein Ausdruck, der \colorbold{keine Nebeneffekte} hat und der in eine \colorbold{Folge von RETI-Befehlen} übersetzt werden kann, die \colorbold{atomar} ist, also \colorbold{nicht} mehr weiter in kleinere Folgen von RETI-Befehlen \colorbold{zerkleinert} werden kann, welche die \colorbold{Übersetzung} eines anderen Ausdrucks sind.
 
-  Präziser ist ein \colorbold{Ausdruck} ist \colorbold{atomar}, wenn er
+  Also z.B. im Fall der Sprache $L_{PicoC}$ entweder eine \colorbold{Variable} \smalltt{var}, eine \colorbold{Zahl} \smalltt{12}, ein \colorbold{ASCII-Zeichen} \smalltt{'c'} oder ein \colorbold{Zugriff auf eine Location}, wie z.B. \smalltt{stack(1)}.\footcite{g_siek_course_2022}
 \end{Definition}
 
 \begin{Definition}{Komplexer Ausdruck}{komplexer_ausdruck}
-  Ein \colorbold{Komplexer Ausdruck} ist ein \colorbold{Ausdruck}, der \colorbold{nicht atomar} ist, wie z.B. \smalltt{5 \% 4}, \smalltt{-1} oder \smalltt{fun(12)}.\footcite{g_siek_course_2022}
+  Ein \colorbold{Komplexer Ausdruck} ist ein \colorbold{Ausdruck}, der \colorbold{nicht atomar} ist, wie z.B. \smalltt{5 \% 4}, \smalltt{-1}, \smalltt{fun(12)} oder \smalltt{int var}.\footnote{\smalltt{int var} ist eine  \colorbold{Allokation}.}\footcite{g_siek_course_2022}
 \end{Definition}
 
 \begin{Definition}{A-Normalform (ANF)}{a_normal_form}
