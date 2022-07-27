@@ -454,8 +454,6 @@
   \removed
   \firstcase{block}{Block(Name(str), \langle instr\rangle *)}{}
   \removed
-  \firstcase{block}{Block(Name(str), \lochighlight{\langle instr\rangle} *)}{}
-  \removed
   \firstcase{file}{File(Name(str), \langle block\rangle *)}{}
 }
 
@@ -569,6 +567,5 @@
   \otherform{SingleLineComment(str, str)}{}
   \removed
   \otherform{Instr(Loadi(), [Reg(Acc()), GoTo(Name(str))]) \gralt Jump(Eq(), GoTo(Name(str)))}{}
-  \downplay
   \firstcase{program}{Program(Name(str), \langle instr\rangle *)}{}
 }

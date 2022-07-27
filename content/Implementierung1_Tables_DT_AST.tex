@@ -245,6 +245,9 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
 % finalle Grammatik im Appendix
 % Crafting Compilers Quelle benennen
 
+
+
+
 \subsection{Derivation Tree Generierung}
 \subsubsection{Early Parser}
 \subsubsection{Codebeispiel}
@@ -524,7 +527,7 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 \subsubsection{Ausgabe von Abstract Syntax Trees}
 \label{sec:ausgabe_von_abstract_syntax_trees}
 
-Ein \colorbold{Abstract Syntax Tree} kann entweder in der \colorbold{Konkretter Syntax} der Sprache, für dessen Kompilierung er generiert wurde oder in der \colorbold{Abstrakter Syntax}, die beschreibt, wie der Abstract Syntax Tree selbst aufgebaut sein darf ausgegeben werden.
+Ein \colorbold{Knoten} eines \colorbold{Abstract Syntax Tree} kann entweder in der \colorbold{Konkretter Syntax} der Sprache, für dessen Kompilierung er generiert wurde oder in der \colorbold{Abstrakter Syntax}, die beschreibt, wie der Abstract Syntax Tree selbst aufgebaut sein darf ausgegeben werden.
 
 Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird im \colorbold{PicoC-Compiler} über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} der Programmiersprache \colorbold{Python} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine nach der \colorbold{Abstrakten} oder \colorbold{Konkretten Syntax} aufgebaute \colorbold{Textrepräsentation} seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{','}, \colorbold{Semikolons} \smalltt{;} usw. zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach dem \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene \colorbold{Textrepräsentation} passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgeben}.
 
@@ -707,7 +710,7 @@ Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} de
 \begin{Special_Paragraph}
   Alles \textcolor{red}{rot} markierte bedeutet, es wurde \colorbold{entfernt} oder \colorbold{abgeändert}. Alles \textcolor{gray!90!black}{ausgegraute} bedeutet, es hat sich im Vergleich zur letzten Abstrakten Syntax \colorbold{nichts} geändert. Alle normal in \smalltt{schwarz} geschriebenen Knoten wurden \colorbold{neu} hinzugefügt.
 
-  Die \colorbold{Abstrakte Syntax} soll im Gegensatz zur \colorbold{Konkretten Syntax} meist nur vom \colorbold{Programmierer} verstanden werden und sollte daher vor allem \colorbold{einfach verständlich} sein und stellt daher eine \colorbold{Obermenge} aller tatsächlich möglichen \colorbold{Kompositionen} von \colorbold{Knoten} dar\footnote{D.h. auch wenn dort \smalltt{exp} als \colorbold{Attribut} steht, kann dort \colorbold{nicht} jeder Knoten, der sich aus der \colorbold{Produktion} \smalltt{exp} ergibt auch wirklich eingesetzt werden.}.
+  Die \colorbold{Abstrakte Syntax} soll im Gegensatz zur \colorbold{Konkretten Syntax} meist nur vom \colorbold{Programmierer} verstanden werden, der den Compiler implementiert und sollte daher vor allem \colorbold{einfach verständlich} sein und stellt daher eine \colorbold{Obermenge} aller tatsächlich möglichen \colorbold{Kompositionen} von \colorbold{Knoten} dar\footnote{D.h. auch wenn dort \smalltt{exp} als \colorbold{Attribut} steht, kann dort \colorbold{nicht} jeder Knoten, der sich aus der \colorbold{Produktion} \smalltt{exp} ergibt auch wirklich eingesetzt werden.}.
 
   Man bezeichnet hier die \colorbold{Abstrakte Syntax} als \colorbold{\enquote{Abstrakte Syntax der Sprache $L_{Picoc\_Blocks}$}}. Diese Sprache $L_{Picoc\_Blocks}$ wird durch eine \colorbold{Konkrette Syntax} beschrieben, die allerdings nicht weiter relevant ist, da in den \colorbold{Passes} nur \colorbold{Abstract Syntax Trees} umgeformt werden. Es ist hierbei nur wichtig zu wissen, dass die \colorbold{Abstrakte Syntax} theoretisch zur Kompilierung der Sprache $L_{Picoc\_Blocks}$ definiert ist, also die Sprache $L_{PicoC\_Blocks}$ nicht die Sprache ist, die von der \colorbold{Abstrakten Syntax} beschrieben ist.
 \end{Special_Paragraph}
@@ -790,7 +793,7 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
 \subsubsection{RETI-Blocks Pass}
 \label{reti_blocks_pass}
 
-\newlineparagraph{Aufgaben}
+\newlineparagraph{Aufgabe}
 \label{sec:reti_blocks_pass_zweck}
 
 Die Aufgabe des \colorbold{RETI-Blocks Passes} ist es die \colorbold{Statements} in der \colorbold{Blöcken}, die durch \colorbold{PicoC-Knoten} im \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC\_ANF}$ dargestellt sind durch ihren entsprechenden \colorbold{RETI-Knoten} zu ersetzen.
@@ -819,28 +822,26 @@ In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{A
 \end{code}
 
 \begin{Special_Paragraph}
-  Theoretisch ist das kein richtiger \colorbold{Abstrakt Syntax Tree} mehr, da die die \colorbold{RETI-Knoten} aus bereits im Unterkapitel~\ref{sec:ausgabe_von_abstract_syntax_trees} vermitteltem Grund in \colorbold{Konkretter Syntax} und nicht in \colorbold{Abstrakter Syntax} sind. Aber über das wird im Folgenden hinweggesehen und die Bäume, die als Resultat der verschiedenen \colorbold{Passes} ausgegeben werden, werden weiterhin als \colorbold{Abstract Syntax Trees} bezeichnet.
+  Wenn der \colorbold{Abstract Syntax Tree} ausgegeben wird, ist die Darstellung nicht auschließlich in \colorbold{Abstrakter Syntax}, da die \colorbold{RETI-Knoten} aus bereits im Unterkapitel~\ref{sec:ausgabe_von_abstract_syntax_trees} vermitteltem Grund in \colorbold{Konkretter Syntax} ausgeben werden.
 \end{Special_Paragraph}
 
 \subsubsection{RETI-Patch Pass}
 \label{reti_patch_pass}
 
-\newlineparagraph{Aufgaben}
+\newlineparagraph{Aufgabe}
 \label{sec:reti_patch_pass_zweck}
 
 Die Aufgabe des \colorbold{RETI-Patch Passes} ist das \colorbold{Ausbessern} (engl. to patch) des \colorbold{Abstract Syntax Trees}, durch:
 \begin{itemize}
-  \item das \colorbold{Einsetzen} eines \smalltt{start.<nummer>}-Blockes, welcher ein \smalltt{GoTo(Name('main'))} zur  \smalltt{main}-Funktion enthält, wenn in manchen Fällen die \smalltt{main}-Funktion \colorbold{nicht} die erste Funktion ist und daher am Anfang zur \smalltt{main}-Funktion gesprungen werden muss.
+  \item das \colorbold{Einfügen} eines \smalltt{start.<nummer>}-Blockes, welcher ein \smalltt{GoTo(Name('main'))} zur  \smalltt{main}-Funktion enthält, wenn in manchen Fällen die \smalltt{main}-Funktion \colorbold{nicht} die erste Funktion ist und daher am Anfang zur \smalltt{main}-Funktion gesprungen werden muss.
   \item das \colorbold{Entfernen} von \smalltt{GoTo()}'s, deren Sprung nur \colorbold{eine} Adresse weiterspringen würde.
   \item das \colorbold{Voranstellen} von \colorbold{RETI-Knoten}, die vor jeder \colorbold{Division} \smalltt{Instr(Div(), args)} prüfen, ob, nicht durch \smalltt{0} geteilt wird.\footnote{Das fällt unter die Themenbereiche des \colorbold{Bachelorprojekts} und wird daher \colorbold{nicht} genauer erläutert.}
-  \item das Überprüfen darauf, ob bestimmte \colorbold{Immediates} \smalltt{Im(str)} in Befehlen, wie z.B. \smalltt{Jump(rel, Im(str))}, \smalltt{Instr(Loadin(), [reg, reg, Im(str)])}, \smalltt{Instr(Loadi(), [reg, Im(str)])} usw. $< -2^{21}$ oder $> 2^{21}-1$ sind. Im Fall dessen, dass es so ist, soll . Im Fall, dessen, dass Die Immedaites
-  \item if s_num < -(2**31) and s_num > 2**31 - 1:
+  \item das Überprüfen darauf, ob bestimmte \colorbold{Immediates} \smalltt{Im(str)} in Befehlen, wie z.B. \smalltt{Jump(rel, Im(str))}, \smalltt{Instr(Loadin(), [reg, reg, Im(str)])}, \smalltt{Instr(Loadi(), [reg, Im(str)])} usw. \colorbold{kleiner} $-2^{21}$ oder \colorbold{größer} $2^{21}-1$ sind. Im Fall dessen, dass es so ist, muss der \colorbold{gewünschte Zahlenwert} durch \colorbold{Bitshiften} und Anwenden von \colorbold{bitweise Oder} berechnet werden. Im Fall, dessen, dass der \colorbold{Immediate} allerdings \colorbold{kleiner} $-(2^{31})$ oder \colorbold{größer} $2^{31} - 1$ ist, wird eine Fehlermeldung \smalltt{TooLargeLiteral} ausgegeben.
 \end{itemize}
 
 \newlineparagraph{Abstrakte Syntax}
 
-Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} in die \colorbold{A-Normalform} zu bringen. Darunter fällt es unter anderem, dafür zu sorgen, dass \colorbold{Komplexe Knoten}, wie z.B. \smalltt{BinOp(exp, bin\_op, exp)} nur \colorbold{Atomare Knoten}, wie z.B. \smalltt{Stack(Num(str))} enthalten können. Des Weiteren werden auch \colorbold{Funktionen} und \colorbold{Funktionsaufrufe} aufgelöst, sodass u.a. die \colorbold{Blöcke} \smalltt{Block(Name(str), stmt*)} nun direkt im \smalltt{File(Name(str), block*)}-Knoten liegen usw., was in Unterkapitel~\ref{sec:umsetzung_von_funktionen} genauer erklärt wird. Die \colorbold{Symboltabelle} ist ebenfalls als \colorbold{Abstract Syntax Tree} umgesetzt, wofür in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf} neue Knoten eingeführt werden.
-
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{RETI\_Patch}$ in Grammatik~\ref{gr:abstract_syntax_l_reti_patch} ist im Vergleich zur \colorbold{Abstrakten Syntax} der Sprache $L_{RETI\_Blocks}$ in Grammatik~\ref{gr:abstract_syntax_l_reti_blocks} kaum verändert. Es muss nur ein Knoten \smalltt{Exit()} hinzugefügt werden, der im Falle einer  \colorbold{Division durch $0$} die Ausführung des Programs beendet.
 
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_patch]
   \toprule
@@ -852,13 +853,11 @@ Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} de
 
 \newlineparagraph{Codebeispiel}
 
-In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-Blocks Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem nun eigene \colorbold{Blöcke} für die Funktion \smalltt{faculty} und die \smalltt{main}-Funktion erstellt werden, in denen die \colorbold{ersten} Statements der jeweiligen Funktionen bis zum \colorbold{letzten} Statement oder bis zum ersten \colorbold{Auftauchen} eines \smalltt{If(exp, stmts)}-, \smalltt{IfElse(exp, stmts1, stmts2)}-, \smalltt{While(exp, stmts)}- oder \smalltt{DoWhile(exp, stmts)}-Knoten stehen. Je nachdem, ob ein \smalltt{If(exp, stmts)}-, \smalltt{IfElse(exp, stmts1, stmts2)}-, \smalltt{While(exp, stmts)}- oder \smalltt{DoWhile(exp, stmts)}-Knoten auftaucht, werden für die \colorbold{Bedingung} und mögliche \colorbold{Branches} eigene \colorbold{Blöcke} erstellt.
-
-% In Code~\ref{code:} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-ANF Passes} für das aus Unterkapitel~\ref{code:} weitergeführte Beispiel, indem
+In Code~\ref{code:reti_patch_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-Patch Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel. Durch den \colorbold{RETI-Patch Pass} wurde hier ein \smalltt{start.<nummer>}-Block\footnote{Dieser \colorbold{Block} wurde im Code~\ref{code:picoc_blocks_pass_für_codebeispiel} markiert.} eingesetzt, da die \smalltt{main}-Funktion \colorbold{nicht} die \colorbold{erste} Funktion ist. Des Weiteren wurden durch diesen Pass einzelne \smalltt{GoTo(Name(str))}-\colorbold{Statements} entfernt\footnote{Diese \colorbold{entfernten} \smalltt{GoTo(Name(str))}'s' wurden ebenfalls im Code~\ref{code:picoc_blocks_pass_für_codebeispiel} markiert.}, die nur einen Sprung um \colorbold{eine} Position entsprochen hätten.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_faculty_it.reti_patch}
+  \numberedcodebox[minted language=text, minted options={highlightlines={4-9,24,38,66}}]{./code_examples/example_faculty_it.reti_patch}
   \caption{RETI-Patch Pass für Codebespiel}
   \label{code:reti_patch_pass_für_codebeispiel}
 \end{code}
@@ -866,21 +865,20 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 \subsubsection{RETI Pass}
 \label{reti_pass}
 
-\newlineparagraph{Aufgaben}
+\newlineparagraph{Aufgabe}
 \label{sec:reti_pass_zweck}
 
-
-Die Aufgabe des \colorbold{RETI-Patch Passes} ist es
-
+Die Aufgabe des \colorbold{RETI-Patch Passes} ist es die \smalltt{GoTo(Name(str))}-Knoten in den den Knoten \smalltt{Instr(Loadi(), [reg, GoTo(Name(str))])}, \smalltt{Jump(Eq(), GoTo(Name(str)))} und \smalltt{Exp(GoTo(Name(str)))} durch eine entsprechende \colorbold{Adresse} zu ersetzen, die entsprechende \colorbold{Distanz} oder einen entsprechenden \colorbold{Sprungbefehl} mit passender \colorbold{Distanz} \smalltt{Jump(Always(), Im(str(distance)))}. Die \colorbold{Distanz-} und \colorbold{Adressberechnung} wird in Unterkapitel~\ref{sec:funktionsaufruf} genauer mit \colorbold{Formeln} erklärt.
 
 \newlineparagraph{Konkrette und Abstrakte Syntax}
 
-Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} in die \colorbold{A-Normalform} zu bringen. Darunter fällt es unter anderem, dafür zu sorgen, dass \colorbold{Komplexe Knoten}, wie z.B. \smalltt{BinOp(exp, bin\_op, exp)} nur \colorbold{Atomare Knoten}, wie z.B. \smalltt{Stack(Num(str))} enthalten können. Des Weiteren werden auch \colorbold{Funktionen} und \colorbold{Funktionsaufrufe} aufgelöst, sodass u.a. die \colorbold{Blöcke} \smalltt{Block(Name(str), stmt*)} nun direkt im \smalltt{File(Name(str), block*)}-Knoten liegen usw., was in Unterkapitel~\ref{sec:umsetzung_von_funktionen} genauer erklärt wird. Die \colorbold{Symboltabelle} ist ebenfalls als \colorbold{Abstract Syntax Tree} umgesetzt, wofür in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf} neue Knoten eingeführt werden.
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{RETI}$ in Grammatik~\ref{gr:abstract_syntax_l_reti} hat im Vergleich zur \colorbold{Abstrakten Syntax} der Sprache $L_{RETI\_Patch}$ in Grammatik~\ref{gr:abstract_syntax_l_reti_patch} nur noch auschließlich \colorbold{RETI-Knoten}. Alle \colorbold{RETI-Knoten} stehen nun einem \smalltt{Program(Name(str), instr)}-Knoten.
 
+Ausgegeben wird der finale \colorbold{Maschinencode} allerdings in \colorbold{Konkretter Syntax}, die sich aus den Grammatiken~\ref{gr:konkrette_syntax_l_reti_lexer} und \ref{gr:konkrette_syntax_l_reti_parser} für jeweils die \colorbold{Lexikalische} und \colorbold{Syntaktische Analyse} zusammensetzt. Der Grund, warum die \colorbold{Konkrette Syntax} der Sprache  $L_{RETI}$ auch nochmal in einen Teil für die \colorbold{Lexikalische} und \colorbold{Syntaktische Analyse} unterteilt ist, hat den Grund, dass für die Bachelorarbeit zum \colorbold{Testen} des \colorbold{PicoC-Compilers} ein \colorbold{RETI-Interpreter} implementiert wurde, der den RETI-Code \colorbold{lexen} und \colorbold{parsen} muss, um ihn später \colorbold{interpretieren} zu können.
 
 % dieser Pass entspricht Assembler bis auf die Sache mit binärer Repräsentation, was der PicoC-Compiler garnicht macht
 
-\begin{grammar}[Konkrette Syntax der Sprache $L_{RETI\_Lex}$][H][gr:konkrette_syntax_l_reti_lexer]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{RETI}$ für die Lexikalische Analyse in EBNF][H][gr:konkrette_syntax_l_reti_lexer]
   \toprule
   \firstcase{dig\_no\_0}{ \dq 1\dq \gralt \dq 2\dq \gralt \dq 3\dq \gralt \dq 4\dq \gralt \dq 5\dq \gralt \dq 6\dq}{L\_Program}
   \otherform{\dq 7\dq \gralt \dq 8\dq \gralt \dq 9\dq}{}
@@ -896,7 +894,7 @@ Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} de
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Konkrette Syntax der Sprache $L_{RETI\_Parse}$][H][gr:konkrette_syntax_l_reti_parser]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{RETI}$ für die Syntaktische Analyse in EBNF][H][gr:konkrette_syntax_l_reti_parser]
 \toprule
 \firstcase{instr}{\dq ADD\dq\enspace reg\enspace arg\gralt \dq ADDI\dq\enspace reg\enspace num\gralt \dq SUB\dq\enspace reg\enspace arg}{L\_Program}
 \otherform{\dq SUBI\dq\enspace reg\enspace\enspace num\gralt \dq MULT\dq\enspace reg\enspace arg\gralt \dq MULTI\dq\enspace reg\enspace num}{}
@@ -925,7 +923,9 @@ Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} de
 
 \newlineparagraph{Codebeispiel}
 
-In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-Blocks Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem nun eigene \colorbold{Blöcke} für die Funktion \smalltt{faculty} und die \smalltt{main}-Funktion erstellt werden, in denen die \colorbold{ersten} Statements der jeweiligen Funktionen bis zum \colorbold{letzten} Statement oder bis zum ersten \colorbold{Auftauchen} eines \smalltt{If(exp, stmts)}-, \smalltt{IfElse(exp, stmts1, stmts2)}-, \smalltt{While(exp, stmts)}- oder \smalltt{DoWhile(exp, stmts)}-Knoten stehen. Je nachdem, ob ein \smalltt{If(exp, stmts)}-, \smalltt{IfElse(exp, stmts1, stmts2)}-, \smalltt{While(exp, stmts)}- oder \smalltt{DoWhile(exp, stmts)}-Knoten auftaucht, werden für die \colorbold{Bedingung} und mögliche \colorbold{Branches} eigene \colorbold{Blöcke} erstellt.
+Nach dem \colorbold{RETI-Pass} ist das Programm komplett in \colorbold{RETI-Knoten} übersetzt, die allerdings in ihrer \colorbold{Konkretten Syntax} ausgegeben werden, wie in Code~\ref{code:reti_pass_für_codebeispiel} zu sehen ist. Es gibt \colorbold{keine Blöcke} mehr und die \colorbold{RETI-Befehle} in diesen Blöcken wurden \colorbold{zusammengesetzt}, wie sie in den \colorbold{Blöcken} angeordnet waren. Die letzten \colorbold{Nicht-RETI-Befehle} oder \colorbold{RETI-Befehle}, die \colorbold{nicht} auschließlich aus \colorbold{RETI-Ausdrücken} bestehen\footnote{Wie z.B. \seqtt{LOADI\; ACC\; GoTo(Name('addr@next\_instr'))}, \seqtt{Exp(GoTo(Name('main.0')))} und \seqtt{JUMP==\; GoTo(Name('if\_else\_after.2'))}.}, die sich in den \colorbold{Blöcken} befunden haben, wurden durch \colorbold{RETI-Befehle} ersetzt.
+
+Der \smalltt{Program(Name(str), instr)}-Knoten, indem alle \colorbold{RETI-Knoten} stehen gibt alleinig die \colorbold{RETI-Knoten}, die er beinhaltet aus und fügt ansonsten nichts hinzu, wodurch der \colorbold{Abstract Syntax Tree}, wenn er in eine Datei ausgegeben wird, direkt \colorbold{RETI-Code} in \colorbold{menschenlesbarer Repräsentation} erzeugt.
 
 \begin{code}
   \centering
