@@ -558,6 +558,13 @@ Ein solcher \colorbold{Pass} hat vor allem in erster Linie die Aufgabe den \colo
 
 Alle weiteren denkbaren \colorbold{Passes} sind zu \colorbold{spezifisch} auf bestimmte \colorbold{Statements} und \colorbold{Ausdrücke} ausgelegt, als das sich zu diesen allgemein etwas mit einer \colorbold{Theorie} dahinter sagen lässt. Alle \colorbold{Passes}, die zur Implementierung des \colorbold{PicoC-Compilers} geplant und ausgedacht wurden sind im Unterkapitel~\ref{sec:passes} definiert.
 
+\subsection{Ausgabe des Maschienencodes}
+
+Nachdem alle \colorbold{Passes} durchgearbeitet wurden, ist es notwendig aus dem finalen \colorbold{Abstract Syntax Tree} den eigentlichen \colorbold{Maschinencode} in \colorbold{Konkretter Syntax} zu generieren. In üblichen Compilern wird hier für den \colorbold{Maschinencode} eine \colorbold{binäre Repräsentation} gewählt\footnote{Da der \colorbold{PicoC-Compiler} vor allem zu \colorbold{Lernzwecken} konzipiert ist, wird bei diesem der \colorbold{Maschienencode} allerdings in einer \colorbold{menschenlesbaren Repräsentation} ausgegeben.}. Der Weg von \colorbold{Abstrakter Syntax} zu  \colorbold{Konkretter Syntax} ist allerdings wesentlich einfacher, als der Weg von der \colorbold{Konkretten Syntax} zur \colorbold{Abstrakten Syntax}, für die eine gesamte \colorbold{Syntaktische Analyse}, die eine Lexikalische Analyse beinhaltet durchlaufen werden musste.
+
+Jeder Knoten erhält dazu eine Funktion, die eine \colorbold{Textrepräsentation} seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{,} und \colorbold{Semikolons} \smalltt{;} zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurückgibt. Dabei wird nach dem \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene Textrepräsentation passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgebeben}.
+
+
 \section{Fehlermeldungen}
 \begin{Definition}{Fehlermeldung}{fehlermeldung}
   \colorbold{Benachrichtigung} beliebiger Form, die darüber informiert, dass:

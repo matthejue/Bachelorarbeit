@@ -513,7 +513,7 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   Man spricht hier von der \colorbold{\enquote{Abstrakten Syntax der Sprache $L_{PicoC}$}} und meint hier mit der Sprache $L_{PicoC}$ \colorbold{nicht} die Sprache, welche durch die \colorbold{Abstrakte Syntax} beschrieben wird. Es ist damit \colorbold{immer} die Sprache gemeint, die \colorbold{kompiliert} werden soll und zu deren Zweck die \colorbold{Abstrakt Syntax} überhaupt definiert wird. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakt Syntax} beschrieben wird, interessiert man sich nie wirklich explizit. Diese \colorbold{Redeart} wurde aus der \colorbold{Quelle} \cite{g_siek_course_2022} übernommen.
 \end{Special_Paragraph}
 
-Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird in Python über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine Textrepräsentation seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{,} und \colorbold{Semikolons} \smalltt{;} zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene Textrepräsentation passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgebeben}.
+Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird in Python über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine \colorbold{Textrepräsentation} seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{,} und \colorbold{Semikolons} \smalltt{;} zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach dem \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene \colorbold{Textrepräsentation} passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgebeben}.
 
 % $L_{X}$ ist nicht notwendig sich zu überlegen, hier so getann als gäbe es diese Sprache
 % Abstrakte Syntax ist für den Programmierer als Orientierungshilfe bei der Implementierung
@@ -725,19 +725,19 @@ In Code~\ref{code:picoc_blocks_pass_für_codebeispiel} sieht man den \colorbold{
 
 Die Aufgabe des \colorbold{PicoC-ANF Passes} ist es den \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC\_Blocks}$ in die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_ANF}$ umzuformen, welche in \colorbold{A-Normalform} (Definition~\ref{def:a_normal_form}) und damit auch in \colorbold{Monadischer Normalform} (Definition~\ref{def:monadische_normalform}) ist. Um Wiederholung zu vermeiden wird zur Erklärung der \colorbold{A-Normalform} auf Unterkapitel~\ref{sec:a_normalform} verwiesen.
 
-\newlineparagraph{Abstrakte Syntax}
+Zudem wird eine \colorbold{Symboltabelle} (Definition~\ref{def:symboltabelle}) eingeführt. In der \colorbold{Symboltabelle} wird beim Anlegen eines \colorbold{neuen Eintrags} für eine Variable zunächst eine \colorbold{Adresse} zugewiesen, die dem Wert einer von zwei \colorbold{Countern}  \smalltt{rel\_global\_addr} und  \smalltt{rel\_stack\_addr} entspricht. Der Counter \smalltt{rel\_global\_addr} ist für Variablen in den \colorbold{Globalen Statischen Daten} und der \colorbold{Counter}  \smalltt{rel\_stack\_addr} ist für Variablen auf dem \colorbold{Stackframe}. Einer der beiden \colorbold{Counter} wird entsprechend der \colorbold{Größe} der angelegten Variable \colorbold{hochgezählt}.
 
-Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} in die \colorbold{A-Normalform} zu bringen. Darunter fällt es auch, dafür zu sorgen, dass \colorbold{Komplexe Knoten}, wie z.B. \smalltt{BinOp(exp, bin\_op, exp)} nur \colorbold{Atomare Knoten}, wie z.B. \smalltt{Stack(Num(str))} enthalten können. Des Weiteren werden auch \colorbold{Funktionen} und \colorbold{Funktionsaufrufe} aufgelöst, sodass u.a. die \colorbold{Blöcke} \smalltt{Block(Name(str), stmt*)} nun direkt im \smalltt{File(Name(str), block*)}-Knoten liegen usw., was in Unterkapitel~\ref{sec:umsetzung_von_funktionen} genauer erklärt wird. Zudem wird eine \colorbold{Symboltabelle} (Definition~\ref{def:symboltabelle}) eingeführt, welche mit Knoten aus der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf} umgesetzt ist.
-
-In der \colorbold{Symboltabelle} wird beim Anlegen eines \colorbold{neuen Eintrags} für eine Variable zunächst eine \colorbold{Adresse} zugewiesen, die dem Wert einer von zwei \colorbold{Countern}  \smalltt{rel\_global\_addr} und  \smalltt{rel\_stack\_addr} entspricht. Der Counter \smalltt{rel\_global\_addr} ist für Variablen in den \colorbold{Globalen Statischen Daten} und der \colorbold{Counter}  \smalltt{rel\_stack\_addr} ist für Variablen auf dem \colorbold{Stackframe}. Einer der beiden \colorbold{Counter} wird entsprechend der \colorbold{Größe} der angelegten Variable \colorbold{hochgezählt}.
-
-Kommt im \colorbold{Programmcode} an einer späteren Stelle diese Variable \smalltt{Name('symbol')} vor, so wird mit dem \colorbold{Symbol}\footnote{Bzw. der \colorbold{Bezeichner}} als Schlüssel in der \colorbold{Symboltabelle} nachgeschlagen und anstelle des \smalltt{Name(str)}-Knotens die in der \colorbold{Symboltabelle} nachgeschlagene Adresse in einem \smalltt{Global(Num('addr'))}- bzw. \smalltt{Stackframe(Num('addr'))}-Knoten eingesetzt eingefügt. Ob der \smalltt{Global(Num('addr'))}- oder  der \smalltt{Stackframe(Num('addr'))}-Knoten zum Einsatz kommt, entscheidet sich anhand des \colorbold{Scopes} (z.B. \smalltt{@scope}), der in der \colorbold{Symboltabelle} an den \colorbold{Bezeichner} drangehängt ist (z.B.\smalltt{identifier@scope}).\footnote{Die Umsetzung von \colorbold{Scopes} wird in Unterkapitel~\ref{sec:funktionsdeklaration_und_definition_und_umsetzung_von_scopes} genauer beschrieben.}
+Kommt im \colorbold{Programmcode} an einer späteren Stelle diese Variable \smalltt{Name('symbol')} vor, so wird mit dem \colorbold{Symbol}\footnote{Bzw. der \colorbold{Bezeichner}} als Schlüssel in der \colorbold{Symboltabelle} nachgeschlagen und anstelle des \smalltt{Name(str)}-Knotens die in der \colorbold{Symboltabelle} nachgeschlagene Adresse in einem \smalltt{Global(Num('addr'))}- bzw. \smalltt{Stackframe(Num('addr'))}-Knoten eingesetzt eingefügt. Ob der \smalltt{Global(Num('addr'))}- oder  der \smalltt{Stackframe(Num('addr'))}-Knoten zum Einsatz kommt, entscheidet sich anhand des \colorbold{Scopes} (z.B. \smalltt{@scope}), der in der \colorbold{Symboltabelle} an den \colorbold{Bezeichner} drangehängt ist (z.B. \smalltt{identifier@scope}).\footnote{Die Umsetzung von \colorbold{Scopes} wird in Unterkapitel~\ref{sec:funktionsdeklaration_und_definition_und_umsetzung_von_scopes} genauer beschrieben.}.
 
 \begin{Definition}{Symboltabelle}{symboltabelle}
   Eine über ein \colorbold{Assoziatives Feld} umgesetzte \colorbold{Datenstruktur}, die notwendig ist, um das Konzept einer \colorbold{Variablen} in einer Sprache umzusetzen. Diese Datenstruktur ordnet jedem \colorbold{Symbol}\footnote{In einer \colorbold{Symboltabelle} werden \colorbold{Bezeichner} als \colorbold{Symbole} bezeichnet.} einer \colorbold{Variablen}, \colorbold{Konstanten} oder \colorbold{Funktion} aus einem \colorbold{Programm}, Informationen, wie die \colorbold{Adresse}, die \colorbold{Position} im Programmcode oder den \colorbold{Datentyp} zu.
 
   Die \colorbold{Symboltabelle} muss nur während des \colorbold{Kompiliervorgangs} im \colorbold{Speicher} existieren, da die Einträge in der \colorbold{Symboltabelle} beeinflussen, was für \colorbold{Maschinencode} generiert wird und dadurch im \colorbold{Maschinencode} bereits die richtigen \colorbold{Adressen} usw. angesprochen werden und es die Symboltabelle selbst \colorbold{nicht} mehr braucht.
 \end{Definition}
+
+\newlineparagraph{Abstrakte Syntax}
+
+Zur Umsetzung dieses Passes ist es notwendig die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC\_Blocks}$ in Tabelle~\ref{gr:abstract_syntax_l_picoc_blocks} in die \colorbold{A-Normalform} zu bringen. Darunter fällt es unter anderem, dafür zu sorgen, dass \colorbold{Komplexe Knoten}, wie z.B. \smalltt{BinOp(exp, bin\_op, exp)} nur \colorbold{Atomare Knoten}, wie z.B. \smalltt{Stack(Num(str))} enthalten können. Des Weiteren werden auch \colorbold{Funktionen} und \colorbold{Funktionsaufrufe} aufgelöst, sodass u.a. die \colorbold{Blöcke} \smalltt{Block(Name(str), stmt*)} nun direkt im \smalltt{File(Name(str), block*)}-Knoten liegen usw., was in Unterkapitel~\ref{sec:umsetzung_von_funktionen} genauer erklärt wird. Die \colorbold{Symboltabelle} ist ebenfalls als \colorbold{Abstract Syntax Tree} umgesetzt, wofür in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf} neue Knoten eingeführt werden.
 
 Das ganze resultiert in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf}.
 
@@ -771,7 +771,7 @@ Das ganze resultiert in der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\
 
 \newlineparagraph{Codebeispiel}
 
-In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-ANF Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem
+In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-ANF Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem alls Statements und Ausdrücke in \colorbold{A-Normalform} sind. Die \smalltt{IfElse(exp, stmts, stmts)}-Knoten sind hier in  \colorbold{A-Normalform} gebracht worden, indem ihre \colorbold{Komplexe Bedingung} vorgezogen wurde und das Ergebnis der \colorbold{Komplexen Bedingung} einer \colorbold{Location} zugewiesen ist und sie selbst das Ergebnis über den \colorbold{Atomaren Ausdruck} \smalltt{Stack(Num(str))} vom Stack lesen: \smalltt{IfElse(Stack(Num(str)), stmts, stmts)}. \colorbold{Funktionen} sind nur noch über die \colorbold{Labels} von Blöcken zu erkennen, die den gleichen Bezeichner haben, wie die ursprüngliche Funktion und es lässt sich nur durch das \colorbold{Nachverfolgen} der \smalltt{GoTo(Name('label'))}-Knoten nachvollziehen, was ursprünglich zur Funktion gehörte.
 
 \begin{code}
   \centering
@@ -782,8 +782,10 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
 
 \subsubsection{RETI-Blocks Pass}
 \label{reti_blocks_pass}
+
 \newlineparagraph{Aufgaben}
 \label{sec:reti_blocks_pass_zweck}
+
 \newlineparagraph{Abstrakte Syntax}
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
   \toprule
@@ -794,10 +796,13 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
 \end{grammar}
 
 \begin{Special_Paragraph}
+
   % die Sache mit Konkretter Syntax statt Abstrakter Syntax da so simpel und so....
 \end{Special_Paragraph}
 
 \newlineparagraph{Codebeispiel}
+
+In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{RETI-Blocks Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem
 
 \begin{code}
   \centering
@@ -808,8 +813,10 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
 
 \subsubsection{RETI-Patch Pass}
 \label{reti_patch_pass}
+
 \newlineparagraph{Aufgaben}
 \label{sec:reti_patch_pass_zweck}
+
 \newlineparagraph{Abstrakte Syntax}
 
 \begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_blocks]
@@ -821,6 +828,8 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
 \end{grammar}
 
 \newlineparagraph{Codebeispiel}
+
+% In Code~\ref{code:} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{PiocC-ANF Passes} für das aus Unterkapitel~\ref{code:} weitergeführte Beispiel, indem
 
 \begin{code}
   \centering
