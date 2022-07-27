@@ -73,11 +73,11 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{BinOp(Stack(Num(str)), \langle bin\_op\rangle, Stack(Num(str)))}{}
+  \otherform{BinOp(\textcolor{red}{Stack(Num(str))}, \langle bin\_op\rangle, \textcolor{red}{Stack(Num(str))})}{}
   \IfBooleanT{#1}{%
     \downplay
   }
-  \otherform{UnOp(\langle un\_op\rangle, Stack(Num(str))) \gralt Call(Name('input'), Empty())}{}
+  \otherform{UnOp(\langle un\_op\rangle, \textcolor{red}{Stack(Num(str))}) \gralt Call(Name('input'), Empty())}{}
   \IfBooleanT{#1}{%
     \downplay
   }
@@ -160,10 +160,10 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{Assign(Global(Num(str)), Stack(Num(str))) }{}
-  \otherform{Assign(Stackframe(Num(str)), Stack(Num(str)))}{}
-  \otherform{Assign(Stack(Num(str)), Global(Num(str))) }{}
-  \otherform{Assign(Stack(Num(str)), Stackframe(Num(str)))}{}
+  \firstcase{stmt}{Assign(Global(Num(str)), \textcolor{red}{Stack(Num(str))}) }{}
+  \otherform{Assign(Stackframe(Num(str)), \textcolor{red}{Stack(Num(str))})}{}
+  \otherform{Assign(\textcolor{red}{Stack(Num(str))}, Global(Num(str))) }{}
+  \otherform{Assign(\textcolor{red}{Stack(Num(str))}, Stackframe(Num(str)))}{}
 }
 
 \NewDocumentCommand{\pntr}{s}{%
@@ -228,7 +228,7 @@
     \downplay
   }
   \firstcase{datatype}{ArrayDecl(Num(str)+, \langle datatype\rangle )}{L\_Array}
-  \firstcase{exp}{Subscr(\langle exp\rangle, Stack(Num(str))) \gralt \textcolor{gray!90!black}{Array(\langle exp\rangle +)}}{}
+  \firstcase{exp}{Subscr(\langle exp\rangle, \textcolor{red}{Stack(Num(str))}) \gralt \textcolor{gray!90!black}{Array(\langle exp\rangle +)}}{}
 }
 
 \NewDocumentCommand{\struct}{s}{%
@@ -316,7 +316,7 @@
   \IfBooleanT{#1}{%
     \downplay
   }
-  \firstcase{stmt}{IfElse(Stack(Num(str)), \langle stmt\rangle *, \langle stmt\rangle*)}{L\_If\_Else}
+  \firstcase{stmt}{IfElse(\textcolor{red}{Stack(Num(str))}, \langle stmt\rangle *, \langle stmt\rangle*)}{L\_If\_Else}
 }
 
 \NewDocumentCommand{\loopsecond}{s}{%

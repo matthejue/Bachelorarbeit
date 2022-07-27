@@ -513,8 +513,6 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
   Man spricht hier von der \colorbold{\enquote{Abstrakten Syntax der Sprache $L_{PicoC}$}} und meint hier mit der Sprache $L_{PicoC}$ \colorbold{nicht} die Sprache, welche durch die \colorbold{Abstrakte Syntax} beschrieben wird. Es ist damit \colorbold{immer} die Sprache gemeint, die \colorbold{kompiliert} werden soll und zu deren Zweck die \colorbold{Abstrakt Syntax} überhaupt definiert wird. Für die tatsächliche Sprache, die durch die \colorbold{Abstrakt Syntax} beschrieben wird, interessiert man sich nie wirklich explizit. Diese \colorbold{Redeart} wurde aus der \colorbold{Quelle} \cite{g_siek_course_2022} übernommen.
 \end{Special_Paragraph}
 
-Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird in Python über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine \colorbold{Textrepräsentation} seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{,} und \colorbold{Semikolons} \smalltt{;} zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach dem \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene \colorbold{Textrepräsentation} passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgebeben}.
-
 % $L_{X}$ ist nicht notwendig sich zu überlegen, hier so getann als gäbe es diese Sprache
 % Abstrakte Syntax ist für den Programmierer als Orientierungshilfe bei der Implementierung
 
@@ -523,8 +521,15 @@ Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird in Python über die \c
 % Sache mit Deref und (), leftmost node
 % Umdrehen von ArrayDecl und PntrDecl
 
+\subsubsection{Ausgabe von Abstract Syntax Trees}
+Ein \colorbold{Abstract Syntax Tree} kann entweder in der \colorbold{Konkretter Syntax} der Sprache, für dessen Kompilierung er generiert wurde oder in der \colorbold{Abstrakter Syntax}, die beschreibt, wie der Abstract Syntax Tree selbst aufgebaut sein darf ausgegeben werden.
+
+Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird im \colorbold{PicoC-Compiler} über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} der Programmiersprache \colorbold{Python} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine nach der \colorbold{Abstrakten} oder \colorbold{Konkretten Syntax} aufgebaute \colorbold{Textrepräsentation} seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{','}, \colorbold{Semikolons} \smalltt{;} usw. zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach dem \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene \colorbold{Textrepräsentation} passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgeben}.
+
+Im \colorbold{PicoC-Compiler} wurden \colorbold{Abstrakte} und \colorbold{Konkrette Syntax} miteinander gemischt. Für \colorbold{PicoC-Knoten} wurde die \colorbold{Abstrakte Syntax} verwendet, da Passes schließlich auf \colorbold{Abstract Syntax Trees} operieren. Bei \colorbold{RETI-Knoten} wurde die \colorbold{Konkrette Syntax} verwendet, da \colorbold{Maschienenbefehle} in \colorbold{Konkretter Syntax} schließlich das \colorbold{Endprodukt} des Kompiliervorgangs sein sollen. Da die \colorbold{Abstrakte Syntax} von \colorbold{RETI-Knoten} so simpel ist, macht es kaum einen Unterschied in der Erkennbarkeit, bis auf fehlende gescheifte Klammern \smalltt{()} usw., ob man die \colorbold{RETI-Knoten} in \colorbold{Abstrakter} oder \colorbold{Konkretter} Syntax schreibt. Daher kann man auch einfach gleich die \colorbold{RETI-Knoten} in \colorbold{Konkretter Syntax} ausgeben und muss nicht beim letzten \colorbold{Pass} daran denken, am Ende die \colorbold{Konkrette}, statt der \colorbold{Abstrakten Syntax} für die \colorbold{RETI-Knoten} auszugeben.
+
 \subsubsection{Codebeispiel}
-Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
+Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
 % Transformer erwähnen, viel zu viel um es hier reinzumachen
 
 \begin{code}
@@ -727,7 +732,7 @@ Die Aufgabe des \colorbold{PicoC-ANF Passes} ist es den \colorbold{Abstract Synt
 
 Zudem wird eine \colorbold{Symboltabelle} (Definition~\ref{def:symboltabelle}) eingeführt. In der \colorbold{Symboltabelle} wird beim Anlegen eines \colorbold{neuen Eintrags} für eine Variable zunächst eine \colorbold{Adresse} zugewiesen, die dem Wert einer von zwei \colorbold{Countern}  \smalltt{rel\_global\_addr} und  \smalltt{rel\_stack\_addr} entspricht. Der Counter \smalltt{rel\_global\_addr} ist für Variablen in den \colorbold{Globalen Statischen Daten} und der \colorbold{Counter}  \smalltt{rel\_stack\_addr} ist für Variablen auf dem \colorbold{Stackframe}. Einer der beiden \colorbold{Counter} wird entsprechend der \colorbold{Größe} der angelegten Variable \colorbold{hochgezählt}.
 
-Kommt im \colorbold{Programmcode} an einer späteren Stelle diese Variable \smalltt{Name('symbol')} vor, so wird mit dem \colorbold{Symbol}\footnote{Bzw. der \colorbold{Bezeichner}} als Schlüssel in der \colorbold{Symboltabelle} nachgeschlagen und anstelle des \smalltt{Name(str)}-Knotens die in der \colorbold{Symboltabelle} nachgeschlagene Adresse in einem \smalltt{Global(Num('addr'))}- bzw. \smalltt{Stackframe(Num('addr'))}-Knoten eingesetzt eingefügt. Ob der \smalltt{Global(Num('addr'))}- oder  der \smalltt{Stackframe(Num('addr'))}-Knoten zum Einsatz kommt, entscheidet sich anhand des \colorbold{Scopes} (z.B. \smalltt{@scope}), der in der \colorbold{Symboltabelle} an den \colorbold{Bezeichner} drangehängt ist (z.B. \smalltt{identifier@scope}).\footnote{Die Umsetzung von \colorbold{Scopes} wird in Unterkapitel~\ref{sec:funktionsdeklaration_und_definition_und_umsetzung_von_scopes} genauer beschrieben.}.
+Kommt im \colorbold{Programmcode} an einer späteren Stelle diese Variable \smalltt{Name('symbol')} vor, so wird mit dem \colorbold{Symbol}\footnote{Bzw. der \colorbold{Bezeichner}} als Schlüssel in der \colorbold{Symboltabelle} nachgeschlagen und anstelle des \smalltt{Name(str)}-Knotens die in der \colorbold{Symboltabelle} nachgeschlagene Adresse in einem \smalltt{Global(Num('addr'))}- bzw. \smalltt{Stackframe(Num('addr'))}-Knoten eingesetzt eingefügt. Ob der \smalltt{Global(Num('addr'))}- oder  der \smalltt{Stackframe(Num('addr'))}-Knoten zum Einsatz kommt, entscheidet sich anhand des \colorbold{Scopes} (z.B. \smalltt{@scope}), der in der \colorbold{Symboltabelle} an den \colorbold{Bezeichner} drangehängt ist (z.B. \smalltt{identifier@scope}).\footnote{Die Umsetzung von \colorbold{Scopes} wird in Unterkapitel~\ref{sec:funktionsdeklaration_und_definition_und_umsetzung_von_scopes} genauer beschrieben.}
 
 \begin{Definition}{Symboltabelle}{symboltabelle}
   Eine über ein \colorbold{Assoziatives Feld} umgesetzte \colorbold{Datenstruktur}, die notwendig ist, um das Konzept einer \colorbold{Variablen} in einer Sprache umzusetzen. Diese Datenstruktur ordnet jedem \colorbold{Symbol}\footnote{In einer \colorbold{Symboltabelle} werden \colorbold{Bezeichner} als \colorbold{Symbole} bezeichnet.} einer \colorbold{Variablen}, \colorbold{Konstanten} oder \colorbold{Funktion} aus einem \colorbold{Programm}, Informationen, wie die \colorbold{Adresse}, die \colorbold{Position} im Programmcode oder den \colorbold{Datentyp} zu.
@@ -786,8 +791,13 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
 \newlineparagraph{Aufgaben}
 \label{sec:reti_blocks_pass_zweck}
 
+Die Aufgabe des \colorbold{RETI-Blocks Passes} ist es die \colorbold{Statements} in der \colorbold{Blöcken}, die durch \colorbold{PicoC-Knoten} im \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC\_ANF}$ dargestellt sind durch ihren entsprechenden \colorbold{RETI-Knoten} zu ersetzen.
+
 \newlineparagraph{Abstrakte Syntax}
-\begin{grammar}[Abstrakte Syntax für $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
+
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{RETI\_Blocks}$ in Grammatik~\ref{gr:abstract_syntax_l_reti_blocks} ist verglichen mit der \colorbold{Abstrakten Syntax} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf} stark verändert, denn der Großteil der \colorbold{PicoC-Knoten} wird in diesem Pass durch entsprechende \colorbold{RETI-Knoten} ersetzt. Die einzigen verbleibenden \colorbold{PicoC-Knoten} sind \smalltt{Exp(GoTo(str))}, \smalltt{Block(Name(str), ⟨instr⟩*)} und \smalltt{File(Name(str), ⟨block⟩*)}, da das gesamte Konzept mit den \colorbold{Blöcken} erst im \colorbold{RETI-Pass} in Unterkapitel~\ref{gr:abstract_syntax_l_reti} aufgelöst wird.
+
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{RETI\_Blocks}$][H][gr:abstract_syntax_l_reti_blocks]
   \toprule
   \retiblocks
   \midrule
@@ -795,14 +805,9 @@ In Code~\ref{code:picoc_mon_pass_für_codebeispiel} sieht man den \colorbold{Abs
   \bottomrule
 \end{grammar}
 
-\begin{Special_Paragraph}
-
-  % die Sache mit Konkretter Syntax statt Abstrakter Syntax da so simpel und so....
-\end{Special_Paragraph}
-
 \newlineparagraph{Codebeispiel}
 
-In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{RETI-Blocks Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem
+In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{Abstract-Syntax-Tree} des \colorbold{RETI-Blocks Passes} für das aus Unterkapitel~\ref{code:picoc_code_für_codebeispiel} weitergeführte Beispiel, indem die \colorbold{Statements}, die durch entsprechende \colorbold{PicoC-Knoten} im \colorbold{Abstrakt Syntax Tree} der Sprache $L_{PicoC\_ANF}$ in Grammatik~\ref{gr:abstract_syntax_l_picoc_anf} repräsentiert waren nun durch ihre entsprechennden \colorbold{RETI-Knoten} ersetzt werden.
 
 \begin{code}
   \centering
@@ -810,6 +815,10 @@ In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{A
   \caption{RETI-Blocks Pass für Codebespiel}
   \label{code:reti_blocks_pass_für_codebeispiel}
 \end{code}
+
+\begin{Special_Paragraph}
+  Theoretisch ist das kein richtiger \colorbold{Abstrakt Syntax Tree} mehr, da die die \colorbold{RETI-Knoten} in \colorbold{Konkretter Syntax} sind und nicht in \colorbold{Abstrakter Syntax}.
+\end{Special_Paragraph}
 
 \subsubsection{RETI-Patch Pass}
 \label{reti_patch_pass}
@@ -819,7 +828,7 @@ In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{A
 
 \newlineparagraph{Abstrakte Syntax}
 
-\begin{grammar}[Abstrakte Syntax für $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_blocks]
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{RETI\_Patch}$][H][gr:abstract_syntax_l_reti_patch]
   \toprule
   \retiblocks*
   \midrule
@@ -848,7 +857,7 @@ In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{A
 
 % dieser Pass entspricht Assembler bis auf die Sache mit binärer Repräsentation, was der PicoC-Compiler garnicht macht
 
-\begin{grammar}[Konkrette Syntax für $L_{RETI\_Lex}$][H][gr:konkrette_syntax_l_reti_lexer]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{RETI\_Lex}$][H][gr:konkrette_syntax_l_reti_lexer]
   \toprule
   \firstcase{dig\_no\_0}{ \dq 1\dq \gralt \dq 2\dq \gralt \dq 3\dq \gralt \dq 4\dq \gralt \dq 5\dq \gralt \dq 6\dq}{L\_Program}
   \otherform{\dq 7\dq \gralt \dq 8\dq \gralt \dq 9\dq}{}
@@ -864,7 +873,7 @@ In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{A
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Konkrette Syntax für $L_{RETI\_Parse}$][H][gr:konkrette_syntax_l_reti_parser]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{RETI\_Parse}$][H][gr:konkrette_syntax_l_reti_parser]
 \toprule
 \firstcase{instr}{\dq ADD\dq\enspace reg\enspace arg\gralt \dq ADDI\dq\enspace reg\enspace num\gralt \dq SUB\dq\enspace reg\enspace arg}{L\_Program}
 \otherform{\dq SUBI\dq\enspace reg\enspace\enspace num\gralt \dq MULT\dq\enspace reg\enspace arg\gralt \dq MULTI\dq\enspace reg\enspace num}{}
@@ -883,7 +892,7 @@ In Code~\ref{code:reti_blocks_pass_für_codebeispiel} sieht man den \colorbold{A
 \end{grammar}
 
 % TODO: es braucht noch eine Konkrette Syntax dafür
-\begin{grammar}[Abstrakte Syntax für $L_{RETI}$][H][gr:abstract_syntax_l_reti]
+\begin{grammar}[Abstrakte Syntax der Sprache $L_{RETI}$][H][gr:abstract_syntax_l_reti]
   \toprule
   \reti
   \midrule
