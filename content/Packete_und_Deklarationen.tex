@@ -250,6 +250,18 @@
     \fancyfoot[R]{}
 }
 
+% https://github.com/IUCompilerCourse/Essentials-of-Compilation
+\newenvironment{transformation}{
+  \newcommand{\compilesto}{%
+    \end{minipage}&$\Rightarrow$&\begin{minipage}{0.4\textwidth}\centering}
+  \newcommand{\notequal}{%
+    \end{minipage}&$\ne$&\begin{minipage}{0.4\textwidth}\centering}
+  \begin{center}\begin{tabular}{ccc}\begin{minipage}{0.4\textwidth}\centering
+  }{%
+  \end{minipage}\end{tabular}\end{center}%
+}
+
+
 % https://tex.stackexchange.com/questions/395856/switching-tocdepth-in-the-middle-of-a-document
 % \newcommand{\changelocaltocdepth}[1]{%
 %   \addtocontents{toc}{\protect\setcounter{tocdepth}{#1}}%

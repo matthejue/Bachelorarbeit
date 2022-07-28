@@ -145,17 +145,57 @@ Würde man einen Teil dieser \colorbold{Operationen} ohne Beachtung von \colorbo
   \bottomrule
 \end{grammar}
 
-Die Grammatik~\ref{gr:undurchdachte_konkrette_syntax} ist allerdings \colorbold{mehrdeutig}, verschiedene \colorbold{Ableitungen} in der Grammatik können zum selben \colorbold{Wort} führen. Z.B. kann das Wort \smalltt{3 * 1 >= -4 \&\& 1} über die Ableitung~\ref{eq:ableitung1} als auch über die Ableitung~\ref{eq:ableitung2}.
+Die Grammatik~\ref{gr:undurchdachte_konkrette_syntax} ist allerdings \colorbold{mehrdeutig}, d.h. verschiedene \colorbold{Linksableitungen} in der Grammatik können zum selben \colorbold{Wort} abgeleitet werden. Z.B. kann das Wort \smalltt{3 * 1 \&\& 4} sowohl über die \colorbold{Linksableitung}~\ref{eq:ableitung1} als auch über die \colorbold{Linksableitung}~\ref{eq:ableitung2} abgeleitet werden.
 
 \begin{dmath}[compact]
-  \smalltt{exp}\enspace\Rightarrow\enspace bin\_exp\Rightarrow\enspace exp\enspace bin\_op\enspace exp\enspace \Rightarrow^*\enspace exp\enspace bin\_op\enspace exp\enspace \&\&\enspace prim\_exp\enspace \Rightarrow^*\enspace bin\_exp\enspace >=\enspace un\_exp\enspace \&\&\enspace 1\enspace \Rightarrow^*\enspace exp\enspace bin\_op\enspace exp\enspace >=\enspace un\_op\enspace exp\enspace \&\&\enspace 1\enspace \Rightarrow\enspace prim\_exp\enspace ^*\enspace prim\_exp\enspace >=\enspace -prim\_exp\enspace \&\&\enspace 1\enspace \Rightarrow\enspace 3\enspace *\enspace 4\enspace >=\enspace -prim\_exp\enspace \&\&\enspace 1
+  \mathtt{exp}\enspace
+  \Rightarrow\enspace \mathtt{bin\_exp}
+  \Rightarrow\enspace \mathtt{exp}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}
+  \Rightarrow\enspace \mathtt{bin\_exp}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}
+  \Rightarrow\enspace \mathtt{exp}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}
+  \Rightarrow^*\enspace \mathtt{3}\enspace \mathtt{*}\enspace \mathtt{1}\enspace \mathtt{\&\&}\enspace \mathtt{4}
     \label{eq:ableitung1}
 \end{dmath}
 
-\begin{equation}
-   exp\Rightarrow \Rightarrow
+\begin{dmath}[compact]
+   \mathtt{exp}\Rightarrow \mathtt{bin\_exp}
+   \Rightarrow \mathtt{exp}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}\enspace
+   \Rightarrow \mathtt{prim\_exp}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}
+   \Rightarrow \mathtt{NUM}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}
+   \Rightarrow \mathtt{3}\enspace \mathtt{bin\_op}\enspace \mathtt{exp}
+   \Rightarrow \mathtt{3}\enspace \mathtt{*}\enspace \mathtt{exp}
+   \Rightarrow \mathtt{3}\enspace \mathtt{*}\enspace \mathtt{bin\_exp}
+   \Rightarrow \mathtt{3}\enspace \mathtt{*}\enspace \mathtt{exp}\enspace \mathtt{bin\_exp}\enspace \mathtt{exp}
+   \Rightarrow^* \mathtt{3}\enspace \mathtt{*}\enspace \mathtt{1}\enspace \mathtt{\&\&}\enspace \mathtt{4}
     \label{eq:ableitung2}
-\end{equation}
+\end{dmath}
+
+Beide \colorbold{Wörter} sind \colorbold{gleich}, allerdings sind die \colorbold{Ableitungsbäume unterschiedlich}, wie in Abbildung~\ref{fig:ableitungsbäume_zu_den_beiden_ableitungen}.
+
+\begin{figure}[H]
+\begin{transformation}
+  \begin{tikzpicture}
+    \node {\smalltt{\&\&}}
+    child {node {\smalltt{*}}
+      child {node {\smalltt{3}}}
+      child {node {\smalltt{1}}}}
+    child {node {\smalltt{4}}};
+  \end{tikzpicture}
+  \notequal
+  \begin{tikzpicture}
+    \node {\smalltt{*}}
+    child {node {\smalltt{3}}}
+    child {node {\smalltt{\&\&}}
+      child {node {\smalltt{1}}}
+      child {node {\smalltt{4}}}
+    };
+  \end{tikzpicture}
+\end{transformation}
+\caption{Ableitungsbäume zu den beiden Ableitungen}
+\label{fig:ableitungsbäume_zu_den_beiden_ableitungen}
+\end{figure}
+
+Der \colorbold{linke Baum} entspricht Ableitung~\ref{eq:ableitung1} und der \colorbold{rechte Baum} entspricht Ableitung~\ref{eq:ableitung2}
 
 \subsection{Konkrette Syntax für die Syntaktische Analyse}
 % ./concrete_syntax_picoc.lark

@@ -3,14 +3,14 @@
 \contentsline {floatgrammar}{\numberline {2.1.1}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1\relax }}{25}{floatgrammar.caption.21}%
 \contentsline {floatgrammar}{\numberline {2.1.2}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2\relax }}{26}{floatgrammar.caption.22}%
 \contentsline {floatgrammar}{\numberline {2.2.1}{\ignorespaces Undurchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{27}{floatgrammar.caption.24}%
-\contentsline {floatgrammar}{\numberline {2.2.2}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{28}{floatgrammar.caption.25}%
-\contentsline {floatgrammar}{\numberline {2.2.3}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{29}{floatgrammar.caption.26}%
-\contentsline {floatgrammar}{\numberline {2.2.4}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{41}{floatgrammar.caption.36}%
-\contentsline {floatgrammar}{\numberline {2.3.1}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$\relax }}{47}{floatgrammar.caption.41}%
-\contentsline {floatgrammar}{\numberline {2.3.2}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$\relax }}{50}{floatgrammar.caption.44}%
-\contentsline {floatgrammar}{\numberline {2.3.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$\relax }}{54}{floatgrammar.caption.46}%
-\contentsline {floatgrammar}{\numberline {2.3.4}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Blocks}$\relax }}{57}{floatgrammar.caption.48}%
-\contentsline {floatgrammar}{\numberline {2.3.5}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Patch}$\relax }}{61}{floatgrammar.caption.50}%
-\contentsline {floatgrammar}{\numberline {2.3.6}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Lexikalische Analyse in EBNF\relax }}{65}{floatgrammar.caption.52}%
-\contentsline {floatgrammar}{\numberline {2.3.7}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Syntaktische Analyse in EBNF\relax }}{65}{floatgrammar.caption.53}%
-\contentsline {floatgrammar}{\numberline {2.3.8}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI}$\relax }}{65}{floatgrammar.caption.54}%
+\contentsline {floatgrammar}{\numberline {2.2.2}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{28}{floatgrammar.caption.26}%
+\contentsline {floatgrammar}{\numberline {2.2.3}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{29}{floatgrammar.caption.27}%
+\contentsline {floatgrammar}{\numberline {2.2.4}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{41}{floatgrammar.caption.37}%
+\contentsline {floatgrammar}{\numberline {2.3.1}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$\relax }}{47}{floatgrammar.caption.42}%
+\contentsline {floatgrammar}{\numberline {2.3.2}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$\relax }}{50}{floatgrammar.caption.45}%
+\contentsline {floatgrammar}{\numberline {2.3.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$\relax }}{54}{floatgrammar.caption.47}%
+\contentsline {floatgrammar}{\numberline {2.3.4}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Blocks}$\relax }}{57}{floatgrammar.caption.49}%
+\contentsline {floatgrammar}{\numberline {2.3.5}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Patch}$\relax }}{61}{floatgrammar.caption.51}%
+\contentsline {floatgrammar}{\numberline {2.3.6}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Lexikalische Analyse in EBNF\relax }}{65}{floatgrammar.caption.53}%
+\contentsline {floatgrammar}{\numberline {2.3.7}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Syntaktische Analyse in EBNF\relax }}{65}{floatgrammar.caption.54}%
+\contentsline {floatgrammar}{\numberline {2.3.8}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI}$\relax }}{65}{floatgrammar.caption.55}%
