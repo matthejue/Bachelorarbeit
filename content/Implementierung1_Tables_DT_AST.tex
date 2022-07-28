@@ -138,12 +138,24 @@ Würde man einen Teil dieser \colorbold{Operationen} ohne Beachtung von \colorbo
   \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt \dq(\dq exp\dq)\dq}{L\_Arith +}
   \firstcase{un\_op}{\dq -\dq\gralt \dq\sim\dq \gralt \dq!\dq \gralt \dq *\dq \gralt \dq \&\dq}{}
   \firstcase{un\_exp}{un\_op\enspace exp}{}
-  \firstcase{bin\_op}{\dq *\dq\gralt \dq /\dq\gralt \dq \%\dq \gralt \dq+\dq\gralt \dq-\dq\gralt \& \gralt {\wedge{}} \gralt {\mid}
-  \otherform{{<} \gralt {<=} \gralt {>} \gralt {>=} \gralt {!=} \gralt {==} \gralt {\&\&} \gralt {\mid\mid}}{}
+  \firstcase{bin\_op}{\dq *\dq\gralt \dq /\dq\gralt \dq \%\dq \gralt \dq+\dq\gralt \dq-\dq\gralt \dq\&\dq \gralt \dq{\wedge{}}\dq \gralt \dq{\mid}\dq}{}
+  \otherform{\dq{<}\dq \gralt \dq{<=}\dq \gralt \dq{>}\dq \gralt \dq{>=}\dq \gralt \dq{!=}\dq \gralt \dq{==}\dq \gralt \dq{\&\&}\dq \gralt \dq{\mid\mid}\dq}{}
   \firstcase{bin\_exp}{exp\enspace bin\_op\enspace exp}{}
   \firstcase{exp}{prim\_exp \gralt un\_exp \gralt bin\_exp}{}
   \bottomrule
 \end{grammar}
+
+Die Grammatik~\ref{gr:undurchdachte_konkrette_syntax} ist allerdings \colorbold{mehrdeutig}, verschiedene \colorbold{Ableitungen} in der Grammatik können zum selben \colorbold{Wort} führen. Z.B. kann das Wort \smalltt{3 * 1 >= -4 \&\& 1} über die Ableitung~\ref{eq:ableitung1} als auch über die Ableitung~\ref{eq:ableitung2}.
+
+\begin{dmath}[compact]
+  \smalltt{exp}\enspace\Rightarrow\enspace bin\_exp\Rightarrow\enspace exp\enspace bin\_op\enspace exp\enspace \Rightarrow^*\enspace exp\enspace bin\_op\enspace exp\enspace \&\&\enspace prim\_exp\enspace \Rightarrow^*\enspace bin\_exp\enspace >=\enspace un\_exp\enspace \&\&\enspace 1\enspace \Rightarrow^*\enspace exp\enspace bin\_op\enspace exp\enspace >=\enspace un\_op\enspace exp\enspace \&\&\enspace 1\enspace \Rightarrow\enspace prim\_exp\enspace ^*\enspace prim\_exp\enspace >=\enspace -prim\_exp\enspace \&\&\enspace 1\enspace \Rightarrow\enspace 3\enspace *\enspace 4\enspace >=\enspace -prim\_exp\enspace \&\&\enspace 1
+    \label{eq:ableitung1}
+\end{dmath}
+
+\begin{equation}
+   exp\Rightarrow \Rightarrow
+    \label{eq:ableitung2}
+\end{equation}
 
 \subsection{Konkrette Syntax für die Syntaktische Analyse}
 % ./concrete_syntax_picoc.lark
