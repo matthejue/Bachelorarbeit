@@ -107,31 +107,31 @@ Die Programmiersprache $L_{PicoC}$ hat dieselben \colorbold{Präzidenzregeln} im
   \rowcolors{2-18}{SecondaryColor}{}[cols={2-3}]
   \rowcolors{2-18}{SecondaryColor}{}[cols={1,4}, respect-blocks, restart]
   \Body
-  \textbf{\textcolor{white}{Präzidenz}} &	\textbf{\textcolor{white}{Operator}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
-  13	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
-    & \verb|a[]|	& Indexzugriff & \\
-    & \verb|a.b| & Attributzugriff & \\
-  12	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
+  \textbf{\textcolor{white}{Präzidenzstufe}} &	\textbf{\textcolor{white}{Operatoren}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
+  1	& \verb|a()| & Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
+    & \verb|a[]| & Indexzugriff & \\
+    & \verb|a.b| & Attributzugriff & \\
+  2	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
     & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
     & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
-  11	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
-  10	& \verb|a+b a-b|	& Addition und Subtraktion & \\
-  9	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
-  8 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
+  3	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
+  4	& \verb|a+b a-b|	& Addition und Subtraktion & \\
+  5	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
+  6 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
   7 &	\verb|a&b| & Bitweise UND & \\
-  6 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
-  5 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
-  4 & \verb|a&&b| &	Logiches UND & \\
-  3 & $a{\mid\mid} b$	& Logisches ODER & \\
-  2 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
-  1 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
+  8 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
+  9 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
+  10 & \verb|a&&b| &	Logiches UND & \\
+  11 & $\mathtt{a{\mid\mid} b}$	& Logisches ODER & \\
+  12 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
+  % 13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
   \bottomrule
 \end{NiceTabular}
 \caption{Präzidenzregeln von PicoC}
 \label{tab:reference_table}
 \end{table}
 
-Würde man einen Teil dieser \colorbold{Operationen} ohne Beachtung von \colorbold{Präzidenzreglen} und \colorbold{Assoziativität} in eine Grammatik verarbeiten wollen, so könnte eine Grammatik, wie Grammatik~\ref{gr:undurchdachte_konkrette_syntax} dabei rauskommen.
+Würde man diese \colorbold{Operatoren} ohne Beachtung von \colorbold{Präzidenzreglen} (Definiton~\ref{def:präzidenz}) und \colorbold{Assoziativität} (Definition~\ref{def:assoziativität}) in eine Grammatik verarbeiten wollen, so könnte eine Grammatik, wie Grammatik~\ref{gr:undurchdachte_konkrette_syntax} dabei rauskommen.
 
 \begin{grammar}[Undurchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF][H][gr:undurchdachte_konkrette_syntax]
   \toprule
@@ -170,7 +170,7 @@ Die Grammatik~\ref{gr:undurchdachte_konkrette_syntax} ist allerdings \colorbold{
     \label{eq:ableitung2}
 \end{dmath}
 
-Beide \colorbold{Wörter} sind \colorbold{gleich}, allerdings sind die \colorbold{Ableitungsbäume unterschiedlich}, wie in Abbildung~\ref{fig:ableitungsbäume_zu_den_beiden_ableitungen}.
+Beide \colorbold{Wörter} sind \colorbold{gleich}, allerdings sind die \colorbold{Ableitungsbäume unterschiedlich}, wie in Abbildung~\ref{fig:ableitungsbäume_zu_den_beiden_ableitungen} zu sehen ist.
 
 \begin{figure}[H]
 \begin{transformation}
@@ -195,24 +195,107 @@ Beide \colorbold{Wörter} sind \colorbold{gleich}, allerdings sind die \colorbol
 \label{fig:ableitungsbäume_zu_den_beiden_ableitungen}
 \end{figure}
 
-Der \colorbold{linke Baum} entspricht Ableitung~\ref{eq:ableitung1} und der \colorbold{rechte Baum} entspricht Ableitung~\ref{eq:ableitung2}
+Der \colorbold{linke Baum} entspricht Ableitung~\ref{eq:ableitung1} und der \colorbold{rechte Baum} entspricht Ableitung~\ref{eq:ableitung2}. Würde man in den Ausdrücken, die von diesen Bäumen darsgestellt sind in \colorbold{Klammern} setzen, um die \colorbold{Präzidenz} sichtbar zu machen, so würde Ableitung~\ref{eq:ableitung1} die Klammerung \smalltt{(3 * 1) \&\& 4} haben und die Ableitung~\ref{eq:ableitung2} die Klammerung \smalltt{3 * (1 \&\& 4)} haben.
+
+Aus diesem Grund ist es wichtig die \colorbold{Präzidenzregeln} und die \colorbold{Assoziativität} der Operatoren beim Erstellen der Grammatik miteinzubeziehen. Hierzu wird nun Tabelle~\ref{tab:reference_table} betrachtet. Für jede \colorbold{Präzidenzstufe} in der Tabelle~\ref{tab:reference_table} wird eine eigene Regel erstellt werden, wie in Tabelle~\ref{gr:durchdachte_konkrette_syntax_first} dargestellt ist. Zudem braucht es eine \colorbold{Produktion} \smalltt{prim\_exp} für die höchste \colorbold{Präzidenzstufe}, welche \colorbold{Literale}, wie \smalltt{'c'},  \smalltt{5}  oder \smalltt{var} und geklammerte Ausdrücke wie \smalltt{(3 \&\& 14)} abdeckt.
+
+\begin{grammar}[Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF][H][gr:durchdachte_konkrette_syntax_first]
+  \toprule
+  \firstcase{prim\_exp}{\ldots}{L\_Arith + L\_Array}
+  \firstcase{post\_exp}{\ldots}{+ L\_Pntr + L\_Struct}
+  \firstcase{un\_exp}{\ldots}{+ L\_Fun}
+  \firstcase{arith\_prec1}{\ldots}{}
+  \firstcase{arith\_prec2}{\ldots}{}
+  \firstcase{arith\_and}{\ldots}{}
+  \firstcase{arith\_oplus}{\ldots}{}
+  \firstcase{arith\_or}{\ldots}{}
+  \midrule
+  \firstcase{rel\_exp}{\ldots}{L\_Logic}
+  \firstcase{eq\_exp}{\ldots}{}
+  \firstcase{logic\_and}{\ldots}{}
+  \firstcase{logic\_or}{\ldots}{}
+  \midrule
+  \firstcase{assign\_stmt}{\ldots}{L\_Assign}
+  \bottomrule
+\end{grammar}
+
+Die \colorbold{Bezeichnungen} der \colorbold{Produktionen} sind in Tabelle~\ref{tab:bezeichnungen_von_produktionsregeln} ihren jeweiligen \colorbold{Operatoren} und  zugeordnet.
+
+\begin{table}[H]
+  \center
+  % \Block{2}{=}{Links, dann rechts $\rightarrow$} \\
+  \begin{NiceTabular}{X[2,c]X[1,c]X[2,c]X[2,c]}[rules/color=PrimaryColor] % {\linewidth}{|C|C|L|L|}
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-13}{SecondaryColor}{}[cols={1-3}]
+  \rowcolors{2-13}{SecondaryColor}{}[cols={4}, respect-blocks, restart]
+  \Body
+  \textbf{\textcolor{white}{Bezeichnung der Produktionsregel}} & \textbf{\textcolor{white}{Präzidenzstufe}} & \textbf{\textcolor{white}{Operatoren}} & \textbf{\textcolor{white}{Assoziativität}} \\
+  \smalltt{post\_exp} & 1	&\verb|a()| \verb|a[]| \verb|a.b| & Links, dann rechts $\rightarrow$ \\
+  \smalltt{un\_exp} & 2	& \verb|-a| \smalltt{!a $\thicksim$a} \verb|*a &a| & Rechts, dann links $\leftarrow$ \\
+  \smalltt{arith\_prec1} & 3	& \smalltt{a*b a/b a\%b} & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
+  \smalltt{arith\_prec2} & 4	& \verb|a+b a-b| & \\
+  \smalltt{arith\_and} & 5	& \verb|a<b a<=b| \verb|a>b a>=b| & \\
+  \smalltt{arith\_oplus} & 6 & \verb|a==b a!=b| & \\
+  \smalltt{arith\_or} & 7 & \verb|a&b| & \\
+  \smalltt{rel\_exp} & 8 & \verb|a^b| & \\
+  \smalltt{eq\_exp} & 9 & \smalltt{a$\mid$b} & \\
+  \smalltt{logic\_and} & 10 & \verb|a&&b| & \\
+  \smalltt{logic\_or} & 11 & $\mathtt{a{\mid\mid} b}$& \\
+  \smalltt{assign} & 12 & \verb|a=b| & Rechts, dann links $\leftarrow$ \\
+  \bottomrule
+\end{NiceTabular}
+\caption{Zuordnung der Bezeichnungen von Produktionsregeln zu Operatoren}
+\label{tab:bezeichnungen_von_produktionsregeln}
+\end{table}
+
+
+Jede der \colorbold{Produktionen} enthält nur \colorbold{Terminalsymbole} und \colorbold{Nicht-Terminalsymbole}, die für \colorbold{Ausdrücke} mit \colorbold{Operatoren} stehen, die auf der \colorbold{Präzidenzstufe} sind, für welche die jeweilige Produktion verantwortlich ist oder \colorbold{höher}. Wenn man hierzu
+
+\begin{grammar}[Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF][H][gr:durchdachte_konkrette_syntax]
+  \toprule
+  \firstcase{prec1\_op}{\dq*\dq\gralt \dq*\dq\gralt \dq\%\dq}{L\_Misc}
+  \firstcase{prec2\_op}{\dq +\dq\gralt \dq -\dq}{}
+  \firstcase{rel\_op}{\dq <\dq\gralt \dq <=\dq\gralt \dq >\dq\gralt \dq >=\dq}{}
+  \firstcase{eq\_op}{\dq ==\dq\gralt \dq !=\dq}{}
+  \firstcase{fun\_args}{[logic\_or(\dq ,\dq\enspace logic\_or)*]}{} % TODO: sagen was [] bedeutet in Lark
+  \midrule
+  \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith}
+  \firstcase{post\_exp}{post\_exp\dq [\dq logic\_or\dq ]\dq \gralt post\_exp\dq .\dq name\gralt name\dq (\dq fun\_args\dq )\dq}{+ L\_Array}
+  \otherform{prim\_exp}{+ L\_Pntr}
+  \firstcase{un\_exp}{un\_op\enspace un\_exp\gralt post\_exp}{+ L\_Struct}
+  \firstcase{arith\_prec1}{arith\_prec1\enspace prec1\_op\enspace un\_exp\gralt un\_exp}{+ L\_Fun}
+  \firstcase{arith\_prec2}{arith\_prec2\enspace prec2\_op\enspace arith\_prec1\gralt arith\_prec1}{}
+  \firstcase{arith\_and}{arith\_and\enspace \dq\&\dq\enspace arith\_prec2\gralt arith\_prec2}{}
+  \firstcase{arith\_oplus}{arith\_oplus\enspace \dq {\wedge{}}\dq\enspace arith\_and\gralt arith\_and}{}
+  \firstcase{arith\_or}{arith\_or\enspace \dq{\mid} \dq\enspace arith\_oplus\gralt arith\_oplus}{}
+  \midrule
+  \firstcase{rel\_exp}{rel\_exp\enspace rel\_op\enspace arith\_or\gralt arith\_or}{L\_Logic}
+  \firstcase{eq\_exp}{eq\_exp\enspace eq\_op\enspace rel\_exp\gralt rel\_exp}{}
+  \firstcase{logic\_and}{logic\_and\enspace \dq{\&\&}\dq\enspace eq\_exp\gralt eq\_exp}{}
+  \firstcase{logic\_or}{logic\_or\enspace \dq{\mid\mid}\dq\enspace logic\_and\gralt logic\_and}{}
+  \midrule
+  \firstcase{assign\_stmt}{un\_exp\enspace \dq {=}\dq\enspace logic\_or\dq ;\dq }{L\_Assign}
+  \bottomrule
+\end{grammar}
 
 \subsection{Konkrette Syntax für die Syntaktische Analyse}
 % ./concrete_syntax_picoc.lark
 % https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
+
 In \ref{gr:concrete_syntax_parser}
 
 \begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_parser]
   \toprule
 	\downplay
-  \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith +}
-  \firstcase{post\_exp}{array\_subscr\gralt struct\_attr\gralt fun\_call}{L\_Array +}
+  \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith + L\_Array}
+  \firstcase{post\_exp}{array\_subscr\gralt struct\_attr\gralt fun\_call}{+ L\_Pntr + L\_Struct}
 	\downplay
-  \otherform{input\_exp\gralt print\_exp\gralt prim\_exp}{L\_Pntr +}
-  \firstcase{un\_exp}{un\_op\enspace un\_exp\gralt post\_exp}{L\_Struct + L\_Fun}
+  \otherform{input\_exp\gralt print\_exp\gralt prim\_exp}{+ L\_Fun}
+  \firstcase{un\_exp}{un\_op\enspace un\_exp\gralt post\_exp}{}
   \midrule
 	\downplay
-  \firstcase{input\_exp}{\dq input\dq\dq(\dq\dq)\dq}{L\_Arith}
+  \firstcase{input\_exp}{\dq input\dq\dq(\dq\dq)\dq}{}
 	\downplay
   \firstcase{print\_exp}{\dq print\dq\dq(\dq logic\_or\dq)\dq}{}
 	\downplay
