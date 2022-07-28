@@ -12,12 +12,12 @@
 \label{ch:implementierung}
 
 \section{Lexikalische Analyse}
-\subsection{Teil der Konkretten Syntax für die Lexikalische Analyse}
+\subsection{Konkrette Syntax für die Lexikalische Analyse}
 \numberwithin{floatgrammar}{section}
 
 \label{sec:lex_analyse_verwendung_von_lark}
 % ./concrete_syntax_picoc.lark
-\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_lex_teil_1]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_lex_teil_1]
   \toprule
   \firstcase{COMMENT}{\dq //\dq\enspace /[{\wedge}\backslash n]{*}/\gralt \dq {/*}\dq\enspace  /(.\mid \setminus n)*?/\enspace \dq {*/}\dq }{L\_Comment}
   \firstcase{RETI\_COMMENT.2}{\dq {//}\dq \dq \text{\textvisiblespace} \dq ? \dq \#\dq /[\wedge\backslash n]{*}/}{}
@@ -34,13 +34,14 @@
   & & \qquad(LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )* & \\
   \firstcase{name}{NAME\gralt INT\_NAME\gralt CHAR\_NAME}{}
   \otherform{VOID\_NAME}{}
+  \firstcase{LOGIC\_NOT}{\dq !\dq }{}
   \firstcase{NOT}{\dq \sim\dq }{}
   \firstcase{REF\_AND}{\dq \&\dq }{}
   \firstcase{un\_op}{SUB\_MINUS\gralt LOGIC\_NOT\gralt NOT}{}
   \otherform{MUL\_DEREF\_PNTR \gralt REF\_AND}{}
-  \firstcase{MUL\_DEREF\_PNTR}{\dq {*}\dq }{}
-  \firstcase{DIV}{\dq /\dq }{}
-  \firstcase{MOD}{\dq \%\dq }{}
+  \firstcase{MUL\_DEREF\_PNTR}{\dq {*}\dq}{}
+  \firstcase{DIV}{\dq /\dq}{}
+  \firstcase{MOD}{\dq \%\dq}{}
   \firstcase{prec1\_op}{MUL\_DEREF\_PNTR\gralt DIV\gralt MOD}{}
   \firstcase{ADD}{\dq {+}\dq }{}
   \firstcase{SUB\_MINUS}{\dq {-}\dq }{}
@@ -54,11 +55,10 @@
   \firstcase{EQ}{\dq {==}\dq }{}
   \firstcase{NEQ}{\dq {!=}\dq }{}
   \firstcase{eq\_op}{EQ\gralt NEQ}{}
-  \firstcase{LOGIC\_NOT}{\dq !\dq }{}
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex_teil_2]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex_teil_2]
   \toprule
   \firstcase{INT\_DT.2}{\dq int\dq }{L\_Assign\_Alloc}
   \firstcase{INT\_NAME.3}{\dq int\dq\enspace (LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )+}{}
@@ -92,21 +92,72 @@
 \section{Syntaktische Analyse}
 \label{sec:syntaktische_analyse}
 
-\subsection{Teil der Konkretten Syntax für die Syntaktische Analyse}
+\subsection{Umsetzung von Präzidenz und Assoziativität}
+\label{sec:umsetzung_von_präzidenz}
+
+Die Programmiersprache $L_{PicoC}$ hat dieselben \colorbold{Präzidenzregeln} implementiert, wie die Programmiersprache $L_C$ \footcite{noauthor_c_nodate}. Die \colorbold{Präzidenzregeln} der Programmiersprache $L_{PicoC}$ sind in Tabelle~\ref{tab:reference_table} aufgelistet.
+
+% \rowcolors{2}{SecondaryColor}{white}
+\begin{table}[H]
+  \center
+  % \Block{2}{=}{Links, dann rechts $\rightarrow$} \\
+  \begin{NiceTabular}{X[1,c]X[2,c]X[3,l]X[2,c]}[rules/color=PrimaryColor] % {\linewidth}{|C|C|L|L|}
+  \CodeBefore
+  \rowcolor{PrimaryColor}{1}
+  \rowcolors{2-18}{SecondaryColor}{}[cols={2-3}]
+  \rowcolors{2-18}{SecondaryColor}{}[cols={1,4}, respect-blocks, restart]
+  \Body
+  \textbf{\textcolor{white}{Präzidenz}} &	\textbf{\textcolor{white}{Operator}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
+  13	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
+    & \verb|a[]|	& Indexzugriff & \\
+    & \verb|a.b| & Attributzugriff & \\
+  12	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
+    & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
+    & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
+  11	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
+  10	& \verb|a+b a-b|	& Addition und Subtraktion & \\
+  9	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
+  8 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
+  7 &	\verb|a&b| & Bitweise UND & \\
+  6 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
+  5 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
+  4 & \verb|a&&b| &	Logiches UND & \\
+  3 & $a{\mid\mid} b$	& Logisches ODER & \\
+  2 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
+  1 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
+  \bottomrule
+\end{NiceTabular}
+\caption{Präzidenzregeln von PicoC}
+\label{tab:reference_table}
+\end{table}
+
+Würde man einen Teil dieser \colorbold{Operationen} ohne Beachtung von \colorbold{Präzidenzreglen} und \colorbold{Assoziativität} in eine Grammatik verarbeiten wollen, so könnte eine Grammatik, wie Grammatik~\ref{gr:undurchdachte_konkrette_syntax} dabei rauskommen.
+
+\begin{grammar}[Undurchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF][H][gr:undurchdachte_konkrette_syntax]
+  \toprule
+  \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt \dq(\dq exp\dq)\dq}{L\_Arith +}
+  \firstcase{un\_op}{\dq -\dq\gralt \dq\sim\dq \gralt \dq!\dq \gralt \dq *\dq \gralt \dq \&\dq}{}
+  \firstcase{un\_exp}{un\_op\enspace exp}{}
+  \firstcase{bin\_op}{\dq *\dq\gralt \dq /\dq\gralt \dq \%\dq \gralt \dq+\dq\gralt \dq-\dq\gralt \& \gralt {\wedge{}} \gralt {\mid}
+  \otherform{{<} \gralt {<=} \gralt {>} \gralt {>=} \gralt {!=} \gralt {==} \gralt {\&\&} \gralt {\mid\mid}}{}
+  \firstcase{bin\_exp}{exp\enspace bin\_op\enspace exp}{}
+  \firstcase{exp}{prim\_exp \gralt un\_exp \gralt bin\_exp}{}
+  \bottomrule
+\end{grammar}
+
+\subsection{Konkrette Syntax für die Syntaktische Analyse}
 % ./concrete_syntax_picoc.lark
 % https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
 In \ref{gr:concrete_syntax_parser}
 
-\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_parser]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_parser]
   \toprule
 	\downplay
   \firstcase{prim\_exp}{name\gralt NUM\gralt CHAR\gralt "("logic\_or")"}{L\_Arith +}
-	\downplay
   \firstcase{post\_exp}{array\_subscr\gralt struct\_attr\gralt fun\_call}{L\_Array +}
 	\downplay
   \otherform{input\_exp\gralt print\_exp\gralt prim\_exp}{L\_Pntr +}
-	\downplay
-  \firstcase{un\_exp}{un\_op un\_exp\gralt post\_exp}{L\_Struct + L\_Fun}
+  \firstcase{un\_exp}{un\_op\enspace un\_exp\gralt post\_exp}{L\_Struct + L\_Fun}
   \midrule
 	\downplay
   \firstcase{input\_exp}{\dq input\dq\dq(\dq\dq)\dq}{L\_Arith}
@@ -126,7 +177,7 @@ In \ref{gr:concrete_syntax_parser}
   \downplay
   \firstcase{rel\_exp}{rel\_exp\enspace rel\_op\enspace arith\_or\gralt arith\_or}{L\_Logic}
   \downplay
-  \firstcase{eq\_exp}{eq\_exp\enspace eq\_op rel\_exp\gralt rel\_exp}{}
+  \firstcase{eq\_exp}{eq\_exp\enspace eq\_op\enspace rel\_exp\gralt rel\_exp}{}
   \downplay
   \firstcase{logic\_and}{logic\_and\enspace \dq{\&\&}\dq\enspace eq\_exp\gralt eq\_exp}{}
   \downplay
@@ -171,7 +222,7 @@ In \ref{gr:concrete_syntax_parser}
   \bottomrule
 \end{grammar}
 
-\begin{grammar}[Teil der Konkretten Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2][H]
+\begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2][H]
   \toprule
 	\downplay
   \firstcase{decl\_exp\_stmt}{alloc\dq ;\dq }{L\_Stmt}
@@ -205,50 +256,11 @@ In \ref{gr:concrete_syntax_parser}
   \bottomrule
 \end{grammar}
 % Vorteile von Lark
-\subsection{Umsetzung von Präzidenz}
-\label{sec:umsetzung_von_präzidenz}
 
-Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzregeln} implementiert, wie die Programmiersprache \colorbold{C} \footcite{noauthor_c_nodate}. Die \colorbold{Präzidenzregeln} von \colorbold{PicoC} sind in Tabelle~\ref{tab:reference_table} aufgelistet.
 
-% \rowcolors{2}{SecondaryColor}{white}
-\begin{table}[H]
-  \center
-  % \Block{2}{=}{Links, dann rechts $\rightarrow$} \\
-  \begin{NiceTabular}{X[1,c]X[2,c]X[3,l]X[2,c]}[rules/color=PrimaryColor] % {\linewidth}{|C|C|L|L|}
-  \CodeBefore
-  \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-18}{SecondaryColor}{}[cols={2-3}]
-  \rowcolors{2-18}{SecondaryColor}{}[cols={1,4}, respect-blocks, restart]
-  \Body
-  \textbf{\textcolor{white}{Präzidenz}} &	\textbf{\textcolor{white}{Operator}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
-  13	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
-    & \verb|a[]|	& Indexzugriff & \\
-    & \verb|a.b| & Attributzugriff & \\
-  12	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
-    & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
-    & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
-  11	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
-  10	& \verb|a+b a-b|	& Addition und Subtraktion & \\
-  9	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
-  8 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
-  7 &	\verb|a&b| & Bitweise UND & \\
-  6 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
-  5 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
-  4 & \verb|a&&b| &	Logiches UND & \\
-  3 & $a{\mid\mid} b$	& Logisches ODER & \\
-  2 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
-  1 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
-  \bottomrule
-\end{NiceTabular}
-\caption{Präzidenzregeln von PicoC}
-\label{tab:reference_table}
-\end{table}
 % erwähnen von Mehrdeutigkeit und Assoziativität
 % finalle Grammatik im Appendix
 % Crafting Compilers Quelle benennen
-
-
-
 
 \subsection{Derivation Tree Generierung}
 \subsubsection{Early Parser}
