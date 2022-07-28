@@ -197,7 +197,7 @@ Beide \colorbold{Wörter} sind \colorbold{gleich}, allerdings sind die \colorbol
 
 Der \colorbold{linke Baum} entspricht Ableitung~\ref{eq:ableitung1} und der \colorbold{rechte Baum} entspricht Ableitung~\ref{eq:ableitung2}. Würde man in den Ausdrücken, die von diesen Bäumen darsgestellt sind in \colorbold{Klammern} setzen, um die \colorbold{Präzidenz} sichtbar zu machen, so würde Ableitung~\ref{eq:ableitung1} die Klammerung \smalltt{(3 * 1) \&\& 4} haben und die Ableitung~\ref{eq:ableitung2} die Klammerung \smalltt{3 * (1 \&\& 4)} haben.
 
-Aus diesem Grund ist es wichtig die \colorbold{Präzidenzregeln} und die \colorbold{Assoziativität} der Operatoren beim Erstellen der Grammatik miteinzubeziehen. Hierzu wird nun Tabelle~\ref{tab:reference_table} betrachtet. Für jede \colorbold{Präzidenzstufe} in der Tabelle~\ref{tab:reference_table} wird eine eigene Regel erstellt werden, wie in Tabelle~\ref{gr:durchdachte_konkrette_syntax_first} dargestellt ist. Zudem braucht es eine \colorbold{Produktion} \smalltt{prim\_exp} für die höchste \colorbold{Präzidenzstufe}, welche \colorbold{Literale}, wie \smalltt{'c'},  \smalltt{5}  oder \smalltt{var} und geklammerte Ausdrücke wie \smalltt{(3 \&\& 14)} abdeckt.
+Aus diesem Grund ist es wichtig die \colorbold{Präzidenzregeln} und die \colorbold{Assoziativität} der Operatoren beim Erstellen der Grammatik miteinzubeziehen. Hierzu wird nun Tabelle~\ref{tab:reference_table} betrachtet. Für jede \colorbold{Präzidenzstufe} in der Tabelle~\ref{tab:reference_table} wird eine eigene Regel erstellt werden, wie es in Grammatik~\ref{gr:durchdachte_konkrette_syntax_first} dargestellt ist. Zudem braucht es eine \colorbold{Produktion} \smalltt{prim\_exp} für die höchste \colorbold{Präzidenzstufe}, welche \colorbold{Literale}, wie \smalltt{'c'},  \smalltt{5}  oder \smalltt{var} und geklammerte Ausdrücke wie \smalltt{(3 \&\& 14)} abdeckt.
 
 \begin{grammar}[Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF][H][gr:durchdachte_konkrette_syntax_first]
   \toprule
@@ -219,7 +219,7 @@ Aus diesem Grund ist es wichtig die \colorbold{Präzidenzregeln} und die \colorb
   \bottomrule
 \end{grammar}
 
-Die \colorbold{Bezeichnungen} der \colorbold{Produktionen} sind in Tabelle~\ref{tab:bezeichnungen_von_produktionsregeln} ihren jeweiligen \colorbold{Operatoren} und  zugeordnet.
+Den \colorbold{Bezeichnungen} der \colorbold{Produktionen} sind in Tabelle~\ref{tab:bezeichnungen_von_produktionsregeln} ihre jeweiligen \colorbold{Operatoren}, ihre \colorbold{Präzidenzstufe} und ihre \colorbold{Assoziativität} zugeordnet.
 
 \begin{table}[H]
   \center
@@ -249,8 +249,7 @@ Die \colorbold{Bezeichnungen} der \colorbold{Produktionen} sind in Tabelle~\ref{
 \label{tab:bezeichnungen_von_produktionsregeln}
 \end{table}
 
-
-Jede der \colorbold{Produktionen} enthält nur \colorbold{Terminalsymbole} und \colorbold{Nicht-Terminalsymbole}, die für \colorbold{Ausdrücke} mit \colorbold{Operatoren} stehen, die auf der \colorbold{Präzidenzstufe} sind, für welche die jeweilige Produktion verantwortlich ist oder \colorbold{höher}. Wenn man hierzu
+Jede der \colorbold{Produktionen} ist nur für \colorbold{Ausdrücke} zuständig, die auf der \colorbold{Präzidenzstufe} sind, für welche die jeweilige Produktion verantwortlich ist oder auf \colorbold{höher} einer höheren \colorbold{Präzidenzstufe} sind.
 
 \begin{grammar}[Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF][H][gr:durchdachte_konkrette_syntax]
   \toprule
