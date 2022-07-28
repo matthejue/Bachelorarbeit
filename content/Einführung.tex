@@ -196,16 +196,11 @@ wobei $a$ eine beliebige Folge von \colorbold{Terminalsymbolen} und \colorbold{N
 % TODO: Bild hierfür
 \end{Definition}
 \begin{Definition}{Mehrdeutige Grammatik}{mehrdeutige_grammatik}
+  \enquote{Eine Grammatik ist \colorbold{mehrdeutig}, wenn es ein Wort $w\in L(G)$ gibt, das mehrere \colorbold{Syntaxbäume} zulässt}.\footnote{Alternativ, wenn es für $w$ \colorbold{mehrere} unterschiedliche \colorbold{Linksableitungen} gibt.}
   \footcite{nebel_theoretische_2020}
 % TODO: (Bild hierfür)
 \end{Definition}
-\subsection{Präzidenz und Assoziativität}
-\begin{Definition}{Assoziativität}{assoziativität}
-  \footcite{noauthor_parsing_nodate}
-\end{Definition}
-\begin{Definition}{Präzidenz}{präzidenz}
-  \footcite{noauthor_parsing_nodate}
-\end{Definition}
+
 \begin{Definition}{Wortproblem}{wortproblem}
   \footcite{nebel_theoretische_2020}
   % zu Grammatiken schieben
@@ -214,6 +209,65 @@ wobei $a$ eine beliebige Folge von \colorbold{Terminalsymbolen} und \colorbold{N
   Eine Grammatik ist \colorbold{LL(k)} für $k\in\mathbb{N}$, falls jeder Ableitungsschritt eindeutig durch die nächsten $k$ \colorbold{Symbole} des \colorbold{Eingabeworts} bzw. in Bezug zu Compilerbau \colorbold{Token} des \colorbold{Inputstrings} zu bestimmen ist\footnote{Das wird auch als \colorbold{Lookahead} von $k$ bezeichnet.}. Dabei steht \colorbold{LL} für \colorbold{l}eft-to-right und \colorbold{l}eftmost-derivation, da das \colorbold{Eingabewort} von \colorbold{links nach rechts} geparsed und immer \colorbold{Linksableitungen} genommen werden müssen\footnote{Wobei sich das mit den \colorbold{Linksableitungen} automatisch ergibt, wenn man das Eingabewort von  \colorbold{links-nach-rechts} parsed und jeder der nächsten $k$ \colorbold{Ableitungsschritte} eindeutig sein soll.}, damit die obige Bedingung mit den \colorbold{nächsten} $k$ Symbolen gilt.\footcite{nebel_theoretische_2020}
 \end{Definition}
 % \subsection{Linksrekursiv und Rechtrekursiv}
+
+\subsection{Präzidenz und Assoziativität}
+
+Will man die \colorbold{Operatoren} aus einer \colorbold{Programmiersprache} in einer \colorbold{Grammatik} für eine \colorbold{Konkrette Syntax} ausdrücken, so lässt sich das nach einem klaren Schema machen, wenn die \colorbold{Assoziativität} (Definiton~\ref{def:assoziativität}) und \colorbold{Präzidenz} (Definition~\ref{def:präzidenz}) dieser \colorbold{Operatoren} bekannt ist. Dieses Schema wird in Unterkapitel~\ref{sec:umsetzung_von_präzidenz} genauer erklärt.
+
+\begin{Definition}{Assoziativität}{assoziativität}
+  \enquote{Bestimmt, welcher Operator aus einer Reihe \colorbold{gleicher} Operatoren \colorbold{zuerst} ausgewertet wird.}
+
+  Es wird grundsätzlich zwischen \colorbold{linksassoziativen} Operatoren, bei denen der \colorbold{linke Operator} vor dem \colorbold{rechten Operator} ausgewertet wird und \colorbold{rechtsassoziativen} Operatoren, bei denen es genau anders rum ist unterschieden.
+  \footcite{noauthor_parsing_nodate}
+\end{Definition}
+
+Bei \colorbold{Assoziativität} ist z.B. der \colorbold{Multitplikationsoperator} \smalltt{*} ein Beispiel für einen \colorbold{linksassoziativen} Operator und ein \colorbold{Zuweisungsoperator} \smalltt{=} ein Beispiel für einen \colorbold{rechtsassoziativen} Operator. Dies ist in Abbildung~\ref{fig:linksassoziativität_rechtsassoziativität_veranschaulichung} mithilfe von Klammern \smalltt{()} veranschaulicht.
+
+\begin{figure}[H]
+  \hspace{2cm}
+  \codebox[title=Ohne Klammern, remember as=linksassoziativohneklammern, width=4cm, nobeforeafter, minted language=c]{./code_examples/left_assoziatice_code.special}
+  \hfill
+  \codebox[title=Mit Klammern, remember as=linksassoziativmitklammern, width=4cm, nobeforeafter, minted language=c]{./code_examples/left_assoziatice_parens.special}
+  \hspace{2cm}
+
+  \vspace{1cm}
+
+  \hspace{2cm}
+  \codebox[title=Ohne Klammern, remember as=rechtsassoziativohneklammern, width=4cm, nobeforeafter, minted language=c]{./code_examples/right_assoziatice_code.special}
+  \hfill
+  \codebox[title=Mit Klammern, remember as=rechtsassoziativmitklammern, width=4cm, nobeforeafter, minted language=c]{./code_examples/right_assoziatice_parens.special}
+  \hspace{2cm}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (linksassoziativohneklammern.east) to[bend left] node[above] {Linksassoziativität} (linksassoziativmitklammern.west);
+  \draw[->] (rechtsassoziativohneklammern.east) to[bend right] node[below] {Rechtsassoziativität} (rechtsassoziativmitklammern.west);
+  \end{tikzpicture}
+  \caption{Veranschaulichung von Linksassoziativität und Rechtsassoziativität}
+  \label{fig:linksassoziativität_rechtsassoziativität_veranschaulichung}
+\end{figure}
+
+\begin{Definition}{Präzidenz}{präzidenz}
+  \enquote{Bestimmt, welcher Operator \colorbold{zuerst} in einem Ausdruck, der eine Mischung \colorbold{verschiedener} Operatoren enthält, ausgewertet wird. Operatoren mit einer \colorbold{höheren Präzidenz}, werden \colorbold{vor} Operatoren mit \colorbold{niedrigerer Präzidenz} ausgewertet.}
+  \footcite{noauthor_parsing_nodate}
+\end{Definition}
+
+Bei \colorbold{Präzidenz} ist die Mischung der Operatoren für \colorbold{Subraktion} \smalltt{'-'} und für \colorbold{Multiplikation} \smalltt{*} ein Beispiel für den Einfluss von Präzidenz. Dies ist in Abbildung~\ref{fig:precedence_veranschaulichung} mithilfe der Klammern \smalltt{()} veranschaulicht. Im Beispiel in Abbildung~\ref{fig:precedence_veranschaulichung} ist bei den beiden \colorbold{Subtraktionsoperatoren} \smalltt{'-'} nacheinander und dem darauffolgenden \colorbold{Multitplikationsoperator} \smalltt{*} sowohl \colorbold{Assoziativität} als auch \colorbold{Präzidenz} im Spiel.
+
+\begin{figure}[H]
+  \hspace{2cm}
+  \codebox[title=Ohne Klammern, remember as=precidenceohneklammern, width=4cm, nobeforeafter, minted language=c]{./code_examples/precidence_code.special}
+  \hfill
+  \codebox[title=Mit Klammern, remember as=precidencemitklammern, width=4cm, nobeforeafter, minted language=c]{./code_examples/precidence_parens.special}
+  \hspace{2cm}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (precidenceohneklammern.east) to[bend right] node[above] {Präzidenz} (precidencemitklammern.west);
+  \end{tikzpicture}
+  \caption{Veranschaulichung von Präzidenz}
+  \label{fig:precedence_veranschaulichung}
+\end{figure}
+
+
 \section{Lexikalische Analyse}
 \label{sec:lexikalische_analyse}
 

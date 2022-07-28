@@ -206,6 +206,8 @@ In \ref{gr:concrete_syntax_parser}
 \end{grammar}
 % Vorteile von Lark
 \subsection{Umsetzung von Präzidenz}
+\label{sec:umsetzung_von_präzidenz}
+
 Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzregeln} implementiert, wie die Programmiersprache \colorbold{C} \footcite{noauthor_c_nodate}. Die \colorbold{Präzidenzregeln} von \colorbold{PicoC} sind in Tabelle~\ref{tab:reference_table} aufgelistet.
 
 % \rowcolors{2}{SecondaryColor}{white}
@@ -219,23 +221,23 @@ Die \colorbold{PicoC} Programmiersprache hat dieselben \colorbold{Präzidenzrege
   \rowcolors{2-18}{SecondaryColor}{}[cols={1,4}, respect-blocks, restart]
   \Body
   \textbf{\textcolor{white}{Präzidenz}} &	\textbf{\textcolor{white}{Operator}} & \textbf{\textcolor{white}{Beschreibung}} &	\textbf{\textcolor{white}{Assoziativität}} \\
-  1	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
+  13	& \verb|a()|	& Funktionsaufruf & \Block{3-1}{Links, dann rechts $\rightarrow$} \\
     & \verb|a[]|	& Indexzugriff & \\
     & \verb|a.b| & Attributzugriff & \\
-  2	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
+  12	&	\verb|-a| & Unäres Minus & \Block{3-1}{Rechts, dann links $\leftarrow$} \\
     & \smalltt{!a $\thicksim$a}	& Logisches NOT und Bitweise NOT & \\
     & \verb|*a &a| & Dereferenz und Referenz, auch Adresse-von & \\
-  3	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
-  4	& \verb|a+b a-b|	& Addition und Subtraktion & \\
-  5	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
-  6 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
+  11	& \smalltt{a*b a/b a\%b} &	Multiplikation, Division und Modulo & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
+  10	& \verb|a+b a-b|	& Addition und Subtraktion & \\
+  9	& \verb|a<b a<=b| \verb|a>b a>=b| & Kleiner, Kleiner Gleich, Größer, Größer gleich & \\
+  8 &	\verb|a==b a!=b| & Gleichheit und Ungleichheit & \\
   7 &	\verb|a&b| & Bitweise UND & \\
-  8 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
-  9 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
-  10	& \verb|a&&b| &	Logiches UND & \\
-  11	& $a{\mid\mid} b$	& Logisches ODER & \\
-  12 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
-  13 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
+  6 &	\verb|a^b| & Bitweise XOR (exclusive or) & \\
+  5 & \smalltt{a$\mid$b} & Bitweise ODER (inclusive or) & \\
+  4 & \verb|a&&b| &	Logiches UND & \\
+  3 & $a{\mid\mid} b$	& Logisches ODER & \\
+  2 & \verb|a=b| & Zuweisung & Rechts, dann links $\leftarrow$ \\
+  1 &	\verb|a,b|& Komma	& Links, dann rechts $\rightarrow$ \\
   \bottomrule
 \end{NiceTabular}
 \caption{Präzidenzregeln von PicoC}
