@@ -250,16 +250,16 @@ Einigen \colorbold{Bezeichnungen} der \colorbold{Produktionen} sind in Tabelle~\
 
 Als nächstes müssen die einzelnen \colorbold{Produktionen} entsprechend der \colorbold{Ausdrücke} für die sie zuständig sind definiert werden. Jede der \colorbold{Produktionen} soll nur Ausdrücke \colorbold{erkennen} können, deren \colorbold{Präzidenzstufe} die ist, für welche die jeweilige Produktion verantwortlich ist oder deren Präzidenzstufe \colorbold{höher} ist. Z.B. soll \smalltt{un\_op} sowohl den Ausdruck \smalltt{-(3 * 14)} als auch einfach nur \smalltt{(3 * 14)}\footnote{\colorbold{Geklammerte Ausdrücke} werden nämlich von \smalltt{prim\_exp} erkannt, welches eine höhere \colorbold{Präzidenzstufe} hat.} erkennen können, aber nicht \smalltt{3 * 14} ohne Klammern, da dieser Ausdruck eine \colorbold{geringe Präzidenz} hat. Des Weiteren muss bei Produktionen für Ausdrücke mit \colorbold{Operatoren} unterschieden werden, ob die Operatoren \colorbold{linksassoziativ} oder \colorbold{rechtsassoziativ}, \colorbold{unär}, \colorbold{binär} usw. sind.
 
-Bei z.B. der Produktion \smalltt{un\_exp} in \ref{pr:un_exp} für die \colorbold{rechtsassoziativen unären Operatoren} \verb|-a|, \smalltt{!a $\thicksim$a}, \verb|*a| und \verb|&a| ist die \colorbold{Alternative} \smalltt{un\_op un\_exp} dafür zuständig, dass die unären Operatoren \colorbold{rechtsassoziativ} geschachtelt werden können (z.B. \smalltt{!-~42}). Die Alterantive \smalltt{post\_exp}  ist dafür zuständig, dass die Produktion auch \colorbold{terminieren} kann und es auch möglich ist auschließlich einen Ausdruck \colorbold{höherer Präzidenz}, wie \smalltt{42} zu haben.
+Bei z.B. der Produktion \smalltt{un\_exp} in \ref{pr:un_exp} für die \colorbold{rechtsassoziativen unären Operatoren} \verb|-a|, \smalltt{!a $\thicksim$a}, \verb|*a| und \verb|&a| ist die \colorbold{Alternative} \smalltt{un\_op un\_exp} dafür zuständig, dass diese unären Operatoren \colorbold{rechtsassoziativ} geschachtelt werden können (z.B. \smalltt{!-$\thicksim$42}). Die Alternative \smalltt{post\_exp}  ist dafür zuständig, dass die Produktion auch \colorbold{terminieren} kann und es auch möglich ist auschließlich einen Ausdruck \colorbold{höherer Präzidenz} (z.B. \smalltt{42}) zu haben.
 
 \begin{grammar}[Beispiel für eine unäre rechtsassoziative Produktion][H][pr:un_exp]
   \firstcase{un\_exp}{un\_op\enspace un\_exp\gralt post\_exp}{}
 \end{grammar}
 
-Bei z.B. der Produktion \smalltt{post\_exp} in \ref{post_exp} für die \colorbold{linksassoziativen unären Operatoren} \verb|a()|, \verb|a[]| und \verb|a.b| ist die Alternative
+Bei z.B. der Produktion \smalltt{post\_exp} in \ref{pr:post_exp} für die \colorbold{linksassoziativen unären Operatoren} \verb|a()|, \verb|a[]| und \verb|a.b| sind die Alternativen \smalltt{post\_exp\dq[\dq logic\_or\dq]\dq} und \smalltt{post\_exp\dq .\dq name} dafür zuständig, dass diese unären Operatoren \colorbold{linksassoziativ} geschachtelt werden können (z.B. \smalltt{ar[3][1].car[4]}). Die Alternative \smalltt{name\dq (\dq fun\_args\dq )\dq} ist für einen \colorbold{einzelnen Funktionsaufruf} zuständig. Die Alternative \smalltt{prim\_exp} ist dafür zuständig, dass die Produktion nicht nur bei \smalltt{name\dq (\dq fun\_args\dq )\dq} \colorbold{terminieren} kann und es auch möglich ist auschließlich einen Ausdruck der \colorbold{höchsten Präzidenz} (z.B. \smalltt{42}) zu haben.
 
 \begin{grammar}[Beispiel für eine unäre linksassoziative Produktion][H][pr:post_exp]
-  \firstcase{post\_exp}{post\_exp\dq [\dq logic\_or\dq ]\dq \gralt post\_exp\dq .\dq name\gralt name\dq (\dq fun\_args\dq )\dq}{+ L\_Array}
+  \firstcase{post\_exp}{post\_exp\dq [\dq logic\_or\dq ]\dq \gralt post\_exp\dq .\dq name\gralt name\dq (\dq fun\_args\dq )\dq \gralt prim\_exp}{}
 \end{grammar}
 
 
@@ -269,7 +269,15 @@ Bei z.B. der Produktion \smalltt{prec2\_exp} in \ref{pr:prec2_exp} für die \col
   \firstcase{arith\_prec2}{arith\_prec2\enspace prec2\_op\enspace arith\_prec1\gralt arith\_prec1}{}
 \end{grammar}
 
-% TODO: die Sache mit Linksrekursiv
+\begin{Special_Paragraph}
+  Manche \colorbold{Parser}\footnote{Darunter zählt der \colorbold{Earley Parser}, der im \colorbold{PicoC-Compiler} verwendet wird \colorbold{nicht}.} haben allerdings ein Problem mit \colorbold{Linksrekursion} (Definition~\ref{def:linksrekursive_grammatiken}), wie sie z.B. in der Produktion~\ref{pr:prec2_exp} vorliegt. Dieses Problem lässt sich allerdings einfach lösen, indem man die Produktion~\ref{pr:prec2_exp} zur Produktion~\ref{pr:prec2_exp_no_left_rec} umschreibt.
+
+\begin{grammar}[Beispiel für eine linksassoziative Produktion][H][pr:prec2_exp_no_left_rec]
+  \firstcase{arith\_prec2}{arith\_prec1\enspace(prec2\_op\enspace arith\_prec1)*}{}
+\end{grammar}
+
+Die von Produktion~\ref{pr:prec2_exp_no_left_rec} erkannten Ausdrücke sind dieselben, wie für die Produktion~\ref{pr:prec2_exp}, allerdings ist die Produktion\ref{pr:prec2_exp_no_left_rec} \colorbold{flach} gehalten und ruft sich \colorbold{nicht} selber auf, sondern nutzt den in der EBNF (Definition~\ref{def:ebnf}) definierten \smalltt{*}-Operator, um mehrere Operationen der Präzidenzstufe $4$ in Folge erkennen zu können (z.B. \smalltt{3 + 1 - 4}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben). Das \colorbold{Nicht-Terminalsymbol} \smalltt{arith\_prec1} erlaubt es, dass \colorbold{zwischen} der Folge von Operationen der Präzidenzstufe $4$ auch Operationen der Präzidenzstufe $3$ auftauchen können (z.B. \smalltt{3 + 1 / 4 - 1}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben und \smalltt{/} Präzidenzstufe $3$). Da der in der EBNF definierte \smalltt{*}-Operator auch bedeutet, dass das Teilpattern auf das er sich bezieht \colorbold{kein einziges mal} vorkommen kann, ist es mit dem \colorbold{linken Nicht-Terminalsymbol} \smalltt{arith\_prec1} möglich, dass auschließlich ein Ausdruck \colorbold{höherer Präzidenz} erkannt wird (z.B. \smalltt{1 / 4}).
+\end{Special_Paragraph}
 
 Alle \colorbold{Operatoren} der Sprache $L_{PicoC}$ sind also entweder \colorbold{binär} und \colorbold{linksassoziativ} (z.B. \smalltt{a*b}, \smalltt{a-b}, \smalltt{a>=b} oder \smalltt{a\&\&b}), \colorbold{unär} und \colorbold{rechtsassoziativ} (z.B. \smalltt{\&a} oder \smalltt{!a}) oder \colorbold{unär} und \colorbold{linksassoziativ} (z.B. \smalltt{a[]} oder \smalltt{a()}). Somit ergibt sich die Grammatik~\ref{gr:durchdachte_konkrette_syntax}.
 
