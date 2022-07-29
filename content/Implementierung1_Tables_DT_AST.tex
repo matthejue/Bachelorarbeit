@@ -219,41 +219,63 @@ Aus diesem Grund ist es wichtig die \colorbold{Präzidenzregeln} und die \colorb
   \bottomrule
 \end{grammar}
 
-Den \colorbold{Bezeichnungen} der \colorbold{Produktionen} sind in Tabelle~\ref{tab:bezeichnungen_von_produktionsregeln} ihre jeweiligen \colorbold{Operatoren}, ihre \colorbold{Präzidenzstufe} und ihre \colorbold{Assoziativität} zugeordnet.
+Einigen \colorbold{Bezeichnungen} der \colorbold{Produktionen} sind in Tabelle~\ref{tab:bezeichnungen_von_produktionsregeln} ihren jeweiligen \colorbold{Operatoren} zugeordnet für welche sie zuständig sind.
 
 \begin{table}[H]
   \center
   % \Block{2}{=}{Links, dann rechts $\rightarrow$} \\
-  \begin{NiceTabular}{X[2,c]X[1,c]X[2,c]X[2,c]}[rules/color=PrimaryColor] % {\linewidth}{|C|C|L|L|}
+  \begin{NiceTabular}{cc}[rules/color=PrimaryColor, columns-width=0.3\textwidth] % {\linewidth}{|C|C|L|L|}
   \CodeBefore
   \rowcolor{PrimaryColor}{1}
-  \rowcolors{2-13}{SecondaryColor}{}[cols={1-3}]
-  \rowcolors{2-13}{SecondaryColor}{}[cols={4}, respect-blocks, restart]
+  \rowcolors{2-13}{SecondaryColor}{}[cols={1-2}]
   \Body
-  \textbf{\textcolor{white}{Bezeichnung der Produktionsregel}} & \textbf{\textcolor{white}{Präzidenzstufe}} & \textbf{\textcolor{white}{Operatoren}} & \textbf{\textcolor{white}{Assoziativität}} \\
-  \smalltt{post\_exp} & 1	&\verb|a()| \verb|a[]| \verb|a.b| & Links, dann rechts $\rightarrow$ \\
-  \smalltt{un\_exp} & 2	& \verb|-a| \smalltt{!a $\thicksim$a} \verb|*a &a| & Rechts, dann links $\leftarrow$ \\
-  \smalltt{arith\_prec1} & 3	& \smalltt{a*b a/b a\%b} & \Block{9-1}{Links, dann rechts $\rightarrow$} \\
-  \smalltt{arith\_prec2} & 4	& \verb|a+b a-b| & \\
-  \smalltt{arith\_and} & 5	& \verb|a<b a<=b| \verb|a>b a>=b| & \\
-  \smalltt{arith\_oplus} & 6 & \verb|a==b a!=b| & \\
-  \smalltt{arith\_or} & 7 & \verb|a&b| & \\
-  \smalltt{rel\_exp} & 8 & \verb|a^b| & \\
-  \smalltt{eq\_exp} & 9 & \smalltt{a$\mid$b} & \\
-  \smalltt{logic\_and} & 10 & \verb|a&&b| & \\
-  \smalltt{logic\_or} & 11 & $\mathtt{a{\mid\mid} b}$& \\
-  \smalltt{assign} & 12 & \verb|a=b| & Rechts, dann links $\leftarrow$ \\
+  \textbf{\textcolor{white}{Bezeichnung der Produktionsregel}} & \textbf{\textcolor{white}{Operatoren}} \\
+  \smalltt{post\_exp} & \verb|a()| \verb|a[]| \verb|a.b| \\
+  \smalltt{un\_exp} & \verb|-a| \smalltt{!a $\thicksim$a} \verb|*a &a| \\
+  \smalltt{arith\_prec1} & \smalltt{a*b a/b a\%b} \\
+  \smalltt{arith\_prec2} & \verb|a+b a-b| \\
+  \smalltt{arith\_and} & \verb|a<b a<=b| \verb|a>b a>=b| \\
+  \smalltt{arith\_oplus} & \verb|a==b a!=b| \\
+  \smalltt{arith\_or} & \verb|a&b| \\
+  \smalltt{rel\_exp} & \verb|a^b| \\
+  \smalltt{eq\_exp} & \smalltt{a$\mid$b} \\
+  \smalltt{logic\_and} & \verb|a&&b| \\
+  \smalltt{logic\_or} & $\mathtt{a{\mid\mid} b}$ \\
+  \smalltt{assign} & \verb|a=b| \\
   \bottomrule
 \end{NiceTabular}
 \caption{Zuordnung der Bezeichnungen von Produktionsregeln zu Operatoren}
 \label{tab:bezeichnungen_von_produktionsregeln}
 \end{table}
 
-Jede der \colorbold{Produktionen} ist nur für \colorbold{Ausdrücke} zuständig, die auf der \colorbold{Präzidenzstufe} sind, für welche die jeweilige Produktion verantwortlich ist oder auf \colorbold{höher} einer höheren \colorbold{Präzidenzstufe} sind.
+Als nächstes müssen die einzelnen \colorbold{Produktionen} entsprechend der \colorbold{Ausdrücke} für die sie zuständig sind definiert werden. Jede der \colorbold{Produktionen} soll nur Ausdrücke \colorbold{erkennen} können, deren \colorbold{Präzidenzstufe} die ist, für welche die jeweilige Produktion verantwortlich ist oder deren Präzidenzstufe \colorbold{höher} ist. Z.B. soll \smalltt{un\_op} sowohl den Ausdruck \smalltt{-(3 * 14)} als auch einfach nur \smalltt{(3 * 14)}\footnote{\colorbold{Geklammerte Ausdrücke} werden nämlich von \smalltt{prim\_exp} erkannt, welches eine höhere \colorbold{Präzidenzstufe} hat.} erkennen können, aber nicht \smalltt{3 * 14} ohne Klammern, da dieser Ausdruck eine \colorbold{geringe Präzidenz} hat. Des Weiteren muss bei Produktionen für Ausdrücke mit \colorbold{Operatoren} unterschieden werden, ob die Operatoren \colorbold{linksassoziativ} oder \colorbold{rechtsassoziativ}, \colorbold{unär}, \colorbold{binär} usw. sind.
+
+Bei z.B. der Produktion \smalltt{un\_exp} in \ref{pr:un_exp} für die \colorbold{rechtsassoziativen unären Operatoren} \verb|-a|, \smalltt{!a $\thicksim$a}, \verb|*a| und \verb|&a| ist die \colorbold{Alternative} \smalltt{un\_op un\_exp} dafür zuständig, dass die unären Operatoren \colorbold{rechtsassoziativ} geschachtelt werden können (z.B. \smalltt{!-~42}). Die Alterantive \smalltt{post\_exp}  ist dafür zuständig, dass die Produktion auch \colorbold{terminieren} kann und es auch möglich ist auschließlich einen Ausdruck \colorbold{höherer Präzidenz}, wie \smalltt{42} zu haben.
+
+\begin{grammar}[Beispiel für eine unäre rechtsassoziative Produktion][H][pr:un_exp]
+  \firstcase{un\_exp}{un\_op\enspace un\_exp\gralt post\_exp}{}
+\end{grammar}
+
+Bei z.B. der Produktion \smalltt{post\_exp} in \ref{post_exp} für die \colorbold{linksassoziativen unären Operatoren} \verb|a()|, \verb|a[]| und \verb|a.b| ist die Alternative
+
+\begin{grammar}[Beispiel für eine unäre linksassoziative Produktion][H][pr:post_exp]
+  \firstcase{post\_exp}{post\_exp\dq [\dq logic\_or\dq ]\dq \gralt post\_exp\dq .\dq name\gralt name\dq (\dq fun\_args\dq )\dq}{+ L\_Array}
+\end{grammar}
+
+
+Bei z.B. der Produktion \smalltt{prec2\_exp} in \ref{pr:prec2_exp} für die \colorbold{binären linksassoziativen Operatoren} \smalltt{a+b} und \smalltt{a-b} ist die \colorbold{Alternative} \smalltt{arith\_prec2\enspace prec2\_op\enspace arith\_prec1} dafür zuständig, dass \colorbold{mehrere} Operationen der Präzidenzstufe $4$ in Folge erkannt werden können\footnote{Bezogen auf Tabelle~\ref{tab:reference_table}.} (z.B. \smalltt{3 + 1 - 4}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben). Das \colorbold{Nicht-Terminalsymbol} \smalltt{arith\_prec1} auf der \colorbold{rechten Seite} ermöglicht es, dass zwischen den Operationen der Präzidenzstufe $4$ auch Operationen der Präzidenzstufe $3$ auftauchen können (z.B. \smalltt{3 + 1 / 4 - 1}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben und \smalltt{/} Präzidenzstufe $3$). Mit der Alternative \smalltt{arith\_prec1} ist es möglich, dass auschließlich ein Ausdruck \colorbold{höherer Präzidenz} erkannt wird (z.B. \smalltt{1 / 4}).
+
+\begin{grammar}[Beispiel für eine linksassoziative Produktion][H][pr:prec2_exp]
+  \firstcase{arith\_prec2}{arith\_prec2\enspace prec2\_op\enspace arith\_prec1\gralt arith\_prec1}{}
+\end{grammar}
+
+% TODO: die Sache mit Linksrekursiv
+
+Alle \colorbold{Operatoren} der Sprache $L_{PicoC}$ sind also entweder \colorbold{binär} und \colorbold{linksassoziativ} (z.B. \smalltt{a*b}, \smalltt{a-b}, \smalltt{a>=b} oder \smalltt{a\&\&b}), \colorbold{unär} und \colorbold{rechtsassoziativ} (z.B. \smalltt{\&a} oder \smalltt{!a}) oder \colorbold{unär} und \colorbold{linksassoziativ} (z.B. \smalltt{a[]} oder \smalltt{a()}). Somit ergibt sich die Grammatik~\ref{gr:durchdachte_konkrette_syntax}.
 
 \begin{grammar}[Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF][H][gr:durchdachte_konkrette_syntax]
   \toprule
-  \firstcase{prec1\_op}{\dq*\dq\gralt \dq*\dq\gralt \dq\%\dq}{L\_Misc}
+  \firstcase{prec1\_op}{\dq*\dq\gralt \dq/\dq\gralt \dq\%\dq}{L\_Misc}
   \firstcase{prec2\_op}{\dq +\dq\gralt \dq -\dq}{}
   \firstcase{rel\_op}{\dq <\dq\gralt \dq <=\dq\gralt \dq >\dq\gralt \dq >=\dq}{}
   \firstcase{eq\_op}{\dq ==\dq\gralt \dq !=\dq}{}
