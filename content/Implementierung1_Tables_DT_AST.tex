@@ -25,13 +25,13 @@
   \firstcase{DIG\_NO\_0}{\dq 1\dq \gralt \dq 2\dq \gralt \dq 3\dq \gralt \dq 4\dq \gralt \dq 5\dq}{L\_Arith}
   \otherform{\dq 6\dq \gralt \dq 7\dq \gralt \dq 8\dq \gralt \dq 9\dq}{}
   \firstcase{DIG\_WITH\_0}{\dq 0\dq \gralt DIG\_NO\_0}{}
-  \firstcase{NUM}{\dq 0\dq \gralt DIG\_NO\_0 DIG\_WITH\_0*}{}
-  \firstcase{ASCII\_CHAR}{\dq\text{\textvisiblespace} \dq ..\dq \sim\dq }{}
+  \firstcase{NUM}{\dq 0\dq \gralt DIG\_NO\_0\enspace DIG\_WITH\_0*}{}
+  \firstcase{ASCII\_CHAR}{\dq\text{\textvisiblespace} \dq ..\dq {\sim}\dq }{}
   \firstcase{CHAR}{\dq '\dq ASCII\_CHAR\dq '\dq }{}
   \firstcase{FILENAME}{ASCII\_CHAR+\dq .picoc\dq }{}
   \firstcase{LETTER}{\dq {a}\dq ..\dq {z}\dq \gralt \dq {A}\dq ..\dq {Z}\dq}{}
-  \firstcase{NAME}{(LETTER\gralt \dq \_\dq )}{}
-  & & \qquad(LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )* & \\
+  \firstcase{NAME}{(LETTER\enspace \mid \dq \_\dq )}{}
+  & & \qquad(LETTER $\mid$ DIG\_WITH\_0\enspace$\mid$ \dq \_\dq )* & \\
   \firstcase{name}{NAME\gralt INT\_NAME\gralt CHAR\_NAME}{}
   \otherform{VOID\_NAME}{}
   \firstcase{LOGIC\_NOT}{\dq !\dq }{}
@@ -276,7 +276,9 @@ Bei z.B. der Produktion \smalltt{prec2\_exp} in \ref{pr:prec2_exp} für die \col
   \firstcase{arith\_prec2}{arith\_prec1\enspace(prec2\_op\enspace arith\_prec1)*}{}
 \end{grammar}
 
-Die von Produktion~\ref{pr:prec2_exp_no_left_rec} erkannten Ausdrücke sind dieselben, wie für die Produktion~\ref{pr:prec2_exp}, allerdings ist die Produktion\ref{pr:prec2_exp_no_left_rec} \colorbold{flach} gehalten und ruft sich \colorbold{nicht} selber auf, sondern nutzt den in der EBNF (Definition~\ref{def:ebnf}) definierten \smalltt{*}-Operator, um mehrere Operationen der Präzidenzstufe $4$ in Folge erkennen zu können (z.B. \smalltt{3 + 1 - 4}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben). Das \colorbold{Nicht-Terminalsymbol} \smalltt{arith\_prec1} erlaubt es, dass \colorbold{zwischen} der Folge von Operationen der Präzidenzstufe $4$ auch Operationen der Präzidenzstufe $3$ auftauchen können (z.B. \smalltt{3 + 1 / 4 - 1}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben und \smalltt{/} Präzidenzstufe $3$). Da der in der EBNF definierte \smalltt{*}-Operator auch bedeutet, dass das Teilpattern auf das er sich bezieht \colorbold{kein einziges mal} vorkommen kann, ist es mit dem \colorbold{linken Nicht-Terminalsymbol} \smalltt{arith\_prec1} möglich, dass auschließlich ein Ausdruck \colorbold{höherer Präzidenz} erkannt wird (z.B. \smalltt{1 / 4}).
+Die von Produktion~\ref{pr:prec2_exp_no_left_rec} erkannten Ausdrücke sind dieselben, wie für die Produktion~\ref{pr:prec2_exp}, allerdings ist die Produktion\ref{pr:prec2_exp_no_left_rec} \colorbold{flach} gehalten und ruft sich \colorbold{nicht} selber auf, sondern nutzt den in der EBNF (Definition~\ref{def:ebnf}) definierten \smalltt{*}-Operator, um mehrere Operationen der Präzidenzstufe $4$ in Folge erkennen zu können (z.B. \smalltt{3 + 1 - 4}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben).
+
+Das \colorbold{Nicht-Terminalsymbol} \smalltt{arith\_prec1} erlaubt es, dass \colorbold{zwischen} der Folge von Operationen der Präzidenzstufe $4$ auch Operationen der Präzidenzstufe $3$ auftauchen können (z.B. \smalltt{3 + 1 / 4 - 1}, wobei \smalltt{-} und \smalltt{+} beide Präzidenzstufe $4$ haben und \smalltt{/} Präzidenzstufe $3$). Da der in der EBNF definierte \smalltt{*}-Operator auch bedeutet, dass das Teilpattern auf das er sich bezieht \colorbold{kein einziges mal} vorkommen kann, ist es mit dem \colorbold{linken Nicht-Terminalsymbol} \smalltt{arith\_prec1} möglich, dass auschließlich ein Ausdruck \colorbold{höherer Präzidenz} erkannt wird (z.B. \smalltt{1 / 4}).
 \end{Special_Paragraph}
 
 Alle \colorbold{Operatoren} der Sprache $L_{PicoC}$ sind also entweder \colorbold{binär} und \colorbold{linksassoziativ} (z.B. \smalltt{a*b}, \smalltt{a-b}, \smalltt{a>=b} oder \smalltt{a\&\&b}), \colorbold{unär} und \colorbold{rechtsassoziativ} (z.B. \smalltt{\&a} oder \smalltt{!a}) oder \colorbold{unär} und \colorbold{linksassoziativ} (z.B. \smalltt{a[]} oder \smalltt{a()}). Somit ergibt sich die Grammatik~\ref{gr:durchdachte_konkrette_syntax}.
@@ -427,9 +429,14 @@ In \ref{gr:concrete_syntax_parser}
 % Crafting Compilers Quelle benennen
 
 \subsection{Derivation Tree Generierung}
-\subsubsection{Early Parser}
+
+\begin{Definition}{Earley Parser}{earley_parser}
+
+\end{Definition}
+
 \subsubsection{Codebeispiel}
 \label{sec:derivation_tree_generierung}
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.picoc}
