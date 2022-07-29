@@ -311,10 +311,14 @@ Alle \colorbold{Operatoren} der Sprache $L_{PicoC}$ sind also entweder \colorbol
 \end{grammar}
 
 \subsection{Konkrette Syntax für die Syntaktische Analyse}
+\label{sec:konkrette_syntax_für_die_syntaktische_analyse}
+
 % ./concrete_syntax_picoc.lark
 % https://tex.stackexchange.com/questions/851/removing-spaces-between-words-in-math-mode
 
-In \ref{gr:concrete_syntax_parser}
+Die gesamte Grammatik~\ref{gr:concrete_syntax_parser}, welche die \colorbold{Konkrette Syntax} der Sprache $L_{PicoC}$ beschreibt  ergibt sich wenn man die Grammatik~\ref{gr:durchdachte_konkrette_syntax} um die \colorbold{restliche Syntax} der Sprache $L_{PicoC}$ erweitert, die sich nach einem \colorbold{ähnlichen Prinzip} wie in Unterkapitel~\ref{gr:durchdachte_konkrette_syntax} erläutert ergibt.
+
+Später in der Entwicklung des \colorbold{PicoC-Compilers} wurde die \colorbold{Konkrette Syntax} an die \colorbold{aktuellste konstenlos auffindbare Version} der echten Grammatik~\cite{noauthor_ansi_nodate} der Sprache $L_C$ angepasst\footnote{An der für die Programmiersprache $L_{PicoC}$ relevanten \colorbold{Syntax} hat sich allerdings über die Jahre nichts verändert, wie die Grammatiken für die \colorbold{Syntaktische Analyse} \cite{noauthor_ansi_nodate-1}\ und \colorbold{Lexikalische Analyse} \cite{noauthor_ansi_nodate-2} aus dem Jahre 1985 zeigen.}, damit es sicherer gewährleistet werden kann, dass der \colorbold{PicoC-Compiler} sich genauso verhält, wie geläufige Compiler der Programmiersprache $L_C$, wobei z.B. die Compiler \colorbold{GCC}\footcite{noauthor_gcc_nodate} und \colorbold{Clang}\footcite{noauthor_clang_nodate} zu nennen wären.
 
 \begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_parser]
   \toprule
@@ -430,6 +434,8 @@ In \ref{gr:concrete_syntax_parser}
 
 \subsection{Derivation Tree Generierung}
 
+Die in Unterkapitel~\ref{sec:konkrette_syntax_für_die_syntaktische_analyse} definierte \colorbold{Konkrette Syntax}, die von der Grammatik~\ref{gr:concrete_syntax_parser} beschrieben wird lässt sich mithilfe des \colorbold{Earley Parsers} (Definition~\ref{def:earley_parser}) von Lark dazu verwenden Code, der in der Sprache $L_{PicoC}$ geschrieben ist zu parsen um einen \colorbold{Derivation Tree} zu generieren.
+
 \begin{Definition}{Earley Parser}{earley_parser}
 
 \end{Definition}
@@ -437,12 +443,16 @@ In \ref{gr:concrete_syntax_parser}
 \subsubsection{Codebeispiel}
 \label{sec:derivation_tree_generierung}
 
+In den folgenden Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} dazu verwendet die Konstruktion eines \colorbold{Abstract Syntax Trees} in seinen einzelnen \colorbold{Zwischenschritten} zu erläutern.
+
 \begin{code}
   \centering
   \numberedcodebox[minted language=c]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.picoc}
   \caption{PicoC Code für Derivation Tree Generierung}
   \label{code:picoc_code_für_derivation_tree_generierung}
 \end{code}
+
+Der \colorbold{Derivation Tree}, der sich aus dem Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} ergibt, ist in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} zu sehen.
 
 \begin{code}
   \centering
@@ -452,10 +462,13 @@ In \ref{gr:concrete_syntax_parser}
 \end{code}
 
 \subsection{Derivation Tree Vereinfachung}
-\subsubsection{Visitor}
 \subsubsection{Codebeispiel}
 
-Beispiel aus Subkapitel~\ref{sec:derivation_tree_generierung} wird fortgeführt.
+Der \colorbold{Derivation Tree} in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung}, dessen Generierung in Unterkapitel~\ref{sec:derivation_tree_generierung} besprochen wurde ist noch untauglich, damit aus ihm mittels eines \colorbold{Tramsformers} ein \colorbold{Abstract Syntax Tree} generiert werden kann. Das Problem ist, dass um den den \colorbold{Datentyp} einer Variable in der Programmiersprache $L_C$ und somit auch die Programmiersprache $L_{PicoC}$ korrekt bestimmen zu können, wie z.B. ein \colorbold{\enquote{Array der Größe $3$ von Pointern auf Arrays der Größe $2$ von Integern}} \smalltt{int (*ar[3])[2]} die \colorbold{Spiralregel}\footcite{noauthor_clockwisespiral_nodate} in der Implementeirung des \colorbold{PicoC-Compilers} umgesetzt werden muss und das ist nicht alleinig möglich, indem man die entsprechenden \colorbold{Produktionen} in der Grammatik~\ref{gr:concrete_syntax_parser} der \colorbold{Konkretten Syntax} auf eine spezielle Weise passend spezifiziert.
+
+Was man erhalten will, ist ein \colorbold{entarteter Baum} von \colorbold{PicoC-Knoten}, an dem man den \colorbold{Datentyp} direkt ablesen kann, indem man sich einfach über den \colorbold{entarteten Baum} bewegt, wie z.B. \seqtt{ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType())))} für den Ausdruck \smalltt{int (*ar[3][2])[3]}.
+
+% Visitor
 
 \begin{code}
   \centering
@@ -704,7 +717,19 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 % $L_{X}$ ist nicht notwendig sich zu überlegen, hier so getann als gäbe es diese Sprache
 % Abstrakte Syntax ist für den Programmierer als Orientierungshilfe bei der Implementierung
 
-\subsubsection{Transformer}
+\subsubsection{Codebeispiel}
+
+Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
+% Transformer erwähnen, viel zu viel um es hier reinzumachen
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.ast}
+  \caption{Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert}
+  \label{code:abstract_syntax_tree_aus_vereinfachtem_derivarion_tree_generiert}
+\end{code}
+
+% Transformer erwähnen
 % Vielleicht Sache mit ToBool erwähnen aber vielleicht reicht es schon in der entsprechenden Tabelle
 % Sache mit Deref und (), leftmost node
 % Umdrehen von ArrayDecl und PntrDecl
@@ -717,17 +742,6 @@ Ein \colorbold{Knoten} eines \colorbold{Abstract Syntax Tree} kann entweder in d
 Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird im \colorbold{PicoC-Compiler} über die \colorbold{Magische Methode} \smalltt{\_\_repr\_\_()}\footnote{Spezielle Methode, die immer aufgerufen wird, wenn das \colorbold{Object}, dass in Besitz dieser Methode ist als \colorbold{String} mittels \smalltt{print()} oder zur \colorbold{Repräsentation} ausgegeben werden soll.} der Programmiersprache \colorbold{Python} umgesetzt. Sobald ein \colorbold{PicoC-Knoten} oder \colorbold{RETI-Knoten} ausgegeben werden soll, gibt seine Magische Methode \smalltt{\_\_repr\_\_()} eine nach der \colorbold{Abstrakten} oder \colorbold{Konkretten Syntax} aufgebaute \colorbold{Textrepräsentation} seiner selbst und all seiner Knoten mit an den richtigen Stellen passend gesetzten \colorbold{runden} \colorbold{öffnenden} \smalltt{(} und \colorbold{schließenden} \smalltt{)} \colorbold{Klammern}, sowie \colorbold{Kommas} \smalltt{','}, \colorbold{Semikolons} \smalltt{;} usw. zur Darstellung der \colorbold{Hierarchie} und zur \colorbold{Abtrennung} zurück. Dabei wird nach dem \colorbold{Depth-First-Search} Schema der gesamte \colorbold{Abstract Sybtax Tree} durchlaufen und die Magische \smalltt{\_\_repr\_\_()}-Methode der verschiedenen Knoten aufgerufen, die immer jeweils die \smalltt{\_\_repr\_\_()}-Methode ihrer Kinder aufrufen und die zurückgegebene \colorbold{Textrepräsentation} passend \colorbold{zusammenfügen} und selbst \colorbold{zurückgeben}.
 
 Im \colorbold{PicoC-Compiler} wurden \colorbold{Abstrakte} und \colorbold{Konkrette Syntax} miteinander gemischt. Für \colorbold{PicoC-Knoten} wurde die \colorbold{Abstrakte Syntax} verwendet, da Passes schließlich auf \colorbold{Abstract Syntax Trees} operieren. Bei \colorbold{RETI-Knoten} wurde die \colorbold{Konkrette Syntax} verwendet, da \colorbold{Maschienenbefehle} in \colorbold{Konkretter Syntax} schließlich das \colorbold{Endprodukt} des Kompiliervorgangs sein sollen. Da die \colorbold{Abstrakte Syntax} von \colorbold{RETI-Knoten} so simpel ist, macht es kaum einen Unterschied in der Erkennbarkeit, bis auf fehlende gescheifte Klammern \smalltt{()} usw., ob man die \colorbold{RETI-Knoten} in \colorbold{Abstrakter} oder \colorbold{Konkretter} Syntax schreibt. Daher kann man auch einfach gleich die \colorbold{RETI-Knoten} in \colorbold{Konkretter Syntax} ausgeben und muss nicht beim letzten \colorbold{Pass} daran denken, am Ende die \colorbold{Konkrette}, statt der \colorbold{Abstrakten Syntax} für die \colorbold{RETI-Knoten} auszugeben.
-
-\subsubsection{Codebeispiel}
-Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
-% Transformer erwähnen, viel zu viel um es hier reinzumachen
-
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.ast}
-  \caption{Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert}
-  \label{code:abstract_syntax_tree_aus_vereinfachtem_derivarion_tree_generiert}
-\end{code}
 
 \section{Code Generierung}
 \subsection{Übersicht}
