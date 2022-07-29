@@ -452,27 +452,59 @@ In den folgenden Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_f�
   \label{code:picoc_code_für_derivation_tree_generierung}
 \end{code}
 
-Der \colorbold{Derivation Tree}, der sich aus dem Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} ergibt, ist in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} zu sehen.
+Der \colorbold{Derivation Tree}, der sich aus dem Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} ergibt, ist in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} zu sehen. Im Code~\ref{code:picoc_code_für_derivation_tree_generierung} wurden einige Zeilen \colorbold{markiert}, die später in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} zum Vergleich wichtig sind.
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.dt}
+  \numberedcodebox[minted language=text, minted options={highlightlines={8-21, 32-46}}]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.dt}
   \caption{Derivation Tree nach Derivation Tree Generierung}
   \label{code:derivation_tree_nach_derivation_tree_generierung}
 \end{code}
 
 \subsection{Derivation Tree Vereinfachung}
+\label{sec:derivation_tree_vereinfachung}
+
 \subsubsection{Codebeispiel}
 
 Der \colorbold{Derivation Tree} in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung}, dessen Generierung in Unterkapitel~\ref{sec:derivation_tree_generierung} besprochen wurde ist noch untauglich, damit aus ihm mittels eines \colorbold{Tramsformers} ein \colorbold{Abstract Syntax Tree} generiert werden kann. Das Problem ist, dass um den den \colorbold{Datentyp} einer Variable in der Programmiersprache $L_C$ und somit auch die Programmiersprache $L_{PicoC}$ korrekt bestimmen zu können, wie z.B. ein \colorbold{\enquote{Array der Größe $3$ von Pointern auf Arrays der Größe $2$ von Integern}} \smalltt{int (*ar[3])[2]} die \colorbold{Spiralregel}\footcite{noauthor_clockwisespiral_nodate} in der Implementeirung des \colorbold{PicoC-Compilers} umgesetzt werden muss und das ist nicht alleinig möglich, indem man die entsprechenden \colorbold{Produktionen} in der Grammatik~\ref{gr:concrete_syntax_parser} der \colorbold{Konkretten Syntax} auf eine spezielle Weise passend spezifiziert.
 
-Was man erhalten will, ist ein \colorbold{entarteter Baum} von \colorbold{PicoC-Knoten}, an dem man den \colorbold{Datentyp} direkt ablesen kann, indem man sich einfach über den \colorbold{entarteten Baum} bewegt, wie z.B. \seqtt{ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), ArrayDecl([Num('3')], IntType())))} für den Ausdruck \smalltt{int (*ar[3][2])[3]}.
+Was man erhalten will, ist ein \colorbold{entarteter Baum} von \colorbold{PicoC-Knoten}, an dem man den \colorbold{Datentyp} direkt ablesen kann, indem man sich einfach über den \colorbold{entarteten Baum} bewegt, wie z.B. \seqtt{PntrDecl(Num('1'), ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), StructSpec(Name('st')))))} für den Ausdruck \smalltt{struct st *(*var)[3][2]}.
+
+Es sind hierbei mehrere Probleme zu lösen. Hat man den Ausdruck \smalltt{struct st *(*var)[3][2]} wird dieser zu einem  \colorbold{Derivation Tree}, wie er in Abbildung~\ref{fig:derivation_tree_nach_parsen_eines_ausdrucks} zu sehen ist.
+
+\begin{figure}[H]
+  \hspace{2cm}
+  \codebox[title=Ausdruck, remember as=ausdruck, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_code.special}
+  \hfill
+  \codebox[title=Derivation Tree, remember as=derivation_tree, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_dt.special}
+  \hspace{2cm}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (ausdruck.east) to[bend left] node[above] {Parser} (derivation_tree.west);
+  \end{tikzpicture}
+  \caption{Derivation Tree nach Parsen eines Ausdrucks}
+  \label{fig:derivatin_tree_nach_parsen_eines_ausdrucks}
+\end{figure}
+
+\begin{figure}[H]
+  \hspace{2cm}
+  \codebox[title=Ausdruck, remember as=derivation_tree, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_dt.special}
+  \hfill
+  \codebox[title=Derivation Tree, remember as=derivation_tree_simple, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_dt_simple.special}
+  \hspace{2cm}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (derivation_tree.east) to[bend left] node[above] {Visitor} (derivation_tree_simple.west);
+  \end{tikzpicture}
+  \caption{Derivation Tree nach Vereinfachung}
+  \label{fig:derivation_nach_vereinfachung}
+\end{figure}
 
 % Visitor
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.dt_simple}
+  \numberedcodebox[minted language=text, minted options={highlightlines={8-21, 32-46}}]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.dt_simple}
   \caption{Derivation Tree nach Derivation Tree Vereinfachung}
   \label{code:picoc_code_nach_derivation_tree_vereinfachung}
 \end{code}

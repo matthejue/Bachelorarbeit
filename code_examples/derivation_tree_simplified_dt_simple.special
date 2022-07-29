@@ -1,0 +1,15 @@
+alloc
+  pntr_decl
+    pntr_deg	*
+    array_decl
+      array_dims
+        3
+        2
+      pntr_decl
+        pntr_deg	*
+        array_decl
+          array_dims
+          type_spec
+            struct_spec
+              name	st
+  name	var
