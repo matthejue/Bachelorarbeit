@@ -11,19 +11,39 @@
 \chapter{Implementierung}
 \label{ch:implementierung}
 
+Die Imp
+
+% Verwendung von Lark
+
+\begin{Definition}{EBNF}{ebnf}
+
+\end{Definition}
+
 \section{Lexikalische Analyse}
+
+Für die \colorbold{Lexikalische Analyse} ist es nur notwendig eine Grammatik zu definieren, die den Teil der \colorbold{Konkretten Syntax} beschreibt, der die \colorbold{verschiedenen Pattern} für die verschiedenen Token der Sprache $L_{PicoC}$ beschreibt, also den Teil der für die \colorbold{Lexikalische Analyse} wichtig ist. Diese Grammatik wird dann vom \colorbold{Lark Parsing Toolkit}~\footcite{noauthor_lark_2022} dazu verwendet ein Programm in \colorbold{Konkretter Syntax} zu lexen und daraus Tokens für die \colorbold{Syntaktische Analyse} zu erstellen, wie es im Unterkapitel~\ref{sec:lexikalische_analyse} erläutert ist.
+
 \subsection{Konkrette Syntax für die Lexikalische Analyse}
+\label{sec:lex_analyse_verwendung_von_lark}
 \numberwithin{floatgrammar}{section}
 
-\label{sec:lex_analyse_verwendung_von_lark}
+In der Grammatik~\ref{gr:concrete_syntax_lex_teil_1} für die \colorbold{Lexikalische Analyse} stehen \colorbold{großgeschriebene Nicht-Terminalsymbole}, die in keiner colorbold{Produktion} mit \colorbold{großgeschriebenem Nicht-Terminalsymbol} auf der \colorbold{rechten Seite} des \colorbold{\enquote{kann abgeleitet werden zu}-Symbols} \smalltt{::=} vorkommen, wie z.B. \smalltt{NUM} für einen \colorbold{Tokennamen} (Definition~\ref{def:lexeme}). Dagegen beschreiben \colorbold{großgeschriebene Nicht-Terminalsymbole}, die in einer anderen  \colorbold{Produktion} mit \colorbold{großgeschriebenem Bezeicher}
+
+z.B. beschreibt \smalltt{NUM}
+
+% für Terminalsymbole. Steht ein Terminalsymbol auf der linken Seite des \colorbold{\enquote{kann abgeleitet werden zu}-Symbols} \smalltt{::=} so wird an dieser Stelle definiert, wie dieses Terminalsymbol
+
+
+% für \colorbold{Pattern} (Definition~\ref{def:pattern}), die
+
 % ./concrete_syntax_picoc.lark
 \begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1][H][gr:concrete_syntax_lex_teil_1]
   \toprule
   \firstcase{COMMENT}{\dq //\dq\enspace /[{\wedge}\backslash n]{*}/\gralt \dq {/*}\dq\enspace  /(.\mid \setminus n)*?/\enspace \dq {*/}\dq }{L\_Comment}
   \firstcase{RETI\_COMMENT.2}{\dq {//}\dq \dq \text{\textvisiblespace} \dq ? \dq \#\dq /[\wedge\backslash n]{*}/}{}
   \midrule
-  \firstcase{DIG\_NO\_0}{\dq 1\dq \gralt \dq 2\dq \gralt \dq 3\dq \gralt \dq 4\dq \gralt \dq 5\dq}{L\_Arith}
-  \otherform{\dq 6\dq \gralt \dq 7\dq \gralt \dq 8\dq \gralt \dq 9\dq}{}
+  \firstcase{DIG\_NO\_0}{\dq 1\dq \gralt \dq 2\dq \gralt \dq 3\dq \gralt \dq 4\dq \gralt \dq 5\dq\gralt \dq 6\dq}{L\_Arith}
+  \otherform{\dq 7\dq \gralt \dq 8\dq \gralt \dq 9\dq}{}
   \firstcase{DIG\_WITH\_0}{\dq 0\dq \gralt DIG\_NO\_0}{}
   \firstcase{NUM}{\dq 0\dq \gralt DIG\_NO\_0\enspace DIG\_WITH\_0*}{}
   \firstcase{ASCII\_CHAR}{\dq\text{\textvisiblespace} \dq ..\dq {\sim}\dq }{}
@@ -55,11 +75,7 @@
   \firstcase{EQ}{\dq {==}\dq }{}
   \firstcase{NEQ}{\dq {!=}\dq }{}
   \firstcase{eq\_op}{EQ\gralt NEQ}{}
-  \bottomrule
-\end{grammar}
-
-\begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex_teil_2]
-  \toprule
+  \midrule
   \firstcase{INT\_DT.2}{\dq int\dq }{L\_Assign\_Alloc}
   \firstcase{INT\_NAME.3}{\dq int\dq\enspace (LETTER\gralt DIG\_WITH\_0\gralt \dq \_\dq )+}{}
   \firstcase{CHAR\_DT.2}{\dq char\dq }{}
@@ -69,6 +85,11 @@
   \firstcase{prim\_dt}{INT\_DT\gralt CHAR\_DT\gralt VOID\_DT}{}
   \bottomrule
 \end{grammar}
+
+% \begin{grammar}[Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2][H][gr:concrete_syntax_lex_teil_2]
+  % \toprule
+  % \bottomrule
+% \end{grammar}
 
 % \begin{grammar}[\(\lambda\) calculus syntax][p][gr:ex1]
 %   \firstcase{T}{\nonterm{V}}{Variable}
@@ -91,6 +112,24 @@
 
 % TODO: erwähnen, dass im Bachelorprojekt noch ein eigener Lexer verwendet wurde
 % TODO: erwähnen, dass im Bachelorprojekt noch ein eigener Parser verwendet wurde
+
+\subsection{Codebeispiel}
+
+In den folgenden Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} dazu verwendet die Konstruktion eines \colorbold{Abstract Syntax Trees} in seinen einzelnen \colorbold{Zwischenschritten} zu erläutern.
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=c]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.picoc}
+  \caption{PicoC-Code des Codebeispiels}
+  \label{code:picoc_code_für_derivation_tree_generierung}
+\end{code}
+
+\begin{code}
+  \centering
+  \numberedcodebox[minted language=text]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.tokens}
+  \caption{Tokens für das Codebeispiel}
+  \label{code:picoc_code_für_derivation_tree_generierung}
+\end{code}
 
 \section{Syntaktische Analyse}
 \label{sec:syntaktische_analyse}
@@ -446,14 +485,7 @@ Die in Unterkapitel~\ref{sec:konkrette_syntax_für_die_syntaktische_analyse} def
 \subsubsection{Codebeispiel}
 \label{sec:derivation_tree_generierung}
 
-In den folgenden Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} dazu verwendet die Konstruktion eines \colorbold{Abstract Syntax Trees} in seinen einzelnen \colorbold{Zwischenschritten} zu erläutern.
-
-\begin{code}
-  \centering
-  \numberedcodebox[minted language=c]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.picoc}
-  \caption{PicoC Code für Derivation Tree Generierung}
-  \label{code:picoc_code_für_derivation_tree_generierung}
-\end{code}
+% TODO: daran anpassen, dass das Bespiel in die Lexikalische Analyse verfrachtet wurde
 
 Der \colorbold{Derivation Tree}, der mithilfe des \colorbold{Earley Parsers} aus dem Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} generiert wurde, ist in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} zu sehen. Im Code~\ref{code:picoc_code_für_derivation_tree_generierung} wurden einige Zeilen \colorbold{markiert}, die später in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} zum Vergleich wichtig sind.
 
@@ -829,7 +861,7 @@ In Code~\ref{code:abstract_syntax_tree_aus_vereinfachtem_derivarion_tree_generie
 \begin{code}
   \centering
   \numberedcodebox[minted language=text, minted options={highlightlines={26-40}}]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.ast}
-  \caption{Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert}
+  \caption{Aus vereinfachtem Derivation Tree generierter Abstract Syntax Tree}
   \label{code:abstract_syntax_tree_aus_vereinfachtem_derivarion_tree_generiert}
 \end{code}
 

@@ -1,21 +1,20 @@
 \addvspace {10\p@ }
-\contentsline {floatgrammar}{\numberline {1.1.1}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1\relax }}{1}{floatgrammar.caption.7}%
-\contentsline {floatgrammar}{\numberline {1.1.2}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 2\relax }}{2}{floatgrammar.caption.8}%
-\contentsline {floatgrammar}{\numberline {1.2.1}{\ignorespaces Undurchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{3}{floatgrammar.caption.10}%
-\contentsline {floatgrammar}{\numberline {1.2.2}{\ignorespaces Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{4}{floatgrammar.caption.12}%
-\contentsline {floatgrammar}{\numberline {1.2.3}{\ignorespaces Beispiel für eine unäre rechtsassoziative Produktion\relax }}{5}{floatgrammar.caption.14}%
-\contentsline {floatgrammar}{\numberline {1.2.4}{\ignorespaces Beispiel für eine unäre linksassoziative Produktion\relax }}{5}{floatgrammar.caption.15}%
-\contentsline {floatgrammar}{\numberline {1.2.5}{\ignorespaces Beispiel für eine linksassoziative Produktion\relax }}{5}{floatgrammar.caption.16}%
-\contentsline {floatgrammar}{\numberline {1.2.6}{\ignorespaces Beispiel für eine linksassoziative Produktion\relax }}{5}{floatgrammar.caption.17}%
-\contentsline {floatgrammar}{\numberline {1.2.7}{\ignorespaces Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{6}{floatgrammar.caption.18}%
-\contentsline {floatgrammar}{\numberline {1.2.8}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{7}{floatgrammar.caption.19}%
-\contentsline {floatgrammar}{\numberline {1.2.9}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{8}{floatgrammar.caption.20}%
-\contentsline {floatgrammar}{\numberline {1.2.10}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{23}{floatgrammar.caption.34}%
-\contentsline {floatgrammar}{\numberline {1.3.1}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$\relax }}{29}{floatgrammar.caption.39}%
-\contentsline {floatgrammar}{\numberline {1.3.2}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$\relax }}{32}{floatgrammar.caption.42}%
-\contentsline {floatgrammar}{\numberline {1.3.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$\relax }}{36}{floatgrammar.caption.44}%
-\contentsline {floatgrammar}{\numberline {1.3.4}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Blocks}$\relax }}{39}{floatgrammar.caption.46}%
-\contentsline {floatgrammar}{\numberline {1.3.5}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Patch}$\relax }}{43}{floatgrammar.caption.48}%
-\contentsline {floatgrammar}{\numberline {1.3.6}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Lexikalische Analyse in EBNF\relax }}{47}{floatgrammar.caption.50}%
-\contentsline {floatgrammar}{\numberline {1.3.7}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Syntaktische Analyse in EBNF\relax }}{47}{floatgrammar.caption.51}%
-\contentsline {floatgrammar}{\numberline {1.3.8}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI}$\relax }}{47}{floatgrammar.caption.52}%
+\contentsline {floatgrammar}{\numberline {1.1.1}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Lexikalische Analyse in EBNF, Teil 1\relax }}{2}{floatgrammar.caption.7}%
+\contentsline {floatgrammar}{\numberline {1.2.1}{\ignorespaces Undurchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{4}{floatgrammar.caption.11}%
+\contentsline {floatgrammar}{\numberline {1.2.2}{\ignorespaces Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{5}{floatgrammar.caption.13}%
+\contentsline {floatgrammar}{\numberline {1.2.3}{\ignorespaces Beispiel für eine unäre rechtsassoziative Produktion\relax }}{6}{floatgrammar.caption.15}%
+\contentsline {floatgrammar}{\numberline {1.2.4}{\ignorespaces Beispiel für eine unäre linksassoziative Produktion\relax }}{6}{floatgrammar.caption.16}%
+\contentsline {floatgrammar}{\numberline {1.2.5}{\ignorespaces Beispiel für eine linksassoziative Produktion\relax }}{7}{floatgrammar.caption.17}%
+\contentsline {floatgrammar}{\numberline {1.2.6}{\ignorespaces Beispiel für eine linksassoziative Produktion\relax }}{7}{floatgrammar.caption.18}%
+\contentsline {floatgrammar}{\numberline {1.2.7}{\ignorespaces Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{8}{floatgrammar.caption.19}%
+\contentsline {floatgrammar}{\numberline {1.2.8}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{9}{floatgrammar.caption.20}%
+\contentsline {floatgrammar}{\numberline {1.2.9}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{10}{floatgrammar.caption.21}%
+\contentsline {floatgrammar}{\numberline {1.2.10}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{25}{floatgrammar.caption.34}%
+\contentsline {floatgrammar}{\numberline {1.3.1}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$\relax }}{31}{floatgrammar.caption.39}%
+\contentsline {floatgrammar}{\numberline {1.3.2}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$\relax }}{34}{floatgrammar.caption.42}%
+\contentsline {floatgrammar}{\numberline {1.3.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$\relax }}{38}{floatgrammar.caption.44}%
+\contentsline {floatgrammar}{\numberline {1.3.4}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Blocks}$\relax }}{41}{floatgrammar.caption.46}%
+\contentsline {floatgrammar}{\numberline {1.3.5}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Patch}$\relax }}{45}{floatgrammar.caption.48}%
+\contentsline {floatgrammar}{\numberline {1.3.6}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Lexikalische Analyse in EBNF\relax }}{49}{floatgrammar.caption.50}%
+\contentsline {floatgrammar}{\numberline {1.3.7}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Syntaktische Analyse in EBNF\relax }}{49}{floatgrammar.caption.51}%
+\contentsline {floatgrammar}{\numberline {1.3.8}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI}$\relax }}{49}{floatgrammar.caption.52}%
