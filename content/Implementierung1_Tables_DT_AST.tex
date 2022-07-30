@@ -89,7 +89,9 @@
 % EBNF erwähnen
 % (erwähnen, dass finalle Grammatik im Appendix)
 
-\subsection{Basic Lexer}
+% TODO: erwähnen, dass im Bachelorprojekt noch ein eigener Lexer verwendet wurde
+% TODO: erwähnen, dass im Bachelorprojekt noch ein eigener Parser verwendet wurde
+
 \section{Syntaktische Analyse}
 \label{sec:syntaktische_analyse}
 
@@ -464,7 +466,9 @@ Der \colorbold{Derivation Tree}, der mithilfe des \colorbold{Earley Parsers} aus
 
 \subsubsection{Ausgabe des Derivation Tree}
 
-Die Ausgabe des \colorbold{Derivation Tree} wird komplett vom \colorbold{Lark Parsing Toolkit} übernommen. Die \colorbold{Inneren Knoten} sind \colorbold{Nicht-Terminalsymbole}, welche in der Grammatik den \colorbold{linken Seite} einer \colorbold{Produktion} entsprechen.
+Die Ausgabe des \colorbold{Derivation Tree} wird komplett vom \colorbold{Lark Parsing Toolkit} übernommen. Für die \colorbold{Inneren Knoten} werden die \colorbold{Nicht-Terminalsymbole}, welche in der Grammatik den \colorbold{linken Seiten} des \colorbold{\enquote{kann abgeleitet werden zu}-Symbols} \smalltt{::=}\footcite{noauthor_grammar_nodate} entsprechen hergenommen und die \colorbold{Blätter} sind \colorbold{Terminalsymbole}, genauso, wie es in der Definition~\ref{def:derivation_tree} eines \colorbold{Derivation Tree} auch schon definiert ist. Die \colorbold{EBNF-Grammatik}~\ref{gr:concrete_syntax_parser} des \colorbold{PicoC-Compilers} erlaubt es allerdings auch, dass in einem \colorbold{Blatt} garnichts $\varepsilon$ steht, weil es z.B. \colorbold{Produktionen}, wie \smalltt{array\_dims ::= (\dq[\dq NUM\dq]\dq)*} gibt, in denen auch das \colorbold{leere Wort} $\varepsilon$ abgeleitet werden kann.
+
+Der \colorbold{Abstract Syntax Tree} ist bewusst so gewählt, dass er sich optisch vom \colorbold{Derivation Tree} unterscheidet, indem die Bezeichner der \colorbold{Knoten} in \colorbold{UpperCamelCase} geschrieben sind, im Gegensatz zum \colorbold{Derivation Tree}, dessen \colorbold{Innere Knoten} im \colorbold{snake\_case} geschrieben sind\footcite{noauthor_naming_2022}, wie auch die \colorbold{Nicht-Terminalsymbole} auf den \colorbold{linken Seiten} des \colorbold{\enquote{kann abgeleitet werden zu}-Symbols} \smalltt{::=}.
 
 % Nodes sind Produktionnen, Blätter sind...
 % TODO: auf Dokumentation verweisen
@@ -846,8 +850,7 @@ Im \colorbold{PicoC-Compiler} wurden \colorbold{Abstrakte} und \colorbold{Konkre
 \section{Code Generierung}
 \label{sec:code_generierung}
 
-\subsection{Übersicht}
-Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse} in Unterkapitel~\ref{sec:syntaktische_analyse}, wird in diesem Kapitel mit den verschiedenen \colorbold{Kompositionen} von \colorbold{Container-Knoten} und \colorbold{Token-Knoten} im \colorbold{Abstract Syntax Tree} als Basis das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
+Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse} in Unterkapitel~\ref{sec:syntaktische_analyse}, wird in diesem Kapitel mit den verschiedenen \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \colorbold{RETI-Knoten} im \colorbold{Abstract Syntax Tree} als Basis das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
 
 Man steht nun dem Problem gegenüber einen \colorbold{Abstract Syntax Tree} der Sprache $L_{PicoC}$, der durch die \colorbold{Abstrakte Syntax} in Grammatik~\ref{gr:abstract_syntax_l_picoc} spezifiziert ist in einen entsprechenden \colorbold{Abstract Syntax Tree} der Sprache $L_{RETI}$ umzuformen. Das ganze lässt sich, wie in Unterkapitel~\ref{sec:code_generierung} bereits beschrieben vereinfachen, indem man dieses Problem in mehrere \colorbold{Passes} (Definition~\ref{def:pass}) herunterbricht.
 
