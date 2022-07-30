@@ -453,7 +453,7 @@ In den folgenden Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_f�
   \label{code:picoc_code_für_derivation_tree_generierung}
 \end{code}
 
-Der \colorbold{Derivation Tree}, der sich aus dem Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} ergibt, ist in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} zu sehen. Im Code~\ref{code:picoc_code_für_derivation_tree_generierung} wurden einige Zeilen \colorbold{markiert}, die später in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} zum Vergleich wichtig sind.
+Der \colorbold{Derivation Tree}, der mithilfe des \colorbold{Earley Parsers} aus dem Beispiel in Code~\ref{code:picoc_code_für_derivation_tree_generierung} generiert wurde, ist in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} zu sehen. Im Code~\ref{code:picoc_code_für_derivation_tree_generierung} wurden einige Zeilen \colorbold{markiert}, die später in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} zum Vergleich wichtig sind.
 
 \begin{code}
   \centering
@@ -512,7 +512,7 @@ In Abbildung~\ref{fig:derivation_nach_vereinfachung} ist daher zu sehen, wie der
 
 \subsubsection{Codebeispiel}
 
-In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorbold{Derivation Tree} aus Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} nach der \colorbold{Vereinfachung} zu sehen.
+In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorbold{Derivation Tree} aus Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} nach der \colorbold{Vereinfachung} mithilfe eines \colorbold{Visitors} zu sehen.
 
 \begin{code}
   \centering
@@ -526,13 +526,9 @@ In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorb
 
 \subsection{Abstrakt Syntax Tree Generierung}
 
-Nachdem der \colorbold{Derviation Tree} in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} vereinfacht wurde, ist der \colorbold{vereinfachte Derivation Tree} in Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} nun dazu geeignet, um mit einem \colorbold{Transformer} (Definition~\ref{def:transformer}) einen \colorbold{Abstract Syntax Tree} aus ihm zu generieren.
+Nachdem der \colorbold{Derviation Tree} in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} vereinfacht wurde, ist der \colorbold{vereinfachte Derivation Tree} in Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} nun dazu geeignet, um mit einem \colorbold{Transformer} (Definition~\ref{def:transformer}) einen \colorbold{Abstract Syntax Tree} aus ihm zu generieren. Würde man den \colorbold{vereinfachten Derivation Tree} des Ausdrucks \smalltt{struct st *(*var[3][2])} auf passende Weise in einen \colorbold{Abstract Syntax Tree} umwandeln, so würde dabei ein \colorbold{Abstract Syntax Tree} wie in Abbildung~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen} rauskommen.
 
-Würde man den \colorbold{vereinfachten Derivation Tree} des Ausdrucks \smalltt{struct st *(*var[3][2])} auf passende Weise in einen \colorbold{Abstract Syntax Tree} umwandeln, so würde dabei ein \colorbold{Abstract Syntax Tree} wie in Abbildung~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen} rausbekommen.
-
-% umdrehen
-
-% folgende Kapitel Knoten
+Den Teilbaum, der den Datentyp darstellt würde man von von \colorbold{oben-nach-unten}\footnote{In der Informatik wachsen Bäume von \colorbold{oben-nach-unten}, von der \colorbold{Wurzel} zur den \colorbold{Blättern}, bzw. in diesem Beispiel von \colorbold{links-nach-rechts}.} als \colorbold{\enquote{Pointer auf einen Pointer auf ein Array der Mächtigkeit 2, 3 von Structs des Typs \smalltt{st}}} lesen, also genau anders herum, als man den Ausdruck  \smalltt{struct st *(*var[3][2])} mit der \colorbold{Spiralregel} lesen würde. Bei der \colorbold{Spiralregel} fängt man beim Ausdruck \smalltt{struct st *(*var[3][2])} bei der Variable \smalltt{var} an und arbeitet sich dann auf \colorbold{\enquote{Spiralbahnen}}, von \colorbold{innen-nach-außen} durch den Ausdruck, um herauszufinden, dass dieser Datentyp ein \colorbold{\enquote{Array der Mächtigkeit 3, 2 von Pointern auf einen Pointer auf einen Struct vom Typ \smalltt{st}}} ist.
 
 \begin{figure}[H]
   \hspace{2cm}
@@ -548,11 +544,9 @@ Würde man den \colorbold{vereinfachten Derivation Tree} des Ausdrucks \smalltt{
   \label{fig:abstract_syntax_tree_generierung_ohne_umdrehen}
 \end{figure}
 
-Dieser \colorbold{Abstract Syntax Tree} ist allerdings für die Weiterverarbeitung ungeeignet, denn für die \colorbold{Adressberechnung} für eine Aneinandereihung von Zugriffen auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} oder \colorbold{Structattribute}, welche in Unterkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} genauer erläutert wird will man den Datentyp in \colorbold{umgekehrter Reihenfolge}. Das hat den Grund, dass man bei der \colorbold{Spiralregel} beim Ausdruck \smalltt{struct st *(*var[3][2])} bei der Variable \smalltt{var} anfängt und sich dann auf \colorbold{\enquote{Spiralbahnen}}, von \colorbold{innen-nach-außen} durch den Ausdruck arbeitet, um herauszufinden, dass dieser Datentyp ein \colorbold{\enquote{Array der Mächtigkeit 3, 2 von einem Pointer auf einen Pointer auf einen Struct vom Typ st}} ist.
+Dieser \colorbold{Abstract Syntax Tree} ist für die Weiterverarbeitung ungeeignet, denn für die \colorbold{Adressberechnung} für eine Aneinandereihung von Zugriffen auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} oder \colorbold{Structattribute}, welche in Unterkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} genauer erläutert wird, will man den Datentyp in \colorbold{umgekehrter Reihenfolge}. Aus diesem Grund muss der \colorbold{Transformer} bei der Konstruktion des \colorbold{Abstract Syntax Tree} zusätzlich dafür sorgen, dass jeder \colorbold{Teilbaum}, der für einen \colorbold{Datentyp} steht \colorbold{umgedreht} wird. Auf diese Weise kommt ein \colorbold{Abstract Syntax Tree} mit \colorbold{richtig rum gedrehtem Datentyp}, wie in Abbildung~\ref{fig:abstract_syntax_tree_generierung_mit_umdrehen} zustande, der für die Weiterverarbeitung geeignet ist.
 
-Die \colorbold{\enquote{Spiralbahnen}} sind bereits duch die Art wie der Ausdruck \smalltt{struct st *(*var[3][2])} geparst wird und aus ihm ein Derivation Tree generiert wird gewährleistet, allerdings verlaufen diese \colorbold{\enquote{Spiralbahnen} von \colorbold{außen-nach-innen} und nicht von \colorbold{innnen-nach-außen}. Aus diesem Grund muss der \colorbold{Transformer}
-% spiralbahnen erledigt
-
+% Die \colorbold{\enquote{Spiralbahnen}} sind bereits duch die Art wie der Ausdruck \smalltt{struct st *(*var[3][2])} geparst wird und aus ihm ein \colorbold{Derivation Tree} generiert wird gewährleistet. Allerdings verlaufen diese \colorbold{\enquote{Spiralbahnen}} von \colorbold{außen-nach-innen} und nicht von \colorbold{innen-nach-außen}, was den \colorbold{Abstract Syntax Tree} in Abbildung~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen}, bei dem der Datentyp genau \colorbold{anders herum} vorliegt als man ihn benötigen würde zur Folge hat.
 
 \begin{figure}[H]
   \hspace{2cm}
@@ -568,10 +562,12 @@ Die \colorbold{\enquote{Spiralbahnen}} sind bereits duch die Art wie der Ausdruc
   \label{fig:abstract_syntax_tree_generierung_mit_umdrehen}
 \end{figure}
 
+Die Weiterverarbeitung des \colorbold{Abstract Syntax Trees} geschieht mithilfe von \colorbold{Passes}, welche im Unterkapitel~\ref{sec:code_generierung} genauer beschrieben werden. Da die Knoten des \colorbold{Abstract Syntax Tree} anders als beim \colorbold{Derivation Tree} nicht die gleichen Bezeichnungen haben wie \colorbold{Produktionen} der Grammatik der \colorbold{Konkretten Syntax} ist es in den folgenden Unterkapiteln~\ref{sec:picoc_knoten}, \ref{sec:reti_knoten} und \ref{sec:kompositionen_von_picoc-knoten_und_reti-knoten_mit_besonderer_bedeutung} notwendig die \colorbold{Bedeutung} der einzelnen \colorbold{PicoC-Knoten}, \colorbold{RETI-Knoten} und bestimmter \colorbold{Kompositionen} dieser Knoten zu \colorbold{dokumentieren}, die alle in den unterschiedlichen von den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees} vorkommen.
 
 \subsubsection{PicoC-Knoten}
-% Tabelle aller PicoC Knoten
-% möglichst kurze und leicht verständliche Bezeichner für Knoten
+\label{sec:picoc_knoten}
+
+Bei den \colorbold{PicoC-Knoten} handelt es sich um Knoten, die irgendeinen \colorbold{Ausdruck} aus der Sprache $L_{PicoC}$ darstellen. Für die \colorbold{PicoC-Knoten} wurden möglichst \colorbold{kurze} und \colorbold{leicht} verständliche Bezeichner gewählt, da auf diese Weise bei der Implementierung der einzelnen Passes möglichst \colorbold{viel Code in eine Zeile} passt und dieser Code auch durch leicht verständliche Bezeichner von Knoten \colorbold{intuitiv verständlich} sein sollte\footnote{Z.B. steht der \colorbold{PicoC-Knoten} \smalltt{Name(str)} für einen \colorbold{Bezeichner}. Anstatt diesen Knoten in englisch \smalltt{Identifier(str)} zu nennen, wurde dieser als \smalltt{Name(str)} gewählt, da \smalltt{Name(str)} \colorbold{kürzer} ist und \colorbold{inuitiver verständlich}.}. Alle \colorbold{PicoC-Knoten}, die in den von den verschiedenen Passes generierten \colorbold{Abstract Syntax Trees} vorkommen sind in Tabelle~\ref{tab:picoc_knoten_teil_1} mit einem \colorbold{Bschreibungstext} dokumentiert.
 
 \begin{table}[H]
   \center
@@ -699,6 +695,10 @@ Die \colorbold{\enquote{Spiralbahnen}} sind bereits duch die Art wie der Ausdruc
 \end{Definition}
 
 \subsubsection{RETI-Knoten}
+\label{sec:reti_knoten}
+
+Bei den \colorbold{RETI-Knoten} handelt es sich um Knoten, die irgendeinen \colorbold{Ausdruck} aus der Sprache $L_{RETI}$ darstellen. Für die \colorbold{RETI-Knoten} wurden aus bereits in Unterkapitel~\ref{sec:picoc_knoten} erläutertem Grund, genauso wie für die \colorbold{RETI-Knoten} möglichst \colorbold{kurze} und \colorbold{leicht} verständliche Bezeichner gewählt. Alle \colorbold{RETI-Knoten}, die in den von den verschiedenen Passes generierten \colorbold{Abstract Syntax Trees} vorkommen sind in Tabelle~\ref{sec:picoc_knoten} mit einem \colorbold{Beschreibungstext} dokumentiert.
+
 \begin{table}[H]
   \center
   \begin{NiceTabular}{X[8]X[10]}[rules/color=PrimaryColor]
@@ -731,7 +731,10 @@ Die \colorbold{\enquote{Spiralbahnen}} sind bereits duch die Art wie der Ausdruc
 % Transformer erwähnen
 
 \subsubsection{Kompositionen von PicoC-Knoten und RETI-Knoten mit besonderer Bedeutung}
-Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \colorbold{RETI-Knoten} aufgelistet, die eine \colorbold{besondere Bedeutung} haben und nicht bereits in der \colorbold{Abstrakten Syntax}~\ref{gr:concrete_syntax_parser} enthalten sind.
+\label{sec:kompositionen_von_picoc-knoten_und_reti-knoten_mit_besonderer_bedeutung}
+
+In Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besonderer_bedeutung} sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \colorbold{RETI-Knoten} aufgelistet, die eine \colorbold{besondere Bedeutung} haben und nicht bereits in der \colorbold{Abstrakten Syntax}~\ref{gr:concrete_syntax_parser} enthalten sind.
+
 % (generelle Aufgaben von Exp und Reg)
 
 \begin{table}[H]
@@ -771,9 +774,9 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 \subsubsection{Abstrakte Syntax}
 \label{sec:abstrakte_syntax}
 
-% ./abstract_syntax.txt
-\newpage
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC}$ wird durch die Grammatik~\ref{gr:abstract_syntax_l_picoc} beschrieben.
 
+% ./abstract_syntax.txt
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
   \toprule
   \commentsecond
@@ -809,6 +812,8 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 
 \subsubsection{Codebeispiel}
 
+In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorbold{Abstract Syntax Tree} aus Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} nach der Generierung mithilfe eines \colorbold{Transformers} zu sehen.
+
 Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
 % Transformer erwähnen, viel zu viel um es hier reinzumachen
 
@@ -836,6 +841,8 @@ Das Ausgeben eines \colorbold{Abstract Syntax Trees} wird im \colorbold{PicoC-Co
 Im \colorbold{PicoC-Compiler} wurden \colorbold{Abstrakte} und \colorbold{Konkrette Syntax} miteinander gemischt. Für \colorbold{PicoC-Knoten} wurde die \colorbold{Abstrakte Syntax} verwendet, da Passes schließlich auf \colorbold{Abstract Syntax Trees} operieren. Bei \colorbold{RETI-Knoten} wurde die \colorbold{Konkrette Syntax} verwendet, da \colorbold{Maschienenbefehle} in \colorbold{Konkretter Syntax} schließlich das \colorbold{Endprodukt} des Kompiliervorgangs sein sollen. Da die \colorbold{Abstrakte Syntax} von \colorbold{RETI-Knoten} so simpel ist, macht es kaum einen Unterschied in der Erkennbarkeit, bis auf fehlende gescheifte Klammern \smalltt{()} usw., ob man die \colorbold{RETI-Knoten} in \colorbold{Abstrakter} oder \colorbold{Konkretter} Syntax schreibt. Daher kann man auch einfach gleich die \colorbold{RETI-Knoten} in \colorbold{Konkretter Syntax} ausgeben und muss nicht beim letzten \colorbold{Pass} daran denken, am Ende die \colorbold{Konkrette}, statt der \colorbold{Abstrakten Syntax} für die \colorbold{RETI-Knoten} auszugeben.
 
 \section{Code Generierung}
+\label{sec:code_generierung}
+
 \subsection{Übersicht}
 Nach der Generierung eines \colorbold{Abstract Syntax Tree} als Ergebnis der \colorbold{Lexikalischen} und \colorbold{Syntaktischen Analyse} in Unterkapitel~\ref{sec:syntaktische_analyse}, wird in diesem Kapitel mit den verschiedenen \colorbold{Kompositionen} von \colorbold{Container-Knoten} und \colorbold{Token-Knoten} im \colorbold{Abstract Syntax Tree} als Basis das gewünschte Endprodukt des \colorbold{PicoC-Compilers}, der \colorbold{RETI-Code} generiert.
 
