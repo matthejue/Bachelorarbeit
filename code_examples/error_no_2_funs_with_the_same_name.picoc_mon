@@ -1,0 +1,19 @@
+File 
+  Name './error_no_2_funs_with_the_same_name.picoc_mon', 
+  [
+    Block 
+      Name 'main.2', 
+      [
+        Return(Empty())
+      ], 
+    Block 
+      Name 'fun.1', 
+      [
+        Return(Empty())
+      ], 
+    Block 
+      Name 'fun.0', 
+      [
+        Return(Empty())
+      ]
+  ]

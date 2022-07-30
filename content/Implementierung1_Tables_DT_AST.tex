@@ -88,6 +88,7 @@
 % erwähnen, dass in Lark die Grammatiken L_Lex und L_Parse gemischt sind
 % EBNF erwähnen
 % (erwähnen, dass finalle Grammatik im Appendix)
+
 \subsection{Basic Lexer}
 \section{Syntaktische Analyse}
 \label{sec:syntaktische_analyse}
@@ -461,22 +462,25 @@ Der \colorbold{Derivation Tree}, der sich aus dem Beispiel in Code~\ref{code:pic
   \label{code:derivation_tree_nach_derivation_tree_generierung}
 \end{code}
 
+\subsubsection{Ausgabe des Derivation Tree}
+
+% TODO: Bei Derivation Tree ist Lark für das Ausgeben der Knoten verantwortlich
+% TODO: auf Dokumentation verweisen
+
 \subsection{Derivation Tree Vereinfachung}
 \label{sec:derivation_tree_vereinfachung}
 
-\subsubsection{Codebeispiel}
-
 Der \colorbold{Derivation Tree} in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung}, dessen Generierung in Unterkapitel~\ref{sec:derivation_tree_generierung} besprochen wurde ist noch untauglich, damit aus ihm mittels eines \colorbold{Tramsformers} ein \colorbold{Abstract Syntax Tree} generiert werden kann. Das Problem ist, dass um den den \colorbold{Datentyp} einer Variable in der Programmiersprache $L_C$ und somit auch die Programmiersprache $L_{PicoC}$ korrekt bestimmen zu können, wie z.B. ein \colorbold{\enquote{Array der Größe $3$ von Pointern auf Arrays der Größe $2$ von Integern}} \smalltt{int (*ar[3])[2]} die \colorbold{Spiralregel}\footcite{noauthor_clockwisespiral_nodate} in der Implementeirung des \colorbold{PicoC-Compilers} umgesetzt werden muss und das ist nicht alleinig möglich, indem man die entsprechenden \colorbold{Produktionen} in der Grammatik~\ref{gr:concrete_syntax_parser} der \colorbold{Konkretten Syntax} auf eine spezielle Weise passend spezifiziert.
 
-Was man erhalten will, ist ein \colorbold{entarteter Baum} von \colorbold{PicoC-Knoten}, an dem man den \colorbold{Datentyp} direkt ablesen kann, indem man sich einfach über den \colorbold{entarteten Baum} bewegt, wie z.B. \seqtt{PntrDecl(Num('1'), ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), StructSpec(Name('st')))))} für den Ausdruck \smalltt{struct st *(*var)[3][2]}.
+Was man erhalten will, ist ein \colorbold{entarteter Baum} von \colorbold{PicoC-Knoten}, an dem man den \colorbold{Datentyp} direkt ablesen kann, indem man sich einfach über den \colorbold{entarteten Baum} bewegt, wie z.B. \seqtt{PntrDecl(Num('1'), ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), StructSpec(Name('st')))))} für den Ausdruck \smalltt{struct st *(*var[3][2])}.
 
-Es sind hierbei mehrere Probleme zu lösen. Hat man den Ausdruck \smalltt{struct st *(*var)[3][2]} wird dieser zu einem  \colorbold{Derivation Tree}, wie er in Abbildung~\ref{fig:derivation_tree_nach_parsen_eines_ausdrucks} zu sehen ist.
+Es sind hierbei mehrere Probleme zu lösen. Hat man den Ausdruck \smalltt{struct st *(*var[3][2])} wird dieser zu einem  \colorbold{Derivation Tree}, wie er in Abbildung~\ref{fig:derivatin_tree_nach_parsen_eines_ausdrucks} zu sehen ist.
 
 \begin{figure}[H]
   \hspace{2cm}
   \codebox[title=Ausdruck, remember as=ausdruck, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_code.special}
   \hfill
-  \codebox[title=Derivation Tree, remember as=derivation_tree, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_dt.special}
+  \codebox[title=Derivation Tree, remember as=derivation_tree, hbox, nobeforeafter, minted language=text]{./code_examples/derivation_tree_simplified_dt.special}
   \hspace{2cm}
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
@@ -486,11 +490,17 @@ Es sind hierbei mehrere Probleme zu lösen. Hat man den Ausdruck \smalltt{struct
   \label{fig:derivatin_tree_nach_parsen_eines_ausdrucks}
 \end{figure}
 
+Dieser \colorbold{Derivation Tree} für den Ausdruck \smalltt{struct st *(*var[3][2])} hat allerdings einen Aufbau welcher durch die \colorbold{Syntax} der \colorbold{Pointerdeklaratoren} \smalltt{pntr\_decl(num, datatype)} und \colorbold{Arraydeklaratoren} \smalltt{array\_decl(datatype, nums)} bestimmt ist, die \colorbold{spiralähnlich} ist. Man würde allerdings gerne einen \colorbold{entarteten Baum} erhalten, bei dem der Datentyp immer im \colorbold{zweiten Attribut} weitergeht, anstatt abwechselnd im \colorbold{zweiten} und \colorbold{ersten}, wie beim \colorbold{Pointerdeklarator} \smalltt{pntr\_decl(num, datatype)} und \colorbold{Arraydeklarator} \smalltt{array\_decl(datatype, nums)}. Daher muss beim \colorbold{ArrayDeclarator} \smalltt{array\_decl(datatype, nums)} immer das \colorbold{erste Attribut} \smalltt{datatype} mit dem \colorbold{zweiten Attribut} \smalltt{nums} getauscht werden.
+
+Des Weiteren befindet sich in der \colorbold{Mitte} dieser \colorbold{Spirale}, die der \colorbold{Derivation Tree} bildet der \colorbold{Name der Variable} \smalltt{name(var)} und nicht der \colorbold{innerste Datentyp} \smalltt{struct st}, da der \colorbold{Derivation Tree} einfach nur die \colorbold{kompilerinterne Darstellung}, die durch das Parsen eines \colorbold{Programms} in \colorbold{Konkretter Syntax} (z.B. \smalltt{struct st *(*var[3][2])}) \colorbold{generiert} wird darstellt. Der \colorbold{Name der Variable} \smalltt{name(var)} sollte daher mit dem \colorbold{innersten Datentyp} \smalltt{struct st} ausgetauscht werden.
+
+In Abbildung~\ref{fig:derivation_nach_vereinfachung} ist daher zu sehen, wie der \colorbold{Derivation Tree} aus Abbildung~\ref{fig:derivatin_tree_nach_parsen_eines_ausdrucks} mithilfe eines \colorbold{Visitors} (Definition~\ref{def:visitor}) \colorbold{vereinfacht} wird, sodass er die gerade erläuterten Ansprüche erfüllt.
+
 \begin{figure}[H]
   \hspace{2cm}
-  \codebox[title=Ausdruck, remember as=derivation_tree, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_dt.special}
+  \codebox[title=Ausdruck, remember as=derivation_tree, hbox, nobeforeafter, minted language=text]{./code_examples/derivation_tree_simplified_dt.special}
   \hfill
-  \codebox[title=Derivation Tree, remember as=derivation_tree_simple, hbox, nobeforeafter, minted language=c]{./code_examples/derivation_tree_simplified_dt_simple.special}
+  \codebox[title=Derivation Tree, remember as=derivation_tree_simple, hbox, nobeforeafter, minted language=text]{./code_examples/derivation_tree_simplified_dt_simple.special}
   \hspace{2cm}
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
@@ -500,7 +510,9 @@ Es sind hierbei mehrere Probleme zu lösen. Hat man den Ausdruck \smalltt{struct
   \label{fig:derivation_nach_vereinfachung}
 \end{figure}
 
-% Visitor
+\subsubsection{Codebeispiel}
+
+In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorbold{Derivation Tree} aus Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} nach der \colorbold{Vereinfachung} zu sehen.
 
 \begin{code}
   \centering
@@ -510,7 +522,50 @@ Es sind hierbei mehrere Probleme zu lösen. Hat man den Ausdruck \smalltt{struct
 \end{code}
 
 % Visitor erwähnen
+
+
 \subsection{Abstrakt Syntax Tree Generierung}
+
+Nachdem der \colorbold{Derviation Tree} in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} vereinfacht wurde, ist der \colorbold{vereinfachte Derivation Tree} in Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} nun dazu geeignet, um mit einem \colorbold{Transformer} einen \colorbold{Abstract Syntax Tree} aus ihm zu generieren.
+
+Hierzu kommt ein \colorbold{Transformer} (Definition~\ref{def:transformer}) zu Einsatz, der aus dem \colorbold{Derivation Tree} in Code~\ref{} einen \colorbold{Abstract Syntax Tree} in Code~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen} generiert.
+
+\smalltt{struct st *(*var[3][2])}
+
+% umdrehen
+
+% folgende Kapitel Knoten
+
+\begin{figure}[H]
+  \hspace{2cm}
+  \codebox[title=Derivation Tree, remember as=derivation_tree_simple, hbox, nobeforeafter, minted language=text]{./code_examples/derivation_tree_simplified_dt_simple.special}
+  \hfill
+  \codebox[title=Abstract Syntax Tree, remember as=abstract_syntax_tree, hbox, nobeforeafter, minted language=text]{./code_examples/derivation_tree_simplified_ast_no_turn_around.special}
+  \hspace{2cm}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (derivation_tree_simple.east) to[bend left] node[above] {Transformer} (abstract_syntax_tree.west);
+  \end{tikzpicture}
+  \caption{Abstract Syntax Tree Generierung ohne Umdrehen}
+  \label{fig:abstract_syntax_tree_generierung_ohne_umdrehen}
+\end{figure}
+
+
+\begin{figure}[H]
+  \hspace{2cm}
+  \codebox[title=Derivation Tree, remember as=derivation_tree_simple, hbox, nobeforeafter, minted language=text]{./code_examples/derivation_tree_simplified_dt_simple.special}
+  \hfill
+  \codebox[title=Abstract Syntax Tree, remember as=abstract_syntax_tree, hbox, nobeforeafter, minted language=text]{./code_examples/derivation_tree_simplified_ast.special}
+  \hspace{2cm}
+
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
+  \draw[->] (derivation_tree_simple.east) to[bend left] node[above] {Transformer} (abstract_syntax_tree.west);
+  \end{tikzpicture}
+  \caption{Abstract Syntax Tree Generierung mit Umdrehen}
+  \label{fig:abstract_syntax_tree_generierung_mit_umdrehen}
+\end{figure}
+
+
 \subsubsection{PicoC-Knoten}
 % Tabelle aller PicoC Knoten
 % möglichst kurze und leicht verständliche Bezeichner für Knoten
@@ -756,7 +811,7 @@ Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefan
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={14}}]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.ast}
   \caption{Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert}
   \label{code:abstract_syntax_tree_aus_vereinfachtem_derivarion_tree_generiert}
 \end{code}
@@ -766,7 +821,7 @@ Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefan
 % Sache mit Deref und (), leftmost node
 % Umdrehen von ArrayDecl und PntrDecl
 
-\subsubsection{Ausgabe von Abstract Syntax Trees}
+\subsubsection{Ausgabe des Abstract Syntax Tree}
 \label{sec:ausgabe_von_abstract_syntax_trees}
 
 Ein \colorbold{Knoten} eines \colorbold{Abstract Syntax Tree} kann entweder in der \colorbold{Konkretter Syntax} der Sprache, für dessen Kompilierung er generiert wurde oder in der \colorbold{Abstrakter Syntax}, die beschreibt, wie der Abstract Syntax Tree selbst aufgebaut sein darf ausgegeben werden.

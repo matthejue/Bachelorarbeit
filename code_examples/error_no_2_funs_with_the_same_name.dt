@@ -1,0 +1,43 @@
+file
+  ./error_no_2_funs_with_the_same_name.dt
+  decls_defs
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	void
+        pntr_deg
+        name	main
+        fun_params
+        decl_exec_stmts
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	int
+        pntr_deg
+        name	fun
+        fun_params
+          alloc
+            type_spec
+              prim_dt	char
+            pntr_decl
+              pntr_deg
+              array_decl
+                name	param2
+                array_dims
+        decl_exec_stmts
+    decl_def
+      fun_def
+        type_spec
+          prim_dt	int
+        pntr_deg
+        name	fun
+        fun_params
+          alloc
+            type_spec
+              prim_dt	int
+            pntr_decl
+              pntr_deg
+              array_decl
+                name	param1
+                array_dims
+        decl_exec_stmts

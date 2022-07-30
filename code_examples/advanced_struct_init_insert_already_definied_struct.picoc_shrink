@@ -1,0 +1,61 @@
+File 
+  Name './advanced_struct_init_insert_already_definied_struct.picoc_shrink', 
+  [
+    StructDecl 
+      Name 'st1', 
+      [
+        Alloc 
+          Writeable, 
+          ArrayDecl 
+            [
+              Num '2'
+            ], 
+            IntType 'int', 
+          Name 'ar'
+      ], 
+    StructDecl 
+      Name 'st2', 
+      [
+        Alloc 
+          Writeable, 
+          StructSpec 
+            Name 'st1', 
+          Name 'st'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        # struct 1, 
+        Assign 
+          Alloc 
+            Writeable, 
+            StructSpec 
+              Name 'st1', 
+            Name 'st_var1', 
+          Struct 
+            [
+              Assign 
+                Name 'ar', 
+                Array 
+                  [
+                    Num '2', 
+                    Num '4'
+                  ]
+            ], 
+        # struct 2, 
+        Assign 
+          Alloc 
+            Writeable, 
+            StructSpec 
+              Name 'st2', 
+            Name 'st_var2', 
+          Struct 
+            [
+              Assign 
+                Name 'st', 
+                Name 'st_var1'
+            ]
+      ]
+  ]

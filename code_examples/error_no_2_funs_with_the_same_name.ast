@@ -1,0 +1,29 @@
+File 
+  Name './error_no_2_funs_with_the_same_name.ast', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun', 
+      [
+        Alloc 
+          Writeable, 
+          CharType 'char', 
+          Name 'param2'
+      ], 
+      [], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'param1'
+      ], 
+      []
+  ]

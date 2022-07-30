@@ -1,0 +1,15 @@
+Exp
+  Alloc
+    Writeable,
+    ArrayDecl
+      [
+        Num '3',
+        Num '2'
+      ],
+      PntrDecl
+        Num '1',
+        PntrDecl
+          Num '1',
+          StructSpec
+            Name 'st',
+    Name 'var'

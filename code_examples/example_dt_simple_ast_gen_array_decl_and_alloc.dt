@@ -17,8 +17,8 @@ file
                     name	attr
                     array_dims
                 array_dims
+                  4
                   5
-                  6
     decl_def
       fun_def
         type_spec
@@ -41,6 +41,6 @@ file
                       array_decl
                         name	var
                         array_dims
+                          3
+                          2
                     array_dims
-                      3
-                      2

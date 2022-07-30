@@ -4,7 +4,19 @@ File
     StructDecl 
       Name 'st', 
       [
-        Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('5'), Num('6')], PntrDecl(Num('1'), IntType('int')))), Name('attr'))
+        Alloc 
+          Writeable, 
+          PntrDecl 
+            Num '1', 
+            ArrayDecl 
+              [
+                Num '4', 
+                Num '5'
+              ], 
+              PntrDecl 
+                Num '1', 
+                IntType 'int', 
+          Name 'attr'
       ], 
     FunDef 
       VoidType 'void', 
@@ -14,7 +26,7 @@ File
         Block 
           Name 'main.0', 
           [
-            Exp(Alloc(Writeable(), PntrDecl(Num('1'), ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), StructSpec(Name('st'))))), Name('var')))
+            Exp(Alloc(Writeable(), ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), PntrDecl(Num('1'), StructSpec(Name('st'))))), Name('var')))
           ]
       ]
   ]

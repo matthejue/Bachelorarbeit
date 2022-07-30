@@ -10,8 +10,8 @@ file
               pntr_deg	*
               array_decl
                 array_dims
+                  4
                   5
-                  6
                 pntr_decl
                   pntr_deg	*
                   array_decl
@@ -34,12 +34,12 @@ file
                   pntr_deg	*
                   array_decl
                     array_dims
-                      3
-                      2
                     pntr_decl
                       pntr_deg	*
                       array_decl
                         array_dims
+                          3
+                          2
                         type_spec
                           struct_spec
                             name	st

@@ -1,0 +1,41 @@
+File 
+  Name './error_no_2_funs_with_the_same_name.picoc_blocks', 
+  [
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Block 
+          Name 'main.2', 
+          []
+      ], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun', 
+      [
+        Alloc 
+          Writeable, 
+          CharType 'char', 
+          Name 'param2'
+      ], 
+      [
+        Block 
+          Name 'fun.1', 
+          []
+      ], 
+    FunDef 
+      IntType 'int', 
+      Name 'fun', 
+      [
+        Alloc 
+          Writeable, 
+          IntType 'int', 
+          Name 'param1'
+      ], 
+      [
+        Block 
+          Name 'fun.0', 
+          []
+      ]
+  ]

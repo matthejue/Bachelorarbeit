@@ -1,0 +1,34 @@
+File 
+  Name './advanced_struct_init_insert_already_definied_array.reti_patch', 
+  [
+    Block 
+      Name 'start.1', 
+      [], 
+    Block 
+      Name 'main.0', 
+      [
+        # array
+        SUBI SP 1;
+        LOADI ACC 2;
+        STOREIN SP ACC 1;
+        SUBI SP 1;
+        LOADI ACC 4;
+        STOREIN SP ACC 1;
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 1;
+        LOADIN SP ACC 2;
+        STOREIN DS ACC 0;
+        ADDI SP 2;
+        # struct
+        SUBI SP 1;
+        LOADI IN1 0;
+        ADD IN1 DS;
+        STOREIN SP IN1 1;
+        LOADIN SP ACC 1;
+        STOREIN DS ACC 3;
+        LOADIN SP ACC 2;
+        STOREIN DS ACC 2;
+        ADDI SP 2;
+        LOADIN BAF PC -1;
+      ]
+  ]

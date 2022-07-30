@@ -1,0 +1,19 @@
+File 
+  Name './error_no_2_funs_with_the_same_name.reti_blocks', 
+  [
+    Block 
+      Name 'main.2', 
+      [
+        LOADIN BAF PC -1;
+      ], 
+    Block 
+      Name 'fun.1', 
+      [
+        LOADIN BAF PC -1;
+      ], 
+    Block 
+      Name 'fun.0', 
+      [
+        LOADIN BAF PC -1;
+      ]
+  ]
