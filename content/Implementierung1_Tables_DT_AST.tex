@@ -470,7 +470,7 @@ Der \colorbold{Derivation Tree}, der sich aus dem Beispiel in Code~\ref{code:pic
 \subsection{Derivation Tree Vereinfachung}
 \label{sec:derivation_tree_vereinfachung}
 
-Der \colorbold{Derivation Tree} in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung}, dessen Generierung in Unterkapitel~\ref{sec:derivation_tree_generierung} besprochen wurde ist noch untauglich, damit aus ihm mittels eines \colorbold{Tramsformers} ein \colorbold{Abstract Syntax Tree} generiert werden kann. Das Problem ist, dass um den den \colorbold{Datentyp} einer Variable in der Programmiersprache $L_C$ und somit auch die Programmiersprache $L_{PicoC}$ korrekt bestimmen zu können, wie z.B. ein \colorbold{\enquote{Array der Größe $3$ von Pointern auf Arrays der Größe $2$ von Integern}} \smalltt{int (*ar[3])[2]} die \colorbold{Spiralregel}\footcite{noauthor_clockwisespiral_nodate} in der Implementeirung des \colorbold{PicoC-Compilers} umgesetzt werden muss und das ist nicht alleinig möglich, indem man die entsprechenden \colorbold{Produktionen} in der Grammatik~\ref{gr:concrete_syntax_parser} der \colorbold{Konkretten Syntax} auf eine spezielle Weise passend spezifiziert.
+Der \colorbold{Derivation Tree} in Code~\ref{code:derivation_tree_nach_derivation_tree_generierung}, dessen Generierung in Unterkapitel~\ref{sec:derivation_tree_generierung} besprochen wurde ist noch untauglich, damit aus ihm mittels eines \colorbold{Tramsformers} ein \colorbold{Abstract Syntax Tree} generiert werden kann. Das Problem ist, dass um den den \colorbold{Datentyp} einer Variable in der Programmiersprache $L_C$ und somit auch die Programmiersprache $L_{PicoC}$ korrekt bestimmen zu können, wie z.B. ein \colorbold{\enquote{Array der Mächtigkeit $3$ von Pointern auf Arrays der Mächtigkeit $2$ von Integern}} \smalltt{int (*ar[3])[2]} die \colorbold{Spiralregel}\footcite{noauthor_clockwisespiral_nodate} in der Implementeirung des \colorbold{PicoC-Compilers} umgesetzt werden muss und das ist nicht alleinig möglich, indem man die entsprechenden \colorbold{Produktionen} in der Grammatik~\ref{gr:concrete_syntax_parser} der \colorbold{Konkretten Syntax} auf eine spezielle Weise passend spezifiziert.
 
 Was man erhalten will, ist ein \colorbold{entarteter Baum} von \colorbold{PicoC-Knoten}, an dem man den \colorbold{Datentyp} direkt ablesen kann, indem man sich einfach über den \colorbold{entarteten Baum} bewegt, wie z.B. \seqtt{PntrDecl(Num('1'), ArrayDecl([Num('3'), Num('2')], PntrDecl(Num('1'), StructSpec(Name('st')))))} für den Ausdruck \smalltt{struct st *(*var[3][2])}.
 
@@ -526,11 +526,9 @@ In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorb
 
 \subsection{Abstrakt Syntax Tree Generierung}
 
-Nachdem der \colorbold{Derviation Tree} in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} vereinfacht wurde, ist der \colorbold{vereinfachte Derivation Tree} in Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} nun dazu geeignet, um mit einem \colorbold{Transformer} einen \colorbold{Abstract Syntax Tree} aus ihm zu generieren.
+Nachdem der \colorbold{Derviation Tree} in Unterkapitel~\ref{sec:derivation_tree_vereinfachung} vereinfacht wurde, ist der \colorbold{vereinfachte Derivation Tree} in Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} nun dazu geeignet, um mit einem \colorbold{Transformer} (Definition~\ref{def:transformer}) einen \colorbold{Abstract Syntax Tree} aus ihm zu generieren.
 
-Hierzu kommt ein \colorbold{Transformer} (Definition~\ref{def:transformer}) zu Einsatz, der aus dem \colorbold{Derivation Tree} in Code~\ref{} einen \colorbold{Abstract Syntax Tree} in Code~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen} generiert.
-
-\smalltt{struct st *(*var[3][2])}
+Würde man den \colorbold{vereinfachten Derivation Tree} des Ausdrucks \smalltt{struct st *(*var[3][2])} auf passende Weise in einen \colorbold{Abstract Syntax Tree} umwandeln, so würde dabei ein \colorbold{Abstract Syntax Tree} wie in Abbildung~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen} rausbekommen.
 
 % umdrehen
 
@@ -549,6 +547,11 @@ Hierzu kommt ein \colorbold{Transformer} (Definition~\ref{def:transformer}) zu E
   \caption{Abstract Syntax Tree Generierung ohne Umdrehen}
   \label{fig:abstract_syntax_tree_generierung_ohne_umdrehen}
 \end{figure}
+
+Dieser \colorbold{Abstract Syntax Tree} ist allerdings für die Weiterverarbeitung ungeeignet, denn für die \colorbold{Adressberechnung} für eine Aneinandereihung von Zugriffen auf \colorbold{Pointerelemente}, \colorbold{Arrayelemente} oder \colorbold{Structattribute}, welche in Unterkapitel~\ref{sec:mittelteil_für_die_verschiedenen_derived_datatypes} genauer erläutert wird will man den Datentyp in \colorbold{umgekehrter Reihenfolge}. Das hat den Grund, dass man bei der \colorbold{Spiralregel} beim Ausdruck \smalltt{struct st *(*var[3][2])} bei der Variable \smalltt{var} anfängt und sich dann auf \colorbold{\enquote{Spiralbahnen}}, von \colorbold{innen-nach-außen} durch den Ausdruck arbeitet, um herauszufinden, dass dieser Datentyp ein \colorbold{\enquote{Array der Mächtigkeit 3, 2 von einem Pointer auf einen Pointer auf einen Struct vom Typ st}} ist.
+
+Die \colorbold{\enquote{Spiralbahnen}} sind bereits duch die Art wie der Ausdruck \smalltt{struct st *(*var[3][2])} geparst wird und aus ihm ein Derivation Tree generiert wird gewährleistet, allerdings verlaufen diese \colorbold{\enquote{Spiralbahnen} von \colorbold{außen-nach-innen} und nicht von \colorbold{innnen-nach-außen}. Aus diesem Grund muss der \colorbold{Transformer}
+% spiralbahnen erledigt
 
 
 \begin{figure}[H]
@@ -808,6 +811,8 @@ Hier sind jegliche \colorbold{Kompositionen} von \colorbold{PicoC-Knoten} und \c
 
 Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
 % Transformer erwähnen, viel zu viel um es hier reinzumachen
+
+% Hierzu kommt ein \colorbold{Transformer}  zu Einsatz, der aus dem \colorbold{Derivation Tree} in Code~\ref{} einen \colorbold{Abstract Syntax Tree} in Code~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen} generiert.
 
 \begin{code}
   \centering

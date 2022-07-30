@@ -11,12 +11,3 @@
 \contentsline {floatgrammar}{\numberline {2.2.7}{\ignorespaces Durchdachte Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF\relax }}{30}{floatgrammar.caption.18}%
 \contentsline {floatgrammar}{\numberline {2.2.8}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 1\relax }}{31}{floatgrammar.caption.19}%
 \contentsline {floatgrammar}{\numberline {2.2.9}{\ignorespaces Konkrette Syntax der Sprache $L_{PicoC}$ für die Syntaktische Analyse in EBNF, Teil 2\relax }}{32}{floatgrammar.caption.20}%
-\contentsline {floatgrammar}{\numberline {2.2.10}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC}$\relax }}{47}{floatgrammar.caption.34}%
-\contentsline {floatgrammar}{\numberline {2.3.1}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Shrink}$\relax }}{53}{floatgrammar.caption.39}%
-\contentsline {floatgrammar}{\numberline {2.3.2}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_Blocks}$\relax }}{56}{floatgrammar.caption.42}%
-\contentsline {floatgrammar}{\numberline {2.3.3}{\ignorespaces Abstrakte Syntax der Sprache $L_{PiocC\_ANF}$\relax }}{60}{floatgrammar.caption.44}%
-\contentsline {floatgrammar}{\numberline {2.3.4}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Blocks}$\relax }}{63}{floatgrammar.caption.46}%
-\contentsline {floatgrammar}{\numberline {2.3.5}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI\_Patch}$\relax }}{67}{floatgrammar.caption.48}%
-\contentsline {floatgrammar}{\numberline {2.3.6}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Lexikalische Analyse in EBNF\relax }}{71}{floatgrammar.caption.50}%
-\contentsline {floatgrammar}{\numberline {2.3.7}{\ignorespaces Konkrette Syntax der Sprache $L_{RETI}$ für die Syntaktische Analyse in EBNF\relax }}{71}{floatgrammar.caption.51}%
-\contentsline {floatgrammar}{\numberline {2.3.8}{\ignorespaces Abstrakte Syntax der Sprache $L_{RETI}$\relax }}{71}{floatgrammar.caption.52}%
