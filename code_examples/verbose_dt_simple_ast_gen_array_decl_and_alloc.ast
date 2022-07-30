@@ -1,0 +1,42 @@
+File 
+  Name './verbose_dt_simple_ast_gen_array_decl_and_alloc.ast', 
+  [
+    StructDecl 
+      Name 'st', 
+      [
+        Alloc 
+          Writeable, 
+          PntrDecl 
+            Num '1', 
+            ArrayDecl 
+              [
+                Num '4', 
+                Num '5'
+              ], 
+              PntrDecl 
+                Num '1', 
+                IntType 'int', 
+          Name 'attr'
+      ], 
+    FunDef 
+      VoidType 'void', 
+      Name 'main', 
+      [], 
+      [
+        Exp 
+          Alloc 
+            Writeable, 
+            ArrayDecl 
+              [
+                Num '3', 
+                Num '2'
+              ], 
+              PntrDecl 
+                Num '1', 
+                PntrDecl 
+                  Num '1', 
+                  StructSpec 
+                    Name 'st', 
+            Name 'var'
+      ]
+  ]

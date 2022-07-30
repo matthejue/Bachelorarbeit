@@ -1,5 +1,5 @@
 file
-  ./example_dt_simple_ast_gen_array_decl_and_alloc.dt_simple
+  ./verbose_dt_simple_ast_gen_array_decl_and_alloc.dt_simple
   decls_defs
     decl_def
       struct_decl

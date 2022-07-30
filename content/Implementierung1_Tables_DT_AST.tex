@@ -448,7 +448,7 @@ In den folgenden Unterkapiteln wird das Beispiel in Code~\ref{code:picoc_code_f�
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=c]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.picoc}
+  \numberedcodebox[minted language=c]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.picoc}
   \caption{PicoC Code für Derivation Tree Generierung}
   \label{code:picoc_code_für_derivation_tree_generierung}
 \end{code}
@@ -457,15 +457,18 @@ Der \colorbold{Derivation Tree}, der mithilfe des \colorbold{Earley Parsers} aus
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={8-21, 32-46}}]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.dt}
+  \numberedcodebox[minted language=text, minted options={highlightlines={8-21, 32-46}}]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.dt}
   \caption{Derivation Tree nach Derivation Tree Generierung}
   \label{code:derivation_tree_nach_derivation_tree_generierung}
 \end{code}
 
 \subsubsection{Ausgabe des Derivation Tree}
 
-% TODO: Bei Derivation Tree ist Lark für das Ausgeben der Knoten verantwortlich
+Die Ausgabe des \colorbold{Derivation Tree} wird komplett vom \colorbold{Lark Parsing Toolkit} übernommen. Die \colorbold{Inneren Knoten} sind \colorbold{Nicht-Terminalsymbole}, welche in der Grammatik den \colorbold{linken Seite} einer \colorbold{Produktion} entsprechen.
+
+% Nodes sind Produktionnen, Blätter sind...
 % TODO: auf Dokumentation verweisen
+% anderes Aussehen Unterschied zu Abstrakter Syntax
 
 \subsection{Derivation Tree Vereinfachung}
 \label{sec:derivation_tree_vereinfachung}
@@ -516,7 +519,7 @@ In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorb
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={8-21, 32-46}}]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.dt_simple}
+  \numberedcodebox[minted language=text, minted options={highlightlines={8-21, 32-46}}]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.dt_simple}
   \caption{Derivation Tree nach Derivation Tree Vereinfachung}
   \label{code:picoc_code_nach_derivation_tree_vereinfachung}
 \end{code}
@@ -556,13 +559,15 @@ Dieser \colorbold{Abstract Syntax Tree} ist für die Weiterverarbeitung ungeeign
   \hspace{2cm}
 
   \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor]
-  \draw[->] (derivation_tree_simple.east) to[bend left] node[above] {Transformer} (abstract_syntax_tree.west);
+  \draw[->] (derivation_tree_simple.east) to[bend left] node[above, align=center] {Transformer der\\Datentyp umdreht} (abstract_syntax_tree.west);
   \end{tikzpicture}
   \caption{Abstract Syntax Tree Generierung mit Umdrehen}
   \label{fig:abstract_syntax_tree_generierung_mit_umdrehen}
 \end{figure}
 
-Die Weiterverarbeitung des \colorbold{Abstract Syntax Trees} geschieht mithilfe von \colorbold{Passes}, welche im Unterkapitel~\ref{sec:code_generierung} genauer beschrieben werden. Da die Knoten des \colorbold{Abstract Syntax Tree} anders als beim \colorbold{Derivation Tree} nicht die gleichen Bezeichnungen haben wie \colorbold{Produktionen} der Grammatik der \colorbold{Konkretten Syntax} ist es in den folgenden Unterkapiteln~\ref{sec:picoc_knoten}, \ref{sec:reti_knoten} und \ref{sec:kompositionen_von_picoc-knoten_und_reti-knoten_mit_besonderer_bedeutung} notwendig die \colorbold{Bedeutung} der einzelnen \colorbold{PicoC-Knoten}, \colorbold{RETI-Knoten} und bestimmter \colorbold{Kompositionen} dieser Knoten zu \colorbold{dokumentieren}, die alle in den unterschiedlichen von den \colorbold{Passes} generierten \colorbold{Abstract Syntax Trees} vorkommen.
+Die Weiterverarbeitung des \colorbold{Abstract Syntax Trees} geschieht mithilfe von \colorbold{Passes}, welche im Unterkapitel~\ref{sec:code_generierung} genauer beschrieben werden. Da die Knoten des \colorbold{Abstract Syntax Tree} anders als beim \colorbold{Derivation Tree} nicht die gleichen Bezeichnungen haben wie \colorbold{Produktionen} der Grammatik der \colorbold{Konkretten Syntax} ist es in den folgenden Unterkapiteln~\ref{sec:picoc_knoten}, \ref{sec:reti_knoten} und \ref{sec:kompositionen_von_picoc-knoten_und_reti-knoten_mit_besonderer_bedeutung} notwendig die \colorbold{Bedeutung} der einzelnen \colorbold{PicoC-Knoten}, \colorbold{RETI-Knoten} und bestimmter \colorbold{Kompositionen} dieser Knoten zu \colorbold{dokumentieren}, die alle in den unterschiedlichen von den \colorbold{Passes} umgeformten \colorbold{Abstract Syntax Trees} vorkommen.
+
+Des Weiteren gibt die \colorbold{Abstrakte Syntax} die durch die Grammatik~\ref{gr:undurchdachte_konkrette_syntax} in Unterkapitel~\ref{sec:abstrakte_syntax} beschrieben wird aufschluss darüber welche \colorbold{Kompositionen von PicoC-Knoten}, neben den bereits in Tabelle~\ref{gr:abstract_syntax_l_picoc} definierten Kompositionen mit Bedeutung insgesamt überhaupt \colorbold{möglich} sind.
 
 \subsubsection{PicoC-Knoten}
 \label{sec:picoc_knoten}
@@ -774,7 +779,7 @@ In Tabelle~\ref{tab:kompositionen_von_picoc_knoten_und_reti_knoten_mit_besondere
 \subsubsection{Abstrakte Syntax}
 \label{sec:abstrakte_syntax}
 
-Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC}$ wird durch die Grammatik~\ref{gr:abstract_syntax_l_picoc} beschrieben.
+Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC}$ wird durch die Grammatik~\ref{gr:abstract_syntax_l_picoc} beschrieben. Es ist die Aufgabe des \colorbold{Parsers}, die Aufgabe möglicher \colorbold{Visitors} und die Aufgabe des \colorbold{Transformers} am Ende der \colorbold{Syntaktischen Analyse} aus einem \colorbold{Programm} in \colorbold{Konkretter Syntax} einen \colorbold{Abstract Syntax Tree} in \colorbold{Abstrakter Syntax} zu generieren.
 
 % ./abstract_syntax.txt
 \begin{grammar}[Abstrakte Syntax der Sprache $L_{PiocC}$][H][gr:abstract_syntax_l_picoc]
@@ -812,16 +817,14 @@ Die \colorbold{Abstrakte Syntax} der Sprache $L_{PicoC}$ wird durch die Grammati
 
 \subsubsection{Codebeispiel}
 
-In Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} ist der \colorbold{Abstract Syntax Tree} aus Code~\ref{code:derivation_tree_nach_derivation_tree_generierung} nach der Generierung mithilfe eines \colorbold{Transformers} zu sehen.
+In Code~\ref{code:abstract_syntax_tree_aus_vereinfachtem_derivarion_tree_generiert} ist der \colorbold{Abstract Syntax Tree} zu sehen, der aus dem \colorbold{vereinfachten Derivation Tree} aus Code~\ref{code:picoc_code_nach_derivation_tree_vereinfachung} mithilfe eines \colorbold{Transformers} generiert wurde.
 
-Das Beispiel welches in Subkapitel~\ref{sec:derivation_tree_generierung} angefangen wurde, wird hier fortgeführt.
 % Transformer erwähnen, viel zu viel um es hier reinzumachen
-
-% Hierzu kommt ein \colorbold{Transformer}  zu Einsatz, der aus dem \colorbold{Derivation Tree} in Code~\ref{} einen \colorbold{Abstract Syntax Tree} in Code~\ref{fig:abstract_syntax_tree_generierung_ohne_umdrehen} generiert.
+% TODO: vielleicht auf Implementierung verweisen erwähnen, dass konkrette Implementeriung von Transformer unwesentlich
 
 \begin{code}
   \centering
-  \numberedcodebox[minted language=text, minted options={highlightlines={14}}]{./code_examples/example_dt_simple_ast_gen_array_decl_and_alloc.ast}
+  \numberedcodebox[minted language=text, minted options={highlightlines={26-40}}]{./code_examples/verbose_dt_simple_ast_gen_array_decl_and_alloc.ast}
   \caption{Abstract Syntax Tree aus vereinfachtem Derivarion Tree generiert}
   \label{code:abstract_syntax_tree_aus_vereinfachtem_derivarion_tree_generiert}
 \end{code}
